@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <sequence name="fault">
+        <log level="full">
+            <property name="MESSAGE" value="Executing default &quot;fault&quot; sequence"/>
+            <property name="ERROR_CODE" expression="get-property('ERROR_CODE')"/>
+            <property name="ERROR_MESSAGE" expression="get-property('ERROR_MESSAGE')"/>
+        </log>
+        <drop/>
+    </sequence>
+    <sequence name="main">
+        <in>
+            <clone>
+                <target>
+                    <endpoint name="endpoint_urn_uuid_FFA29481453CADDABE11666323829574988329398">
+                        <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+                    </endpoint>
+                </target>
+            </clone>
+        </in>
+        <out>
+            <send/>
+        </out>
+    </sequence>
+</definitions>

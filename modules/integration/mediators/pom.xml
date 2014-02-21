@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>org.wso2.esb</groupId>
+        <artifactId>esb-integration-tests</artifactId>
+        <version>4.8.1</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mediators</artifactId>
+    <name>Mediator Integration Tests</name>
+    <packaging>pom</packaging>
+
+    <modules>
+	<module>aggregate-mediator</module>
+	<module>callout-mediator</module>
+        <module>filter-mediator</module>
+        <module>log-mediator</module>
+	<!--module>script-mediator</module-->
+        <module>send-mediator</module>
+        <module>mediators-xquery</module>
+        <module>mediators-drop</module>
+        <module>mediators-throttle</module>
+        <module>mediators-enrich</module>
+        <module>mediators-fault</module>
+        <module>mediators-event</module>
+        <module>mediators-validate</module>
+    </modules>
+
+</project>

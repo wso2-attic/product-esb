@@ -1,0 +1,24 @@
+<sequence name="StarbucksOrderInfo" xmlns="http://ws.apache.org/ns/synapse" xmlns:m1="http://ws.starbucks.com/xsd">
+	<property name="Location"
+		expression="concat($ctx:STARBUCKS_HOST_NAME, 'order/', //m1:orderId)"
+		scope="transport" />
+	<payloadFactory>
+		<format>
+			<order xmlns="http://starbucks.example.org">
+				<drink>$1</drink>
+				<cost>$2</cost>
+				<additions>$3</additions>
+				<next xmlns="http://example.org/state-machine" rel="$4" uri="$5"
+					type="application/xml" />
+			</order>
+		</format>
+		<args>
+			<arg expression="//m1:drinkName/text()" />
+			<arg expression="//m1:cost/text()" />
+			<arg expression="//m1:additions/text()" />
+			<arg expression="concat($ctx:STARBUCKS_HOST_NAME, 'payment')" />
+			<arg
+				expression="concat($ctx:STARBUCKS_HOST_NAME, 'payment/order/', $ctx:uri.var.orderId)" />			
+		</args>
+	</payloadFactory>				
+</sequence>

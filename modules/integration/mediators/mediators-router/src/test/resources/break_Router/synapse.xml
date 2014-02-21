@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <registry provider="org.wso2.carbon.mediation.registry.WSO2Registry">
+        <parameter name="cachableDuration">15000</parameter>
+    </registry>
+    <sequence name="fault">
+        <log level="full">
+            <property name="MESSAGE" value="Executing default 'fault' sequence"/>
+            <property name="ERROR_CODE" expression="get-property('ERROR_CODE')"/>
+            <property name="ERROR_MESSAGE" expression="get-property('ERROR_MESSAGE')"/>
+        </log>
+        <drop/>
+    </sequence>
+    <sequence name="routerSeq">
+        <in>
+            <router continueAfter="true">
+                <route xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd"
+                       xmlns:m0="http://services.samples" expression="//m0:getQuote/m0:request/m0:symbol" match="IBM"
+                       breakRouter="true">
+                    <target>
+                        <sequence>
+                            <log>
+                                <property name="text" value="*********FIRST ROUTE*********"/>
+                            </log>
+                            <send>
+                                <endpoint name="endpoint_urn_uuid_726CD5F6C3B43ED1CF6289377383999-1452230442">
+                                    <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+                                </endpoint>
+                            </send>
+                        </sequence>
+                    </target>
+                </route>
+                <route xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd"
+                       xmlns:m0="http://services.samples" expression="//m0:getQuote/m0:request/m0:symbol" match="IBM"
+                       breakRouter="false">
+                    <target>
+                        <sequence>
+                            <log>
+                                <property name="text" value="##########SECOND ROUTE########"/>
+                            </log>
+                            <send>
+                                <endpoint name="endpoint_urn_uuid_726CD5F6C3B43ED1CF6289377383999-1452230442">
+                                    <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+                                </endpoint>
+                            </send>
+                        </sequence>
+                    </target>
+                </route>
+                <route xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd"
+                       xmlns:m0="http://services.samples" expression="//m0:getQuote/m0:request/m0:symbol" match="IBM">
+                    <target>
+                        <sequence>
+                            <log>
+                                <property name="text" value="=============THIRD ROUTE============="/>
+                            </log>
+                            <send>
+                                <endpoint name="endpoint_urn_uuid_726CD5F6C3B43ED1CF6289377383999-1452230442">
+                                    <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+                                </endpoint>
+                            </send>
+                        </sequence>
+                    </target>
+                </route>
+            </router>
+            <log level="full">
+                <property name="text" value="*********CONTINUE AFTER ROUTING*********"/>
+            </log>
+        </in>
+        <out>
+            <send/>
+        </out>
+    </sequence>
+    <sequence name="main">
+        <sequence key="routerSeq"/>
+    </sequence>
+</definitions>

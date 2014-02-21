@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <sequence name="main">
+        <in>
+            <log level="full"/>
+            <send>
+                <endpoint>
+                    <address uri="http://localhost:8080/services/foo"/>
+                </endpoint>
+            </send>
+        </in>
+        <out>
+            <log level="full"/>
+            <send/>
+        </out>
+    </sequence>
+</definitions>

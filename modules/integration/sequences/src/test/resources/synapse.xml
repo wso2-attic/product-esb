@@ -1,0 +1,7 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="testFwSeq">
+    <log level="full"/>
+    <property name="OUT_ONLY" value="true"/>
+    <send>
+        <endpoint key="/foo/bar"/>
+    </send>
+</sequence>

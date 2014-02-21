@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Command line suite">
+  <test name="Test - Endpoints" preserve-order="true" verbose="2">
+    <classes>
+      <class name="org.wso2.esb.integration.ESBTestServerManager"/>
+      <class name="org.wso2.carbon.endpoint.test.ESBSecurityVerificationTestCase"/>
+      <class name="org.wso2.carbon.endpoint.test.AddressEndpointTestCase"/>
+      <class name="org.wso2.carbon.endpoint.test.DefaultEndpointTestCase"/>
+      <class name="org.wso2.carbon.endpoint.test.DynamicAddressEpTestCase"/>
+      <class name="org.wso2.carbon.endpoint.test.DynamicDefaultEpTestCase"/>
+      <class name="org.wso2.carbon.endpoint.test.DynamicFailoverEpTestCase"/>
+      <class name="org.wso2.carbon.endpoint.test.DynamicInlinedWSDLEpTestCase"/>
+      <class name="org.wso2.carbon.endpoint.test.DynamicLoadBalanceEpTestCase"/>
+      <class name="org.wso2.carbon.endpoint.test.DynamicURIWSDLEpTestCase"/>
+      <class name="org.wso2.carbon.endpoint.test.FailoverEndpointTestCase"/>
+      <class name="org.wso2.carbon.endpoint.test.InlinedWSDLEndpointTestCase"/>
+      <class name="org.wso2.carbon.endpoint.test.LoadBalanceEndpointTestCase"/>
+      <class name="org.wso2.carbon.endpoint.test.URIWSDLEndpointTestCase"/>
+    </classes>
+  </test>
+</suite>

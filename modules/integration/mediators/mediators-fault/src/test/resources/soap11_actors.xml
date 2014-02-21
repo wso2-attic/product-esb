@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <sequence name="FaultHandler">
+        <makefault version="soap11">
+            <code xmlns:soap11Env="http://schemas.xmlsoap.org/soap/envelope/" value="soap11Env:VersionMismatch"/>
+            <reason value="SOAP Version Mismatch Error"/>
+            <role>http://schemas.xmlsoap.org/soap/actor/next</role>
+        </makefault>
+        <sequence key="afterFault"/>
+    </sequence>
+    <sequence name="afterFault">
+        <in>
+            <send>
+                <endpoint>
+                    <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+                </endpoint>
+            </send>
+            <drop/>
+        </in>
+        <out>
+            <send/>
+        </out>
+    </sequence>
+    <sequence name="main" onError="FaultHandler">
+        <in>
+            <send>
+                <endpoint>
+                    <address uri="http://bogus:9000/services/SimpleStockQuoteService"/>
+                </endpoint>
+            </send>
+            <log>
+                <property name="before" value="****BEFORE DROP***"/>
+            </log>
+            <drop/>
+            <log>
+                <property name="after" value="****AFTER DROP***"/>
+            </log>
+        </in>
+        <out>
+            <send/>
+        </out>
+    </sequence>
+    <sequence name="fault">
+        <log level="full">
+            <property name="MESSAGE" value="Executing default &quot;fault&quot; sequence"/>
+            <property name="ERROR_CODE" expression="get-property('ERROR_CODE')"/>
+            <property name="ERROR_MESSAGE" expression="get-property('ERROR_MESSAGE')"/>
+        </log>
+        <drop/>
+    </sequence>
+</definitions>

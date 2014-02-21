@@ -1,0 +1,96 @@
+<api name="StarbucksPaymentAPI" context="/payment"
+	xmlns="http://ws.apache.org/ns/synapse" xmlns:sb="http://starbucks.example.org"
+	xmlns:m0="http://ws.starbucks.com" xmlns:m1="http://ws.starbucks.com/xsd">
+
+	<resource uri-template="/order/{orderId}" methods="GET PUT"
+		faultSequence="StarbucksFault">
+		<inSequence>
+			<property name="STARBUCKS_HOST_NAME" expression="$axis2:SERVICE_PREFIX" />
+			<filter source="$ctx:REST_METHOD" regex="PUT">
+				<then>
+					<payloadFactory>
+						<format>
+							<m0:doPayment>
+								<m0:orderId>$1</m0:orderId>
+								<m0:name>$2</m0:name>
+								<m0:cardNumber>$3</m0:cardNumber>
+								<m0:expiryDate>$4</m0:expiryDate>
+								<m0:amount>$5</m0:amount>								
+							</m0:doPayment>
+						</format>
+						<args>
+							<arg expression="$ctx:uri.var.orderId" />
+							<arg expression="//sb:name" />							
+							<arg expression="//sb:cardNo" />
+							<arg expression="//sb:expires" />
+							<arg expression="//sb:amount" />
+						</args>
+					</payloadFactory>
+				</then>
+				<else>
+					<payloadFactory>
+						<format>
+							<m0:getPayment>
+								<m0:orderId>$1</m0:orderId>
+							</m0:getPayment>
+						</format>
+						<args>
+							<arg expression="$ctx:uri.var.orderId" />
+						</args>
+					</payloadFactory>
+				</else>
+			</filter>
+			<property name="HTTP_METHOD" value="POST" scope="axis2" />
+			<send>
+				<endpoint key="DataServiceEndpoint" />
+			</send>
+		</inSequence>
+		<outSequence>
+			<filter source="$ctx:REST_METHOD" regex="PUT">
+				<then>
+					<filter source="//m1:status/text()" regex="Payment Accepted">
+						<then>
+							<property name="Location"
+								expression="concat($ctx:STARBUCKS_HOST_NAME, 'payment/order/', $ctx:uri.var.orderId)"
+								scope="transport" />
+							<sequence key="StarbucksPaymentInfo" />
+							<property name="HTTP_SC" value="201" scope="axis2" />
+						</then>
+						<else>
+							<payloadFactory>
+								<format>
+									<paymentError xmlns="http://starbucks.example.org/">
+										<errorCode>$1</errorCode>
+									</paymentError>
+								</format>
+								<args>
+									<arg expression="//m1:status/text()" />
+								</args>
+							</payloadFactory>
+							<property name="HTTP_SC" value="403" scope="axis2" />
+						</else>
+					</filter>
+				</then>
+				<else>
+					<filter xpath="//m1:orderId">
+						<then>
+							<sequence key="StarbucksPaymentInfo" />
+						</then>
+						<else>
+							<payloadFactory>
+								<format>
+									<paymentError xmlns="http://starbucks.example.org/">
+										<errorCode>No payment resource found</errorCode>
+									</paymentError>
+								</format>
+							</payloadFactory>
+							<property name="HTTP_SC" value="404" scope="axis2" />
+						</else>
+					</filter>
+				</else>
+			</filter>
+			<send />
+		</outSequence>
+	</resource>
+        <resource inSequence="main"/>
+</api>	

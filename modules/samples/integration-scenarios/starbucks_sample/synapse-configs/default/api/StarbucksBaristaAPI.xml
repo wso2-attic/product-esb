@@ -1,0 +1,71 @@
+<api name="StarbucksBaristaAPI" context="/barista"
+	xmlns="http://ws.apache.org/ns/synapse" xmlns:sb="http://starbucks.example.org"
+	xmlns:m0="http://ws.starbucks.com" xmlns:m1="http://ws.starbucks.com/xsd">
+
+	<resource uri-template="/order/{orderId}" methods="PUT DELETE">
+		<inSequence>
+			<property name="STARBUCKS_HOST_NAME" expression="$axis2:SERVICE_PREFIX" />
+			<switch source="$ctx:REST_METHOD">
+				<case regex="DELETE">
+					<payloadFactory>
+						<format>
+							<m0:removeOrder>
+								<m0:orderId>$1</m0:orderId>
+							</m0:removeOrder>
+						</format>
+						<args>
+							<arg expression="$ctx:uri.var.orderId" />
+						</args>
+					</payloadFactory>
+				</case>
+				<case regex="PUT">
+					<payloadFactory>
+						<format>
+							<m0:lockOrder>
+								<m0:orderId>$1</m0:orderId>
+							</m0:lockOrder>
+						</format>
+						<args>
+							<arg expression="$ctx:uri.var.orderId" />
+						</args>
+					</payloadFactory>
+					<property name="STARBUCKS_CONTENT_TYPE" expression="$axis2:ContentType"/>
+					<property name="ContentType" value="application/xml" scope="axis2"/>
+				</case>
+			</switch>
+			<property name="HTTP_METHOD" value="POST" scope="axis2" />			
+			<send>
+				<endpoint key="DataServiceEndpoint" />
+			</send>
+		</inSequence>
+		<outSequence>
+			<switch source="$ctx:REST_METHOD">
+				<case regex="DELETE">
+					<payloadFactory>
+						<format>
+							<message xmlns="http://starbucks.example.org">Order deleted</message>
+						</format>
+					</payloadFactory>
+				</case>
+				<case regex="PUT">
+					<payloadFactory>
+						<format>
+							<order xmlns="http://starbucks.example.org">
+								<drink>$1</drink>
+								<cost>$2</cost>
+								<additions>$3</additions>								
+							</order>
+						</format>
+						<args>
+							<arg expression="//m1:drinkName/text()" />
+							<arg expression="//m1:cost/text()" />
+							<arg expression="//m1:additions/text()" />										
+						</args>
+					</payloadFactory>
+					<property name="ContentType" expression="$ctx:STARBUCKS_CONTENT_TYPE" scope="axis2"/>					
+				</case>
+			</switch>
+			<send/>
+		</outSequence>
+	</resource>
+</api>	

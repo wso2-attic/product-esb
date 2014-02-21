@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <proxy name="HeaderManipulationProxy">
+        <target>
+            <inSequence>
+                <log level="full">
+                    <property name="MyHeader" expression="$trp:MyHeader"/>
+                </log>
+                <filter source="$trp:MyHeader" regex="TestValue">
+                    <filter source="$trp:MYHEADER" regex="TestValue">
+                        <filter source="$trp:myheader" regex="TestValue">
+                            <send>
+                                <endpoint>
+                                    <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+                                </endpoint>
+                            </send>
+                            <drop/>
+                        </filter>
+                    </filter>
+                </filter>
+                <log level="custom">
+                    <property name="ERROR" value="At least one of the filters didn't match"/>
+                </log>
+                <drop/>
+            </inSequence>
+            <outSequence>
+                <log level="full"/>
+                <send/>
+            </outSequence>
+        </target>
+    </proxy>
+</definitions>

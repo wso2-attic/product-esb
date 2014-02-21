@@ -1,0 +1,254 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="ESBTestSuite" parallel="false">
+    <listeners>
+        <listener class-name="org.wso2.carbon.automation.core.PlatformExecutionManager"/>
+        <listener class-name="org.wso2.carbon.automation.core.PlatformSuiteManager"/>
+        <listener class-name="org.wso2.carbon.automation.core.PlatformAnnotationTransferManager"/>
+        <listener class-name="org.wso2.carbon.automation.core.PlatformTestManager"/>
+        <listener class-name="org.wso2.carbon.automation.core.PlatformReportManager"/>
+    </listeners>
+
+    <test name="Server-Stratup" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.ServerStartupTestCase"/>
+        </classes>
+    </test>
+
+    <test name="Throttle-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.throttle"/>
+        </packages>
+    </test>
+
+    <test name="Aggregate-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.aggregate"/>
+        </packages>
+    </test>
+
+    <test name="Cache-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.cache"/>
+        </packages>
+    </test>
+
+    <test name="Call-Template-Mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.callTemplate"/>
+        </packages>
+    </test>
+
+    <test name="CallOut-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.callOut"/>
+        </packages>
+    </test>
+
+    <test name="Call-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.call"/>
+        </packages>
+    </test>
+
+    <test name="Clone-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.clone"/>
+        </packages>
+    </test>
+
+    <test name="ConditionalRouting-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.conditionalRouter"/>
+        </packages>
+    </test>
+
+    <test name="Drop-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.drop"/>
+        </packages>
+    </test>
+
+    <test name="Message-Store-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.message.store.test"/>
+        </packages>
+    </test>
+
+    <!--    <test name="dblookup-mediator-Test" preserve-order="true" verbose="2">
+            <packages>
+                <package name="org.wso2.carbon.esb.mediator.test.db.dblookup"/>
+            </packages>
+        </test>-->
+
+    <test name="Enrich-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.enrich"/>
+        </packages>
+    </test>
+
+    <test name="Fault-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.fault"/>
+        </packages>
+    </test>
+
+    <test name="Filter-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.filter"/>
+        </packages>
+    </test>
+
+    <test name="Header-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.header"/>
+        </packages>
+    </test>
+    <test name="In-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.in"/>
+        </packages>
+    </test>
+
+    <test name="Log-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.log"/>
+        </packages>
+    </test>
+
+    <test name="Out-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.out"/>
+        </packages>
+    </test>
+
+    <!--    <test name="dbreport-mediator-Test" preserve-order="true" verbose="2">
+            <packages>
+                <package name="org.wso2.carbon.esb.mediator.test.db.dbreport"/>
+            </packages>
+        </test>-->
+
+
+    <test name="Property-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.property"/>
+        </packages>
+    </test>
+
+    <test name="PayloadFactory-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.payload.factory"/>
+        </packages>
+    </test>
+
+    <test name="Rewrite-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.rewrite"/>
+        </packages>
+    </test>
+
+    <test name="Router-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.router"/>
+        </packages>
+    </test>
+
+    <test name="Rule-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.rule"/>
+        </packages>
+    </test>
+
+    <test name="Message-Processor-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.message.processor.test"/>
+            <package name="org.wso2.carbon.esb.message.processor.test.forwarding"/>
+        </packages>
+    </test>
+
+    <test name="Send-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.send"/>
+        </packages>
+    </test>
+
+    <test name="Sequence-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.sequence"/>
+        </packages>
+    </test>
+
+    <test name="Switch-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.switchMediator"/>
+        </packages>
+    </test>
+
+    <test name="Validate-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.validate"/>
+        </packages>
+    </test>
+
+    <test name="XQuery-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.xquery"/>
+        </packages>
+    </test>
+
+    <test name="XSLT-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.xslt"/>
+        </packages>
+    </test>
+    <test name="FastXSLT-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.fastXslt"/>
+        </packages>
+    </test>
+    <test name="Class-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.classMediator"/>
+        </packages>
+    </test>
+
+    <test name="Iterate-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.iterate"/>
+        </packages>
+    </test>
+
+    <test name="Spring-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.spring"/>
+        </packages>
+    </test>
+
+    <test name="Smook-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.smooks"/>
+        </packages>
+    </test>
+
+    <test name="Script-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.script"/>
+        </packages>
+    </test>
+
+    <test name="Respond-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.respond"/>
+        </packages>
+    </test>
+
+    <test name="Loopback-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.loopback"/>
+        </packages>
+    </test>
+
+
+</suite>
+
+

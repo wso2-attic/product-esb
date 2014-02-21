@@ -1,0 +1,7 @@
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <!-- log all attributes of messages passing through -->
+    <log level="full"/>
+
+    <!-- Send the messageto implicit destination -->
+    <send/>
+</definitions>

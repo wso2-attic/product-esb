@@ -1,0 +1,50 @@
+<!-- Simple rule based transformation (changing message )  -->
+
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <!-- the SimpleURLRegistry allows access to a URL based registry (e.g. file:/// or http://) -->
+    <registry provider="org.wso2.carbon.mediation.registry.ESBRegistry">
+        <!-- the root property of the simple URL registry helps resolve a resource URL as root + key -->
+        <parameter name="root">file:repository/samples/resources/</parameter>
+        <!-- all resources loaded from the URL registry would be cached for this number of milliseconds -->
+        <parameter name="cachableDuration">15000</parameter>
+    </registry>
+
+
+    <localEntry key="rule-script-key"
+                src="file:repository/samples/resources/rule/always_ibm.xml"/>
+    <in>
+
+        <rule>
+
+            <ruleset>
+                <source key="rule-script-key"/>
+                <creation>
+                    <property name="source" value="xml"/>
+                </creation>
+            </ruleset>
+            <session type="stateless"/>
+            <facts>
+                <fact name="symbol" expression="//m0:getQuote/m0:request/m0:symbol/child::text()"
+                      type="java.lang.String" xmlns:m0="http://services.samples"/>
+            </facts>
+            <results>
+                <result name="symbol" expression="//m0:getQuote/m0:request/m0:symbol"
+                        type="java.lang.String" xmlns:m0="http://services.samples"/>
+            </results>
+
+        </rule>
+
+        <send>
+            <endpoint>
+                <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+            </endpoint>
+        </send>
+
+    </in>
+
+    <out>
+        <send/>
+    </out>
+
+</definitions>
+

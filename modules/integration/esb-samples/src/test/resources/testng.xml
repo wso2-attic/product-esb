@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Command line suite">
+    <test name="Test - ESB Samples" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.esb.integration.ESBTestServerManager"/>
+
+            <!-- Introduction to WSO2 ESB -->
+            <class name="org.wso2.esb.samples.mediation.Sample0Test"/>
+            <class name="org.wso2.esb.samples.mediation.Sample1Test"/>
+            <class name="org.wso2.esb.samples.mediation.Sample3Test"/>
+            <class name="org.wso2.esb.samples.mediation.Sample4Test"/>
+            <class name="org.wso2.esb.samples.mediation.Sample5Test"/>
+            <class name="org.wso2.esb.samples.mediation.Sample7Test"/>
+            <class name="org.wso2.esb.samples.mediation.Sample8Test"/>
+            <class name="org.wso2.esb.samples.mediation.Sample15Test"/>
+            <class name="org.wso2.esb.samples.mediation.Sample17Test"/>
+
+            <!-- Endpoint samples -->
+            <class name="org.wso2.esb.samples.endpoint.Sample52Test"/>
+            <class name="org.wso2.esb.samples.endpoint.Sample53Test"/>
+            <class name="org.wso2.esb.samples.endpoint.Sample56Test"/>
+
+            <!-- Security (QoS) samples -->
+            <class name="org.wso2.esb.samples.security.Sample100Test"/>
+            <class name="org.wso2.esb.samples.security.Sample153Test"/>
+            <class name="org.wso2.esb.samples.security.Sample200Test"/>
+
+            <!-- Proxy service samples -->
+            <class name="org.wso2.esb.samples.proxy.Sample150Test"/>
+            <class name="org.wso2.esb.samples.proxy.Sample151Test"/>
+            <class name="org.wso2.esb.samples.proxy.Sample152Test"/>
+
+            <!--<class name="org.wso2.esb.samples.transport.Sample268Test"/>-->
+
+            <!-- Advanced mediation samples -->
+            <class name="org.wso2.esb.samples.advanced.Sample350Test"/>
+            <class name="org.wso2.esb.samples.advanced.Sample351Test"/>
+            <class name="org.wso2.esb.samples.advanced.Sample352Test"/>
+            <class name="org.wso2.esb.samples.advanced.Sample371Test"/>
+            <class name="org.wso2.esb.samples.advanced.Sample390Test"/>
+            <class name="org.wso2.esb.samples.advanced.Sample400Test"/>
+            <class name="org.wso2.esb.samples.advanced.Sample420Test"/>
+            <class name="org.wso2.esb.samples.advanced.Sample430Test"/>
+            <class name="org.wso2.esb.samples.advanced.Sample440Test"/>
+            <class name="org.wso2.esb.samples.advanced.Sample450Test"/>
+            <class name="org.wso2.esb.samples.advanced.Sample452Test"/>
+            <!--class name="org.wso2.esb.samples.advanced.Sample600Test"/-->
+            <class name="org.wso2.esb.samples.advanced.Sample380Test"/>
+
+            <!-- API mediation samples -->
+            <class name="org.wso2.esb.samples.rest.Sample800Test"/>
+
+        </classes>
+    </test>
+</suite>

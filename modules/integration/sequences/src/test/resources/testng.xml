@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Command line suite">
+  <test name="Test - Sequences" preserve-order="true" verbose="2">
+    <classes>
+      <class name="org.wso2.esb.integration.ESBTestServerManager"/>
+      <class name="org.wso2.carbon.sequence.test.ESBSecurityVerificationTestCase"/>
+      <class name="org.wso2.carbon.sequence.test.DynamicSequenceAddRemoveTestCase"/>
+      <class name="org.wso2.carbon.sequence.test.SequenceAddRemoveTestCase"/>
+    </classes>
+  </test>
+</suite>

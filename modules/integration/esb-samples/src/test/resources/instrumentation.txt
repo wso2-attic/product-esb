@@ -1,0 +1,4 @@
+synapse-commons_
+synapse-core_
+synapse-extensions_
+synapse-nhttp-transport_

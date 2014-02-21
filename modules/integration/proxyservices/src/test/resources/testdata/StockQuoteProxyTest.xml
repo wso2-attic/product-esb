@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="StockQuoteProxyTest" transports="https,http" statistics="disable" trace="disable" startOnLoad="true">
+   <target>
+      <outSequence>
+         <send />
+      </outSequence>
+      <endpoint name="endpoint_urn_uuid_A7A29D6F11AB580267120053169846734-1426957609">
+         <address uri="http://localhost:9000/services/SimpleStockQuoteService" />
+      </endpoint>
+   </target>
+   <publishWSDL uri="file:repository/samples/resources/proxy/sample_proxy_1.wsdl" />
+</proxy>

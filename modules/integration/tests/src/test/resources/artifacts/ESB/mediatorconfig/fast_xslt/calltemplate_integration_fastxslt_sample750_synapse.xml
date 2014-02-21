@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+
+    <proxy name="StockQuoteProxy">
+        <target>
+            <inSequence>
+                <!--use sequence template to trasnform incoming request-->
+                <call-template target="fast_xslt_func">
+                    <with-param name="xslt_key" value="xslt-key-req"/>
+                </call-template>
+                <send>
+                    <endpoint>
+                        <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+                    </endpoint>
+                </send>
+            </inSequence>
+            <outSequence>
+                <!--use sequence template to trasnform incoming response-->
+                <call-template target="fast_xslt_func">
+                    <with-param name="xslt_key" value="xslt-key-back"/>
+                </call-template>
+                <send/>
+            </outSequence>
+        </target>
+    </proxy>
+
+    <!--this sequence template will trasnform requests with the given xslt local entry key And will log
+    the message before and after. Takes Iterate local entry key as an argument-->
+    <template xmlns="http://ws.apache.org/ns/synapse" name="fast_xslt_func">
+        <parameter name="xslt_key"/>
+        <sequence>
+            <fastXSLT key="{$func:xslt_key}"/>
+        </sequence>
+    </template>
+    <localEntry key="xslt-key-req" src="file:repository/samples/resources/transform/transform.xslt"/>
+    <localEntry key="xslt-key-back" src="file:repository/samples/resources/transform/transform_back.xslt"/>
+</definitions>

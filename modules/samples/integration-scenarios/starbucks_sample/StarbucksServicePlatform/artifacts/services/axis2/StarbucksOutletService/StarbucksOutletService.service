@@ -1,0 +1,6 @@
+#Contains the information about the axis2 service generation information from the eclipse workspace
+#Thu Jan 26 09:56:49 IST 2012
+Class-name=com.starbucks.ws.StarbucksOutletService
+Type=FROM_CLASS
+Service-name=StarbucksOutletService
+Projects=StarbucksServicePlatform

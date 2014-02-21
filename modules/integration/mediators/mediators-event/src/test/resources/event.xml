@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <eventSource name="event_src1">
+        <subscriptionManager class="org.apache.synapse.eventing.managers.DefaultInMemorySubscriptionManager">
+            <property name="topicHeaderName" value="Topic"/>
+            <property name="topicHeaderNS" value="http://apache.org/aip"/>
+        </subscriptionManager>
+    </eventSource>
+
+    <sequence name="PublicEventSource">
+        <log level="full"/>
+        <eventPublisher eventSourceName="SampleEventSource"/>
+    </sequence>
+
+    <proxy name="EventingProxy">
+        <target inSequence="PublicEventSource"/>
+    </proxy>
+</definitions>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <proxy name="tcpProxy" transports="tcp" startOnLoad="true" trace="disable">
+        <target>
+            <inSequence>
+                <log level="full"/>
+                <payloadFactory>
+                    <format>
+                        <ax:text xmlns:ax="http://ws.apache.org/commons/ns/payload">test1,test2</ax:text>
+                    </format>
+                    <args/>
+                </payloadFactory>
+                <header name="To" action="remove"/>
+                <property name="CONTENT_TYPE"
+                          value="text/plain"
+                          scope="axis2"
+                          type="STRING"/>
+                <property name="OUT_ONLY" value="true" scope="default" type="STRING"/>
+                <property name="FORCE_SC_ACCEPTED"
+                          value="true"
+                          scope="axis2"
+                          type="STRING"/>
+                <log level="full"/>
+                <send>
+                    <endpoint>
+                        <address uri="tcp://localhost:10991"/>
+                    </endpoint>
+                </send>
+            </inSequence>
+        </target>
+    </proxy>
+</definitions>
+

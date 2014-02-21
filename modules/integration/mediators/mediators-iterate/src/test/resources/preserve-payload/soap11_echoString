@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <ser:echoString xmlns:ser="http://service.carbon.wso2.org">
+            <ser:s>Hi-A</ser:s>
+            <ser:s>Hi-B</ser:s>
+            <ser:s>Hi-C</ser:s>
+            <ser:s>Hi-D</ser:s>
+            <ser:s>Hi-E</ser:s>
+            <ser:s>Hi-F</ser:s>
+        </ser:echoString>
+    </soap:Body>
+</soap:Envelope>

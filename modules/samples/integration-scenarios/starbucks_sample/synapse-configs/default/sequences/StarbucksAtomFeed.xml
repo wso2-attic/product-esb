@@ -1,0 +1,7 @@
+<sequence name="StarbucksAtomFeed" xmlns="http://ws.apache.org/ns/synapse">
+	<xslt key="OrderFeedGenerator">
+		<property name="SystemDate" expression='get-property("SYSTEM_DATE", "yyyy-MM-dd&apos;T&apos;hh:mm:ss&apos;Z&apos;")'/>
+		<property name="SystemURL" expression="$ctx:STARBUCKS_SYSTEM_URL"/>
+	</xslt>
+	<property name="ContentType" value="application/atom+xml" scope="axis2"/>
+</sequence>

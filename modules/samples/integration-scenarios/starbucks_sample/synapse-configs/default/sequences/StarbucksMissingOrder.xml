@@ -1,0 +1,10 @@
+<sequence name="StarbucksMissingOrder" xmlns="http://ws.apache.org/ns/synapse">
+	<property name="HTTP_SC" value="404" scope="axis2" />
+	<payloadFactory>
+		<format>
+			<message xmlns="http://starbucks.example.org">
+				<text>No order exists by the specified ID</text>
+			</message>
+		</format>
+	</payloadFactory>
+</sequence>

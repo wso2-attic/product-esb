@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>org.wso2.esb</groupId>
+        <artifactId>esb-integration-tests</artifactId>
+        <version>4.0.0</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mediators-command</artifactId>
+    <name>Command Mediator Module</name>
+    <packaging>jar</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.7.1</version>
+                <configuration>
+                    <outputDirectory>${basedir}/target/report</outputDirectory>
+                    <outputName>command-mediator-test</outputName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>report-only</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <id>create-temp-dir</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <property name="tempdir" value="target/carbontmp/wso2esb-${project.version}"/>
+                                <mkdir dir="${tempdir}"/>
+                            </tasks>
+                        </configuration>
+                     </execution>
+                 </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <inherited>false</inherited>
+                <configuration>
+                    <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m</argLine>
+                    <includes>
+                        <include>**/TestRunner.java</include>
+                    </includes>
+                    <systemProperties>
+                        <property>
+                            <name>maven.test.haltafterfailure</name>
+                            <value>false</value>
+                        </property>
+                        <property>
+                            <name>carbon.zip</name>
+                            <value>
+                                ${basedir}/../../../distribution/target/wso2esb-${project.version}.zip
+                            </value>
+                        </property>
+                    </systemProperties>
+                    <workingDirectory>${basedir}/target/carbontmp/wso2esb-${project.version}</workingDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <id>moving report to reporting module</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <copy todir="../../reporting/src/site/resources/report"
+                                      overwrite="true">
+                                    <fileset dir="target/report">
+                                        <exclude name="**/*.gif"/>
+                                        <exclude name="**/*.png"/>
+                                        <exclude name="**/*.css"/>
+                                        <include name="**/*.html"/>
+                                    </fileset>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.mediation.configadmin.stub</artifactId>
+            <version>${carbon.platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.integration.core</artifactId>
+            <version>${carbon.platform.version}</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.registry.resource.stub</artifactId>
+            <version>${carbon.platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.logging.view.stub</artifactId>
+            <version>${carbon.platform.version}</version>
+        </dependency>
+
+    </dependencies>
+</project>

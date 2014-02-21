@@ -1,0 +1,20 @@
+<sequence name="StarbucksPaymentInfo" xmlns="http://ws.apache.org/ns/synapse"
+	xmlns:m1="http://ws.starbucks.com/xsd">
+
+	<payloadFactory>
+		<format>
+			<payment xmlns="http://starbucks.example.org/">
+				<cardNo>$1</cardNo>
+				<expires>$2</expires>
+				<name>$3</name>
+				<amount>$4</amount>
+			</payment>
+		</format>
+		<args>
+			<arg expression="//m1:cardNumber" />
+			<arg expression="//m1:expiryDate" />
+			<arg expression="//m1:name" />
+			<arg expression="//m1:amount" />
+		</args>
+	</payloadFactory>
+</sequence>	

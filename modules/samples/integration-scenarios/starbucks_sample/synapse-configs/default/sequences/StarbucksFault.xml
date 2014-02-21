@@ -1,0 +1,20 @@
+<sequence name="StarbucksFault" xmlns="http://ws.apache.org/ns/synapse">
+	<property name="HTTP_SC" value="500" scope="axis2" />
+	<payloadFactory>
+		<format>
+			<sb:serverError xmlns:sb="http://starbucks.example.org">
+				<sb:errorCode>$1</sb:errorCode>
+				<sb:errorMessage>$2</sb:errorMessage>
+				<sb:errorDetail>$3</sb:errorDetail>
+			</sb:serverError>
+		</format>
+		<args>
+			<arg expression="get-property('ERROR_CODE')" />
+			<arg expression="get-property('ERROR_MESSAGE')" />
+			<arg expression="get-property('ERROR_DETAIL')" />
+		</args>
+	</payloadFactory>
+	<property name="RESPONSE" value="true" />
+	<header name="To" action="remove" />
+	<send />
+</sequence>

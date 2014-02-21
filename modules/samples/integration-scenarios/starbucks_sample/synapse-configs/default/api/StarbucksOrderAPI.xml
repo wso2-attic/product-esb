@@ -1,0 +1,115 @@
+<api name="StarbucksOrderAPI" context="/order"
+	xmlns="http://ws.apache.org/ns/synapse" xmlns:sb="http://starbucks.example.org"
+	xmlns:m0="http://ws.starbucks.com" xmlns:m1="http://ws.starbucks.com/xsd">
+
+	<resource uri-template="/{orderId}" methods="GET PUT OPTIONS" faultSequence="StarbuckFault">
+		<inSequence>
+			<property name="STARBUCKS_HOST_NAME" expression="$axis2:SERVICE_PREFIX" />
+			<switch source="$ctx:REST_METHOD">
+				<case regex="PUT">
+					<payloadFactory>
+						<format>
+							<m0:updateOrder>
+								<m0:orderId>$1</m0:orderId>
+								<m0:drinkName>$2</m0:drinkName>
+								<m0:additions>$3</m0:additions>
+							</m0:updateOrder>
+						</format>
+						<args>
+							<arg expression="$ctx:uri.var.orderId" />
+							<arg expression="//sb:drink" />
+							<arg expression="//sb:additions" />
+						</args>
+					</payloadFactory>						
+				</case>				
+				<default>
+					<payloadFactory>
+						<format>
+							<m0:getOrder>
+								<m0:orderId>$1</m0:orderId>
+							</m0:getOrder>
+						</format>
+						<args>
+							<arg expression="$ctx:uri.var.orderId" />
+						</args>
+					</payloadFactory>
+				</default>
+			</switch>
+			<property name="HTTP_METHOD" value="POST" scope="axis2" />
+			<send>
+				<endpoint key="DataServiceEndpoint" />
+			</send>
+		</inSequence>
+		<outSequence>
+			<switch source="$ctx:REST_METHOD">
+				<case regex="OPTIONS">
+					<property name="NO_ENTITY_BODY" value="true" scope="axis2"
+						type="BOOLEAN" />
+					<filter source="//m1:locked" regex="false">
+						<then>
+							<property name="Allow" value="GET,PUT" scope="transport" />
+						</then>
+						<else>
+							<property name="Allow" value="GET" scope="transport" />
+						</else>
+					</filter>
+				</case>
+				<case regex="GET">
+					<filter xpath="//m1:orderId">
+						<then>
+							<sequence key="StarbucksOrderInfo" />
+							<property name="Location" action="remove" scope="transport" />
+						</then>
+						<else>
+							<sequence key="StarbucksMissingOrder"/>
+						</else>
+					</filter>
+				</case>
+				<case regex="PUT">	
+					<filter xpath="//m1:orderId">
+						<then>
+							<property name="STARBUCKS_RESOURCE_LOCKED" expression="//m1:locked"/>
+							<sequence key="StarbucksOrderInfo" />
+							<filter source="$ctx:STARBUCKS_RESOURCE_LOCKED" regex="true">
+								<property name="HTTP_SC" value="409" scope="axis2" />
+								<property name="Location" action="remove" scope="transport" />
+							</filter>
+						</then>
+						<else>
+							<sequence key="StarbucksMissingOrder"/>
+						</else>
+					</filter>									
+				</case>				
+			</switch>
+			<send />
+		</outSequence>
+	</resource>
+
+	<resource url-mapping="/" methods="POST" faultSequence="StarbucksFault">
+		<inSequence>
+			<property name="STARBUCKS_HOST_NAME" expression="$axis2:SERVICE_PREFIX" />			
+			<payloadFactory>
+				<format>
+					<m0:addOrder>
+						<m0:drinkName>$1</m0:drinkName>
+						<m0:additions>$2</m0:additions>
+					</m0:addOrder>
+				</format>
+				<args>
+					<arg expression="//sb:drink" />
+					<arg expression="//sb:additions" />
+				</args>
+			</payloadFactory>
+			<send>
+				<endpoint key="DataServiceEndpoint" />
+			</send>
+		</inSequence>
+		<outSequence>
+			<property name="HTTP_SC" value="201" scope="axis2" />
+			<property name="uri.var.orderId" expression="//m1:orderId"/>
+			<sequence key="StarbucksOrderInfo" />
+			<send />
+		</outSequence>
+	</resource>
+
+</api>

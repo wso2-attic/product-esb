@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.wso2.esb</groupId>
+        <artifactId>esb-integration-tests</artifactId>
+        <version>4.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>mediators-xquery</artifactId>
+    <name>XQuery Mediators Module</name>
+    <packaging>jar</packaging>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.7.1</version>
+                <configuration>
+                    <outputDirectory>${basedir}/target/report</outputDirectory>
+                    <outputName>xquery-mediator-test</outputName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>report-only</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <id>create-temp-dir</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <property name="tempdir" value="target/carbontmp/wso2esb-${project.version}"/>
+                                <mkdir dir="${tempdir}"/>
+                            </tasks>
+                        </configuration>
+                     </execution>
+                 </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <inherited>false</inherited>
+                <configuration>
+                    <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m</argLine>
+                    <includes>
+                        <include>**/*TestServerManager.java</include>
+                        <include>**/*TestCase.java</include>
+                    </includes>
+                    <systemProperties>
+                        <maven.test.haltafterfailure>false</maven.test.haltafterfailure>
+                        <carbon.zip>${basedir}/../../../distribution/target/wso2esb-${project.version}.zip</carbon.zip>
+                        <sec.verifier.dir>${basedir}/target/security-verifier/</sec.verifier.dir>
+                    </systemProperties>
+                    <workingDirectory>${basedir}/target</workingDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <id>moving report to reporting module</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <copy todir="../../reporting/src/site/resources/report"
+                                      overwrite="true">
+                                    <fileset dir="target/report">
+                                        <exclude name="**/*.gif"/>
+                                        <exclude name="**/*.png"/>
+                                        <exclude name="**/*.css"/>
+                                        <include name="**/*.html"/>
+                                    </fileset>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                    	<id>copy-secVerifier</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/security-verifier</outputDirectory>
+                            <includeTypes>aar</includeTypes>
+                            <includeArtifactIds>SecVerifier</includeArtifactIds>
+                            <stripVersion>true</stripVersion>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.integration.framework</artifactId>
+            <version>${carbon.platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.esb</groupId>
+            <artifactId>org.wso2.esb.integration.core</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.mediation.configadmin.stub</artifactId>
+            <version>${carbon.platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>SecVerifier</artifactId>
+            <version>${carbon.platform.version}</version>
+            <type>aar</type>
+        </dependency>
+    </dependencies>
+</project>

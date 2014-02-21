@@ -1,0 +1,44 @@
+<api name="StarbucksOrderListAPI" context="/orders" xmlns="http://ws.apache.org/ns/synapse"
+	xmlns:sb="http://starbucks.example.org" xmlns:m0="http://ws.starbucks.com">
+	
+	<resource methods="GET" faultSequence="StarbucksFault">
+		<inSequence>
+			<property name="HTTP_METHOD" value="POST" scope="axis2"/>
+			<property name="STARBUCKS_SYSTEM_URL" expression="$axis2:SERVICE_PREFIX"/>
+			<property name="STARBUCKS_ACCEPT" expression="$trp:Accept"/>
+			<payloadFactory>
+				<format>
+					<m0:getPendingOrders/>
+				</format>
+			</payloadFactory>			
+			<send>
+				<endpoint key="DataServiceEndpoint" />
+			</send>
+		</inSequence>
+		<outSequence>
+			<switch source="$ctx:STARBUCKS_ACCEPT">
+				<case regex=".*atom.*">
+					<sequence key="StarbucksAtomFeed"/>
+				</case>				
+				<case regex=".*text/html.*">
+					<xslt key="OrderHtmlGenerator">
+						<property name="SystemDate" expression='get-property("SYSTEM_DATE", "yyyy-MM-dd&apos;T&apos;hh:mm:ss&apos;Z&apos;")'/>
+						<property name="SystemURL" expression="$ctx:STARBUCKS_SYSTEM_URL"/>
+					</xslt>
+					<property name="ContentType" value="text/html" scope="axis2"/>
+				</case>				
+				<case regex=".*json.*">
+					<xslt key="RemoveNS"/>
+					<property name="messageType" value="application/json" scope="axis2"/>
+				</case>
+				<case regex=".*application/xml.*">
+					<property name="messageType" value="application/xml" scope="axis2"/>
+				</case>
+				<default>
+					<sequence key="StarbucksAtomFeed"/>
+				</default>
+			</switch>			
+			<send/>
+		</outSequence>
+	</resource>
+</api>	

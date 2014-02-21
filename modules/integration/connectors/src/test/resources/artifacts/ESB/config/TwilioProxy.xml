@@ -1,0 +1,24 @@
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="TwilioProxy"
+    statistics="disable" trace="disable" transports="https http">
+    <target>
+        <inSequence>
+            <property action="set" expression="//per:conifg/per:accountSid" name="accountSid" scope="default" type="STRING" xmlns:per="http://connector.esb.wso2.org"/>
+            <property action="set" expression="//per:conifg/per:authToken" name="authToken" scope="default" type="STRING" xmlns:per="http://connector.esb.wso2.org"/>
+            <twilio.init>
+                <accountSid>{get-property('accountSid')}</accountSid>
+                <authToken>{get-property('authToken')}</authToken>
+            </twilio.init>
+            <log level="full"/>
+            <twilio.getShortCode>
+		        <shortCodeSid>00045</shortCodeSid>
+            </twilio.getShortCode>
+            <twilio.getShortCodeList>
+		        <shortCode>*</shortCode>
+            </twilio.getShortCodeList>     
+            <header action="remove" name="To"/>
+            <property action="remove" name="NO_ENTITY_BODY" scope="axis2"/>
+            <property action="set" name="RESPONSE" scope="default" type="STRING" value="true"/>                 
+            <send/>
+        </inSequence>
+    </target>
+</proxy>

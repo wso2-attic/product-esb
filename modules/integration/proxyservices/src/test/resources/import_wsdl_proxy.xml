@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <proxy name="RelativePathProxy">
+        <target>
+            <endpoint>
+                <address uri="http://localhost:9000/services/foo"/>
+            </endpoint>
+        </target>
+        <publishWSDL uri="file:repository/samples/resources/test.wsdl"/>
+    </proxy>
+    <proxy name="AbsolutePathProxy">
+        <target>
+            <endpoint>
+                <address uri="http://localhost:9000/services/foo"/>
+            </endpoint>
+        </target>
+        <publishWSDL uri="file:repository/samples/resources/test.wsdl"/>
+        <parameter name="showAbsoluteSchemaURL">true</parameter>
+    </proxy>
+</definitions>
