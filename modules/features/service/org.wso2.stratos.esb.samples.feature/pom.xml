@@ -45,7 +45,6 @@
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
-                <version>${carbon.p2.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>p2-feature-generation</id>
@@ -60,7 +59,7 @@
                                 <bundleDef>org.wso2.esb:org.wso2.stratos.esb.samples</bundleDef>
                             </bundles>
                             <importFeatures>
-                                <importFeatureDef>org.apache.synapse.wso2:2.1.0-wso2v7</importFeatureDef>
+                                <importFeatureDef>org.apache.synapse.wso2</importFeatureDef>
                             </importFeatures>
                         </configuration>
                     </execution>

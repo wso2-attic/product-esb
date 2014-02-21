@@ -24,11 +24,11 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
     	<artifactId>esb-samples-parent</artifactId>
-        <version>4.8.1</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>5.0.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
+    <version>5.0.0-SNAPSHOT</version>
     <groupId>org.wso2.esb</groupId>
     <artifactId>org.wso2.esb.samples</artifactId>
     <packaging>bundle</packaging>
@@ -40,7 +40,6 @@
         <dependency>
             <groupId>org.apache.synapse</groupId>
             <artifactId>synapse-core</artifactId>
-            <version>${synapse.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.axis2</groupId>
@@ -52,7 +51,6 @@
         <dependency>
             <groupId>org.apache.synapse</groupId>
             <artifactId>synapse-commons</artifactId>
-            <version>${synapse.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.axis2</groupId>
@@ -62,21 +60,18 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.ws.security.wso2</groupId>
+            <groupId>org.apache.ws.security</groupId>
             <artifactId>wss4j</artifactId>
-            <version>${orbit.version.wss4j}</version>
         </dependency>
 
     	 <dependency>
             <groupId>org.apache.rampart.wso2</groupId>
             <artifactId>rampart-core</artifactId>
-            <version>${orbit.version.rampart}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.geronimo.specs.wso2</groupId>
+            <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jms_1.1_spec</artifactId>
-            <version>${orbit.version.geronimo-jms_1.1_spec}</version>
         </dependency>
 
     </dependencies>

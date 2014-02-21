@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-integration-tests</artifactId>
-        <version>4.8.1</version>
+        <version>5.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.carbon.esb.tests</artifactId>
@@ -257,7 +257,7 @@
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>service-samples</artifactId>
-            <version>4.8.1</version>
+            <version>5.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>commons-digester</groupId>
@@ -333,7 +333,7 @@
 	<dependency>
 	   <groupId>org.wso2.esb</groupId>
 	   <artifactId>org.wso2.carbon.esb.common</artifactId>
-	   <version>4.8.1</version>
+	   <version>5.0.0-SNAPSHOT</version>
 	</dependency>
 	<dependency>
             <groupId>org.apache.httpcomponents</groupId>

@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-integration-tests</artifactId>
-        <version>4.8.1</version>
+        <version>5.0.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -45,7 +45,7 @@
         <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.integration.core</artifactId>
-            <version>${carbon.platform.version}</version>
+            <version>${wso2carbon.old.version}</version>
             <type>test-jar</type>
             <exclusions>
                 <exclusion>
@@ -57,7 +57,6 @@
         <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.rm</artifactId>
-            <version>${carbon.platform.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>javax.servlet</groupId>
@@ -72,37 +71,30 @@
         <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.mediation.configadmin.stub</artifactId>
-            <version>${carbon.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.integration.framework</artifactId>
-            <version>${carbon.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.addressing</artifactId>
-            <version>${carbon.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.rampart.wso2</groupId>
             <artifactId>rampart-core</artifactId>
-            <version>${orbit.version.rampart}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.ws.security</groupId>
             <artifactId>wss4j</artifactId>
-            <version>1.5.11-wso2v6</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents.wso2</groupId>
             <artifactId>httpcore</artifactId>
-            <version>4.1.0-wso2v1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents.wso2</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.1.1-wso2v1</version>
         </dependency>
     </dependencies>
 
