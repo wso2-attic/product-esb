@@ -249,10 +249,10 @@
                         <!--Carbon Common Ends here-->
                         <!--Registry Start here-->
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.registry.core.feature:4.2.1</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.registry.ui.menu.feature:${wso2carbon.version}</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.registry.resource.properties.feature:${wso2carbon.version}</featureArtifactDef>
+                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.registry.ui.menu.feature:${wso2carbon.old.version}</featureArtifactDef>
+                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.registry.resource.properties.feature:${wso2carbon.old.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.registry.extensions.feature:${wso2carbon.old.version}</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.registry.associations.dependencies.feature:${wso2carbon.version}</featureArtifactDef>
+                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.registry.associations.dependencies.feature:${wso2carbon.old.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.registry.community.features.feature:4.2.1</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.registry.community.features.server.feature:4.2.1</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transaction.manager.feature:4.2.1</featureArtifactDef>
