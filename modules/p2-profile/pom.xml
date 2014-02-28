@@ -87,7 +87,7 @@
                         <!--Carbon-Mediation Start here-->
                         <!--TODO:HAVE TO CHANGE THE VERSION-->
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.identity.oauth.mediator.feature:${wso2carbon.version}</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.identity.xacml.mediator.feature:4.2.2</featureArtifactDef>
+                        <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.identity.xacml.mediator.feature:4.2.2</featureArtifactDef-->
                         <!--========================business-adaptors==============================================================================-->
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.hl7.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transports.sap.feature:${wso2carbon.version}</featureArtifactDef>
@@ -113,18 +113,18 @@
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.core.runtime.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.core.feature:${wso2carbon.version}</featureArtifactDef>
 
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.core.feature:${wso2carbon.old.version}</featureArtifactDef>
+                        <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.core.feature:${wso2carbon.old.version}</featureArtifactDef-->
 			
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.core.ui.feature:${wso2carbon.version}</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.discovery.core.feature:4.2.1</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.discovery.ui.feature:${wso2carbon.old.version}</featureArtifactDef>
+                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.discovery.core.feature:${wso2carbon.version}</featureArtifactDef>
+                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.discovery.ui.feature:${wso2carbon.version}</featureArtifactDef>
                         <!--Carbon-kernel End here-->
                         <!--Carbon Common Start here-->
                         <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.task.feature:${wso2carbon.version}</featureArtifactDef-->
 
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.sts.feature:4.2.1</featureArtifactDef>
+                        <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.sts.feature:4.2.1</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.xfer.feature:${wso2carbon.old.version}</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.mex.feature:${wso2carbon.old.version}</featureArtifactDef>
+                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.mex.feature:${wso2carbon.old.version}</featureArtifactDef-->
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.ndatasource.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.ndatasource.ui.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.system.statistics.feature:${wso2carbon.version}</featureArtifactDef>
@@ -133,7 +133,7 @@
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.event.common.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.event.ui.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.application.mgt.feature:${wso2carbon.version}</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.cloud.gateway.agent.feature:${wso2carbon.old.version}</featureArtifactDef>
+                        <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.cloud.gateway.agent.feature:${wso2carbon.old.version}</featureArtifactDef-->
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.deployment.synchronizer.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.deployment.synchronizer.git.feature:${wso2carbon.version}</featureArtifactDef>
                         <!--Carbon Common Ends here-->
@@ -150,21 +150,21 @@
 
 
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transaction.manager.feature:${wso2carbon.version}</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.datasource.server.feature:4.2.1</featureArtifactDef>
+                        <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.datasource.server.feature:${wso2carbon.version}</featureArtifactDef-->
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.module.mgt.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.throttle.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.caching.feature:${wso2carbon.version}</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.rm.feature:${wso2carbon.old.version}</featureArtifactDef>
+                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.rm.feature:${wso2carbon.version}</featureArtifactDef>
                         <!--Registry End here-->
                         <!--Data Feature Start here-->
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.bam.mediation.agent.feature:4.2.2</featureArtifactDef>
+                        <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.bam.mediation.agent.feature:4.2.2</featureArtifactDef-->
                         <!--Data Features End here-->
                         <!--Security Start here-->
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.user.mgt.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.logging.mgt.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.security.mgt.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.identity.authenticator.saml2.sso.server.feature:${wso2carbon.version}</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature:4.2.1</featureArtifactDef>
+                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature:${wso2carbon.version}</featureArtifactDef>
                         <!--Security End here-->
                         <!--Transport Start here -->
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transport.mgt.feature:${wso2carbon.version}</featureArtifactDef>
@@ -173,17 +173,17 @@
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transport.mail.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transport.nhttp.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transport.jms.feature:${wso2carbon.version}</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.statistics.transport.feature:${wso2carbon.version}</featureArtifactDef>
+                        <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.statistics.transport.feature:${wso2carbon.old.version}</featureArtifactDef-->
                         <!--Transport Ends here -->
                         <!--Misc Start here -->
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.message.flows.feature:${wso2carbon.old.version}</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.wsdl.tools.feature:${wso2carbon.old.version}</featureArtifactDef>
+                        <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.message.flows.feature:${wso2carbon.old.version}</featureArtifactDef-->
+                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.wsdl.tools.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.tryit.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.soaptracer.feature:${wso2carbon.version}</featureArtifactDef>
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.ec2.client.feature:${wso2carbon.old.version}</featureArtifactDef>
+                        <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.ec2.client.feature:${wso2carbon.old.version}</featureArtifactDef-->
                         <!--Misc End here -->
                         <!-- reporting features -->
-                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.reporting.server.feature:4.2.1</featureArtifactDef>
+                        <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.reporting.server.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.reporting.ui.feature:${wso2carbon.version}</featureArtifactDef>
                         <!-- end reporting features -->
                         <!--Stratos Start here-->
@@ -316,6 +316,7 @@
                            <id>org.wso2.carbon.mediators.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
+ 			
                         <feature>
                            <id>org.wso2.carbon.user.mgt.feature.group</id>
                            <version>${wso2carbon.version}</version>
@@ -336,10 +337,10 @@
                            <id>org.apache.synapse.transport.vfs.smb.feature.group</id>
                            <version>${synapse.version}</version>
                         </feature>
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.datasource.server.feature.group</id>
                            <version>4.2.1</version>
-                        </feature>
+                        </feature-->
                         <feature>
                            <id>org.wso2.carbon.ndatasource.feature.group</id>
                            <version>${wso2carbon.version}</version>
@@ -352,10 +353,10 @@
                            <id>org.wso2.carbon.task.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature-->
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.statistics.transport.feature.group</id>
-                           <version>${wso2carbon.version}</version>
-                        </feature>
+                           <version>${wso2carbon.old.version}</version>
+                        </feature-->
                         <feature>
                            <id>org.wso2.carbon.application.mgt.feature.group</id>
                            <version>${wso2carbon.version}</version>
@@ -408,11 +409,11 @@
                            <id>org.wso2.carbon.transport.fix.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.message.flows.feature.group</id>
                            <version>${wso2carbon.old.version}</version>
-                        </feature>
-                        <feature>
+                        </feature-->
+                        <!--feature>
                            <id>org.wso2.carbon.sts.feature.group</id>
                            <version>4.2.1</version>
                         </feature>
@@ -423,7 +424,7 @@
                         <feature>
                            <id>org.wso2.carbon.mex.feature.group</id>
                            <version>${wso2carbon.old.version}</version>
-                        </feature>
+                        </feature-->
                         <feature>
                            <id>org.wso2.carbon.registry.core.feature.group</id>
                            <version>${wso2carbon.version}</version>
@@ -442,7 +443,7 @@
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.wsdl.tools.feature.group</id>
-                           <version>${wso2carbon.old.version}</version>
+                           <version>${wso2carbon.version}</version>
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.core.ui.feature.group</id>
@@ -451,11 +452,11 @@
                        
                         <feature>
                            <id>org.wso2.carbon.discovery.core.feature.group</id>
-                           <version>4.2.1</version>
+                           <version>${wso2carbon.version}</version>
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.discovery.ui.feature.group</id>
-                           <version>${wso2carbon.old.version}</version>
+                           <version>${wso2carbon.version}</version>
                         </feature>
                         <feature>
                            <id>org.wso2.esb.styles.feature.group</id>
@@ -489,26 +490,26 @@
                            <id>org.wso2.carbon.identity.oauth.mediator.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.identity.xacml.mediator.feature.group</id>
                            <version>4.2.2</version>
-                        </feature>
+                        </feature-->
                         <feature>
                            <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature.group</id>
-                           <version>4.2.1</version>
+                           <version>${wso2carbon.version}</version>
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.tryit.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.cloud.gateway.agent.feature.group</id>
                            <version>${wso2carbon.old.version}</version>
-                        </feature>
+                        </feature-->
                         <!--feature>
                            <id>org.wso2.carbon.load.balance.agent.ui.feature.group</id>
                            <version>${stratos.version}</version>
@@ -517,10 +518,10 @@
                            <id>org.wso2.carbon.load.balance.agent.server.feature.group</id>
                            <version>${stratos.version}</version>
                         </feature-->
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.ec2-client.feature.group</id>
                            <version>${wso2carbon.old.version}</version>
-                        </feature>
+                        </feature-->
                         <feature>
                            <id>org.wso2.carbon.deployment.synchronizer.feature.group</id>
                            <version>${wso2carbon.version}</version>
@@ -535,7 +536,7 @@
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.reporting.server.feature.group</id>
-                           <version>4.2.1</version>
+                           <version>${wso2carbon.version}</version>
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.reporting.ui.feature.group</id>
@@ -546,9 +547,13 @@
                            <version>${wso2carbon.version}</version>
                         </feature>
 			<feature>
+                           <id>org.wso2.carbon.core.runtime.feature.group</id>
+                           <version>${wso2carbon.version}</version>
+                        </feature>
+			<!--feature>
                            <id>org.wso2.carbon.core.feature.group</id>
                            <version>${wso2carbon.old.version}</version>
-                        </feature>
+                        </feature-->
 			<feature>
                            <id>org.wso2.carbon.databridge.datapublisher.feature.group</id>
                            <version>${wso2carbon.version}</version>
@@ -570,10 +575,10 @@
                            <id>org.wso2.carbon.transaction.manager.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.bam.mediation.agent.feature.group</id>
                            <version>4.2.2</version>
-                        </feature>
+                        </feature-->
                         <feature>
                            <id>org.wso2.carbon.module.mgt.feature.group</id>
                            <version>${wso2carbon.version}</version>
@@ -588,12 +593,12 @@
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.rm.feature.group</id>
-                           <version>${wso2carbon.old.version}</version>
+                           <version>${wso2carbon.version}</version>
                         </feature>
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.cloud.gateway.agent.feature.group</id>
                            <version>${wso2carbon.old.version}</version>
-                        </feature>
+                        </feature-->
                         <!--End Stratos ESB features-->
                         <feature>
                            <id>org.wso2.carbon.service.mgt.server.feature.group</id>
@@ -682,8 +687,6 @@
                            <id>org.wso2.carbon.mediators.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
-
-
 			
                         <feature>
                            <id>org.wso2.carbon.core.common.feature.group</id>
@@ -722,10 +725,10 @@
                            <id>org.apache.synapse.transport.vfs.smb.feature.group</id>
                            <version>${synapse.version}</version>
                         </feature>
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.datasource.server.feature.group</id>
                            <version>4.2.1</version>
-                        </feature>
+                        </feature-->
                         `
                         <feature>
                            <id>org.wso2.carbon.ndatasource.feature.group</id>
@@ -743,10 +746,10 @@
                            <id>org.wso2.carbon.mediation.library.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.statistics.transport.feature.group</id>
-                           <version>${wso2carbon.version}</version>
-                        </feature>
+                           <version>${wso2carbon.old.version}</version>
+                        </feature-->
                         <feature>
                            <id>org.wso2.carbon.application.mgt.feature.group</id>
                            <version>${wso2carbon.version}</version>
@@ -799,11 +802,11 @@
                            <id>org.wso2.carbon.transport.fix.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.message.flows.feature.group</id>
                            <version>${wso2carbon.old.version}</version>
-                        </feature>
-                        <feature>
+                        </feature-->
+                        <!--feature>
                            <id>org.wso2.carbon.sts.feature.group</id>
                            <version>4.2.1</version>
                         </feature>
@@ -814,7 +817,7 @@
                         <feature>
                            <id>org.wso2.carbon.mex.feature.group</id>
                            <version>${wso2carbon.old.version}</version>
-                        </feature>
+                        </feature-->
                         <feature>
                            <id>org.wso2.carbon.registry.core.feature.group</id>
                            <version>${wso2carbon.version}</version>
@@ -833,15 +836,15 @@
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.wsdl.tools.feature.group</id>
-                           <version>${wso2carbon.old.version}</version>
+                           <version>${wso2carbon.version}</version>
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.discovery.core.feature.group</id>
-                           <version>4.2.1</version>
+                           <version>${wso2carbon.version}</version>
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.discovery.ui.feature.group</id>
-                           <version>${wso2carbon.old.version}</version>
+                           <version>${wso2carbon.version}</version>
                         </feature>
                         <feature>
                            <id>org.wso2.esb.styles.feature.group</id>
@@ -875,35 +878,23 @@
                            <id>org.wso2.carbon.identity.oauth.mediator.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.identity.xacml.mediator.feature.group</id>
                            <version>4.2.2</version>
-                        </feature>
+                        </feature-->
                         <feature>
                            <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature.group</id>
-                           <version>4.2.1</version>
+                           <version>${wso2carbon.version}</version>
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.tryit.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
                         <feature>
-                           <id>org.wso2.carbon.mediation.templates.feature.group</id>
-                           <version>${wso2carbon.version}</version>
-                        </feature>
-                        <feature>
-                           <id>org.wso2.carbon.message.processor.feature.group</id>
-                           <version>${wso2carbon.version}</version>
-                        </feature>
-                        <feature>
-                           <id>org.wso2.carbon.message.store.feature.group</id>
-                           <version>${wso2carbon.version}</version>
-                        </feature>
-			<feature>
                            <id>org.wso2.carbon.databridge.datapublisher.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
@@ -915,10 +906,10 @@
                            <id>org.wso2.carbon.load.balance.agent.server.feature.group</id>
                            <version>${stratos.version}</version>
                         </feature-->
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.ec2-client.feature.group</id>
                            <version>${wso2carbon.old.version}</version>
-                        </feature>
+                        </feature-->
                         <feature>
                            <id>org.wso2.carbon.deployment.synchronizer.feature.group</id>
                            <version>${wso2carbon.version}</version>
@@ -933,7 +924,7 @@
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.reporting.server.feature.group</id>
-                           <version>4.2.1</version>
+                           <version>${wso2carbon.version}</version>
                         </feature>
                         <feature>
                            <id>org.wso2.carbon.reporting.ui.feature.group</id>
@@ -955,10 +946,10 @@
                            <id>org.wso2.carbon.transaction.manager.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.bam.mediation.agent.feature.group</id>
                            <version>4.2.2</version>
-                        </feature>
+                        </feature-->
                         <feature>
                            <id>org.wso2.carbon.module.mgt.feature.group</id>
                            <version>${wso2carbon.version}</version>
@@ -967,10 +958,10 @@
                            <id>org.wso2.carbon.core.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
-			<feature>
+			<!--feature>
                            <id>org.wso2.carbon.core.feature.group</id>
                            <version>${wso2carbon.old.version}</version>
-                        </feature>
+                        </feature-->
                         <feature>
                            <id>org.wso2.carbon.throttle.feature.group</id>
                            <version>${wso2carbon.version}</version>
@@ -983,10 +974,10 @@
                            <id>org.wso2.carbon.rm.feature.group</id>
                            <version>${wso2carbon.version}</version>
                         </feature>
-                        <feature>
+                        <!--feature>
                            <id>org.wso2.carbon.cloud.gateway.agent.feature.group</id>
                            <version>${wso2carbon.old.version}</version>
-                        </feature>
+                        </feature-->
                         <feature>
                            <id>org.wso2.carbon.service.mgt.server.feature.group</id>
                            <version>${wso2carbon.version}</version>
