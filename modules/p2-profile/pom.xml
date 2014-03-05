@@ -91,27 +91,23 @@
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.relay.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.mediation.tracer.feature:${wso2carbon.version}</featureArtifactDef>
                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.mediation.configadmin.feature:${wso2carbon.version}</featureArtifactDef>
+                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.mediation.admin.feature:${wso2carbon.version}</featureArtifactDef>
+                         <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.mediation.ui.feature:${wso2carbon.version}</featureArtifactDef>
 
 
 
 
-
-                        <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.identity.oauth.mediator.feature:${wso2carbon.version}</featureArtifactDef>-->
+                         <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.identity.oauth.mediator.feature:${wso2carbon.version}</featureArtifactDef>-->
                         <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.identity.xacml.mediator.feature:4.2.2</featureArtifactDef-->
                         <!--========================business-adaptors==============================================================================-->
                         <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.hl7.feature:${wso2carbon.version}</featureArtifactDef>-->
                         <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transports.sap.feature:${wso2carbon.version}</featureArtifactDef>-->
 
 
-                        <!--&lt;!&ndash;========================mediation-config-admin features================================================================&ndash;&gt;-->
-
-
                         <!--&lt;!&ndash;========================mediation-admin features=======================================================================&ndash;&gt;-->
-                        <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.mediation.admin.feature:${wso2carbon.version}</featureArtifactDef>-->
+
                         <!--&lt;!&ndash;========================mediation-UI features==========================================================================&ndash;&gt;-->
-                        <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.mediation.ui.feature:${wso2carbon.version}</featureArtifactDef>-->
-                        <!--&lt;!&ndash;========================Mediators features=============================================================================&ndash;&gt;-->
-                        <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.mediator.bam.feature:${wso2carbon.version}</featureArtifactDef>-->
+                         <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.mediator.bam.feature:${wso2carbon.version}</featureArtifactDef>-->
                         <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.smooks.feature:${wso2carbon.version}</featureArtifactDef>-->
                         <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.mediators.feature:${wso2carbon.version}</featureArtifactDef>-->
                         <!--Carbon-Mediation End here-->
@@ -291,6 +287,18 @@
                          <id>org.wso2.carbon.mediation.configadmin.feature.group</id>
                          <version>${wso2carbon.version}</version>
                          </feature>
+                         <feature>
+                         <id>org.wso2.carbon.mediation.admin.feature.group</id>
+                         <version>${wso2carbon.version}</version>
+                         </feature>
+
+                         <feature>
+                         <id>org.wso2.carbon.mediation.ui.feature.group</id>
+                         <version>${wso2carbon.version}</version>
+                         </feature>
+
+
+
                         <!--========================business-adaptors=================-->
                         <!--<feature>-->
                            <!--<id>org.wso2.carbon.hl7.feature.group</id>-->
@@ -300,25 +308,8 @@
                            <!--<id>org.wso2.carbon.transports.sap.feature.group</id>-->
                            <!--<version>${wso2carbon.version}</version>-->
                         <!--</feature>-->
-                        <!--========================mediation-monitor-features=================-->
 
 
-
-                        <!--========================mediation-config-admin features=================-->
-
-                        <!--========================mediation-Initializer features=================-->
-
-                        <!--========================mediation-admin features=================-->
-                        <!--<feature>-->
-                           <!--<id>org.wso2.carbon.mediation.admin.feature.group</id>-->
-                           <!--<version>${wso2carbon.version}</version>-->
-                        <!--</feature>-->
-                        <!--&lt;!&ndash;========================mediation-ui features=========================&ndash;&gt;-->
-                        <!--<feature>-->
-                           <!--<id>org.wso2.carbon.mediation.ui.feature.group</id>-->
-                           <!--<version>${wso2carbon.version}</version>-->
-                        <!--</feature>-->
-                        <!--&lt;!&ndash;========================Mediator features=============================&ndash;&gt;-->
                         <!--<feature>-->
                            <!--<id>org.wso2.carbon.mediator.bam.feature.group</id>-->
                            <!--<version>${wso2carbon.version}</version>-->
@@ -673,6 +664,17 @@
                          <id>org.wso2.carbon.mediation.configadmin.feature.group</id>
                          <version>${wso2carbon.version}</version>
                          </feature>
+                         <feature>
+                         <id>org.wso2.carbon.mediation.admin.feature.group</id>
+                         <version>${wso2carbon.version}</version>
+                         </feature>
+                         <feature>
+                         <id>org.wso2.carbon.mediation.ui.feature.group</id>
+                         <version>${wso2carbon.version}</version>
+                         </feature>
+
+
+
 
                         <!--========================business-adaptors=================-->
                         <!--<feature>-->
@@ -683,23 +685,7 @@
                            <!--<id>org.wso2.carbon.transports.sap.feature.group</id>-->
                            <!--<version>${wso2carbon.version}</version>-->
                         <!--</feature>-->
-                        <!--&lt;!&ndash;========================mediation-monitor-features=================&ndash;&gt;-->
 
-
-                        <!--&lt;!&ndash;========================mediation-config-admin features=================&ndash;&gt;-->
-
-                        <!--========================mediation initializer features=================-->
-
-                        <!--========================mediation-admin features=================-->
-                        <!--<feature>-->
-                           <!--<id>org.wso2.carbon.mediation.admin.feature.group</id>-->
-                           <!--<version>${wso2carbon.version}</version>-->
-                        <!--</feature>-->
-                        <!--&lt;!&ndash;========================mediation-ui features=================&ndash;&gt;-->
-                        <!--<feature>-->
-                           <!--<id>org.wso2.carbon.mediation.ui.feature.group</id>-->
-                           <!--<version>${wso2carbon.version}</version>-->
-                        <!--</feature>-->
                         <!--&lt;!&ndash;========================Mediator features=============================&ndash;&gt;-->
                         <!--<feature>-->
                            <!--<id>org.wso2.carbon.mediator.bam.feature.group</id>-->
