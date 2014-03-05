@@ -206,47 +206,9 @@
             </includes>
         </fileSet>
 
-        <!-- copy the landing page webapp -->
         <fileSet>
             <directory>lib/home</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps/STRATOS_ROOT</outputDirectory>
-        </fileSet>
-
-	<!-- Kernal patches -->
-        <fileSet>
-            <directory>../p2-profile/target/WSO2-CARBON-PATCH-4.2.0-0001</directory>
-            <outputDirectory>wso2esb-${pom.version}/repository/components/patches/</outputDirectory>
-            <includes>
-                <include>**/patch0001/*.*</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>../p2-profile/target/WSO2-CARBON-PATCH-4.2.0-0002</directory>
-            <outputDirectory>wso2esb-${pom.version}/repository/components/patches/</outputDirectory>
-            <includes>
-                <include>**/patch0002/*.*</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>../p2-profile/target/WSO2-CARBON-PATCH-4.2.0-0003</directory>
-            <outputDirectory>wso2esb-${pom.version}/repository/components/patches/</outputDirectory>
-            <includes>
-                <include>**/patch0003/*.*</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>../p2-profile/target/WSO2-CARBON-PATCH-4.2.0-0004</directory>
-            <outputDirectory>wso2esb-${pom.version}/repository/components/patches/</outputDirectory>
-            <includes>
-                <include>**/patch0004/*.*</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>../p2-profile/target/WSO2-CARBON-PATCH-4.2.0-0005</directory>
-            <outputDirectory>wso2esb-${pom.version}/repository/components/patches/</outputDirectory>
-            <includes>
-                <include>**/patch0005/*.*</include>
-            </includes>
         </fileSet>
     </fileSets>
     <dependencySets>
@@ -364,22 +326,22 @@
             <destName>jndi.properties</destName>
             <filtered>true</filtered>
         </file>
-        <file>
-            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/rule-engine-config.xml</source>
-            <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
-        </file>
+        <!--<file>-->
+            <!--<source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/rule-engine-config.xml</source>-->
+            <!--<outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>-->
+        <!--</file>-->
         <file>
             <source>../../LICENSE.txt</source>
             <outputDirectory>wso2esb-${pom.version}</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <file>
-            <source>../../README.txt</source>
-            <outputDirectory>wso2esb-${pom.version}</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
+        <!--<file>-->
+            <!--<source>../../README.txt</source>-->
+            <!--<outputDirectory>wso2esb-${pom.version}</outputDirectory>-->
+            <!--<filtered>true</filtered>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
         <file>
             <source>../../INSTALL.txt</source>
             <outputDirectory>wso2esb-${pom.version}</outputDirectory>
@@ -409,17 +371,10 @@
             <outputDirectory>wso2esb-${pom.version}/bin/</outputDirectory>
             <filtered>true</filtered>
         </file>
-        <!--file>
+        <file>
             <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/carbon.xml</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
-        </file-->
-        <!-- Take carbon.xml from patch004 -->
-        <file>
-            <source>../p2-profile/target/WSO2-CARBON-PATCH-${carbon.kernel.version}-0004/repository/conf/carbon.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
         </file>
         <file>
             <source>../../modules/samples/product/src/main/conf/client/axis2.xml</source>
@@ -451,49 +406,15 @@
             <outputDirectory>wso2esb-${pom.version}/repository/axis2/client/lib</outputDirectory>
             <destName>wss4j_1.5.11.wso2v6.jar</destName>
         </file>
-
-	<!-- ESB connectors (This can be done without hardcoding using antrn or GMaven plugin) -->
-	<!-- end of connectors -->
-	<!-- Removed connectors as we will host those somewhere eles ( github )
-	<file>
-            <source>../../../../../components/mediation/mediation-library/connectors/org.wso2.carbon.connector.jira/1.0.0/target/jira-connector-1.0.0.zip</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/connectors</outputDirectory>
-        </file>
-
-	<file>
-            <source>../../../../../components/mediation/mediation-library/connectors/org.wso2.carbon.connector.twilio/1.0.0/target/twilio-connector-1.0.0.zip</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/connectors</outputDirectory>
-        </file>
-
-	<file>
-            <source>../../../../../components/mediation/mediation-library/connectors/org.wso2.carbon.connector.googlespreadsheet/1.0.0/target/googlespreadsheet-connector-1.0.0.zip</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/connectors</outputDirectory>
-        </file>
-
-	<file>
-            <source>../../../../../components/mediation/mediation-library/connectors/org.wso2.carbon.connector.salesforce/1.0.0/target/salesforce-connector-1.0.0.zip</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/connectors</outputDirectory>
-        </file>
-
-	<file>
-            <source>../../../../../components/mediation/mediation-library/connectors/org.wso2.carbon.connector.twitter/1.0.0/target/twitter-connector-1.0.0.zip</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/connectors</outputDirectory>
-        </file> -->
-
-        <!--Start Stratos ESB-->
-
         <file>
             <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/logging-config.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
         </file>
-        <file>
-            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-
-
-        <!--End Stratos ESB-->
+        <!--<file>-->
+            <!--<source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity.xml</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>-->
+            <!--<filtered>true</filtered>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
     </files>
 </assembly>
