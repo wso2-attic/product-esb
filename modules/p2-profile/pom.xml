@@ -277,10 +277,12 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.transport.jms.feature:${wso2carbon.version}
                                 </featureArtifactDef>
+
+
                                 <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.statistics.transport.feature:${wso2carbon.old.version}</featureArtifactDef-->
                                 <!--Transport Ends here -->
                                 <!--Misc Start here -->
-                                <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.message.flows.feature:${wso2carbon.old.version}</featureArtifactDef-->
+                                <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.message.flows.feature:${wso2carbon.old.version}</featureArtifactDef--> <!--This has to be modified-->
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.wsdl.tools.feature:${wso2carbon.version}
                                 </featureArtifactDef>
@@ -674,10 +676,6 @@
                                     <id>org.wso2.carbon.core.runtime.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <!--feature>
-                                               <id>org.wso2.carbon.core.feature.group</id>
-                                               <version>${wso2carbon.old.version}</version>
-                                            </feature-->
                                 <feature>
                                     <id>org.wso2.carbon.databridge.datapublisher.feature.group</id>
                                     <version>${wso2carbon.version}</version>
