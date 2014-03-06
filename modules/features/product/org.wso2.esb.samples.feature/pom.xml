@@ -64,7 +64,7 @@
                                 <bundleDef>org.wso2.esb:org.wso2.esb.samples</bundleDef>
                             </bundles>
                             <importFeatures>
-                                <importFeatureDef>org.apache.synapse.wso2:2.1.2-wso2v1</importFeatureDef>
+                                <importFeatureDef>org.apache.synapse.wso2:${synapse.version}</importFeatureDef>
                             </importFeatures>
                         </configuration>
                     </execution>

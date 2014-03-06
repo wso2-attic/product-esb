@@ -35,21 +35,6 @@
     <name>WSO2 Stratos ESB - Features Aggregator Module</name>
     <description>Features specific to the WSO2 ESB</description>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.wso2.esb</groupId>
-                <artifactId>org.wso2.stratos.esb.styles</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.esb</groupId>
-                <artifactId>org.wso2.stratos.esb.samples</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <modules>
         <module>org.wso2.stratos.esb.login.ui.feature</module>
         <module>org.wso2.stratos.esb.styles.feature</module>

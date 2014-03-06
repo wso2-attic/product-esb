@@ -130,6 +130,12 @@
             <artifactId>addressing</artifactId>
             <version>${addressing.version}</version>
          </dependency>
+          <dependency>
+              <groupId>org.apache.axis2</groupId>
+              <artifactId>addressing</artifactId>
+              <type>mar</type>
+              <version>${addressing.version}</version>
+          </dependency>
          <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.ui.menu.stratos</artifactId>
@@ -192,6 +198,11 @@
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
          </dependency>
+          <dependency>
+              <groupId>xerces</groupId>
+              <artifactId>xercesImpl</artifactId>
+              <version>2.8.1</version>
+          </dependency>
          <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
@@ -248,6 +259,65 @@
             <artifactId>org.wso2.carbon.mediator.bridge</artifactId>
             <version>${wso2carbon.version}</version>
          </dependency>
+          <dependency>
+              <groupId>commons-codec</groupId>
+              <artifactId>commons-codec</artifactId>
+              <version>1.6</version>
+          </dependency>
+          <dependency>
+              <groupId>org.apache.sandesha2</groupId>
+              <artifactId>sandesha2</artifactId>
+              <type>mar</type>
+              <version>1.6.1-wso2v1</version>
+          </dependency>
+          <dependency>
+              <groupId>org.wso2.carbon</groupId>
+              <artifactId>org.wso2.carbon.mediator.bridge</artifactId>
+              <type>jar</type>
+              <version>${carbon.platform.version}</version>
+          </dependency>
+          <dependency>
+              <groupId>bouncycastle</groupId>
+              <artifactId>bcprov-jdk15</artifactId>
+              <version>132</version>
+          </dependency>
+
+          <dependency>
+              <groupId>org.apache.rampart</groupId>
+              <artifactId>rampart</artifactId>
+              <type>mar</type>
+              <version>1.6.1-wso2v8</version>
+          </dependency>
+          <dependency>
+              <groupId>org.apache.httpcomponents</groupId>
+              <artifactId>httpcore</artifactId>
+              <version>4.1.2</version>
+          </dependency>
+          <dependency>
+              <groupId>org.apache.httpcomponents</groupId>
+              <artifactId>httpclient</artifactId>
+              <version>4.1.2</version>
+          </dependency>
+          <dependency>
+              <groupId>org.wso2.esb</groupId>
+              <artifactId>org.wso2.esb.styles</artifactId>
+              <version>${project.version}</version>
+          </dependency>
+          <dependency>
+              <groupId>org.wso2.esb</groupId>
+              <artifactId>org.wso2.esb.samples</artifactId>
+              <version>${project.version}</version>
+          </dependency>
+          <dependency>
+              <groupId>org.wso2.esb</groupId>
+              <artifactId>org.wso2.stratos.esb.styles</artifactId>
+              <version>${project.version}</version>
+          </dependency>
+          <dependency>
+              <groupId>org.wso2.esb</groupId>
+              <artifactId>org.wso2.stratos.esb.samples</artifactId>
+              <version>${project.version}</version>
+          </dependency>
       </dependencies>
    </dependencyManagement>
    <properties>
