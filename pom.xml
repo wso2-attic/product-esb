@@ -308,7 +308,7 @@
               <artifactId>org.wso2.esb.samples</artifactId>
               <version>${project.version}</version>
           </dependency>
-          <dependency>
+          <!--dependency>
               <groupId>org.wso2.esb</groupId>
               <artifactId>org.wso2.stratos.esb.styles</artifactId>
               <version>${project.version}</version>
@@ -317,7 +317,7 @@
               <groupId>org.wso2.esb</groupId>
               <artifactId>org.wso2.stratos.esb.samples</artifactId>
               <version>${project.version}</version>
-          </dependency>
+          </dependency-->
       </dependencies>
    </dependencyManagement>
    <properties>
