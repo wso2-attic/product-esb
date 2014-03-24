@@ -206,7 +206,7 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.registry.resource.properties.feature:${wso2carbon.version}
                                 </featureArtifactDef>
-                                <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.registry.extensions.feature:${wso2carbon.version}</featureArtifactDef-->
+                                <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.registry.extensions.feature:${wso2carbon.version}</featureArtifactDef>
 
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.registry.handler.configuration.feature:${wso2carbon.version}
@@ -561,10 +561,10 @@
                                     <id>org.wso2.carbon.registry.core.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <!--feature>
+                                <feature>
                                    <id>org.wso2.carbon.registry.extensions.feature.group</id>
                                    <version>${wso2carbon.version}</version>
-                                </feature-->
+                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.feature.group</id>
                                     <version>${wso2carbon.version}</version>
@@ -822,8 +822,10 @@
                                 <!--<id>org.wso2.carbon.mediator.bam.feature.group</id>-->
                                 <!--<version>${wso2carbon.version}</version>-->
                                 <!--</feature>-->
-
-
+                                <feature>
+                                    <id>org.wso2.carbon.rule.mediation.feature.group</id>
+                                    <version>${wso2carbon.version}</version>
+                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.common.feature.group</id>
                                     <version>${wso2carbon.version}</version>
@@ -955,10 +957,10 @@
                                     <id>org.wso2.carbon.registry.core.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <!--feature>
+                                <feature>
                                    <id>org.wso2.carbon.registry.extensions.feature.group</id>
                                    <version>${wso2carbon.version}</version>
-                                </feature-->
+                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.feature.group</id>
                                     <version>${wso2carbon.version}</version>
