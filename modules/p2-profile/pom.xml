@@ -130,7 +130,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.smooks.feature:${wso2carbon.version}
                                 </featureArtifactDef>
-
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.rule.mediation.feature:${wso2carbon.version}
+                                </featureArtifactDef>
 
                                 <!--========================Need to be add adaptors==============================================================================-->
                                 <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.hl7.feature:${wso2carbon.version}</featureArtifactDef>-->
@@ -533,6 +535,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.transport.fix.feature.group</id>
+                                    <version>${wso2carbon.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.rule.mediation.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
                                 <!--feature>
