@@ -305,13 +305,24 @@
                                 </featureArtifactDef>
                                 <!-- end reporting features -->
 
+                                <!-- Multi Tenant-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.tenant.common.feature:${carbon.platform.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.tenant.usage.agent.feature:${carbon.platform.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.tenant.throttling.agent.feature:${carbon.platform.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.tenant.deployment.feature:${carbon.platform.version}
+                                </featureArtifactDef>
+
                                 <!--Stratos Start here-->
                                 <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.load.balance.agent.ui.feature:${stratos.version}</featureArtifactDef-->
                                 <!--featureArtifactDef>org.wso2.esb:org.wso2.stratos.esb.login.ui.feature:${stratos.version}</featureArtifactDef-->
-                                <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.stratos.common.feature:2.2.1</featureArtifactDef>
-                                <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.stratos.usage.agent.feature:${stratos.version}</featureArtifactDef>
-                                <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.stratos.throttling.agent.feature:${stratos.version}</featureArtifactDef>
-                                <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.load.balance.agent.server.feature:${stratos.version}</featureArtifactDef-->
+                                <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.load.balance.agent.server.feature:${stratos.version}</featureArtifactDef-->
                                 <!--Stratos End here-->
 
 
@@ -686,19 +697,23 @@
                                     <id>org.wso2.carbon.databridge.datapublisher.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <!--Start Stratos ESB features-->
-                                <!--feature>
-                                   <id>org.wso2.carbon.stratos.usage.agent.feature.group</id>
-                                   <version>${stratos.version}</version>
+                                <!--Start Multi Tenant ESB features-->
+                                <feature>
+                                    <id>org.wso2.carbon.tenant.common.feature.group</id>
+                                    <version>${carbon.platform.version}</version>
                                 </feature>
                                 <feature>
-                                   <id>org.wso2.carbon.stratos.throttling.agent.feature.group</id>
-                                   <version>${stratos.version}</version>
+                                    <id>org.wso2.carbon.tenant.usage.agent.feature.group</id>
+                                    <version>${carbon.platform.version}</version>
                                 </feature>
                                 <feature>
-                                   <id>org.wso2.carbon.stratos.common.feature.group</id>
-                                   <version>2.2.1</version>
-                                </feature-->
+                                    <id>org.wso2.carbon.tenant.throttling.agent.feature.group</id>
+                                    <version>${carbon.platform.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.tenant.deployment.feature.group</id>
+                                    <version>${carbon.platform.version}</version>
+                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.transaction.manager.feature.group</id>
                                     <version>${wso2carbon.version}</version>
@@ -1065,18 +1080,23 @@
                                     <id>org.wso2.carbon.reporting.ui.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <!--feature>
-                                   <id>org.wso2.carbon.stratos.usage.agent.feature.group</id>
-                                   <version>${stratos.version}</version>
+                                <!--Start Multi Tenant ESB features-->
+                                <feature>
+                                    <id>org.wso2.carbon.tenant.common.feature.group</id>
+                                    <version>${carbon.platform.version}</version>
                                 </feature>
                                 <feature>
-                                   <id>org.wso2.carbon.stratos.throttling.agent.feature.group</id>
-                                   <version>${stratos.version}</version>
+                                    <id>org.wso2.carbon.tenant.usage.agent.feature.group</id>
+                                    <version>${carbon.platform.version}</version>
                                 </feature>
                                 <feature>
-                                   <id>org.wso2.carbon.stratos.common.feature.group</id>
-                                   <version>2.2.1</version>
-                                </feature-->
+                                    <id>org.wso2.carbon.tenant.throttling.agent.feature.group</id>
+                                    <version>${carbon.platform.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.tenant.deployment.feature.group</id>
+                                    <version>${carbon.platform.version}</version>
+                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.transaction.manager.feature.group</id>
                                     <version>${wso2carbon.version}</version>
