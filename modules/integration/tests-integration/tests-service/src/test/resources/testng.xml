@@ -17,8 +17,8 @@
 
     <test name="ProxyService-Test" preserve-order="true" verbose="2">
         <packages>
-            <package name="org.wso2.carbon.esb.jaxrs.test.*"/>
-            <package name="org.wso2.carbon.esb.jaxrs.rest.test.*"/>
+           <!-- <package name="org.wso2.carbon.esb.jaxrs.test.*"/>
+            <package name="org.wso2.carbon.esb.jaxrs.rest.test.*"/>-->
         </packages>
     </test>
  <!--   <test name="ProxyService-Test" preserve-order="true" verbose="2">
