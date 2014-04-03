@@ -560,7 +560,7 @@ public class ESBTestCaseUtils {
      * @throws java.rmi.RemoteException
      */
     public boolean isEndpointDeployed(String backEndUrl, String sessionCookie, String endpointName)
-            throws EndpointAdminEndpointAdminException, RemoteException {
+            throws RemoteException, EndpointAdminEndpointAdminException {
         EndPointAdminClient endPointAdminClient = new EndPointAdminClient(backEndUrl,
                 sessionCookie);
         log.info("waiting " + 5000 + " millis for Endpoint " + endpointName);

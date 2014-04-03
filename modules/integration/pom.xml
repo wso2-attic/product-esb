@@ -45,7 +45,7 @@
     <modules>
         <module>test-common</module>
         <module>service-samples</module>
-<!--        <module>tests-integration/tests-mediator</module>-->
+       <!-- <module>tests-integration/tests-mediator</module>-->
         <module>tests-integration/tests-service</module>
     </modules>
 
