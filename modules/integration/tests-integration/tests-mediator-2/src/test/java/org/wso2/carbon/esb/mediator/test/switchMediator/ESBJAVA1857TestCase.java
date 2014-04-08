@@ -13,10 +13,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.utils.HttpResponse;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.ESBTestConstant;
 
+import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
 public class ESBJAVA1857TestCase extends ESBIntegrationTest {
 	@BeforeClass(alwaysRun = true)
 	public void beforeClass() throws Exception {

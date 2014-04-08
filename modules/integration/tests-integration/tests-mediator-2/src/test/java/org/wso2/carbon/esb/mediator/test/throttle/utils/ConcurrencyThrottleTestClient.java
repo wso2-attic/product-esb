@@ -22,7 +22,7 @@ import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
 import org.apache.axiom.om.OMNamespace;
 import org.apache.axiom.om.util.AXIOMUtil;
-import org.wso2.carbon.automation.utils.axis2client.AxisServiceClient;
+import org.wso2.esb.integration.common.utils.clients.axis2client.AxisServiceClient;
 
 import javax.xml.stream.XMLStreamException;
 import java.util.List;

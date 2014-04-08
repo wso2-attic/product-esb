@@ -22,11 +22,11 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.ESBTestConstant;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
 import java.io.File;
 
 
@@ -47,7 +47,7 @@ public class FilterMediatorTest extends ESBIntegrationTest {
      *
      * @throws Exception
      */
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_user})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"})
     public void filterMediatorWithSourceAndRegexTest() throws Exception {
 

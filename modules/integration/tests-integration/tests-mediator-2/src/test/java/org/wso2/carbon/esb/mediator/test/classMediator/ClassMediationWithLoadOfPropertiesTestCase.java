@@ -23,10 +23,11 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.core.ProductConstant;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.registry.properties.stub.PropertiesAdminServiceRegistryExceptionException;
 import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 
@@ -37,7 +38,7 @@ import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-
+@Test(groups = { "excludeGroup" })
 public class ClassMediationWithLoadOfPropertiesTestCase extends ESBIntegrationTest {
 
     private final String CLASS_JAR="org.wso2.carbon.test.mediator.simpleClassMediator.jar";
@@ -49,7 +50,7 @@ public class ClassMediationWithLoadOfPropertiesTestCase extends ESBIntegrationTe
     public void setEnvironment() throws Exception {
 
         init(ProductConstant.ADMIN_USER_ID);
-        serverConfigurationManager=new ServerConfigurationManager(esbServer.getBackEndUrl());
+        serverConfigurationManager=new ServerConfigurationManager(contextUrls.getBackEndUrl());
         serverConfigurationManager.copyToComponentLib
                 (new File(getClass().getResource(JAR_LOCATION + File.separator + CLASS_JAR).toURI()));
         serverConfigurationManager.restartGracefully();
@@ -58,7 +59,8 @@ public class ClassMediationWithLoadOfPropertiesTestCase extends ESBIntegrationTe
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/class/class_mediation_with_twenty_properties.xml");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb","localOnly"}, description = "Class Mediator " +
                                   " -Class mediator which has a load of properties to be passed and mediation")
     public void testMediationWithLoadOfProperties()

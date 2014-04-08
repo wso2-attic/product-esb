@@ -32,7 +32,7 @@ import org.apache.axis2.context.ConfigurationContext;
 import org.apache.axis2.context.ConfigurationContextFactory;
 import org.apache.axis2.context.MessageContext;
 import org.testng.Assert;
-import org.wso2.carbon.automation.utils.esb.AxisOperationClient;
+import org.wso2.esb.integration.common.utils.clients.axis2client.AxisOperationClient;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;

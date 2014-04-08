@@ -23,11 +23,12 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.mediation.MessageStoreAdminClient;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.clients.mediation.MessageStoreAdminClient;import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+
 
 import java.rmi.RemoteException;
 import java.util.Arrays;
@@ -36,6 +37,7 @@ import java.util.List;
 /**
  * This class checks whether a message store is persisted after ESB restarted
  */
+@Test(groups = { "excludeGroup" })
 public class MessageStorePersistenceTestCase extends ESBIntegrationTest {
 
     private MessageStoreAdminClient messageStoreAdminClient;
@@ -45,12 +47,13 @@ public class MessageStorePersistenceTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         super.init();
-        messageStoreAdminClient = new MessageStoreAdminClient(esbServer.getBackEndUrl(),
-                                                              esbServer.getSessionCookie());
-        serverConfigurationManager = new ServerConfigurationManager(esbServer.getBackEndUrl());
+        messageStoreAdminClient = new MessageStoreAdminClient(contextUrls.getBackEndUrl(),
+                                                              getSessionCookie());
+        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb"}, description = "Test whether message store is persistance")
     public void messageStorePersistenceTest() throws Exception {
         OMElement messageStore =
@@ -89,7 +92,7 @@ public class MessageStorePersistenceTestCase extends ESBIntegrationTest {
         serverConfigurationManager.restartGracefully();
         Thread.sleep(10000);
         super.init();
-        messageStoreAdminClient = new MessageStoreAdminClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+        messageStoreAdminClient = new MessageStoreAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
         messageStores = messageStoreAdminClient.getMessageStores();
         Assert.assertNotNull(messageStores, "Message Store Not Found after restarting server");
         if (messageStores != null) {
@@ -106,7 +109,7 @@ public class MessageStorePersistenceTestCase extends ESBIntegrationTest {
         if (messageStores != null) {
             List list = Arrays.asList(messageStores);
             if (list.contains(MESSAGE_STORE_NAME)) {
-                esbUtils.deleteMessageStore(esbServer.getBackEndUrl(), esbServer.getSessionCookie(), MESSAGE_STORE_NAME);
+                esbUtils.deleteMessageStore(contextUrls.getBackEndUrl(), getSessionCookie(), MESSAGE_STORE_NAME);
             }
         }
         messageStoreAdminClient = null;

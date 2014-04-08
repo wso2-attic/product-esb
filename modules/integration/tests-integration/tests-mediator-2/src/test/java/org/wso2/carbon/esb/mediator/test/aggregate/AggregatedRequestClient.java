@@ -23,7 +23,7 @@ import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMNamespace;
 import org.apache.axiom.soap.SOAPFactory;
 import org.testng.Assert;
-import org.wso2.carbon.automation.utils.esb.AxisOperationClient;
+import org.wso2.esb.integration.common.utils.clients.axis2client.AxisOperationClient;
 
 import java.io.IOException;
 

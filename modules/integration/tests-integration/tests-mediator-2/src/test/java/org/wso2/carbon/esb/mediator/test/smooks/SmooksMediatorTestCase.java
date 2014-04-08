@@ -23,9 +23,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.esb.util.MultiMessageReceiver;
 
 import javax.activation.DataHandler;
@@ -37,7 +37,7 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
-
+@Test(groups = { "excludeGroup" })
 public class SmooksMediatorTestCase extends ESBIntegrationTest {
     private ServerConfigurationManager serverConfigurationManager;
     private ResourceAdminServiceClient resourceAdminServiceStub;
@@ -48,10 +48,10 @@ public class SmooksMediatorTestCase extends ESBIntegrationTest {
     /*@BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        serverConfigurationManager = new ServerConfigurationManager(esbServer.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
         serverConfigurationManager.applyConfiguration(new File(getClass().getResource(COMMON_FILE_LOCATION + File.separator + "axis2.xml").getPath()));
         super.init();
-        resourceAdminServiceStub = new ResourceAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+        resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
 
     @AfterClass

@@ -23,9 +23,10 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
@@ -36,7 +37,8 @@ public class UrlReWriteByPort extends ESBIntegrationTest {
         super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/rewrite/url_reWrite_by_port_synapse.xml");
     }
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb"}, description = "Conditional URL Rewriting",
           dataProvider = "addressingUrl")
     public void reWriteProtocol(String addUrl) throws AxisFault {
@@ -49,7 +51,8 @@ public class UrlReWriteByPort extends ESBIntegrationTest {
         assertTrue(response.toString().contains("IBM"));
 
     }
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb"}, description = "Conditional URL Rewriting")
     public void invalidUrl() throws AxisFault {
         try {

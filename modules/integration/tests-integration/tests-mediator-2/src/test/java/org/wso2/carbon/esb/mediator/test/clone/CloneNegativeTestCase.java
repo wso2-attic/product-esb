@@ -24,11 +24,13 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.axis2serverutils.SampleAxis2Server;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.ESBTestConstant;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
+import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
 
 public class CloneNegativeTestCase extends ESBIntegrationTest {
 
@@ -48,7 +50,8 @@ public class CloneNegativeTestCase extends ESBIntegrationTest {
         axis2Server2.start();
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Tests clone ID that does not match with the aggregate ID")
     public void testAggregateID() throws Exception {
 
@@ -64,14 +67,16 @@ public class CloneNegativeTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Tests against a invalid SOAP adress")
     public void testSOAPAction() throws Exception {
         //TODO QA test has failed
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Tests against a invalid SOAP adress")
     public void testAddress() throws Exception {
         //TODO not yet tested

@@ -22,12 +22,12 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.api.clients.logging.LoggingAdminClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.namespace.QName;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-
+@Test(groups = { "excludeGroup" })
 public class SequenceWhichHasJsFunctionsForBothInOutTestCase extends ESBIntegrationTest {
 
     @BeforeClass
@@ -62,7 +62,7 @@ public class SequenceWhichHasJsFunctionsForBothInOutTestCase extends ESBIntegrat
 
 
     private void enableDebugLogging() throws Exception {
-        LoggingAdminClient logAdminClient = new LoggingAdminClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+        LoggingAdminClient logAdminClient = new LoggingAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
         logAdminClient.updateLoggerData("org.apache.synapse", "DEBUG", true, false);
     }
  }

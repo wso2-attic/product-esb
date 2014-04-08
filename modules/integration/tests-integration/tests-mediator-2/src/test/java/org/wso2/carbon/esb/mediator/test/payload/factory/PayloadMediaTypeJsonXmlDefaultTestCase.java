@@ -18,8 +18,9 @@ package org.wso2.carbon.esb.mediator.test.payload.factory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.utils.httpclient.HttpURLConnectionClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+
+import org.wso2.carbon.automation.test.utils.http.client.HttpURLConnectionClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import java.io.Reader;
 import java.io.StringReader;

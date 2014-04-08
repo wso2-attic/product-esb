@@ -20,7 +20,7 @@ package org.wso2.carbon.esb.mediator.test.throttle;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.esb.mediator.test.throttle.utils.ConcurrencyThrottleTestClient;
 import org.wso2.carbon.esb.mediator.test.throttle.utils.ThrottleTestCounter;
 

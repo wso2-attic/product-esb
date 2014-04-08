@@ -24,17 +24,18 @@ import org.apache.axis2.AxisFault;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.ProductConstant;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.fileutils.FileManager;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+
+import org.wso2.carbon.automation.test.utils.common.FileManager;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.namespace.QName;
 import java.util.Iterator;
 
 import static org.testng.Assert.assertTrue;
-
+@Test(groups = { "excludeGroup" })
 public class ValidPathAxis2XmlTestCase extends ESBIntegrationTest {
 
 
@@ -77,7 +78,8 @@ public class ValidPathAxis2XmlTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb")
     public void TestPath() throws AxisFault {
 

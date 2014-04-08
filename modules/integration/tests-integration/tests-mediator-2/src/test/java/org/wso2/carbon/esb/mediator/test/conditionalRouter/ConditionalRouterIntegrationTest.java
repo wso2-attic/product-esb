@@ -24,21 +24,21 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.sequences.SequenceAdminServiceClient;
+
 import org.wso2.carbon.automation.core.ProductConstant;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.endpointutils.EsbEndpointSetter;
-import org.wso2.carbon.automation.utils.esb.ArtifactReaderUtil;
-import org.wso2.carbon.automation.utils.esb.StockQuoteClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.ESBTestConstant;
-import org.wso2.carbon.esb.util.EndpointGenerator;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+
+import org.wso2.esb.integration.common.clients.sequences.SequenceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
+import org.wso2.esb.integration.common.utils.clients.stockquoteclient.StockQuoteClient;
 
 import java.io.File;
 import java.net.URL;
 
-
+@Test(groups = { "excludeGroup" })
 public class ConditionalRouterIntegrationTest extends ESBIntegrationTest {
 
     private String toUrl = null;
@@ -50,8 +50,8 @@ public class ConditionalRouterIntegrationTest extends ESBIntegrationTest {
     public void setEnvironment() throws Exception {
         super.init();
         mainSeqUrl = getMainSequenceURL();
-        sequenceAdminServiceClient = new SequenceAdminServiceClient(esbServer.getBackEndUrl(),
-                                                                    esbServer.getSessionCookie());
+        sequenceAdminServiceClient = new SequenceAdminServiceClient(contextUrls.getBackEndUrl(),
+                                                                    getSessionCookie());
         toUrl = getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE);
 
     }
@@ -111,7 +111,8 @@ public class ConditionalRouterIntegrationTest extends ESBIntegrationTest {
      *
      * @throws Exception
      */
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_user,ExecutionEnvironment.platform_user })
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE,ExecutionEnvironment.PLATFORM
+ })
     @Test(groups = {"wso2.esb"})
     public void conditionalRouterMediatorWithMultiRoutesTest() throws Exception {
         loadSampleESBConfiguration(157);

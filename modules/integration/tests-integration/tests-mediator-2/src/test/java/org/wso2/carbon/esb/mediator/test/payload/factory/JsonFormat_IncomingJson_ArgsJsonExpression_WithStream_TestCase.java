@@ -23,19 +23,21 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.core.ProductConstant;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.automation.core.utils.environmentutils.EnvironmentBuilder;
-import org.wso2.carbon.automation.core.utils.environmentutils.EnvironmentVariables;
-import org.wso2.carbon.automation.core.utils.httpserverutils.SimpleHttpClient;
+
+
 import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.automation.utils.esb.ESBTestCaseUtils;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
+
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import java.io.File;
 
 import static org.testng.Assert.assertTrue;
-
+@Test(groups = { "excludeGroup" })
 public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase extends ESBIntegrationTest{
 
     private ServerConfigurationManager serverManager = null;
@@ -79,16 +81,18 @@ public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase exte
             +"<id>819797</id>"
             +"</user></xml>";
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
         super.init();
-        serverManager = new ServerConfigurationManager(esbServer.getBackEndUrl());
+        serverManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
 //        serverManager.applyConfiguration(new File(getClass().getResource("/artifacts/ESB/mediatorconfig/payload/factory/axis2/axis2.xml").getPath()));
         super.init();
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb"}, description = "With Stream B&F, json format, json evaluators, incoming json, outgoing json ")
     public void incomingJsontransformJsonPayloadByArgsJsonExpressions() throws Exception {
 
@@ -98,7 +102,8 @@ public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase exte
 
         }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb"}, description = "With Stream B&F, xml format, json evaluators, incoming json, outgoing xml ")
     public void incomingJsontransformXmlPayloadByArgsJsonExpressions() throws Exception {
 
@@ -107,7 +112,8 @@ public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase exte
         assertTrue(responsePayload.contains("wso2"), "Symbol wso2 not found in response message");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb"}, description = "With Stream B&F, json format, json evaluators, incoming json, outgoing json ")
     public void incomingJsontransformJsonPayloadByArgsJsonXmlExpressionsValues() throws Exception {
 
@@ -119,7 +125,8 @@ public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase exte
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb"}, description = "With Stream B&F, json format, json evaluators, incoming json, outgoing json ")
     public void incomingXmltransformJsonPayloadByArgsJsonXmlExpressionsValues() throws Exception {
 
@@ -140,7 +147,8 @@ public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase exte
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @AfterClass(alwaysRun = true)
     private void destroy() throws Exception {
         try {

@@ -23,8 +23,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+
 
 import javax.activation.DataHandler;
 import java.net.URL;
@@ -37,8 +38,8 @@ public class RouterMediatorSequenceTestCase extends ESBIntegrationTest {
     @BeforeClass
     public void setEnvironment() throws Exception {
         init();
-        resourceAdminServiceClient = new ResourceAdminServiceClient(esbServer.getBackEndUrl(),
-                        esbServer.getSessionCookie());
+        resourceAdminServiceClient = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
+                        sessionCookie);
     }
 
     @Test(groups = "wso2.esb", description = "Tests different kinds of sequences in target")

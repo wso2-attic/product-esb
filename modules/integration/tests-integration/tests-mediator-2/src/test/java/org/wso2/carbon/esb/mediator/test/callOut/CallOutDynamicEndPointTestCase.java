@@ -6,9 +6,10 @@ import org.apache.axis2.AxisFault;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import static org.testng.Assert.assertTrue;
 
@@ -21,7 +22,7 @@ import static org.testng.Assert.assertTrue;
 public class CallOutDynamicEndPointTestCase  extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.platform_user})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.PLATFORM})
     public void setEnvironment() throws Exception {
 
         super.init();
@@ -29,7 +30,8 @@ public class CallOutDynamicEndPointTestCase  extends ESBIntegrationTest {
     }
 
     @Test(groups = {"wso2.esb"})
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.platform_user})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.PLATFORM
+})
     public void TestDynamicEndPoints() throws AxisFault {
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("CalloutProxy"), "", "IBM");    // send the simplestockquote request. service url is set at the synapse
@@ -41,7 +43,8 @@ public class CallOutDynamicEndPointTestCase  extends ESBIntegrationTest {
 
 
     @AfterClass(alwaysRun = true)
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.platform_user})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.PLATFORM
+})
     public void destroy() throws Exception {
         super.cleanup();
     }

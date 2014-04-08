@@ -24,10 +24,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.ESBTestConstant;
-import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 
 import javax.activation.DataHandler;
 import java.io.File;
@@ -44,7 +43,7 @@ public class ValidateIntegrationDynamicSchemaChangeTestCase extends ESBIntegrati
 
         // Initialize ESBMediatorTest
         super.init();
-        resourceAdminServiceClient = new ResourceAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+        resourceAdminServiceClient = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
         toUrl = getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE);
 
 

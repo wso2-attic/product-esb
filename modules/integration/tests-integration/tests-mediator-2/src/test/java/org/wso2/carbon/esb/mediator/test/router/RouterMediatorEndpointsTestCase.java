@@ -23,8 +23,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.endpoint.EndPointAdminClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.clients.endpoint.EndPointAdminClient;import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.activation.DataHandler;
 import java.net.URL;
@@ -39,7 +38,7 @@ public class RouterMediatorEndpointsTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         init();
-        endPointAdminClient = new EndPointAdminClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+        endPointAdminClient = new EndPointAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
 
     @Test(groups = "wso2.esb", description = "Tests different types of endpoints")

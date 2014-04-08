@@ -22,8 +22,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.api.clients.logging.LoggingAdminClient;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 
 import javax.activation.DataHandler;
@@ -34,7 +34,7 @@ import java.rmi.RemoteException;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-
+@Test(groups = { "excludeGroup" })
 public class CustomIntegrationWithJSStoredInRegistryTestCase extends ESBIntegrationTest {
 
 
@@ -77,7 +77,8 @@ public class CustomIntegrationWithJSStoredInRegistryTestCase extends ESBIntegrat
     private void uploadResourcesToConfigRegistry() throws Exception {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), userInfo.getUserName(), userInfo.getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
+, context.getUser().getPassword());
 
         resourceAdminServiceStub.deleteResource("/_system/config/script_js");
         resourceAdminServiceStub.addCollection("/_system/config/", "script_js", "",
@@ -92,7 +93,7 @@ public class CustomIntegrationWithJSStoredInRegistryTestCase extends ESBIntegrat
     }
 
     private void enableDebugLogging() throws Exception {
-        LoggingAdminClient logAdminClient = new LoggingAdminClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+        LoggingAdminClient logAdminClient = new LoggingAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
         logAdminClient.updateLoggerData("org.apache.synapse", "DEBUG", true, false);
     }
 
@@ -100,7 +101,8 @@ public class CustomIntegrationWithJSStoredInRegistryTestCase extends ESBIntegrat
             throws InterruptedException, ResourceAdminServiceExceptionException, RemoteException {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), userInfo.getUserName(), userInfo.getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
+, context.getUser().getPassword());
 
         resourceAdminServiceStub.deleteResource("/_system/config/script_js");
         Thread.sleep(1000);

@@ -18,7 +18,7 @@
 
 package org.wso2.carbon.esb.mediator.test.aggregate;
 
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.util.AXIOMUtil;
 import org.testng.Assert;

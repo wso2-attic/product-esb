@@ -29,8 +29,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 /**
  * Tests a sequence with a iterate mediator that calls sequences of Governors
@@ -47,8 +47,8 @@ public class IterateRegistryAsTargetTestCase extends ESBIntegrationTest {
         init();
         client = new IterateClient();
         resourceAdminServiceClient =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(),
-                                               esbServer.getSessionCookie());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
+                                               getSessionCookie());
     }
 
     @Test(groups = "wso2.esb", description = "Tests for sequence from governors registry ")

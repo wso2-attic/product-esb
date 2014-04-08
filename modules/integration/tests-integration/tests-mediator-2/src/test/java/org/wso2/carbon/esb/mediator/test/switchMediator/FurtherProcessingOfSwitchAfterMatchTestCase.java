@@ -21,9 +21,8 @@ package org.wso2.carbon.esb.mediator.test.switchMediator;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.ESBTestConstant;
-
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
 public class FurtherProcessingOfSwitchAfterMatchTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)

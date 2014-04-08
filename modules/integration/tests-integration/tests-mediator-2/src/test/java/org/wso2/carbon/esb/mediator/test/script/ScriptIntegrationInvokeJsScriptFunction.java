@@ -23,8 +23,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.api.clients.logging.LoggingAdminClient;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
@@ -34,7 +34,7 @@ import java.net.URL;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-
+@Test(groups = { "excludeGroup" })
 public class ScriptIntegrationInvokeJsScriptFunction extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
@@ -43,7 +43,7 @@ public class ScriptIntegrationInvokeJsScriptFunction extends ESBIntegrationTest 
         String filePath = "/artifacts/ESB/synapseconfig/script_mediator/jsfromEntry_config.xml";
         loadESBConfigurationFromClasspath(filePath);
         uploadResourcesToConfigRegistry();
-        LoggingAdminClient loggingAdminClient = new LoggingAdminClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+        LoggingAdminClient loggingAdminClient = new LoggingAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
         loggingAdminClient.updateLoggerData("org.apache.synapse", "debug", true, false);
 
     }
@@ -76,7 +76,8 @@ public class ScriptIntegrationInvokeJsScriptFunction extends ESBIntegrationTest 
 
     private void uploadResourcesToConfigRegistry() throws Exception {
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), userInfo.getUserName(), userInfo.getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
+, context.getUser().getPassword());
         resourceAdminServiceStub.deleteResource("/_system/config/script_js");
 
         resourceAdminServiceStub.addCollection("/_system/config/", "script_js", "", "Contains test js files");

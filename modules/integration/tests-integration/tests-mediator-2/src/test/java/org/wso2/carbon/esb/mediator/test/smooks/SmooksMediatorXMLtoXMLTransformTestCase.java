@@ -22,11 +22,12 @@ import org.apache.commons.io.FileUtils;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.activation.DataHandler;
 import java.io.File;
@@ -35,7 +36,7 @@ import java.net.URL;
 
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
-
+@Test(groups = { "excludeGroup" })
 public class SmooksMediatorXMLtoXMLTransformTestCase extends ESBIntegrationTest {
     private ServerConfigurationManager serverConfigurationManager;
     private ResourceAdminServiceClient resourceAdminServiceStub;
@@ -49,8 +50,9 @@ public class SmooksMediatorXMLtoXMLTransformTestCase extends ESBIntegrationTest 
     public void init() throws Exception {
         super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/vfsTransport/vfs_xml_to_xml.xml");
-        resourceAdminServiceStub = new ResourceAdminServiceClient(esbServer.getBackEndUrl(), userInfo.getUserName(), userInfo.getPassword());
-        serverConfigurationManager = new ServerConfigurationManager(esbServer.getBackEndUrl());
+        resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
+, context.getUser().getPassword());
+        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
         serverConfigurationManager.applyConfiguration(new File(COMMON_FILE_LOCATION + "axis2.xml"));
         super.init();
         setSmooksSampleConfigFileLocations();
@@ -60,7 +62,8 @@ public class SmooksMediatorXMLtoXMLTransformTestCase extends ESBIntegrationTest 
 
      /* Commenting out this test as it is incomplete and its purpose is unclear. */
      /* IMPORTANT: Do not uncomment this test case if do not know how to fix it. */
-//    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+//    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
 //    @Test(groups = {"wso2.esb", "local only"}, description = "XML to XML transformation using smooks mediator")
     public void testXMLtoXMLTransformationUsingSmooksMeidator() throws Exception {
         new File(COMMON_FILE_LOCATION + "test" + File.separator + "out" + File.separator).mkdir();

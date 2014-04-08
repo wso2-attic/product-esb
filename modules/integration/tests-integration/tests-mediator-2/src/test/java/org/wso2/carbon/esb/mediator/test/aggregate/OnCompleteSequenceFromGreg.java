@@ -21,8 +21,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.activation.DataHandler;
 import javax.xml.stream.XMLStreamException;
@@ -38,7 +38,7 @@ public class OnCompleteSequenceFromGreg extends ESBIntegrationTest {
     public void setEnvironment() throws Exception {
         super.init();
         resourceAdminServiceStub = new ResourceAdminServiceClient
-                (esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+                (contextUrls.getBackEndUrl(), getSessionCookie());
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/onCompleteSequenceFromGreg/synapse.xml");
         aggregatedRequestClient = new AggregatedRequestClient();

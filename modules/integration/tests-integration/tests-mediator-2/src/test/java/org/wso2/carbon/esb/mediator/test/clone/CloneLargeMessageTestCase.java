@@ -23,11 +23,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.axis2serverutils.SampleAxis2Server;
-import org.wso2.carbon.automation.utils.artifact.FixedSizeSymbolGenerator;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
+import org.wso2.esb.integration.common.utils.common.
+
+
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.namespace.QName;
 import java.util.Iterator;
@@ -36,7 +39,7 @@ import java.util.Iterator;
  * Test sending large messages (3MB) through the clone mediator and verify the
  * load can be handled while cloning
  */
-
+@Test(groups = { "excludeGroup" })
 public class CloneLargeMessageTestCase extends ESBIntegrationTest {
 
     private SampleAxis2Server axis2Server1;
@@ -57,7 +60,8 @@ public class CloneLargeMessageTestCase extends ESBIntegrationTest {
         axis2Server2.start();
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Tests large message ~3MB")
     public void testLargeMessage() throws Exception {
 

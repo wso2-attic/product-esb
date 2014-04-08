@@ -22,18 +22,20 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.core.ProductConstant;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.automation.utils.esb.JSONClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.clients.JSONClient;
 
 import javax.xml.namespace.QName;
 import java.io.File;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-
+@Test(groups = { "excludeGroup" })
 public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
 
     private final String GROOVY_JAR = "groovy-all-1.1-rc-1.jar";
@@ -44,10 +46,11 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
     private JSONClient jsonclient;
 
     @BeforeClass(alwaysRun = true)
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     public void setEnvironment() throws Exception {
         super.init(1);
-        serverManager = new ServerConfigurationManager(esbServer.getBackEndUrl());
+        serverManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
         serverManager.copyToComponentLib(new File(getESBResourceLocation() + GROOVY_JAR_LOCATION));
         serverManager.applyConfiguration(new File(ProductConstant.getResourceLocations(ProductConstant.ESB_SERVER_NAME)
                 + File.separator + "synapseconfig" + File.separator + "groovy" + File.separator + "axis2.xml"));
@@ -55,7 +58,8 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
         jsonclient = new JSONClient();
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb", "localonly"}, description = "Testing the groovy support in a proxy")
     public void GroovySupportWithinProxyTest() throws Exception {
 
@@ -69,7 +73,8 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
         assertEquals(symbolResponse, "WSO2", "Symbol is not match");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Groovy script with the mediator")
     public void testGroovyScriptMediation() throws Exception {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/script_mediator/groovy_script_with_the_mediator.xml");
@@ -85,7 +90,8 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
         assertEquals(symbol, "IBM", "Fault: value 'symbol' mismatched");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Groovy script with setPayloadJson")
     public void testGroovySetPayloadJson() throws Exception {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/script_mediator/groovy_script_with_setPayloadJson.xml");
@@ -100,7 +106,8 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
     }
 
     @AfterClass(alwaysRun = true)
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     public void destroy() throws Exception {
         try {
             super.cleanup();

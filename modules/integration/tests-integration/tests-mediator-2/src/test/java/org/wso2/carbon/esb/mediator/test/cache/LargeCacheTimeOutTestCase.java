@@ -22,9 +22,10 @@ import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.namespace.QName;
 
@@ -45,7 +46,8 @@ public class LargeCacheTimeOutTestCase extends ESBIntegrationTest {
      * This test case checks whether the  back-end (axis2Server) has been hit only once for whole of 30 mins, which
      * was set as cache timeout value. As soon as 1800 secs passes the server should be hit once more.
      */
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb"}, description = "Testing with a large cache time out value for cache mediator")
     public void testLargeCacheTimeOut() throws Exception {
         OMElement response;

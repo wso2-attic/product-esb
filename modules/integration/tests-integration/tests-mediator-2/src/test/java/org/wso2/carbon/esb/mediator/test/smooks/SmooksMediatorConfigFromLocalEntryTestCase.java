@@ -22,10 +22,11 @@ import org.apache.commons.io.FileUtils;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.esb.util.MultiMessageReceiver;
 
 import java.io.File;
@@ -50,13 +51,14 @@ public class SmooksMediatorConfigFromLocalEntryTestCase extends ESBIntegrationTe
     public void init() throws Exception {
         super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/vfsTransport/vfs_test_synapse.xml");
-        serverConfigurationManager = new ServerConfigurationManager(esbServer.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
         serverConfigurationManager.applyConfiguration(new File(getClass().getResource(COMMON_FILE_LOCATION + File.separator + "axis2.xml").getPath()));
         super.init();
         addVFSProxy();
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb", "local only"}, description = "Testing Smooks configuration from local entry", enabled = false)
     public void testSmookConfigFromLocalEntry() throws Exception {
         MultiMessageReceiver multiMessageReceiver = new MultiMessageReceiver(PORT);

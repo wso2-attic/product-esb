@@ -25,12 +25,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.authenticator.stub.LoginAuthenticationExceptionException;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
 import org.wso2.carbon.endpoint.stub.types.EndpointAdminEndpointAdminException;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.activation.DataHandler;
 import javax.xml.stream.XMLStreamException;
@@ -49,13 +50,14 @@ public class SmooksIntegrationTestCase extends ESBIntegrationTest {
     public void setEnvironment() throws Exception {
 
         super.init();
-        serverConfigurationManager = new ServerConfigurationManager(esbServer.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
         serverConfigurationManager.applyConfiguration(new File(getClass().getResource(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "smooks" + File.separator + "axis2.xml").getPath()));
         super.init();
         loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "smooks" + File.separator + "smooks_synapse.xml");
 
         resourceAdminServiceClient = new ResourceAdminServiceClient
-                (esbServer.getBackEndUrl(), userInfo.getUserName(), userInfo.getPassword());
+                (contextUrls.getBackEndUrl(), context.getUser().getUserName()
+, context.getUser().getPassword());
 
         uploadResourcesToConfigRegistry();
         addSmooksProxy();
@@ -79,7 +81,8 @@ public class SmooksIntegrationTestCase extends ESBIntegrationTest {
         }
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb"}, description = "Sending a Large File To Smooks Mediator")
     public void testSendingToSmooks() throws IOException, EndpointAdminEndpointAdminException,
                                              LoginAuthenticationExceptionException,

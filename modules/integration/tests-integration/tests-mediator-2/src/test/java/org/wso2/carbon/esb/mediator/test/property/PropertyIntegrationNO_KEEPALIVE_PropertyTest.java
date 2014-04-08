@@ -20,11 +20,11 @@ package org.wso2.carbon.esb.mediator.test.property;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.WireMonitorServer;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.servers.WireMonitorServer;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -44,7 +44,8 @@ public class PropertyIntegrationNO_KEEPALIVE_PropertyTest extends ESBIntegration
                 ("/artifacts/ESB/mediatorconfig/property/NO_KEEPALIVE.xml");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb",description = "Test-Without NO_KEEPALIVE Property")
     public void testNO_KEEPALIVEPropertyTest() {
 

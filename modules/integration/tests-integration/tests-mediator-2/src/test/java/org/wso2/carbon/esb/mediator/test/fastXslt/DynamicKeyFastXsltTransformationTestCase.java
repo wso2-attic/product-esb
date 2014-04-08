@@ -22,9 +22,10 @@ import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.PropertiesAdminServiceClient;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+
+import org.wso2.esb.integration.common.clients.registry.PropertiesAdminServiceClient;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import javax.activation.DataHandler;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -66,9 +67,9 @@ public class DynamicKeyFastXsltTransformationTestCase extends ESBIntegrationTest
 
     private void uploadResourcesToRegistry() throws Exception {
         ResourceAdminServiceClient resourceAdminServiceClient =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
         PropertiesAdminServiceClient propertiesAdminServiceClient =
-                new PropertiesAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+                new PropertiesAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
         resourceAdminServiceClient.deleteResource("/_system/config/localEntries");
         resourceAdminServiceClient.addCollection("/_system/config/", "localEntries", "",
@@ -94,7 +95,7 @@ public class DynamicKeyFastXsltTransformationTestCase extends ESBIntegrationTest
 
     private void clearRegistry() throws Exception {
         ResourceAdminServiceClient resourceAdminServiceClient =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
         resourceAdminServiceClient.deleteResource("/_system/config/localEntries");
 

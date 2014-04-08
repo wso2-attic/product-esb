@@ -22,13 +22,14 @@ import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.logging.LogViewerClient;
+
 import org.wso2.carbon.automation.api.clients.logging.LoggingAdminClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
-
+@Test(groups = { "excludeGroup" })
 public class CallTemplateIntegrationParamsWithValuesTestCase extends ESBIntegrationTest {
     private LogViewerClient logViewer;
     private LoggingAdminClient logAdmin;
@@ -44,9 +45,9 @@ public class CallTemplateIntegrationParamsWithValuesTestCase extends ESBIntegrat
     public void testXSLTTransformationWithTemplates() throws IOException, XMLStreamException {
         OMElement response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL
                                                                            ("StockQuoteProxy"), null, "IBM");
-        logAdmin = new LoggingAdminClient(esbServer.getBackEndUrl(),esbServer.getSessionCookie());
+        logAdmin = new LoggingAdminClient(contextUrls.getBackEndUrl(),getSessionCookie());
         //TODO - Asserting the response from the log
-        /*logViewer=new LogViewerClient(esbServer.getBackEndUrl(),esbServer.getSessionCookie());
+        /*logViewer=new LogViewerClient(contextUrls.getBackEndUrl(),getSessionCookie());
         LogEvent[] getLogsDebug = logViewer.getLogs("PARAM", "LogMediator");*/
         /*Assert "RESPONSE PARAM VALUE" and "REQUEST PARAM VALUE" is in logs */
     }

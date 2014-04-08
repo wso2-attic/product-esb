@@ -21,8 +21,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.proxy.admin.ProxyServiceAdminClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+
+import org.wso2.esb.integration.common.clients.proxy.admin.ProxyServiceAdminClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 /**
  * This Test Case Tests the issue reported in the Public JIRA https://wso2.org/jira/browse/ESBJAVA-1740
@@ -39,7 +40,7 @@ public class IterateSequentialPropertySavingTestCase extends ESBIntegrationTest 
     public void setEnvironment() throws Exception {
         init();
         addProxyService(esbUtils.loadClasspathResource("/artifacts/ESB/mediatorconfig/iterate/iterateSequentialTruePropertyWithOutProperty.xml"));
-        proxyServiceAdminClient = new ProxyServiceAdminClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+        proxyServiceAdminClient = new ProxyServiceAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
 
 

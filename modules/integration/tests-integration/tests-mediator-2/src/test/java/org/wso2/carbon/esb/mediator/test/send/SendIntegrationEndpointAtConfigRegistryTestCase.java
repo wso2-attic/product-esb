@@ -23,8 +23,8 @@ import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
@@ -40,7 +40,8 @@ public class SendIntegrationEndpointAtConfigRegistryTestCase extends ESBIntegrat
     public void uploadSynapseConfig() throws Exception {
         super.init();
         resourceAdminServiceStub = new ResourceAdminServiceClient
-                (esbServer.getBackEndUrl(), userInfo.getUserName(), userInfo.getPassword());
+                (contextUrls.getBackEndUrl(), context.getUser().getUserName()
+, context.getUser().getPassword());
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath
                 ("/artifacts/ESB/synapseconfig/send_mediator/synapse_config.xml");
@@ -59,7 +60,8 @@ public class SendIntegrationEndpointAtConfigRegistryTestCase extends ESBIntegrat
 
     private void uploadResourcesToConfigRegistry() throws Exception {
         new ResourceAdminServiceClient
-                (esbServer.getBackEndUrl(), userInfo.getUserName(), userInfo.getPassword());
+                (contextUrls.getBackEndUrl(), context.getUser().getUserName()
+, context.getUser().getPassword());
         resourceAdminServiceStub.deleteResource("/_system/config/endpoints");
         resourceAdminServiceStub.addCollection("/_system/config/", "endpoints", "",
                                                "Contains test endpoint files");

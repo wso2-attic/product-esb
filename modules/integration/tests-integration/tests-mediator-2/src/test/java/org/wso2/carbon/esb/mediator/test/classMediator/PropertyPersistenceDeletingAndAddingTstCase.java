@@ -23,17 +23,18 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.core.ProductConstant;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.namespace.QName;
 import java.io.File;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-
+@Test(groups = { "excludeGroup" })
 public class PropertyPersistenceDeletingAndAddingTstCase extends ESBIntegrationTest {
     private static final String CLASS_JAR_FIVE_PROPERTIES="org.wso2.carbon.test.mediator.stockmediator-v1.0.jar";
     private static final String CLASS_JAR_FOUR_PROPERTIES="org.wso2.carbon.test.mediator.stockmediator-v1.0.2.jar";
@@ -45,7 +46,7 @@ public class PropertyPersistenceDeletingAndAddingTstCase extends ESBIntegrationT
     public void setEnvironment() throws Exception {
 
         init(ProductConstant.ADMIN_USER_ID);
-        serverConfigurationManager=new ServerConfigurationManager(esbServer.getBackEndUrl());
+        serverConfigurationManager=new ServerConfigurationManager(contextUrls.getBackEndUrl());
         serverConfigurationManager.copyToComponentLib
                 (new File(getClass().getResource(JAR_LOCATION + File.separator + CLASS_JAR_FIVE_PROPERTIES).toURI()));
         serverConfigurationManager.restartGracefully();
@@ -54,7 +55,8 @@ public class PropertyPersistenceDeletingAndAddingTstCase extends ESBIntegrationT
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/class/class_property_persistence_five_properties.xml");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb","localOnly"}, description = "Class Mediator " +
                                                            " -Class mediator property persistence -deleting and adding different properties")
     public void testMediationPersistenceDeletingAndAdding() throws Exception {

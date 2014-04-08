@@ -23,13 +23,14 @@ import org.apache.axis2.AxisFault;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.carbon.automation.core.ProductConstant;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.fileutils.FileManager;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.carbon.automation.test.utils.common.FileManager;
 import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 
 import javax.activation.DataHandler;
@@ -42,7 +43,7 @@ import java.rmi.RemoteException;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.fail;
-
+@Test(groups = { "excludeGroup" })
 public class SpringMediationTestCase extends ESBIntegrationTest {
     private final String SIMPLE_BEAN_JAR = "org.wso2.carbon.test.simplebean.jar";
     private final String JAR_LOCATION = "/artifacts/ESB/jar";
@@ -54,7 +55,7 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
 
         init(ProductConstant.ADMIN_USER_ID);
         clearUploadedResource();
-        serverConfigurationManager = new ServerConfigurationManager(esbServer.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
         serverConfigurationManager.copyToComponentLib
                 (new File(getClass().getResource(JAR_LOCATION + File.separator + SIMPLE_BEAN_JAR).toURI()));
         serverConfigurationManager.restartGracefully();
@@ -80,7 +81,8 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
         }
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Spring Mediator " +
                                                             "- Change the spring xml and see whether message context is changed")
     public void changeSpringXmlAndCheckMessageContextTest() throws Exception {
@@ -133,7 +135,8 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Spring Mediator " +
                                                             "-Added Simple bean into lib -referring to an invalid spring xml")
     public void uploadSequenceHavingInvalidSpringXMLTest() throws Exception {
@@ -150,7 +153,8 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
         }
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Spring Mediator " +
                                                             "- referring to an non existing spring xml")
     public void uploadSequenceHavingNonExistingSpringXMLResourceTest() throws Exception {
@@ -168,7 +172,8 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
     }
 
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Spring Mediator " +
                                                             "-Added Simple bean into lib " +
                                                             "-Different bean ids in spring xml")
@@ -184,7 +189,8 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Spring Mediator -Added Simple bean into lib")
     public void springBeanMediationTest() throws Exception {
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/spring/spring_mediation.xml");
@@ -206,7 +212,7 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
             throws ResourceAdminServiceExceptionException, IOException, InterruptedException {
 
         ResourceAdminServiceClient resourceAdminServiceClient =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
         String filePath = getESBResourceLocation() + File.separator + "mediatorconfig" + File.separator
                           + "spring" + File.separator + "utils" + File.separator + "updating_spring.xml";
 
@@ -218,7 +224,7 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
     private void uploadResourcesToConfigRegistry() throws Exception {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
         resourceAdminServiceStub.deleteResource("/_system/config/spring");
         resourceAdminServiceStub.addCollection("/_system/config/", "spring", "",
@@ -241,7 +247,7 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
             throws InterruptedException, ResourceAdminServiceExceptionException, RemoteException {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
         resourceAdminServiceStub.deleteResource("/_system/config/spring");
     }

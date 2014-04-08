@@ -22,8 +22,8 @@ import org.apache.axis2.AxisFault;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 
 import javax.activation.DataHandler;
 import java.net.URL;
@@ -57,7 +57,7 @@ public class DynamicEndpointTestCase extends ESBIntegrationTest {
 
     private void uploadResourcesToRegistry() throws Exception {
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
         resourceAdminServiceStub.addResource(
                 "/_system/config/SimpleStockQuoteServiceEndpoint", "application/xml", "Endpoint Configuration",
@@ -67,7 +67,7 @@ public class DynamicEndpointTestCase extends ESBIntegrationTest {
     }
 
     private void clearRegistry() throws Exception {
-        new ResourceAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie()).deleteResource("/_system/config/SimpleStockQuoteServiceEndpoint");
+        new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie()).deleteResource("/_system/config/SimpleStockQuoteServiceEndpoint");
     }
 
 }

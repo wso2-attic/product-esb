@@ -23,10 +23,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.ESBTestConstant;
-
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
 import javax.activation.DataHandler;
 import java.io.File;
 import java.net.URL;
@@ -40,7 +39,7 @@ public class ValidateMediatorTestCase extends ESBIntegrationTest {
 
         // Initialize ESBMediatorTest
         super.init();
-        resourceAdminServiceClient = new ResourceAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+        resourceAdminServiceClient = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
         URL url2 = new URL("file:///" + getESBResourceLocation() + File.separator + "synapseconfig"
                            + File.separator + "filters" + File.separator + "validate" + File.separator + "schema1a.xml");
         resourceAdminServiceClient.deleteResource("/_system/config/schema");

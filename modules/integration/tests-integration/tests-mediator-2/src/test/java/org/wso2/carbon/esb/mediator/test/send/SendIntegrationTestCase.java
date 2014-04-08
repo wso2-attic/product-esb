@@ -27,15 +27,16 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.axis2serverutils.SampleAxis2Server;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
+
 import org.wso2.carbon.automation.utils.axis2client.AxisServiceClientUtils;
 import org.wso2.carbon.automation.utils.esb.loadbalanceclient.LoadbalanceFailoverClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.ESBTestConstant;
-
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
 import javax.activation.DataHandler;
 import java.io.File;
 import java.io.IOException;
@@ -89,7 +90,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
         resourceAdminServiceClient = new ResourceAdminServiceClient
-                (esbServer.getBackEndUrl(), userInfo.getUserName(), userInfo.getPassword());
+                (contextUrls.getBackEndUrl(), context.getUser().getUserName()
+, context.getUser().getPassword());
         uploadResourcesToConfigRegistry();
 
     }
@@ -145,7 +147,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Thread.sleep(1000);
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint")
     public void testSendingAddressEndpoint() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint"),
@@ -155,7 +158,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint")
     public void testSendingDefaultEndpoint() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint"),
@@ -164,7 +168,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint")
     public void testSendingWSDLEndpoint() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint"),
@@ -173,7 +178,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint")
     public void testSendingFailOverEndpoint() throws IOException, InterruptedException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failoverEndPointBM"),
@@ -209,7 +215,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         }
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint Build Message Before Sending")
     public void testSendingAddressEndpoint_BuildMessage() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPointBM"),
@@ -218,7 +225,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Build Message Before Sending")
     public void testSendingDefaultEndpoint_BuildMessage() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPointBM"),
@@ -227,7 +235,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Build Message Before Sending")
     public void testSendingWSDLEndpoint_BuildMessage() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPointBM"),
@@ -236,7 +245,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Build Message Before Sending")
     public void testSendingFailOverEndpoint_BuildMessage()
             throws IOException, InterruptedException {
@@ -273,7 +283,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         }
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint while Receiving Sequence in Local Registry")
     public void testDynamicAddressEndpointSequence_LocalReg() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Receiving_Sequence_LocalReg"),
@@ -283,7 +294,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint while Receiving Sequence in Config Registry")
     public void testSendingAddressEndpoint_Receiving_Sequence_ConfigReg() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Receiving_Sequence_ConfigReg"),
@@ -293,7 +305,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint while Receiving Sequence in Governance  Registry")
     public void testSendingAddressEndpoint_Receiving_Sequence_GovReg() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Receiving_Sequence_GovReg"),
@@ -303,7 +316,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Local Registry")
     public void testSendingDefaultEndpoint_Receiving_Sequence_LocalReg() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Receiving_Sequence_LocalReg"),
@@ -312,7 +326,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence  in Config Registry")
     public void testSendingDefaultEndpoint_Receiving_Sequence_ConfigReg() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Receiving_Sequence_ConfigReg"),
@@ -321,7 +336,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Governance Registry")
     public void testSendingDefaultEndpoint_Receiving_Sequence_GovReg() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Receiving_Sequence_GovReg"),
@@ -330,7 +346,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Local Registry")
     public void testSendingWSDLEndpoint_Receiving_Sequence_LocalReg() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Receiving_Sequence_LocalReg"),
@@ -339,7 +356,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Config Registry")
     public void testSendingWSDLEndpoint_Receiving_Sequence_ConfigReg() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Receiving_Sequence_ConfigReg"),
@@ -348,7 +366,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Governance Registry")
     public void testSendingWSDLEndpoint_Receiving_Sequence_GovReg() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Receiving_Sequence_GovReg"),
@@ -357,7 +376,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence in Local Registry")
     public void testSendingFailOverEndpoint_Receiving_Sequence_LocalReg()
             throws IOException, InterruptedException {
@@ -394,7 +414,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         }
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence in Config Registry")
     public void testSendingFailOverEndpoint_Receiving_Sequence_ConfigReg()
             throws IOException, InterruptedException {
@@ -432,7 +453,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence in Gov Registry")
     public void testSendingFailOverEndpoint_Receiving_Sequence_GovReg()
             throws IOException, InterruptedException {
@@ -469,7 +491,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         }
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint Receiving Sequence in Local Registry while BuildMessage enabled")
     public void testDynamicAddressEndpoint_Receiving_Sequence_LocalReg_BuildMessage()
             throws Exception {
@@ -480,7 +503,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint Receiving Sequence in Config Registry while BuildMessage enabled")
     public void testDynamicAddressEndpoint_Receiving_Sequence__ConfigReg_BuildMessage()
             throws Exception {
@@ -491,7 +515,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint Receiving Sequence in Governance  Registry while BuildMessage enabled")
     public void testDynamicAddressEndpoint_Receiving_Sequence_GovReg_BuildMessage()
             throws Exception {
@@ -502,7 +527,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Local Registry while BuildMessage enabled")
     public void testSendingDefaultEndpoint_Receiving_Sequence_LocalReg_BuildMessage()
             throws IOException {
@@ -512,7 +538,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Config Registry while BuildMessage enabled")
     public void testSendingDefaultEndpoint_Receiving_Sequence_ConfigReg_BuildMessage()
             throws IOException {
@@ -522,7 +549,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Governance Registry while BuildMessage enabled")
     public void testSendingDefaultEndpoint_Receiving_Sequence_GovReg_BuildMessage()
             throws IOException {
@@ -532,7 +560,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Local Registry while BuildMessage enabled")
     public void testSendingWSDLEndpoint_Receiving_Sequence_LocalReg_BuildMessage()
             throws IOException {
@@ -542,7 +571,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Config Registry while BuildMessage enabled")
     public void testSendingWSDLEndpoint_Receiving_Sequence_ConfigReg_BuildMessage()
             throws IOException {
@@ -552,7 +582,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Governance Registry while BuildMessage enabled")
     public void testSendingWSDLEndpoint_Receiving_Sequence_GovReg_BuildMessage()
             throws IOException {
@@ -562,7 +593,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence in Local Registry while BuildMessage enabled")
     public void testSendingFailOverEndpoint_Receiving_Sequence_LocalReg_BuildMessage()
             throws IOException, InterruptedException {
@@ -599,7 +631,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         }
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence in Config Registry while BuildMessage enabled")
     public void testSendingFailOverEndpoint_Receiving_Sequence_ConfigReg_BuildMessage()
             throws IOException, InterruptedException {
@@ -636,7 +669,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         }
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence in Gov Registry while BuildMessage enabled")
     public void testSendingFailOverEndpoint_Receiving_Sequence_GovReg_BuildMessage()
             throws IOException, InterruptedException {
@@ -674,7 +708,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     }
 
     // Receiving Sequence Dynamic Build Message= False
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint Receiving Sequence Dynamic")
     public void testSendingAddressEndpoint_Receiving_Sequence_Dynamic() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Receiving_Sequence_Dynamic"),
@@ -683,7 +718,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence Dynamic")
     public void testSendingDefaultEndpoint_Receiving_Sequence_Dynamic() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Receiving_Sequence_Dynamic"),
@@ -692,7 +728,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence Dynamic")
     public void testSendingWSDLEndpoint_Receiving_Sequence_Dynamic() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Receiving_Sequence_Dynamic"),
@@ -701,7 +738,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence Dynamic")
     public void testSendingFailOverEndpoint_Receiving_Sequence_Dynamic()
             throws IOException, InterruptedException {
@@ -739,7 +777,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     }
 
     // Receiving Sequence Dynamic Build Message= True
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint Receiving Sequence Dynamic Build Message")
     public void testSendingAddressEndpoint_Receiving_Sequence_Dynamic_BM() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Receiving_Sequence_Dynamic_BM"),
@@ -748,7 +787,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence Dynamic Build Message")
     public void testSendingDefaultEndpoint_Receiving_Sequence_Dynamic_BM() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Receiving_Sequence_Dynamic_BM"),
@@ -757,7 +797,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence Dynamic Build Message")
     public void testSendingWSDLEndpoint_Receiving_Sequence_Dynamic_BM() throws IOException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Receiving_Sequence_Dynamic_BM"),
@@ -766,7 +807,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence Dynamic Build Message")
     public void testSendingFailOverEndpoint_Receiving_Sequence_Dynamic_BM()
             throws IOException, InterruptedException {
@@ -803,7 +845,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         }
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm")
     public void testSendingLoadBalancingEndpoint1() throws IOException {
 
@@ -833,7 +876,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm")
     public void testSendingLoadBalancingEndpoint2() throws IOException {
 
@@ -859,7 +903,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint3() throws IOException {
 
@@ -889,7 +934,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint4() throws IOException {
 
@@ -915,7 +961,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm Receiving Sequence in Conf Registry while BuildMessage Disabled")
     public void testSendingLoadBalancingEndpoint5() throws IOException {
 
@@ -945,7 +992,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm Receiving Sequence in Conf Registry while BuildMessage Disabled")
     public void testSendingLoadBalancingEndpoint6() throws IOException {
 
@@ -971,7 +1019,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm Receiving Sequence in Conf Registry while BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint7() throws IOException {
 
@@ -1001,7 +1050,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm Receiving Sequence in Conf Registry while BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint8() throws IOException {
 
@@ -1027,7 +1077,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm Receiving Sequence in Gov Registry while BuildMessage Disabled")
     public void testSendingLoadBalancingEndpoint9() throws IOException {
 
@@ -1057,7 +1108,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm Receiving Sequence in Gov Registry while BuildMessage Disabled")
     public void testSendingLoadBalancingEndpoint10() throws IOException {
 
@@ -1083,7 +1135,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm Receiving Sequence in Gov Registry while BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint11() throws IOException {
 
@@ -1113,7 +1166,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm Receiving Sequence in Gov Registry while BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint12() throws IOException {
 
@@ -1139,7 +1193,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm Receiving Sequence Dynamic BuildMessage Disabled")
     public void testSendingLoadBalancingEndpoint13() throws IOException {
 
@@ -1169,7 +1224,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm Receiving Sequence Dynamic BuildMessage Disabled")
     public void testSendingLoadBalancingEndpoint14() throws IOException {
 
@@ -1195,7 +1251,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm Receiving Sequence Dynamic BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint15() throws IOException {
 
@@ -1225,7 +1282,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm Receiving Sequence Dynamic BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint16() throws IOException {
 

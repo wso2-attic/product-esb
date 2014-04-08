@@ -1,22 +1,23 @@
 package org.wso2.carbon.esb.message.processor.test.forwarding;
 
-import org.apache.axiom.om.OMAbstractFactory;
+
 import org.apache.axiom.om.OMElement;
-import org.apache.axiom.om.OMFactory;
-import org.apache.axiom.om.OMNamespace;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.axis2serverutils.SampleAxis2Server;
-import org.wso2.carbon.automation.utils.axis2client.AxisServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
+
+import org.wso2.esb.integration.common.utils.clients.axis2client.AxisServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+
 
 import java.io.File;
 
-
+@Test(groups = { "excludeGroup" })
 public class ESBJAVA2006RetryOnSOAPFaultTestCase extends ESBIntegrationTest {
 
     private SampleAxis2Server axis2Server;
@@ -30,7 +31,8 @@ public class ESBJAVA2006RetryOnSOAPFaultTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "<property name=\"RETRY_ON_SOAPFAULT\" value=\"false\"/>")
     public void testRetryOnSOAPFaultWithInOutFalse() throws Exception {
 
@@ -50,7 +52,8 @@ public class ESBJAVA2006RetryOnSOAPFaultTestCase extends ESBIntegrationTest {
 
     }
 
-    //@SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    //@SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     //@Test(groups = "wso2.esb", description = "<property name=\"RETRY_ON_SOAPFAULT\" value=\"true\"/>")
     public void testRetryOnSOAPFaultWithInOutTrue() throws Exception {
 

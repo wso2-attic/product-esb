@@ -23,9 +23,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.mediation.MessageStoreAdminClient;
-import org.wso2.carbon.automation.utils.esb.StockQuoteClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.clients.mediation.MessageStoreAdminClient;
+import org.wso2.esb.integration.common.utils.clients.stockquoteclient.StockQuoteClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+
 import org.wso2.carbon.message.store.stub.MessageInfo;
 
 import java.util.ArrayList;
@@ -45,8 +46,8 @@ public class MessageStoreMessageConcurrencyTestCase extends ESBIntegrationTest {
     public void setEnvironment() throws Exception {
         init();
         messageStoreAdminClient =
-                new MessageStoreAdminClient(esbServer.getBackEndUrl(),
-                                            esbServer.getSessionCookie());
+                new MessageStoreAdminClient(contextUrls.getBackEndUrl(),
+                                            getSessionCookie());
         initialize();
     }
 
@@ -130,7 +131,7 @@ public class MessageStoreMessageConcurrencyTestCase extends ESBIntegrationTest {
     // delete the message store
     public void clear() throws Exception {
         if (isMessageStoreCreated) {
-            esbUtils.deleteMessageStore(esbServer.getBackEndUrl(), esbServer.getSessionCookie(), MESSAGE_STORE_NAME);
+            esbUtils.deleteMessageStore(contextUrls.getBackEndUrl(), getSessionCookie(), MESSAGE_STORE_NAME);
         }
     }
 

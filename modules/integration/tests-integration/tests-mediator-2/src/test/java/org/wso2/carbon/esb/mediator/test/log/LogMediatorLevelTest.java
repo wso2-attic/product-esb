@@ -23,12 +23,12 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.logging.LogViewerClient;
-import org.wso2.carbon.automation.api.clients.logging.LoggingAdminClient;
-import org.wso2.carbon.automation.utils.esb.StockQuoteClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
+import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 
+
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
+@Test(groups = { "excludeGroup" })
 public class LogMediatorLevelTest extends ESBIntegrationTest {
 
     private LogViewerClient logViewer;
@@ -38,8 +38,8 @@ public class LogMediatorLevelTest extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        logAdmin = new LoggingAdminClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
-        logViewer = new LogViewerClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+        logAdmin = new LoggingAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
+        logViewer = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/log_mediator/synapse.xml");
 
     }

@@ -21,8 +21,8 @@ import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.activation.DataHandler;
 import java.net.URL;
@@ -80,7 +80,7 @@ public class RegistryEntryXsltTransformationTestCase extends ESBIntegrationTest 
 
     private void uploadResourcesToConfigRegistry() throws Exception {
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
         resourceAdminServiceStub.deleteResource("/_system/config/xslt");
         resourceAdminServiceStub.addCollection("/_system/config/", "xslt", "",
@@ -100,7 +100,7 @@ public class RegistryEntryXsltTransformationTestCase extends ESBIntegrationTest 
 
     private void uploadResourcesToGovernanceRegistry() throws Exception {
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
 
         resourceAdminServiceStub.deleteResource("/_system/governance/xslt");

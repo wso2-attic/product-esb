@@ -23,8 +23,8 @@ import org.apache.axis2.AxisFault;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.utils.axis2client.AxisServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.clients.axis2client.AxisServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import static org.testng.Assert.assertTrue;
 
@@ -52,7 +52,7 @@ public class PayloadFormatWithArgumentsTestCase extends ESBIntegrationTest {
 
         AxisServiceClient axisServiceClient = new AxisServiceClient();
         OMElement response = axisServiceClient.sendReceive(createPayload(),
-                esbServer.getServiceUrl() + "/ProxyPF", "echoString");
+                contextUrls.getServiceUrl() + "/ProxyPF", "echoString");
         assertTrue(response.toString().contains("Wso2 Test Automation"),"Response mismatch. " +
                 "Actual Response "+response.toString());
     }

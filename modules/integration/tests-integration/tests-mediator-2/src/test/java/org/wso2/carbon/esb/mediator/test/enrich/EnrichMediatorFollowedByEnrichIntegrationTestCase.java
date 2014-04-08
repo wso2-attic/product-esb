@@ -21,9 +21,9 @@ import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.ESBTestConstant;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
@@ -41,9 +41,9 @@ public class EnrichMediatorFollowedByEnrichIntegrationTestCase extends ESBIntegr
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
         super.init();
-        resourceAdminServiceStub = new ResourceAdminServiceClient(esbServer.getBackEndUrl(),
-                                                                  userInfo.getUserName(),
-                                                                  userInfo.getPassword());
+        resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
+                                                                  context.getUser().getUserName(),
+                                                                  context.getUser().getPassword());
         uploadResourcesToGovernanceRegistry();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/enrich/enrich_by_enrich.xml");
     }

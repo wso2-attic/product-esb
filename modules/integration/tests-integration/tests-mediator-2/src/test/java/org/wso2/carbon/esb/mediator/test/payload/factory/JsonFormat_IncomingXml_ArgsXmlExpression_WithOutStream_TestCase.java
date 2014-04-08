@@ -23,11 +23,9 @@ import org.apache.http.HttpResponse;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.utils.httpserverutils.SimpleHttpClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.esb.mediator.test.payload.factory.util.RequestUtil;
-import org.wso2.carbon.esb.util.ESBTestConstant;
-
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
 import static org.testng.Assert.assertTrue;
 
 public class JsonFormat_IncomingXml_ArgsXmlExpression_WithOutStream_TestCase extends ESBIntegrationTest {

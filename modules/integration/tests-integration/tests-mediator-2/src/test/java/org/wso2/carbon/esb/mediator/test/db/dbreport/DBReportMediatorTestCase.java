@@ -23,13 +23,14 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.dbutils.MySqlDatabaseManager;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.carbon.automation.test.utils.dbutils.MySqlDatabaseManager;
 import org.wso2.carbon.automation.core.utils.environmentutils.EnvironmentBuilder;
 import org.wso2.carbon.automation.core.utils.frameworkutils.productvariables.DataSource;
 import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLInputFactory;
@@ -43,7 +44,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.testng.Assert.assertEquals;
-
+@Test(groups = { "excludeGroup" })
 public class DBReportMediatorTestCase extends ESBIntegrationTest {
 
     private final String MYSQL_JAR = "mysql-connector-java-5.1.6.jar";
@@ -61,7 +62,7 @@ public class DBReportMediatorTestCase extends ESBIntegrationTest {
         super.init();
         mySqlDatabaseManager = new MySqlDatabaseManager(JDBC_URL, DB_USER, DB_PASSWORD);
         mySqlDatabaseManager.executeUpdate("DROP DATABASE IF EXISTS SampleDBForAutomation");
-        serverConfigurationManager = new ServerConfigurationManager(esbServer.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
         File jarFile = new File(getClass().getResource("/artifacts/ESB/jar/" + MYSQL_JAR + "").getPath());
         serverConfigurationManager.copyToComponentLib(jarFile);
         serverConfigurationManager.restartGracefully();

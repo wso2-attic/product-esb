@@ -23,11 +23,12 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.api.clients.logging.LoggingAdminClient;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 
 import javax.activation.DataHandler;
@@ -38,7 +39,7 @@ import java.rmi.RemoteException;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-
+@Test(groups = { "excludeGroup" })
 public class RubyScriptSupportTestCase extends ESBIntegrationTest {
 
     private final String JRUBY_JAR = "jruby-complete-1.3.0.jar";
@@ -50,14 +51,15 @@ public class RubyScriptSupportTestCase extends ESBIntegrationTest {
     public void setEnvironment() throws Exception {
 
         init(1);
-        serverManager = new ServerConfigurationManager(esbServer.getBackEndUrl());
+        serverManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
         serverManager.copyToComponentDropins(new File(getClass().getResource(JRUBY_JAR_LOCATION + JRUBY_JAR).toURI()));
         serverManager.restartGracefully();
         init(1);
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Ruby script with the mediator")
     public void testJRubyScriptMediation() throws Exception {
         loadSampleESBConfiguration(353);
@@ -75,7 +77,8 @@ public class RubyScriptSupportTestCase extends ESBIntegrationTest {
                 new QName("http://services.samples/xsd", "Price")), "Fault response null localpart");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Ruby script with the mediator" +
                                                             " -Script from gov registry")
     public void testJRubyScriptMediationScriptFromGovRegistry() throws Exception {
@@ -116,7 +119,8 @@ public class RubyScriptSupportTestCase extends ESBIntegrationTest {
     private void uploadResourcesToConfigRegistry() throws Exception {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), userInfo.getUserName(), userInfo.getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
+, context.getUser().getPassword());
 
         resourceAdminServiceStub.deleteResource("/_system/governance/script");
         resourceAdminServiceStub.addCollection("/_system/governance/", "script", "",
@@ -131,7 +135,7 @@ public class RubyScriptSupportTestCase extends ESBIntegrationTest {
 
 
     private void enableDebugLogging() throws Exception {
-        LoggingAdminClient logAdminClient = new LoggingAdminClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+        LoggingAdminClient logAdminClient = new LoggingAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
         logAdminClient.updateLoggerData("org.apache.synapse", "DEBUG", true, false);
     }
 
@@ -140,7 +144,8 @@ public class RubyScriptSupportTestCase extends ESBIntegrationTest {
             throws InterruptedException, ResourceAdminServiceExceptionException, RemoteException {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), userInfo.getUserName(), userInfo.getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
+, context.getUser().getPassword());
 
         resourceAdminServiceStub.deleteResource("/_system/governance/script");
     }

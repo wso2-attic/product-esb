@@ -22,10 +22,9 @@ import org.apache.axis2.AxisFault;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.ESBTestConstant;
-import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 
 import javax.activation.DataHandler;
 import javax.servlet.ServletException;
@@ -154,7 +153,8 @@ public class ValidateIntegrationTestCase extends ESBIntegrationTest {
             throws RemoteException, ResourceAdminServiceExceptionException, MalformedURLException,
                    InterruptedException {
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), userInfo.getUserName(), userInfo.getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
+, context.getUser().getPassword());
         resourceAdminServiceStub.deleteResource("/_system/config/validate");
         resourceAdminServiceStub.addCollection("/_system/config/", "validate", "", "Contains test schema files");
         resourceAdminServiceStub.addResource("/_system/config/validate/schema.xml", "application/xml", "schema files"
@@ -165,7 +165,8 @@ public class ValidateIntegrationTestCase extends ESBIntegrationTest {
     private void clearUploadedResource()
             throws InterruptedException, ResourceAdminServiceExceptionException, RemoteException {
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), userInfo.getUserName(), userInfo.getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
+, context.getUser().getPassword());
         resourceAdminServiceStub.deleteResource("/_system/config/validate");
 
     }

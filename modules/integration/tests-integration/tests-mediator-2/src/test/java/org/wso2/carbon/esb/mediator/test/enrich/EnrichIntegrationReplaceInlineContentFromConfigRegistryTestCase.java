@@ -19,8 +19,6 @@ package org.wso2.carbon.esb.mediator.test.enrich;
 
 import org.apache.axiom.om.OMElement;
 import org.testng.annotations.BeforeClass;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
 
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
@@ -30,7 +28,9 @@ import java.net.URL;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.esb.util.ESBTestConstant;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -43,9 +43,9 @@ public class EnrichIntegrationReplaceInlineContentFromConfigRegistryTestCase
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
         super.init();
-        resourceAdminServiceStub = new ResourceAdminServiceClient(esbServer.getBackEndUrl(),
-                                                                  userInfo.getUserName(),
-                                                                  userInfo.getPassword());
+        resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
+                                                                 context.getUser().getUserName(),
+                                                                 context.getUser().getPassword());
         uploadResourcesToConfigRegistry();
         uploadResourcesToGovernanceRegistry();
 

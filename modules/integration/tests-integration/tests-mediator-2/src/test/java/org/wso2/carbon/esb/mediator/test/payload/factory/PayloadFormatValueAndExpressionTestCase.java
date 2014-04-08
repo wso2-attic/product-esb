@@ -27,7 +27,7 @@ import org.apache.axis2.client.ServiceClient;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 /**
  * This class can be used to nativesupportforjson 'Native Support for JSON' scenarios using

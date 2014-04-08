@@ -22,14 +22,16 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.axis2serverutils.SampleAxis2Server;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
+
 import org.wso2.carbon.automation.utils.artifact.FixedSizeSymbolGenerator;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 /* Tests sending different number of small messages through iterate mediator */
-
+@Test(groups = { "excludeGroup" })
 public class CloneSmallMessageTestCase extends ESBIntegrationTest {
 
     private SampleAxis2Server axis2Server;
@@ -46,7 +48,8 @@ public class CloneSmallMessageTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Tests small message in small number ~20")
     public void testSmallNumbers() throws Exception {
 
@@ -62,7 +65,8 @@ public class CloneSmallMessageTestCase extends ESBIntegrationTest {
         response = null;
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+})
     @Test(groups = "wso2.esb", description = "Tests small message in small number ~100")
     public void testLargeNumbers() throws Exception {
         String symbol = FixedSizeSymbolGenerator.generateMessageKB(5);

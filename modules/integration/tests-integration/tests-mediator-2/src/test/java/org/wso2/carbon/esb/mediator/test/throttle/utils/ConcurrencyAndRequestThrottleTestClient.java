@@ -18,7 +18,7 @@
 package org.wso2.carbon.esb.mediator.test.throttle.utils;
 
 import org.apache.axiom.om.OMElement;
-import org.wso2.carbon.automation.utils.esb.StockQuoteClient;
+import org.wso2.esb.integration.common.utils.clients.stockquoteclient.StockQuoteClient;
 import java.util.List;
 
 public class ConcurrencyAndRequestThrottleTestClient implements Runnable {

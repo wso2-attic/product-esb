@@ -27,18 +27,18 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.axis2serverutils.SampleAxis2Server;
-import org.wso2.carbon.automation.utils.axis2client.AxisServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
+import org.wso2.esb.integration.common.utils.clients.axis2client.AxisServiceClient;
 
 /**
  * 
  * Tests SOAP Action property of the clone mediator
  *
  */
-public class CloneSOAPActionTestCase extends ESBIntegrationTest {
+public class CloneSOAPActionTestCase extends ESBIntegrationTest{
 
 	private SampleAxis2Server axis2Server1;
 	private SampleAxis2Server axis2Server2;
@@ -58,7 +58,7 @@ public class CloneSOAPActionTestCase extends ESBIntegrationTest {
 		axis2Server2.start();
 	}
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.integration_all})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
 	@Test(groups = "wso2.esb", description = "Tests SOAP Action")
 	public void testSOAPAction() throws Exception {
 

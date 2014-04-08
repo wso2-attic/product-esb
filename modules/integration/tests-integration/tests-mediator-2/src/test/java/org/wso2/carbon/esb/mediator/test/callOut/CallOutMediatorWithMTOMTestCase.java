@@ -5,22 +5,22 @@ import org.apache.axis2.Constants;
 import org.apache.axis2.addressing.EndpointReference;
 import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
+import org.osgi.framework.launch.FrameworkFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.utils.axis2serverutils.SampleAxis2Server;
-import org.wso2.carbon.automation.core.utils.frameworkutils.FrameworkFactory;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.automation.core.ProductConstant;
-import org.wso2.carbon.automation.core.utils.environmentutils.EnvironmentBuilder;
-import org.wso2.carbon.automation.core.utils.environmentutils.EnvironmentVariables;
-import org.wso2.carbon.esb.util.ServiceDeploymentUtil;
+import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
+
+
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+
+
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import java.io.*;
-
+@Test(groups = { "excludeGroup" })
 public class CallOutMediatorWithMTOMTestCase extends ESBIntegrationTest {
     private final String MTOM_SERVICE = "MTOMSwASampleService";
     private SampleAxis2Server axis2Server;

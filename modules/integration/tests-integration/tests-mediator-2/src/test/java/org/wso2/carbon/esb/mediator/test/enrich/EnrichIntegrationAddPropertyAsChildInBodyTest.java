@@ -23,12 +23,11 @@ import org.apache.axis2.AxisFault;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
-import javax.servlet.ServletException;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
-import java.rmi.RemoteException;
+
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
