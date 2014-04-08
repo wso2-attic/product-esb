@@ -13,8 +13,5 @@
     <name>ESB Integration Test Admin Clients</name>
     <packaging>jar</packaging>
     <artifactId>admin-clients</artifactId>
-
-    <dependencies>
-
-    </dependencies>
+  
 </project>
