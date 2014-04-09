@@ -294,7 +294,7 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.soaptracer.feature:${wso2carbon.version}
                                 </featureArtifactDef>
-                                <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.ec2.client.feature:${wso2carbon.version}</featureArtifactDef>
+                                <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.ec2.client.feature:${wso2carbon.version}</featureArtifactDef-->
                                 <!--Misc End here -->
                                 <!-- reporting features -->
                                 <featureArtifactDef>
