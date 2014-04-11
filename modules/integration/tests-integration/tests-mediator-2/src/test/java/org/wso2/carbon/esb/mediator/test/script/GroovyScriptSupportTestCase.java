@@ -21,12 +21,11 @@ import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.ProductConstant;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-
+import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.clients.JSONClient;
 
@@ -35,7 +34,7 @@ import java.io.File;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-@Test(groups = { "excludeGroup" })
+
 public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
 
     private final String GROOVY_JAR = "groovy-all-1.1-rc-1.jar";
@@ -49,12 +48,12 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     public void setEnvironment() throws Exception {
-        super.init(1);
-        serverManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        super.init();
+        serverManager = new ServerConfigurationManager(context);
         serverManager.copyToComponentLib(new File(getESBResourceLocation() + GROOVY_JAR_LOCATION));
-        serverManager.applyConfiguration(new File(ProductConstant.getResourceLocations(ProductConstant.ESB_SERVER_NAME)
+        serverManager.applyConfiguration(new File(FrameworkPathUtil.getSystemResourceLocation() + File.separator + "artifacts"+ File.separator +"ESB"
                 + File.separator + "synapseconfig" + File.separator + "groovy" + File.separator + "axis2.xml"));
-        super.init(1);
+        super.init();
         jsonclient = new JSONClient();
     }
 

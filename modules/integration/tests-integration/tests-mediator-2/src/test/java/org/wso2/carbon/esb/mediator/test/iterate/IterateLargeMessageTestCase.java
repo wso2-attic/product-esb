@@ -43,14 +43,14 @@ import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.automation.utils.artifact.FixedSizeSymbolGenerator;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.common.FixedSizeSymbolGenerator;
 
 /*
  * Test sending large messages (~1MB) in large numbers (~50) through the
  * Iterate mediator and verify the load can be handled while iterating
  */
-@Test(groups = { "excludeGroup" })
+
 public class IterateLargeMessageTestCase extends ESBIntegrationTest {
     private String symbol;
 
@@ -61,7 +61,7 @@ public class IterateLargeMessageTestCase extends ESBIntegrationTest {
 
     }
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
-, ExecutionEnvironment.platform_all})
+, ExecutionEnvironment.ALL})
     @Test(groups = "wso2.esb", description = "Tests large message in small number 5")
     public void testSmallNumbers() throws Exception {
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/iterate/simple_iterator.xml");

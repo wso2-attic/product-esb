@@ -25,20 +25,18 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import org.wso2.carbon.automation.core.ProductConstant;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 
 import org.wso2.esb.integration.common.clients.sequences.SequenceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ArtifactReaderUtil;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 import org.wso2.esb.integration.common.utils.clients.stockquoteclient.StockQuoteClient;
 
 import java.io.File;
-import java.net.URL;
 
-@Test(groups = { "excludeGroup" })
 public class ConditionalRouterIntegrationTest extends ESBIntegrationTest {
 
     private String toUrl = null;

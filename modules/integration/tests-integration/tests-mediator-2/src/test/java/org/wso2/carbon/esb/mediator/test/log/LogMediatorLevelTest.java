@@ -26,9 +26,10 @@ import org.testng.annotations.Test;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 
 
+import org.wso2.esb.integration.common.clients.logging.LoggingAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
-@Test(groups = { "excludeGroup" })
+
 public class LogMediatorLevelTest extends ESBIntegrationTest {
 
     private LogViewerClient logViewer;

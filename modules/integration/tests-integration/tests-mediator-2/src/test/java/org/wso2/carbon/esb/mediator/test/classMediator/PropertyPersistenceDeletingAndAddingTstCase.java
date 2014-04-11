@@ -22,19 +22,17 @@ import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.ProductConstant;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.namespace.QName;
 import java.io.File;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-@Test(groups = { "excludeGroup" })
+
 public class PropertyPersistenceDeletingAndAddingTstCase extends ESBIntegrationTest {
     private static final String CLASS_JAR_FIVE_PROPERTIES="org.wso2.carbon.test.mediator.stockmediator-v1.0.jar";
     private static final String CLASS_JAR_FOUR_PROPERTIES="org.wso2.carbon.test.mediator.stockmediator-v1.0.2.jar";
@@ -45,13 +43,13 @@ public class PropertyPersistenceDeletingAndAddingTstCase extends ESBIntegrationT
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        init(ProductConstant.ADMIN_USER_ID);
-        serverConfigurationManager=new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        init();
+        serverConfigurationManager=new ServerConfigurationManager(context);
         serverConfigurationManager.copyToComponentLib
                 (new File(getClass().getResource(JAR_LOCATION + File.separator + CLASS_JAR_FIVE_PROPERTIES).toURI()));
         serverConfigurationManager.restartGracefully();
 
-        init(ProductConstant.ADMIN_USER_ID);
+        init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/class/class_property_persistence_five_properties.xml");
     }
 
@@ -92,7 +90,7 @@ public class PropertyPersistenceDeletingAndAddingTstCase extends ESBIntegrationT
         loadSampleESBConfiguration(0);
         serverConfigurationManager.restartGracefully();
 
-        init(ProductConstant.ADMIN_USER_ID);
+        init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/class/class_property_persistence_four_properties.xml");
         Thread.sleep(2000);
         response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(),null, "IBM");

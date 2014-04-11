@@ -1,7 +1,10 @@
 package org.wso2.carbon.esb.message.processor.test.forwarding;
 
 
+import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
+import org.apache.axiom.om.OMFactory;
+import org.apache.axiom.om.OMNamespace;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -17,7 +20,7 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import java.io.File;
 
-@Test(groups = { "excludeGroup" })
+
 public class ESBJAVA2006RetryOnSOAPFaultTestCase extends ESBIntegrationTest {
 
     private SampleAxis2Server axis2Server;
@@ -53,7 +56,6 @@ public class ESBJAVA2006RetryOnSOAPFaultTestCase extends ESBIntegrationTest {
     }
 
     //@SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
-})
     //@Test(groups = "wso2.esb", description = "<property name=\"RETRY_ON_SOAPFAULT\" value=\"true\"/>")
     public void testRetryOnSOAPFaultWithInOutTrue() throws Exception {
 

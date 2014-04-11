@@ -17,27 +17,24 @@
 */
 package org.wso2.carbon.esb.mediator.test.payload.factory;
 
-import org.apache.axiom.om.OMElement;
+
 import org.apache.http.HttpResponse;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.ProductConstant;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.environmentutils.EnvironmentBuilder;
 
 
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
 
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import java.io.File;
 
 import static org.testng.Assert.assertTrue;
-@Test(groups = { "excludeGroup" })
+
 public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase extends ESBIntegrationTest{
 
     private ServerConfigurationManager serverManager = null;
@@ -86,7 +83,7 @@ public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase exte
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
         super.init();
-        serverManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        serverManager = new ServerConfigurationManager(context);
 //        serverManager.applyConfiguration(new File(getClass().getResource("/artifacts/ESB/mediatorconfig/payload/factory/axis2/axis2.xml").getPath()));
         super.init();
     }

@@ -14,13 +14,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
-
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-
-
-
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpServer;
+import org.wso2.carbon.automation.extensions.servers.httpserver.RequestInterceptor;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpServer;
 import org.wso2.carbon.automation.extensions.servers.jmsserver.controller.JMSBrokerController;
 import org.wso2.carbon.automation.extensions.servers.jmsserver.controller.config.JMSBrokerConfiguration;
 import org.wso2.carbon.automation.extensions.servers.jmsserver.controller.config.JMSBrokerConfigurationProvider;
@@ -34,7 +30,7 @@ import java.io.InputStream;
 /**
  * @author wso2
  */
-@Test(groups = { "excludeGroup" })
+
 public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
 
     private TestRequestInterceptor interceptor = new TestRequestInterceptor();
@@ -59,12 +55,12 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
             log.error("Error while starting the HTTP server", e);
         }
 
-        interceptor = new TestRequestInterceptor();
-        httpServer.getRequestHandler().setInterceptor(interceptor);
+        TestRequestInterceptor interceptor = new TestRequestInterceptor();
+        httpServer.getRequestHandler().setInterceptor((RequestInterceptor)interceptor);
 
-        super.init(5);
+        super.init();
 
-        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(context);
         serverConfigurationManager.copyToComponentLib(new File(getClass().
                 getResource(JAR_LOCATION + File.separator + ACTIVEMQ_CORE).toURI()));
         serverConfigurationManager.copyToComponentLib(new File(getClass().
@@ -74,7 +70,7 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
         serverConfigurationManager.applyConfiguration(new File(getClass().
                 getResource(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "messageStore" + File.separator + "axis2.xml").getPath()));
 
-        super.init(5);
+        super.init();
 
         File outfolder = new File(getClass().
                 getResource(File.separator + "artifacts" + File.separator + "ESB" + File.separator
@@ -98,8 +94,7 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
         failurelfolder.mkdirs();
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
-})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
     @Test(groups = {"wso2.esb"}, description = "Sending a file through VFS Transport to JMS endpoint" +
                                                " and test whether its getting suspended")
     public void testJMSEndpointSuspensionViaVFSTest()

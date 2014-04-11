@@ -27,14 +27,15 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.wso2.carbon.automation.test.utils.axis2client.AxisServiceClientUtils;
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.utils.clients.LoadbalanceFailoverClient;
 import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
 
-import org.wso2.carbon.automation.utils.axis2client.AxisServiceClientUtils;
-import org.wso2.carbon.automation.utils.esb.loadbalanceclient.LoadbalanceFailoverClient;
+
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 import javax.activation.DataHandler;

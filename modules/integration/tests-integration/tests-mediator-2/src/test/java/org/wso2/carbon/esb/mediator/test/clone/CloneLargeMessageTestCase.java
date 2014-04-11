@@ -26,8 +26,8 @@ import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.utils.common.FixedSizeSymbolGenerator;
 import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
-import org.wso2.esb.integration.common.utils.common.
 
 
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
@@ -39,7 +39,7 @@ import java.util.Iterator;
  * Test sending large messages (3MB) through the clone mediator and verify the
  * load can be handled while cloning
  */
-@Test(groups = { "excludeGroup" })
+
 public class CloneLargeMessageTestCase extends ESBIntegrationTest {
 
     private SampleAxis2Server axis2Server1;

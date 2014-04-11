@@ -23,10 +23,12 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.esb.integration.common.clients.mediation.MessageStoreAdminClient;import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
+import org.wso2.esb.integration.common.clients.mediation.MessageStoreAdminClient;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
+
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 
@@ -37,7 +39,7 @@ import java.util.List;
 /**
  * This class checks whether a message store is persisted after ESB restarted
  */
-@Test(groups = { "excludeGroup" })
+
 public class MessageStorePersistenceTestCase extends ESBIntegrationTest {
 
     private MessageStoreAdminClient messageStoreAdminClient;
@@ -49,7 +51,7 @@ public class MessageStorePersistenceTestCase extends ESBIntegrationTest {
         super.init();
         messageStoreAdminClient = new MessageStoreAdminClient(contextUrls.getBackEndUrl(),
                                                               getSessionCookie());
-        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(context);
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL

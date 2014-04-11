@@ -8,6 +8,7 @@
             </inSequence>
 
             <outSequence>
+                <log level="full"/>
                 <send/>
             </outSequence>
         </target>
@@ -16,6 +17,7 @@
 
     <sequence name="correctsequence">
         <send>
+            <log level="full"/>
             <endpoint>
                 <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
             </endpoint>

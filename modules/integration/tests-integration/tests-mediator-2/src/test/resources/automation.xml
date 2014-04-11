@@ -266,7 +266,7 @@
         <platformExecutionManager>
             <extentionClasses>
                 <className>org.wso2.carbon.integration.common.extensions.carbonserver.CarbonServerExtension</className>
-                <className>org.wso2.esb.integration.common.extensions.axis2server.Axis2ServerExtension</className>
+                <!--<className>org.wso2.esb.integration.common.extensions.axis2server.Axis2ServerExtension</className>-->
             </extentionClasses>
         </platformExecutionManager>
 

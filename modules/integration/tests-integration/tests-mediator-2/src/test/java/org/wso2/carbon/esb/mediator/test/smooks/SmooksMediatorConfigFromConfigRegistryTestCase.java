@@ -26,9 +26,9 @@ import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClie
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.MultiMessageReceiver;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.servers.MultiMessageReceiver;
+
 
 import javax.activation.DataHandler;
 import java.io.File;
@@ -57,7 +57,7 @@ public class SmooksMediatorConfigFromConfigRegistryTestCase extends ESBIntegrati
 , context.getUser().getPassword());
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/vfsTransport/vfs_test_smook_config_at_registry.xml");
-        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(context);
         serverConfigurationManager.applyConfiguration(new File(getClass().getResource(COMMON_FILE_LOCATION + "axis2.xml").getPath()));
         super.init();
         addVFSProxy();

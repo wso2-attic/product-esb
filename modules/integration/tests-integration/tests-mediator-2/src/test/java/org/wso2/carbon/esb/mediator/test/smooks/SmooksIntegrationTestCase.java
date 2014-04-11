@@ -29,8 +29,7 @@ import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClie
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.endpoint.stub.types.EndpointAdminEndpointAdminException;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;import org.wso2.carbon.endpoint.stub.types.EndpointAdminEndpointAdminException;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.activation.DataHandler;
@@ -50,7 +49,7 @@ public class SmooksIntegrationTestCase extends ESBIntegrationTest {
     public void setEnvironment() throws Exception {
 
         super.init();
-        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(context);
         serverConfigurationManager.applyConfiguration(new File(getClass().getResource(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "smooks" + File.separator + "axis2.xml").getPath()));
         super.init();
         loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "smooks" + File.separator + "smooks_synapse.xml");

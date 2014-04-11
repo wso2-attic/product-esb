@@ -25,9 +25,8 @@ import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.MultiMessageReceiver;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.servers.MultiMessageReceiver;
 
 import java.io.File;
 import java.util.List;
@@ -51,7 +50,7 @@ public class SmooksMediatorConfigFromLocalEntryTestCase extends ESBIntegrationTe
     public void init() throws Exception {
         super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/vfsTransport/vfs_test_synapse.xml");
-        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(context);
         serverConfigurationManager.applyConfiguration(new File(getClass().getResource(COMMON_FILE_LOCATION + File.separator + "axis2.xml").getPath()));
         super.init();
         addVFSProxy();

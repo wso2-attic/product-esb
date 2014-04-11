@@ -26,8 +26,7 @@ import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.esb.integration.common.clients.mediation.SynapseConfigAdminClient;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;import org.wso2.esb.integration.common.clients.mediation.SynapseConfigAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 
@@ -37,7 +36,7 @@ import static java.io.File.separator;
  * This is related to JIRA issue:    WSO2 Carbon / CARBON-13132
  * Message stores/processor does not persist properly via mediation persistence manager
  */
-@Test(groups = { "excludeGroup" })
+
 public class MessageProcessorPersistenceTestCase extends ESBIntegrationTest {
 
     private SynapseConfigAdminClient synapseConfigAdminClient;
@@ -47,7 +46,7 @@ public class MessageProcessorPersistenceTestCase extends ESBIntegrationTest {
     public void init() throws Exception {
 
         super.init();
-        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(context);
         synapseConfigAdminClient = new SynapseConfigAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
 

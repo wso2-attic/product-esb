@@ -22,11 +22,11 @@ import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.ProductConstant;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.registry.properties.stub.PropertiesAdminServiceRegistryExceptionException;
 import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
@@ -38,7 +38,7 @@ import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-@Test(groups = { "excludeGroup" })
+
 public class ClassMediationWithLoadOfPropertiesTestCase extends ESBIntegrationTest {
 
     private final String CLASS_JAR="org.wso2.carbon.test.mediator.simpleClassMediator.jar";
@@ -49,13 +49,13 @@ public class ClassMediationWithLoadOfPropertiesTestCase extends ESBIntegrationTe
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        init(ProductConstant.ADMIN_USER_ID);
-        serverConfigurationManager=new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        init();
+        serverConfigurationManager=new ServerConfigurationManager(context);
         serverConfigurationManager.copyToComponentLib
                 (new File(getClass().getResource(JAR_LOCATION + File.separator + CLASS_JAR).toURI()));
         serverConfigurationManager.restartGracefully();
 
-        init(ProductConstant.ADMIN_USER_ID);
+        init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/class/class_mediation_with_twenty_properties.xml");
     }
 

@@ -23,14 +23,13 @@ import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.esb.integration.common.utils.clients.JSONClient;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;import org.wso2.esb.integration.common.utils.clients.JSONClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import java.io.File;
 
 import static org.testng.Assert.assertEquals;
-@Test(groups = { "excludeGroup" })
+
 public class GroovySetPayloadJSONTestCase extends ESBIntegrationTest {
 
     private final String GROOVY_JAR = "groovy-all-1.1-rc-1.jar";
@@ -44,7 +43,7 @@ public class GroovySetPayloadJSONTestCase extends ESBIntegrationTest {
 })
     public void setEnvironment() throws Exception {
         super.init(1);
-        serverManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        serverManager = new ServerConfigurationManager(context);
         serverManager.copyToComponentLib(new File(getESBResourceLocation() + GROOVY_JAR_LOCATION));
         serverManager.restartGracefully();
         super.init(1);

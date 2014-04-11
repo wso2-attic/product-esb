@@ -27,8 +27,7 @@ import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.esb.integration.common.clients.mediation.MessageStoreAdminClient;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;import org.wso2.esb.integration.common.clients.mediation.MessageStoreAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 
@@ -37,7 +36,7 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
  * This class checks whether in memory massages are cleaned after restarting the esb
  * 
  */
-@Test(groups = { "excludeGroup" })
+
 public class MessageStoreMessageCleaningTestCase extends ESBIntegrationTest {
 
 	private MessageStoreAdminClient messageStoreAdminClient;
@@ -57,7 +56,7 @@ public class MessageStoreMessageCleaningTestCase extends ESBIntegrationTest {
         messageStoreAdminClient =
                 new MessageStoreAdminClient(contextUrls.getBackEndUrl(),
                         getSessionCookie());
-        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(context);
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
@@ -92,7 +91,6 @@ public class MessageStoreMessageCleaningTestCase extends ESBIntegrationTest {
 		clear();
         cleanup();
 		messageStoreAdminClient = null;
-        esbServer = null;
         serverConfigurationManager = null;
 	}
 

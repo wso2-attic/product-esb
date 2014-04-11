@@ -31,7 +31,7 @@ import org.wso2.carbon.automation.utils.artifact.FixedSizeSymbolGenerator;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 /* Tests sending different number of small messages through iterate mediator */
-@Test(groups = { "excludeGroup" })
+
 public class CloneSmallMessageTestCase extends ESBIntegrationTest {
 
     private SampleAxis2Server axis2Server;

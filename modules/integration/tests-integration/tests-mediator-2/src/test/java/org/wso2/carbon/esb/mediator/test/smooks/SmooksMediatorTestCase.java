@@ -17,29 +17,29 @@
 */
 package org.wso2.carbon.esb.mediator.test.smooks;
 
-import org.apache.axiom.om.util.AXIOMUtil;
-import org.apache.commons.io.FileUtils;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+//import org.apache.axiom.om.util.AXIOMUtil;
+//import org.apache.commons.io.FileUtils;
+//import org.testng.annotations.AfterClass;
+//import org.testng.annotations.AfterMethod;
+//import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.MultiMessageReceiver;
+//import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+//import org.wso2.carbon.esb.util.MultiMessageReceiver;
 
 import javax.activation.DataHandler;
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
+//import java.io.IOException;
+//import java.net.URL;
+//import java.util.List;
+//
+//import static org.testng.Assert.assertEquals;
+//import static org.testng.Assert.assertNotNull;
+//import static org.testng.Assert.assertTrue;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-@Test(groups = { "excludeGroup" })
 public class SmooksMediatorTestCase extends ESBIntegrationTest {
-    private ServerConfigurationManager serverConfigurationManager;
+    //private ServerConfigurationManager serverConfigurationManager;
     private ResourceAdminServiceClient resourceAdminServiceStub;
     private final String COMMON_FILE_LOCATION = File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "vfsTransport";
     private boolean isProxyDeployed = false;
@@ -48,7 +48,7 @@ public class SmooksMediatorTestCase extends ESBIntegrationTest {
     /*@BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(context);
         serverConfigurationManager.applyConfiguration(new File(getClass().getResource(COMMON_FILE_LOCATION + File.separator + "axis2.xml").getPath()));
         super.init();
         resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());

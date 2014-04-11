@@ -23,13 +23,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import org.wso2.carbon.automation.api.clients.logging.LoggingAdminClient;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
+import org.wso2.esb.integration.common.clients.logging.LoggingAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
-@Test(groups = { "excludeGroup" })
+
 public class CallTemplateIntegrationParamsWithValuesTestCase extends ESBIntegrationTest {
     private LogViewerClient logViewer;
     private LoggingAdminClient logAdmin;

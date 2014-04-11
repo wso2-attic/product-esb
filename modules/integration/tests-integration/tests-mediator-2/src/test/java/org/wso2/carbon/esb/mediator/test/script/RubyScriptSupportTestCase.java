@@ -18,28 +18,27 @@
 package org.wso2.carbon.esb.mediator.test.script;
 
 import org.apache.axiom.om.OMElement;
-import org.apache.axis2.AxisFault;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.logging.LoggingAdminClient;
+import org.wso2.esb.integration.common.clients.logging.LoggingAdminClient;
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
 import java.net.URL;
 import java.rmi.RemoteException;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-@Test(groups = { "excludeGroup" })
+
 public class RubyScriptSupportTestCase extends ESBIntegrationTest {
 
     private final String JRUBY_JAR = "jruby-complete-1.3.0.jar";
@@ -51,7 +50,7 @@ public class RubyScriptSupportTestCase extends ESBIntegrationTest {
     public void setEnvironment() throws Exception {
 
         init(1);
-        serverManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        serverManager = new ServerConfigurationManager(context);
         serverManager.copyToComponentDropins(new File(getClass().getResource(JRUBY_JAR_LOCATION + JRUBY_JAR).toURI()));
         serverManager.restartGracefully();
         init(1);
@@ -141,7 +140,7 @@ public class RubyScriptSupportTestCase extends ESBIntegrationTest {
 
 
     private void clearUploadedResource()
-            throws InterruptedException, ResourceAdminServiceExceptionException, RemoteException {
+            throws InterruptedException, ResourceAdminServiceExceptionException, RemoteException, XPathExpressionException {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
                 new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()

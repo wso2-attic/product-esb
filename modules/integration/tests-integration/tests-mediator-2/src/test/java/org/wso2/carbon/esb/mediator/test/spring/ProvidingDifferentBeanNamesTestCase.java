@@ -23,22 +23,21 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.automation.core.ProductConstant;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 
 import javax.activation.DataHandler;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
 import java.net.URL;
 import java.rmi.RemoteException;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
-@Test(groups = { "excludeGroup" })
+
 public class ProvidingDifferentBeanNamesTestCase extends ESBIntegrationTest {
 
     private static final String SIMPLE_BEAN_JAR = "org.wso2.carbon.test.simplebean.jar";
@@ -48,13 +47,13 @@ public class ProvidingDifferentBeanNamesTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-        init(ProductConstant.ADMIN_USER_ID);
-        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        init();
+        serverConfigurationManager = new ServerConfigurationManager(context);
         serverConfigurationManager.copyToComponentLib
                 (new File(getESBResourceLocation() + File.separator + JAR_LOCATION + File.separator + SIMPLE_BEAN_JAR));
         serverConfigurationManager.restartGracefully();
 
-        init(ProductConstant.ADMIN_USER_ID);
+        init();
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/spring/spring_mediation.xml");
     }
@@ -111,7 +110,7 @@ public class ProvidingDifferentBeanNamesTestCase extends ESBIntegrationTest {
 
 
     private void clearUploadedResource()
-            throws InterruptedException, ResourceAdminServiceExceptionException, RemoteException {
+            throws InterruptedException, ResourceAdminServiceExceptionException, RemoteException, XPathExpressionException {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
                 new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()

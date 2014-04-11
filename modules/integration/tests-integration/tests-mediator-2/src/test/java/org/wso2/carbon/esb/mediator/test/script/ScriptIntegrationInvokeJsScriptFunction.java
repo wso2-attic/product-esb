@@ -22,7 +22,7 @@ import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.logging.LoggingAdminClient;
+import org.wso2.esb.integration.common.clients.logging.LoggingAdminClient;
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
@@ -34,7 +34,7 @@ import java.net.URL;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-@Test(groups = { "excludeGroup" })
+
 public class ScriptIntegrationInvokeJsScriptFunction extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)

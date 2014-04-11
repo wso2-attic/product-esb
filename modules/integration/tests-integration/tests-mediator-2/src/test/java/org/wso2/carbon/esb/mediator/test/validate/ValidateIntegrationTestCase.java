@@ -27,9 +27,7 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 
 import javax.activation.DataHandler;
-import javax.servlet.ServletException;
-import javax.xml.stream.XMLStreamException;
-import java.io.IOException;
+import javax.xml.xpath.XPathExpressionException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -151,7 +149,7 @@ public class ValidateIntegrationTestCase extends ESBIntegrationTest {
 
     public void uploadConfig()
             throws RemoteException, ResourceAdminServiceExceptionException, MalformedURLException,
-                   InterruptedException {
+            InterruptedException, XPathExpressionException {
         ResourceAdminServiceClient resourceAdminServiceStub =
                 new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
 , context.getUser().getPassword());
@@ -163,7 +161,7 @@ public class ValidateIntegrationTestCase extends ESBIntegrationTest {
     }
 
     private void clearUploadedResource()
-            throws InterruptedException, ResourceAdminServiceExceptionException, RemoteException {
+            throws InterruptedException, ResourceAdminServiceExceptionException, RemoteException, XPathExpressionException {
         ResourceAdminServiceClient resourceAdminServiceStub =
                 new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
 , context.getUser().getPassword());

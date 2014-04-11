@@ -30,7 +30,7 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 /**
  * https://wso2.org/jira/browse/ESBJAVA-823
  */
-@Test(groups = { "excludeGroup" })
+
 public class SecuredCloneMediatorTestCase extends ESBIntegrationTest {
 
 
@@ -50,7 +50,6 @@ public class SecuredCloneMediatorTestCase extends ESBIntegrationTest {
     public void testSecuredCloneMediator() throws Exception {
 
         applySecurity("Secured_Clone", 1, getUserRole(userInfo.getUserId()));
-
         SecureServiceClient secureAxisServiceClient = new SecureServiceClient();
         OMElement response = secureAxisServiceClient.sendSecuredStockQuoteRequest(userInfo, getProxyServiceSecuredURL("Secured_Clone"), 1, "WSO2");
         Assert.assertNotNull(response);

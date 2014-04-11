@@ -34,7 +34,7 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
-@Test(groups = { "excludeGroup" })
+
 public class DBlookupMediatorTestCase extends ESBIntegrationTest {
     private MySqlDatabaseManager mySqlDatabaseManager;
     private ServerConfigurationManager serverConfigurationManager;
@@ -52,7 +52,7 @@ public class DBlookupMediatorTestCase extends ESBIntegrationTest {
         super.init();
         mySqlDatabaseManager = new MySqlDatabaseManager(JDBC_URL, DB_USER, DB_PASSWORD);
         mySqlDatabaseManager.executeUpdate("DROP DATABASE IF EXISTS SampleDBForAutomation");
-        serverConfigurationManager = new ServerConfigurationManager(contextUrls.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(context);
         copyJDBCDriverToClassPath();
         super.init();
 

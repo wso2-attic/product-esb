@@ -25,9 +25,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
-
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-
+import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.automation.test.utils.common.FileManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
@@ -35,7 +34,7 @@ import javax.xml.namespace.QName;
 import java.util.Iterator;
 
 import static org.testng.Assert.assertTrue;
-@Test(groups = { "excludeGroup" })
+
 public class ValidPathAxis2XmlTestCase extends ESBIntegrationTest {
 
 
@@ -43,8 +42,9 @@ public class ValidPathAxis2XmlTestCase extends ESBIntegrationTest {
     public void setEnvironment() throws Exception {
 
         init();
-        String axis2XmlPath = ProductConstant.SYSTEM_TEST_RESOURCE_LOCATION + "/artifacts/ESB/mediatorconfig/callout/client_repo/conf/axis2.xml";
-        String uriSynapse = ProductConstant.SYSTEM_TEST_RESOURCE_LOCATION + "/artifacts/ESB/mediatorconfig/callout/ValidPath_Axis2Xml.xml";
+
+        String axis2XmlPath = FrameworkPathUtil.getSystemResourceLocation() + "/artifacts/ESB/mediatorconfig/callout/client_repo/conf/axis2.xml";
+        String uriSynapse = FrameworkPathUtil.getSystemResourceLocation() + "/artifacts/ESB/mediatorconfig/callout/ValidPath_Axis2Xml.xml";
 
         OMElement lineItem = AXIOMUtil.stringToOM(FileManager.readFile(uriSynapse));
 

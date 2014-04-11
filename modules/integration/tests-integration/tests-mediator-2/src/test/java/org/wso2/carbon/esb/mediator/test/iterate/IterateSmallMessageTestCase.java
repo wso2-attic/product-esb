@@ -23,11 +23,11 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.utils.artifact.FixedSizeSymbolGenerator;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.common.FixedSizeSymbolGenerator;
 
 /* Tests sending different number of small messages through iterate mediator */
-@Test(groups = { "excludeGroup" })
+
 public class IterateSmallMessageTestCase extends ESBIntegrationTest {
 
     @BeforeClass
