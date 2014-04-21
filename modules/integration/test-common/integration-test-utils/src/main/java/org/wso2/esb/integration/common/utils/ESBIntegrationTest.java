@@ -48,8 +48,8 @@ import java.util.regex.Matcher;
 public abstract class ESBIntegrationTest {
     protected Log log = LogFactory.getLog(getClass());
     protected StockQuoteClient axis2Client;
-    ContextUrls contextUrls = new ContextUrls();
-    String sessionCookie;
+    protected ContextUrls contextUrls = new ContextUrls();
+    protected String sessionCookie;
     protected OMElement synapseConfiguration = null;
     public ESBTestCaseUtils esbUtils;
     private List<String> proxyServicesList = null;
