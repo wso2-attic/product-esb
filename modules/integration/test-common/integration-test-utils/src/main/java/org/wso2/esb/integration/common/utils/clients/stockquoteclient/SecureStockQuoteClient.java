@@ -44,7 +44,7 @@ public class SecureStockQuoteClient {
         return secureClient.sendReceive(userName, password, trpUrl, "getQuote"
                 , createStandardRequest(symbol), securityPolicyPath
                 , "alice", "bob"
-                , FrameworkPathUtil.getSystemResourceLocation() + File.separator + "keystores"
+                , FrameworkPathUtil.getSystemResourceLocation() + "keystores"
                   + File.separator + "products" + File.separator + "store.jks", "password");
 
     }
