@@ -61,7 +61,7 @@ public class StockQuoteClient {
     public OMElement sendSimpleStockQuoteRequest(String trpUrl, String addUrl, String symbol)
             throws AxisFault {
 
-        ServiceClient sc = new ServiceClient();
+        ServiceClient sc;
         sc=getServiceClient(trpUrl, addUrl);
 
         try {
@@ -71,7 +71,7 @@ public class StockQuoteClient {
         }
     }
 
-    public OMElement sendSimpleStockQuoteRequest_REST(String trpUrl, String addUrl, String symbol)
+    public OMElement sendSimpleStockQuoteRequestREST(String trpUrl, String addUrl, String symbol)
             throws AxisFault {
         ServiceClient sc = getRESTEnabledServiceClient(trpUrl, addUrl);
         try {
@@ -93,7 +93,7 @@ public class StockQuoteClient {
         }
     }
 
-    public OMElement sendSimpleQuoteRequest_REST(String trpUrl, String addUrl, String symbol)
+    public OMElement sendSimpleQuoteRequestREST(String trpUrl, String addUrl, String symbol)
             throws AxisFault {
 
         ServiceClient serviceClient = getRESTEnabledServiceClient(trpUrl, addUrl, "getSimpleQuote");
@@ -142,7 +142,7 @@ public class StockQuoteClient {
         }
     }
 
-    public OMElement sendSimpleStockQuoteRequest_REST(String trpUrl, String addUrl,
+    public OMElement sendSimpleStockQuoteRequestREST(String trpUrl, String addUrl,
                                                       OMElement payload)
             throws AxisFault {
 
@@ -178,7 +178,7 @@ public class StockQuoteClient {
     }
 
 
-    public OMElement sendCustomQuoteRequest_REST(String trpUrl, String addUrl, String symbol)
+    public OMElement sendCustomQuoteRequestREST(String trpUrl, String addUrl, String symbol)
             throws AxisFault {
 
         ServiceClient serviceClient = getRESTEnabledServiceClient(trpUrl, addUrl);
@@ -200,7 +200,7 @@ public class StockQuoteClient {
         }
     }
 
-    public OMElement sendMultipleQuoteRequest_REST(String trpUrl, String addUrl, String symbol,
+    public OMElement sendMultipleQuoteRequestREST(String trpUrl, String addUrl, String symbol,
                                                    int n)
             throws AxisFault {
 

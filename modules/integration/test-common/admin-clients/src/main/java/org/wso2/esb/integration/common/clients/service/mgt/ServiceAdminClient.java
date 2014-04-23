@@ -83,14 +83,9 @@ public class ServiceAdminClient {
 
     public ServiceMetaDataWrapper listServices(String serviceName)
             throws RemoteException {
-        ServiceMetaDataWrapper serviceMetaDataWrapper = null;
-        try{
-        serviceMetaDataWrapper = serviceAdminStub.listServices("all", serviceName, 0);
+        ServiceMetaDataWrapper serviceMetaDataWrapper;
+        serviceMetaDataWrapper = serviceAdminStub.listServices("ALL", serviceName, 0);
         serviceAdminStub.getFaultyServiceArchives(0);
-        }catch(Exception e)
-        {
-            log.error(e.getStackTrace());
-        }
         return serviceMetaDataWrapper;
     }
 
@@ -133,11 +128,11 @@ public class ServiceAdminClient {
         if (serviceMetaDataList == null || serviceMetaDataList.length == 0) {
             serviceState = false;
         } else {
-           // for (ServiceMetaData serviceData : serviceMetaDataList) {
-             //   if (serviceData != null && serviceData.getName().equalsIgnoreCase(serviceName)) {
+            for (ServiceMetaData serviceData : serviceMetaDataList) {
+                if (serviceData != null && serviceData.getName().equalsIgnoreCase(serviceName)) {
                     return true;
-               // }
-           // }
+                }
+            }
         }
         return serviceState;
     }
