@@ -42,7 +42,7 @@ public class Axis2ServerExtension implements ExecutionListenerExtension {
     }
 
     public void onExecutionFinish() throws Exception {
-       // serverManager.stop();
+        serverManager.stop();
     }
 
     private static void handleException(String msg, Exception e) {

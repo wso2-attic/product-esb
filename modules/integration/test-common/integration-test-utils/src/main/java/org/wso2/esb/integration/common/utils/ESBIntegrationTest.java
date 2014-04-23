@@ -28,17 +28,24 @@ import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.context.beans.ContextUrls;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
-import org.wso2.carbon.integration.common.admin.client.AuthenticatorClient;
 import org.wso2.carbon.integration.common.admin.client.SecurityAdminServiceClient;
+import org.wso2.carbon.integration.common.utils.LoginLogoutClient;
 import org.wso2.carbon.security.mgt.stub.config.SecurityAdminServiceSecurityConfigExceptionException;
 import org.wso2.carbon.sequences.stub.types.SequenceEditorException;
 import org.wso2.esb.integration.common.utils.clients.stockquoteclient.StockQuoteClient;
+import org.xml.sax.SAXException;
 
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.xpath.XPathExpressionException;
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,10 +55,10 @@ import java.util.regex.Matcher;
 public abstract class ESBIntegrationTest {
     protected Log log = LogFactory.getLog(getClass());
     protected StockQuoteClient axis2Client;
-    ContextUrls contextUrls = new ContextUrls();
-    String sessionCookie;
+    protected ContextUrls contextUrls = new ContextUrls();
+    protected String sessionCookie;
     protected OMElement synapseConfiguration = null;
-    public ESBTestCaseUtils esbUtils;
+    protected ESBTestCaseUtils esbUtils;
     private List<String> proxyServicesList = null;
     private List<String> sequencesList = null;
     private List<String> endpointsList = null;
@@ -62,22 +69,22 @@ public abstract class ESBIntegrationTest {
     private List<String> apiList = null;
     private List<String> priorityExecutorList = null;
     private List<String[]> scheduledTaskList = null;
-    public AutomationContext context;
+    protected AutomationContext context;
 
-    public ESBIntegrationTest()
-    {
-        esbUtils = new ESBTestCaseUtils();
-    }
+    protected TestUserMode userMode;
+
     protected void init() throws Exception {
-        init(2);
+        userMode = TestUserMode.SUPER_TENANT_ADMIN;
+        init(userMode);
 
     }
 
-    protected void init(int userId) throws Exception {
+    protected void init(TestUserMode userMode) throws Exception {
         axis2Client = new StockQuoteClient();
-        context = new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN);
+        context = new AutomationContext("ESB", userMode);
         contextUrls = context.getContextUrls();
-        sessionCookie= login(context);
+        sessionCookie = login(context);
+        esbUtils = new ESBTestCaseUtils();
     }
 
     protected void cleanup() throws Exception {
@@ -92,11 +99,11 @@ public abstract class ESBIntegrationTest {
                     while (proxies.hasNext()) {
                         String proxy = proxies.next().getAttributeValue(new QName("name"));
 
-                        Assert.assertTrue(isProxyWSDlNotExist(getProxyServiceURL(proxy), deploymentDelay)
+                        Assert.assertTrue(isProxyWSDlNotExist(getProxyServiceURLHttp(proxy), deploymentDelay)
                                 , "UnDeployment Synchronizing failed in workers");
-                        Assert.assertTrue(isProxyWSDlNotExist(getProxyServiceURL(proxy), deploymentDelay)
+                        Assert.assertTrue(isProxyWSDlNotExist(getProxyServiceURLHttp(proxy), deploymentDelay)
                                 , "UnDeployment Synchronizing failed in workers");
-                        Assert.assertTrue(isProxyWSDlNotExist(getProxyServiceURL(proxy), deploymentDelay)
+                        Assert.assertTrue(isProxyWSDlNotExist(getProxyServiceURLHttp(proxy), deploymentDelay)
                                 , "UnDeployment Synchronizing failed in workers");
                     }
                 }
@@ -142,14 +149,14 @@ public abstract class ESBIntegrationTest {
 
     protected String getMainSequenceURL() {
         String mainSequenceUrl = contextUrls.getServiceUrl();
-       if (mainSequenceUrl.endsWith("/services")) {
+        if (mainSequenceUrl.endsWith("/services")) {
             mainSequenceUrl = mainSequenceUrl.replace("/services", "");
         }
         return mainSequenceUrl;
 
     }
 
-    protected String getProxyServiceURL(String proxyServiceName) {
+    protected String getProxyServiceURLHttp(String proxyServiceName) {
         return contextUrls.getServiceUrl() + "/" + proxyServiceName;
     }
 
@@ -157,12 +164,12 @@ public abstract class ESBIntegrationTest {
         return getMainSequenceURL() + proxyServiceName;
     }
 
-    protected String getProxyServiceSecuredURL(String proxyServiceName) {
+    protected String getProxyServiceURLHttps(String proxyServiceName) {
         return contextUrls.getSecureServiceUrl() + "/" + proxyServiceName;
     }
 
     protected void loadSampleESBConfiguration(int sampleNo) throws Exception {
-        OMElement synapseSample = esbUtils.loadSampleESBConfiguration(sampleNo);
+        OMElement synapseSample = esbUtils.loadESBSampleConfiguration(sampleNo);
         updateESBConfiguration(synapseSample);
 
     }
@@ -170,7 +177,7 @@ public abstract class ESBIntegrationTest {
     protected void loadESBConfigurationFromClasspath(String relativeFilePath) throws Exception {
         relativeFilePath = relativeFilePath.replaceAll("[\\\\/]", Matcher.quoteReplacement(File.separator));
 
-        OMElement synapseConfig = esbUtils.loadClasspathResource(relativeFilePath);
+        OMElement synapseConfig = esbUtils.loadResource(relativeFilePath);
         updateESBConfiguration(synapseConfig);
 
     }
@@ -194,11 +201,11 @@ public abstract class ESBIntegrationTest {
             while (proxies.hasNext()) {
                 String proxy = proxies.next().getAttributeValue(new QName("name"));
 
-                Assert.assertTrue(isProxyWSDlExist(getProxyServiceURL(proxy), deploymentDelay)
+                Assert.assertTrue(isProxyWSDlExist(getProxyServiceURLHttp(proxy), deploymentDelay)
                         , "Deployment Synchronizing failed in workers");
-                Assert.assertTrue(isProxyWSDlExist(getProxyServiceURL(proxy), deploymentDelay)
+                Assert.assertTrue(isProxyWSDlExist(getProxyServiceURLHttp(proxy), deploymentDelay)
                         , "Deployment Synchronizing failed in workers");
-                Assert.assertTrue(isProxyWSDlExist(getProxyServiceURL(proxy), deploymentDelay)
+                Assert.assertTrue(isProxyWSDlExist(getProxyServiceURLHttp(proxy), deploymentDelay)
                         , "Deployment Synchronizing failed in workers");
             }
         }
@@ -231,14 +238,14 @@ public abstract class ESBIntegrationTest {
 
     protected void isProxyDeployed(String proxyServiceName) throws Exception {
         Assert.assertTrue(esbUtils.isProxyDeployed(contextUrls.getBackEndUrl(), sessionCookie,
-                proxyServiceName), "Proxy Deployment failed or time out");
+                                                   proxyServiceName), "Proxy Deployment failed or time out");
     }
 
     protected void deleteProxyService(String proxyServiceName) throws Exception {
         if (esbUtils.isProxyServiceExist(contextUrls.getBackEndUrl(), sessionCookie, proxyServiceName)) {
             esbUtils.deleteProxyService(contextUrls.getBackEndUrl(), sessionCookie, proxyServiceName);
             Assert.assertTrue(esbUtils.isProxyUnDeployed(contextUrls.getBackEndUrl(), sessionCookie,
-                    proxyServiceName), "Proxy Deletion failed or time out");
+                                                         proxyServiceName), "Proxy Deletion failed or time out");
         }
         if (proxyServicesList != null && proxyServicesList.contains(proxyServiceName)) {
             proxyServicesList.remove(proxyServiceName);
@@ -368,21 +375,21 @@ public abstract class ESBIntegrationTest {
         if (scheduledTaskList == null) {
             scheduledTaskList = new ArrayList<String[]>();
         }
-        scheduledTaskList.add(new String[]{taskName,taskGroup});
+        scheduledTaskList.add(new String[]{taskName, taskGroup});
     }
 
     protected void applySecurity(String serviceName, int policyId, String[] userGroups)
             throws SecurityAdminServiceSecurityConfigExceptionException, RemoteException,
-            InterruptedException {
+                   InterruptedException {
         SecurityAdminServiceClient securityAdminServiceClient = new SecurityAdminServiceClient(contextUrls.getBackEndUrl(), sessionCookie);
-      //  if (FrameworkFactory.getFrameworkProperties(ProductConstant.ESB_SERVER_NAME).getEnvironmentSettings().is_runningOnStratos()) {
+        //  if (FrameworkFactory.getFrameworkProperties(ProductConstant.ESB_SERVER_NAME).getEnvironmentSettings().is_runningOnStratos()) {
 
-      //      securityAdminServiceClient.applySecurity(serviceName, policyId + "", userGroups,
-                //    new String[]{"service.jks"}, "service.jks");
-      //  } else {
-            securityAdminServiceClient.applySecurity(serviceName, policyId + "", userGroups,
-                    new String[]{"wso2carbon.jks"}, "wso2carbon.jks");
-      //  }
+        //      securityAdminServiceClient.applySecurity(serviceName, policyId + "", userGroups,
+        //    new String[]{"service.jks"}, "service.jks");
+        //  } else {
+        securityAdminServiceClient.applySecurity(serviceName, policyId + "", userGroups,
+                                                 new String[]{"wso2carbon.jks"}, "wso2carbon.jks");
+        //  }
         log.info("Security Scenario " + policyId + " Applied");
 
         Thread.sleep(1000);
@@ -564,7 +571,7 @@ public abstract class ESBIntegrationTest {
                 String[] executor = itr.next();
                 try {
                     if (esbUtils.isScheduleTaskExist(contextUrls.getBackEndUrl(), sessionCookie, executor[0])) {
-                        esbUtils.deleteScheduleTask(contextUrls.getBackEndUrl(), sessionCookie, executor[0],executor[1]);
+                        esbUtils.deleteScheduleTask(contextUrls.getBackEndUrl(), sessionCookie, executor[0], executor[1]);
                     }
                 } catch (Exception e) {
                     Assert.fail("while undeploying ScheduledTask Executor. " + e.getMessage());
@@ -579,7 +586,7 @@ public abstract class ESBIntegrationTest {
     }
 
     protected String getESBResourceLocation() {
-        return FrameworkPathUtil.getSystemResourceLocation()+File.separator+"artifacts"+File.separator+"ESB";
+        return FrameworkPathUtil.getSystemResourceLocation() + File.separator + "artifacts" + File.separator + "ESB";
     }
 
     protected String getBackEndServiceUrl(String serviceName) {
@@ -587,7 +594,8 @@ public abstract class ESBIntegrationTest {
     }
 
 
-    protected OMElement setEndpoints(OMElement synapseConfig) throws XMLStreamException, XPathExpressionException {
+    protected OMElement setEndpoints(OMElement synapseConfig)
+            throws XMLStreamException, XPathExpressionException {
         if (isBuilderEnabled()) {
             return synapseConfig;
         }
@@ -603,7 +611,6 @@ public abstract class ESBIntegrationTest {
         ByteArrayDataSource dbs = new ByteArrayDataSource(config.getBytes());
         return new DataHandler(dbs);
     }
-
 
 
     private boolean isBuilderEnabled() throws XPathExpressionException {
@@ -644,9 +651,9 @@ public abstract class ESBIntegrationTest {
     protected OMElement replaceEndpoints(String relativePathToConfigFile, String serviceName,
                                          String port)
             throws XMLStreamException, FileNotFoundException {
-        String config = esbUtils.loadClasspathResource(relativePathToConfigFile).toString();
+        String config = esbUtils.loadResource(relativePathToConfigFile).toString();
         config = config.replace("http://localhost:" + port + "/services/" + serviceName,
-                getBackEndServiceUrl(serviceName));
+                                getBackEndServiceUrl(serviceName));
 
         return AXIOMUtil.stringToOM(config);
     }
@@ -666,20 +673,15 @@ public abstract class ESBIntegrationTest {
     }
 
 
-    public String login(AutomationContext context) throws RemoteException,
-            LoginAuthenticationExceptionException, XPathExpressionException {
-        String sessionCookie;
-        AuthenticatorClient authenticationAdminClient
-                = new AuthenticatorClient(context.getContextUrls().getBackEndUrl());
-        sessionCookie = authenticationAdminClient.
-                login(context.getUser().getUserName(), context.getUser().getPassword()
-                        ,context.getInstance().getHosts().get("default"));
-        return sessionCookie;
+    protected String login(AutomationContext context)
+            throws IOException, XPathExpressionException, URISyntaxException, SAXException,
+                   XMLStreamException, LoginAuthenticationExceptionException {
+        LoginLogoutClient loginLogoutClient = new LoginLogoutClient(context);
+        return loginLogoutClient.login();
     }
 
-   public String getSessionCookie()
-   {
-       return sessionCookie;
-   }
+    protected String getSessionCookie() {
+        return sessionCookie;
+    }
 
 }

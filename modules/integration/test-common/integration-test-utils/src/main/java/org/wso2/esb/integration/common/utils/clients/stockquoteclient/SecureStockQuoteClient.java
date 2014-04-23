@@ -44,7 +44,7 @@ public class SecureStockQuoteClient {
         return secureClient.sendReceive(userName, password, trpUrl, "getQuote"
                 , createStandardRequest(symbol), securityPolicyPath
                 , "alice", "bob"
-                , FrameworkPathUtil.SYSTEM_ARTIFACT_RESOURCE_LOCATION+ File.separator + "keystores"
+                , FrameworkPathUtil.getSystemResourceLocation() + "keystores"
                   + File.separator + "products" + File.separator + "store.jks", "password");
 
     }
@@ -78,4 +78,3 @@ public OMElement sendSecuredSimpleStockQuoteRequest(String userName, String pass
         return method;
     }
 }
-
