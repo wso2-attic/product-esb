@@ -57,7 +57,7 @@ public class DynamicSequenceNullPointerExceptionTestCase extends ESBIntegrationT
 
         OMElement response;
         axis2Client.addHttpHeader("Sequence","correctsequence");
-        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("simpleProxy"),null,"WSO2");
+        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("simpleProxy"),null,"WSO2");
 
         assertNotNull(response, "Response message null");
         OMElement returnElement=response.getFirstElement();

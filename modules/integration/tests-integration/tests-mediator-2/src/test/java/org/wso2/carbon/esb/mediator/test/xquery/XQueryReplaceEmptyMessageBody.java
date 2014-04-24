@@ -50,7 +50,7 @@ public class XQueryReplaceEmptyMessageBody extends ESBIntegrationTest {
         OMElement response;
 
         response = sendReceive(
-                getProxyServiceURL("StockQuoteProxy"));
+                getProxyServiceURLHttp("StockQuoteProxy"));
         assertNotNull(response, "Response message null");
         assertEquals(response.getFirstElement().getFirstChildWithName(
                 new QName("http://services.samples/xsd", "symbol", "ax21")).getText(), "WSO2", "Symbol name mismatched");

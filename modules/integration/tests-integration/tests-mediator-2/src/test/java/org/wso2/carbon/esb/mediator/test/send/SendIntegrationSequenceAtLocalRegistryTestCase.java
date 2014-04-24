@@ -48,7 +48,7 @@ public class SendIntegrationSequenceAtLocalRegistryTestCase extends ESBIntegrati
 
     @Test(groups = {"wso2.esb"}, description = "Receiving sequence at local registry build message before receive ")
     public void testSequenceAtLocalRegistryBuildMessage() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("testSequenceAtLocalRegistryBuildMessage"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("testSequenceAtLocalRegistryBuildMessage"), null, "WSO2");
         assertNotNull(response, "Response is null");
         assertEquals(response.getLocalName(), "getQuoteResponse", "getQuoteResponse mismatch");
         OMElement omElement = response.getFirstElement();
@@ -59,7 +59,7 @@ public class SendIntegrationSequenceAtLocalRegistryTestCase extends ESBIntegrati
 
     @Test(groups = {"wso2.esb"}, description = "Receiving sequence at local registry not build message before receive ")
     public void testSequenceAtLocalRegistryBuildMessageNo() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("testSequenceAtLocalRegistryBuildMessageNo"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("testSequenceAtLocalRegistryBuildMessageNo"), null, "WSO2");
         assertNotNull(response, "Response is null");
         assertEquals(response.getLocalName(), "getQuoteResponse", "getQuoteResponse mismatch");
         OMElement omElement = response.getFirstElement();

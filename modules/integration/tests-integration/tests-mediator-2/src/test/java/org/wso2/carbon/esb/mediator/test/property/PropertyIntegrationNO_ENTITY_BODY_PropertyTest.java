@@ -45,8 +45,8 @@ public class PropertyIntegrationNO_ENTITY_BODY_PropertyTest extends ESBIntegrati
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        OMElement config = esbUtils.loadClasspathResource("/artifacts/ESB/mediatorconfig/property/NO_ENTITY_BODY.xml");
-        config = AXIOMUtil.stringToOM(config.toString().replace("http://localhost:8280/services/", getProxyServiceURL("")));
+        OMElement config = esbUtils.loadResource("/artifacts/ESB/mediatorconfig/property/NO_ENTITY_BODY.xml");
+        config = AXIOMUtil.stringToOM(config.toString().replace("http://localhost:8280/services/", getProxyServiceURLHttp("")));
         updateESBConfiguration(config);
         client = new HttpClientUtil();
     }
@@ -54,7 +54,7 @@ public class PropertyIntegrationNO_ENTITY_BODY_PropertyTest extends ESBIntegrati
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test-Without No_ENTITY_BODY Property")
     public void testWithoutNoEntityBodyPropertTest() throws Exception {
-        response1 = client.get(getProxyServiceURL("Axis2ProxyService1") + "/echoString?in=IBM");
+        response1 = client.get(getProxyServiceURLHttp("Axis2ProxyService1") + "/echoString?in=IBM");
         assertNotNull(response1, "Response is null");
         assertEquals(response1.getFirstElement().getText(), "IBM", "Text does not match");
     }
@@ -63,7 +63,7 @@ public class PropertyIntegrationNO_ENTITY_BODY_PropertyTest extends ESBIntegrati
     @Test(groups = "wso2.esb", expectedExceptions = OMException.class,
           description = "Test-With NO_ENTITY_BODY")
     public void testWithNoEntityBodyPropertTest() throws Exception {
-        client.get(getProxyServiceURL("Axis2ProxyService2") + "/echoString?in=IBM");
+        client.get(getProxyServiceURLHttp("Axis2ProxyService2") + "/echoString?in=IBM");
     }
 
     @AfterClass(alwaysRun = true)

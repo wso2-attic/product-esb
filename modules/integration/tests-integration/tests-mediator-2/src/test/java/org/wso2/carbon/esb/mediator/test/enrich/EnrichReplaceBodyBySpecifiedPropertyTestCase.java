@@ -51,7 +51,7 @@ public class EnrichReplaceBodyBySpecifiedPropertyTestCase extends ESBIntegration
     @Test(groups = {"wso2.esb"}, description = "Enrich mediator replace body by specified property")
     public void replaceMessageBodyByProperty() throws IOException,
                                                       XMLStreamException {
-        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURL(
+        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp(
                 "enrichSample1"), getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "IBM");
         assertNotNull(response, "Response message is null");
         assertEquals(response.getLocalName(), "CheckPriceResponse", "CheckPriceResponse not match");

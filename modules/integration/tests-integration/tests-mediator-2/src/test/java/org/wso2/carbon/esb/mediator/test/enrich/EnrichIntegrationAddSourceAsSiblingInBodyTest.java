@@ -46,7 +46,7 @@ public class EnrichIntegrationAddSourceAsSiblingInBodyTest extends ESBIntegratio
     @Test(groups = "wso2.esb", description = "Tests-Adding a source as a sibling of message body")
     public void testAddSourceAsSiblingInBody() throws AxisFault, XMLStreamException {
 
-        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample6"), null,"WSO2");
+        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample6"), null,"WSO2");
         assertNotNull(response,"Response is null");
         OMElement sibling = (OMElement) response.getNextOMSibling();
         assertEquals(sibling.getFirstElement().getFirstChildWithName

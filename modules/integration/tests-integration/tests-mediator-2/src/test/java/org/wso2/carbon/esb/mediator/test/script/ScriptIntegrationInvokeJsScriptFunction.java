@@ -28,7 +28,6 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
-import java.io.IOException;
 import java.net.URL;
 
 import static org.testng.Assert.assertEquals;

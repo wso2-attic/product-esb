@@ -52,7 +52,7 @@ public class EnrichIntegrationCopyXpathOfSingleNodeTest extends ESBIntegrationTe
                          "<m:symbol>IBM</m:symbol>" +
                          "</m:getQuote>";
         OMElement payloadOM = AXIOMUtil.stringToOM(payload);
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample3"), null, payloadOM);
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample3"), null, payloadOM);
         assertNotNull(response, "Response is null");
         assertEquals(response.getFirstElement().getFirstChildWithName
                 (new QName("http://services.samples/xsd", "symbol")).getText(),

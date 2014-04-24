@@ -43,7 +43,7 @@ public class LogMediatorAfterSendMediatorTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "use Log mediator after send mediator", enabled = false)
     public void logMediatorAfterSendMediatorTest() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("testLogMediatorAfterSend"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("testLogMediatorAfterSend"), null, "WSO2");
         assertNotNull(response, "Response is null");
         assertEquals(response.getLocalName(), "getQuoteResponse", "getQuoteResponse mismatch");
         OMElement omElement = response.getFirstElement();

@@ -39,9 +39,9 @@ public class RouterMediatorEndPointProtocolTestCase extends ESBIntegrationTest {
     public void setEnvironment() throws Exception {
         init();
         addProxy();
-        OMElement config = esbUtils.loadClasspathResource("/artifacts/ESB/mediatorconfig/router/router_https_endpoint.xml");
+        OMElement config = esbUtils.loadResource("/artifacts/ESB/mediatorconfig/router/router_https_endpoint.xml");
         config = AXIOMUtil.stringToOM(config.toString().replace("https://localhost:8243/services/StockQuoteProxy"
-                , getProxyServiceSecuredURL("StockQuoteProxy")));
+                , getProxyServiceURLHttps("StockQuoteProxy")));
         updateESBConfiguration(config);
     }
 

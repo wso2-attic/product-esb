@@ -125,17 +125,17 @@ public class ConditionalRouterIntegrationTest extends ESBIntegrationTest {
         client3.addHttpHeader("my_custom_header2", "bar");
         client3.addHttpHeader("my_custom_header3", "foo");
 
-        OMElement response1 = client1.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy"), null, "WSO2");
+        OMElement response1 = client1.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 
         Assert.assertTrue(response1.toString().contains("GetQuoteResponse"));
         Assert.assertTrue(response1.toString().contains("WSO2 Company"));
 
-        OMElement response2 = client2.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy"), null, "WSO2");
+        OMElement response2 = client2.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 
         Assert.assertTrue(response2.toString().contains("GetQuoteResponse"));
         Assert.assertTrue(response2.toString().contains("WSO2 Company"));
 
-        OMElement response3 = client3.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy") + "?qparam1=qpv_foo&qparam2=qpv_foo2", null, "WSO2");
+        OMElement response3 = client3.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy") + "?qparam1=qpv_foo&qparam2=qpv_foo2", null, "WSO2");
 
         Assert.assertTrue(response3.toString().contains("GetQuoteResponse"));
         Assert.assertTrue(response3.toString().contains("WSO2 Company"));
@@ -158,7 +158,7 @@ public class ConditionalRouterIntegrationTest extends ESBIntegrationTest {
         OMElement response = null;
 
         try {
-            response = client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy1"), null, "WSO2");
+            response = client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy1"), null, "WSO2");
             Assert.fail("This Request Should throw AxisFault");
         } catch (AxisFault e) {
 
@@ -181,7 +181,7 @@ public class ConditionalRouterIntegrationTest extends ESBIntegrationTest {
 
         client.addHttpHeader("foo", "bar");
 
-        OMElement response = client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy2"), null, "WSO2");
+        OMElement response = client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy2"), null, "WSO2");
 
 
         Assert.assertTrue(response.toString().contains("GetQuoteResponse"));
@@ -243,7 +243,7 @@ public class ConditionalRouterIntegrationTest extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/filters/conditional_router/synapse5.xml");
         StockQuoteClient client = new StockQuoteClient();
         // Note: toUrl is set to null -
-        OMElement response = client.sendSimpleStockQuoteRequest(getProxyServiceURL("conditionalRouterWithManyRoutesProxy")
+        OMElement response = client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("conditionalRouterWithManyRoutesProxy")
                                                                 + "?qparam1=qpv_foo", null, "WSO2");
 
 
@@ -266,7 +266,7 @@ public class ConditionalRouterIntegrationTest extends ESBIntegrationTest {
 
         OMElement response = null;
         try {
-            response = client.sendSimpleStockQuoteRequest(getProxyServiceURL("ServiceProxy1")
+            response = client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("ServiceProxy1")
                                                           + "?qparam1=qpv_foo", null, "WSO2");
             Assert.fail("This Request Should throw AxisFault");
         } catch (AxisFault e) {
@@ -292,7 +292,7 @@ public class ConditionalRouterIntegrationTest extends ESBIntegrationTest {
 
         OMElement response = null;
         try {
-            response = client.sendSimpleStockQuoteRequest(getProxyServiceURL("ServiceProxy2")
+            response = client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("ServiceProxy2")
                                                           + "?qparam1=qpv_foo", null, "WSO2");
             Assert.fail("This Request Should throw AxisFault");
         } catch (AxisFault e) {

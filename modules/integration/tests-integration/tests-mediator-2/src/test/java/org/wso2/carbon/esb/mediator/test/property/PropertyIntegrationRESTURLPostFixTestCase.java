@@ -43,8 +43,8 @@ public class PropertyIntegrationRESTURLPostFixTestCase extends ESBIntegrationTes
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        OMElement config = esbUtils.loadClasspathResource("/artifacts/ESB/mediatorconfig/property/REST_URL_postfix.xml");
-        config = AXIOMUtil.stringToOM(config.toString().replace("http://localhost:8280/services/", getProxyServiceURL("")));
+        OMElement config = esbUtils.loadResource("/artifacts/ESB/mediatorconfig/property/REST_URL_postfix.xml");
+        config = AXIOMUtil.stringToOM(config.toString().replace("http://localhost:8280/services/", getProxyServiceURLHttp("")));
         updateESBConfiguration(config);
         client= new HttpClientUtil();
     }
@@ -52,7 +52,7 @@ public class PropertyIntegrationRESTURLPostFixTestCase extends ESBIntegrationTes
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test-REST URL Postfix")
     public void testRESTUrlPostFix() throws Exception {
-        response = client.get(getProxyServiceURL("Axis2RestService")+"/echoString?in=wso2");
+        response = client.get(getProxyServiceURLHttp("Axis2RestService")+"/echoString?in=wso2");
         assertNotNull(response,"Response is null");
         assertEquals(response.getQName().getLocalPart(),"echoStringResponse","Tag does not match");
         assertEquals(response.getFirstElement().getLocalName(),"return","Tag does not match");

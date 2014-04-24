@@ -26,7 +26,6 @@ import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
-
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
 import java.net.URL;

@@ -53,7 +53,7 @@ public class EnrichIntegrationReplaceByPropertyTestCase extends ESBIntegrationTe
     public void enrichMediatorReplaceByProperty() throws IOException,
                                                          XMLStreamException {
 
-        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURL(
+        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp(
                 "enrichSample1"), getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "IBM");
         assertNotNull(response, "Response message is null");
         assertEquals(response.getLocalName(), "CheckPriceResponse", "CheckPriceResponse not match");

@@ -88,7 +88,7 @@ public class ValidateIntegrationTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/validatemediator/validate_with_proxy.xml");
 
         try {
-            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("validateProxy2")
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("validateProxy2")
                     , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
             fail("Test failed to invoke on-fail sequence of mediators");
         } catch (AxisFault axisFault) {

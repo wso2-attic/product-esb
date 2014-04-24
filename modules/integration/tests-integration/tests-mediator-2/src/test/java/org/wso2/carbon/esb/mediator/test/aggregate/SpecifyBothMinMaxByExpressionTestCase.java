@@ -42,7 +42,7 @@ public class SpecifyBothMinMaxByExpressionTestCase extends ESBIntegrationTest {
         super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/config20/synapse.xml");
         aggregatedRequestClient= new AggregatedRequestClient();
-        aggregatedRequestClient.setProxyServiceUrl(getProxyServiceURL("aggregateMediatorTestProxy"));
+        aggregatedRequestClient.setProxyServiceUrl(getProxyServiceURLHttp("aggregateMediatorTestProxy"));
         aggregatedRequestClient.setSymbol("IBM");
 
     }

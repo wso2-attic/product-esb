@@ -99,7 +99,7 @@ public class CallTemplateWithValuesAndExpressionTestCase extends ESBIntegrationT
         AxisOperationClient operationClient = new AxisOperationClient();
         OMElement response = null;
         try {
-            response = operationClient.send(getProxyServiceURL(proxyServiceName), null,
+            response = operationClient.send(getProxyServiceURLHttp(proxyServiceName), null,
                                             createMultipleQuoteRequestBody(symbol, iterations), "urn:getQuote");
         } finally {
             operationClient.destroy();

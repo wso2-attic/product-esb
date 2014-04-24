@@ -52,7 +52,7 @@ public class PropertyIntegrationDisableAddressingForOutMessagesTestCase extends 
     public void testDisableAddressingForOutMessages() throws Exception {
 
         OMElement response = axisOperationClient.send
-                (getProxyServiceURL("Axis2ProxyService"),
+                (getProxyServiceURLHttp("Axis2ProxyService"),
                  getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
                  createStandardRequest("wso2"),"urn:getQuote");
         assertNotNull(response, "Response is null");

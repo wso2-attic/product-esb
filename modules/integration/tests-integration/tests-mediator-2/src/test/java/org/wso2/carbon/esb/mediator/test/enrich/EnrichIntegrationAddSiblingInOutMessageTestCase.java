@@ -52,7 +52,7 @@ public class EnrichIntegrationAddSiblingInOutMessageTestCase extends ESBIntegrat
                          "</m:getQuote>";
         OMElement payloadOM = AXIOMUtil.stringToOM(payload);
         try {
-            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample3")
+            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample3")
                     , null, payloadOM);
         } catch (Exception e) {
 

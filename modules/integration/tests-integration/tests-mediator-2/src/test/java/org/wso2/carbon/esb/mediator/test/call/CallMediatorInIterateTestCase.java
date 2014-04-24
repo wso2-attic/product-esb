@@ -38,7 +38,7 @@ public class CallMediatorInIterateTestCase extends ESBIntegrationTest {
     public void callMediatorInIterateTestCase() throws AxisFault {
 
         OMElement response =
-                axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("TestCallProxy"), null, "WSO2");
+                axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("TestCallProxy"), null, "WSO2");
         boolean responseContainsAGG = response.getFirstElement().toString().contains("AGG");
         assertTrue(responseContainsAGG);
     }

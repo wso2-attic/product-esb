@@ -43,7 +43,7 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Set a new property value (static text value) and retrieve it using get-property(property-name) Xpath function  (in default scope)")
     public void testStaticValue() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("static"), null
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("static"), null
                 , "MSFT");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("MSFT Company"));
 
@@ -51,14 +51,14 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Set a new property - Select \"Set Action As\" expression and give an Xpath expression (in default scope)")
     public void testXpath() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("static"), null, "MSFT");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("static"), null, "MSFT");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("MSFT Company"));
 
     }
 
     @Test(groups = "wso2.esb", description = "Set a new property - Select \"Set Action As\" expression and give an Xpath expression - use name spaces (in default scope)")
     public void testXpathWithNameSpace() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("static"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("static"), null, "WSO2");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("WSO2 Company"));
 
     }
@@ -66,7 +66,7 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Set action as \"experssion\" and type STRING (default scope)")
     public void testStringXpath() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("stringXpathProperty"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("stringXpathProperty"), null, "WSO2");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("WSO2 Company"));
 
     }
@@ -74,7 +74,7 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Set action as \"value\" and type STRING (default scope)")
     public void testStringValue() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("stringValProperty"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("stringValProperty"), null, "WSO2");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("WSO2 Company"));
 
 
@@ -82,42 +82,42 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Set action as \"expression\" and type INTEGER (default scope)")
     public void testIntegerXpath() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("integerXpathProperty"), null, "88888888");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("integerXpathProperty"), null, "88888888");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("88888888 Company"));
 
     }
 
     @Test(groups = "wso2.esb", description = "Set action as \"value\" and type INTEGER (default scope)")
     public void testIntegerVal() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("integerValProperty"), null, "88888888");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("integerValProperty"), null, "88888888");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("88888888 Company"));
 
     }
 
     @Test(groups = "wso2.esb", description = "Set action as \"expression\" and type Boolean (default scope)")
     public void testBooleanXpath() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("booleanXpath"), null, "TRUE");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("booleanXpath"), null, "TRUE");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("TRUE Company"));
 
     }
 
     @Test(groups = "wso2.esb", description = "Set action as \"value\" and type BOOLEAN (default scope)")
     public void testBooleanVal() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("booleanVal"), null, "FALSE");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("booleanVal"), null, "FALSE");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("FALSE Company"));
 
     }
 
     @Test(groups = "wso2.esb", description = "Set action as \"expression\" and type Short (default scope)")
     public void testShortXpath() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("shortXpath"), null, "88");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("shortXpath"), null, "88");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("88 Company"));
 
     }
 
     @Test(groups = "wso2.esb", description = "Set action as \"value\" and type Short (default scope)")
     public void testShortVal() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("shortVal"), null, "88");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("shortVal"), null, "88");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("88 Company"));
 
 
@@ -125,7 +125,7 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Set action as \"expression\" and type Long (default scope)")
     public void testLongXpath() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("longXpath"), null, "8888888888");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("longXpath"), null, "8888888888");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("8888888888 Company"));
 
 
@@ -133,34 +133,34 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Set action as \"value\" and type Long (default scope)")
     public void testLongVal() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("longVal"), null, "8888888888");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("longVal"), null, "8888888888");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("8888888888 Company"));
 
     }
 
     @Test(groups = "wso2.esb", description = "Set action as \"expression\" and type Double (default scope)")
     public void testDoubleXpath() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("doubleXpath"), null, "8888888888.8888888888888");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("doubleXpath"), null, "8888888888.8888888888888");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("8888888888.8888888888888 Company"));
 
     }
 
     @Test(groups = "wso2.esb", description = "Set action as \"value\" and type Double (default scope)")
     public void testDoubletVal() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("doubleVal"), null, "8888888888.8888888888888");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("doubleVal"), null, "8888888888.8888888888888");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("8888888888.8888888888888 Company"));
 
     }
 
     @Test(groups = "wso2.esb", description = "Set action as \"expression\" and type Float (default scope)")
     public void testFloatXpath() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("floatXpath"), null, "8888.8888");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("floatXpath"), null, "8888.8888");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("8888.8888 Company"));
     }
 
     @Test(groups = "wso2.esb", description = "Set action as \"value\" and type Float (default scope)")
     public void testFloatVal() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("floatVal"), null, "8888.8888");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("floatVal"), null, "8888.8888");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("8888.8888 Company"));
 
 
@@ -168,7 +168,7 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "SOAP header specific properties")
     public void testSOAPHeaders() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("Axis2ProxyService"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("Axis2ProxyService"), null, "WSO2");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("WSO2 Company"));
 
 
@@ -177,7 +177,7 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Specify invalid Xpath function when setting a property")
     public void testInvalidXpath() throws Exception {
         try {
-            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("negative"), null, "MSFT");
+            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("negative"), null, "MSFT");
         } catch (Exception e) {
             Assert.assertTrue(e instanceof org.apache.axis2.AxisFault);
         }
@@ -185,7 +185,7 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Set the property in one scope and read it from another scope")
     public void testInvalidScope() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("negative"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("negative"), null, "WSO2");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("WSO2 Company"));
 
 
@@ -193,7 +193,7 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Synapse Xpath variables")
     public void testSynapseXpathVariables() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("SynapseXpathvariables"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("SynapseXpathvariables"), null, "WSO2");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("WSO2 Company"));
 
 
@@ -201,7 +201,7 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Synapse Properties")
     public void testSynapseProperties() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("SynapseProperties"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("SynapseProperties"), null, "WSO2");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("WSO2 Company"));
 
 
@@ -209,7 +209,7 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "HTTP Properties")
     public void testHttpProperties() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("HttpProperties"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("HttpProperties"), null, "WSO2");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("WSO2 Company"));
 
 
@@ -217,7 +217,7 @@ public class PropertyIntegrationTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Generic Properties")
     public void testGenericProperties() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("GenericProperties"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("GenericProperties"), null, "WSO2");
         Assert.assertTrue(response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "name")).toString().contains("WSO2 Company"));
     }
 }

@@ -45,7 +45,7 @@ public class UrlReWriteByPort extends ESBIntegrationTest {
         OMElement response;
 
         response = axis2Client.sendSimpleStockQuoteRequest(
-                getProxyServiceURL("urlRewriteProxy"),
+                getProxyServiceURLHttp("urlRewriteProxy"),
                 addUrl,
                 "IBM");
         assertTrue(response.toString().contains("IBM"));
@@ -57,7 +57,7 @@ public class UrlReWriteByPort extends ESBIntegrationTest {
     public void invalidUrl() throws AxisFault {
         try {
             axis2Client.sendSimpleStockQuoteRequest(
-                    getProxyServiceURL("urlRewriteProxy"),
+                    getProxyServiceURLHttp("urlRewriteProxy"),
                     "http://localhost:9009/services/SimpleStockQuoteService",
                     "IBM");
             fail("This Query Must fail");
