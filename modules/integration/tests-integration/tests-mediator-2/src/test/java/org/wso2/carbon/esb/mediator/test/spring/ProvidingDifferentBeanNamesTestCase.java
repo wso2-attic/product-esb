@@ -92,8 +92,8 @@ public class ProvidingDifferentBeanNamesTestCase extends ESBIntegrationTest {
     private void uploadResourcesToConfigRegistry() throws Exception {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
-, context.getUser().getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName()
+, context.getContextTenant().getContextUser().getPassword());
 
         resourceAdminServiceStub.deleteResource("/_system/config/spring");
         resourceAdminServiceStub.addCollection("/_system/config/", "spring", "",
@@ -113,8 +113,8 @@ public class ProvidingDifferentBeanNamesTestCase extends ESBIntegrationTest {
             throws InterruptedException, ResourceAdminServiceExceptionException, RemoteException, XPathExpressionException {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
-, context.getUser().getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName()
+, context.getContextTenant().getContextUser().getPassword());
 
         resourceAdminServiceStub.deleteResource("/_system/config/spring");
 

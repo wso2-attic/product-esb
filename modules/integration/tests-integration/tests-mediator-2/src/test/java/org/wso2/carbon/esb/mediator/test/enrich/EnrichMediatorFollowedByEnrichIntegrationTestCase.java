@@ -42,8 +42,8 @@ public class EnrichMediatorFollowedByEnrichIntegrationTestCase extends ESBIntegr
     public void uploadSynapseConfig() throws Exception {
         super.init();
         resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
-                                                                  context.getUser().getUserName(),
-                                                                  context.getUser().getPassword());
+                                                                  context.getContextTenant().getContextUser().getUserName(),
+                                                                  context.getContextTenant().getContextUser().getPassword());
         uploadResourcesToGovernanceRegistry();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/enrich/enrich_by_enrich.xml");
     }

@@ -80,8 +80,8 @@ public class SendMediatorEndpointFromRegistryTestCase extends ESBIntegrationTest
 
     private void uploadResourcesToRegistry() throws Exception {
         new ResourceAdminServiceClient
-                (contextUrls.getBackEndUrl(), context.getUser().getUserName()
-, context.getUser().getPassword());
+                (contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName()
+, context.getContextTenant().getContextUser().getPassword());
         resourceAdminServiceStub.deleteResource("/_system/config/endpointConfig");
         resourceAdminServiceStub.addCollection("/_system/config/", "endpointConfig", "",
                                                "Contains test endpoint files");

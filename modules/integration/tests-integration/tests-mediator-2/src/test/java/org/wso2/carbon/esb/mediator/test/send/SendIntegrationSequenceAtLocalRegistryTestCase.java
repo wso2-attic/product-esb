@@ -39,8 +39,8 @@ public class SendIntegrationSequenceAtLocalRegistryTestCase extends ESBIntegrati
     public void uploadSynapseConfig() throws Exception {
         super.init();
         resourceAdminServiceStub = new ResourceAdminServiceClient
-                (contextUrls.getBackEndUrl(), context.getUser().getUserName()
-, context.getUser().getPassword());
+                (contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName()
+, context.getContextTenant().getContextUser().getPassword());
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath
                 ("/artifacts/ESB/mediatorconfig/send/synapse_local.xml");

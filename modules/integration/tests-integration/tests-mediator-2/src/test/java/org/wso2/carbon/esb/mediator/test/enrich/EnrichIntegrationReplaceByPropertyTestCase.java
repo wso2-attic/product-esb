@@ -42,8 +42,8 @@ public class EnrichIntegrationReplaceByPropertyTestCase extends ESBIntegrationTe
     public void uploadSynapseConfig() throws Exception {
         super.init();
         resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
-                                                                  context.getUser().getUserName(),
-                                                                  context.getUser().getPassword());
+                                                                  context.getContextTenant().getContextUser().getUserName(),
+                                                                  context.getContextTenant().getContextUser().getPassword());
         uploadResourcesToGovernanceRegistry();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/enrich/enrich_replace_by_property.xml");
     }

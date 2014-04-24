@@ -91,8 +91,8 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
         resourceAdminServiceClient = new ResourceAdminServiceClient
-                (contextUrls.getBackEndUrl(), context.getUser().getUserName()
-, context.getUser().getPassword());
+                (contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName()
+, context.getContextTenant().getContextUser().getPassword());
         uploadResourcesToConfigRegistry();
 
     }
