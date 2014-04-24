@@ -50,11 +50,11 @@ public class RubyScriptSupportTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        init(TestUserMode.TENANT_ADMIN);
+        init(TestUserMode.SUPER_TENANT_ADMIN);
         serverManager = new ServerConfigurationManager(context);
         serverManager.copyToComponentDropins(new File(getClass().getResource(JRUBY_JAR_LOCATION + JRUBY_JAR).toURI()));
         serverManager.restartGracefully();
-        init(TestUserMode.TENANT_ADMIN);
+        init(TestUserMode.SUPER_TENANT_ADMIN);
 
     }
 
