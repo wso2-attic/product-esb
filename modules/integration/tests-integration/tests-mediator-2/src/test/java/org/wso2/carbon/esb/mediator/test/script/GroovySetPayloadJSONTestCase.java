@@ -43,11 +43,11 @@ public class GroovySetPayloadJSONTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     public void setEnvironment() throws Exception {
-        super.init(TestUserMode.TENANT_ADMIN);
+        super.init(TestUserMode.SUPER_TENANT_ADMIN);
         serverManager = new ServerConfigurationManager(context);
         serverManager.copyToComponentLib(new File(getESBResourceLocation() + GROOVY_JAR_LOCATION));
         serverManager.restartGracefully();
-        super.init(TestUserMode.TENANT_ADMIN);
+        super.init(TestUserMode.SUPER_TENANT_ADMIN);
         jsonclient = new JSONClient();
     }
 
