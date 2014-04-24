@@ -100,12 +100,12 @@
             <artifactId>jruby-complete</artifactId>
             <scope>compile</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>SecVerifier</artifactId>
             <type>aar</type>
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -126,11 +126,17 @@
             <artifactId>geronimo-jms_1.1_spec</artifactId>
             <scope>compile</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>ca.uhn.hapi.wso2</groupId>
             <artifactId>hapi</artifactId>
             <scope>compile</scope>
-        </dependency>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.wso2.carbon</groupId>
+                    <artifactId>org.wso2.carbon.service.mgt</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>-->
 
         <dependency>
             <groupId>org.wso2.carbon</groupId>
@@ -298,6 +304,10 @@
                 <exclusion>
                     <groupId>org.apache.httpcomponents</groupId>
                     <artifactId>httpclient</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcprov-jdk16</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
