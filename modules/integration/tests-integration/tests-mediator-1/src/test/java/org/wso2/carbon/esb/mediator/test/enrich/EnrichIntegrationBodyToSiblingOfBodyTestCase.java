@@ -79,7 +79,7 @@ public class EnrichIntegrationBodyToSiblingOfBodyTestCase extends ESBIntegration
         AxisOperationClient operationClient = new AxisOperationClient();
         OMElement response = null;
         try {
-            response = operationClient.send(getProxyServiceURL("enrichSample"), null,
+            response = operationClient.send(getProxyServiceURLHttp("enrichSample"), null,
                                             createQuoteRequestBody("WSO2"), "urn:getQuote");
         } finally {
             operationClient.destroy();

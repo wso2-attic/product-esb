@@ -46,7 +46,7 @@ public class SendIntegrationDefaultSequenceTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "End point in local registry and default receiving sequence with build message before receive")
     public void testSequenceDefaultBuildMessageTest() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("testSequenceDefaultBuildMessage"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("testSequenceDefaultBuildMessage"), null, "WSO2");
         assertNotNull(response, "Response is null");
         assertEquals(response.getLocalName(), "getQuoteResponse", "getQuoteResponse mismatch");
         OMElement omElement = response.getFirstElement();
@@ -57,7 +57,7 @@ public class SendIntegrationDefaultSequenceTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "End point in local registry and default receiving sequence with not build message before receive")
     public void testSequenceDefaultBuildMessageNo() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("testSequenceDefaultBuildMessageNo"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("testSequenceDefaultBuildMessageNo"), null, "WSO2");
         assertNotNull(response, "Response is null");
         assertEquals(response.getLocalName(), "getQuoteResponse", "getQuoteResponse mismatch");
         OMElement omElement = response.getFirstElement();

@@ -42,7 +42,7 @@ public class EnrichIntegrationReplaceMessageBodyTestCase extends ESBIntegrationT
     @Test(groups = "wso2.esb", description = "Tests-Replace the body of the target message")
     public void testReplacingMessageBody() throws AxisFault, XMLStreamException {
         OMElement response;
-        response = axis2Client.sendCustomQuoteRequest(getProxyServiceURL("enrichSample3"), null, "IBM");
+        response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp("enrichSample3"), null, "IBM");
         assertNotNull(response, "Response is null");
         assertEquals(response.getFirstElement().getFirstChildWithName
                 (new QName("http://services.samples/xsd", "symbol")).getText(),

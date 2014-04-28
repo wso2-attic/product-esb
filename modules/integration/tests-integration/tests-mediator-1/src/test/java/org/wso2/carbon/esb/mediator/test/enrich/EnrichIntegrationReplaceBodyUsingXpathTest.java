@@ -60,7 +60,7 @@ public class EnrichIntegrationReplaceBodyUsingXpathTest extends ESBIntegrationTe
     public void testReplaceBodyUsingXpath() throws AxisFault, XMLStreamException {
 
         response=axis2Client.sendSimpleStockQuoteRequest
-                (getProxyServiceURL("enrichSample3"),null,createStandardRequest("IBM"));
+                (getProxyServiceURLHttp("enrichSample3"),null,createStandardRequest("IBM"));
         assertNotNull(response,"Response is null");
         System.out.println(response);
         assertEquals(response.getFirstElement().getFirstChildWithName

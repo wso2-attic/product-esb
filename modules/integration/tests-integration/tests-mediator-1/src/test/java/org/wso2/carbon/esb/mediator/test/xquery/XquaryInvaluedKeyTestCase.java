@@ -43,7 +43,7 @@ public class XquaryInvaluedKeyTestCase extends ESBIntegrationTest {
     public void testXquaryInvaluedKey() throws IOException, XMLStreamException {
 
         try {
-            axis2Client.sendCustomQuoteRequest(getProxyServiceURL("StockQuoteProxy")
+            axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy")
                     , null, "IBM");
             Assert.fail("Did not throw expected AxisFaultException with the reason Unable to execute the query");
 

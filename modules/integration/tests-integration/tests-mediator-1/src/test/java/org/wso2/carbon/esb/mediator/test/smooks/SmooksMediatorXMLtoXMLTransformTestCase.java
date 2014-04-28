@@ -50,7 +50,7 @@ public class SmooksMediatorXMLtoXMLTransformTestCase extends ESBIntegrationTest 
         super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/vfsTransport/vfs_xml_to_xml.xml");
         resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
-                context.getUser().getUserName(), context.getUser().getPassword());
+                context.getContextTenant().getContextUser().getUserName(), context.getContextTenant().getContextUser().getPassword());
         serverConfigurationManager = new ServerConfigurationManager(context);
         serverConfigurationManager.applyConfiguration(new File(COMMON_FILE_LOCATION + "axis2.xml"));
         super.init();

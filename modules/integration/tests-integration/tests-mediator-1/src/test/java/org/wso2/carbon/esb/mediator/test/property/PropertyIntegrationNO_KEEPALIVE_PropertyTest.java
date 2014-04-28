@@ -50,7 +50,7 @@ public class PropertyIntegrationNO_KEEPALIVE_PropertyTest extends ESBIntegration
 
         wireServer.start();
         try {
-            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("Axis2ProxyService"),null,"WSO2");
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("Axis2ProxyService"),null,"WSO2");
         } catch (Exception e) {
           //ignore since wire message is captured
         }

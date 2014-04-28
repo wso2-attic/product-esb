@@ -59,7 +59,7 @@ public class PayloadFormatValueAndExpressionTestCase extends ESBIntegrationTest 
         options.setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED, Boolean.FALSE);
         options.setAction("urn:placeOrder");
 
-        options.setProperty(Constants.Configuration.TRANSPORT_URL, getProxyServiceSecuredURL("ProxyPF"));
+        options.setProperty(Constants.Configuration.TRANSPORT_URL, getProxyServiceURLHttps("ProxyPF"));
 
         sender.setOptions(options);
 

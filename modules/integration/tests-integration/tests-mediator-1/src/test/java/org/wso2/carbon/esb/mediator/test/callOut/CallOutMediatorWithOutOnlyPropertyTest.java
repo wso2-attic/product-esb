@@ -41,7 +41,7 @@ public class CallOutMediatorWithOutOnlyPropertyTest extends ESBIntegrationTest{
 
     @Test(groups = {"wso2.esb"},description = "Call")
     public void callOutMediatorWithOutOnlyPropertyTest() throws AxisFault {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("CallOutMediatorOutOnlyTestProxy"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("CallOutMediatorOutOnlyTestProxy"), null, "WSO2");
         Assert.assertFalse(response.toString().contains("<ax21:ErrorCode>401000</ax21:ErrorCode>")," Error is using call out mediator with OUT ONLY='true' property");
     }
 
