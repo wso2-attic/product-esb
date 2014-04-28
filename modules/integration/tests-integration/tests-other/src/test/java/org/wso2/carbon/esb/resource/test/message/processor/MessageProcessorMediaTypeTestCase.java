@@ -44,7 +44,7 @@ public class MessageProcessorMediaTypeTestCase extends ESBIntegrationTest{
     private boolean isMessageProcessorExist = false;
     private boolean isMessageStoreExist = false;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         messageProcessorClient = new MessageProcessorClient(contextUrls.getBackEndUrl(), getSessionCookie());
         messageStoreAdminClient = new MessageStoreAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
@@ -74,7 +74,7 @@ public class MessageProcessorMediaTypeTestCase extends ESBIntegrationTest{
 
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void destroy() throws RemoteException {
         if (isMessageProcessorExist) {
             messageProcessorClient.deleteMessageProcessor(MESSAGE_PROCESSOR_NAME);

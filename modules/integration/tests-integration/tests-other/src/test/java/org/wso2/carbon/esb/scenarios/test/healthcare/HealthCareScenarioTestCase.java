@@ -52,7 +52,7 @@ public class HealthCareScenarioTestCase extends ESBIntegrationTest {
                                                     "            </soapenv:Body>\n" +
                                                     "</soapenv:Envelope>");
 
-        String proxyServiceEP = getProxyServiceURL("HCCProxyService");
+        String proxyServiceEP = getProxyServiceURLHttp("HCCProxyService");
         OMElement response = a2Client.sendReceive(requestXML, proxyServiceEP, "getHealthcareCenterInfo");
         assertTrue(response.getLocalName() == "getHCCenterInfoResponse" ? this.countSiblings(response, 1) == 5 : false, "Received 5 aggregated HCCenterInfoResponse elements in response.");
         //System.out.println("==== Response: " + response.toString());
