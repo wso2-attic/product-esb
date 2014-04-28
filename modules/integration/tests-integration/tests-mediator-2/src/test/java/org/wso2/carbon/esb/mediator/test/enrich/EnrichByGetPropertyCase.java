@@ -43,8 +43,8 @@ public class EnrichByGetPropertyCase extends ESBIntegrationTest {
     public void uploadSynapseConfig() throws Exception {
         super.init();
         resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
-                                                                 context.getUser().getUserName(),
-                                                                 context.getUser().getPassword());
+                                                                 context.getContextTenant().getContextUser().getUserName(),
+                                                                 context.getContextTenant().getContextUser().getPassword());
         uploadResourcesToGovernanceRegistry();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/enrich/enrich_byGetProperty.xml");
     }
@@ -53,7 +53,7 @@ public class EnrichByGetPropertyCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb"}, description = "Enrich by get property")
     public void enrichGetPropertyTest() throws IOException,
                                                XMLStreamException {
-        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURL(
+        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp(
                 "enrichSample1"), getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "IBM");
         assertNotNull(response, "Response message is null");
         assertEquals(response.getLocalName(), "CheckPriceResponse", "CheckPriceResponse not match");

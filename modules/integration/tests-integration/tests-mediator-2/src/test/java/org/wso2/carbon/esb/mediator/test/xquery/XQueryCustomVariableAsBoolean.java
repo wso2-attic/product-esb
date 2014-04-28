@@ -46,7 +46,7 @@ public class XQueryCustomVariableAsBoolean extends ESBIntegrationTest {
         RequestUtil getQuoteCustomRequest = new RequestUtil();
 
         response = getQuoteCustomRequest.sendReceive(
-                getProxyServiceURL("StockQuoteProxy"),
+                getProxyServiceURLHttp("StockQuoteProxy"),
                 "WSO2");
         assertNotNull(response, "Response message null");
         assertEquals(response.getFirstElement().getFirstChildWithName(

@@ -44,7 +44,7 @@ public class EnrichIntegrationReplaceEnvelopTestCase extends ESBIntegrationTest 
     @Test(groups = "wso2.esb", description = "Tests-Replace out going message envelop")
     public void testReplaceEnvelop() throws AxisFault {
 
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample6"), null, "WSO2");
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample6"), null, "WSO2");
         assertNotNull(response, "Response is null");
         assertEquals(response.getQName().getLocalPart(), "getQuote");
         assertEquals(response.getFirstElement().getLocalName().toString(),

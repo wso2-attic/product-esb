@@ -51,7 +51,7 @@ public class SecuredCloneMediatorTestCase extends ESBIntegrationTest {
 
         applySecurity("Secured_Clone", 1, getUserRole(userInfo.getUserId()));
         SecureServiceClient secureAxisServiceClient = new SecureServiceClient();
-        OMElement response = secureAxisServiceClient.sendSecuredStockQuoteRequest(userInfo, getProxyServiceSecuredURL("Secured_Clone"), 1, "WSO2");
+        OMElement response = secureAxisServiceClient.sendSecuredStockQuoteRequest(userInfo, getProxyServiceURLHttps("Secured_Clone"), 1, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
         //Please add a log mediator read assertion for further make sure this works fine.

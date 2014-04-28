@@ -28,7 +28,6 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
-import java.io.IOException;
 import java.net.URL;
 
 import static org.testng.Assert.assertEquals;
@@ -76,8 +75,8 @@ public class ScriptIntegrationInvokeJsScriptFunction extends ESBIntegrationTest 
 
     private void uploadResourcesToConfigRegistry() throws Exception {
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
-, context.getUser().getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName()
+, context.getContextTenant().getContextUser().getPassword());
         resourceAdminServiceStub.deleteResource("/_system/config/script_js");
 
         resourceAdminServiceStub.addCollection("/_system/config/", "script_js", "", "Contains test js files");

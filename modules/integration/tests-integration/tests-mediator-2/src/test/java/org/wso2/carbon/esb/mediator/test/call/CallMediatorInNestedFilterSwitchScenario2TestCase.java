@@ -38,7 +38,7 @@ public class CallMediatorInNestedFilterSwitchScenario2TestCase extends ESBIntegr
     public void callMediatorInNestedFilterSwitchScenario2TestCase() throws AxisFault {
 
         OMElement response =
-                axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("TestCallProxy"), null, "IBM");
+                axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("TestCallProxy"), null, "IBM");
         boolean responseContainsWSO2 = response.getFirstElement().toString().contains("IBM");
         assertTrue(responseContainsWSO2);
 

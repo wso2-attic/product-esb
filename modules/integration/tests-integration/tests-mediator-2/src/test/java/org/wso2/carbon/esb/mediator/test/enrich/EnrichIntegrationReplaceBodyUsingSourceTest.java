@@ -48,7 +48,7 @@ public class EnrichIntegrationReplaceBodyUsingSourceTest extends ESBIntegrationT
     @Test(groups = "wso2.esb", description = "Tests-replace body using source type body")
     public void testReplaceBodyUsingSourceBody() throws AxisFault, XMLStreamException {
 
-        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample3"), null,"IBM");
+        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample3"), null,"IBM");
         System.out.println(response);
         assertNotNull(response,"Response is null");
         assertEquals(response.getFirstElement().getFirstChildWithName

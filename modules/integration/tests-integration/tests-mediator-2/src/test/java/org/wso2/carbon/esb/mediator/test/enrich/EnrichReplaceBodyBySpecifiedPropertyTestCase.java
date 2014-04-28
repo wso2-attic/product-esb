@@ -42,8 +42,8 @@ public class EnrichReplaceBodyBySpecifiedPropertyTestCase extends ESBIntegration
     public void uploadSynapseConfig() throws Exception {
         super.init();
         resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
-                                                                  context.getUser().getUserName(),
-                                                                  context.getUser().getPassword());
+                                                                  context.getContextTenant().getContextUser().getUserName(),
+                                                                  context.getContextTenant().getContextUser().getPassword());
         uploadResourcesToGovernanceRegistry();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/enrich/enrich_replace_body_by_specified_property.xml");
     }
@@ -51,7 +51,7 @@ public class EnrichReplaceBodyBySpecifiedPropertyTestCase extends ESBIntegration
     @Test(groups = {"wso2.esb"}, description = "Enrich mediator replace body by specified property")
     public void replaceMessageBodyByProperty() throws IOException,
                                                       XMLStreamException {
-        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURL(
+        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp(
                 "enrichSample1"), getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "IBM");
         assertNotNull(response, "Response message is null");
         assertEquals(response.getLocalName(), "CheckPriceResponse", "CheckPriceResponse not match");

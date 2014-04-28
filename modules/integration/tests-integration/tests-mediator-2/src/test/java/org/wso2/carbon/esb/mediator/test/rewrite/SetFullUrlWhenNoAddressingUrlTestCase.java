@@ -44,7 +44,7 @@ public class SetFullUrlWhenNoAddressingUrlTestCase extends ESBIntegrationTest {
         OMElement response;
 
         response = axis2Client.sendSimpleStockQuoteRequest(
-                getProxyServiceURL("urlRewriteProxy"),
+                getProxyServiceURLHttp("urlRewriteProxy"),
                 null,
                 "IBM");
         assertTrue(response.toString().contains("IBM"));

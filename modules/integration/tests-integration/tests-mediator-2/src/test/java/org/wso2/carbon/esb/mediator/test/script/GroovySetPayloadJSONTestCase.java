@@ -21,10 +21,11 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
-
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;import org.wso2.esb.integration.common.utils.clients.JSONClient;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.clients.JSONClient;
 
 import java.io.File;
 
@@ -42,11 +43,11 @@ public class GroovySetPayloadJSONTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     public void setEnvironment() throws Exception {
-        super.init(1);
+        super.init(TestUserMode.SUPER_TENANT_ADMIN);
         serverManager = new ServerConfigurationManager(context);
         serverManager.copyToComponentLib(new File(getESBResourceLocation() + GROOVY_JAR_LOCATION));
         serverManager.restartGracefully();
-        super.init(1);
+        super.init(TestUserMode.SUPER_TENANT_ADMIN);
         jsonclient = new JSONClient();
     }
 
@@ -57,7 +58,7 @@ public class GroovySetPayloadJSONTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/script_mediator/groovy_script_with_setPayloadJson.xml");
 
         String query = "{\"key\":\"value\"}";
-        String addUrl = getProxyServiceSecuredURL("MyMockProxy");
+        String addUrl = getProxyServiceURLHttps("MyMockProxy");
         String expectedResult = "{\"fileID\":\"89265\",\"mySiteID\":\"54571\"}";
 
         String actualResult = jsonclient.sendUserDefineRequest(addUrl, query).toString();

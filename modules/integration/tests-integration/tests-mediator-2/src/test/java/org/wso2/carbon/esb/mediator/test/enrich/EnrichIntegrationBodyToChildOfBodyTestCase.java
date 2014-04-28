@@ -43,7 +43,7 @@ public class EnrichIntegrationBodyToChildOfBodyTestCase extends ESBIntegrationTe
     public void testEnrichMediator() throws Exception {
         OMElement response;
 
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample"), null,
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample"), null,
                                                            "WSO2");
 
         assertNotNull(response, "Response message null");

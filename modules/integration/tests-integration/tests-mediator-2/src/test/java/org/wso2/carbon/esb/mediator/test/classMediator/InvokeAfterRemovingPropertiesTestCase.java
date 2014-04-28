@@ -57,10 +57,10 @@ public class InvokeAfterRemovingPropertiesTestCase extends ESBIntegrationTest {
         assertNotNull(editedResponse, "Response message null");
 
 
-        String editResponse = editedResponse.getFirstElement().getFirstChildWithName
-                (new QName("http://services.samples/xsd", "last")).getText().toString();
+        int editResponse = (int)Double.parseDouble(editedResponse.getFirstElement().getFirstChildWithName
+                (new QName("http://services.samples/xsd", "last")).getText().toString());
 
-        Assert.assertEquals(editResponse, "0.0", "Value mismatched" );
+        Assert.assertEquals(editResponse, 0, "Value mismatched" );
 
     }
 

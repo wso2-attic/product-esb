@@ -45,7 +45,7 @@ public class EnrichIntegrationAddChildXpathTestCase extends ESBIntegrationTest {
     public void testEnrichMediator() throws Exception {
         OMElement response;
 
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample3"), null,
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample3"), null,
                                                            createQuoteRequestBody());
         assertNotNull(response, "Response message null");
         OMElement returnTag = response.getFirstElement();

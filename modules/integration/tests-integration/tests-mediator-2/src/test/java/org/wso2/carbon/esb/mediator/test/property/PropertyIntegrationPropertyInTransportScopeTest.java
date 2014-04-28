@@ -53,7 +53,7 @@ public class PropertyIntegrationPropertyInTransportScopeTest extends ESBIntegrat
         wireServer.start();
         try {
             axis2Client.sendSimpleStockQuoteRequest
-                    (getProxyServiceURL("Axis2ProxyService"),
+                    (getProxyServiceURLHttp("Axis2ProxyService"),
                      null,
                      "WSO2");
         } catch (Exception e) {

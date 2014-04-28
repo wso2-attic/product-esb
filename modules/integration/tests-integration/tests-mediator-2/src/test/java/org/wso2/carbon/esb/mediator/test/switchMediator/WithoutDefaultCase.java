@@ -44,13 +44,13 @@ public class WithoutDefaultCase extends ESBIntegrationTest {
     public void testSwitchWithoutDefault() throws AxisFault {
         OMElement response;
 
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("switchSample1"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("switchSample1"),
                                              getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
                                              "IBM");
         assertTrue(response.toString().contains("IBM"));
 
         try {
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("switchSample1"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("switchSample1"),
                                                                getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
                                                                "test");
             fail("This query must throw an exception.");

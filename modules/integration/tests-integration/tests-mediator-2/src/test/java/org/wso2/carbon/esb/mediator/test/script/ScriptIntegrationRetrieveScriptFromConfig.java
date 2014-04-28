@@ -26,7 +26,6 @@ import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
-
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
 import java.net.URL;
@@ -78,7 +77,7 @@ public class ScriptIntegrationRetrieveScriptFromConfig extends ESBIntegrationTes
     private void uploadResourcesToConfigRegistry() throws Exception {
         ResourceAdminServiceClient resourceAdminServiceStub =
                 new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
-                                               context.getUser().getUserName(), context.getUser().getPassword());
+                                               context.getContextTenant().getContextUser().getUserName(), context.getContextTenant().getContextUser().getPassword());
         resourceAdminServiceStub.deleteResource("/_system/config/script_key");
 
         resourceAdminServiceStub.addCollection("/_system/config/", "script_key", "",

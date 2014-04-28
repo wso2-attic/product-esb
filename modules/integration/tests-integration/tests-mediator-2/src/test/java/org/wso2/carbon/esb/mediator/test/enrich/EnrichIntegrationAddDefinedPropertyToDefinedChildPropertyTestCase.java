@@ -44,7 +44,7 @@ public class EnrichIntegrationAddDefinedPropertyToDefinedChildPropertyTestCase
     public void testEnrichMediator() throws Exception {
         OMElement response;
 
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample2"), null,
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample2"), null,
                                                            "WSO2");
 
         assertNotNull(response, "Response message null");

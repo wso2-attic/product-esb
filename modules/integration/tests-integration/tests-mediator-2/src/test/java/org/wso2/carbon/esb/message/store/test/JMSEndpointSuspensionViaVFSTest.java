@@ -154,7 +154,7 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
 //        String payload = "<test>This payload is üsed to check special character mediation</test>";
 //        try {
 //
-//            HttpResponse response = httpClient.doPost(getProxyServiceURL("InOutProxy"), null, payload, "application/xml");
+//            HttpResponse response = httpClient.doPost(getProxyServiceURLHttp("InOutProxy"), null, payload, "application/xml");
 //        } catch (AxisFault e) {
 //            log.error("Response not expected here, Exception can be accepted ");
 //        }

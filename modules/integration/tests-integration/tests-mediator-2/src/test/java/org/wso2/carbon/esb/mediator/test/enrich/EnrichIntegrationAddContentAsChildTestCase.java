@@ -45,7 +45,7 @@ public class EnrichIntegrationAddContentAsChildTestCase extends ESBIntegrationTe
                          "</m:request>" +
                          "</m:getQuote>";
         OMElement payloadOM = AXIOMUtil.stringToOM(payload);
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample3")
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample3")
                 , null, payloadOM);
         assertNotNull(response, "Response is null");
         assertEquals(response.getLocalName(), "getQuoteResponse", "getQuoteResponse mismatch");

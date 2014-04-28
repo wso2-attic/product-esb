@@ -44,7 +44,7 @@ public class XQueryCustomVariableAsFloat extends ESBIntegrationTest {
         OMElement response;
         RequestUtil getQuoteCustomRequest = new RequestUtil();
         response = getQuoteCustomRequest.sendReceive(
-                getProxyServiceURL("StockQuoteProxy"),
+                getProxyServiceURLHttp("StockQuoteProxy"),
                 "WSO2");
         assertNotNull(response, "Response message null");
         assertEquals(response.getFirstElement().getFirstChildWithName(

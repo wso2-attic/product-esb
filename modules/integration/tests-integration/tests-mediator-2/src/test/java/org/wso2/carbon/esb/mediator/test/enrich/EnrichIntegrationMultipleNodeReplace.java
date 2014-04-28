@@ -45,7 +45,7 @@ public class EnrichIntegrationMultipleNodeReplace extends ESBIntegrationTest {
     public void testEnrichMediator() throws Exception{
         OMElement response;
 
-        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample"),null,
+        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample"),null,
                                                          "WSO2");
 
 

@@ -42,14 +42,14 @@ public class SOAPNSBasedSwitchingNegativeCase extends ESBIntegrationTest {
         OMElement response1 = null;
         OMElement response2 = null;
         response1 =
-                axis2Client.sendSimpleStockQuoteSoap11(getProxyServiceURL("switchSoap11SampleNegative"),
+                axis2Client.sendSimpleStockQuoteSoap11(getProxyServiceURLHttp("switchSoap11SampleNegative"),
                                                        getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
                                                        "IBM");
         Assert.assertTrue(response1.toString().contains("IBM"), "Asserting response for 'IBM'");
 
         try {
             response2 =
-                    axis2Client.sendSimpleStockQuoteSoap12(getProxyServiceURL("switchSoap11SampleNegative"),
+                    axis2Client.sendSimpleStockQuoteSoap12(getProxyServiceURLHttp("switchSoap11SampleNegative"),
                                                            getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
                                                            "IBM");
 

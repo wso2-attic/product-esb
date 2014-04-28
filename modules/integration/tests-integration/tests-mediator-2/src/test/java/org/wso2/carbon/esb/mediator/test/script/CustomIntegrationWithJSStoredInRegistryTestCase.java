@@ -21,10 +21,10 @@ import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 import org.wso2.esb.integration.common.clients.logging.LoggingAdminClient;
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
@@ -78,8 +78,8 @@ public class CustomIntegrationWithJSStoredInRegistryTestCase extends ESBIntegrat
     private void uploadResourcesToConfigRegistry() throws Exception {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
-, context.getUser().getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName()
+, context.getContextTenant().getContextUser().getPassword());
 
         resourceAdminServiceStub.deleteResource("/_system/config/script_js");
         resourceAdminServiceStub.addCollection("/_system/config/", "script_js", "",
@@ -102,8 +102,8 @@ public class CustomIntegrationWithJSStoredInRegistryTestCase extends ESBIntegrat
             throws InterruptedException, ResourceAdminServiceExceptionException, RemoteException, XPathExpressionException {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
-, context.getUser().getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName()
+, context.getContextTenant().getContextUser().getPassword());
 
         resourceAdminServiceStub.deleteResource("/_system/config/script_js");
         Thread.sleep(1000);

@@ -46,7 +46,7 @@ public class XQueryEmptyEmptySoapRequestTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Tests-XQuery test on empty message body")
     public void testEmptyMessageBody() throws AxisFault, XMLStreamException {
         OMElement payload = null;
-        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("empty"),null, payload);
+        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("empty"),null, payload);
         assertNotNull(response,"Response is null");
         assertEquals(response.getFirstElement().getFirstChildWithName
                 (new QName("http://services.samples/xsd", "symbol")).getText(),

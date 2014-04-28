@@ -39,7 +39,7 @@ public class ReplacePropertyByEnrichTestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb"}, description = "replacing a property by using an enrich mediator")
     public void test() throws AxisFault {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample2")
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample2")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "IBM");
 
 

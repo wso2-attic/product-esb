@@ -22,7 +22,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
-
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
@@ -63,7 +62,7 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
     public void GroovySupportWithinProxyTest() throws Exception {
 
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/groovy/synapse_without_groovy.xml");
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL(proxyName), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(proxyName), null, "WSO2");
         assertNotNull(response, "Response is null");
         assertEquals(response.getLocalName(), "getQuoteResponse", "getQuoteResponse mismatch");
         OMElement omElement = response.getFirstElement();
@@ -78,7 +77,7 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
     public void testGroovyScriptMediation() throws Exception {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/script_mediator/groovy_script_with_the_mediator.xml");
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL(proxyName), null, "IBM");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(proxyName), null, "IBM");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
                 .getText();
@@ -96,7 +95,7 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/script_mediator/groovy_script_with_setPayloadJson.xml");
 
         String query = "{\"key\":\"value\"}";
-        String addUrl = getProxyServiceSecuredURL("MyMockProxy");
+        String addUrl = getProxyServiceURLHttps("MyMockProxy");
         String expectedResult = "{\"fileID\":\"89265\",\"mySiteID\":\"54571\"}";
 
         String actualResult = jsonclient.sendUserDefineRequest(addUrl, query).toString();

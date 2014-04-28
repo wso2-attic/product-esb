@@ -55,8 +55,8 @@ public class SmooksIntegrationTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "smooks" + File.separator + "smooks_synapse.xml");
 
         resourceAdminServiceClient = new ResourceAdminServiceClient
-                (contextUrls.getBackEndUrl(), context.getUser().getUserName()
-, context.getUser().getPassword());
+                (contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName()
+, context.getContextTenant().getContextUser().getPassword());
 
         uploadResourcesToConfigRegistry();
         addSmooksProxy();

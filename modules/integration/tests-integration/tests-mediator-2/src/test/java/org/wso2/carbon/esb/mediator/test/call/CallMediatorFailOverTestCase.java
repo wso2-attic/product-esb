@@ -38,7 +38,7 @@ public class CallMediatorFailOverTestCase extends ESBIntegrationTest {
     public void callMediatorFailOverTestCase() throws AxisFault {
 
         OMElement response =
-                axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("TestCallProxy"), null, "WSO2");
+                axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("TestCallProxy"), null, "WSO2");
         boolean responseContainsFO = response.getFirstElement().toString().contains("FO");
         assertTrue(responseContainsFO);
     }

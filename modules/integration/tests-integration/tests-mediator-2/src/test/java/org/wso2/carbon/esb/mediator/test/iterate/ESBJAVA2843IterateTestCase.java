@@ -46,7 +46,7 @@ public class ESBJAVA2843IterateTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Iterating when payload containing different element")
     public void testIteratorWithMultipleElement() throws Exception {
         IterateClient client = new IterateClient();
-        String response = client.send(getProxyServiceURL("testMultipleElement"), createRequestPayload(), "urn:getQuote");
+        String response = client.send(getProxyServiceURLHttp("testMultipleElement"), createRequestPayload(), "urn:getQuote");
         Assert.assertNotNull(response, "Response message null");
         OMElement envelope = client.toOMElement(response);
         OMElement soapBody = envelope.getFirstElement();

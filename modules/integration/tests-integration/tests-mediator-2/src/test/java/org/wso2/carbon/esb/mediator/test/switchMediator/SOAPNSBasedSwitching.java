@@ -43,13 +43,13 @@ public class SOAPNSBasedSwitching extends ESBIntegrationTest {
 		OMElement response;
 
 		response =
-		           axis2Client.sendSimpleStockQuoteSoap11(getProxyServiceURL("switchSoap11Sample"),
+		           axis2Client.sendSimpleStockQuoteSoap11(getProxyServiceURLHttp("switchSoap11Sample"),
                                                           getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
 		                                                  "IBM");
 		Assert.assertTrue(response.toString().contains("IBM"), "Asserting for IBM in response");
 
 		response =
-		           axis2Client.sendSimpleStockQuoteSoap12(getProxyServiceURL("switchSoap11Sample"),
+		           axis2Client.sendSimpleStockQuoteSoap12(getProxyServiceURLHttp("switchSoap11Sample"),
                                                           getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
 		                                                  "MSFT");
 

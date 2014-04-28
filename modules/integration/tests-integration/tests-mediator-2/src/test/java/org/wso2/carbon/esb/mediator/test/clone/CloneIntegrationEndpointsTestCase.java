@@ -52,7 +52,7 @@ public class CloneIntegrationEndpointsTestCase extends ESBIntegrationTest {
                                           + "clone" + File.separator + "clone_https_sequence.xml");
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/clone/clone_https.xml");
 
-        sqn = sqn.replace("httpsEndpoint",getProxyServiceSecuredURL("StockQuoteProxy"));
+        sqn = sqn.replace("httpsEndpoint",getProxyServiceURLHttps("StockQuoteProxy"));
         addSequence(AXIOMUtil.stringToOM(sqn));
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2"));

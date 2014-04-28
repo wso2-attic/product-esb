@@ -46,7 +46,7 @@ public class SendMediatorEndpointFromRegistryTestCase extends ESBIntegrationTest
 
     @Test(groups = {"wso2.esb"}, description = "End point in config registry")
     public void endPointFromConfigRegistryTest() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("testConfRegistry"), null, "IBM");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("testConfRegistry"), null, "IBM");
         assertNotNull(response, "Response is null");
         assertEquals(response.getLocalName(), "getQuoteResponse", "getQuoteResponse mismatch");
         OMElement omElement = response.getFirstElement();
@@ -57,7 +57,7 @@ public class SendMediatorEndpointFromRegistryTestCase extends ESBIntegrationTest
 
     @Test(groups = {"wso2.esb"}, description = "End point in local registry")
     public void endPointFromLocalRegistryTest() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("testLocalRegistry"), null, "IBM");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("testLocalRegistry"), null, "IBM");
         assertNotNull(response, "Response is null");
         assertEquals(response.getLocalName(), "getQuoteResponse", "getQuoteResponse mismatch");
         OMElement omElement = response.getFirstElement();
@@ -68,7 +68,7 @@ public class SendMediatorEndpointFromRegistryTestCase extends ESBIntegrationTest
 
     @Test(groups = {"wso2.esb"}, description = "End point in governance registry")
     public void endPointFromGovernanceRegistryTest() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("testGovRegistry"), null, "IBM");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("testGovRegistry"), null, "IBM");
         assertNotNull(response, "Response is null");
         assertEquals(response.getLocalName(), "getQuoteResponse", "getQuoteResponse mismatch");
         OMElement omElement = response.getFirstElement();
@@ -80,8 +80,8 @@ public class SendMediatorEndpointFromRegistryTestCase extends ESBIntegrationTest
 
     private void uploadResourcesToRegistry() throws Exception {
         new ResourceAdminServiceClient
-                (contextUrls.getBackEndUrl(), context.getUser().getUserName()
-, context.getUser().getPassword());
+                (contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName()
+, context.getContextTenant().getContextUser().getPassword());
         resourceAdminServiceStub.deleteResource("/_system/config/endpointConfig");
         resourceAdminServiceStub.addCollection("/_system/config/", "endpointConfig", "",
                                                "Contains test endpoint files");

@@ -53,8 +53,8 @@ public class SmooksMediatorConfigFromConfigRegistryTestCase extends ESBIntegrati
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         super.init();
-        resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName()
-, context.getUser().getPassword());
+        resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName()
+, context.getContextTenant().getContextUser().getPassword());
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/vfsTransport/vfs_test_smook_config_at_registry.xml");
         serverConfigurationManager = new ServerConfigurationManager(context);
