@@ -47,12 +47,9 @@
         <module>service-samples</module>
        <!-- <module>tests-integration/tests-mediator</module>-->
         <!--<module>tests-integration/tests-service</module>-->
-<<<<<<< HEAD
         <!--<module>tests-integration/tests-mediator-1</module>-->
         <module>tests-integration/tests-transport</module>
-=======
         <module>tests-integration/tests-sample</module>
->>>>>>> b28a9fa31883fd105b1b1ad5843ed3e770984567
     </modules>
 
     <build>
