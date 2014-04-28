@@ -355,7 +355,7 @@ public class SecureAxisServiceClient implements CallbackHandler {
 
         if (usage == WSPasswordCallback.SIGNATURE || usage == WSPasswordCallback.DECRYPT) {
             // Logic to get the private key password for signture or decryption
-            if ("clients".equals(id)) {
+            if ("client".equals(id)) {
                 pwcb.setPassword("automation");
 
             } else if ("service".equals(id)) {

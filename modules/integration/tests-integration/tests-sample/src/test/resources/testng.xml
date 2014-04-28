@@ -14,15 +14,9 @@
             <!--<class name="org.wso2.carbon.esb.ServerStartupTestCase"/>-->
         <!--</classes>-->
     <!--</test>-->
-
-    <!--<test name="ESB-Sample-Test" preserve-order="true" verbose="2">
-        <classes>
-            <class name="org.wso2.carbon.esb.samples.test.mediation.Sample1TestCase"/>
-        </classes>
-    </test>-->
-    <test name="tests-template" preserve-order="true" verbose="2">
+    <test name="ESB-Sample-Test" preserve-order="true" verbose="2">
         <packages>
-            <package name="org.wso2.carbon.esb.samples.test.proxy"/>
+            <package name="org.wso2.carbon.esb.samples.test.*"/>
         </packages>
     </test>
 

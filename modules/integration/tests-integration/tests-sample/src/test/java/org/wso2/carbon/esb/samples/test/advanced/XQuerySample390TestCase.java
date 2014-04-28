@@ -40,7 +40,7 @@ public class XQuerySample390TestCase extends ESBIntegrationTest {
             "Add a XQuery transformation logic as a local entry; Refer it inside a XQuery mediator ", enabled = false)
     public void XQueryTransformationInSideXQueryIntegrationTest() throws Exception {
 
-        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURL("StockQuoteProxy"), null, "WSO2");
+        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 
         assertNotNull(response, "Fault: response message null");
 
