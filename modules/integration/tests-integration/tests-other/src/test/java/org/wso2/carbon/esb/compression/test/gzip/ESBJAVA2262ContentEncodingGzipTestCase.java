@@ -53,14 +53,14 @@ public class ESBJAVA2262ContentEncodingGzipTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "having 'Content-Encoding = gzip' within insequence")
     public void testGzipCompressionInsideInSequence() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("sendingGZIPCompressedPayloadToBackEnd"), null, "GZIP");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("sendingGZIPCompressedPayloadToBackEnd"), null, "GZIP");
         Assert.assertTrue(response.toString().contains("GZIP"));
         Assert.assertTrue(response.toString().contains("GZIP Company"));
     }
 
     @Test(groups = {"wso2.esb"}, description = "having 'Content-Encoding = gzip' within outsequence")
     public void gzipCompressionInsideOutSequenceTest() throws Exception {
-        ServiceClient client = getServiceClient(getProxyServiceURL("sendingGZIPCompressedPayloadToClient"));
+        ServiceClient client = getServiceClient(getProxyServiceURLHttp("sendingGZIPCompressedPayloadToClient"));
         client.getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.MC_ACCEPT_GZIP, true);
         OMElement response = client.sendReceive(Utils.getStockQuoteRequest("GZIP"));
         OperationContext operationContext = client.getLastOperationContext();
@@ -75,7 +75,7 @@ public class ESBJAVA2262ContentEncodingGzipTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "having 'Content-Encoding = gzip' within both in and out sequences and accepting gzip response")
     public void gzipCompressionBothInAndOutSequencesTest() throws Exception {
-        ServiceClient client = getServiceClient(getProxyServiceURL("sendAndReceiveGZIPCompressedPayload"));
+        ServiceClient client = getServiceClient(getProxyServiceURLHttp("sendAndReceiveGZIPCompressedPayload"));
         client.getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.MC_ACCEPT_GZIP, true);
         OMElement response = client.sendReceive(Utils.getStockQuoteRequest("GZIP"));
         OperationContext operationContext = client.getLastOperationContext();
@@ -90,7 +90,7 @@ public class ESBJAVA2262ContentEncodingGzipTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "Sending gzip compressed payload to ESB")
     public void sendingGzipCompressedRequestToESBTest() throws Exception {
-        ServiceClient client = getServiceClient(getProxyServiceURL("acceptGzipPayload"));
+        ServiceClient client = getServiceClient(getProxyServiceURLHttp("acceptGzipPayload"));
         client.getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.MC_GZIP_REQUEST, true);
         OMElement response = client.sendReceive(Utils.getStockQuoteRequest("GZIP"));
         Assert.assertTrue(response.toString().contains("GZIP"));
@@ -99,7 +99,7 @@ public class ESBJAVA2262ContentEncodingGzipTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "having 'Accept-Encoding = gzip' within both in and out sequences")
     public void sendingAndReceivingGzipCompressedPayloadTest() throws Exception {
-        ServiceClient client = getServiceClient(getProxyServiceURL("sendingGZIPCompressedPayloadToClient"));
+        ServiceClient client = getServiceClient(getProxyServiceURLHttp("sendingGZIPCompressedPayloadToClient"));
         client.getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.MC_GZIP_REQUEST, true);
         client.getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.MC_ACCEPT_GZIP, true);
         OMElement response = client.sendReceive(Utils.getStockQuoteRequest("GZIP"));
@@ -114,7 +114,7 @@ public class ESBJAVA2262ContentEncodingGzipTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "sending and accepting gzip compressed payload")
     public void sendingAndReceivingGzipCompressedRequestInAllPathTest() throws Exception {
-        ServiceClient client = getServiceClient(getProxyServiceURL("sendAndReceiveGZIPCompressedPayload"));
+        ServiceClient client = getServiceClient(getProxyServiceURLHttp("sendAndReceiveGZIPCompressedPayload"));
         client.getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.MC_GZIP_REQUEST, true);
         client.getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.MC_ACCEPT_GZIP, true);
         OMElement response = client.sendReceive(Utils.getStockQuoteRequest("GZIP"));
