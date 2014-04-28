@@ -104,7 +104,7 @@ public class ConcurrencyAndRequestThrottlingTestRequest extends ESBIntegrationTe
     private void initClients() {
         for (int i = 0; i < CONCURRENT_CLIENTS; i++) {
             concurrencyAndRequestThrottleTestClients[i] = new ConcurrencyAndRequestThrottleTestClient(
-                    getProxyServiceURL("StockQuoteProxy"), list, clientsDone, requestThrottledClients, THROTTLE_MAX_MSG_COUNT);
+                    getProxyServiceURLHttp("StockQuoteProxy"), list, clientsDone, requestThrottledClients, THROTTLE_MAX_MSG_COUNT);
         }
         for (int i = 0; i < CONCURRENT_CLIENTS; i++) {
             clients[i] = new Thread(concurrencyAndRequestThrottleTestClients[i]);

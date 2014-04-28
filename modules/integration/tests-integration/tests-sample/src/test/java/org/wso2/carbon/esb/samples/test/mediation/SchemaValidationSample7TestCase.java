@@ -39,7 +39,7 @@ public class SchemaValidationSample7TestCase extends ESBIntegrationTest {
     public void testValidationSchema() throws Exception {
 
         try{
-            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy"), null, "WSO2");
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
             fail("Request Should throw AxisFault");
         }catch (AxisFault axisFault){
             assertEquals(axisFault.getMessage(), "Invalid custom quote request",

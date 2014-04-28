@@ -46,7 +46,7 @@ public class SendIntegrationDynamicSequenceTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "Receiving sequence dynamic and build message before receive")
     public void testSequenceDynamicBuildMessage() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("testSequenceDynamicBuildMessage"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("testSequenceDynamicBuildMessage"), null, "WSO2");
         assertNotNull(response, "Response is null");
         assertEquals(response.getLocalName(), "getQuoteResponse", "getQuoteResponse mismatch");
         OMElement omElement = response.getFirstElement();
@@ -57,7 +57,7 @@ public class SendIntegrationDynamicSequenceTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "Receiving sequence dynamic and not build message before receive")
     public void sequenceDynamicBuildMessageNoTest() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("testSequenceDynamicBuildMessageNo"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("testSequenceDynamicBuildMessageNo"), null, "WSO2");
         assertNotNull(response, "Response is null");
         assertEquals(response.getLocalName(), "getQuoteResponse", "getQuoteResponse mismatch");
         OMElement omElement = response.getFirstElement();

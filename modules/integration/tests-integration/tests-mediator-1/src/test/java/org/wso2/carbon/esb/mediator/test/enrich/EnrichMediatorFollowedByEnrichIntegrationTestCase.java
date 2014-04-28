@@ -42,8 +42,8 @@ public class EnrichMediatorFollowedByEnrichIntegrationTestCase extends ESBIntegr
     public void uploadSynapseConfig() throws Exception {
         super.init();
         resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
-                                                                  context.getUser().getUserName(),
-                                                                  context.getUser().getPassword());
+                                                                  context.getContextTenant().getContextUser().getUserName(),
+                                                                  context.getContextTenant().getContextUser().getPassword());
         uploadResourcesToGovernanceRegistry();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/enrich/enrich_by_enrich.xml");
     }
@@ -51,7 +51,7 @@ public class EnrichMediatorFollowedByEnrichIntegrationTestCase extends ESBIntegr
     @Test(groups = {"wso2.esb"}, description = "Enrich mediator followed by enrich mediator")
     public void enrichMediatorFollowedByEnrichMediator() throws IOException,
                                                                 XMLStreamException {
-        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURL(
+        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp(
                 "enrichSample1"), getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "IBM");
         assertNotNull(response, "Response message is null");
         assertEquals(response.getLocalName(), "CheckPriceResponse", "CheckPriceResponse not match");

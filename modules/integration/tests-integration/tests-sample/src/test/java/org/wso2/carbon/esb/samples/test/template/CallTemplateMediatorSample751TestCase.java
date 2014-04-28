@@ -99,7 +99,7 @@ public class CallTemplateMediatorSample751TestCase extends ESBIntegrationTest {
     private String getResponse() throws IOException {
 
         AxisOperationClient operationClient = new AxisOperationClient();
-        OMElement response = operationClient.send(getProxyServiceURL(proxyServiceName), null,
+        OMElement response = operationClient.send(getProxyServiceURLHttp(proxyServiceName), null,
                                                   createMultipleQuoteRequestBody(symbol, iterations), "urn:getQuote");
         operationClient.destroy();
         return response.toString();

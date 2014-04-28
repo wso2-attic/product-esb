@@ -55,7 +55,7 @@ public class GroovySetPayloadJSONTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/script_mediator/groovy_script_with_setPayloadJson.xml");
 
         String query = "{\"key\":\"value\"}";
-        String addUrl = getProxyServiceSecuredURL("MyMockProxy");
+        String addUrl = getProxyServiceURLHttps("MyMockProxy");
         String expectedResult = "{\"fileID\":\"89265\",\"mySiteID\":\"54571\"}";
 
         String actualResult = jsonclient.sendUserDefineRequest(addUrl, query).toString();

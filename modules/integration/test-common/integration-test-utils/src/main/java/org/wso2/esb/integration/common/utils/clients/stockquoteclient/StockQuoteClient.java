@@ -268,6 +268,7 @@ public class StockQuoteClient {
 
     public void destroy() {
         //to keep backward compatibility
+        ConfigurationContextProvider.getInstance().getConfigurationContext().cleanupContexts();
     }
 
     private OMElement createStandardRequest(String symbol) {

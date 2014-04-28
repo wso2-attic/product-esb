@@ -43,7 +43,7 @@ public class SpecifyMinMessageCountAsExpressionTestCase extends ESBIntegrationTe
         super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/config19/synapse.xml");
         aggregatedRequestClient = new AggregatedRequestClient();
-        aggregatedRequestClient.setProxyServiceUrl(getProxyServiceURL("aggregateMediatorTestProxy"));
+        aggregatedRequestClient.setProxyServiceUrl(getProxyServiceURLHttp("aggregateMediatorTestProxy"));
         aggregatedRequestClient.setSymbol("IBM");
 
     }

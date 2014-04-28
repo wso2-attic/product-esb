@@ -41,7 +41,7 @@ public class XpathCallWithoutNSTest extends ESBIntegrationTest {
     @Test(expectedExceptions = AxisFault.class, groups = {"wso2.esb"}, description = "Sample 750 Call Template Test")
     public void test() throws AxisFault {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL(proxyServiceName), null, "IBM");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(proxyServiceName), null, "IBM");
         Assert.assertNotNull(response, "Response message is null");
         Assert.assertTrue(response.toString().contains("CheckPriceResponse"));
         Assert.assertTrue(response.toString().contains("Price"));

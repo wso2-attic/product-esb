@@ -82,7 +82,7 @@ public class ValidateIntegrationNegativeTestCase extends ESBIntegrationTest {
             throws RemoteException, ResourceAdminServiceExceptionException, MalformedURLException,
             InterruptedException, XPathExpressionException {
         ResourceAdminServiceClient resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
-                context.getUser().getUserName(), context.getUser().getPassword());
+                context.getContextTenant().getContextUser().getUserName(), context.getContextTenant().getContextUser().getPassword());
         resourceAdminServiceStub.deleteResource("/_system/config/validate");
         resourceAdminServiceStub.addCollection("/_system/config/", "validate", "", "Contains test schema files");
 
@@ -95,8 +95,8 @@ public class ValidateIntegrationNegativeTestCase extends ESBIntegrationTest {
             throws InterruptedException, ResourceAdminServiceExceptionException, RemoteException, XPathExpressionException {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName(),
-                        context.getUser().getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName(),
+                        context.getContextTenant().getContextUser().getPassword());
 
         resourceAdminServiceStub.deleteResource("/_system/config/validate");
     }

@@ -51,7 +51,7 @@ public class EnrichByOMTextTestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb"}, description = "Enrich by OMText")
     public void enrichByOMText() throws IOException,
                                         XMLStreamException {
-        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURL("enrichSample1")
+        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp("enrichSample1")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "IBM");
         assertNotNull(response, "Response message is null");
         assertEquals(response.getLocalName(), "CheckPriceResponse", "CheckPriceResponse not match");

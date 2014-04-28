@@ -89,7 +89,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
         resourceAdminServiceClient = new ResourceAdminServiceClient
-                (contextUrls.getBackEndUrl(), context.getUser().getUserName(), context.getUser().getPassword());
+                (contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName(), context.getContextTenant().getContextUser().getPassword());
         uploadResourcesToConfigRegistry();
 
     }
@@ -148,7 +148,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint")
     public void testSendingAddressEndpoint() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPoint"),
                                                                      null, "WSO2");
 
         Assert.assertNotNull(response);
@@ -158,7 +158,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint")
     public void testSendingDefaultEndpoint() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -167,7 +167,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint")
     public void testSendingWSDLEndpoint() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -176,12 +176,12 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint")
     public void testSendingFailOverEndpoint() throws IOException, InterruptedException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failoverEndPointBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failoverEndPointBM"),
                                                                      null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
         axis2Server1.stop();
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failoverEndPointBM"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failoverEndPointBM"),
                                                            null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -202,7 +202,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
             throw new AssertionError("Axis2 Server didn't started with in expected time period.");
         } else {
 
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failoverEndPointBM"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failoverEndPointBM"),
                                                                null, "WSO2");
             Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -212,7 +212,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint Build Message Before Sending")
     public void testSendingAddressEndpoint_BuildMessage() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPointBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPointBM"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -221,7 +221,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Build Message Before Sending")
     public void testSendingDefaultEndpoint_BuildMessage() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPointBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPointBM"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -230,7 +230,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Build Message Before Sending")
     public void testSendingWSDLEndpoint_BuildMessage() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPointBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPointBM"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -240,12 +240,12 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Build Message Before Sending")
     public void testSendingFailOverEndpoint_BuildMessage()
             throws IOException, InterruptedException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failoverEndPointBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failoverEndPointBM"),
                                                                      null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
         axis2Server1.stop();
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failoverEndPointBM"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failoverEndPointBM"),
                                                            null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -266,7 +266,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
             throw new AssertionError("Axis2 Server didn't started with in expected time period.");
         } else {
 
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failoverEndPointBM"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failoverEndPointBM"),
                                                                null, "WSO2");
             Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -276,7 +276,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint while Receiving Sequence in Local Registry")
     public void testDynamicAddressEndpointSequence_LocalReg() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Receiving_Sequence_LocalReg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPoint_Receiving_Sequence_LocalReg"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -286,7 +286,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint while Receiving Sequence in Config Registry")
     public void testSendingAddressEndpoint_Receiving_Sequence_ConfigReg() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Receiving_Sequence_ConfigReg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPoint_Receiving_Sequence_ConfigReg"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -296,7 +296,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint while Receiving Sequence in Governance  Registry")
     public void testSendingAddressEndpoint_Receiving_Sequence_GovReg() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Receiving_Sequence_GovReg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPoint_Receiving_Sequence_GovReg"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -306,7 +306,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Local Registry")
     public void testSendingDefaultEndpoint_Receiving_Sequence_LocalReg() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Receiving_Sequence_LocalReg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_LocalReg"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -315,7 +315,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence  in Config Registry")
     public void testSendingDefaultEndpoint_Receiving_Sequence_ConfigReg() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Receiving_Sequence_ConfigReg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_ConfigReg"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -324,7 +324,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Governance Registry")
     public void testSendingDefaultEndpoint_Receiving_Sequence_GovReg() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Receiving_Sequence_GovReg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_GovReg"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -333,7 +333,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Local Registry")
     public void testSendingWSDLEndpoint_Receiving_Sequence_LocalReg() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Receiving_Sequence_LocalReg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint_Receiving_Sequence_LocalReg"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -342,7 +342,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Config Registry")
     public void testSendingWSDLEndpoint_Receiving_Sequence_ConfigReg() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Receiving_Sequence_ConfigReg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint_Receiving_Sequence_ConfigReg"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -351,7 +351,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Governance Registry")
     public void testSendingWSDLEndpoint_Receiving_Sequence_GovReg() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Receiving_Sequence_GovReg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint_Receiving_Sequence_GovReg"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -361,12 +361,12 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence in Local Registry")
     public void testSendingFailOverEndpoint_Receiving_Sequence_LocalReg()
             throws IOException, InterruptedException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_LocalReg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_LocalReg"),
                                                                      null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
         axis2Server1.stop();
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_LocalReg"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_LocalReg"),
                                                            null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -387,7 +387,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
             throw new AssertionError("Axis2 Server didn't started with in expected time period.");
         } else {
 
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_LocalReg"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_LocalReg"),
                                                                null, "WSO2");
             Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -398,12 +398,12 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence in Config Registry")
     public void testSendingFailOverEndpoint_Receiving_Sequence_ConfigReg()
             throws IOException, InterruptedException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_ConfigReg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_ConfigReg"),
                                                                      null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
         axis2Server1.stop();
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_ConfigReg"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_ConfigReg"),
                                                            null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -424,7 +424,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
             throw new AssertionError("Axis2 Server didn't started with in expected time period.");
         } else {
 
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_ConfigReg"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_ConfigReg"),
                                                                null, "WSO2");
             Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -436,12 +436,12 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence in Gov Registry")
     public void testSendingFailOverEndpoint_Receiving_Sequence_GovReg()
             throws IOException, InterruptedException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_GovReg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_GovReg"),
                                                                      null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
         axis2Server1.stop();
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_GovReg"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_GovReg"),
                                                            null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -462,7 +462,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
             throw new AssertionError("Axis2 Server didn't started with in expected time period.");
         } else {
 
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_GovReg"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_GovReg"),
                                                                null, "WSO2");
             Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -473,7 +473,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint Receiving Sequence in Local Registry while BuildMessage enabled")
     public void testDynamicAddressEndpoint_Receiving_Sequence_LocalReg_BuildMessage()
             throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Receiving_Sequence_LocalRegBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPoint_Receiving_Sequence_LocalRegBM"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -484,7 +484,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint Receiving Sequence in Config Registry while BuildMessage enabled")
     public void testDynamicAddressEndpoint_Receiving_Sequence__ConfigReg_BuildMessage()
             throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Receiving_Sequence_ConfigRegBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPoint_Receiving_Sequence_ConfigRegBM"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -495,7 +495,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint Receiving Sequence in Governance  Registry while BuildMessage enabled")
     public void testDynamicAddressEndpoint_Receiving_Sequence_GovReg_BuildMessage()
             throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Receiving_Sequence_GovRegBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPoint_Receiving_Sequence_GovRegBM"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -506,7 +506,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Local Registry while BuildMessage enabled")
     public void testSendingDefaultEndpoint_Receiving_Sequence_LocalReg_BuildMessage()
             throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Receiving_Sequence_LocalRegBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_LocalRegBM"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -516,7 +516,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Config Registry while BuildMessage enabled")
     public void testSendingDefaultEndpoint_Receiving_Sequence_ConfigReg_BuildMessage()
             throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Receiving_Sequence_ConfigRegBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_ConfigRegBM"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -526,7 +526,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Governance Registry while BuildMessage enabled")
     public void testSendingDefaultEndpoint_Receiving_Sequence_GovReg_BuildMessage()
             throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Receiving_Sequence_GovRegBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_GovRegBM"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -536,7 +536,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Local Registry while BuildMessage enabled")
     public void testSendingWSDLEndpoint_Receiving_Sequence_LocalReg_BuildMessage()
             throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Receiving_Sequence_LocalRegBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint_Receiving_Sequence_LocalRegBM"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -546,7 +546,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Config Registry while BuildMessage enabled")
     public void testSendingWSDLEndpoint_Receiving_Sequence_ConfigReg_BuildMessage()
             throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Receiving_Sequence_ConfigRegBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint_Receiving_Sequence_ConfigRegBM"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -556,7 +556,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Governance Registry while BuildMessage enabled")
     public void testSendingWSDLEndpoint_Receiving_Sequence_GovReg_BuildMessage()
             throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Receiving_Sequence_GovRegBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint_Receiving_Sequence_GovRegBM"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -566,12 +566,12 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence in Local Registry while BuildMessage enabled")
     public void testSendingFailOverEndpoint_Receiving_Sequence_LocalReg_BuildMessage()
             throws IOException, InterruptedException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_LocalRegBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_LocalRegBM"),
                                                                      null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
         axis2Server1.stop();
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_LocalRegBM"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_LocalRegBM"),
                                                            null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -592,7 +592,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
             throw new AssertionError("Axis2 Server didn't started with in expected time period.");
         } else {
 
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_LocalRegBM"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_LocalRegBM"),
                                                                null, "WSO2");
             Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -603,12 +603,12 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence in Config Registry while BuildMessage enabled")
     public void testSendingFailOverEndpoint_Receiving_Sequence_ConfigReg_BuildMessage()
             throws IOException, InterruptedException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_ConfigRegBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_ConfigRegBM"),
                                                                      null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
         axis2Server1.stop();
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_ConfigRegBM"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_ConfigRegBM"),
                                                            null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -629,7 +629,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
             throw new AssertionError("Axis2 Server didn't started with in expected time period.");
         } else {
 
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_ConfigRegBM"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_ConfigRegBM"),
                                                                null, "WSO2");
             Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -640,12 +640,12 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence in Gov Registry while BuildMessage enabled")
     public void testSendingFailOverEndpoint_Receiving_Sequence_GovReg_BuildMessage()
             throws IOException, InterruptedException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_GovRegBM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_GovRegBM"),
                                                                      null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
         axis2Server1.stop();
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_GovRegBM"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_GovRegBM"),
                                                            null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -666,7 +666,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
             throw new AssertionError("Axis2 Server didn't started with in expected time period.");
         } else {
 
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_GovRegBM"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_GovRegBM"),
                                                                null, "WSO2");
             Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -677,7 +677,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint Receiving Sequence Dynamic")
     public void testSendingAddressEndpoint_Receiving_Sequence_Dynamic() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Receiving_Sequence_Dynamic"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPoint_Receiving_Sequence_Dynamic"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -686,7 +686,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence Dynamic")
     public void testSendingDefaultEndpoint_Receiving_Sequence_Dynamic() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Receiving_Sequence_Dynamic"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_Dynamic"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -695,7 +695,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence Dynamic")
     public void testSendingWSDLEndpoint_Receiving_Sequence_Dynamic() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Receiving_Sequence_Dynamic"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint_Receiving_Sequence_Dynamic"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -705,12 +705,12 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence Dynamic")
     public void testSendingFailOverEndpoint_Receiving_Sequence_Dynamic()
             throws IOException, InterruptedException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_Dynamic"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_Dynamic"),
                                                                      null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
         axis2Server1.stop();
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_Dynamic"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_Dynamic"),
                                                            null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -731,7 +731,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
             throw new AssertionError("Axis2 Server didn't started with in expected time period.");
         } else {
 
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_Dynamic"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_Dynamic"),
                                                                null, "WSO2");
             Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -742,7 +742,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Address Endpoint Receiving Sequence Dynamic Build Message")
     public void testSendingAddressEndpoint_Receiving_Sequence_Dynamic_BM() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Receiving_Sequence_Dynamic_BM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPoint_Receiving_Sequence_Dynamic_BM"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -751,7 +751,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence Dynamic Build Message")
     public void testSendingDefaultEndpoint_Receiving_Sequence_Dynamic_BM() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Receiving_Sequence_Dynamic_BM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_Dynamic_BM"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -760,7 +760,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence Dynamic Build Message")
     public void testSendingWSDLEndpoint_Receiving_Sequence_Dynamic_BM() throws IOException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Receiving_Sequence_Dynamic_BM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint_Receiving_Sequence_Dynamic_BM"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -770,12 +770,12 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint Receiving Sequence Dynamic Build Message")
     public void testSendingFailOverEndpoint_Receiving_Sequence_Dynamic_BM()
             throws IOException, InterruptedException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_Dynamic_BM"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_Dynamic_BM"),
                                                                      null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
         axis2Server1.stop();
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_Dynamic_BM"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_Dynamic_BM"),
                                                            null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -796,7 +796,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
             throw new AssertionError("Axis2 Server didn't started with in expected time period.");
         } else {
 
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failOverEndPoint_Receiving_Sequence_Dynamic_BM"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failOverEndPoint_Receiving_Sequence_Dynamic_BM"),
                                                                null, "WSO2");
             Assert.assertTrue(response.toString().contains("WSO2 Company"));
 
@@ -807,27 +807,27 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm")
     public void testSendingLoadBalancingEndpoint1() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint1"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint1"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint1"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint1"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint1"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint1"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint1"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint1"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint1"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint1"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -837,22 +837,22 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm")
     public void testSendingLoadBalancingEndpoint2() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint2"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint2"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint2"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint2"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint2"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint2"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint2"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint2"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -863,27 +863,27 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint3() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint3"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint3"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint3"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint3"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint3"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint3"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint3"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint3"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint3"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint3"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -893,22 +893,22 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint4() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint4"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint4"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint4"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint4"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint4"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint4"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint4"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint4"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -919,27 +919,27 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm Receiving Sequence in Conf Registry while BuildMessage Disabled")
     public void testSendingLoadBalancingEndpoint5() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint5"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint5"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint5"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint5"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint5"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint5"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint5"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint5"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint5"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint5"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -949,22 +949,22 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm Receiving Sequence in Conf Registry while BuildMessage Disabled")
     public void testSendingLoadBalancingEndpoint6() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint6"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint6"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint6"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint6"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint6"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint6"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint6"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint6"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -975,27 +975,27 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm Receiving Sequence in Conf Registry while BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint7() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint7"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint7"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint7"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint7"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint7"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint7"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint7"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint7"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint7"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint7"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -1005,22 +1005,22 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm Receiving Sequence in Conf Registry while BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint8() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint8"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint8"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint8"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint8"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint8"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint8"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint8"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint8"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -1031,27 +1031,27 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm Receiving Sequence in Gov Registry while BuildMessage Disabled")
     public void testSendingLoadBalancingEndpoint9() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint9"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint9"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint9"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint9"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint9"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint9"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint9"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint9"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint9"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint9"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -1061,22 +1061,22 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm Receiving Sequence in Gov Registry while BuildMessage Disabled")
     public void testSendingLoadBalancingEndpoint10() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint10"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint10"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint10"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint10"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint10"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint10"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint10"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint10"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -1087,27 +1087,27 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm Receiving Sequence in Gov Registry while BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint11() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint11"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint11"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint11"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint11"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint11"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint11"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint11"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint11"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint11"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint11"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -1117,22 +1117,22 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm Receiving Sequence in Gov Registry while BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint12() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint12"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint12"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint12"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint12"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint12"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint12"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint12"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint12"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -1143,27 +1143,27 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm Receiving Sequence Dynamic BuildMessage Disabled")
     public void testSendingLoadBalancingEndpoint13() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint13"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint13"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint13"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint13"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint13"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint13"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint13"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint13"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint13"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint13"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -1173,22 +1173,22 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm Receiving Sequence Dynamic BuildMessage Disabled")
     public void testSendingLoadBalancingEndpoint14() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint14"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint14"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint14"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint14"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint14"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint14"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint14"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint14"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -1199,27 +1199,27 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the WeightedRoundRobin Algorithm Receiving Sequence Dynamic BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint15() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint15"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint15"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint15"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint15"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint15"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint15"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint15"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint15"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint15"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint15"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
@@ -1229,22 +1229,22 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test sending request to Load Balancing Endpoint With the RoundRobin Algorithm Receiving Sequence Dynamic BuildMessage Enabled")
     public void testSendingLoadBalancingEndpoint16() throws IOException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint16"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint16"),
                                                           "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint16"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint16"),
                                                    "http://localhost:9002/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint16"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint16"),
                                                    "http://localhost:9003/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadBalancingEndPoint16"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadBalancingEndPoint16"),
                                                    "http://localhost:9001/services/LBService1");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));

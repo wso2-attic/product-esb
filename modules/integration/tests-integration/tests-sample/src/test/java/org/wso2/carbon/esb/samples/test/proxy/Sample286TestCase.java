@@ -40,7 +40,7 @@ import static org.testng.Assert.assertNotNull;
  */
 public class Sample286TestCase extends ESBIntegrationTest {
 
-    private ServerConfigurationManager serverManager;
+    /*private ServerConfigurationManager serverManager;
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
@@ -56,7 +56,7 @@ public class Sample286TestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "proxy service with local transport")
     public void proxyServiceWithLocalTransportTest() throws AxisFault {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest
-                (getProxyServiceURL("LocalTransportProxy"), null, "WSO2");
+                (getProxyServiceURLHttp("LocalTransportProxy"), null, "WSO2");
         assertNotNull(response, "Response is null");
         assertEquals(response.getFirstElement().getFirstChildWithName
                 (new QName("http://services.samples/xsd", "symbol")).getText(),
@@ -69,10 +69,10 @@ public class Sample286TestCase extends ESBIntegrationTest {
             cleanup();
         } finally {
             Thread.sleep(3000);
-//            serverManager.restoreToLastConfiguration();
-//            serverManager = null;
+            serverManager.restoreToLastConfiguration();
+            serverManager = null;
         }
 
 
-    }
+    }*/
 }

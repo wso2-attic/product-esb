@@ -45,7 +45,7 @@ public class SetHeaderActionTestCase extends ESBIntegrationTest {
         OMElement response;
 
         response = sendReceive(
-                getProxyServiceURL("HeaderProxy"),
+                getProxyServiceURLHttp("HeaderProxy"),
                 "IBM");
         assertTrue(response.toString().contains("IBM"));
 

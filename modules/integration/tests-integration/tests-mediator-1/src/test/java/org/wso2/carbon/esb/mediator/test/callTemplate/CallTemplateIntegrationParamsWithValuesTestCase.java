@@ -41,7 +41,7 @@ public class CallTemplateIntegrationParamsWithValuesTestCase extends ESBIntegrat
     @Test(groups = {"wso2.esb"}, description = "Call Template Mediator Sample Parameters with" +
                                                " values assigned test")
     public void testXSLTTransformationWithTemplates() throws IOException, XMLStreamException {
-        OMElement response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL
+        OMElement response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp
                                                                            ("StockQuoteProxy"), null, "IBM");
        // logAdmin = new LoggingAdminClient(contextUrls.getBackEndUrl(),getSessionCookie());
         //TODO - Asserting the response from the log

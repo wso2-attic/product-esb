@@ -42,7 +42,7 @@ public class SetProtocolTestCase extends ESBIntegrationTest {
         OMElement response;
 
         response = axis2Client.sendSimpleStockQuoteRequest(
-                getProxyServiceURL("urlRewriteProxy"),
+                getProxyServiceURLHttp("urlRewriteProxy"),
                 addUrl,
                 "IBM");
         assertTrue(response.toString().contains("IBM"));

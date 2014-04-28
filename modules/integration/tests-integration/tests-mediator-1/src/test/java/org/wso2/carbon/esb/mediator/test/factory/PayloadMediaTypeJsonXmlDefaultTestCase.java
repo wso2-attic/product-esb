@@ -44,7 +44,7 @@ public class PayloadMediaTypeJsonXmlDefaultTestCase extends ESBIntegrationTest {
         // applying changes to esb - source view
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/payloadmediatype/" +
                 "media_type_xml_json_default.xml");
-        serviceURL = this.getProxyServiceURL("Dummy");
+        serviceURL = this.getProxyServiceURLHttp("Dummy");
     }
 
     @AfterClass(alwaysRun = true)

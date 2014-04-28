@@ -49,7 +49,7 @@ public class EnrichIntegrationAddPropertyAsChildInBodyTest extends ESBIntegratio
         String payload="<m:getQuote xmlns:m=\"http://services.samples\">" +
                        "</m:getQuote>";
         OMElement payloadOM= AXIOMUtil.stringToOM(payload);
-        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample3"),null,payloadOM);
+        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample3"),null,payloadOM);
         assertNotNull(response,"Response is null");
         assertEquals(response.getFirstElement().getFirstChildWithName
                 (new QName("http://services.samples/xsd", "symbol")).getText(),

@@ -42,7 +42,7 @@ public class Sample1TestCase extends ESBIntegrationTest {
     @Test
     public void filterMediatorWithSourceAndRegexTest() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest( getProxyServiceURL("StockQuote"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest( getProxyServiceURLHttp("StockQuote"), null, "WSO2");
 
         Assert.assertTrue(response.toString().contains("GetQuoteResponse"));
         Assert.assertTrue(response.toString().contains("WSO2 Company"));

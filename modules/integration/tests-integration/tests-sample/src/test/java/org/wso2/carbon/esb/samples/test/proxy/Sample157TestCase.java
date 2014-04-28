@@ -54,17 +54,17 @@ public class Sample157TestCase extends ESBIntegrationTest {
         client3.addHttpHeader("my_custom_header2", "bar");
         client3.addHttpHeader("my_custom_header3", "foo");
 
-        OMElement response1 = client1.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy"), null, "WSO2");
+        OMElement response1 = client1.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 
         Assert.assertTrue(response1.toString().contains("GetQuoteResponse"));
         Assert.assertTrue(response1.toString().contains("WSO2 Company"));
 
-        OMElement response2 = client2.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy"), null, "WSO2");
+        OMElement response2 = client2.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 
         Assert.assertTrue(response2.toString().contains("GetQuoteResponse"));
         Assert.assertTrue(response2.toString().contains("WSO2 Company"));
 
-        OMElement response3 = client3.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy") + "?qparam1=qpv_foo&qparam2=qpv_foo2", null, "WSO2");
+        OMElement response3 = client3.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy") + "?qparam1=qpv_foo&qparam2=qpv_foo2", null, "WSO2");
 
         Assert.assertTrue(response3.toString().contains("GetQuoteResponse"));
         Assert.assertTrue(response3.toString().contains("WSO2 Company"));

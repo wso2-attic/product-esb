@@ -48,7 +48,7 @@ public class EnrichIntegrationReplacePartOfMessageByBodyTest extends ESBIntegrat
     @Test(groups = "wso2.esb", description = "Tests-Replace part of the message defined by xpath from message body")
     public void testReplacePartOfMessageByBody() throws AxisFault, XMLStreamException {
 
-        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample6"), null,"WSO2");
+        response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample6"), null,"WSO2");
         assertNotNull(response,"Response is null");
         assertEquals(response.getFirstElement().getLocalName(), "getQuote",
                      "Tag does not match");

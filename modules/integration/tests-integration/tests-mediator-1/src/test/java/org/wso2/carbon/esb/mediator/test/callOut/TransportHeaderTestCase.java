@@ -47,7 +47,7 @@ public class TransportHeaderTestCase extends ESBIntegrationTest {
 	public void testContentTypeSoap11() throws Exception {
 		try {
 			axis2Client.sendSimpleStockQuoteRequest(
-					getProxyServiceURL("SimpleStockQuote"), null,
+					getProxyServiceURLHttp("SimpleStockQuote"), null,
 					"transport_header_test");
 		} catch (Exception e) {
 
@@ -62,7 +62,7 @@ public class TransportHeaderTestCase extends ESBIntegrationTest {
 	public void testContentTypeSoap12() throws Exception {
 		try {
 			axis2Client.sendSimpleStockQuoteRequest(
-					getProxyServiceURL("SimpleStockQuote"), null,
+					getProxyServiceURLHttp("SimpleStockQuote"), null,
 					"transport_header_test");
 		} catch (Exception e) {
 
