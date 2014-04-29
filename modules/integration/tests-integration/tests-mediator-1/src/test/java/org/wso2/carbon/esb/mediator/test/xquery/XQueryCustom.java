@@ -43,7 +43,7 @@ public class XQueryCustom extends ESBIntegrationTest {
         RequestUtil getQuoteCustomRequest = new RequestUtil();
 
         response = getQuoteCustomRequest.sendReceive(
-                getProxyServiceURL("StockQuoteProxy"),
+                getProxyServiceURLHttp("StockQuoteProxy"),
                 "IBM");
         assertNotNull(response, "Response message null");
         assertTrue(response.toString().contains("IBM"));

@@ -40,7 +40,7 @@ public class Sample151TestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Custom sequences and endpoints with proxy services")
     public void customSequencesAndEndpointsWithProxyServices() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy1"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy1"), null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
                 .getText();

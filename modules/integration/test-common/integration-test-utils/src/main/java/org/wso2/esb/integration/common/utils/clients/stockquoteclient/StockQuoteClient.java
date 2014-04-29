@@ -248,6 +248,7 @@ public class StockQuoteClient {
         if (httpHeaders.size() > 0) {
             options.setProperty(HTTPConstants.HTTP_HEADERS, httpHeaders);
         }
+        options.setTimeOutInMilliSeconds(45000);
       /*  options.setProperty(HTTPConstants.CHUNKED, Constants.VALUE_FALSE);
         options.setProperty(Constants.Configuration.MESSAGE_TYPE,HTTPConstants.MEDIA_TYPE_APPLICATION_ECHO_XML);
         options.setProperty(Constants.Configuration.DISABLE_SOAP_ACTION,Boolean.TRUE);*/
@@ -267,6 +268,7 @@ public class StockQuoteClient {
 
     public void destroy() {
         //to keep backward compatibility
+        ConfigurationContextProvider.getInstance().getConfigurationContext().cleanupContexts();
     }
 
     private OMElement createStandardRequest(String symbol) {

@@ -42,13 +42,13 @@ public class SwitchingBasedOnAddressTestCase extends ESBIntegrationTest {
     public void testSample2() throws RemoteException {
         OMElement response;
 
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("switchByAddress"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("switchByAddress"),
                                                            getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
                                                            "IBM");
         assertEquals("getQuote Response root element name mismatched", "getQuoteResponse", response.getLocalName());
         assertTrue("Symbol name mismatched", response.toString().contains("IBM"));
 
-        response = axis2Client.sendSimpleQuoteRequest(getProxyServiceURL("switchByAddress"),
+        response = axis2Client.sendSimpleQuoteRequest(getProxyServiceURLHttp("switchByAddress"),
                                                       getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
                                                       "MSTF");
         assertEquals("getSimpleQuote Response root element name mismatched", "getSimpleQuoteResponse", response.getLocalName());

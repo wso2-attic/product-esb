@@ -43,7 +43,7 @@ public class EnrichIntegrationSiblingsTest extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Tests-Adding custom content as sibling")
     public void testAddSibling() throws AxisFault, XMLStreamException {
 
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample6"), null, "IBM");
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample6"), null, "IBM");
         assertNotNull(response, "Response is null");
         assertEquals(response.getFirstElement().getFirstChildWithName
                 (new QName("http://services.samples/xsd", "test")).getText(),

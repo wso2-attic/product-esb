@@ -41,7 +41,7 @@ public class Sample200TestCase extends ESBIntegrationTest {
     public void sample200Test() throws Exception {
          //todo
         OMElement response = new SecureStockQuoteClient().sendSecuredSimpleStockQuoteRequest(null, null
-                , getProxyServiceURL("StockQuoteProxy"), null, "sample200");
+                , getProxyServiceURLHttp("StockQuoteProxy"), null, "sample200");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
                 .getText();

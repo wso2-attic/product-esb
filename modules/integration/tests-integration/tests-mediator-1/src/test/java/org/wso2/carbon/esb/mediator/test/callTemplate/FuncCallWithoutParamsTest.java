@@ -39,7 +39,7 @@ public class FuncCallWithoutParamsTest extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb"}, description = "Sample 750 Call Template Test")
     public void test() throws AxisFault {
 
-        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURL(proxyServiceName), null, "IBM");
+        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp(proxyServiceName), null, "IBM");
         Assert.assertNotNull(response, "Response message is null");
         Assert.assertTrue(response.toString().contains("CheckPriceResponse"), "Invalid Response");
         Assert.assertTrue(response.toString().contains("Price"), "Invalid Response");

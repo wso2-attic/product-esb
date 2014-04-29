@@ -40,7 +40,7 @@ public class XQueryIntegrationTestCase extends ESBIntegrationTest {
 
         response = axis2Client.sendCustomQuoteRequest(
                 null,
-                getProxyServiceURL("StockQuoteProxy"),
+                getProxyServiceURLHttp("StockQuoteProxy"),
                 "IBM");
         assertTrue(response.toString().contains("IBM"));
 

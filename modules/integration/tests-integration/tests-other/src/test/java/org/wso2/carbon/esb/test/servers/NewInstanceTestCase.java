@@ -16,47 +16,50 @@
 *under the License.
 */
 
-//package org.wso2.carbon.esb.test.servers;
-//
-//import org.testng.annotations.AfterClass;
-//import org.testng.annotations.BeforeClass;
-//import org.testng.annotations.Test;
-//import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
-//import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
-//import org.wso2.carbon.integration.common.extensions.carbonserver.MultipleServersManager;
-//
-//import javax.xml.xpath.XPathExpressionException;
-//import java.io.IOException;
-//import java.util.HashMap;
-//import java.util.Map;
-//
-//public class NewInstanceTestCase extends CarbonTestServerManager {
-//    public MultipleServersManager manager = new MultipleServersManager();
-//    public Map<String, String> startupParameterMap1 = new HashMap<String, String>();
-//    public Map<String, String> startupParameterMap2 = new HashMap<String, String>();
-//
-//    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-//    @BeforeClass(groups = {"esb.multi.server"})
-//    public void testStartServers() throws IOException, XPathExpressionException {
-//        startupParameterMap1.put("-DportOffset", "10");
-//        CarbonTestServerManager server1 = new CarbonTestServerManager(System.getProperty("carbon.zip"),
-//                                                                      startupParameterMap1);
-//        startupParameterMap2.put("-DportOffset", "20");
-//        CarbonTestServerManager server2 = new CarbonTestServerManager(System.getProperty("carbon.zip"),
-//                                                                      startupParameterMap2);
-//        manager.startServers(server1, server2);
-//    }
-//
-//    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-//    @Test(groups = {"esb.multi.server"})
-//    public void test() {
-//        System.out.println("Test server startup with system properties");
-//    }
-//
-//    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-//    @AfterClass
-//    public void clean() throws Exception {
-//        manager.stopAllServers();
-//    }
-//}
+package org.wso2.carbon.esb.test.servers;
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.carbon.integration.common.extensions.carbonserver.MultipleServersManager;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class NewInstanceTestCase {
+    private MultipleServersManager manager = new MultipleServersManager();
+    private Map<String, String> startupParameterMap1 = new HashMap<String, String>();
+    private Map<String, String> startupParameterMap2 = new HashMap<String, String>();
+    private AutomationContext context;
+
+
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
+    @BeforeClass(groups = {"esb.multi.server"})
+    public void testStartServers() throws Exception {
+        context = new AutomationContext();
+        startupParameterMap1.put("-DportOffset", "10");
+        CarbonTestServerManager server1 = new CarbonTestServerManager(context, System.getProperty("carbon.zip"),
+                                                                      startupParameterMap1);
+        startupParameterMap2.put("-DportOffset", "20");
+        CarbonTestServerManager server2 = new CarbonTestServerManager(context, System.getProperty("carbon.zip"),
+                                                                      startupParameterMap2);
+        manager.startServers(server1, server2);
+    }
+
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
+    @Test(groups = {"esb.multi.server"})
+    public void test() {
+        System.out.println("Test server startup with system properties");
+    }
+
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
+    @AfterClass
+    public void clean() throws Exception {
+        manager.stopAllServers();
+    }
+}
 

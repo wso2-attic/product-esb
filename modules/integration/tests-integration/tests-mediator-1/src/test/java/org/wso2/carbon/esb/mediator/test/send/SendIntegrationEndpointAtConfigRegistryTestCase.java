@@ -40,7 +40,7 @@ public class SendIntegrationEndpointAtConfigRegistryTestCase extends ESBIntegrat
     public void uploadSynapseConfig() throws Exception {
         super.init();
         resourceAdminServiceStub = new ResourceAdminServiceClient
-                (contextUrls.getBackEndUrl(), context.getUser().getUserName(), context.getUser().getPassword());
+                (contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName(), context.getContextTenant().getContextUser().getPassword());
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath
                 ("/artifacts/ESB/synapseconfig/send_mediator/synapse_config.xml");
@@ -59,7 +59,7 @@ public class SendIntegrationEndpointAtConfigRegistryTestCase extends ESBIntegrat
 
     private void uploadResourcesToConfigRegistry() throws Exception {
         new ResourceAdminServiceClient
-                (contextUrls.getBackEndUrl(), context.getUser().getUserName(), context.getUser().getPassword());
+                (contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName(), context.getContextTenant().getContextUser().getPassword());
         resourceAdminServiceStub.deleteResource("/_system/config/endpoints");
         resourceAdminServiceStub.addCollection("/_system/config/", "endpoints", "",
                                                "Contains test endpoint files");

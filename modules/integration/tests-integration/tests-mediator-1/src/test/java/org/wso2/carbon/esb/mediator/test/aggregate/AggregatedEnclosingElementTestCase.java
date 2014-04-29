@@ -40,7 +40,7 @@ public class AggregatedEnclosingElementTestCase extends ESBIntegrationTest {
         super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/aggregatedEnclosingElement/synapse.xml");
         aggregatedRequestClient = new AggregatedRequestClient();
-        aggregatedRequestClient.setProxyServiceUrl(getProxyServiceURL("aggregateMediatorTestProxy"));
+        aggregatedRequestClient.setProxyServiceUrl(getProxyServiceURLHttp("aggregateMediatorTestProxy"));
         aggregatedRequestClient.setSymbol("WSO2");
     }
 

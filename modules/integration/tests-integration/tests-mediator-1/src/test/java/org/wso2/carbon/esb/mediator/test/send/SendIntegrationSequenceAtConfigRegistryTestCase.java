@@ -45,7 +45,7 @@ public class SendIntegrationSequenceAtConfigRegistryTestCase extends ESBIntegrat
 
     @Test(groups = {"wso2.esb"},description = "Receiving sequence at config registry build message")
     public void testSequenceAtConfigRegistryBuildMessage() throws Exception {
-        OMElement response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("testSequenceAtConfigRegistryBuildMessage"),null,"WSO2");
+        OMElement response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("testSequenceAtConfigRegistryBuildMessage"),null,"WSO2");
         assertNotNull(response,"Response is null");
         assertEquals(response.getLocalName(),"getQuoteResponse","getQuoteResponse mismatch");
         OMElement omElement=response.getFirstElement();
@@ -55,7 +55,7 @@ public class SendIntegrationSequenceAtConfigRegistryTestCase extends ESBIntegrat
     }
     @Test(groups = {"wso2.esb"},description = "Receiving sequence at config registry not build message")
     public void testSequenceAtConfigRegistryBuildMessageNo() throws Exception {
-        OMElement response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("testSequenceAtConfigRegistryBuildMessageNo"),null,"WSO2");
+        OMElement response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("testSequenceAtConfigRegistryBuildMessageNo"),null,"WSO2");
         assertNotNull(response,"Response is null");
         assertEquals(response.getLocalName(),"getQuoteResponse","getQuoteResponse mismatch");
         OMElement omElement=response.getFirstElement();

@@ -43,10 +43,11 @@ public class EndPointMediaTypeTestCase extends ESBIntegrationTest {
     private final String KEY = "conf:/endpoint/testAutomationEndpoint";
     private final String DEFINED_ENDPOINT_NAME = "definedEndpoint";
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
-        endpointAdminClient = new EndPointAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
-        resourceAdmin = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
+        super.init();
+        endpointAdminClient = new EndPointAdminClient(contextUrls.getBackEndUrl(), sessionCookie);
+        resourceAdmin = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), sessionCookie);
     }
 
     @Test(groups = {"wso2.esb"}, description = "Test dynamic Endpoint media type - application/vnd.wso2.esb.endpoint")
@@ -103,7 +104,7 @@ public class EndPointMediaTypeTestCase extends ESBIntegrationTest {
 
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void destroy() throws EndpointAdminEndpointAdminException, RemoteException {
         if(isDefinedEndpointExist){
            endpointAdminClient.deleteEndpoint(DEFINED_ENDPOINT_NAME) ;

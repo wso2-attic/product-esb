@@ -29,7 +29,7 @@ public class CallTemplateIntegrationSample750FastXSLTTestCase extends ESBIntegra
     @Test(groups = {"wso2.esb"}, description = "Stereotyping Fast XSLT Transformations with Templates " +
             ":Test using sample 750")
     public void testFastXSLTTransformationWithTemplates() throws IOException, XMLStreamException {
-        OMElement response=axis2Client.sendCustomQuoteRequest(getProxyServiceURL("StockQuoteProxy")
+        OMElement response=axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy")
                 ,null,"WSO2");
         assertNotNull(response,"Response message is null");
         assertEquals(response.getLocalName(),"CheckPriceResponse","CheckPriceResponse not match");

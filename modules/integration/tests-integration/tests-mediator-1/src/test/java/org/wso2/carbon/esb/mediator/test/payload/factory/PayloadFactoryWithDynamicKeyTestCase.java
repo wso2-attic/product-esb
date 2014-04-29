@@ -55,8 +55,8 @@ public class PayloadFactoryWithDynamicKeyTestCase extends ESBIntegrationTest {
     private void uploadResourcesToConfigRegistry() throws Exception {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName(),
-                        context.getUser().getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName(),
+                        context.getContextTenant().getContextUser().getPassword());
 
         resourceAdminServiceStub.addCollection("/_system/config/", "payloadFactory", "",
                 "Contains test files for payload factory mediator");
@@ -74,8 +74,8 @@ public class PayloadFactoryWithDynamicKeyTestCase extends ESBIntegrationTest {
             XPathExpressionException {
 
         ResourceAdminServiceClient resourceAdminServiceStub =
-                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getUser().getUserName(),
-                        context.getUser().getPassword());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName(),
+                        context.getContextTenant().getContextUser().getPassword());
 
         resourceAdminServiceStub.deleteResource("/_system/config/payloadFactory");
         Thread.sleep(1000);

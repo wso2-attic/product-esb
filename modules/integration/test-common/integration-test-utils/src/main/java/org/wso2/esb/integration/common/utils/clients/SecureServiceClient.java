@@ -14,7 +14,7 @@
 *KIND, either express or implied.  See the License for the
 *specific language governing permissions and limitations
 *under the License.
-*//*
+*/
 
 package org.wso2.esb.integration.common.utils.clients;
 
@@ -23,7 +23,9 @@ import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
 import org.apache.axiom.om.OMNamespace;
 import org.osgi.framework.launch.FrameworkFactory;
+import org.wso2.carbon.automation.engine.context.beans.User;
 import org.wso2.esb.integration.common.utils.clients.axis2client.SecureAxisServiceClient;
+import org.wso2.esb.integration.common.utils.common.TestConfigurationProvider;
 
 import java.io.File;
 
@@ -35,7 +37,7 @@ public class SecureServiceClient {
     }
 
 
-    public OMElement sendSecuredStockQuoteRequest(UserInfo userInfo, String trpUrl,
+    public OMElement sendSecuredStockQuoteRequest(User userInfo, String trpUrl,
                                                   int securityPolicyId,
                                                   String symbol) throws Exception {
 
@@ -43,11 +45,11 @@ public class SecureServiceClient {
 
     }
 
-    public OMElement sendSecuredRequest(UserInfo userInfo, String trpUrl, int securityPolicyId,
+    public OMElement sendSecuredRequest(User userInfo, String trpUrl, int securityPolicyId,
                                         OMElement payload, String action) throws Exception {
-        boolean isTenant = FrameworkFactory.getFrameworkProperties(ProductConstant.ESB_SERVER_NAME)
-                .getEnvironmentSettings().is_runningOnStratos();
-        String policyPath = ProductConstant.getSecurityScenarios() + File.separator +
+        //todo isTenat
+        boolean isTenant = false;
+        String policyPath = TestConfigurationProvider.getSecurityPolicyLocation() + File.separator +
                             "scenario" + securityPolicyId + "-policy.xml";
         String keyStorePath;
         String userCertAlias;
@@ -55,14 +57,14 @@ public class SecureServiceClient {
         String keyStorePassword;
 
         if (isTenant) {
-            keyStorePath = ProductConstant.SYSTEM_TEST_RESOURCE_LOCATION + File.separator + "security"
+            keyStorePath = TestConfigurationProvider.getResourceLocation() + File.separator + "security"
                            + File.separator + "keystore" + File.separator + "clients.jks";
             userCertAlias = "clients";
             encryptionUser = "service";
             keyStorePassword = "automation";
 
         } else {
-            keyStorePath = ProductConstant.SYSTEM_TEST_RESOURCE_LOCATION + File.separator + "keystores"
+            keyStorePath = TestConfigurationProvider.getResourceLocation() + File.separator + "keystores"
                            + File.separator + "products" + File.separator + "wso2carbon.jks";
             userCertAlias = "wso2carbon";
             encryptionUser = "wso2carbon";
@@ -87,4 +89,4 @@ public class SecureServiceClient {
         return method;
     }
 }
-*/
+

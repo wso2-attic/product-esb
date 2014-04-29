@@ -44,6 +44,7 @@ public class SequenceTemplateMediaTypeTestCase extends ESBIntegrationTest{
 
     @BeforeClass
     public void init() throws Exception {
+        super.init();
         sequenceTemplateAdminServiceClient = new SequenceTemplateAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
         resourceAdmin = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }

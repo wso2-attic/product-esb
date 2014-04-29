@@ -44,6 +44,7 @@ public class EndpointTemplateMediaTypeTestCase extends ESBIntegrationTest{
 
     @BeforeClass
     public void init() throws Exception {
+        super.init();
         endpointTemplateAdminServiceClient = new EndpointTemplateAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
         resourceAdmin = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }

@@ -43,7 +43,7 @@ public class SequenceIntegrationNonExistingSequenceNegativeTestCase extends ESBI
     )
     public void testEnrichMediator() throws Exception {
         try {
-            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("enrichSample"), null,
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample"), null,
                                                     "WSO2");
         } catch (AxisFault e) {
 
