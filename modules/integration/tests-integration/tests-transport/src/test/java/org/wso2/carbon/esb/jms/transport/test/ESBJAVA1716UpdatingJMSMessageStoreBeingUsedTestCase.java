@@ -50,7 +50,7 @@ public class ESBJAVA1716UpdatingJMSMessageStoreBeingUsedTestCase extends ESBInte
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
         super.init();
-        synapseConfig = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/ESBJAVA-1716_messageStore.xml");
+        synapseConfig = esbUtils.loadResource("/artifacts/ESB/jms/transport/ESBJAVA-1716_messageStore.xml");
         synapseConfig = JMSEndpointManager.setConfigurations(synapseConfig);
         messageStoreAdminClient = new MessageStoreAdminClient(contextUrls.getBackEndUrl(),getSessionCookie());
         logViewer = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
@@ -72,7 +72,7 @@ public class ESBJAVA1716UpdatingJMSMessageStoreBeingUsedTestCase extends ESBInte
 
         AxisServiceClient client = new AxisServiceClient();
         for (int i = 0; i < 5; i++) {
-            client.sendRobust(Utils.getStockQuoteRequest("JMS"), getProxyServiceURL(proxyServiceName), "getQuote");
+            client.sendRobust(Utils.getStockQuoteRequest("JMS"), getProxyServiceURLHttp(proxyServiceName), "getQuote");
         }
 
         Thread.sleep(5000);

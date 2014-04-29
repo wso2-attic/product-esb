@@ -23,6 +23,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.base.CarbonBaseUtils;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
@@ -47,7 +49,7 @@ public class PttMaximumOpenConnections extends ESBIntegrationTest {
     public void init() throws Exception {
         super.init();
 
-        serverConfigurationManagerProp = new ServerConfigurationManager(context);
+        serverConfigurationManagerProp = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
         String pttFile = /*ProductConstant.getResourceLocations(ProductConstant.ESB_SERVER_NAME)*/FrameworkPathUtil.getSystemResourceLocation()  + "artifacts" + separator +
                 "ESB" +separator + "synapseconfig" + separator + "MaxOpenConnections" + separator
                          + "passthru-http.properties";

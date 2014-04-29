@@ -61,7 +61,7 @@ public class JMSMessageStoreProcRESTTestCase extends ESBIntegrationTest {
         super.init();
         headers.put("Test-Header-Field", "TestHeaderValue");
         //headers.put("Content-Type", "application/json");
-        OMElement synapse = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/JMSMessageStoreREST.xml");
+        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/JMSMessageStoreREST.xml");
         JMSQueueMessageConsumer consumer = new JMSQueueMessageConsumer(JMSBrokerConfigurationProvider.getInstance().getBrokerConfiguration());
         try {
             Thread.sleep(2000);

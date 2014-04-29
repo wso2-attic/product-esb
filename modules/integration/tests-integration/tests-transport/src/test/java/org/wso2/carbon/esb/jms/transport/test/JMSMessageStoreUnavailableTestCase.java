@@ -39,7 +39,7 @@ public class JMSMessageStoreUnavailableTestCase extends ESBIntegrationTest {
     public void testCustomProxy() throws Exception {
         OMElement response = null;
         try {
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("JMSStoreNotAvailableTestCaseProxy"), null, "WSO2");
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("JMSStoreNotAvailableTestCaseProxy"), null, "WSO2");
             fail("Must throw AxisFault");
         } catch (AxisFault axisFault) {
             assertEquals("Fault sequence invoked", axisFault.getMessage(), "Fault sequence is not called.");

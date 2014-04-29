@@ -18,9 +18,9 @@ public class JMSEndpointTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void deployeService() throws Exception {
         super.init();
-        OMElement synapse = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/jms_transport.xml");
+        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/jms_transport.xml");
         updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
-        endPointAdminClient = new EndPointAdminClient(contextUrls.getBackEndUrl(), context.getUser().getUserName(), context.getUser().getPassword());
+        endPointAdminClient = new EndPointAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
 
 

@@ -63,25 +63,23 @@ public class SpecialCharacterTestCase extends ESBIntegrationTest {
         httpServer.getRequestHandler().setInterceptor(interceptor);
 
 
-        super.init(5);
+        super.init();
 
         updateESBConfiguration(JMSEndpointManager.setConfigurations(
-                esbUtils.loadClasspathResource(File.separator + "artifacts" + File.separator + "ESB"
+                esbUtils.loadResource(File.separator + "artifacts" + File.separator + "ESB"
                                                + File.separator + "synapseconfig" + File.separator
                                                + "messageStore" + File.separator + "special_character.xml")));
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"})
     public void testSpecialCharacterMediation() throws Exception {
-//        serverConfigurationManager.restartGracefully();
-//        super.init(5);
         SimpleHttpClient httpClient = new SimpleHttpClient();
         String payload = "<test>This payload is üsed to check special character mediation</test>";
         try {
 
-            HttpResponse response = httpClient.doPost(getProxyServiceURL("InOutProxy"), null, payload, "application/xml");
+            HttpResponse response = httpClient.doPost(getProxyServiceURLHttp("InOutProxy"), null, payload, "application/xml");
         } catch (AxisFault e) {
             log.error("Response not expected here, Exception can be accepted ");
         }

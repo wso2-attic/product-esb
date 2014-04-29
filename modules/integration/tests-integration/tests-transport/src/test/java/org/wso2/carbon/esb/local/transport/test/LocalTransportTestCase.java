@@ -21,6 +21,8 @@ import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
@@ -42,9 +44,9 @@ public class LocalTransportTestCase extends ESBIntegrationTest {
         super.init();
 
         configurationManagerAxis2 =
-                new ServerConfigurationManager(context);
+                new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
         configurationManagerCarbon =
-                new ServerConfigurationManager(context);
+                new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
 
         File customAxisConfigAxis2 = new File(getESBResourceLocation() + File.separator +
                 "local" + File.separator + "axis2.xml");

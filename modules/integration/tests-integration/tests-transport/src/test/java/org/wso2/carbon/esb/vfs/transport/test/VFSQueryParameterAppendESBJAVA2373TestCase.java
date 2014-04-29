@@ -28,6 +28,8 @@ import org.testng.annotations.Test;
 import org.testng.Assert;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
@@ -41,7 +43,7 @@ public class VFSQueryParameterAppendESBJAVA2373TestCase extends ESBIntegrationTe
     public void init() throws Exception {
         super.init();
 
-        serverConfigurationManager = new ServerConfigurationManager(context);
+        serverConfigurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
         serverConfigurationManager.applyConfiguration(new File(getClass().getResource(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "vfsTransport" + File.separator + "axis2.xml").getPath()));
         super.init();
 
@@ -101,7 +103,7 @@ public class VFSQueryParameterAppendESBJAVA2373TestCase extends ESBIntegrationTe
                 "    </proxy>"));
 
         try {
-            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("VFSProxy")
+            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("VFSProxy")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         } catch(AxisFault e) {}
 
@@ -111,7 +113,7 @@ public class VFSQueryParameterAppendESBJAVA2373TestCase extends ESBIntegrationTe
         long fileSize = appendTrueFile.length();
 
         try {
-            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("VFSProxy")
+            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("VFSProxy")
                     , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         } catch(AxisFault e) {}
 
@@ -157,7 +159,7 @@ public class VFSQueryParameterAppendESBJAVA2373TestCase extends ESBIntegrationTe
                 "    </proxy>"));
 
         try {
-            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("VFSProxy")
+            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("VFSProxy")
                     , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         } catch(AxisFault e) {}
 
@@ -165,7 +167,7 @@ public class VFSQueryParameterAppendESBJAVA2373TestCase extends ESBIntegrationTe
         Assert.assertTrue(appendFalseFile.exists(), "File with transport.vfs.Append=false file has been created?");
 
         try {
-            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("VFSProxy")
+            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("VFSProxy")
                     , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         } catch(AxisFault e) {}
 

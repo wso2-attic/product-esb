@@ -23,6 +23,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
@@ -50,7 +52,7 @@ public class NhttpMaximumOpenConnections extends ESBIntegrationTest {
     public void init() throws Exception {
         super.init();
 
-	serverConfigurationManagerProp = new ServerConfigurationManager(context);
+	serverConfigurationManagerProp = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
         String nhttpFile = /*ProductConstant.getResourceLocations(ProductConstant.ESB_SERVER_NAME)*/FrameworkPathUtil.getSystemResourceLocation()  + "artifacts" + separator +
                 "ESB" +separator + "synapseconfig" + separator + "MaxOpenConnections" + separator
                 + "nhttp.properties";
@@ -59,7 +61,7 @@ public class NhttpMaximumOpenConnections extends ESBIntegrationTest {
 
         serverConfigurationManagerProp.applyConfiguration(srcFile);
 
-        serverConfigurationManagerAxis2 = new ServerConfigurationManager(context);
+        serverConfigurationManagerAxis2 = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
         String nhttpAxis2xml = /*ProductConstant.getResourceLocations(ProductConstant.ESB_SERVER_NAME)*/FrameworkPathUtil.getSystemResourceLocation()  + "artifacts" + separator +
                 "ESB" +separator +separator + "synapseconfig" + separator + "MaxOpenConnections" + separator + "nhttp"
                 + separator + "axis2.xml";

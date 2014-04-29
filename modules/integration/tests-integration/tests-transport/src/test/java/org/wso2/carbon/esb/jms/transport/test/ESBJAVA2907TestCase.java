@@ -23,14 +23,14 @@ public class ESBJAVA2907TestCase extends ESBIntegrationTest {
 	protected void init() throws Exception {
 		super.init();
 		OMElement synapse = esbUtils
-				.loadClasspathResource("/artifacts/ESB/synapseconfig/messageStore/ESBJAVA-2907StoreOmElementsAsProperties.xml");
+				.loadResource("/artifacts/ESB/synapseconfig/messageStore/ESBJAVA-2907StoreOmElementsAsProperties.xml");
 		updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
 	}
 
 	@Test(groups = "wso2.esb", description = "Test adding OMElements as properties when saving messages to the MessageStore")
 	public void testAddingOMElementPropertyToMessageStore() throws Exception {
 		AxisServiceClient client = new AxisServiceClient();
-		client.sendRobust(Utils.getStockQuoteRequest("IBM"), getProxyServiceURL("testPS"), "getQuote");
+		client.sendRobust(Utils.getStockQuoteRequest("IBM"), getProxyServiceURLHttp("testPS"), "getQuote");
 		LogViewerClient cli = new LogViewerClient(contextUrls.getBackEndUrl(),getSessionCookie());
 		LogEvent[] logs = cli.getAllSystemLogs();
 		Assert.assertNotNull(logs, "No logs found");

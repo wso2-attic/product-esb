@@ -33,7 +33,7 @@ public class JMSQueueAsProxyEndpointTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
         super.init();
-        OMElement synapse = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/jms_endpoint_proxy_service.xml");
+        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/jms_endpoint_proxy_service.xml");
         updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
 
     }
@@ -47,7 +47,7 @@ public class JMSQueueAsProxyEndpointTestCase extends ESBIntegrationTest {
             consumer.connect("TestQueuePox");
             //sending messages to proxy service
             for (int i = 0; i < 5; i++) {
-                client.sendRobust(Utils.getStockQuoteRequest("JMS"), getProxyServiceURL("proxyWithJmsEndpointPox"), "getQuote");
+                client.sendRobust(Utils.getStockQuoteRequest("JMS"), getProxyServiceURLHttp("proxyWithJmsEndpointPox"), "getQuote");
             }
             //wait for messages to reach the destination queue
             Thread.sleep(5000);
@@ -73,7 +73,7 @@ public class JMSQueueAsProxyEndpointTestCase extends ESBIntegrationTest {
             consumer.connect("TestQueueSoap11");
             //sending messages to proxy service
             for (int i = 0; i < 5; i++) {
-                client.sendRobust(Utils.getStockQuoteRequest("JMS"), getProxyServiceURL("proxyWithJmsEndpointSoap11"), "getQuote");
+                client.sendRobust(Utils.getStockQuoteRequest("JMS"), getProxyServiceURLHttp("proxyWithJmsEndpointSoap11"), "getQuote");
             }
             //wait for messages to reach the destination queue
             Thread.sleep(5000);
@@ -99,7 +99,7 @@ public class JMSQueueAsProxyEndpointTestCase extends ESBIntegrationTest {
             consumer.connect("TestQueueSoap12");
             //sending messages to proxy service
             for (int i = 0; i < 5; i++) {
-                client.sendRobust(Utils.getStockQuoteRequest("JMS"), getProxyServiceURL("proxyWithJmsEndpointSoap12"), "getQuote");
+                client.sendRobust(Utils.getStockQuoteRequest("JMS"), getProxyServiceURLHttp("proxyWithJmsEndpointSoap12"), "getQuote");
             }
             //wait for messages to reach the destination queue
             Thread.sleep(5000);

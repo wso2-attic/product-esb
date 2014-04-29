@@ -33,7 +33,7 @@ public class JMSMessageProcessorTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
         super.init();
-        OMElement synapse = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/jms_message_store_and_processor_service.xml");
+        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/jms_message_store_and_processor_service.xml");
         JMSQueueMessageConsumer consumer = new JMSQueueMessageConsumer(JMSBrokerConfigurationProvider.getInstance().getBrokerConfiguration());
         try {
             //to create a subscription for WSO2 MB. then JMSEndPoint queue is created in MB
@@ -50,7 +50,7 @@ public class JMSMessageProcessorTestCase extends ESBIntegrationTest {
 
         AxisServiceClient client = new AxisServiceClient();
         for (int i = 0; i < 5; i++) {
-            client.sendRobust(Utils.getStockQuoteRequest("JMS"), getProxyServiceURL("JMSStoreAndProcessorTestCaseProxy"), "getQuote");
+            client.sendRobust(Utils.getStockQuoteRequest("JMS"), getProxyServiceURLHttp("JMSStoreAndProcessorTestCaseProxy"), "getQuote");
         }
 
         Thread.sleep(10000);

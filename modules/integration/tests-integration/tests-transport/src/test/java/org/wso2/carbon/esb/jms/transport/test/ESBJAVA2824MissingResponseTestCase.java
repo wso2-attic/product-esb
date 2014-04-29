@@ -42,7 +42,7 @@ public class ESBJAVA2824MissingResponseTestCase extends ESBIntegrationTest {
 	@BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
         super.init();
-        OMElement synapse = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/jms_wait_response.xml");                             
+        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/jms_wait_response.xml");
         updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
     }	
 	

@@ -19,7 +19,7 @@ public class ESBJAVA1910TestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
         super.init();
-        OMElement synapse = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/HTTP_SC.xml");
+        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/HTTP_SC.xml");
         updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
         logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
@@ -30,7 +30,7 @@ public class ESBJAVA1910TestCase extends ESBIntegrationTest {
         int beforeLogCount = logViewerClient.getAllSystemLogs().length;
         AxisServiceClient client = new AxisServiceClient();
         Thread.sleep(3000); //force wait until message processor executes
-        client.sendRobust(Utils.getStockQuoteRequest("WSO2"), getProxyServiceURL("MessageStoreProxy"), "getQuote");
+        client.sendRobust(Utils.getStockQuoteRequest("WSO2"), getProxyServiceURLHttp("MessageStoreProxy"), "getQuote");
         Thread.sleep(5000);
         LogEvent[] logs = logViewerClient.getAllSystemLogs();
         boolean status = false;
