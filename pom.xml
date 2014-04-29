@@ -601,6 +601,12 @@
                 <version>${automation.framework.utills.version}</version>
                 <scope>test</scope>
             </dependency>
+	    <dependency>
+            	<groupId>org.wso2.carbon</groupId>
+            	<artifactId>org.wso2.carbon.integration.common.tests</artifactId>
+                <version>${automation.framework.utills.version}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.logging.admin.stub</artifactId>

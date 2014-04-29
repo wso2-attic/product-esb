@@ -9,23 +9,23 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestReportListener"/>
     </listeners>
 
-    <!--<test name="Resource-MediaType-Test" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.resource.test.*"/>-->
-        <!--</packages>-->
-    <!--</test>-->
+    <test name="Resource-MediaType-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.resource.test.*"/>
+        </packages>
+    </test>
 
-    <!--<test name="GZIP-Compression-Test" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.compression.test.gzip.*"/>-->
-        <!--</packages>-->
-    <!--</test>-->
+    <test name="GZIP-Compression-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.compression.test.gzip.*"/>
+        </packages>
+    </test>
 
-    <!--<test name="SecureVault-Test" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.securevalut.test.*"/>-->
-        <!--</packages>-->
-    <!--</test>-->
+    <test name="SecureVault-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.securevalut.test.*"/>
+        </packages>
+    </test>
 
     <test name="Scenario-health-care" preserve-order="true" verbose="2">
         <packages>
@@ -33,11 +33,11 @@
         </packages>
     </test>
 
-<!--    <test name="Test-Multiple-servers" preserve-order="true" verbose="2">
+    <test name="Test-Multiple-servers" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.test.servers.*"/>
         </packages>
-    </test>-->
+    </test>
 
 </suite>
 
