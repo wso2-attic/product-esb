@@ -50,7 +50,7 @@ public class PassthroughTransportHttpProxyTestCase extends ESBIntegrationTest {
         int beforeLogSize = logViewer.getAllSystemLogs().length;
 
         try {
-            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("HttpProxyTest"), "", "IBM");
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("HttpProxyTest"), "", "IBM");
         } catch (AxisFault expected) {
             //read timeout expected
         }

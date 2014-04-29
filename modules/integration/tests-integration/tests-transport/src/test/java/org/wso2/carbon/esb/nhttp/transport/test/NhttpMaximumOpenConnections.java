@@ -107,7 +107,7 @@ public class NhttpMaximumOpenConnections extends ESBIntegrationTest {
 
     private void initClients() {
         for (int i = 0; i < CONCURRENT_CLIENTS; i++) {
-            maxOpenConnectionClients[i] = new MaximumOpenConnectionsClient(getProxyServiceURL("MaxOpenConnectionsTest"));
+            maxOpenConnectionClients[i] = new MaximumOpenConnectionsClient(getProxyServiceURLHttp("MaxOpenConnectionsTest"));
         }
         for (int i = 0; i < CONCURRENT_CLIENTS; i++) {
             clients[i] = new Thread(maxOpenConnectionClients[i]);

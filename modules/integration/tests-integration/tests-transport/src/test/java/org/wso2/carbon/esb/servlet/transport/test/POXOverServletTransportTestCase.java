@@ -72,7 +72,7 @@ public class POXOverServletTransportTestCase extends ESBIntegrationTest {
         httpServer.getRequestHandler().setInterceptor(interceptor);
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(
-                getProxyServiceURL("SOAP2POX"),
+                getProxyServiceURLHttp("SOAP2POX"),
                 null, "WSO2");
         log.info("Response received: " + response);
         Assert.assertEquals(interceptor.getLastRequestURI(), "/services/SimpleStockQuoteService");

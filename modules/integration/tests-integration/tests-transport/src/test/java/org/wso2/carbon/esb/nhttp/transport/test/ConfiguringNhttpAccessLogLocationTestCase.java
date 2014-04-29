@@ -82,7 +82,7 @@ public class ConfiguringNhttpAccessLogLocationTestCase extends ESBIntegrationTes
     @Test(groups = "wso2.esb")
     public void testNhttpAccessLogLocation() throws Exception {
 
-        axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("NhttpLogsTestProxy"),
+        axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("NhttpLogsTestProxy"),
                                                 getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertTrue(new File(nhttpLogDir).listFiles().length > 0,
                           "nhttp access logs were not written to the configured directory " + nhttpLogDir);

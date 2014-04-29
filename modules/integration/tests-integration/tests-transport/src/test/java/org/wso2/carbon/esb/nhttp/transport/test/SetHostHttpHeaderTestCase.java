@@ -42,7 +42,7 @@ public class SetHostHttpHeaderTestCase extends ESBIntegrationTest {
     public void testSetHostHttpHeaderTestCase() throws Exception {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/http_transport/set_host_http_header.xml");
         OMElement response;
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("HttpHostHeaderSetProxy"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("HttpHostHeaderSetProxy"),
                                                            getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         assertTrue(response.toString().contains("WSO2"));
 
@@ -57,7 +57,7 @@ public class SetHostHttpHeaderTestCase extends ESBIntegrationTest {
     public void testSetHostHttpHeaderWithPortTestCase() throws Exception {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/http_transport/set_host_http_header_with_port.xml");
         OMElement response;
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("HttpHostHeaderSetProxyWithPort")
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("HttpHostHeaderSetProxyWithPort")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         assertTrue(response.toString().contains("WSO2"));
 

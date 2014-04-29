@@ -76,7 +76,7 @@ public class LocalTransportTestCase extends ESBIntegrationTest {
     public void testLocalTransportScenario() throws Exception {
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest
-                (getProxyServiceURL("LocalTransportProxy"), null, "WSO2");
+                (getProxyServiceURLHttp("LocalTransportProxy"), null, "WSO2");
 
         String symbol = response.getFirstElement().getFirstChildWithName
                 (new QName("http://services.samples/xsd", "symbol"))

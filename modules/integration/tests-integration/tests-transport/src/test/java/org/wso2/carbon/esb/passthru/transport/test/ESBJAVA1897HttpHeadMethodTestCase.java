@@ -61,7 +61,7 @@ public class ESBJAVA1897HttpHeadMethodTestCase extends  ESBIntegrationTest{
                 File.separator + "rest-service-proxy.xml";
         ESBTestCaseUtils util = new ESBTestCaseUtils();
         relativePath = relativePath.replaceAll("[\\\\/]", File.separator);
-        OMElement proxyConfig = util.loadClasspathResource(relativePath);
+        OMElement proxyConfig = util.loadResource(relativePath);
         addProxyService(proxyConfig);
         
     }
@@ -69,7 +69,7 @@ public class ESBJAVA1897HttpHeadMethodTestCase extends  ESBIntegrationTest{
     @Test(groups = "wso2.esb", description = "test to verify that the HTTP HEAD method works with PTT.")
 	public void testHttpHeadMethod() throws Exception {
     	Thread.sleep(5000);
-    	String restURL = (getProxyServiceURL(SERVICE_NAME)) + "/students";
+    	String restURL = (getProxyServiceURLHttp(SERVICE_NAME)) + "/students";
     	DefaultHttpClient httpclient = new DefaultHttpClient();
     	HttpHead httpHead = new HttpHead(restURL);
     	HttpResponse response = httpclient.execute(httpHead);

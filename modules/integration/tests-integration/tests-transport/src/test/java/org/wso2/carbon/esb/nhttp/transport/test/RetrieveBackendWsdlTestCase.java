@@ -40,7 +40,7 @@ public class RetrieveBackendWsdlTestCase extends ESBIntegrationTest {
         super.init();
         httpClientUtil = new HttpClientUtil();
 
-        backendWSDLUrl=getProxyServiceURL("StockQuoteProxy1")  +"?wsdl";
+        backendWSDLUrl=getProxyServiceURLHttp("StockQuoteProxy1")  +"?wsdl";
     }
 
     /**
