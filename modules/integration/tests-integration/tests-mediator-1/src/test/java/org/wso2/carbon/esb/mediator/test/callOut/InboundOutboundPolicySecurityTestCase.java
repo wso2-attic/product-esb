@@ -36,7 +36,8 @@ public class InboundOutboundPolicySecurityTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"})
     public void inboundOutboundPolicySecurityTest() throws AxisFault {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), "", "IBM");
+        log.info("inboundOutboundPolicySecurityTest getMainSequenceURL : " + getMainSequenceURL());
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getBackEndServiceUrl(""), "", "IBM");
         boolean ResponseContainsIBM = response.getFirstElement().toString().contains("IBM");
         assertTrue(ResponseContainsIBM);
     }

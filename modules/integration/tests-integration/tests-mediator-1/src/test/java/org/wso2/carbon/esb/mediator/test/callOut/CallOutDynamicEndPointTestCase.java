@@ -32,7 +32,7 @@ public class CallOutDynamicEndPointTestCase  extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.PLATFORM})
     public void TestDynamicEndPoints() throws AxisFault {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("CalloutProxy"), "", "IBM");    // send the simplestockquote request. service url is set at the synapse
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getBackEndServiceUrl("CalloutProxy"), "", "IBM");    // send the simplestockquote request. service url is set at the synapse
         boolean ResponseContainsIBM = response.getFirstElement().toString().contains("IBM");      //checks whether the  response contains IBM
          assertTrue(ResponseContainsIBM);
 

@@ -41,7 +41,7 @@ public class DynamicEndpointTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"})
     public void dynamicEndpointTest() throws AxisFault {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), "", "IBM");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getBackEndServiceUrl(""), "", "IBM");
         boolean ResponseContainsIBM = response.getFirstElement().toString().contains("IBM");
         assertTrue(ResponseContainsIBM);
     }

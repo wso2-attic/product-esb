@@ -40,6 +40,9 @@ public class AppendPathTestCase extends ESBIntegrationTest {
     public void appendPath(String addUrl) throws AxisFault {
         OMElement response;
 
+        //log.info("appendPath : " + getProxyServiceURLHttp("urlRewriteProxy"));
+        log.info("getBackEndServiceUrl : " + getBackEndServiceUrl(""));
+        log.info("addUrl : " + addUrl);
         response = axis2Client.sendSimpleStockQuoteRequest(
                 getProxyServiceURLHttp("urlRewriteProxy"),
                 addUrl,
@@ -56,9 +59,8 @@ public class AppendPathTestCase extends ESBIntegrationTest {
     @DataProvider(name = "addressingUrl")
     public Object[][] addressingUrl() {
         return new Object[][]{
-                {getBackEndServiceUrl("").substring(0, (getBackEndServiceUrl("").length() - 1))},
-                {getBackEndServiceUrl("").substring(0, (getBackEndServiceUrl("").length() - 1)).replace("http", "https")},
-
+                {getBackEndServiceUrl("").substring(0, (getBackEndServiceUrl("").length() /*- 1*/))},
+                {getBackEndServiceUrl("").substring(0, (getBackEndServiceUrl("").length() /*- 1*/)).replace("http", "https")},
         };
 
     }
