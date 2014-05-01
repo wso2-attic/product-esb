@@ -152,6 +152,9 @@ public abstract class ESBIntegrationTest {
         if (mainSequenceUrl.endsWith("/services")) {
             mainSequenceUrl = mainSequenceUrl.replace("/services", "");
         }
+        if(!mainSequenceUrl.endsWith("/")){
+           mainSequenceUrl = mainSequenceUrl + "/";
+        }
         return mainSequenceUrl;
 
     }
