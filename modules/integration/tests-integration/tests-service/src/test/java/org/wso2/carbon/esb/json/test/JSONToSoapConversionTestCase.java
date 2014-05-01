@@ -38,7 +38,7 @@ public class JSONToSoapConversionTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "JSON to SOAP conversion using sample 440")
     public void testJSONToSOAPConversion() throws Exception {
         JSONClient jsonClient = new JSONClient();
-        JSONObject response = jsonClient.sendSimpleStockQuoteRequest(getProxyServiceURL("JSONProxy"), "WSO2");
+        JSONObject response = jsonClient.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("JSONProxy"), "WSO2");
         assertNotNull(response, "Response is null");
         JSONObject returnElement = response.getJSONObject("getQuoteResponse");
         assertNotNull(returnElement, "return element contents is null");

@@ -58,7 +58,7 @@ public class EditPassThroughProxyServiceTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Invoking Pass through proxy http", dependsOnMethods = {"editProxyService"})
     public void testHttpPassThroughProxyAfterEditing() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL(proxyName),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(proxyName),
                                                                      null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
@@ -76,7 +76,7 @@ public class EditPassThroughProxyServiceTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Invoking Pass through proxy https", dependsOnMethods = {"editProxyService"})
     public void testHttpsPassThroughProxyAfterEditing() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceSecuredURL(proxyName),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttps(proxyName),
                                                                      null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))

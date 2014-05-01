@@ -41,7 +41,7 @@ public class WSDLOptionsSpecifiedInlineTestCase extends ESBIntegrationTest {
                                                     "- Publish WSDL Options - Specified Inline")
     public void testPassThroughProxy() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
                 .getText();

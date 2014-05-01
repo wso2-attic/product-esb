@@ -90,7 +90,7 @@ public class AddressEndpointTestCase extends ESBIntegrationTest {
             throws IOException, EndpointAdminEndpointAdminException,
                    LoginAuthenticationExceptionException,
                    XMLStreamException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint")
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPoint")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -102,7 +102,7 @@ public class AddressEndpointTestCase extends ESBIntegrationTest {
             throws IOException, EndpointAdminEndpointAdminException,
                    LoginAuthenticationExceptionException,
                    XMLStreamException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("addressEndPoint_Config_Reg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPoint_Config_Reg"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -115,7 +115,7 @@ public class AddressEndpointTestCase extends ESBIntegrationTest {
                    LoginAuthenticationExceptionException,
                    XMLStreamException {
         try {
-            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("invalidAddressEndPoint"),
+            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("invalidAddressEndPoint"),
                                                                          getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         } catch (Exception e) {
             Assert.assertTrue(e instanceof AxisFault);
@@ -128,7 +128,7 @@ public class AddressEndpointTestCase extends ESBIntegrationTest {
         ProxyServiceAdminClient proxyAdmin = new ProxyServiceAdminClient(context.getContextUrls().getBackEndUrl(), getSessionCookie());
         ESBTestCaseUtils testUtil = new ESBTestCaseUtils();
         try {
-            proxyAdmin.addProxyService(testUtil.loadClasspathResource("/artifacts/ESB/endpoint/addressEndpointConfig/invalidPropertyAddressEndPoint.xml"));
+            proxyAdmin.addProxyService(testUtil.loadResource("/artifacts/ESB/endpoint/addressEndpointConfig/invalidPropertyAddressEndPoint.xml"));
             Assert.fail("Proxy Deployment must failed due to Unsupported scope. but proxy deployment success");
         } catch (Exception e) {
             Assert.assertEquals(e.getCause().getMessage(),

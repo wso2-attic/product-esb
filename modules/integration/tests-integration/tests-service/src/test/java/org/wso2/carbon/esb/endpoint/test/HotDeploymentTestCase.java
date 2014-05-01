@@ -42,7 +42,7 @@ public class HotDeploymentTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
-        super.init(3);
+        super.init();
 
         endPointAdminClient = new EndPointAdminClient(context.getContextUrls().getBackEndUrl(), getSessionCookie());
         cleanupEndpoints();

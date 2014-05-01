@@ -82,7 +82,7 @@ public class URIWSDLEndpointTestCase extends ESBIntegrationTest {
     public void testSendingToWSDLEndpoint() throws IOException, EndpointAdminEndpointAdminException,
                                                    LoginAuthenticationExceptionException,
                                                    XMLStreamException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -94,7 +94,7 @@ public class URIWSDLEndpointTestCase extends ESBIntegrationTest {
             throws IOException, EndpointAdminEndpointAdminException,
                    LoginAuthenticationExceptionException,
                    XMLStreamException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("wsdlEndPoint_Config_Reg"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint_Config_Reg"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));

@@ -51,7 +51,7 @@ public class WSDLOptionsPickedFromRegistryTestCase extends ESBIntegrationTest {
                                              "- Publish WSDL Options - Picked from registry")
     public void testTransformerProxy() throws Exception {
 
-        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURL("StockQuoteProxy"), null, "WSO2");
+        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 
         assertNotNull(response, "Fault response message null");
 

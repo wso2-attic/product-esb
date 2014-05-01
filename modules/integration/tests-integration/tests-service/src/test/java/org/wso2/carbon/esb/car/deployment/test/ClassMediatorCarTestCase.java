@@ -79,7 +79,7 @@ public class ClassMediatorCarTestCase extends ESBIntegrationTest {
         OMElement response = null;
         try {
             response = axis2Client.sendCustomQuoteRequest(
-                    getProxyServiceURL(proxyName),
+                    getProxyServiceURLHttp(proxyName),
                     null,
                     "WSO2");
         } catch (AxisFault axisFault) {
@@ -135,7 +135,7 @@ public class ClassMediatorCarTestCase extends ESBIntegrationTest {
         OMElement response = null;
         try {
             response = axis2Client.sendCustomQuoteRequest(
-                    getProxyServiceURL(proxyName),
+                    getProxyServiceURLHttp(proxyName),
                     null,
                     "WSO2");
         } catch (AxisFault axisFault) {

@@ -150,7 +150,7 @@ public class FailOverWithDisabledErrors extends ESBIntegrationTest {
         }
         try {
             log.info("Sending request " + i + " of 7");
-            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("failover"), null, "WSO2");
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failover"), null, "WSO2");
         } catch (AxisFault e) {
             if (!e.getLocalizedMessage().contains("Read timed out")) {
                 throw e;

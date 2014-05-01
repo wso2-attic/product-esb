@@ -43,7 +43,7 @@ public class InvokingNonExistingProxyTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/customProxy/non_existing_proxy.xml");
         try {
-            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("NonExistingProxyService"), null, "WSO2");
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("NonExistingProxyService"), null, "WSO2");
         } catch (AxisFault fault) {
             assertEquals(fault.getMessage(), ESBTestConstant.INCOMING_MESSAGE_IS_NULL, "Error Message Mismatched");
         }
@@ -55,7 +55,7 @@ public class InvokingNonExistingProxyTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/customProxy/non_existing_proxy_route_to_main.xml");
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("NonExistingProxyService"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("NonExistingProxyService"), null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
                 .getText();

@@ -48,7 +48,7 @@ public class PickEndPointFromRegistryTestCase extends ESBIntegrationTest {
                                              "- Create a proxy service and pick the endpoint from registry (config)")
     public void testLoggingProxy() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
                 .getText();

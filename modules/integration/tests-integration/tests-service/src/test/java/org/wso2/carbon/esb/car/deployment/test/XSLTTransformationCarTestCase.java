@@ -76,7 +76,7 @@ public class XSLTTransformationCarTestCase extends ESBIntegrationTest {
         OMElement response = null;
         try {
             response = axis2Client.sendCustomQuoteRequest(
-                    getProxyServiceURL("xsltTransformationProxy"),
+                    getProxyServiceURLHttp("xsltTransformationProxy"),
                     null,
                     "XSLTTransformation");
         } catch (AxisFault axisFault) {
