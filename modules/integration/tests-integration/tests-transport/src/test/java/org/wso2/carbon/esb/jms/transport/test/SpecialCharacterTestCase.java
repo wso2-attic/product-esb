@@ -83,7 +83,7 @@ public class SpecialCharacterTestCase extends ESBIntegrationTest {
         } catch (AxisFault e) {
             log.error("Response not expected here, Exception can be accepted ");
         }
-        Thread.sleep(10000);
+        Thread.sleep(5000);
         assertTrue(interceptor.getPayload().contains(payload));
     }
 
@@ -114,14 +114,10 @@ public class SpecialCharacterTestCase extends ESBIntegrationTest {
     public void destroy() throws Exception {
         try {
             super.cleanup();
-            Thread.sleep(10000);
+            Thread.sleep(2000);
         } finally {
 
-            try {
-                httpServer.stop();
-            } catch (Exception e) {
-                log.warn("Error while shutting down the HTTP server", e);
-            }
+            httpServer.stop();
         }
     }
 }
