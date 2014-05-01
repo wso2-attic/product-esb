@@ -160,8 +160,8 @@ public abstract class ESBIntegrationTest {
         return contextUrls.getServiceUrl() + "/" + proxyServiceName;
     }
 
-    protected String getApiInvocationURL(String proxyServiceName) {
-        return getMainSequenceURL() + proxyServiceName;
+    protected String getApiInvocationURL(String apiName) {
+        return getMainSequenceURL() + apiName;
     }
 
     protected String getProxyServiceURLHttps(String proxyServiceName) {
