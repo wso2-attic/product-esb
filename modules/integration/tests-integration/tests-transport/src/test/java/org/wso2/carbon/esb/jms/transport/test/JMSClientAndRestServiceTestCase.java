@@ -37,32 +37,36 @@ import java.io.File;
  */
 public class JMSClientAndRestServiceTestCase extends ESBIntegrationTest {
 
+    private TomcatServerManager tomcatServerManager;
+
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
+        tomcatServerManager = new TomcatServerManager(
+                CustomerConfig.class.getName(), TomcatServerType.jaxrs.name(), 8060);
 
+        tomcatServerManager.startServer();  // staring tomcat server instance
+        Thread.sleep(5000);
         super.init();
 
         //loading new ESB configuration
-        loadESBConfigurationFromClasspath("/artifacts/ESB/jms/transport/" +
-                "jmsclient-and-restService.xml");
+        loadESBConfigurationFromClasspath("/artifacts/ESB/jms/transport/jmsclient-and-restService.xml");
     }
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
+        try {
+            tomcatServerManager.stop();
+        } finally {
+            super.cleanup();
+        }
 
-        super.cleanup();
     }
 
     @Test(groups = "wso2.esb", description = "JMS front-end client sending message to " +
-            "REST back-end service through ESB")
+                                             "REST back-end service through ESB")
     public void sendRequest() throws Exception {
 
         String basedirLocation = System.getProperty("basedir") + File.separator + "target";
-        TomcatServerManager tomcatServerManager = new TomcatServerManager(
-                CustomerConfig.class.getName(), TomcatServerType.jaxrs.name(), 8080);
-
-        tomcatServerManager.startServer();  // staring tomcat server instance
-        Thread.sleep(5000);
 
         // creation of jms queue message producer instance
         JMSQueueMessageProducer sender = new JMSQueueMessageProducer
@@ -87,7 +91,7 @@ public class JMSClientAndRestServiceTestCase extends ESBIntegrationTest {
 
             // ensure message pop operation is successful
             Assert.assertNotNull(consumer.popMessage(),
-                    "JMS Message Processor not send message to endpoint");
+                                 "JMS Message Processor not send message to endpoint");
 
         } finally {
             consumer.disconnect();

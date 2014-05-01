@@ -48,18 +48,14 @@ import static org.testng.Assert.assertTrue;
 public class SpecialCharacterTestCase extends ESBIntegrationTest {
 
 
-    private TestRequestInterceptor interceptor = new TestRequestInterceptor();
+    private TestRequestInterceptor interceptor;
     private SimpleHttpServer httpServer;
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         httpServer = new SimpleHttpServer();
-        try {
-            httpServer.start();
-            Thread.sleep(5000);
-        } catch (IOException e) {
-            log.error("Error while starting the HTTP server", e);
-        }
+        httpServer.start();
+        Thread.sleep(5000);
 
         interceptor = new TestRequestInterceptor();
         httpServer.getRequestHandler().setInterceptor(interceptor);
@@ -91,7 +87,7 @@ public class SpecialCharacterTestCase extends ESBIntegrationTest {
         assertTrue(interceptor.getPayload().contains(payload));
     }
 
-    private static class TestRequestInterceptor implements RequestInterceptor {
+    private class TestRequestInterceptor implements RequestInterceptor {
 
         private String payload;
 

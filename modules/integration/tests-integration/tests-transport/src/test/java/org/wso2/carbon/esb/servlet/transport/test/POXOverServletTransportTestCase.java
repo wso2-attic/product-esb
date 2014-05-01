@@ -99,7 +99,7 @@ public class POXOverServletTransportTestCase extends ESBIntegrationTest {
 
     }
 
-    private static class TestRequestInterceptor implements RequestInterceptor {
+    private class TestRequestInterceptor implements RequestInterceptor {
 
         private String lastRequestURI;
 
