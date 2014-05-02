@@ -13,7 +13,7 @@
             <property name="OUT_ONLY" value="true"/>
             <send>
                <endpoint>
-                  <address uri="http://localhost:8080/rest/api/customerservice/customers"/>
+                  <address uri="http://localhost:8060/rest/api/customerservice/customers"/>
                </endpoint>
             </send>
          </inSequence>

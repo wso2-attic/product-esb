@@ -37,15 +37,15 @@ public class ProxyServiceHttpToHttpsServiceTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/proxyservice/http_to_https_proxy.xml");
         updateESBConfiguration(AXIOMUtil.stringToOM(
-                esbUtils.loadClasspathResource("/artifacts/ESB/proxyconfig/proxy/proxyservice/http_to_https_proxy.xml")
-                        .toString().replace("HTTPS_PROXY_URL", getProxyServiceSecuredURL("StockQuoteProxyHttps"))));
+                esbUtils.loadResource("/artifacts/ESB/proxyconfig/proxy/proxyservice/http_to_https_proxy.xml")
+                        .toString().replace("HTTPS_PROXY_URL", getProxyServiceURLHttps("StockQuoteProxyHttps"))));
 
     }
 
     @Test(groups = "wso2.esb", description = "proxy service http calling https proxy service as the endpoint")
     public void testHttpsViaHttpProxy() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxyHttp"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxyHttp"), null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
                 .getText();

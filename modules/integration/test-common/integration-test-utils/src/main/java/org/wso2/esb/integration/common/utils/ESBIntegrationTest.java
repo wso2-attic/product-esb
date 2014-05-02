@@ -152,6 +152,9 @@ public abstract class ESBIntegrationTest {
         if (mainSequenceUrl.endsWith("/services")) {
             mainSequenceUrl = mainSequenceUrl.replace("/services", "");
         }
+        if(!mainSequenceUrl.endsWith("/")){
+           mainSequenceUrl = mainSequenceUrl + "/";
+        }
         return mainSequenceUrl;
 
     }
@@ -160,8 +163,8 @@ public abstract class ESBIntegrationTest {
         return contextUrls.getServiceUrl() + "/" + proxyServiceName;
     }
 
-    protected String getApiInvocationURL(String proxyServiceName) {
-        return getMainSequenceURL() + proxyServiceName;
+    protected String getApiInvocationURL(String apiName) {
+        return getMainSequenceURL() + apiName;
     }
 
     protected String getProxyServiceURLHttps(String proxyServiceName) {

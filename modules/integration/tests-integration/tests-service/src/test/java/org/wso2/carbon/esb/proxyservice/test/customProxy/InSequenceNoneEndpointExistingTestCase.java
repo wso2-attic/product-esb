@@ -41,7 +41,7 @@ public class InSequenceNoneEndpointExistingTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "- Custom proxy -In sequence none endpoint existing endpoint")
     public void testCustomProxy() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
                 .getText();

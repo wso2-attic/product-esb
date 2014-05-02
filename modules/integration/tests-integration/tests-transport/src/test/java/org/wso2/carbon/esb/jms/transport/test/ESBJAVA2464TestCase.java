@@ -1,21 +1,19 @@
 package org.wso2.carbon.esb.jms.transport.test;
 
-import java.io.File;
-
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.automation.extensions.servers.jmsserver.client.JMSQueueMessageProducer;
-import org.wso2.carbon.automation.extensions.servers.jmsserver.controller.JMSBrokerController;
-import org.wso2.carbon.automation.extensions.servers.jmsserver.controller.config.JMSBrokerConfiguration;
 import org.wso2.carbon.automation.extensions.servers.jmsserver.controller.config.JMSBrokerConfigurationProvider;
+import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
-import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+
+import java.io.File;
 
 public class ESBJAVA2464TestCase extends ESBIntegrationTest {
 

@@ -39,7 +39,7 @@ public class EndpointFormatRestPTTestCase extends ESBIntegrationTest {
         @Test(groups = {"wso2.esb"}, description = "Test whether message is not built when endpoint format is set to rest")
         public void testEndpointFormatRestPTTestCase() throws Exception {
 
-            URL endpoint = new URL(getProxyServiceURL("EndpointFormatRestPTTestProxy"));
+            URL endpoint = new URL(getProxyServiceURLHttp("EndpointFormatRestPTTestProxy"));
             Reader data = new StringReader("<Customer>\n" +
                                            "    <name>WSO2</name>\n" +
                                            "</Customer>");

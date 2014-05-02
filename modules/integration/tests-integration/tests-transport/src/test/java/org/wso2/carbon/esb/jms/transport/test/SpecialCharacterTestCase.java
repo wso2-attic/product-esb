@@ -22,21 +22,23 @@ import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.automation.extensions.servers.httpserver.RequestInterceptor;
-import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
 import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpServer;
+import org.wso2.carbon.automation.test.utils.http.client.HttpRequestUtil;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.JMSEndpointManager;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.testng.Assert.assertTrue;
 
@@ -46,18 +48,14 @@ import static org.testng.Assert.assertTrue;
 public class SpecialCharacterTestCase extends ESBIntegrationTest {
 
 
-    private TestRequestInterceptor interceptor = new TestRequestInterceptor();
+    private TestRequestInterceptor interceptor;
     private SimpleHttpServer httpServer;
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         httpServer = new SimpleHttpServer();
-        try {
-            httpServer.start();
-            Thread.sleep(5000);
-        } catch (IOException e) {
-            log.error("Error while starting the HTTP server", e);
-        }
+        httpServer.start();
+        Thread.sleep(5000);
 
         interceptor = new TestRequestInterceptor();
         httpServer.getRequestHandler().setInterceptor(interceptor);
@@ -67,27 +65,29 @@ public class SpecialCharacterTestCase extends ESBIntegrationTest {
 
         updateESBConfiguration(JMSEndpointManager.setConfigurations(
                 esbUtils.loadResource(File.separator + "artifacts" + File.separator + "ESB"
-                                               + File.separator + "synapseconfig" + File.separator
-                                               + "messageStore" + File.separator + "special_character.xml")));
+                                      + File.separator + "synapseconfig" + File.separator
+                                      + "messageStore" + File.separator + "special_character.xml")));
 
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"})
     public void testSpecialCharacterMediation() throws Exception {
-        SimpleHttpClient httpClient = new SimpleHttpClient();
+//        SimpleHttpClient httpClient = new SimpleHttpClient();
         String payload = "<test>This payload is üsed to check special character mediation</test>";
         try {
-
-            HttpResponse response = httpClient.doPost(getProxyServiceURLHttp("InOutProxy"), null, payload, "application/xml");
+            Map<String, String> header = new HashMap<String, String>();
+            header.put("Content-Type", "application/xml");
+//            HttpResponse response = httpClient.doPost(getProxyServiceURLHttp("InOutProxy"), null, payload, "application/xml");
+            HttpRequestUtil.doPost(new URL(getProxyServiceURLHttp("InOutProxy")), payload, header);
         } catch (AxisFault e) {
             log.error("Response not expected here, Exception can be accepted ");
         }
-        Thread.sleep(10000);
+        Thread.sleep(5000);
         assertTrue(interceptor.getPayload().contains(payload));
     }
 
-    private static class TestRequestInterceptor implements RequestInterceptor {
+    private class TestRequestInterceptor implements RequestInterceptor {
 
         private String payload;
 
@@ -114,14 +114,10 @@ public class SpecialCharacterTestCase extends ESBIntegrationTest {
     public void destroy() throws Exception {
         try {
             super.cleanup();
-            Thread.sleep(10000);
+            Thread.sleep(2000);
         } finally {
 
-            try {
-                httpServer.stop();
-            } catch (Exception e) {
-                log.warn("Error while shutting down the HTTP server", e);
-            }
+            httpServer.stop();
         }
     }
 }

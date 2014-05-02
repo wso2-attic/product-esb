@@ -68,7 +68,7 @@ public class RestPeopleTestCase extends ESBIntegrationTest {
                 "         </person>\n" +
                 "   <soapenv:Body/>\n" +
                 "</soapenv:Envelope>");
-        axisServiceClient.fireAndForget(putRequest,getProxyServiceURL("peoplePutProxy"),"urn:mediate");
+        axisServiceClient.fireAndForget(putRequest,getProxyServiceURLHttp("peoplePutProxy"),"urn:mediate");
 
 
         tomcatServerManager.stop();

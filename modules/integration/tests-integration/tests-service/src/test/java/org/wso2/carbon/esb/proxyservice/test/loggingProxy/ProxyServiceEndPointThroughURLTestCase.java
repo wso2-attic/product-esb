@@ -43,7 +43,7 @@ public class ProxyServiceEndPointThroughURLTestCase extends ESBIntegrationTest {
     public void testLoggingProxy() throws Exception {
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest
-                (getProxyServiceURL("StockQuoteLoggingProxy"), null, "WSO2");
+                (getProxyServiceURLHttp("StockQuoteLoggingProxy"), null, "WSO2");
 
         String lastPrice = response.getFirstElement().
                 getFirstChildWithName(new QName("http://services.samples/xsd", "last")).getText();

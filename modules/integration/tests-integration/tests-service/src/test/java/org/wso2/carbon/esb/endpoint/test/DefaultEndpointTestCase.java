@@ -99,7 +99,7 @@ public class DefaultEndpointTestCase extends ESBIntegrationTest {
             throws IOException, EndpointAdminEndpointAdminException,
                    LoginAuthenticationExceptionException,
                    XMLStreamException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint")
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -112,7 +112,7 @@ public class DefaultEndpointTestCase extends ESBIntegrationTest {
             throws IOException, EndpointAdminEndpointAdminException,
                    LoginAuthenticationExceptionException,
                    XMLStreamException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Config_Reg")
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Config_Reg")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -130,21 +130,21 @@ public class DefaultEndpointTestCase extends ESBIntegrationTest {
         axis2Server1.stop();
         OMElement response = null;
         try {
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPointWithSuspension"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPointWithSuspension"),
                                                                "http://localhost:9001/services/SimpleStockQuoteService", "WSO2");
         } catch (Exception e) {
             Assert.assertTrue(e instanceof org.apache.axis2.AxisFault);
         }
         axis2Server1.start();
         try {
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPointWithSuspension"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPointWithSuspension"),
                                                                "http://localhost:9001/services/SimpleStockQuoteService", "WSO2");
         } catch (Exception e) {
             Assert.assertTrue(e instanceof org.apache.axis2.AxisFault);
         }
         Assert.assertNull(response);
         Thread.sleep(10000);
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Config_Reg"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Config_Reg"),
                                                            "http://localhost:9001/services/SimpleStockQuoteService", "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));

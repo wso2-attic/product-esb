@@ -49,7 +49,7 @@ public class SimpleStockQuoteRESTTestCase extends ESBIntegrationTest {
                                                    LoginAuthenticationExceptionException,
                                                    XMLStreamException {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest_REST(getProxyServiceURL("restCheck")
+        OMElement response = axis2Client.sendSimpleStockQuoteRequestREST(getProxyServiceURLHttp("restCheck")
                 , null, "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
