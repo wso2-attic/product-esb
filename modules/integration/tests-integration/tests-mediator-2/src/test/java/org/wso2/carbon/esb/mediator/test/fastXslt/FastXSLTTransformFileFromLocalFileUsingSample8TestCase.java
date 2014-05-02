@@ -23,9 +23,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-import org.wso2.esb.integration.common.utils.ESBTestConstant;import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
-import java.io.IOException;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
+
+import javax.xml.namespace.QName;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -40,8 +40,7 @@ public class FastXSLTTransformFileFromLocalFileUsingSample8TestCase extends ESBI
     }
 
     @Test(groups = {"wso2.esb"}, description = "Test for local entry XSLT file refer from File System by FastXSLT - Sample 8")
-    public void testLocalEntryFastXSLTFileFromLocalFile() throws IOException,
-            XMLStreamException {
+    public void testLocalEntryFastXSLTFileFromLocalFile() throws Exception {
         OMElement response = axis2Client.sendCustomQuoteRequest(getMainSequenceURL()
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         assertNotNull(response, "Response message is null");

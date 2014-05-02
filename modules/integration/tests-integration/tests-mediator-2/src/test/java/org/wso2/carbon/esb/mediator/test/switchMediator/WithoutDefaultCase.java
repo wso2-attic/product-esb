@@ -24,6 +24,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
+
+import javax.xml.xpath.XPathExpressionException;
+
 import static org.testng.Assert.fail;
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -41,7 +44,7 @@ public class WithoutDefaultCase extends ESBIntegrationTest {
     }
 
     @Test(groups = {"wso2.esb"}, description = "Without default case scenario")
-    public void testSwitchWithoutDefault() throws AxisFault {
+    public void testSwitchWithoutDefault() throws AxisFault, XPathExpressionException {
         OMElement response;
 
         response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("switchSample1"),

@@ -26,6 +26,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
+
+import javax.xml.xpath.XPathExpressionException;
+
 import static org.testng.Assert.assertEquals;
 
 public class InvokeOnErrorSequenceFromSwitchIntegrationTestCase extends ESBIntegrationTest {
@@ -37,7 +40,7 @@ public class InvokeOnErrorSequenceFromSwitchIntegrationTestCase extends ESBInteg
 
 
     @Test(groups = {"wso2.esb"}, description = "Switch Mediator : Check whether Onerror sequence is executed if an error happens inside a switch")
-    public void testSample2() throws AxisFault {
+    public void testSample2() throws AxisFault, XPathExpressionException {
         //Send mediator will be defined inside onError sequence so that a response will come only is onError sequence is executed.
         try {
             axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(),

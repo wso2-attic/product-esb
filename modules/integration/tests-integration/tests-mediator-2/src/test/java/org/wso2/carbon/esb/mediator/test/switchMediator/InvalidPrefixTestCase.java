@@ -18,14 +18,11 @@
 package org.wso2.carbon.esb.mediator.test.switchMediator;
 
 import org.apache.axis2.AxisFault;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-
-import java.rmi.RemoteException;
-
-import org.testng.Assert;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 public class InvalidPrefixTestCase extends ESBIntegrationTest {
 
@@ -36,7 +33,7 @@ public class InvalidPrefixTestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = {"wso2.esb"}, description = "SwitchMediator:Negative Case 2: Invalid prefix")
-    public void testSample2() throws RemoteException {
+    public void testSample2() throws Exception {
 
         try {
 
