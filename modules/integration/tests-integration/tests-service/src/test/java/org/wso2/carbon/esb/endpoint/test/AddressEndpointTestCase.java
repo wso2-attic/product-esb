@@ -45,7 +45,9 @@ import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 public class AddressEndpointTestCase extends ESBIntegrationTest {
 
@@ -87,9 +89,7 @@ public class AddressEndpointTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "Sending a Message to a Address endpoint")
     public void testSendingToAddressEndpoint()
-            throws IOException, EndpointAdminEndpointAdminException,
-                   LoginAuthenticationExceptionException,
-                   XMLStreamException {
+            throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPoint")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
@@ -99,9 +99,7 @@ public class AddressEndpointTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "Sending a Message to a Address endpoint in Config Reg")
     public void testSendingToAddressEndpoint_ConfigReg()
-            throws IOException, EndpointAdminEndpointAdminException,
-                   LoginAuthenticationExceptionException,
-                   XMLStreamException {
+            throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("addressEndPoint_Config_Reg"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
