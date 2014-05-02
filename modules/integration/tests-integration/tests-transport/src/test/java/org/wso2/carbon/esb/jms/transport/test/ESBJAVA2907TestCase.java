@@ -31,6 +31,7 @@ public class ESBJAVA2907TestCase extends ESBIntegrationTest {
 	public void testAddingOMElementPropertyToMessageStore() throws Exception {
 		AxisServiceClient client = new AxisServiceClient();
 		client.sendRobust(Utils.getStockQuoteRequest("IBM"), getProxyServiceURLHttp("testPS"), "getQuote");
+        Thread.sleep(5000);
 		LogViewerClient cli = new LogViewerClient(contextUrls.getBackEndUrl(),getSessionCookie());
 		LogEvent[] logs = cli.getAllSystemLogs();
 		Assert.assertNotNull(logs, "No logs found");
