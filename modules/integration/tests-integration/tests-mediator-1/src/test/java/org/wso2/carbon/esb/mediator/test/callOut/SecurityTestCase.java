@@ -24,6 +24,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import static org.testng.Assert.assertTrue;
 
 public class SecurityTestCase extends ESBIntegrationTest {
@@ -35,7 +37,7 @@ public class SecurityTestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = {"wso2.esb"})
-    public void securityTest() throws AxisFault {
+    public void securityTest() throws AxisFault, XPathExpressionException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getBackEndServiceUrl(""), "", "IBM");
         boolean ResponseContainsIBM = response.getFirstElement().toString().contains("IBM");
         assertTrue(ResponseContainsIBM);

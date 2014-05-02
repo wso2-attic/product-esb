@@ -26,6 +26,8 @@ import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import static org.testng.Assert.assertTrue;
 
 public class ProtocolReWriteFromProperty extends ESBIntegrationTest {
@@ -55,7 +57,7 @@ public class ProtocolReWriteFromProperty extends ESBIntegrationTest {
     }
 
     @DataProvider(name = "addressingUrl")
-    public Object[][] addressingUrl() {
+    public Object[][] addressingUrl() throws XPathExpressionException {
         return new Object[][]{
                 {getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE).replace("http", "https")},
 //               {"jms://localhost:9000/services/SimpleStockQuoteService"},

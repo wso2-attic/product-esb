@@ -25,6 +25,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import static org.testng.Assert.assertTrue;
 
 public class AppendPathTestCase extends ESBIntegrationTest {
@@ -37,7 +39,7 @@ public class AppendPathTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "Append text to path",
           dataProvider = "addressingUrl")
-    public void appendPath(String addUrl) throws AxisFault {
+    public void appendPath(String addUrl) throws AxisFault, XPathExpressionException {
         OMElement response;
 
         //log.info("appendPath : " + getProxyServiceURLHttp("urlRewriteProxy"));
@@ -57,7 +59,7 @@ public class AppendPathTestCase extends ESBIntegrationTest {
     }
 
     @DataProvider(name = "addressingUrl")
-    public Object[][] addressingUrl() {
+    public Object[][] addressingUrl() throws XPathExpressionException {
         return new Object[][]{
                 {getBackEndServiceUrl("").substring(0, (getBackEndServiceUrl("").length() /*- 1*/))},
                 {getBackEndServiceUrl("").substring(0, (getBackEndServiceUrl("").length() /*- 1*/)).replace("http", "https")},

@@ -25,6 +25,7 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.net.URL;
 
@@ -54,7 +55,7 @@ public class EnrichIntegrationReplaceInlineContentFromConfigRegistryTestCase
 
     @Test(groups = {"wso2.esb"}, description = "This test is to replace a part of a message from resgistry file content")
     public void replaceMessageContentFromRegistryFileContentTest()
-            throws IOException, XMLStreamException {
+            throws IOException, XMLStreamException, XPathExpressionException {
         OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp(
                 "enrichSample1"), getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "IBM");
         assertNotNull(response, "Response message is null");

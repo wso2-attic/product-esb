@@ -25,6 +25,8 @@ import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import static org.testng.Assert.assertTrue;
 
 public class TransformPayloadWhenArgsValueTestCase extends ESBIntegrationTest {
@@ -36,7 +38,7 @@ public class TransformPayloadWhenArgsValueTestCase extends ESBIntegrationTest {
 
 
     @Test(groups = {"wso2.esb"}, description = "Do transformation with a Payload Format that has arguments - Argument Type : Value")
-    public void transformPayloadByArgsValue() throws AxisFault {
+    public void transformPayloadByArgsValue() throws AxisFault, XPathExpressionException {
         OMElement response;
 
         response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(),

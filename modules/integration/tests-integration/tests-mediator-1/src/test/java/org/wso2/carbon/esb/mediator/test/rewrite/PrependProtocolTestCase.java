@@ -26,6 +26,8 @@ import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import static org.testng.Assert.assertTrue;
 
 public class PrependProtocolTestCase extends ESBIntegrationTest {
@@ -55,7 +57,7 @@ public class PrependProtocolTestCase extends ESBIntegrationTest {
     }
 
     @DataProvider(name = "addressingUrl")
-    public Object[][] addressingUrl() {
+    public Object[][] addressingUrl() throws XPathExpressionException {
         return new Object[][]{
                // {"tp://localhost:9000/services/SimpleStockQuoteService"},
 //                {"ttp://localhost:9000/services/SimpleStockQuoteService"},

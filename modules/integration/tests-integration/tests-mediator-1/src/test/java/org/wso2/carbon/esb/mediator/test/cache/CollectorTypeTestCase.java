@@ -28,6 +28,7 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
 import javax.xml.namespace.QName;
+import javax.xml.xpath.XPathExpressionException;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -47,7 +48,7 @@ public class CollectorTypeTestCase extends ESBIntegrationTest {
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"}, description = "Creating Collector Type Mediator Test Case")
-    public void testCollectorTypeMediator() throws AxisFault {
+    public void testCollectorTypeMediator() throws AxisFault, XPathExpressionException {
         OMElement response;
         try {
             response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL()

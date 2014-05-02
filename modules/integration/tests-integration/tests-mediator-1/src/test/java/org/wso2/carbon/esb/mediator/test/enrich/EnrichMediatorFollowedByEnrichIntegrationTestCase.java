@@ -27,8 +27,6 @@ import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
-import java.io.IOException;
 import java.net.URL;
 
 import static org.testng.Assert.assertEquals;
@@ -49,8 +47,7 @@ public class EnrichMediatorFollowedByEnrichIntegrationTestCase extends ESBIntegr
     }
 
     @Test(groups = {"wso2.esb"}, description = "Enrich mediator followed by enrich mediator")
-    public void enrichMediatorFollowedByEnrichMediator() throws IOException,
-                                                                XMLStreamException {
+    public void enrichMediatorFollowedByEnrichMediator() throws Exception {
         OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp(
                 "enrichSample1"), getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "IBM");
         assertNotNull(response, "Response message is null");

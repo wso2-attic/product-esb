@@ -26,6 +26,8 @@ import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
+import javax.xml.xpath.XPathExpressionException;
+
 public class SOAPNSBasedSwitching extends ESBIntegrationTest {
 
 	@BeforeClass(alwaysRun = true)
@@ -40,7 +42,7 @@ public class SOAPNSBasedSwitching extends ESBIntegrationTest {
 	}
 
 	@Test(groups = { "wso2.esb" }, description = "Switch Mediator:Write xpath expression using SOAP 1.1/1.2 NS Send SOAP 1.1/1.2 response and assert switch")
-	public void testXPathOnDifferentSOAPNS() throws AxisFault {
+	public void testXPathOnDifferentSOAPNS() throws AxisFault, XPathExpressionException {
 		OMElement response;
 
 		response =
