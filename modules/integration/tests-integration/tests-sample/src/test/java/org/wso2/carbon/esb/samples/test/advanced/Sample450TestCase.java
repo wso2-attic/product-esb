@@ -25,6 +25,8 @@ import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import static org.testng.Assert.assertTrue;
 
 public class Sample450TestCase extends ESBIntegrationTest {
@@ -36,7 +38,7 @@ public class Sample450TestCase extends ESBIntegrationTest {
 
 
     @Test(groups = {"wso2.esb"}, description = "Sample 450:  Introduction to the URL Rewrite Mediator")
-    public void changeUrlPath() throws AxisFault {
+    public void changeUrlPath() throws AxisFault, XPathExpressionException {
         OMElement response;
 
         response = axis2Client.sendSimpleStockQuoteRequest(

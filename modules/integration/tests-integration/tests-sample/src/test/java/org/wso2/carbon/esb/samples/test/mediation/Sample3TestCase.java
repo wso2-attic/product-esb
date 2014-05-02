@@ -17,10 +17,9 @@
  */
 package org.wso2.carbon.esb.samples.test.mediation;
 
-import org.apache.axis2.AxisFault;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
@@ -35,7 +34,7 @@ public class Sample3TestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb"}, enabled = false, description = "Sample 3: Add a static value as an" +
                                                                 " inline text entry With get-property expression, " +
                                                                 "use that value inside property mediator to be included as a part of a log")
-    public void testLocalValueInPropertyMediator() throws AxisFault {
+    public void testLocalValueInPropertyMediator() throws Exception {
         axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(),
                                                 getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
                                                 "IBM");
