@@ -17,16 +17,18 @@
 */
 package org.wso2.carbon.esb.mediator.test.payload.factory;
 
-import org.apache.axiom.om.OMElement;
-import org.apache.axis2.AxisFault;
-import org.apache.http.HttpResponse;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
+import org.wso2.carbon.automation.test.utils.http.client.HttpURLConnectionClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-import org.wso2.carbon.esb.mediator.test.payload.factory.util.RequestUtil;
-import org.wso2.esb.integration.common.utils.ESBTestConstant;
+
+import java.io.Reader;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.net.URL;
 
 import static org.testng.Assert.assertTrue;
 
@@ -55,11 +57,13 @@ public class JsonFormat_IncomingXml_ArgsXmlExpression_WithOutStream_TestCase ext
 
         String url="http://localhost:8280/services/Dummy";
         String contentType="application/xml";
-        HttpResponse httpResponse = httpClient.doPost(url, null, payload, contentType);
-        String responsePayload = httpClient.getResponsePayload(httpResponse);
+        Reader data = new StringReader(payload);
+        Writer writer = new StringWriter();
 
+        String responsePayload = HttpURLConnectionClient.sendPostRequestAndReadResponse(data,
+                new URL(url), writer, contentType);
 
-        assertTrue(responsePayload.contains("wso2"), "Symbol wso2 not found in response message");
+        assertTrue(responsePayload.contains("wso2"), "Symbol wso2 not found in response message"); // fail
 
     }
 
