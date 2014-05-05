@@ -49,7 +49,7 @@ public class WSDLOptionsPickedFromRegistryTestCase extends ESBIntegrationTest {
                                              "- Publish WSDL Options - Picked from registry")
     public void testWSDLBasedProxy() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxy"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
                 .getText();

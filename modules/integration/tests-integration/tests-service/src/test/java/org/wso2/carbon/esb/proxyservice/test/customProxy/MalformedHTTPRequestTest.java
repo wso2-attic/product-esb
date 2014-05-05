@@ -51,26 +51,26 @@ public class MalformedHTTPRequestTest extends ESBIntegrationTest {
 		for (int i = 0; i < 3; i++) {
 			try {
 				//tests a url with a space
-				httpClientUtil.sendGetRequest(getProxyServiceURL("simpleProxy").replace("services", " services")+"?WSO2", null);
+				httpClientUtil.sendGetRequest(getProxyServiceURLHttp("simpleProxy").replace("services", " services")+"?WSO2", null);
 			} catch (Exception e) {
 			}
 		}
         //check whether ESB is still stable by sending a correct request
 		OMElement response =
-		                     axis2Client.sendSimpleQuoteRequest(getProxyServiceURL("simpleProxy"), null,
+		                     axis2Client.sendSimpleQuoteRequest(getProxyServiceURLHttp("simpleProxy"), null,
 		                                                   "WSO2");
 		Assert.assertTrue(response.toString().contains("WSO2"));
         //Send three malformed requests
 		for (int i = 0; i < 3; i++) {
 			try {
 				//tests a url with double slash
-				httpClientUtil.sendGetRequest(getProxyServiceURL("simpleProxy").replace("services/", "services//") + "?WSO2", null);
+				httpClientUtil.sendGetRequest(getProxyServiceURLHttp("simpleProxy").replace("services/", "services//") + "?WSO2", null);
 			} catch (Exception e) {
 			}
 		}
         //check whether ESB is still stable by sending a correct request
 		OMElement response2 =
-		                      axis2Client.sendSimpleQuoteRequest(getProxyServiceURL("simpleProxy"),
+		                      axis2Client.sendSimpleQuoteRequest(getProxyServiceURLHttp("simpleProxy"),
 		                                                    null, "WSO2");
 		Assert.assertTrue(response2.toString().contains("WSO2"));
         //Send three malformed requests
@@ -83,7 +83,7 @@ public class MalformedHTTPRequestTest extends ESBIntegrationTest {
 		}
         //check whether ESB is still stable by sending a correct request
 		OMElement response3 =
-		                      axis2Client.sendSimpleQuoteRequest(getProxyServiceURL("simpleProxy"),
+		                      axis2Client.sendSimpleQuoteRequest(getProxyServiceURLHttp("simpleProxy"),
 		                                                    null, "WSO2");
 		Assert.assertTrue(response3.toString().contains("WSO2"));
 	}

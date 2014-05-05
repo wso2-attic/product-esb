@@ -35,7 +35,7 @@ public class JMSMapMessageTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
         super.init();
-        OMElement synapse = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/jms_map_message_proxy_service.xml");
+        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/jms_map_message_proxy_service.xml");
         updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
     }
 

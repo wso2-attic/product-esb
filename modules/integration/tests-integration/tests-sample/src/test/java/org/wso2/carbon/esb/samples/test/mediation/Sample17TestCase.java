@@ -21,7 +21,6 @@ import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
 import org.apache.axiom.om.OMNamespace;
-import org.apache.axis2.AxisFault;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -39,7 +38,7 @@ public class Sample17TestCase extends ESBIntegrationTest {
 
 
     @Test(groups = {"wso2.esb"}, description = "Sample 17:  Introduction to payload Mediator")
-    public void transformUsingPayloadFactory() throws AxisFault {
+    public void transformUsingPayloadFactory() throws Exception {
         OMElement response;
         response = axis2Client.sendSimpleStockQuoteRequest(
                 getMainSequenceURL(),

@@ -26,6 +26,7 @@ import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
@@ -43,7 +44,8 @@ public class LocalEntryReferXSLTTransformFileFromLocalFileUsingSample8TestCase e
 
     @Test(groups = {"wso2.esb"}, description = "Test for local entry XSLT file refer from File System")
     public void testLocalEntryXSLTFileFromLocalFile() throws IOException,
-            XMLStreamException {
+                                                             XMLStreamException,
+                                                             XPathExpressionException {
         OMElement response = axis2Client.sendCustomQuoteRequest(getMainSequenceURL()
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         assertNotNull(response, "Response message is null");

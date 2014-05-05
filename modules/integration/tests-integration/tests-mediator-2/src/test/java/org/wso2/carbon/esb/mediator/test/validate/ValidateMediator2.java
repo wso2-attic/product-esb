@@ -24,6 +24,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
+
+import javax.xml.xpath.XPathExpressionException;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -36,7 +39,7 @@ public class ValidateMediator2 extends ESBIntegrationTest {
     }
 
     @Test(groups = {"wso2.esb"})
-    public void TestWithoutXpath() {
+    public void TestWithoutXpath() throws XPathExpressionException {
         OMElement response = null;
         try {
             response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL()

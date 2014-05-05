@@ -24,6 +24,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.esb.tcp.transport.test.util.TcpClient;
@@ -36,7 +38,8 @@ public class TcpTransportProxyServiceTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        serverConfigurationManager = new ServerConfigurationManager(context);
+        //parsing the super admin context to restart the server
+        serverConfigurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
         serverConfigurationManager.applyConfiguration(new File(getESBResourceLocation() + File.separator
                                                                + "tcp" + File.separator + "transport" + File.separator + "axis2.xml"));
         super.init();
@@ -44,14 +47,14 @@ public class TcpTransportProxyServiceTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Proxy service with tcp transport")
     public void tcpTransportProxy() throws Exception {
         TcpClient tcpClient = new TcpClient();
         OMElement response;
         String tcProxyUrl;
         if (isRunningOnStratos()) {
-            tcProxyUrl = "tcp://localhost:8290/services/t/" + context.getTenant().getDomain() + "/tcpProxy/tcpProxy?contentType=application/soap+xml";
+            tcProxyUrl = "tcp://localhost:8290/services/t/" + context.getContextTenant().getDomain() + "/tcpProxy/tcpProxy?contentType=application/soap+xml";
         } else {
             tcProxyUrl = "tcp://localhost:8290/services/tcpProxy/tcpProxy?contentType=application/soap+xml";
         }

@@ -62,7 +62,7 @@ public class UrlEncordedFormPostViaProxyTestCase extends ESBIntegrationTest {
         client.getParams().setConnectionManagerTimeout(5000);
 
         // Create POST method
-        String url = getProxyServiceURL("MyProxy");
+        String url = getProxyServiceURLHttp("MyProxy");
         PostMethod method = new PostMethod(url);
         // Set parameters on POST
         String value1 = "Hello World";

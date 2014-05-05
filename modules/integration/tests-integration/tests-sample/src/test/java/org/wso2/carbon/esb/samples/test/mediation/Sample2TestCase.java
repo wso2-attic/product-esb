@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
+import javax.xml.xpath.XPathExpressionException;
 import java.rmi.RemoteException;
 
 import static org.testng.AssertJUnit.assertTrue;
@@ -39,7 +40,7 @@ public class Sample2TestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = {"wso2.esb"}, description = "Sample 2: CBR with the Switch-case mediator, using message properties")
-    public void testSample2() throws RemoteException {
+    public void testSample2() throws RemoteException, XPathExpressionException {
         OMElement response;
 
         response =

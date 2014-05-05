@@ -9,8 +9,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
-import org.wso2.esb.integration.common.clients.feature.mgt.FeatureManagementAdminServiceClient;
+//import org.wso2.esb.integration.common.clients.feature.mgt.FeatureManagementAdminServiceClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.carbon.esb.hl7.transport.test.sample.HL7Sender;
 import org.wso2.carbon.esb.hl7.transport.test.sample.HL7Server;
@@ -23,7 +25,7 @@ import org.wso2.carbon.esb.hl7.transport.test.sample.HL7Server;
  */
 public class HL7TestCase extends ESBIntegrationTest {
 	private ServerConfigurationManager serverConfigurationManager;
-	private FeatureManagementAdminServiceClient featureClient;
+//	private FeatureManagementAdminServiceClient featureClient;
 
 	private static String featureRepoLocation = "C:\\Downloads\\p2-repo\\p2-repo"; // fix
 																				   // this
@@ -34,12 +36,12 @@ public class HL7TestCase extends ESBIntegrationTest {
 	@BeforeClass(alwaysRun = true)
 	public void init() throws Exception {
 		super.init();
-		serverConfigurationManager = new ServerConfigurationManager(context);
+		serverConfigurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
 		serverConfigurationManager.applyConfiguration(new File(getESBResourceLocation()  +File.separator +"hl7Transport" + File.separator +"axis2.xml"));
 		super.init();
-		featureClient = new FeatureManagementAdminServiceClient(getSessionCookie(), contextUrls.getBackEndUrl());
+		/*featureClient = new FeatureManagementAdminServiceClient(getSessionCookie(), contextUrls.getBackEndUrl());
 		featureClient.addRepository(featureRepoLocation, featureRepoName);
-		featureClient.installFeature(hl7FeatureID, hl7Vesrion);
+		featureClient.installFeature(hl7FeatureID, hl7Vesrion);*/
 		serverConfigurationManager.restartGracefully();
 	}
 

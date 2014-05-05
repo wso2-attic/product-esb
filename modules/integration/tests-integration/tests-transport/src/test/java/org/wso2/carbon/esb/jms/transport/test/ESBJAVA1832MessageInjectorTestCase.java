@@ -40,8 +40,8 @@ public class ESBJAVA1832MessageInjectorTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
         super.init();
-        OMElement msgProessor = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/msgInjection/msg_store.xml");
-        OMElement task = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/msgInjection/msg_injecting_task.xml");
+        OMElement msgProessor = esbUtils.loadResource("/artifacts/ESB/jms/transport/msgInjection/msg_store.xml");
+        OMElement task = esbUtils.loadResource("/artifacts/ESB/jms/transport/msgInjection/msg_injecting_task.xml");
         updateESBConfiguration(JMSEndpointManager.setConfigurations(msgProessor));
         esbUtils.addScheduleTask(contextUrls.getBackEndUrl(),getSessionCookie(), task);
     }

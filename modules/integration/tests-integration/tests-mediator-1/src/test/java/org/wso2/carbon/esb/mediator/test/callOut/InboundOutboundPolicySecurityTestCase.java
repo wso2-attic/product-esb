@@ -24,6 +24,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import static org.testng.Assert.assertTrue;
 
 public class InboundOutboundPolicySecurityTestCase extends ESBIntegrationTest {
@@ -35,7 +37,7 @@ public class InboundOutboundPolicySecurityTestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = {"wso2.esb"})
-    public void inboundOutboundPolicySecurityTest() throws AxisFault {
+    public void inboundOutboundPolicySecurityTest() throws AxisFault, XPathExpressionException {
         log.info("inboundOutboundPolicySecurityTest getMainSequenceURL : " + getMainSequenceURL());
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getBackEndServiceUrl(""), "", "IBM");
         boolean ResponseContainsIBM = response.getFirstElement().toString().contains("IBM");

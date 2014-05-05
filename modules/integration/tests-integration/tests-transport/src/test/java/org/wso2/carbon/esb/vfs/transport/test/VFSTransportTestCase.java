@@ -26,6 +26,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
@@ -49,7 +51,7 @@ public class VFSTransportTestCase extends ESBIntegrationTest {
                                               File.separator + "synapseconfig" + File.separator +
                                               "vfsTransport" + File.separator).getPath();
 
-        serverConfigurationManager = new ServerConfigurationManager(context);
+        serverConfigurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
         serverConfigurationManager.applyConfiguration(new File(pathToVfsDir + File.separator + "axis2.xml"));
         super.init();
 
@@ -663,25 +665,22 @@ public class VFSTransportTestCase extends ESBIntegrationTest {
                                                "transport.vfs.FileURI = Linux Path," +
                                                " transport.vfs.ContentType = text/xml, " +
                                                "transport.vfs.FileNamePattern = - *\\.xml " +
-                                               "transport.vfs.MoveAfterProcess = Invalid")
-    public void testVFSProxyMoveAfterProcess_Invalid()
-            throws Exception {
+                                               "transport.vfs.MoveAfterProcess = processed")
+    public void testVFSProxyMoveAfterProcessInvalidFile() throws Exception {
 
         addVFSProxy21();
 
-        File sourceFile = new File(pathToVfsDir + File.separator + "test.xml");
+        File sourceFile = new File(pathToVfsDir + File.separator + "fail.xml");
         File outfile = new File(pathToVfsDir + "test" + File.separator + "out" + File.separator + "out.xml");
-        File targetFile = new File(pathToVfsDir + "test" + File.separator + "in" + File.separator + "test.xml");
-        File originalFile = new File(pathToVfsDir + "test" + File.separator + "invalid" + File.separator + "test.xml");
+        File targetFile = new File(pathToVfsDir + "test" + File.separator + "in" + File.separator + "fail.xml");
+        File originalFile = new File(pathToVfsDir + "test" + File.separator + "processed" + File.separator + "test.xml");
         try {
             FileUtils.copyFile(sourceFile, targetFile);
             Thread.sleep(2000);
 
-            Assert.assertTrue(outfile.exists());
-            String vfsOut = FileUtils.readFileToString(outfile);
-            Assert.assertTrue(vfsOut.contains("WSO2 Company"));
-            Assert.assertTrue(!originalFile.exists());
-            Assert.assertTrue(targetFile.exists());
+            Assert.assertFalse(outfile.exists(), "Out put file found");
+            Assert.assertFalse(originalFile.exists(), "Input file moved even if file processing is failed");
+            Assert.assertFalse(targetFile.exists(), "Input file found after reading the file");
         } finally {
             deleteFile(targetFile);
             deleteFile(outfile);
@@ -692,11 +691,43 @@ public class VFSTransportTestCase extends ESBIntegrationTest {
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"}, description = "Sending a file through VFS Transport : " +
+                                               "transport.vfs.FileURI = Linux Path," +
+                                               " transport.vfs.ContentType = text/xml, " +
+                                               "transport.vfs.FileNamePattern = - *\\.xml " +
+                                               "transport.vfs.MoveAfterProcess = processed")
+    public void testVFSProxyMoveAfterProcess() throws Exception {
+
+        addVFSProxy21();
+
+        File sourceFile = new File(pathToVfsDir + File.separator + "test.xml");
+        File outfile = new File(pathToVfsDir + "test" + File.separator + "out" + File.separator + "out.xml");
+        File targetFile = new File(pathToVfsDir + "test" + File.separator + "in" + File.separator + "test.xml");
+        File originalFileAfterProcessed = new File(pathToVfsDir + "test" + File.separator + "processed" + File.separator + "test.xml");
+        try {
+            FileUtils.copyFile(sourceFile, targetFile);
+            Thread.sleep(2000);
+
+            Assert.assertTrue(outfile.exists(), "out put file not found");
+            String vfsOut = FileUtils.readFileToString(outfile);
+            Assert.assertTrue(vfsOut.contains("WSO2 Company"), "Invalid Response message. >" + vfsOut);
+            //input file should be moved to processed directory after processing the input file
+            Assert.assertTrue(originalFileAfterProcessed.exists(), "Input file is not moved after processing the file");
+            Assert.assertFalse(targetFile.exists(), "Input file is exist after processing the input file");
+        } finally {
+            deleteFile(targetFile);
+            deleteFile(outfile);
+            deleteFile(originalFileAfterProcessed);
+            removeProxy("VFSProxy21");
+        }
+    }
+
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
+    @Test(groups = {"wso2.esb"}, description = "Sending a file through VFS Transport : " +
                                                "transport.vfs.FileURI = Linux Path, " +
                                                "transport.vfs.ContentType = text/xml, " +
                                                "transport.vfs.FileNamePattern = - *\\.xml " +
                                                "transport.vfs.MoveAfterFailure = Invalid")
-    public void testVFSProxyMoveAfterFailure_Invalid()
+    public void testVFSProxyMoveAfterFailure()
             throws Exception {
 
         addVFSProxy22();
@@ -705,22 +736,22 @@ public class VFSTransportTestCase extends ESBIntegrationTest {
         File targetFile = new File(pathToVfsDir + "test" + File.separator + "in" + File.separator + "fail.xml");
         File outfile = new File(pathToVfsDir + "test" + File.separator + "out" + File.separator + "out.xml");
         File originalFile = new File(pathToVfsDir + "test" + File.separator + "invalid" + File.separator + "fail.xml");
-        File lockFile = new File(pathToVfsDir + "test" + File.separator + "in" + File.separator +
-                                 "fail.xml.lock");
+        /*File lockFile = new File(pathToVfsDir + "test" + File.separator + "in" + File.separator +
+                                 "fail.xml.lock");*/
         try {
             FileUtils.copyFile(sourceFile, targetFile);
             Thread.sleep(2000);
 
-            Assert.assertTrue(!outfile.exists());
-            Assert.assertTrue(!originalFile.exists());
-            Assert.assertTrue(targetFile.exists());
-            //reason - https://wso2.org/jira/browse/ESBJAVA-1838
-            Assert.assertTrue(lockFile.exists(), "lock file doesn't exists");
+            Assert.assertFalse(outfile.exists(), "Out put file found");
+            Assert.assertTrue(originalFile.exists(), "Input file not moved even if failure happens while building message");
+            Assert.assertFalse(targetFile.exists(), "input file not found even if it is invalid file");
+            //reason to bellow assert- https://wso2.org/jira/browse/ESBJAVA-1838
+//            Assert.assertTrue(lockFile.exists(), "lock file doesn't exists"); commented since  it is fixed now
         } finally {
             deleteFile(targetFile);
             deleteFile(outfile);
             deleteFile(originalFile);
-            deleteFile(lockFile);
+//            deleteFile(lockFile);
             removeProxy("VFSProxy22");
         }
     }
@@ -1284,7 +1315,7 @@ public class VFSTransportTestCase extends ESBIntegrationTest {
                                              "                <parameter name=\"transport.vfs.FileNamePattern\">.*\\.xml</parameter>\n" +
                                              "                <parameter name=\"transport.PollInterval\">1</parameter>\n" +
                                              "                <parameter name=\"transport.vfs.ActionAfterProcess\">MOVE</parameter>\n" +
-                                             "                <parameter name=\"transport.vfs.MoveAfterProcess\">file://" + pathToVfsDir + "test" + File.separator + "invalid" + File.separator + "</parameter>" +
+                                             "                <parameter name=\"transport.vfs.MoveAfterProcess\">file://" + pathToVfsDir + "test" + File.separator + "processed" + File.separator + "</parameter>" +
                                              "                <target>\n" +
                                              "                        <endpoint>\n" +
                                              "                                <address format=\"soap12\" uri=\"http://localhost:9000/services/SimpleStockQuoteService\"/>\n" +

@@ -34,7 +34,7 @@ public class JMSTopicAsProxyEndpointTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
         super.init();
-        OMElement synapse = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/topic/send_messages_topic_synapse.xml");
+        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/topic/send_messages_topic_synapse.xml");
         updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
     }
 
@@ -50,7 +50,7 @@ public class JMSTopicAsProxyEndpointTestCase extends ESBIntegrationTest {
             consumer.subscribe("TestTopic");
             for (int i = 0; i < messageCount; i++) {
                 client.sendRobust(Utils.getStockQuoteRequest("JMSTopicTest")
-                        , getProxyServiceURL("StockQuoteProxyToJMSTopic"), "getQuote");
+                        , getProxyServiceURLHttp("StockQuoteProxyToJMSTopic"), "getQuote");
             }
 
             for (int i = 0; i < 30; i++) {

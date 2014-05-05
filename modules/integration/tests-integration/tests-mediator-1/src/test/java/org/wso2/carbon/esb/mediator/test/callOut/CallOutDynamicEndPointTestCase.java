@@ -10,6 +10,8 @@ import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import static org.testng.Assert.assertTrue;
 
 /*
@@ -30,7 +32,7 @@ public class CallOutDynamicEndPointTestCase  extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"})
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.PLATFORM})
-    public void TestDynamicEndPoints() throws AxisFault {
+    public void TestDynamicEndPoints() throws AxisFault, XPathExpressionException {
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getBackEndServiceUrl("CalloutProxy"), "", "IBM");    // send the simplestockquote request. service url is set at the synapse
         boolean ResponseContainsIBM = response.getFirstElement().toString().contains("IBM");      //checks whether the  response contains IBM

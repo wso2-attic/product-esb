@@ -124,17 +124,17 @@ public class LoadBalanceEndpointTestCase extends ESBIntegrationTest {
                    LoginAuthenticationExceptionException,
                    XMLStreamException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadbalancingEndPoint"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadbalancingEndPoint"),
                                                           null);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadbalancingEndPoint"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadbalancingEndPoint"),
                                                    null);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadbalancingEndPoint"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadbalancingEndPoint"),
                                                    null);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));
@@ -148,17 +148,17 @@ public class LoadBalanceEndpointTestCase extends ESBIntegrationTest {
                    LoginAuthenticationExceptionException,
                    XMLStreamException {
 
-        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadbalancingEndPoint_Config_Reg"),
+        String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadbalancingEndPoint_Config_Reg"),
                                                           null);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_1"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadbalancingEndPoint_Config_Reg"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadbalancingEndPoint_Config_Reg"),
                                                    null);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_2"));
 
-        response = lbClient.sendLoadBalanceRequest(getProxyServiceURL("loadbalancingEndPoint_Config_Reg"),
+        response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadbalancingEndPoint_Config_Reg"),
                                                    null);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("Response from server: Server_3"));

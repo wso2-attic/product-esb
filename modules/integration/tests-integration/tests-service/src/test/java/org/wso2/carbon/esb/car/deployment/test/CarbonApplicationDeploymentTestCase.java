@@ -105,7 +105,7 @@ public class CarbonApplicationDeploymentTestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb"}, description = "test proxy service invocation"
             , dependsOnMethods = {"proxyServiceDeploymentTest", "sequenceDeploymentTest", "endpointDeploymentTest", "localEntryDeploymentTest"})
     public void invokeProxyService() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("sampleCustomProxy"), null, "CARDeployment");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("sampleCustomProxy"), null, "CARDeployment");
         Assert.assertTrue(response.toString().contains("CARDeployment"), "Symbol not found on the response message");
     }
 

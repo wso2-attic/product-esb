@@ -57,8 +57,7 @@ public class JMSAccessSOAPFaultDataTestCase extends ESBIntegrationTest {
 			axisServer.deployService(ESBTestConstant.ECHO_SERVICE);
 //		}
 
-		OMElement synapse = esbUtils
-				.loadClasspathResource("/artifacts/ESB/jms/transport/JMSAXISFault.xml");
+		OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/JMSAXISFault.xml");
 		updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
 		logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(),
 				getSessionCookie());
@@ -73,7 +72,7 @@ public class JMSAccessSOAPFaultDataTestCase extends ESBIntegrationTest {
 			AxisServiceClient client = new AxisServiceClient();
 
 			client.fireAndForget(Utils.getIncorrectRequest("Invalid"),
-					getProxyServiceURL("FaultTestProxy"), "echoInt");
+					getProxyServiceURLHttp("FaultTestProxy"), "echoInt");
 		} catch (Exception e) {
 		} finally {
 			try {

@@ -27,6 +27,8 @@ import org.wso2.carbon.authenticator.stub.LoginAuthenticationExceptionException;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.context.beans.ContextUrls;
+import org.wso2.carbon.automation.engine.context.beans.Tenant;
+import org.wso2.carbon.automation.engine.context.beans.User;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.integration.common.admin.client.SecurityAdminServiceClient;
 import org.wso2.carbon.integration.common.utils.LoginLogoutClient;
@@ -70,6 +72,8 @@ public abstract class ESBIntegrationTest {
     private List<String> priorityExecutorList = null;
     private List<String[]> scheduledTaskList = null;
     protected AutomationContext context;
+    protected Tenant tenantInfo;
+    protected User userInfo;
 
     protected TestUserMode userMode;
 
@@ -85,6 +89,8 @@ public abstract class ESBIntegrationTest {
         contextUrls = context.getContextUrls();
         sessionCookie = login(context);
         esbUtils = new ESBTestCaseUtils();
+        tenantInfo = context.getContextTenant();
+        userInfo = tenantInfo.getContextUser();
     }
 
     protected void cleanup() throws Exception {
@@ -152,6 +158,9 @@ public abstract class ESBIntegrationTest {
         if (mainSequenceUrl.endsWith("/services")) {
             mainSequenceUrl = mainSequenceUrl.replace("/services", "");
         }
+        if(!mainSequenceUrl.endsWith("/")){
+           mainSequenceUrl = mainSequenceUrl + "/";
+        }
         return mainSequenceUrl;
 
     }
@@ -160,8 +169,8 @@ public abstract class ESBIntegrationTest {
         return contextUrls.getServiceUrl() + "/" + proxyServiceName;
     }
 
-    protected String getApiInvocationURL(String proxyServiceName) {
-        return getMainSequenceURL() + proxyServiceName;
+    protected String getApiInvocationURL(String apiName) {
+        return getMainSequenceURL() + apiName;
     }
 
     protected String getProxyServiceURLHttps(String proxyServiceName) {
@@ -589,8 +598,8 @@ public abstract class ESBIntegrationTest {
         return FrameworkPathUtil.getSystemResourceLocation() + File.separator + "artifacts" + File.separator + "ESB";
     }
 
-    protected String getBackEndServiceUrl(String serviceName) {
-        return "http://localhost:9000/services/SimpleStockQuoteService";
+    protected String getBackEndServiceUrl(String serviceName) throws XPathExpressionException {
+        return EndpointGenerator.getBackEndServiceEndpointUrl(serviceName);
     }
 
 
@@ -605,7 +614,9 @@ public abstract class ESBIntegrationTest {
 
     protected DataHandler setEndpoints(DataHandler dataHandler)
             throws XMLStreamException, IOException, XPathExpressionException {
-
+        if (isBuilderEnabled()) {
+            return dataHandler;
+        }
         String config = readInputStreamAsString(dataHandler.getInputStream());
         config = replaceEndpoints(config);
         ByteArrayDataSource dbs = new ByteArrayDataSource(config.getBytes());
@@ -639,18 +650,19 @@ public abstract class ESBIntegrationTest {
     }
 
     private String replaceEndpoints(String config) throws XPathExpressionException {
-        String service = context.getContextUrls().getBackEndUrl();
+       //this should be AS context
+        String serviceUrl = new AutomationContext("AS", TestUserMode.SUPER_TENANT_ADMIN).getContextUrls().getServiceUrl();
 
         config = config.replace("http://localhost:9000/services/"
-                , service);
+                , serviceUrl);
         config = config.replace("http://127.0.0.1:9000/services/"
-                , service);
+                , serviceUrl);
         return config;
     }
 
     protected OMElement replaceEndpoints(String relativePathToConfigFile, String serviceName,
                                          String port)
-            throws XMLStreamException, FileNotFoundException {
+            throws XMLStreamException, FileNotFoundException, XPathExpressionException {
         String config = esbUtils.loadResource(relativePathToConfigFile).toString();
         config = config.replace("http://localhost:" + port + "/services/" + serviceName,
                                 getBackEndServiceUrl(serviceName));
@@ -683,5 +695,8 @@ public abstract class ESBIntegrationTest {
     protected String getSessionCookie() {
         return sessionCookie;
     }
-
+    //todo - getting role as the user
+    protected String[] getUserRole(){
+        return new String[]{"admin"};
+    }
 }

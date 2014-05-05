@@ -26,6 +26,8 @@ import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
+import javax.xml.xpath.XPathExpressionException;
+
 public class ReplacePropertyByEnrichTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
@@ -36,7 +38,7 @@ public class ReplacePropertyByEnrichTestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = {"wso2.esb"}, description = "replacing a property by using an enrich mediator")
-    public void test() throws AxisFault {
+    public void test() throws AxisFault, XPathExpressionException {
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("enrichSample2")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "IBM");

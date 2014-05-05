@@ -25,6 +25,8 @@ import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -40,7 +42,7 @@ public class PayloadFactoryIntegrationSpecialCharactersAtPayloadFactoryTestCase 
     }
 
     @Test(groups = {"wso2.esb"}, description = "Test for containing special characters at payload factory")
-    public void testSpecialCharactersAtPayloadFactory() throws AxisFault {
+    public void testSpecialCharactersAtPayloadFactory() throws AxisFault, XPathExpressionException {
         OMElement response;
 
         response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL()

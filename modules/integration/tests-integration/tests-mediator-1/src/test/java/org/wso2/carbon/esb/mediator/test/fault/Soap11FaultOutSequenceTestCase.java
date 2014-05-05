@@ -24,6 +24,8 @@ import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
@@ -36,7 +38,7 @@ public class Soap11FaultOutSequenceTestCase extends ESBIntegrationTest {
 
 
     @Test(groups = {"wso2.esb"}, description = "Creating SOAP1.1 fault messages from from outMediator sequence")
-    public void testSOAP11FaultFromOutSequence() throws AxisFault {
+    public void testSOAP11FaultFromOutSequence() throws AxisFault, XPathExpressionException {
         try {
             axis2Client.sendSimpleStockQuoteRequest(
                     getMainSequenceURL(),

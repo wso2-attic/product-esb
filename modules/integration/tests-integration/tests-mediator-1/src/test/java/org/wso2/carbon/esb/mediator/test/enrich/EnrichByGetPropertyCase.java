@@ -27,8 +27,6 @@ import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
-import java.io.IOException;
 import java.net.URL;
 
 import static org.testng.Assert.assertEquals;
@@ -51,8 +49,7 @@ public class EnrichByGetPropertyCase extends ESBIntegrationTest {
 
     /*https://wso2.org/jira/browse/STRATOS-2248*/
     @Test(groups = {"wso2.esb"}, description = "Enrich by get property")
-    public void enrichGetPropertyTest() throws IOException,
-                                               XMLStreamException {
+    public void enrichGetPropertyTest() throws Exception {
         OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp(
                 "enrichSample1"), getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "IBM");
         assertNotNull(response, "Response message is null");

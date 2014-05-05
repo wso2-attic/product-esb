@@ -32,7 +32,7 @@ public class JMSTransportProxyTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
         super.init();
-        OMElement synapse = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/jms_transport_proxy_service.xml");
+        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/jms_transport_proxy_service.xml");
         updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
     }
 

@@ -20,7 +20,7 @@ public class JMSEndpointSuspensionTestCase extends ESBIntegrationTest {
 //    @BeforeClass(alwaysRun = true)
     public void deployService() throws Exception {
         super.init();
-        OMElement synapse = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/jms_transport_jms_suspension.xml");
+        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/jms_transport_jms_suspension.xml");
         updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
         endPointAdminClient = new EndPointAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }

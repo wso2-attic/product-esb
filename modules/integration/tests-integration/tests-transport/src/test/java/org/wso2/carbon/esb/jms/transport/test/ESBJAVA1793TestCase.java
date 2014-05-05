@@ -39,7 +39,7 @@ public class ESBJAVA1793TestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
         super.init();
-        OMElement synapse = esbUtils.loadClasspathResource("/artifacts/ESB/jms/transport/ESBJAVA-1793MessageStore-targetEndPointFormat-pox.xml");
+        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/ESBJAVA-1793MessageStore-targetEndPointFormat-pox.xml");
         updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
 
     }
@@ -53,7 +53,7 @@ public class ESBJAVA1793TestCase extends ESBIntegrationTest {
             consumer.connect("messageStoreTargetEndpointQueue");
             //sending messages to proxy service
             for (int i = 0; i < 3; i++) {
-                client.sendRobust(Utils.getStockQuoteRequest("JMS"), getProxyServiceURL("messageStoreTargetEndpointFormatTestProxy"), "getQuote");
+                client.sendRobust(Utils.getStockQuoteRequest("JMS"), getProxyServiceURLHttp("messageStoreTargetEndpointFormatTestProxy"), "getQuote");
             }
             //wait for messages to reach the destination queue
             Thread.sleep(5000);

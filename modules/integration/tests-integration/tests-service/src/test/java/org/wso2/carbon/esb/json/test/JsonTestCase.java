@@ -42,7 +42,7 @@ public class JsonTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
         super.init();
-        epr =this.getProxyServiceURL("Version") ;
+        epr =this.getProxyServiceURLHttp("Version") ;
         httpClient = new SimpleHttpClient();
     }
 

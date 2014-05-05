@@ -27,17 +27,15 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.automation.test.utils.axis2client.AxisServiceClientUtils;
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
-
-import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
 import org.wso2.esb.integration.common.utils.clients.LoadbalanceFailoverClient;
 import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
 
-
-import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-import org.wso2.esb.integration.common.utils.ESBTestConstant;
 import javax.activation.DataHandler;
 import java.io.File;
 import java.io.IOException;
@@ -162,7 +160,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint")
-    public void testSendingDefaultEndpoint() throws IOException {
+    public void testSendingDefaultEndpoint() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
@@ -172,7 +170,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint")
-    public void testSendingWSDLEndpoint() throws IOException {
+    public void testSendingWSDLEndpoint() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
@@ -182,7 +180,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     @Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint")
-    public void testSendingFailOverEndpoint() throws IOException, InterruptedException {
+    public void testSendingFailOverEndpoint() throws Exception, InterruptedException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("failoverEndPointBM"),
                                                                      null, "WSO2");
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -229,7 +227,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Build Message Before Sending")
-    public void testSendingDefaultEndpoint_BuildMessage() throws IOException {
+    public void testSendingDefaultEndpoint_BuildMessage() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPointBM"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
@@ -239,7 +237,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Build Message Before Sending")
-    public void testSendingWSDLEndpoint_BuildMessage() throws IOException {
+    public void testSendingWSDLEndpoint_BuildMessage() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPointBM"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
@@ -320,7 +318,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Local Registry")
-    public void testSendingDefaultEndpoint_Receiving_Sequence_LocalReg() throws IOException {
+    public void testSendingDefaultEndpoint_Receiving_Sequence_LocalReg() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_LocalReg"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
@@ -330,7 +328,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence  in Config Registry")
-    public void testSendingDefaultEndpoint_Receiving_Sequence_ConfigReg() throws IOException {
+    public void testSendingDefaultEndpoint_Receiving_Sequence_ConfigReg() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_ConfigReg"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
@@ -340,7 +338,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Governance Registry")
-    public void testSendingDefaultEndpoint_Receiving_Sequence_GovReg() throws IOException {
+    public void testSendingDefaultEndpoint_Receiving_Sequence_GovReg() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_GovReg"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
@@ -350,7 +348,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Local Registry")
-    public void testSendingWSDLEndpoint_Receiving_Sequence_LocalReg() throws IOException {
+    public void testSendingWSDLEndpoint_Receiving_Sequence_LocalReg() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint_Receiving_Sequence_LocalReg"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
@@ -532,7 +530,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 })
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Local Registry while BuildMessage enabled")
     public void testSendingDefaultEndpoint_Receiving_Sequence_LocalReg_BuildMessage()
-            throws IOException {
+            throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_LocalRegBM"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
@@ -543,7 +541,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 })
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Config Registry while BuildMessage enabled")
     public void testSendingDefaultEndpoint_Receiving_Sequence_ConfigReg_BuildMessage()
-            throws IOException {
+            throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_ConfigRegBM"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
@@ -554,7 +552,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 })
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence in Governance Registry while BuildMessage enabled")
     public void testSendingDefaultEndpoint_Receiving_Sequence_GovReg_BuildMessage()
-            throws IOException {
+            throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_GovRegBM"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
@@ -565,7 +563,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
 })
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence in Local Registry while BuildMessage enabled")
     public void testSendingWSDLEndpoint_Receiving_Sequence_LocalReg_BuildMessage()
-            throws IOException {
+            throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint_Receiving_Sequence_LocalRegBM"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
@@ -722,7 +720,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence Dynamic")
-    public void testSendingDefaultEndpoint_Receiving_Sequence_Dynamic() throws IOException {
+    public void testSendingDefaultEndpoint_Receiving_Sequence_Dynamic() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_Dynamic"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
@@ -732,7 +730,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     @Test(groups = "wso2.esb", description = "Test sending request to WSDL Endpoint Receiving Sequence Dynamic")
-    public void testSendingWSDLEndpoint_Receiving_Sequence_Dynamic() throws IOException {
+    public void testSendingWSDLEndpoint_Receiving_Sequence_Dynamic() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("wsdlEndPoint_Receiving_Sequence_Dynamic"),
                                                                      null, "WSO2");
         Assert.assertNotNull(response);
@@ -791,7 +789,7 @@ public class SendIntegrationTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
 })
     @Test(groups = "wso2.esb", description = "Test sending request to Default Endpoint Receiving Sequence Dynamic Build Message")
-    public void testSendingDefaultEndpoint_Receiving_Sequence_Dynamic_BM() throws IOException {
+    public void testSendingDefaultEndpoint_Receiving_Sequence_Dynamic_BM() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Receiving_Sequence_Dynamic_BM"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);

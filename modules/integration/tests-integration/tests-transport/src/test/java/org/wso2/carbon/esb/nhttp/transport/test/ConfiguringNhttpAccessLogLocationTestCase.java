@@ -16,13 +16,14 @@
 
 package org.wso2.carbon.esb.nhttp.transport.test;
 
-import org.codehaus.plexus.util.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
@@ -46,7 +47,7 @@ public class ConfiguringNhttpAccessLogLocationTestCase extends ESBIntegrationTes
     public void init() throws Exception {
 
         super.init();
-        serverConfigurationManager = new ServerConfigurationManager(context);
+        serverConfigurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
         String nhttpFile = /*ProductConstant.getResourceLocations(/*ProductConstant.ESB_SERVER_NAME)*/FrameworkPathUtil.getSystemResourceLocation()  + "artifacts" + separator +
                 "ESB" +separator + "synapseconfig" + separator + "nhttp_transport" + separator
                            + "nhttp.properties";
@@ -94,7 +95,7 @@ public class ConfiguringNhttpAccessLogLocationTestCase extends ESBIntegrationTes
     private void createNewDir(String path) throws IOException {
         File dir = new File(path);
         if (dir.exists()) {
-            FileUtils.deleteDirectory(path);
+             dir.delete();
         } else {
             dir.mkdir();
         }

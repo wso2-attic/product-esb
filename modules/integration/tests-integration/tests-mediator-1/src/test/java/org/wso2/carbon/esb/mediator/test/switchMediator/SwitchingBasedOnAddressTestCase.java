@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
+import javax.xml.xpath.XPathExpressionException;
 import java.rmi.RemoteException;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -39,7 +40,7 @@ public class SwitchingBasedOnAddressTestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = {"wso2.esb"}, description = "Switch messages based on address")
-    public void testSample2() throws RemoteException {
+    public void testSample2() throws RemoteException, XPathExpressionException {
         OMElement response;
 
         response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("switchByAddress"),

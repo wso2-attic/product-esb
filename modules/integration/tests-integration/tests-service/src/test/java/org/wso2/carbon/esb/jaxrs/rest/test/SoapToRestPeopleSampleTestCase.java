@@ -22,7 +22,7 @@ package org.wso2.carbon.esb.jaxrs.rest.test;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.util.AXIOMUtil;
 import org.apache.catalina.LifecycleException;
-import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -64,7 +64,7 @@ public class SoapToRestPeopleSampleTestCase extends ESBIntegrationTest {
                     "\t</per:person>\n" +
                     "   </soapenv:Body>\n" +
                     "</soapenv:Envelope>");
-            OMElement response = axisServiceClient.sendReceive(putRequest, getProxyServiceURL("peoplePostProxy"), "mediate");
+            OMElement response = axisServiceClient.sendReceive(putRequest, getProxyServiceURLHttp("peoplePostProxy"), "mediate");
             Assert.assertTrue(response.toString().contains("OK"));
             Assert.assertTrue(response.toString().contains("201"));
         } else {
@@ -84,7 +84,7 @@ public class SoapToRestPeopleSampleTestCase extends ESBIntegrationTest {
                     "      </per:person>\n" +
                     "   </soapenv:Body>\n" +
                     "</soapenv:Envelope>");
-            OMElement response = axisServiceClient2.sendReceive(getRequest, getProxyServiceURL("peopleGetProxy"), "mediate");
+            OMElement response = axisServiceClient2.sendReceive(getRequest, getProxyServiceURLHttp("peopleGetProxy"), "mediate");
             Assert.assertTrue(response.toString().contains(personEmail));
             Assert.assertTrue(response.toString().contains(personFirstName));
             Assert.assertTrue(response.toString().contains(personLastName));
@@ -109,7 +109,7 @@ public class SoapToRestPeopleSampleTestCase extends ESBIntegrationTest {
                     "      </per:person>\n" +
                     "   </soapenv:Body>\n" +
                     "</soapenv:Envelope>");
-            OMElement response = axisServiceClient.sendReceive(getRequest, getProxyServiceURL("peoplePutProxy"), "mediate");
+            OMElement response = axisServiceClient.sendReceive(getRequest, getProxyServiceURLHttp("peoplePutProxy"), "mediate");
             Assert.assertTrue(response.toString().contains(personEmail));
             Assert.assertTrue(response.toString().contains(updatedFirstName));
             Assert.assertTrue(response.toString().contains(updatedLastName));
@@ -130,7 +130,7 @@ public class SoapToRestPeopleSampleTestCase extends ESBIntegrationTest {
                     "      </per:person>\n" +
                     "   </soapenv:Body>\n" +
                     "</soapenv:Envelope>");
-            OMElement response = axisServiceClient.sendReceive(getRequest, getProxyServiceURL("peopleOptionProxy"), "mediate");
+            OMElement response = axisServiceClient.sendReceive(getRequest, getProxyServiceURLHttp("peopleOptionProxy"), "mediate");
             Assert.assertTrue(response.toString().contains("200"));
             Assert.assertTrue(response.toString().contains("GET POST DELETE PUT OPTIONS"));
 
@@ -152,7 +152,7 @@ public class SoapToRestPeopleSampleTestCase extends ESBIntegrationTest {
                     "      </per:person>\n" +
                     "   </soapenv:Body>\n" +
                     "</soapenv:Envelope>");
-            OMElement response = axisServiceClient.sendReceive(getRequest, getProxyServiceURL("peopleDeleteProxy"), "mediate");
+            OMElement response = axisServiceClient.sendReceive(getRequest, getProxyServiceURLHttp("peopleDeleteProxy"), "mediate");
             Assert.assertTrue(response.toString().contains("Deleted"));
             Assert.assertTrue(response.toString().contains("200"));
         } else {

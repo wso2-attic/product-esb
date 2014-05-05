@@ -35,14 +35,20 @@ import org.wso2.esb.integration.common.utils.ESBTestConstant;
 import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
 
 import javax.xml.stream.XMLStreamException;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 public class HttpEndpointTestCase extends ESBIntegrationTest {
 
@@ -102,7 +108,7 @@ public class HttpEndpointTestCase extends ESBIntegrationTest {
 
         StringReader sendData = new StringReader(addStudentData);
         StringWriter responseData = new StringWriter();
-        URL restURL = new URL((getProxyServiceURL("postEPProxy")) + "/students/");
+        URL restURL = new URL((getProxyServiceURLHttp("postEPProxy")) + "/students/");
         HttpURLConnectionClient.sendPostRequest(sendData, restURL, responseData, "application/xml");
 
         assertTrue(responseData.toString().contains(studentName), "response doesn't contain the expected output");
@@ -111,7 +117,7 @@ public class HttpEndpointTestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb"}, description = "HTTP Endpoint GET test: RESTful", priority = 6)
     public void testToGet() throws IOException {
         //check whether the student is added.
-        String studentGetUri = getProxyServiceURL("getEPProxy") + "/student/" + studentName;
+        String studentGetUri = getProxyServiceURLHttp("getEPProxy") + "/student/" + studentName;
         HttpResponse getResponse = HttpURLConnectionClient.sendGetRequest(studentGetUri, null);
 
         assertTrue(getResponse.getData().contains("<ns:getStudentResponse xmlns:ns=\"http://axis2.apache.org\"><ns:return>" +
@@ -138,7 +144,7 @@ public class HttpEndpointTestCase extends ESBIntegrationTest {
 
         StringReader sendData = new StringReader(updateStudentData);
         StringWriter responseData = new StringWriter();
-        URL restURL = new URL((getProxyServiceURL("putEPProxy")) + "/student/" + studentName);
+        URL restURL = new URL((getProxyServiceURLHttp("putEPProxy")) + "/student/" + studentName);
         HttpURLConnectionClient.sendPutRequest(sendData, restURL, responseData, "application/xml");
 
         assertTrue(responseData.toString().contains(updateStudentName), "response doesn't contain the expected output");
@@ -154,22 +160,20 @@ public class HttpEndpointTestCase extends ESBIntegrationTest {
     public void testToDelete() throws IOException {
         StringWriter responseData = new StringWriter();
         try {
-            URL restURL = new URL((getProxyServiceURL("deleteEPProxy")) + "/student/" + updateStudentName);
+            URL restURL = new URL((getProxyServiceURLHttp("deleteEPProxy")) + "/student/" + updateStudentName);
             HttpURLConnectionClient.sendDeleteRequest(restURL, null);
         } catch (Exception e) {
             assertTrue(e instanceof Exception, "Failed to complete DELETE request.");
         }
 
-        String studentGetUri = getProxyServiceURL("getEPProxy") + "/student/" + updateStudentName;
+        String studentGetUri = getProxyServiceURLHttp("getEPProxy") + "/student/" + updateStudentName;
         HttpResponse getResponse = HttpURLConnectionClient.sendGetRequest(studentGetUri, null);
     }
 
     @Test(groups = {"wso2.esb"}, description = "HTTP endpoint POST test: SOAP", priority = 2)
     public void testSendingToHttpEndpoint()
-            throws IOException, EndpointAdminEndpointAdminException,
-            LoginAuthenticationExceptionException,
-            XMLStreamException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("httpEndPoint")
+            throws Exception {
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("httpEndPoint")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -181,7 +185,7 @@ public class HttpEndpointTestCase extends ESBIntegrationTest {
             LoginAuthenticationExceptionException,
             XMLStreamException {
         try {
-            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("invalidHttpEndPoint"),
+            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("invalidHttpEndPoint"),
                     getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         } catch (Exception e) {
             Assert.assertTrue(e instanceof AxisFault);
@@ -192,7 +196,7 @@ public class HttpEndpointTestCase extends ESBIntegrationTest {
     public void testSendingToNoVarHttpEndpoint()
             throws XMLStreamException, FileNotFoundException, AxisFault {
         try {
-            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("missingVariableEndPoint"),
+            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("missingVariableEndPoint"),
                     getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         } catch (Exception e) {
             Assert.assertTrue(e instanceof AxisFault);
