@@ -39,7 +39,7 @@ public class InboundOutboundPolicySecurityTestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb"})
     public void inboundOutboundPolicySecurityTest() throws AxisFault, XPathExpressionException {
         log.info("inboundOutboundPolicySecurityTest getMainSequenceURL : " + getMainSequenceURL());
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getBackEndServiceUrl(""), "", "IBM");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(""), "", "IBM");
         boolean ResponseContainsIBM = response.getFirstElement().toString().contains("IBM");
         assertTrue(ResponseContainsIBM);
     }
