@@ -48,6 +48,7 @@ public class DynamicURIWSDLEpTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"})
     public void testDynamicURIESDLEndpoint() throws Exception {
+        super.init();
         endPointAdminClient = new EndPointAdminClient(context.getContextUrls().getBackEndUrl(), getSessionCookie());
 
         cleanupEndpoints();
