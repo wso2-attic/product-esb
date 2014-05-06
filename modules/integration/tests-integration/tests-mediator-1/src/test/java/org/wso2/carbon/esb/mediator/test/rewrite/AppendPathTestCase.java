@@ -61,8 +61,8 @@ public class AppendPathTestCase extends ESBIntegrationTest {
     @DataProvider(name = "addressingUrl")
     public Object[][] addressingUrl() throws XPathExpressionException {
         return new Object[][]{
-                {getBackEndServiceUrl("").substring(0, (getBackEndServiceUrl("").length() /*- 1*/))},
-                {getBackEndServiceUrl("").substring(0, (getBackEndServiceUrl("").length() /*- 1*/)).replace("http", "https")},
+                {getBackEndServiceUrl("").substring(0, (getBackEndServiceUrl("").length() - 1))},
+                {getBackEndServiceUrl("").substring(0, (getBackEndServiceUrl("").length() - 1)).replace("http", "https")},
         };
 
     }
