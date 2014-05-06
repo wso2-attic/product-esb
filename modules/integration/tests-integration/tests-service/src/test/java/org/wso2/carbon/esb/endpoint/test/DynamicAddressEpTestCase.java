@@ -48,6 +48,7 @@ public class DynamicAddressEpTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"})
     public void testDynamicAddressEndpoint() throws Exception {
+        super.init();
         endPointAdminClient = new EndPointAdminClient(context.getContextUrls().getBackEndUrl(), getSessionCookie());
 
         cleanupEndpoints();
