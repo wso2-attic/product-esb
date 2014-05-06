@@ -49,6 +49,7 @@ public class DynamicDefaultEpTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"})
     public void testDynamicDefaultEndpoint() throws Exception {
+        super.init();
         endPointAdminClient = new EndPointAdminClient(context.getContextUrls().getBackEndUrl(), getSessionCookie());
 
         cleanupEndpoints();
