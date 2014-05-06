@@ -39,6 +39,7 @@ public class InlinedWSDLEndpointTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"})
     public void testInlineWSDLEndpoint() throws Exception {
+        super.init();
         endPointAdminClient = new EndPointAdminClient(context.getContextUrls().getBackEndUrl(), getSessionCookie());
 
         cleanupEndpoints();
