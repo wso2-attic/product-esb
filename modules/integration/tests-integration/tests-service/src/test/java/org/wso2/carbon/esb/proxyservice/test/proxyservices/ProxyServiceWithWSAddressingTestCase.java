@@ -40,7 +40,7 @@ public class ProxyServiceWithWSAddressingTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "test proxy service behavior when addressing is sent")
     public void testProxyWithAddressing() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("proxyWithAddressing")
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("proxyWithAddressing")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         assertNotNull(response, "Response Message is null");
         String symbol = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "symbol"))
@@ -54,7 +54,7 @@ public class ProxyServiceWithWSAddressingTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "test proxy service behavior when both addressing and endpoint are available")
     public void testInlineEndpointPriorityWithWSAddressing() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("proxyWithAddressingPriority")
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("proxyWithAddressingPriority")
                 , getBackEndServiceUrl("NonExistingService"), "WSO2");
         assertNotNull(response, "Response Message is null");
         String symbol = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "symbol"))

@@ -40,6 +40,8 @@ import org.apache.axis2.transport.http.HttpTransportProperties;
 import org.apache.axis2.wsdl.WSDLConstants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
 import javax.xml.namespace.QName;
 import java.io.File;
@@ -55,7 +57,7 @@ public class LoadbalanceFailoverClient {
     private ServiceClient serviceClient;
 
     public LoadbalanceFailoverClient() {
-        String repositoryPath = "samples" + File.separator + "axis2Client" +
+        String repositoryPath = System.getProperty(ESBTestConstant.CARBON_HOME) + File.separator + "samples" + File.separator + "axis2Client" +
                 File.separator + "client_repo";
 
         File repository = new File(repositoryPath);

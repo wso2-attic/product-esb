@@ -93,7 +93,7 @@ public class TestConfigurationProvider {
     }
 
     public static boolean isIntegration() throws XPathExpressionException {
-        return "Product".equalsIgnoreCase(getExecutionEnvironment());
+        return "standalone".equalsIgnoreCase(getExecutionEnvironment());
     }
 
     public static boolean isPlatform() throws XPathExpressionException {

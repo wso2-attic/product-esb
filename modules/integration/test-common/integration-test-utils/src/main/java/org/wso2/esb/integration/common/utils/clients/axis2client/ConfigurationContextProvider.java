@@ -27,7 +27,7 @@ import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
+import org.wso2.esb.integration.common.utils.common.TestConfigurationProvider;
 
 import java.io.File;
 
@@ -42,7 +42,7 @@ public class ConfigurationContextProvider {
             HttpClient httpClient;
             HttpConnectionManagerParams params;
            configurationContext = ConfigurationContextFactory.
-                   createConfigurationContextFromFileSystem(FrameworkPathUtil.getSystemResourceLocation() + File.separator + "client", null);
+                   createConfigurationContextFromFileSystem(TestConfigurationProvider.getResourceLocation() + File.separator + "client", null);
 
             httpConnectionManager = new MultiThreadedHttpConnectionManager();
             params = new HttpConnectionManagerParams();

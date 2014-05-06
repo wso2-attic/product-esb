@@ -39,7 +39,7 @@ public class DynamicInlinedWSDLEpTestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb"}, enabled = false)
     public void testDynamicInlineWSDLEndpoint() throws Exception {
         endPointAdminClient = new EndPointAdminClient(context.getContextUrls().getBackEndUrl(), getSessionCookie());
-        OMElement endpoint_xml = new ESBTestCaseUtils().loadClasspathResource("/artifacts/ESB/endpoint/wsdlTestEp.xml");
+        OMElement endpoint_xml = new ESBTestCaseUtils().loadResource("/artifacts/ESB/endpoint/wsdlTestEp.xml");
         cleanupEndpoints();
 
         dynamicEndpointAdditionScenario(ENDPOINT_PATH_1, endpoint_xml);

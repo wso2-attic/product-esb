@@ -14,7 +14,7 @@
 *KIND, either express or implied.  See the License for the
 *specific language governing permissions and limitations
 *under the License.
-*//*
+*/
 
 package org.wso2.esb.integration.common.utils.clients.stockquoteclient;
 
@@ -44,24 +44,23 @@ public class SecureStockQuoteClient {
         return secureClient.sendReceive(userName, password, trpUrl, "getQuote"
                 , createStandardRequest(symbol), securityPolicyPath
                 , "alice", "bob"
-                , FrameworkPathUtil.SYSTEM_ARTIFACT_RESOURCE_LOCATION+ File.separator + "keystores"
+                , FrameworkPathUtil.getSystemResourceLocation() + "keystores"
                   + File.separator + "products" + File.separator + "store.jks", "password");
 
     }
 
-   */
-/* public OMElement sendSecuredSimpleStockQuoteRequest(String userName, String password,
+public OMElement sendSecuredSimpleStockQuoteRequest(String userName, String password,
                                                         String trpUrl,
                                                         int securityScenarioId, String symbol)
             throws Exception {
 
         return secureClient.sendReceive(userName, password, trpUrl, "getQuote", createStandardRequest(symbol)
-                , ProductConstant.getSecurityScenarios() + File.separator + "scenario" + securityScenarioId + "-policy.xml"
+                , FrameworkPathUtil.getSystemResourceLocation() + File.separator + "security"+ File.separator +"policies"+ File.separator + "scenario" + securityScenarioId + "-policy.xml"
                 , "alice", "bob"
-                , ProductConstant.SYSTEM_TEST_RESOURCE_LOCATION + File.separator + "keystores"
+                , FrameworkPathUtil.getSystemResourceLocation() + File.separator + "keystores"
                   + File.separator + "products" + File.separator + "store.jks", "password");
 
-    }*//*
+    }
 
 
 
@@ -79,4 +78,3 @@ public class SecureStockQuoteClient {
         return method;
     }
 }
-*/

@@ -42,7 +42,7 @@ public class PassThroughProxyServiceTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Pass through proxy http with addressing uri")
     public void testHttpPassThroughProxyWithAddressing() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuotePassThroughProxyWithAddressing"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuotePassThroughProxyWithAddressing"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
@@ -59,7 +59,7 @@ public class PassThroughProxyServiceTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Pass through http  proxy with out addressing uri")
     public void testHttpPassThroughProxyWithEndpoint() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxyWithEndpoint"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxyWithEndpoint"),
                                                                      null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
@@ -76,7 +76,7 @@ public class PassThroughProxyServiceTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Pass through proxy http with out addressing uri")
     public void testHttpPassThroughProxyWithSendMediatorInInSequence() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuotePassThroughProxy"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuotePassThroughProxy"),
                                                                      null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
@@ -93,7 +93,7 @@ public class PassThroughProxyServiceTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Pass through proxy https with addressing uri")
     public void testHttpsPassThroughProxyWithAddressing() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceSecuredURL("StockQuotePassThroughProxyWithAddressing"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttps("StockQuotePassThroughProxyWithAddressing"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
@@ -110,7 +110,7 @@ public class PassThroughProxyServiceTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Pass through https  proxy with out addressing uri")
     public void testHttpsPassThroughProxyWithEndpoint() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceSecuredURL("StockQuoteProxyWithEndpoint"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttps("StockQuoteProxyWithEndpoint"),
                                                                      null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
@@ -127,7 +127,7 @@ public class PassThroughProxyServiceTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Pass through proxy https with out addressing uri")
     public void testHttpsPassThroughProxyWithSendMediatorInInSequence() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceSecuredURL("StockQuotePassThroughProxy"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttps("StockQuotePassThroughProxy"),
                                                                      null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))

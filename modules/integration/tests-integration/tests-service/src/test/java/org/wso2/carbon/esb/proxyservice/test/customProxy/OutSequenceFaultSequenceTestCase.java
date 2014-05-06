@@ -53,7 +53,7 @@ public class OutSequenceFaultSequenceTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "- Custom proxy -Out sequence inline")
     public void testCustomProxyOutSequenceInline() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxyOne"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxyOne"), null, "WSO2");
 
         String symbol = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "symbol"))
                 .getText();
@@ -68,7 +68,7 @@ public class OutSequenceFaultSequenceTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "- Custom proxy -Out sequence existing")
     public void testCustomProxyOutSequenceExistingSequence() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxyTwo"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxyTwo"), null, "WSO2");
 
         String symbol = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "symbol"))
                 .getText();
@@ -83,7 +83,7 @@ public class OutSequenceFaultSequenceTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "- Custom proxy -Out sequence -from registry")
     public void testCustomProxyOutSequenceFromRegistry() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxyThree"), null, "IBM");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxyThree"), null, "IBM");
 
         String symbol = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "symbol"))
                 .getText();
@@ -99,7 +99,7 @@ public class OutSequenceFaultSequenceTestCase extends ESBIntegrationTest {
     public void testCustomProxyFaultInline() throws Exception {
 
         try {
-            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxyFour"), null, "WSO2");
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxyFour"), null, "WSO2");
             fail("AxisFault Expected");
         } catch (AxisFault axisFault) {
             assertTrue(axisFault.getReason().contains("Fault sequence invoked"), "Fault: value 'reason' mismatched");
@@ -116,7 +116,7 @@ public class OutSequenceFaultSequenceTestCase extends ESBIntegrationTest {
     public void testCustomProxyFaultFromRegistry() throws Exception {
 
         try {
-            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxyFour"), null, "WSO2");
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxyFour"), null, "WSO2");
             fail();
         } catch (AxisFault axisFault) {
             assertTrue(axisFault.getReason().contains("Fault sequence invoked"), "Fault: value 'reason' mismatched");
@@ -132,7 +132,7 @@ public class OutSequenceFaultSequenceTestCase extends ESBIntegrationTest {
     public void testCustomProxyFaultExistingFaultSequence() throws Exception {
 
         try {
-            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("StockQuoteProxyFour"), null, "WSO2");
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxyFour"), null, "WSO2");
             fail();
         } catch (AxisFault axisFault) {
             assertTrue(axisFault.getReason().contains("Fault sequence invoked"), "Fault: value 'reason' mismatched");

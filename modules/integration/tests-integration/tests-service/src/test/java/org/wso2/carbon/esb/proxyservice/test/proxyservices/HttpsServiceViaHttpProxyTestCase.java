@@ -105,7 +105,7 @@ public class HttpsServiceViaHttpProxyTestCase extends ESBIntegrationTest {
     public void testHttpsRequestViaHttpProxy() throws AxisFault {
         OMElement response;
         response =
-                axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("TestProxy"),
+                axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("TestProxy"),
                         null, "IBM");
         Assert.assertTrue(response.toString().contains("IBM"),
                 "Asserting response for string 'IBM'");

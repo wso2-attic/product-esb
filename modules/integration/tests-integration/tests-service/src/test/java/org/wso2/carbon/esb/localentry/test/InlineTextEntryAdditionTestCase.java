@@ -36,7 +36,7 @@ public class InlineTextEntryAdditionTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
-        super.init(1);
+        super.init();
         localEntryAdminServiceClient = new LocalEntriesAdminClient(context.getContextUrls().getBackEndUrl(), getSessionCookie());
     }
 

@@ -23,6 +23,7 @@ public class ESBTestConstant {
     public static final String SIMPLE_AXIS2_SERVICE = "Axis2Service";
     public static final String STUDENT_REST_SERVICE = "StudentService";
     public static final String ECHO_SERVICE = "Echo";
+    public static final java.lang.String CARBON_HOME = "carbon.home";
 
     /**
      * ERROR MESSAGES

@@ -43,7 +43,9 @@ import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 public class DefaultEndpointTestCase extends ESBIntegrationTest {
 
@@ -96,10 +98,8 @@ public class DefaultEndpointTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"}, description = "Sending a Message to a Default endpoint")
     public void testSendingToDefaultEndpoint()
-            throws IOException, EndpointAdminEndpointAdminException,
-                   LoginAuthenticationExceptionException,
-                   XMLStreamException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint")
+            throws Exception {
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -109,10 +109,8 @@ public class DefaultEndpointTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"}, description = "Sending a Message to a Default endpoint in Config Reg")
     public void testSendingToDefaultEndpoint_ConfigReg()
-            throws IOException, EndpointAdminEndpointAdminException,
-                   LoginAuthenticationExceptionException,
-                   XMLStreamException {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Config_Reg")
+            throws Exception {
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Config_Reg")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
@@ -130,21 +128,21 @@ public class DefaultEndpointTestCase extends ESBIntegrationTest {
         axis2Server1.stop();
         OMElement response = null;
         try {
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPointWithSuspension"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPointWithSuspension"),
                                                                "http://localhost:9001/services/SimpleStockQuoteService", "WSO2");
         } catch (Exception e) {
             Assert.assertTrue(e instanceof org.apache.axis2.AxisFault);
         }
         axis2Server1.start();
         try {
-            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPointWithSuspension"),
+            response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPointWithSuspension"),
                                                                "http://localhost:9001/services/SimpleStockQuoteService", "WSO2");
         } catch (Exception e) {
             Assert.assertTrue(e instanceof org.apache.axis2.AxisFault);
         }
         Assert.assertNull(response);
         Thread.sleep(10000);
-        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURL("defaultEndPoint_Config_Reg"),
+        response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Config_Reg"),
                                                            "http://localhost:9001/services/SimpleStockQuoteService", "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));

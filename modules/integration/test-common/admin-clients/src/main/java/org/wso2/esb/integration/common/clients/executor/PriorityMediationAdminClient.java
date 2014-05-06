@@ -62,6 +62,11 @@ public class PriorityMediationAdminClient {
         priorityMediationAdmin.add(name, messageProcessorElem);
     }
 
+    public void addPriorityMediator(String name, OMElement priorityExecutor) throws RemoteException {
+        priorityMediationAdmin = this.setPriorityExecutorStub();
+        priorityMediationAdmin.add(name, priorityExecutor);
+    }
+
     public String[] getExecutorList() throws RemoteException {
         return priorityMediationAdmin.getExecutorList();
     }

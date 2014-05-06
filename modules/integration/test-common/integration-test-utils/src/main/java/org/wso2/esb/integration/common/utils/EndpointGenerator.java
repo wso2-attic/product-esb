@@ -14,13 +14,32 @@
 *KIND, either express or implied.  See the License for the
 *specific language governing permissions and limitations
 *under the License.
-*//*
+*/
 
 
 package org.wso2.esb.integration.common.utils;
 
 
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.esb.integration.common.utils.common.TestConfigurationProvider;
+
+import javax.xml.xpath.XPathExpressionException;
+
 public class EndpointGenerator {
+    public static String getBackEndServiceEndpointUrl(String serviceName) throws XPathExpressionException {
+        String backEndServiceUrl;
+        if (TestConfigurationProvider.isIntegration()) {
+//            AutomationContext axis2 = new AutomationContext("AXIS2", TestUserMode.SUPER_TENANT_ADMIN);
+//            backEndServiceUrl = axis2.getContextUrls().getServiceUrl();
+            backEndServiceUrl = "http://localhost:9000/services";
+        } else {
+            AutomationContext appServer = new AutomationContext("AS", TestUserMode.SUPER_TENANT_ADMIN);
+            backEndServiceUrl = appServer.getContextUrls().getServiceUrl();
+        }
+
+        return (backEndServiceUrl +  "/" + serviceName);
+    }
 
 }
-*/
+

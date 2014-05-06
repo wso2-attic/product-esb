@@ -51,7 +51,7 @@ public class ProxyServiceEnablingHTTPTestCase extends ESBIntegrationTest {
                                              "- Proxy service enabling only http")
     public void testTransformerProxy() throws Exception {
 
-        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURL("StockQuoteProxy"), null, "WSO2");
+        OMElement response = axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 
         assertNotNull(response, "Fault response message null");
 
