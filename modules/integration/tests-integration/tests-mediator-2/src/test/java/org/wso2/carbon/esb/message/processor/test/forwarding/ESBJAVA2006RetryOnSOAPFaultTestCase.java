@@ -55,8 +55,9 @@ public class ESBJAVA2006RetryOnSOAPFaultTestCase extends ESBIntegrationTest {
 
     }
 
-    //@SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
-    //@Test(groups = "wso2.esb", description = "<property name=\"RETRY_ON_SOAPFAULT\" value=\"true\"/>")
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    })
+    @Test(groups = "wso2.esb", description = "<property name=\"RETRY_ON_SOAPFAULT\" value=\"true\"/>", enabled=false)
     public void testRetryOnSOAPFaultWithInOutTrue() throws Exception {
 
         loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB" + File.separator

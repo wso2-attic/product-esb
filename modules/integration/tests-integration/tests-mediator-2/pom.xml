@@ -25,50 +25,6 @@
                     <execution>
                         <id>default-testCompile</id>
                         <phase>test-compile</phase>
-                        <configuration>
-                            <testExcludes>
-
-                                <exclude>org/wso2/carbon/esb/mediator/test/aggregate/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/cache/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/call/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/callOut/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/callTemplate/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/clone/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/conditionalRouter/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/db/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/drop/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/enrich/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/fault/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/filter/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/header/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/in/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/log/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/out/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/payload/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/property/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/rewrite/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/router/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/rule/**</exclude>
-                                <exclude>org/wso2/carbon/esb/mediator/test/throttle/**</exclude>
-                                <exclude>org/wso2/carbon/esb/message/store/test/**</exclude>
-
-
-                                <!--<exclude>org/wso2/carbon/esb/mediator/test/callOut/**</exclude>-->
-                                <!--<exclude>org/wso2/carbon/esb/mediator/test/callTemplate/**</exclude>-->
-                                <!--<exclude>org/wso2/carbon/esb/mediator/test/classMediator/**</exclude>-->
-                                <!--<exclude>org/wso2/carbon/esb/mediator/test/clone/**</exclude>-->
-                                <!--<exclude>org/wso2/carbon/esb/mediator/test/conditionalRouter/**</exclude>-->
-                                <!--<exclude>org/wso2/carbon/esb/mediator/test/db/**</exclude>-->
-                                <!--<exclude>org/wso2/carbon/esb/mediator/test/iterate/**</exclude>-->
-                                <!--<exclude>org/wso2/carbon/esb/mediator/test/log/**</exclude>-->
-                                <!--<exclude>org/wso2/carbon/esb/mediator/test/payload/factory/**</exclude>-->
-                                <!--<exclude>org/wso2/carbon/esb/mediator/test/script/**</exclude>-->
-                                <!--<exclude>org/wso2/carbon/esb/mediator/test/smooks/**</exclude>-->
-                                <!--<exclude>org/wso2/carbon/esb/mediator/test/spring/**</exclude>-->
-                                <!--<exclude>org/wso2/carbon/esb/message/**</exclude>-->
-                                <!--<exclude>org/wso2/carbon/esb/mediator/test/**</exclude>-->
-                            </testExcludes>
-                        </configuration>
                         <goals>
                             <goal>testCompile</goal>
                         </goals>
