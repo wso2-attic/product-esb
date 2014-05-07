@@ -9,7 +9,7 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
 
-<!--    <test name="Server-Stratup" preserve-order="true" verbose="2">
+<!--    <test name="Server-Startup" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.ServerStartupTestCase"/>
         </classes>
@@ -37,6 +37,12 @@
     <test name="Rest-API-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.rest.test.api"/>
+        </packages>
+    </test>
+
+    <test name="Rest-API-Header-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.rest.test.header"/>
         </packages>
     </test>
 
