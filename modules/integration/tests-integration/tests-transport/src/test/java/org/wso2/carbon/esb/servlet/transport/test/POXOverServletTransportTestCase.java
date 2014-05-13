@@ -21,7 +21,7 @@ package org.wso2.carbon.esb.servlet.transport.test;
 import org.apache.axiom.om.OMElement;
 import org.apache.http.HttpRequest;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
@@ -35,6 +35,7 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
 
 
 /**
@@ -45,6 +46,8 @@ import java.io.IOException;
 public class POXOverServletTransportTestCase extends ESBIntegrationTest {
 
     private ServerConfigurationManager serverConfigurationManager;
+    private SimpleHttpServer httpServer;
+    private TestRequestInterceptor interceptor;
 
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
@@ -55,23 +58,19 @@ public class POXOverServletTransportTestCase extends ESBIntegrationTest {
         super.init();
         loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB"
                                           + File.separator + "synapseconfig" + File.separator + "servletTransport" + File.separator + "soap_2_pox.xml");
+        httpServer = new SimpleHttpServer(8098, new Properties());
+        httpServer.start();
+        Thread.sleep(5000);
+
+        interceptor = new TestRequestInterceptor();
+        httpServer.getRequestHandler().setInterceptor(interceptor);
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Tests SOAP to POX Conversion")
     public void testSoapToPOXConversion() throws IOException, InterruptedException {
 
-        SimpleHttpServer httpServer = new SimpleHttpServer();
-        try {
-            httpServer.start();
-            Thread.sleep(5000);
-        } catch (IOException e) {
-            log.error("Error while starting the HTTP server", e);
-        }
-
-        TestRequestInterceptor interceptor = new TestRequestInterceptor();
-        httpServer.getRequestHandler().setInterceptor(interceptor);
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(
                 getProxyServiceURLHttp("SOAP2POX"),
@@ -79,16 +78,15 @@ public class POXOverServletTransportTestCase extends ESBIntegrationTest {
         log.info("Response received: " + response);
         Assert.assertEquals(interceptor.getLastRequestURI(), "/services/SimpleStockQuoteService");
 
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void cleanUp() throws Exception {
         try {
             httpServer.stop();
         } catch (IOException e) {
             log.warn("Error while shutting down the HTTP server", e);
         }
-
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void cleanUp() throws Exception {
         try {
             super.cleanup();
         } finally {

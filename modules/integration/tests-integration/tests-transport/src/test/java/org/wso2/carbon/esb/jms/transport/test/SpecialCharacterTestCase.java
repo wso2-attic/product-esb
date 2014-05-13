@@ -39,6 +39,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import static org.testng.Assert.assertTrue;
 
@@ -53,7 +54,7 @@ public class SpecialCharacterTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
-        httpServer = new SimpleHttpServer();
+        httpServer = new SimpleHttpServer(8097, new Properties());
         httpServer.start();
         Thread.sleep(5000);
 

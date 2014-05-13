@@ -17,7 +17,7 @@
         </target>
     </proxy>
     <endpoint name="SimpleStockQuoteService">
-        <address uri="http://localhost:8080/services/SimpleStockQuoteService"/>
+        <address uri="http://localhost:8097/services/SimpleStockQuoteService"/>
     </endpoint>
     <sequence name="replySequence">
         <log level="full">
