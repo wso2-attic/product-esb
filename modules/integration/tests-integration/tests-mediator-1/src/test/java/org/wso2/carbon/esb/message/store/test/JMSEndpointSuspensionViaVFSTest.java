@@ -3,13 +3,13 @@
  */
 package org.wso2.carbon.esb.message.store.test;
 
-import junit.framework.Assert;
 import org.apache.axiom.om.util.AXIOMUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpRequest;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -35,7 +35,6 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
 
     private TestRequestInterceptor interceptor = new TestRequestInterceptor();
     private JMSBrokerController jmsBrokerController;
-    private SimpleHttpServer backendServer;
     private ServerConfigurationManager serverConfigurationManager;
 
     private final String ACTIVEMQ_CORE = "activemq-core-5.2.0.jar";
@@ -258,7 +257,7 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
                                              "                     </makefault>\n" +
                                              "                     <send>\n" +
                                              "                          <endpoint>\n" +
-                                             "                               <address uri=\"http://localhost:8080/services/SimpleStockQuoteService\"/>" +
+                                             "                               <address uri=\"http://localhost:8095/services/SimpleStockQuoteService\"/>" +
                                              "                          </endpoint>" +
                                              "                     </send>\n" +
                                              "                  </faultSequence>" +

@@ -19,10 +19,10 @@
                 <version>2.12.4</version>
                 <inherited>false</inherited>
                 <configuration>
-                     <!--<argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m -Xmx1024m -XX:PermSize=256m-->
-                             <!---XX:MaxPermSize=512m -Xdebug -Xnoagent -Djava.compiler=NONE-->
-                             <!---Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006-->
-                         <!--</argLine>-->
+                    <!--<argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m -Xmx1024m -XX:PermSize=256m
+                    -XX:MaxPermSize=512m -Xdebug -Xnoagent -Djava.compiler=NONE
+                    -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006
+                    </argLine>-->
                     <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m</argLine>
                     <testFailureIgnore>true</testFailureIgnore>
                     <disableXmlReport>false</disableXmlReport>
@@ -283,7 +283,21 @@
             <artifactId>service-samples</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-core</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-j2ee-management_1.1_spec</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jms_1.1_spec</artifactId>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>
