@@ -26,6 +26,7 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Properties;
 
 /**
  * @author wso2
@@ -46,13 +47,9 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         setUpJMSBroker();
-        httpServer = new SimpleHttpServer();
-        try {
-            httpServer.start();
-            Thread.sleep(5000);
-        } catch (IOException e) {
-            log.error("Error while starting the HTTP server", e);
-        }
+        httpServer = new SimpleHttpServer(8095, new Properties());
+        httpServer.start();
+        Thread.sleep(5000);
 
         interceptor = new TestRequestInterceptor();
         httpServer.getRequestHandler().setInterceptor(interceptor);
@@ -244,7 +241,7 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
                                              "                              </send>\n" +
                                              "                              <send>\n" +
                                              "                                  <endpoint>\n" +
-                                             "                                       <address uri=\"http://localhost:8080/services/SimpleStockQuoteService\"/>" +
+                                             "                                       <address uri=\"http://localhost:8095/services/SimpleStockQuoteService\"/>" +
                                              "                                  </endpoint>" +
                                              "                              </send>\n" +
                                              "                           </sequence>\n" +
