@@ -81,7 +81,7 @@ public class FailOverWithDisabledErrors extends ESBIntegrationTest {
         super.cleanup();
     }
 
-    @AfterMethod(groups = "wso2.esb")
+    /*@AfterMethod(groups = "wso2.esb")
     public void startServersA() throws InterruptedException, IOException {
         if (!axis2Server1.isStarted()) {
             axis2Server1.start();
@@ -101,7 +101,7 @@ public class FailOverWithDisabledErrors extends ESBIntegrationTest {
             axis2Server3.start();
         }
         Thread.sleep(1000);
-    }
+    }*/
 
     private static final String[] logPatterns = new String[]{
             "primary_0 is marked as TIMEOUT and will be retried : 1 more time/s after",
@@ -125,6 +125,10 @@ public class FailOverWithDisabledErrors extends ESBIntegrationTest {
         int[] occurrences = new int[10];
         int[] expected = new int[]{1, 1, 5, 1, 1, 1, 1, 1, 7, 7};
         for (LogEvent log : logs) {
+            //skipping the logs before this test case execution. Then it will only go through the logs only made by this test case
+            if(log.getMessage().contains("Successfully created the Axis2 service for Proxy service : failover")) {
+                break;
+            }
             for (int i = 0; i < logPatterns.length - 1; ++i) {
                 if (log.getMessage().contains(logPatterns[i])) {
                     occurrences[i]++;
