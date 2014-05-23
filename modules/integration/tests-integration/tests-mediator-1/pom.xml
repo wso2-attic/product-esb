@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.carbon.esb.tests.mediator-1</artifactId>
-    <name>ESB test Module-Service</name>
+    <name>ESB test Module-mediator-1</name>
     <packaging>jar</packaging>
     <build>
         <plugins>
