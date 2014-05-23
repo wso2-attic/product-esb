@@ -23,6 +23,7 @@ import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -47,9 +48,29 @@ class WireMonitor extends Thread {
             InputStream in = connection.getInputStream();
             int ch;
             StringBuffer buffer = new StringBuffer();
+            StringBuffer headerBuffer = new StringBuffer();
             Long time = System.currentTimeMillis();
+            int contentLength = -1;
             while ((ch = in.read()) != 1) {
-               buffer.append((char) ch);
+                buffer.append((char) ch);
+                    //message headers end with
+                    if (contentLength == -1 && buffer.toString().endsWith("\r\n\r\n")) {
+                        headerBuffer = new StringBuffer(buffer.toString());
+                        if (buffer.toString().contains("Content-Length")) {
+                            String headers = buffer.toString();
+                            //getting content-length header
+                            String contentLengthHeader = headers.substring(headers.indexOf("Content-Length:"));
+                            contentLengthHeader = contentLengthHeader.substring(0, contentLengthHeader.indexOf("\r\n"));
+                            contentLength = Integer.parseInt(contentLengthHeader.split(":")[1].trim());
+                            //clear the buffer
+                            buffer.setLength(0);
+                        }
+                    }
+
+                //braking loop since whole message is red
+                if (buffer.toString().length() == contentLength) {
+                    break;
+                }
                 // In this case no need of reading more than timeout value
                 if (System.currentTimeMillis() > (time + TIMEOUT_VALUE) || buffer.toString().contains("</soapenv:Envelope>")) {
                     break;
@@ -57,9 +78,12 @@ class WireMonitor extends Thread {
             }
 
             // Signaling Main thread to continue
-            trigger.response = buffer.toString();
+            trigger.response = headerBuffer.toString() + buffer.toString();
             trigger.isFinished = true;
-
+            OutputStream  out = connection.getOutputStream();
+            out.write(("HTTP/1.1 202 Accepted" + "\r\n\r\n").getBytes());
+            out.flush();
+            out.close();
             in.close();
 
         } catch (IOException ioException) {
