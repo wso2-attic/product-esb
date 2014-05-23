@@ -9,6 +9,12 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestReportListener"/>
     </listeners>
 
+    <test name="Server-Startup-verification" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.ServerStartupTestCase"/>
+        </classes>
+    </test>
+
     <test name="Resource-MediaType-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.resource.test.*"/>
