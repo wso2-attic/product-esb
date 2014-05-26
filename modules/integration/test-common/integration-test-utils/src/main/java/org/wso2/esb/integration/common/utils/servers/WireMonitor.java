@@ -53,19 +53,19 @@ class WireMonitor extends Thread {
             int contentLength = -1;
             while ((ch = in.read()) != 1) {
                 buffer.append((char) ch);
-                    //message headers end with
-                    if (contentLength == -1 && buffer.toString().endsWith("\r\n\r\n")) {
-                        headerBuffer = new StringBuffer(buffer.toString());
-                        if (buffer.toString().contains("Content-Length")) {
-                            String headers = buffer.toString();
-                            //getting content-length header
-                            String contentLengthHeader = headers.substring(headers.indexOf("Content-Length:"));
-                            contentLengthHeader = contentLengthHeader.substring(0, contentLengthHeader.indexOf("\r\n"));
-                            contentLength = Integer.parseInt(contentLengthHeader.split(":")[1].trim());
-                            //clear the buffer
-                            buffer.setLength(0);
-                        }
+                //message headers end with
+                if (contentLength == -1 && buffer.toString().endsWith("\r\n\r\n")) {
+                    headerBuffer = new StringBuffer(buffer.toString());
+                    if (buffer.toString().contains("Content-Length")) {
+                        String headers = buffer.toString();
+                        //getting content-length header
+                        String contentLengthHeader = headers.substring(headers.indexOf("Content-Length:"));
+                        contentLengthHeader = contentLengthHeader.substring(0, contentLengthHeader.indexOf("\r\n"));
+                        contentLength = Integer.parseInt(contentLengthHeader.split(":")[1].trim());
+                        //clear the buffer
+                        buffer.setLength(0);
                     }
+                }
 
                 //braking loop since whole message is red
                 if (buffer.toString().length() == contentLength) {
@@ -80,7 +80,7 @@ class WireMonitor extends Thread {
             // Signaling Main thread to continue
             trigger.response = headerBuffer.toString() + buffer.toString();
             trigger.isFinished = true;
-            OutputStream  out = connection.getOutputStream();
+            OutputStream out = connection.getOutputStream();
             out.write(("HTTP/1.1 202 Accepted" + "\r\n\r\n").getBytes());
             out.flush();
             out.close();
