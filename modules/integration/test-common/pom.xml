@@ -66,6 +66,11 @@
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.integration.common.utils</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.message.store.stub</artifactId>
             <scope>compile</scope>
         </dependency>

@@ -18,47 +18,44 @@
 
 package org.wso2.esb.integration.common.utils.servers;
 
-import org.wso2.esb.integration.common.utils.servers.WireMonitor;
-
 /**
  * This class can be used to capture wire messages
- * 
  */
 public class WireMonitorServer {
-	private static final int TIMEOUT_VALUE = 60000;
-	boolean isFinished = false;
-	String response;
-	int port;
+    private static final int TIMEOUT_VALUE = 60000;
+    boolean isFinished = false;
+    String response;
+    int port;
 
-	/**
-	 * Start listening to a port
-	 * 
-	 * @param port
-	 *            to be listened
-	 */
-	public WireMonitorServer(int port) {
-		this.port = port;
-	}
+    /**
+     * Start listening to a port
+     *
+     * @param port to be listened
+     */
+    public WireMonitorServer(int port) {
+        this.port = port;
+    }
 
-	public void start() {
+    public void start() {
         response = "";
-		Thread thread = new WireMonitor(port, this);
-		thread.start();
-	}
+        Thread thread = new WireMonitor(port, this);
+        thread.start();
+    }
 
-	
-	/**
-	 * Wait until response is received and returns
-	 * @return will return null if response is not received
-	 */
-	public String getCapturedMessage() {
-		Long time = System.currentTimeMillis();
-		while (!isFinished) {
-			// If wire monitor is not responding than 2min this will continue
-			if (System.currentTimeMillis() > (time + TIMEOUT_VALUE)) {
-				break;
-			}
-		}
-		return response;
-	}
+
+    /**
+     * Wait until response is received and returns
+     *
+     * @return will return null if response is not received
+     */
+    public String getCapturedMessage() {
+        Long time = System.currentTimeMillis();
+        while (!isFinished) {
+            // If wire monitor is not responding than 2min this will continue
+            if (System.currentTimeMillis() > (time + TIMEOUT_VALUE)) {
+                break;
+            }
+        }
+        return response;
+    }
 }
