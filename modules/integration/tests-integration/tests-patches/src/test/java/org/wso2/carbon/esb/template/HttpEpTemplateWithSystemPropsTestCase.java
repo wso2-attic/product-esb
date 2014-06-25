@@ -24,13 +24,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-//import org.wso2.carbon.automation.api.clients.authenticators.AuthenticatorClient;
-//import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-//import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-//import org.wso2.carbon.automation.core.tests.utils.CarbonTestServerManager;
-//import org.wso2.carbon.automation.core.utils.ClientConnectionUtil;
-//import org.wso2.carbon.automation.utils.esb.ESBTestCaseUtils;
-//import org.wso2.carbon.automation.utils.esb.StockQuoteClient;
 
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
@@ -59,7 +52,7 @@ public class HttpEpTemplateWithSystemPropsTestCase {
 			+ "/HttpTemplateTestAPI/SimpleStockQuoteService";
 	ESBTestCaseUtils esbUtils;
 	CarbonTestServerManager server2;
-
+	
 	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
 	@BeforeClass(groups = { "wso2.esb" })
 	public void init() throws Exception {
