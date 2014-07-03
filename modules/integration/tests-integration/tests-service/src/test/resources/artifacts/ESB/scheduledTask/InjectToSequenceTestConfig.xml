@@ -6,7 +6,7 @@
 
     <sequence name="SampleSequence">
        <log level="custom">
-          <property name="MSG" value="SEQUENCE INVOKED"/>
+          <property name="MSG" value="SEQUENCE INVOKED *************************************************************"/>
        </log>
        <property name="OUT_ONLY" value="true"/>
        <send>
