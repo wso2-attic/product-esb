@@ -30,6 +30,7 @@ import org.wso2.carbon.automation.test.utils.http.client.HttpRequestUtil;
 import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
+import org.wso2.esb.integration.common.clients.logging.LoggingAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.JMSEndpointManager;
 import org.wso2.esb.integration.services.jaxrs.customersample.CustomerConfig;
@@ -49,23 +50,25 @@ import static org.testng.Assert.assertTrue;
 public class MSMPCronForwarderCase extends ESBIntegrationTest {
 
     private TomcatServerManager tomcatServerManager;
+    private LoggingAdminClient logAdmin;
 
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
-
+        // START THE ESB
+        super.init();
         // START THE SERVER
         tomcatServerManager = new TomcatServerManager(
                 CustomerConfig.class.getName(), TomcatServerType.jaxrs.name(), 8080);
 
         tomcatServerManager.startServer();  // staring tomcat server instance
         Thread.sleep(10000);
+        logAdmin = new LoggingAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
 
     @Test(groups = {"wso2.esb"}, description = "Test Cron Forwarding of message processor")
     public void testMessageProcessorCronForwader() throws Exception {
+        logAdmin.updateLoggerData("org.apache.synapse", LoggingAdminClient.logLevel.DEBUG.name(), true, false);
 
-        // START THE ESB
-        super.init();
         OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/MSMP_CRON_WITH_FORWARDER.xml");
         updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
 
