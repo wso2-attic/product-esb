@@ -1,0 +1,50 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="ESBTestSuite" parallel="false">
+    <listeners>
+        <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestExecutionListener"/>
+        <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestSuiteListener"/>
+        <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
+        <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestManagerListener"/>
+        <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestReportListener"/>
+    </listeners>
+
+    <test name="Server-Startup-verification" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.ServerStartupTestCase"/>
+        </classes>
+    </test>
+
+    <test name="Resource-MediaType-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.resource.test.*"/>
+        </packages>
+    </test>
+
+    <test name="GZIP-Compression-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.compression.test.gzip.*"/>
+        </packages>
+    </test>
+
+    <test name="SecureVault-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.securevalut.test.*"/>
+        </packages>
+    </test>
+
+    <test name="Scenario-health-care" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.scenarios.test.healthcare.*"/>
+        </packages>
+    </test>
+
+    <test name="Test-Multiple-servers" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.test.servers.*"/>
+        </packages>
+    </test>
+
+</suite>
+
+

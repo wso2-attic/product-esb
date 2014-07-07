@@ -43,31 +43,15 @@
     </licenses>
 
     <modules>
-	<module>integration-common</module>
+        <module>test-common</module>
         <module>service-samples</module>
-        <module>core</module>
-        <!--module>tests</module-->
-        <module>tests-mediator-1</module>
-        <module>tests-mediator-2</module>
-        <module>tests-sample</module>
-        <module>tests-transport</module>
-        <module>tests-other</module>
-        <module>tests-service</module>
-        <module>tests-ui</module>
-        <module>reports</module>
-         <!--<module>mediator-tests</module>-->
-        <!--<module>endpoints</module>-->
-        <!--<module>esb-samples</module>-->
-        <!--<module>localentry</module>-->
-        <!--<module>mediators</module>-->
-        <!--<module>nhttp-transport</module>-->
-        <!--<module>priority-executors</module>-->
-        <!--<module>proxyservices</module>-->
-        <!--<module>sequences</module>-->
-        <!--<module>servlet-transport</module>-->
-        <!--<module>ws-discovery</module>-->
-        <!--<module>module-mgt</module>-->
-        <!--<module>service-mgt</module>-->
+        <module>tests-integration/tests-service</module>
+        <module>tests-integration/tests-mediator-1</module>
+        <!--<module>tests-integration/tests-mediator-2</module>-->
+        <!--<module>tests-integration/tests-transport</module>-->
+        <!--<module>tests-integration/tests-sample</module>-->
+        <!--<module>tests-integration/tests-other</module>-->
+        <!--<module>tests-integration/reports</module>-->
     </modules>
 
     <build>
@@ -87,5 +71,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
