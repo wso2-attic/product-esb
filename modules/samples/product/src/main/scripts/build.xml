@@ -146,7 +146,7 @@
             <sysproperty key="itr" value="${itr}"/>
             <sysproperty key="javax.net.ssl.trustStore" value="./../../repository/resources/security/client-truststore.jks"/>
             <sysproperty key="javax.net.ssl.trustStorePassword" value="wso2carbon"/>
-            <sysproperty key="java.io.tmpdir" value="./../../tmp/sampleClient"/>
+            <sysproperty key="java.io.tmpdir" value="./../../tmp/"/>
             <sysproperty key="java.endorsed.dirs" value="./../../lib/endorsed"/>
             <sysproperty key="carbon.home" value="./../.."/>
             <!--
@@ -166,7 +166,7 @@
               classpathref="javac.classpath" fork="true">
             <sysproperty key="addurl" value="http://localhost:9000/services/SimpleStockQuoteService"/>
             <sysproperty key="trpurl" value="http://localhost:8280/"/>
-            <sysproperty key="java.io.tmpdir" value="./../../tmp/sampleClient"/>
+            <sysproperty key="java.io.tmpdir" value="./../../tmp/"/>
         </java>
     </target>
 
@@ -179,7 +179,7 @@
             <!--<sysproperty key="java.naming.provider.url" value="${java.naming.provider.url}"/>
             <sysproperty key="java.naming.factory.initial" value="${java.naming.factory.initial}"/>
             <sysproperty key="java.naming.factory.url.pkg" value="${java.naming.factory.url.pkg}"/>-->
-            <sysproperty key="java.io.tmpdir" value="./../../tmp/sampleClient"/>
+            <sysproperty key="java.io.tmpdir" value="./../../tmp/"/>
             <sysproperty key="carbon.home" value="./../.."/>
         </java>
     </target>
@@ -219,7 +219,7 @@
             <sysproperty key="prxurl" value="${prxurl}"/>
             <sysproperty key="qty"    value="${qty}"/>
             <sysproperty key="repository" value="${repository}"/>
-            <sysproperty key="java.io.tmpdir" value="./../../tmp/sampleClient"/>
+            <sysproperty key="java.io.tmpdir" value="./../../tmp/"/>
             <sysproperty key="carbon.home" value="./../.."/>
         </java>
     </target>
@@ -232,7 +232,7 @@
             <sysproperty key="opt_file" value="${opt_file}"/>
             <sysproperty key="javax.net.ssl.trustStore" value="./../../repository/resources/security/client-truststore.jks"/>
             <sysproperty key="javax.net.ssl.trustStorePassword" value="wso2carbon"/>
-            <sysproperty key="java.io.tmpdir" value="./../../tmp/sampleClient"/>
+            <sysproperty key="java.io.tmpdir" value="./../../tmp/"/>
             <sysproperty key="carbon.home" value="./../.."/>
             <!--
             <jvmarg value="-Xdebug"/>
@@ -252,7 +252,7 @@
             <sysproperty key="addurl" value="${addurl}"/>
             <sysproperty key="trpurl" value="${trpurl}"/>
             <sysproperty key="prxurl" value="${prxurl}"/>
-            <sysproperty key="java.io.tmpdir" value="./../../tmp/sampleClient"/>
+            <sysproperty key="java.io.tmpdir" value="./../../tmp/"/>
             <sysproperty key="carbon.home" value="./../.."/>
         </java>
     </target>
@@ -267,7 +267,7 @@
             <sysproperty key="msg" value="${msg}"/>
             <sysproperty key="t" value="${t}"/>
             <sysproperty key="session" value="${session}"/>
-            <sysproperty key="java.io.tmpdir" value="./../../tmp/sampleClient"/>
+            <sysproperty key="java.io.tmpdir" value="./../../tmp/"/>
             <sysproperty key="carbon.home" value="./../.."/>
         </java>
     </target>
@@ -337,7 +337,7 @@
             <sysproperty key="mode" value="${mode}"/>
             <sysproperty key="identifier" value="${identifier}"/>
             <sysproperty key="expires" value="${expires}"/>
-            <sysproperty key="java.io.tmpdir" value="./../../tmp/sampleClient"/>
+            <sysproperty key="java.io.tmpdir" value="./../../tmp/"/>
             <sysproperty key="carbon.home" value="./../.."/>
         </java>
     </target>
@@ -376,7 +376,7 @@
             <sysproperty key="prxurl" value="${prxurl}"/>
             <sysproperty key="qty"    value="${qty}"/>
             <sysproperty key="repository" value="${repository}"/>
-            <sysproperty key="java.io.tmpdir" value="./../../tmp/sampleClient"/>
+            <sysproperty key="java.io.tmpdir" value="./../../tmp/"/>
             <sysproperty key="topic"    value="${topic}"/>
             <sysproperty key="action"    value="${action}"/>
             <sysproperty key="topicns"    value="${topicns}"/>
