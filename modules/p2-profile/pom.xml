@@ -821,10 +821,10 @@
                                     <id>org.wso2.carbon.mediation.admin.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <feature>
+                                <!--feature>
                                     <id>org.wso2.carbon.mediation.ui.feature.group</id>
                                     <version>${wso2carbon.version}</version>
-                                </feature>
+                                </feature-->
                                 <feature>
                                     <id>org.wso2.carbon.mediators.feature.group</id>
                                     <version>${wso2carbon.version}</version>
@@ -869,10 +869,10 @@
                                     <id>org.wso2.carbon.core.server.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <feature>
+                                <!--feature>
                                     <id>org.wso2.carbon.core.ui.feature.group</id>
                                     <version>${wso2carbon.version}</version>
-                                </feature>
+                                </feature-->
 
                                 <feature>
                                     <id>org.wso2.carbon.core.runtime.feature.group</id>
@@ -902,15 +902,15 @@
                                     <id>org.wso2.carbon.datasource.server.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                `
+                                
                                 <feature>
                                     <id>org.wso2.carbon.ndatasource.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <feature>
+                                <!--feature>
                                     <id>org.wso2.carbon.ndatasource.ui.feature.group</id>
                                     <version>${wso2carbon.version}</version>
-                                </feature>
+                                </feature-->
 
                                 <!--<feature>-->
                                 <!--<id>org.wso2.carbon.mediation.library.feature.group</id>-->
@@ -996,10 +996,10 @@
                                    <id>org.wso2.carbon.registry.extensions.feature.group</id>
                                    <version>${wso2carbon.version}</version>
                                 </feature>
-                                <feature>
+                                <!--feature>
                                     <id>org.wso2.carbon.registry.ui.menu.feature.group</id>
                                     <version>${wso2carbon.version}</version>
-                                </feature>
+                                </feature-->
                                 <feature>
                                     <id>org.wso2.carbon.registry.resource.properties.feature.group</id>
                                     <version>${wso2carbon.version}</version>
@@ -1012,10 +1012,10 @@
                                     <id>org.wso2.carbon.discovery.core.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <feature>
+                                <!--feature>
                                     <id>org.wso2.carbon.discovery.ui.feature.group</id>
                                     <version>${wso2carbon.version}</version>
-                                </feature>
+                                </feature-->
                                 <feature>
                                     <id>org.wso2.esb.styles.feature.group</id>
                                     <version>${project.version}</version>
@@ -1032,10 +1032,10 @@
                                     <id>org.wso2.carbon.event.common.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <feature>
+                                <!--feature>
                                     <id>org.wso2.carbon.event.ui.feature.group</id>
                                     <version>${wso2carbon.version}</version>
-                                </feature>
+                                </feature-->
                                 <feature>
                                     <id>org.wso2.carbon.registry.associations.dependencies.feature.group</id>
                                     <version>${wso2carbon.version}</version>
@@ -1056,10 +1056,10 @@
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <feature>
+                                <!--feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature.group</id>
                                     <version>${wso2carbon.version}</version>
-                                </feature>
+                                </feature-->
                                 <feature>
                                     <id>org.wso2.carbon.tryit.feature.group</id>
                                     <version>${wso2carbon.version}</version>
@@ -1096,10 +1096,10 @@
                                     <id>org.wso2.carbon.reporting.server.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <feature>
+                                <!--feature>
                                     <id>org.wso2.carbon.reporting.ui.feature.group</id>
                                     <version>${wso2carbon.version}</version>
-                                </feature>
+                                </feature-->
                                 <!--Start Multi Tenant ESB features-->
                                 <feature>
                                     <id>org.wso2.carbon.tenant.common.feature.group</id>
