@@ -18,17 +18,24 @@
 package org.wso2.carbon.esb.proxyservice.test.secureProxy;
 
 import org.apache.axiom.om.OMElement;
+import org.apache.http.HttpResponse;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
 import org.wso2.carbon.security.mgt.stub.config.SecurityAdminServiceSecurityConfigExceptionException;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ServiceTransportUtil;
 import org.wso2.esb.integration.common.utils.clients.SecureServiceClient;
 
 import javax.xml.namespace.QName;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.rmi.RemoteException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProxyServiceSecurityTestCase extends ESBIntegrationTest {
 
@@ -294,6 +301,42 @@ public class ProxyServiceSecurityTestCase extends ESBIntegrationTest {
         log.info("SecureConversation - Sign and Encrypt - Service as STS - Bootstrap policy - " +
                  "Sign and Encrypt , Username Token Authentication verified");
     }
+
+    @Test(groups = {"wso2.esb"})
+    public void inValidLoginsecurityPolicy15() throws Exception {
+        //logAdmin.updateLoggerData("org.apache.synapse", LoggingAdminClient.logLevel.DEBUG.name(), true, false);
+        final int policyId = 15;
+        this.secureService(policyId);
+        SimpleHttpClient httpClient = new SimpleHttpClient();
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Content-Type", "text/xml");
+        headers.put("SOAPAction", "urn:getQuote");
+        String payload = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ser=\"http://services.samples\" xmlns:xsd=\"http://services.samples/xsd\">\n" +
+                "   <soapenv:Header/>\n" +
+                "   <soapenv:Body>\n" +
+                "      <ser:getQuote>\n" +
+                "         <!--Optional:-->\n" +
+                "         <ser:request>\n" +
+                "            <!--Optional:-->\n" +
+                "            <xsd:symbol>?</xsd:symbol>\n" +
+                "         </ser:request>\n" +
+                "      </ser:getQuote>\n" +
+                "   </soapenv:Body>\n" +
+                "</soapenv:Envelope>";
+        HttpResponse response = httpClient.doPost(getProxyServiceURLHttp(serviceName), headers,payload,"text/xml");
+        InputStream responseINStream =response.getEntity().getContent();
+        StringBuilder sb = new StringBuilder();
+        BufferedReader br = new BufferedReader(new InputStreamReader(responseINStream));
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+
+        String expected = "<html><body><h1>Failed to process the request</h1><p>Error processing POST request for : /services/SecureStockQuoteProxy</p><p>Missing wsse:Security header in request</p></body></html><p>null</p></body></html>";
+        String contentType ="Content-Type: text/html";
+        Assert.assertEquals(expected,sb.toString());
+    }
+
 
     //@Test(dependsOnMethods = {"uploadArtifactTest"})
     //    public void securityPolicy16() {
