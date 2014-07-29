@@ -17,8 +17,18 @@
 
     <test name="ProxyService-Test" preserve-order="true" verbose="2">
         <packages>
-            <package name="org.wso2.carbon.esb.proxyservice.test.*"/>
+            <!--package name="org.wso2.carbon.esb.proxyservice.test.*"/-->
+            <package name="org.wso2.carbon.esb.proxyservice.test.customProxy"/>
+            <package name="org.wso2.carbon.esb.proxyservice.test.loggingProxy"/>
+            <package name="org.wso2.carbon.esb.proxyservice.test.passThroughProxy"/>
+            <package name="org.wso2.carbon.esb.proxyservice.test.proxyservices"/>
+            <!--package name="org.wso2.carbon.esb.proxyservice.test.secureProxy"/-->
+            <package name="org.wso2.carbon.esb.proxyservice.test.transformerProxy"/>
+            <package name="org.wso2.carbon.esb.proxyservice.test.wsdlBasedProxy"/>
         </packages>
+        <!--classes>
+			<class name="org.wso2.carbon.esb.proxyservice.test.secureProxy.ChangingPoliciesTestCase"/>
+		</classes-->
     </test>
 
     <test name="Endpoint-Test" preserve-order="true" verbose="2">
