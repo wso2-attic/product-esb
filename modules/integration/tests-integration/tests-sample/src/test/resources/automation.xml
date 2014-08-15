@@ -261,12 +261,16 @@
     </platform>
 
     <listenerExtensions>
-<!---->
-        <!--<className>org.wso2.carbon.automation.extensions.servers.carbonserver.CarbonServerExtension</className>-->
         <platformExecutionManager>
             <extentionClasses>
-                <className>org.wso2.carbon.integration.common.extensions.carbonserver.CarbonServerExtension</className>
-                <className>org.wso2.esb.integration.common.extensions.axis2server.Axis2ServerExtension</className>
+                <class>
+                    <name>org.wso2.carbon.integration.common.extensions.carbonserver.CarbonServerExtension</name>
+                    <!--<parameter name="portOffSet" value="2" />-->
+                    <!--<parameter name="cmdArg" value="debug 5005" />-->
+                </class>
+                <class>
+                    <name>org.wso2.esb.integration.common.extensions.axis2server.Axis2ServerExtension</name>
+                </class>
             </extentionClasses>
         </platformExecutionManager>
 

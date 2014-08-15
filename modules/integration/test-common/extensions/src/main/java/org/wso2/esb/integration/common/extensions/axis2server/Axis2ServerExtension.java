@@ -20,12 +20,11 @@ package org.wso2.esb.integration.common.extensions.axis2server;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.wso2.carbon.automation.engine.extensions.interfaces.ExecutionListenerExtension;
+import org.wso2.carbon.automation.engine.extensions.ExecutionListenerExtension;
 
-public class Axis2ServerExtension implements ExecutionListenerExtension {
-    Axis2ServerManager serverManager;
+public class Axis2ServerExtension extends ExecutionListenerExtension {
+    private Axis2ServerManager serverManager;
     private static final Log log = LogFactory.getLog(Axis2ServerExtension.class);
-    private String executionEnvironment;
 
     public void initiate() throws Exception {
 
