@@ -267,7 +267,7 @@
             <extentionClasses>
                 <class>
                     <name>org.wso2.carbon.integration.common.extensions.carbonserver.CarbonServerExtension</name>
-                    <!--<parameter name="portOffSet" value="2" />-->
+                    <!--Here you can set the command argument when staring the instance-->
                     <!--<parameter name="cmdArg" value="debug 5005" />-->
                 </class>
                 <class>
