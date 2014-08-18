@@ -12,13 +12,7 @@ import java.io.IOException;
 
 import static org.testng.Assert.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: vanji
- * Date: 7/11/13
- * Time: 12:12 PM
- * To change this template use File | Settings | File Templates.
- */
+
 public class CallTemplateIntegrationSample750FastXSLTTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception, IOException {

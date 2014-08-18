@@ -14,9 +14,28 @@
             <!--<class name="org.wso2.carbon.esb.ServerStartupTestCase"/>-->
         <!--</classes>-->
     <!--</test>-->
-    <test name="ESB-Test-patches" preserve-order="true" verbose="2">
+    <!-- <test name="ESB-Test-patches" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.*"/>
+        </packages>
+    </test> -->
+    
+    <test name="Template-Test" preserve-order="true" verbose="2">
+      <packages>
+          <package name="org.wso2.carbon.esb.template.*"/>
+         </packages>
+    </test>
+    
+
+    <test name="GetProcessor-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.getprocessor.test"/>
+        </packages>
+    </test>
+
+    <test name="Registry-Caching-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.registry.caching"/>
         </packages>
     </test>
 
