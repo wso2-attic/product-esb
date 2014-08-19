@@ -20,14 +20,13 @@ package org.wso2.esb.integration.common.extensions.axis2server;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.testng.ITestContext;
-import org.wso2.carbon.automation.engine.extensions.interfaces.TestListenerExtension;
+import org.wso2.carbon.automation.engine.extensions.TestListenerExtension;
 
 import java.io.IOException;
 
-public class Axis2ServerTestExtension implements TestListenerExtension {
-    Axis2ServerManager serverManager;
+public class Axis2ServerTestExtension extends TestListenerExtension {
+    private Axis2ServerManager serverManager;
     private static final Log log = LogFactory.getLog(Axis2ServerTestExtension.class);
-    private String executionEnvironment;
 
     @Override
     public void initiate() {

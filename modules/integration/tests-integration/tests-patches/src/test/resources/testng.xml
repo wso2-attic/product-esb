@@ -33,6 +33,12 @@
         </packages>
     </test>
 
+    <test name="Registry-Caching-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.registry.caching"/>
+        </packages>
+    </test>
+
 </suite>
 
 
