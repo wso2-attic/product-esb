@@ -55,10 +55,14 @@ public class VFSTransportTestCase extends ESBIntegrationTest {
         serverConfigurationManager.applyConfiguration(new File(pathToVfsDir + File.separator + "axis2.xml"));
         super.init();
 
+        File rootFolder = new File(pathToVfsDir + "test" + File.separator);
         File outFolder = new File(pathToVfsDir + "test" + File.separator + "out" + File.separator);
         File inFolder = new File(pathToVfsDir + "test" + File.separator + "in" + File.separator);
         File originalFolder = new File(pathToVfsDir + "test" + File.separator + "original" + File.separator);
         File failureFolder = new File(pathToVfsDir + "test" + File.separator + "failure" + File.separator);
+
+        FileUtils.deleteDirectory(rootFolder);
+        assertTrue(rootFolder.mkdirs(), "file folder not created");
         assertTrue(outFolder.mkdirs(), "file folder not created");
         assertTrue(inFolder.mkdirs(), "file folder not created");
         assertTrue(originalFolder.mkdirs(), "file folder not created");
