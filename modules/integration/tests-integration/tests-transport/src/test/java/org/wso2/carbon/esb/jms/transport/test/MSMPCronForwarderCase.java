@@ -115,6 +115,8 @@ public class MSMPCronForwarderCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
+        //undo logger change
+        logAdmin.updateLoggerData("org.apache.synapse", LoggingAdminClient.logLevel.INFO.name(), true, false);
         tomcatServerManager.stop();
         super.cleanup();
     }
