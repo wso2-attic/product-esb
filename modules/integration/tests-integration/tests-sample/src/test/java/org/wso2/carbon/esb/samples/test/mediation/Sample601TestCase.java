@@ -40,11 +40,11 @@ public class Sample601TestCase extends ESBIntegrationTest {
         loadSampleESBConfiguration(601);
     }
 
-    @Test(groups = "wso2.esb", description = " Rule Mediator as a Filter - Simple Rule Based " +
-                                             "Routing " +
-                                             "(Keeping Ruleset in the Registry)-using a string" +
-                                             " other" +
-                                             " than IBM")
+//    @Test(groups = "wso2.esb", description = " Rule Mediator as a Filter - Simple Rule Based " +
+//                                             "Routing " +
+//                                             "(Keeping Ruleset in the Registry)-using a string" +
+//                                             " other" +
+//                                             " than IBM")
     public void testLocalEntryWithWrongInput() throws Exception {
 
 
@@ -61,9 +61,9 @@ public class Sample601TestCase extends ESBIntegrationTest {
     }
 
 
-    @Test(groups = "wso2.esb", description = " Rule Mediator as a Filter - Simple Rule Based " +
-                                             "Routing " +
-                                             "(Keeping Ruleset in the Registry)- using string IBM")
+//    @Test(groups = "wso2.esb", description = " Rule Mediator as a Filter - Simple Rule Based " +
+//                                             "Routing " +
+//                                             "(Keeping Ruleset in the Registry)- using string IBM")
     public void testLocalEntryWithCorrectInput() throws Exception {
 
 
