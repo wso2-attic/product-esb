@@ -24,7 +24,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,7 +48,7 @@ public class ESBJAVA3022SendingSoapRequestAfterRestRequestTestCase extends ESBIn
     @Test(groups = "wso2.esb", description = "test to verify that the soap builder/formatter is invoked properly" +
             "when the soap request is made after rest request.")
 	public void testSendingSoapCallAfterRestCall() throws Exception {
-    	String restURL = esbServer.getServiceUrl() + "/testmessagetype";
+    	String restURL = getApiInvocationURL("api_poc_messagetype");//esbServer.getServiceUrl() + "/testmessagetype";
     	DefaultHttpClient httpclient = new DefaultHttpClient();
         HttpGet request = new HttpGet(restURL);
     	HttpResponse response = httpclient.execute(request);
