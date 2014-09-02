@@ -236,9 +236,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.module.mgt.feature:${wso2carbon.version}
                                 </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.throttle.feature:${wso2carbon.version}
-                                </featureArtifactDef>
+                                <!--<featureArtifactDef>-->
+                                    <!--org.wso2.carbon:org.wso2.carbon.throttle.feature:${wso2carbon.version}-->
+                                <!--</featureArtifactDef>-->
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.caching.feature:${wso2carbon.version}
                                 </featureArtifactDef>
@@ -738,10 +738,10 @@
                                     <id>org.wso2.carbon.module.mgt.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.throttle.feature.group</id>
-                                    <version>${wso2carbon.version}</version>
-                                </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.throttle.feature.group</id>-->
+                                    <!--<version>${wso2carbon.version}</version>-->
+                                <!--</feature>-->
                                 <feature>
                                     <id>org.wso2.carbon.caching.feature.group</id>
                                     <version>${wso2carbon.version}</version>
@@ -1137,10 +1137,10 @@
                                                <id>org.wso2.carbon.core.feature.group</id>
                                                <version>${wso2carbon.old.version}</version>
                                             </feature-->
-                                <feature>
-                                    <id>org.wso2.carbon.throttle.feature.group</id>
-                                    <version>${wso2carbon.version}</version>
-                                </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.throttle.feature.group</id>-->
+                                    <!--<version>${wso2carbon.version}</version>-->
+                                <!--</feature>-->
                                 <feature>
                                     <id>org.wso2.carbon.caching.feature.group</id>
                                     <version>${wso2carbon.version}</version>
