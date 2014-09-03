@@ -34,12 +34,11 @@ import java.io.IOException;
 public class LoginPage {
     private static final Log log = LogFactory.getLog(LoginPage.class);
     private WebDriver driver;
-    private UIElementMapper uiElementMapper;
     private boolean isCloudEnvironment = false;
 
     public LoginPage(WebDriver driver) throws IOException {
         this.driver = driver;
-        this.uiElementMapper = UIElementMapper.getInstance();
+
         // Check that we're on the right page.
         if (!(driver.getCurrentUrl().contains("login.jsp"))) {
             // Alternatively, we could navigate to the login page, perhaps logging out first
@@ -50,7 +49,6 @@ public class LoginPage {
     public LoginPage(WebDriver driver, boolean isCloudEnvironment) throws IOException {
         this.driver = driver;
         this.isCloudEnvironment = isCloudEnvironment;
-        this.uiElementMapper = UIElementMapper.getInstance();
         // Check that we're on the right page.
         if (this.isCloudEnvironment) {
             if (!(driver.getCurrentUrl().contains("home/index.html"))) {
@@ -69,10 +67,8 @@ public class LoginPage {
     public HomePage loginAs(String userName, String password, boolean isTenant)
             throws IOException {
         log.info("login as " + userName + ":Tenant");
-        WebElement userNameField = driver.findElement(By.name(uiElementMapper
-                                                                      .getElement("login.username.name")));
-        WebElement passwordField = driver.findElement(By.name(uiElementMapper
-                                                                      .getElement("login.password")));
+        WebElement userNameField = driver.findElement(By.name(UIElementMapper.getInstance().getElement("login.username.name")));
+        WebElement passwordField = driver.findElement(By.name(UIElementMapper.getInstance().getElement("login.password")));
 
         userNameField.sendKeys(userName);
         passwordField.sendKeys(password);
@@ -83,7 +79,7 @@ public class LoginPage {
             return new HomePage(isTenant, driver);
         } else {
             driver.findElement(
-                    By.className(uiElementMapper
+                    By.className(UIElementMapper.getInstance()
                                          .getElement("login.sign.in.button"))).click();
             return new HomePage(isTenant, driver);
         }
@@ -91,8 +87,8 @@ public class LoginPage {
 
     public HomePage loginAs(String userName, String password) throws IOException {
         log.info("login as " + userName);
-        WebElement userNameField = driver.findElement(By.name(uiElementMapper.getElement("login.username.name")));
-        WebElement passwordField = driver.findElement(By.name(uiElementMapper.getElement("login.password")));
+        WebElement userNameField = driver.findElement(By.name(UIElementMapper.getInstance().getElement("login.username.name")));
+        WebElement passwordField = driver.findElement(By.name(UIElementMapper.getInstance().getElement("login.password")));
 
         userNameField.sendKeys(userName);
         passwordField.sendKeys(password);
@@ -100,7 +96,7 @@ public class LoginPage {
             driver.findElement(By.xpath("//*[@id=\"loginForm\"]/table/tbody/tr[4]/td[2]/input")).click();
             return new HomePage(driver, isCloudEnvironment);
         } else {
-            driver.findElement(By.className(uiElementMapper.getElement("login.sign.in.button"))).click();
+            driver.findElement(By.className(UIElementMapper.getInstance().getElement("login.sign.in.button"))).click();
             return new HomePage(driver);
         }
     }

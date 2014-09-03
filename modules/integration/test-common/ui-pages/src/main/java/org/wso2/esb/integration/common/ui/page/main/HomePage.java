@@ -38,17 +38,15 @@ import java.util.List;
 public class HomePage {
 
 
-    private static final Log log = LogFactory.getLog(LoginPage.class);
+    private static final Log log = LogFactory.getLog(HomePage.class);
     private WebDriver driver;
-    private UIElementMapper uiElementMapper;
     private boolean isCloudEnvironment = false;
     private boolean isTenant = false;
 
     public HomePage(WebDriver driver) throws IOException {
         this.driver = driver;
-        this.uiElementMapper = UIElementMapper.getInstance();
         // Check that we're on the right page.
-        if (!driver.findElement(By.id(uiElementMapper.getElement("home.dashboard.middle.text")))
+        if (!driver.findElement(By.id(UIElementMapper.getInstance().getElement("home.dashboard.middle.text")))
                 .getText().toLowerCase().contains("home")) {
             throw new IllegalStateException("This is not the home page");
         }
@@ -57,14 +55,13 @@ public class HomePage {
     public HomePage(WebDriver driver, boolean isCloudEnvironment) throws IOException {
         this.driver = driver;
         this.isCloudEnvironment = isCloudEnvironment;
-        this.uiElementMapper = UIElementMapper.getInstance();
         if (isCloudEnvironment) {
             if (!driver.findElement(By.className("dashboard-title")).getText().toLowerCase().contains("quick start dashboard")) {
                 throw new IllegalStateException("This is not the cloud home page");
             }
         } else {
             // Check that we're on the right page.
-            if (!driver.findElement(By.id(uiElementMapper.getElement("home.dashboard.middle.text")))
+            if (!driver.findElement(By.id(UIElementMapper.getInstance().getElement("home.dashboard.middle.text")))
                     .getText().toLowerCase().contains("home")) {
                 throw new IllegalStateException("This is not the home page");
             }
@@ -81,7 +78,7 @@ public class HomePage {
     }
 
     public LoginPage logout() throws IOException {
-        driver.findElement(By.xpath(uiElementMapper.getElement("home.greg.sign.out.xpath"))).click();
+        driver.findElement(By.xpath(UIElementMapper.getInstance().getElement("home.greg.sign.out.xpath"))).click();
         return new LoginPage(driver, isCloudEnvironment);
     }
 
