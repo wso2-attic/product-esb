@@ -671,6 +671,28 @@
                 <type>mar</type>
                 <version>1.6.1-wso2v8</version>
             </dependency>
+                <dependency>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-java</artifactId>
+                    <version>${selenium.version}</version>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.seleniumhq.selenium</groupId>
+                            <artifactId>selenium-android-driver</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+                <dependency>
+                    <groupId>com.opera</groupId>
+                    <artifactId>operadriver</artifactId>
+                    <version>${operadriver.version}</version>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.seleniumhq.selenium</groupId>
+                            <artifactId>selenium-remote-driver</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
         </dependencies>
     </dependencyManagement>
     <properties>
@@ -714,6 +736,8 @@
         <!--Automation Framework versions-->
         <automation.framework.verion>4.3.1-SNAPSHOT</automation.framework.verion>
         <automation.framework.utills.version>4.3.0-SNAPSHOT</automation.framework.utills.version>
+        <operadriver.version>0.8.1</operadriver.version>
+        <selenium.version>2.40.0</selenium.version>
     </properties>
     <pluginRepositories>
         <pluginRepository>
