@@ -47,11 +47,11 @@
         <module>service-samples</module>
         <!--module>tests-integration/tests-service</module-->
         <module>tests-integration/tests-mediator-1</module>
-        <module>tests-integration/tests-mediator-2</module>
+        <!--module>tests-integration/tests-mediator-2</module>
         <module>tests-integration/tests-transport</module>
         <module>tests-integration/tests-sample</module>
         <module>tests-integration/tests-other</module>
-        <module>tests-integration/reports</module>
+        <module>tests-integration/reports</module-->
     </modules>
 
     <build>
