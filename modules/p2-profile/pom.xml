@@ -107,6 +107,9 @@
                                     org.wso2.carbon:org.wso2.carbon.mediation.initializer.feature:${wso2carbon.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.inbound.endpoints.server.feature:${wso2carbon.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.mediation.statistics.feature:${wso2carbon.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -412,6 +415,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.mediation.initializer.feature.group</id>
+                                    <version>${wso2carbon.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.inbound.endpoints.server.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
                                 <feature>
@@ -798,6 +805,10 @@
 
                                 <feature>
                                     <id>org.wso2.carbon.mediation.initializer.feature.group</id>
+                                    <version>${wso2carbon.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.inbound.endpoints.server.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
                                 <feature>
