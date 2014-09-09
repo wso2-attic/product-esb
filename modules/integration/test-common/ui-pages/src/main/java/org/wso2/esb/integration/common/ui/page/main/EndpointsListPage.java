@@ -38,27 +38,25 @@ public class EndpointsListPage {
         log.info("Endpoints list page");
         if (!driver
                 .findElement(
-                        By.xpath(UIElementMapper.getInstance().getElement("endpoints.tab.id")))
-                .getText().contains("Endpoints")) {
-            throw new IllegalStateException("This is not the correct Page");
+                        By.xpath(UIElementMapper.getInstance().getElement("endpoint.page.middle.text")))
+                .getText().contains("Manage Endpoints")) {
+            throw new IllegalStateException("This is not the correct Endpoints List Page");
         }
     }
 
-    public void testPageLoadFail() throws IOException {
+    public void listDynamicEndpoint() throws IOException {
         driver.findElement(
-                By.xpath(UIElementMapper.getInstance().getElement("endpoints.tab.id")))
+                By.xpath(UIElementMapper.getInstance().getElement("endpoint.tab.dynamicEndpoint")))
                 .click();
         // test should fail if page load fails
         try {
-            if (!driver
-                    .findElement(
-                            By.id(UIElementMapper.getInstance()
-                                          .getElement("endpoints.page.middle")))
-                    .getText().contains("Manage Endpoints")) {
-                throw new IOException("Page loading failed");
+            if (!driver.findElement(By.xpath(UIElementMapper.getInstance()
+                                          .getElement("endpoint.tab.dynamicEndpoint.middle.text")))
+                    .getText().contains("Dynamic Endpoints Saved in Registry")) {
+                throw new IOException("Dynamic Endpoint Page loading failed");
             }
         } catch (NoSuchElementException e) {
-            throw new IOException("Page loading failed");
+            throw new IOException("Page loading failed", e);
         }
     }
 }
