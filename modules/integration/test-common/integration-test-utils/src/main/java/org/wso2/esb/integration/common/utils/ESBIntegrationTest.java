@@ -134,6 +134,7 @@ public abstract class ESBIntegrationTest {
             deletePriorityExecutors();
 
             deleteScheduledTasks();
+            deleteInboundEndpoints();
 
         } finally {
             synapseConfiguration = null;
@@ -244,6 +245,32 @@ public abstract class ESBIntegrationTest {
 
         }*/
     }
+
+    protected void addInboundEndpoint(OMElement inboundEndpoint) throws Exception {
+        try {
+            esbUtils.addInboundEndpoint(contextUrls.getBackEndUrl(), sessionCookie, inboundEndpoint);
+        } catch (Exception e) {
+           log.error("Error when adding InboundEndpoint" );
+            throw new Exception(e);
+        }
+    }
+
+    protected void deleteInboundEndpoints() throws Exception {
+        try {
+          String name =   esbUtils.getAllInboundEndpoints(contextUrls.getBackEndUrl(), sessionCookie);
+            if(name != null){
+              String[] names =  name.split("~:~");
+                for(String name1:names){
+                    esbUtils.deleteInboundEndpointDeployed(contextUrls.getBackEndUrl(), sessionCookie,name1);
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error when adding InboundEndpoint" );
+            throw new Exception(e);
+        }
+    }
+
+
 
     protected void isProxyDeployed(String proxyServiceName) throws Exception {
         Assert.assertTrue(esbUtils.isProxyDeployed(contextUrls.getBackEndUrl(), sessionCookie,
