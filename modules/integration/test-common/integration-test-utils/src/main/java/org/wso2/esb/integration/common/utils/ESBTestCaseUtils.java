@@ -28,6 +28,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
 import org.wso2.carbon.endpoint.stub.types.EndpointAdminEndpointAdminException;
+import org.wso2.carbon.inbound.stub.types.carbon.InboundEndpointDTO;
 import org.wso2.carbon.localentry.stub.types.LocalEntryAdminException;
 import org.wso2.carbon.proxyadmin.stub.ProxyServiceAdminProxyAdminException;
 import org.wso2.carbon.rest.api.stub.RestApiAdminAPIException;
@@ -35,6 +36,7 @@ import org.wso2.carbon.sequences.stub.types.SequenceEditorException;
 import org.wso2.carbon.task.stub.TaskManagementException;
 import org.wso2.esb.integration.common.clients.endpoint.EndPointAdminClient;
 import org.wso2.esb.integration.common.clients.executor.PriorityMediationAdminClient;
+import org.wso2.esb.integration.common.clients.inbound.endpoint.InboundAdminClient;
 import org.wso2.esb.integration.common.clients.localentry.LocalEntriesAdminClient;
 import org.wso2.esb.integration.common.clients.mediation.MessageProcessorClient;
 import org.wso2.esb.integration.common.clients.mediation.MessageStoreAdminClient;
@@ -189,9 +191,9 @@ public class ESBTestCaseUtils {
      * @param synapseConfig synapse configuration
      * @param backendURL    server backEnd url
      * @param sessionCookie session Cookie
-     * @throws RemoteException
-     * @throws XMLStreamException
-     * @throws ServletException
+     * @throws java.rmi.RemoteException
+     * @throws javax.xml.stream.XMLStreamException
+     * @throws javax.servlet.ServletException
      */
     public void updateESBConfiguration(OMElement synapseConfig, String backendURL,
                                        String sessionCookie)
@@ -347,9 +349,9 @@ public class ESBTestCaseUtils {
      * @param backEndUrl
      * @param sessionCookie
      * @param proxyConfig
-     * @throws XMLStreamException
-     * @throws IOException
-     * @throws ProxyServiceAdminProxyAdminException
+     * @throws javax.xml.stream.XMLStreamException
+     * @throws java.io.IOException
+     * @throws org.wso2.carbon.proxyadmin.stub.ProxyServiceAdminProxyAdminException
      *
      * @throws InterruptedException
      */
@@ -361,6 +363,38 @@ public class ESBTestCaseUtils {
         Assert.assertTrue(isProxyDeployed(backEndUrl, sessionCookie, proxyName),
                           "Proxy Deployment failed or time out");
 
+    }
+
+    public void addInboundEndpoint(String backEndUrl, String sessionCookie, OMElement inboundEndpoint)
+            throws Exception {
+        InboundAdminClient inboundAdmin = new InboundAdminClient(backEndUrl, sessionCookie);
+        inboundAdmin.addInboundEndpoint(inboundEndpoint.toString());
+        isInboundEndpointDeployed(backEndUrl,sessionCookie,inboundEndpoint.getAttributeValue(new QName("name")));
+
+    }
+
+
+
+    public void isInboundEndpointDeployed(String backEndUrl, String sessionCookie,String name)
+            throws Exception {
+        InboundAdminClient inboundAdmin = new InboundAdminClient(backEndUrl, sessionCookie);
+       InboundEndpointDTO inboundEndpointDTO = inboundAdmin.getInboundEndpointbyName(name);
+        Assert.assertNotNull(inboundEndpointDTO);
+
+    }
+
+    public void deleteInboundEndpointDeployed(String backEndUrl, String sessionCookie,String name)
+            throws Exception {
+        InboundAdminClient inboundAdmin = new InboundAdminClient(backEndUrl, sessionCookie);
+        inboundAdmin.removeInboundEndpoint(name);
+        InboundEndpointDTO inboundEndpointDTO = inboundAdmin.getInboundEndpointbyName(name);
+        Assert.assertNull(inboundEndpointDTO);
+    }
+
+    public String getAllInboundEndpoints(String backEndUrl, String sessionCookie)
+            throws Exception {
+        InboundAdminClient inboundAdmin = new InboundAdminClient(backEndUrl, sessionCookie);
+        return inboundAdmin.getAllInboundEndpointNames();
     }
 
 
@@ -424,7 +458,7 @@ public class ESBTestCaseUtils {
      * @param backEndUrl
      * @param sessionCookie
      * @param messageStore
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
     public void addMessageStore(String backEndUrl, String sessionCookie, OMElement messageStore)
             throws Exception {
@@ -439,7 +473,7 @@ public class ESBTestCaseUtils {
      * @param backEndUrl
      * @param sessionCookie
      * @param messageProcessor
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
     public void addMessageProcessor(String backEndUrl, String sessionCookie,
                                     OMElement messageProcessor)
@@ -490,8 +524,8 @@ public class ESBTestCaseUtils {
      * @param backEndUrl
      * @param sessionCookie
      * @param taskDescription
-     * @throws TaskManagementException
-     * @throws RemoteException
+     * @throws org.wso2.carbon.task.stub.TaskManagementException
+     * @throws java.rmi.RemoteException
      */
     public void addScheduleTask(String backEndUrl, String sessionCookie, OMElement taskDescription)
             throws TaskManagementException, RemoteException {
@@ -510,7 +544,7 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param proxyName
      * @return
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
     public boolean isProxyDeployed(String backEndUrl, String sessionCookie, String proxyName)
             throws RemoteException {
@@ -542,9 +576,9 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param endpointName
      * @return
-     * @throws EndpointAdminEndpointAdminException
+     * @throws org.wso2.carbon.endpoint.stub.types.EndpointAdminEndpointAdminException
      *
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
     public boolean isEndpointDeployed(String backEndUrl, String sessionCookie, String endpointName)
             throws EndpointAdminEndpointAdminException, RemoteException {
@@ -583,8 +617,8 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param messageProcessorName
      * @return
-     * @throws SequenceEditorException
-     * @throws RemoteException
+     * @throws org.wso2.carbon.sequences.stub.types.SequenceEditorException
+     * @throws java.rmi.RemoteException
      */
     public boolean isMessageProcessorDeployed(String backEndUrl, String sessionCookie,
                                               String messageProcessorName)
@@ -623,8 +657,8 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param sequenceName
      * @return
-     * @throws SequenceEditorException
-     * @throws RemoteException
+     * @throws org.wso2.carbon.sequences.stub.types.SequenceEditorException
+     * @throws java.rmi.RemoteException
      */
     public boolean isSequenceDeployed(String backEndUrl, String sessionCookie, String sequenceName)
             throws SequenceEditorException, RemoteException {
@@ -663,8 +697,8 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param messageStoreName
      * @return
-     * @throws SequenceEditorException
-     * @throws RemoteException
+     * @throws org.wso2.carbon.sequences.stub.types.SequenceEditorException
+     * @throws java.rmi.RemoteException
      */
     public boolean isMessageStoreDeployed(String backEndUrl, String sessionCookie,
                                           String messageStoreName)
@@ -830,8 +864,8 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param taskName
      * @return
-     * @throws RemoteException
-     * @throws TaskManagementException
+     * @throws java.rmi.RemoteException
+     * @throws org.wso2.carbon.task.stub.TaskManagementException
      */
     public boolean isScheduleTaskDeployed(String backEndUrl, String sessionCookie, String taskName)
             throws RemoteException, TaskManagementException {
@@ -863,7 +897,7 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param proxyName
      * @return
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
     public boolean isProxyServiceExist(String backEndUrl, String sessionCookie, String proxyName)
             throws RemoteException {
@@ -878,8 +912,8 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param localEntryName
      * @return
-     * @throws LocalEntryAdminException
-     * @throws RemoteException
+     * @throws org.wso2.carbon.localentry.stub.types.LocalEntryAdminException
+     * @throws java.rmi.RemoteException
      */
     public boolean isLocalEntryExist(String backEndUrl, String sessionCookie, String localEntryName)
             throws LocalEntryAdminException, RemoteException {
@@ -898,8 +932,8 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param sequenceName
      * @return
-     * @throws SequenceEditorException
-     * @throws RemoteException
+     * @throws org.wso2.carbon.sequences.stub.types.SequenceEditorException
+     * @throws java.rmi.RemoteException
      */
     public boolean isSequenceExist(String backEndUrl, String sessionCookie, String sequenceName)
             throws SequenceEditorException, RemoteException {
@@ -918,9 +952,9 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param endpointName
      * @return
-     * @throws EndpointAdminEndpointAdminException
+     * @throws org.wso2.carbon.endpoint.stub.types.EndpointAdminEndpointAdminException
      *
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
     public boolean isEndpointExist(String backEndUrl, String sessionCookie, String endpointName)
             throws EndpointAdminEndpointAdminException, RemoteException {
@@ -938,7 +972,7 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param messageProcessor
      * @return
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
     public boolean isMessageStoreExist(String backEndUrl, String sessionCookie,
                                        String messageProcessor) throws RemoteException {
@@ -952,7 +986,7 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param messageProcessor
      * @return
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
     public boolean isMessageProcessorExist(String backEndUrl, String sessionCookie,
                                            String messageProcessor) throws RemoteException {
@@ -1000,9 +1034,9 @@ public class ESBTestCaseUtils {
      * @param backEndUrl
      * @param sessionCookie
      * @param proxyServiceName
-     * @throws ProxyServiceAdminProxyAdminException
+     * @throws org.wso2.carbon.proxyadmin.stub.ProxyServiceAdminProxyAdminException
      *
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
     public void deleteProxyService(String backEndUrl, String sessionCookie, String proxyServiceName)
             throws ProxyServiceAdminProxyAdminException, RemoteException {
@@ -1015,8 +1049,8 @@ public class ESBTestCaseUtils {
      * @param backEndUrl
      * @param sessionCookie
      * @param localEntryName
-     * @throws LocalEntryAdminException
-     * @throws RemoteException
+     * @throws org.wso2.carbon.localentry.stub.types.LocalEntryAdminException
+     * @throws java.rmi.RemoteException
      */
     public void deleteLocalEntry(String backEndUrl, String sessionCookie, String localEntryName)
             throws LocalEntryAdminException, RemoteException {
@@ -1031,9 +1065,9 @@ public class ESBTestCaseUtils {
      * @param backEndUrl
      * @param sessionCookie
      * @param endpointName
-     * @throws EndpointAdminEndpointAdminException
+     * @throws org.wso2.carbon.endpoint.stub.types.EndpointAdminEndpointAdminException
      *
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
     public void deleteEndpoint(String backEndUrl, String sessionCookie, String endpointName)
             throws EndpointAdminEndpointAdminException, RemoteException {
@@ -1047,8 +1081,8 @@ public class ESBTestCaseUtils {
      * @param backEndUrl
      * @param sessionCookie
      * @param sequenceName
-     * @throws SequenceEditorException
-     * @throws RemoteException
+     * @throws org.wso2.carbon.sequences.stub.types.SequenceEditorException
+     * @throws java.rmi.RemoteException
      */
     public void deleteSequence(String backEndUrl, String sessionCookie, String sequenceName)
             throws SequenceEditorException, RemoteException {
@@ -1063,7 +1097,7 @@ public class ESBTestCaseUtils {
      * @param backEndUrl
      * @param sessionCookie
      * @param messageStore
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
     public void deleteMessageStore(String backEndUrl, String sessionCookie, String messageStore)
             throws RemoteException, SequenceEditorException {
@@ -1076,7 +1110,7 @@ public class ESBTestCaseUtils {
      * @param backEndUrl
      * @param sessionCookie
      * @param messageProcessor
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
     public void deleteMessageProcessor(String backEndUrl, String sessionCookie,
                                        String messageProcessor)
@@ -1123,8 +1157,8 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param taskName      name of the ScheduleTask
      * @param group         group of the ScheduleTask
-     * @throws TaskManagementException
-     * @throws RemoteException
+     * @throws org.wso2.carbon.task.stub.TaskManagementException
+     * @throws java.rmi.RemoteException
      */
     public void deleteScheduleTask(String backEndUrl, String sessionCookie, String taskName,
                                    String group)
@@ -1143,7 +1177,7 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param proxyName
      * @return
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
 
     public boolean isProxyUnDeployed(String backEndUrl, String sessionCookie, String proxyName)
@@ -1222,8 +1256,8 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param localEntryName
      * @return
-     * @throws LocalEntryAdminException
-     * @throws RemoteException
+     * @throws org.wso2.carbon.localentry.stub.types.LocalEntryAdminException
+     * @throws java.rmi.RemoteException
      */
     public boolean isLocalEntryDeployed(String backEndUrl, String sessionCookie,
                                         String localEntryName)
@@ -1263,8 +1297,8 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param localEntryName
      * @return
-     * @throws LocalEntryAdminException
-     * @throws RemoteException
+     * @throws org.wso2.carbon.localentry.stub.types.LocalEntryAdminException
+     * @throws java.rmi.RemoteException
      */
     public boolean isLocalEntryUnDeployed(String backEndUrl, String sessionCookie,
                                           String localEntryName)
@@ -1296,8 +1330,8 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param sequenceName
      * @return
-     * @throws SequenceEditorException
-     * @throws RemoteException
+     * @throws org.wso2.carbon.sequences.stub.types.SequenceEditorException
+     * @throws java.rmi.RemoteException
      */
     public boolean isSequenceUnDeployed(String backEndUrl, String sessionCookie,
                                         String sequenceName)
@@ -1329,9 +1363,9 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param endpointName
      * @return
-     * @throws EndpointAdminEndpointAdminException
+     * @throws org.wso2.carbon.endpoint.stub.types.EndpointAdminEndpointAdminException
      *
-     * @throws RemoteException
+     * @throws java.rmi.RemoteException
      */
     public boolean isEndpointUnDeployed(String backEndUrl, String sessionCookie,
                                         String endpointName)
@@ -1456,8 +1490,8 @@ public class ESBTestCaseUtils {
      * @param sessionCookie
      * @param taskName
      * @return
-     * @throws RemoteException
-     * @throws TaskManagementException
+     * @throws java.rmi.RemoteException
+     * @throws org.wso2.carbon.task.stub.TaskManagementException
      */
     public boolean isScheduleTaskUnDeployed(String backEndUrl, String sessionCookie,
                                             String taskName)
@@ -1488,11 +1522,11 @@ public class ESBTestCaseUtils {
      * @param synapseConfig
      * @param backendURL
      * @param sessionCookie
-     * @throws LocalEntryAdminException
-     * @throws RemoteException
-     * @throws EndpointAdminEndpointAdminException
+     * @throws org.wso2.carbon.localentry.stub.types.LocalEntryAdminException
+     * @throws java.rmi.RemoteException
+     * @throws org.wso2.carbon.endpoint.stub.types.EndpointAdminEndpointAdminException
      *
-     * @throws SequenceEditorException
+     * @throws org.wso2.carbon.sequences.stub.types.SequenceEditorException
      */
     public void verifySynapseDeployment(OMElement synapseConfig, String backendURL,
                                         String sessionCookie)

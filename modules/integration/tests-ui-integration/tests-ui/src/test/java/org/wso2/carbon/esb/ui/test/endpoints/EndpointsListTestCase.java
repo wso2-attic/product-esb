@@ -16,6 +16,7 @@
 
 package org.wso2.carbon.esb.ui.test.endpoints;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -40,8 +41,7 @@ public class EndpointsListTestCase extends ESBIntegrationUITest {
 
 		// add resource using resourceAdminServiceClient
 		resourceAdminServiceClient = new ResourceAdminServiceClient(
-				contextUrls.getBackEndUrl(), userInfo.getUserName(),
-				userInfo.getPassword());
+				contextUrls.getBackEndUrl(), getSessionCookie());
 		uploadResourcesToGovRegistry();
 	}
 
@@ -50,9 +50,9 @@ public class EndpointsListTestCase extends ESBIntegrationUITest {
 //		boolean isCloud = isRunningOnCloud();
 		LoginPage test = new LoginPage(driver);
 		test.loginAs(userInfo.getUserName(), userInfo.getPassword());
-
+        driver.findElement(By.linkText("Endpoints")).click();
 		EndpointsListPage epPage = new EndpointsListPage(driver);
-		epPage.testPageLoadFail();
+		epPage.listDynamicEndpoint();
 		driver.close();
 	}
 
