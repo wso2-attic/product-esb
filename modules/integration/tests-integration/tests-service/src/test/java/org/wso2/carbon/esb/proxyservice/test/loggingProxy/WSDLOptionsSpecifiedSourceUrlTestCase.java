@@ -42,7 +42,7 @@ public class WSDLOptionsSpecifiedSourceUrlTestCase extends ESBIntegrationTest {
                                                     "- Publish WSDL Options - Specified source url")
     public void testLoggingProxy() throws Exception {
 
-        /*OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
                 .getText();
@@ -51,7 +51,6 @@ public class WSDLOptionsSpecifiedSourceUrlTestCase extends ESBIntegrationTest {
         String symbol = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "symbol"))
                 .getText();
         assertEquals(symbol, "WSO2", "Fault: value 'symbol' mismatched");
-*/
 
     }
 

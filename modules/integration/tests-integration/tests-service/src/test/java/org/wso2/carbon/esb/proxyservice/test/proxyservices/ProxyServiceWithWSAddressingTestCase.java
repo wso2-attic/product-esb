@@ -40,13 +40,12 @@ public class ProxyServiceWithWSAddressingTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "test proxy service behavior when addressing is sent")
     public void testProxyWithAddressing() throws Exception {
 
-        /*OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("proxyWithAddressing")
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("proxyWithAddressing")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         assertNotNull(response, "Response Message is null");
         String symbol = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "symbol"))
                 .getText();
         assertEquals(symbol, "addressing", "Mediation Ignored. proxy service invocation failed when WS-addressing is sent");
-*/
 
     }
 

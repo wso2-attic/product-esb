@@ -42,7 +42,7 @@ public class PassThroughProxyServiceTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Pass through proxy http with addressing uri")
     public void testHttpPassThroughProxyWithAddressing() throws Exception {
 
-        /*OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuotePassThroughProxyWithAddressing"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuotePassThroughProxyWithAddressing"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
@@ -52,7 +52,6 @@ public class PassThroughProxyServiceTestCase extends ESBIntegrationTest {
         String symbol = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "symbol"))
                 .getText();
         assertEquals(symbol, "WSO2", "Fault: value 'symbol' mismatched");
-*/
 
     }
 
@@ -93,7 +92,7 @@ public class PassThroughProxyServiceTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Pass through proxy https with addressing uri")
     public void testHttpsPassThroughProxyWithAddressing() throws Exception {
 
-        /*OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttps("StockQuotePassThroughProxyWithAddressing"),
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttps("StockQuotePassThroughProxyWithAddressing"),
                                                                      getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
@@ -103,7 +102,6 @@ public class PassThroughProxyServiceTestCase extends ESBIntegrationTest {
         String symbol = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "symbol"))
                 .getText();
         assertEquals(symbol, "WSO2", "Fault: value 'symbol' mismatched");
-*/
 
     }
 

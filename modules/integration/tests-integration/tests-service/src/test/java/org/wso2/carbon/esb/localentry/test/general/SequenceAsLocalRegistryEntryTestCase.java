@@ -38,14 +38,14 @@ public class SequenceAsLocalRegistryEntryTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"},description = "Create an sequence as a local registry entry")
     public void testSequenceAsLocalRegistryEntry() throws Exception {
-       /* OMElement response=axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL()
+       OMElement response=axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL()
                 ,getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),"IBM");
         assertNotNull(response,"Response is null");
         assertEquals(response.getLocalName(),"getQuoteResponse","getQuoteResponse mismatch");
         OMElement omElement=response.getFirstElement();
         String symbolResponse=omElement.getFirstChildWithName
                 (new QName("http://services.samples/xsd","symbol")).getText();
-        assertEquals(symbolResponse,"IBM","Symbol is not match");*/
+        assertEquals(symbolResponse,"IBM","Symbol is not match");
     }
 
     @AfterClass

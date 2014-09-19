@@ -40,8 +40,7 @@ public class TransformPayloadWhenArgsValueAndExpressionTestCase extends ESBInteg
 
     @Test(groups = {"wso2.esb"}, description = "Do transformation with a Payload Format that has arguments - Argument Types : Value and Expression both")
     public void transformPayloadByArgsBothValueAndExpression() throws AxisFault {
-        //TODO need to fix this
-        //sendRobust(getMainSequenceURL(), "WSO2");
+        sendRobust(getMainSequenceURL(), "WSO2");
     }
 
     @AfterClass(alwaysRun = true)

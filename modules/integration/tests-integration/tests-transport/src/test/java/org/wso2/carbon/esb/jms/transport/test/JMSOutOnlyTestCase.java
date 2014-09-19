@@ -41,7 +41,7 @@ public class JMSOutOnlyTestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb"}, description = "Test proxy service with out-only jms transport")
     public void testJMSProxy() throws Exception {
 
-   /*     AxisServiceClient client = new AxisServiceClient();
+        AxisServiceClient client = new AxisServiceClient();
         String payload = "<?xml version='1.0' encoding='UTF-8'?>" +
                          "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"" +
                          " xmlns:ser=\"http://services.samples\" xmlns:xsd=\"http://services.samples/xsd\">" +
@@ -84,7 +84,7 @@ public class JMSOutOnlyTestCase extends ESBIntegrationTest {
         }
 
         Assert.assertTrue("Unnecessary Call Back Registered", !terminate);
-*/
+
     }
 
 

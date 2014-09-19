@@ -48,7 +48,7 @@ public class LargeCSVTransformSmooksTestCase extends ESBIntegrationTest {
      */
     @Test(groups = {"wso2.esb"}, description = "Tests the smooks transformation when large CSV files are sent")
     public void testLargeCSVTransformSmooks() throws Exception {
-        /*OMElement response;
+        OMElement response;
         CSVInputRequestUtil testCSVInputRequest = new CSVInputRequestUtil();
         response = testCSVInputRequest.sendReceive(getMainSequenceURL(), generateCSVInput()) ;
         Iterator csvRecs = response.getChildrenWithLocalName("csv-record");
@@ -58,7 +58,7 @@ public class LargeCSVTransformSmooksTestCase extends ESBIntegrationTest {
             Object o =csvRecs.next();
             recordCount++;
         }
-        assertEquals(recordCount,RECORD_COUNT,"Smooks Mediator couldn't transform large CSV files(>4K) ");*/
+        assertEquals(recordCount,RECORD_COUNT,"Smooks Mediator couldn't transform large CSV files(>4K) ");
     }
 
     @AfterClass(alwaysRun = true)

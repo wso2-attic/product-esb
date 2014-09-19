@@ -99,22 +99,20 @@ public class DefaultEndpointTestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb"}, description = "Sending a Message to a Default endpoint")
     public void testSendingToDefaultEndpoint()
             throws Exception {
-        /*OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint")
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
-*/
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"}, description = "Sending a Message to a Default endpoint in Config Reg")
     public void testSendingToDefaultEndpoint_ConfigReg()
             throws Exception {
-        /*OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Config_Reg")
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPoint_Config_Reg")
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
-*/
     }
 
     //Related to Patch Automation https://wso2.org/jira/browse/CARBON-10551
@@ -125,7 +123,7 @@ public class DefaultEndpointTestCase extends ESBIntegrationTest {
                    LoginAuthenticationExceptionException,
                    XMLStreamException, InterruptedException {
 
-        /*axis2Server1.stop();
+        axis2Server1.stop();
         OMElement response = null;
         try {
             response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("defaultEndPointWithSuspension"),
@@ -146,7 +144,6 @@ public class DefaultEndpointTestCase extends ESBIntegrationTest {
                                                            "http://localhost:9001/services/SimpleStockQuoteService", "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
-*/
     }
 
     private void cleanupEndpoints()
