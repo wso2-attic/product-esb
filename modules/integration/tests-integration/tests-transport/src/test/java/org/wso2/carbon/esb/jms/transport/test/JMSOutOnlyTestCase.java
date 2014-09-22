@@ -69,8 +69,15 @@ public class JMSOutOnlyTestCase extends ESBIntegrationTest {
                                                               getSessionCookie());
         LogEvent[] logs = logViewerClient.getAllSystemLogs();
         boolean terminate = false;
+        boolean startLog = false;
         for (LogEvent item : logs) {
-            if (item.getPriority().equals("WARN")) {
+            if (!startLog && item.getPriority().equals("INFO")) {
+                String message = item.getMessage();
+                if(message.contains("JMS_OUT_ONLY_REQUEST_EXECUTING")){
+                    startLog = true;
+                }           
+                continue;
+            }else if (startLog && item.getPriority().equals("WARN")) {
                 String message = item.getMessage();
                 if (message.startsWith("Expiring message ID") && message.endsWith("dropping message after global timeout of : 120 seconds")) {
                     terminate = true;

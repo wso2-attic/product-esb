@@ -38,6 +38,9 @@
                           scope="axis2"/>
                 <property name="OUT_ONLY" value="true"/>
                 <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
+                <log level="custom">
+                    <property name="JMS_OUT_ONLY_REQUEST_EXECUTING" value="Received"/>
+                </log>                
                 <log level="full"/>
             </inSequence>
         </target>
