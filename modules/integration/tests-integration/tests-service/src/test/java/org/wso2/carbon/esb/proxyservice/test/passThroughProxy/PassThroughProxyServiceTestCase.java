@@ -53,7 +53,6 @@ public class PassThroughProxyServiceTestCase extends ESBIntegrationTest {
                 .getText();
         assertEquals(symbol, "WSO2", "Fault: value 'symbol' mismatched");
 
-
     }
 
     @Test(groups = "wso2.esb", description = "Pass through http  proxy with out addressing uri")
@@ -103,7 +102,6 @@ public class PassThroughProxyServiceTestCase extends ESBIntegrationTest {
         String symbol = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "symbol"))
                 .getText();
         assertEquals(symbol, "WSO2", "Fault: value 'symbol' mismatched");
-
 
     }
 
