@@ -62,7 +62,7 @@ public class JMSOutOnlyTestCase extends ESBIntegrationTest {
         client.sendRobust(AXIOMUtil.stringToOM(payload), contextUrls.getServiceUrl() + "/MainProxy", "placeOrder");
         client.sendRobust(AXIOMUtil.stringToOM(payload), contextUrls.getServiceUrl() + "/MainProxy", "placeOrder");
 
-        Thread.sleep(60000); //wait until all message received to jms proxy
+        Thread.sleep(6000); //wait until all message received to jms proxy
 
 
         LogViewerClient logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(),
