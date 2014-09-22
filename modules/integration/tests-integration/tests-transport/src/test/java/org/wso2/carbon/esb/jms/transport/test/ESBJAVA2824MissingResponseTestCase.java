@@ -73,7 +73,6 @@ public class ESBJAVA2824MissingResponseTestCase extends ESBIntegrationTest {
 			}
 			Assert.assertTrue(errorMsgTrue, "Axis Fault Did not receive");
 		}
-
 	}
 
 	@AfterClass(alwaysRun = true)

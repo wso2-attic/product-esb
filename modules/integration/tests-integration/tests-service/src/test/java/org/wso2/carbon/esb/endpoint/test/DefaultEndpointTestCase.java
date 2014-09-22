@@ -103,7 +103,6 @@ public class DefaultEndpointTestCase extends ESBIntegrationTest {
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
-
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
@@ -114,7 +113,6 @@ public class DefaultEndpointTestCase extends ESBIntegrationTest {
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
-
     }
 
     //Related to Patch Automation https://wso2.org/jira/browse/CARBON-10551
@@ -146,7 +144,6 @@ public class DefaultEndpointTestCase extends ESBIntegrationTest {
                                                            "http://localhost:9001/services/SimpleStockQuoteService", "WSO2");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.toString().contains("WSO2 Company"));
-
     }
 
     private void cleanupEndpoints()

@@ -41,7 +41,7 @@
 
     <test name="Test-Multiple-servers" preserve-order="true" verbose="2">
         <packages>
-            <package name="org.wso2.carbon.esb.test.servers.*"/>
+            <package name="org.wso2.carbon.esb.test.servers"/>
         </packages>
     </test>
 
