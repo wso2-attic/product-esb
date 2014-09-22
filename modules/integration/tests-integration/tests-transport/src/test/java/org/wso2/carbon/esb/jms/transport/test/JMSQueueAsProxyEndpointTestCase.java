@@ -87,7 +87,6 @@ public class JMSQueueAsProxyEndpointTestCase extends ESBIntegrationTest {
         } finally {
             consumer.disconnect();
         }
-
     }
 
     @Test(groups = {"wso2.esb"}, description = "Test sending message to jms endpoint with soap12 format from proxy service")
@@ -112,7 +111,6 @@ public class JMSQueueAsProxyEndpointTestCase extends ESBIntegrationTest {
         } finally {
             consumer.disconnect();
         }
-
     }
 
     @AfterClass(alwaysRun = true)
