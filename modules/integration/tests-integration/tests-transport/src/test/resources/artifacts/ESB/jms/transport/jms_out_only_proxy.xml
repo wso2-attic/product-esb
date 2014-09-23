@@ -38,10 +38,27 @@
                           scope="axis2"/>
                 <property name="OUT_ONLY" value="true"/>
                 <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
+                <log level="custom">
+                    <property name="JMS_OUT_ONLY_REQUEST_EXECUTING" value="Received"/>
+                </log>                
                 <log level="full"/>
             </inSequence>
         </target>
     </proxy>
+    <proxy name="EndLogProxy"
+           transports="http"
+           startOnLoad="true"
+           trace="disable">
+        <description/>
+        <target>
+            <inSequence>
+                <log level="custom">
+                    <property name="JMS_OUT_ONLY_END" value="Received"/>
+                </log>                
+                <respond/>
+            </inSequence>
+        </target>
+    </proxy>    
     <sequence name="fault">
         <log level="full">
             <property name="MESSAGE" value="Executing default 'fault' sequence"/>

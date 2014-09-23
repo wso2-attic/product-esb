@@ -51,7 +51,6 @@ public class ProxyServiceEnablingHTTPSTestCase extends ESBIntegrationTest {
                 .getText();
         assertEquals(symbol, "WSO2", "Fault: value 'symbol' mismatched");
 
-
     }
 
 

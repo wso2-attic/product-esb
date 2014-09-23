@@ -17,6 +17,10 @@
 */
 package org.wso2.carbon.esb.mediator.test.factory;
 
+import static org.testng.Assert.assertTrue;
+
+import javax.xml.xpath.XPathExpressionException;
+
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
@@ -29,6 +33,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
 public class TransformPayloadWhenArgsValueAndExpressionTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
@@ -39,9 +44,19 @@ public class TransformPayloadWhenArgsValueAndExpressionTestCase extends ESBInteg
 
 
     @Test(groups = {"wso2.esb"}, description = "Do transformation with a Payload Format that has arguments - Argument Types : Value and Expression both")
-    public void transformPayloadByArgsBothValueAndExpression() throws AxisFault {
+    public void transformPayloadByArgsBothValueAndExpression() throws AxisFault, XPathExpressionException {
 
-        sendRobust(getMainSequenceURL(), "WSO2");
+        //sendRobust(getMainSequenceURL(), "WSO2");
+        
+
+        OMElement response;
+
+        response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(),
+                getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
+                "IBM");
+        assertTrue(response.toString().contains("2000"), "Figure 2000 not found in response message");
+
+            
     }
 
     @AfterClass(alwaysRun = true)
