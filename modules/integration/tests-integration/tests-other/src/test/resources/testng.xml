@@ -40,9 +40,11 @@
     </test>
 
     <test name="Test-Multiple-servers" preserve-order="true" verbose="2">
-        <packages>
-            <package name="org.wso2.carbon.esb.test.servers.*"/>
-        </packages>
+        <classes>
+            <class name="org.wso2.carbon.esb.test.servers.CarbonTestServerManager"/>
+            <class name="org.wso2.carbon.esb.test.servers.NewInstanceTestCase"/>
+            <!-- class name="org.wso2.carbon.esb.test.servers.OSGIUnsatisfiedServerBundlesTestCase"/-->
+        </classes>
     </test>
 
 </suite>

@@ -314,6 +314,16 @@
                 <artifactId>org.wso2.esb.samples</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.inbound.stub</artifactId>
+                <version>${wso2carbon.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.ws.commons.axiom.wso2</groupId>
+                <artifactId>axiom</artifactId>
+                <version>${axiom.wso2.version}</version>
+            </dependency>
             <!--dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>org.wso2.stratos.esb.styles</artifactId>
