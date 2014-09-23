@@ -44,6 +44,7 @@
                 </args>
             </payloadFactory>
             <log level="full"/>
+            <respond/>
         </in>
 
         <out>

@@ -45,6 +45,20 @@
             </inSequence>
         </target>
     </proxy>
+    <proxy name="EndLogProxy"
+           transports="http"
+           startOnLoad="true"
+           trace="disable">
+        <description/>
+        <target>
+            <inSequence>
+                <log level="custom">
+                    <property name="JMS_OUT_ONLY_END" value="Received"/>
+                </log>                
+                <respond/>
+            </inSequence>
+        </target>
+    </proxy>    
     <sequence name="fault">
         <log level="full">
             <property name="MESSAGE" value="Executing default 'fault' sequence"/>
