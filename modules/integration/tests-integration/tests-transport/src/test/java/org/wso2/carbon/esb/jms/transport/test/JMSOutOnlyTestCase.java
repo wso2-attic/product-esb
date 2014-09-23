@@ -70,23 +70,21 @@ public class JMSOutOnlyTestCase extends ESBIntegrationTest {
         LogEvent[] logs = logViewerClient.getAllSystemLogs();
         boolean terminate = false;
         boolean startLog = false;
+        System.out.println("Log test started. XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         for (LogEvent item : logs) {
             if (!startLog && item.getPriority().equals("INFO")) {
                 String message = item.getMessage();
+                System.out.println("XXXXXXXXXXXXXXXXXX" + message);
                 if(message.contains("JMS_OUT_ONLY_REQUEST_EXECUTING")){
-                    startLog = true;
+                    System.out.println("XXXXXXXXXXXXXXXXXX - in" + message);
+                    startLog = true;    
                 }           
-                continue;
-            } else if (startLog && item.getPriority().equals("INFO")) {
-                String message = item.getMessage();
-                if (message.contains("JMS_OUT_ONLY_END")) {
-                    startLog = false;
-                    break;
-                }
-                continue;              
+                continue;             
             }else if (startLog && item.getPriority().equals("WARN")) {
                 String message = item.getMessage();
+                System.out.println("XXXXXXXXXXXXXXXXXX - 2" + message);
                 if (message.startsWith("Expiring message ID") && message.endsWith("dropping message after global timeout of : 120 seconds")) {
+                    System.out.println("XXXXXXXXXXXXXXXXXX - 2 - in" + message);
                     terminate = true;
                     break;
                 } else {
@@ -96,7 +94,7 @@ public class JMSOutOnlyTestCase extends ESBIntegrationTest {
                 continue;
             }
         }
-
+        System.out.println("Log test ended. XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         Assert.assertTrue("Unnecessary Call Back Registered", !terminate);
 
     }
