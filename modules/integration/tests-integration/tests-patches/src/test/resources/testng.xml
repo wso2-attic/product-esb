@@ -38,7 +38,11 @@
             <package name="org.wso2.carbon.esb.registry.caching"/>
         </packages>
     </test>
-
+    <test name="QueryParam-Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.endpoint.test.ESBJAVA3340QueryParamHttpEndpointTestCase"/>
+        </classes>
+    </test>
 </suite>
 
 
