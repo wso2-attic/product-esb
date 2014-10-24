@@ -20,7 +20,7 @@
         </packages>
     </test> -->
     
-    <test name="Template-Test" preserve-order="true" verbose="2">
+   <!-- <test name="Template-Test" preserve-order="true" verbose="2">
       <packages>
           <package name="org.wso2.carbon.esb.template.*"/>
          </packages>
@@ -37,7 +37,13 @@
         <packages>
             <package name="org.wso2.carbon.esb.registry.caching"/>
         </packages>
+    </test>-->
+    <test name="No Entity Body Check" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.passthru.transport.test.NoEntityBodyPropertyCheck" />
+        </classes>
     </test>
+
 
 </suite>
 
