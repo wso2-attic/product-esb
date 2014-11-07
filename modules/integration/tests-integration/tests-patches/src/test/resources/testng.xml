@@ -43,7 +43,13 @@
             <package name="org.wso2.carbon.esb.json"/>
         </packages>
     </test>
-
+		<test name="EmptyStackExceptionTest" preserve-order="true"
+		verbose="2">
+		<classes>
+			<class
+				name="org.wso2.carbon.esb.mediators.clone.ESBJAVA3412EmptyStackExceptionTest" />
+		</classes>
+	</test>
 </suite>
 
 
