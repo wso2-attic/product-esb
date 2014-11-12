@@ -19,7 +19,7 @@
 package org.wso2.carbon.esb.mediator.test.property;
 
 import org.apache.axiom.om.OMElement;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
@@ -34,7 +34,8 @@ import static org.testng.Assert.assertNotNull;
 /**
  * This class tests the functionality of the SYSTEM_DATE property
  */
-public class PropertyIntegrationSystemDatePropertyTestCase extends ESBIntegrationTest {
+public class
+        PropertyIntegrationSystemDatePropertyTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
@@ -44,16 +45,16 @@ public class PropertyIntegrationSystemDatePropertyTestCase extends ESBIntegratio
 
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         super.cleanup();
     }
 
     @Test(groups = "wso2.esb", description = "Test return of the current date")
     public void testSystemDate() throws Exception {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp
-                                                                             ("MyProxy"), null
-                , "MSFT");
+
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest
+                (getProxyServiceURLHttp("MyProxy"), null, "MSFT");
 
         assertNotNull(response);
 
@@ -61,5 +62,5 @@ public class PropertyIntegrationSystemDatePropertyTestCase extends ESBIntegratio
         Date date = new Date();
 
         assertEquals(response.getText(), dateFormat.format(date), "Date mismatch");
-   }
+    }
 }

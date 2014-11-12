@@ -20,7 +20,7 @@ package org.wso2.carbon.esb.mediator.test.property;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.util.AXIOMUtil;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
@@ -47,7 +47,7 @@ public class PropertyIntegrationXpathCtxPropertyTestCase extends ESBIntegrationT
 
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         super.cleanup();
     }

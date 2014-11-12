@@ -48,12 +48,11 @@ public class PropertyIntegrationXPathBodyTestCase extends ESBIntegrationTest {
         super.cleanup();
     }
 
-
     @Test(groups = "wso2.esb", description = "Tests when connections exist")
     public void testXpathBodyProperty() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"),
-                                                                     null, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest
+                (getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
         assertTrue(response.toString().contains("GetQuoteResponse"));
         assertTrue(response.toString().contains("WSO2 Company"));
 

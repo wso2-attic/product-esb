@@ -3,9 +3,6 @@
     <registry provider="org.wso2.carbon.mediation.registry.WSO2Registry">
         <parameter name="cachableDuration">15000</parameter>
     </registry>
-    <taskManager provider="org.wso2.carbon.mediation.ntask.NTaskTaskManager">
-        <parameter name="cachableDuration">15000</parameter>
-    </taskManager>
     <proxy name="StockQuoteProxy"
            transports="https http"
            startOnLoad="true"
@@ -14,9 +11,9 @@
         <target>
             <inSequence>
                 <log>
-                    <property
-                            name="stockprop"
-                            expression="$body/m0:getQuote"/>
+                    <property xmlns:m0="http://services.samples"
+                              name="stockprop"
+                              expression="$body/m0:getQuote"/>
                 </log>
                 <send>
                     <endpoint>

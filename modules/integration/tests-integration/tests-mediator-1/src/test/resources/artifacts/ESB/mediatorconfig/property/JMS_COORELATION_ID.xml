@@ -7,7 +7,7 @@
         <target>
             <inSequence>
                 <log>
-                    <property name="foo" value="**** This Hits Here *******"/>
+                    <property name="foo" value="**** This Hits Insequence *******"/>
                 </log>
                 <property name="OUT_ONLY" value="true"/>
                 <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>

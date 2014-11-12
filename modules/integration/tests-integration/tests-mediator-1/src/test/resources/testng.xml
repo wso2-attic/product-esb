@@ -16,21 +16,21 @@
     </test>
 
     <!--<test name="Aggregate-mediator-Test" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.mediator.test.aggregate"/>-->
-        <!--</packages>-->
+    <!--<packages>-->
+    <!--<package name="org.wso2.carbon.esb.mediator.test.aggregate"/>-->
+    <!--</packages>-->
     <!--</test>-->
 
     <!--<test name="Cache-mediator-Test" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.mediator.test.cache"/>-->
-        <!--</packages>-->
+    <!--<packages>-->
+    <!--<package name="org.wso2.carbon.esb.mediator.test.cache"/>-->
+    <!--</packages>-->
     <!--</test>-->
 
     <!--<test name="Call-Template-Mediator-Test" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.mediator.test.callTemplate"/>-->
-        <!--</packages>-->
+    <!--<packages>-->
+    <!--<package name="org.wso2.carbon.esb.mediator.test.callTemplate"/>-->
+    <!--</packages>-->
     <!--</test>-->
 
     <test name="CallOut-mediator-Test" preserve-order="true" verbose="2">
@@ -40,34 +40,34 @@
     </test>
 
     <!--<test name="Call-mediator-Test" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.mediator.test.call"/>-->
-        <!--</packages>-->
+    <!--<packages>-->
+    <!--<package name="org.wso2.carbon.esb.mediator.test.call"/>-->
+    <!--</packages>-->
     <!--</test>-->
 
     <!--<test name="Clone-mediator-Test" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.mediator.test.clone"/>-->
-        <!--</packages>-->
+    <!--<packages>-->
+    <!--<package name="org.wso2.carbon.esb.mediator.test.clone"/>-->
+    <!--</packages>-->
     <!--</test>-->
 
-     <test name="ConditionalRouting-mediator-Test" preserve-order="true" verbose="2">
-         <packages>
-             <package name="org.wso2.carbon.esb.mediator.test.conditionalRouter"/>
-         </packages>
-     </test>
+    <test name="ConditionalRouting-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.conditionalRouter"/>
+        </packages>
+    </test>
 
-     <test name="Drop-mediator-Test" preserve-order="true" verbose="2">
-         <packages>
-             <package name="org.wso2.carbon.esb.mediator.test.drop"/>
-         </packages>
-     </test>
+    <test name="Drop-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.drop"/>
+        </packages>
+    </test>
 
-     <test name="Message-Store-Test" preserve-order="true" verbose="2">
-         <packages>
-             <package name="org.wso2.carbon.esb.message.store.test"/>
-         </packages>
-     </test>
+    <test name="Message-Store-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.message.store.test"/>
+        </packages>
+    </test>
 
     <!--ignore this-->
     <!--    <test name="dblookup-mediator-Test" preserve-order="true" verbose="2">
@@ -83,9 +83,9 @@
     </test>
 
     <!--<test name="Fault-mediator-Test" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.mediator.test.fault"/>-->
-        <!--</packages>-->
+    <!--<packages>-->
+    <!--<package name="org.wso2.carbon.esb.mediator.test.fault"/>-->
+    <!--</packages>-->
     <!--</test>-->
 
     <test name="Filter-mediator-Test" preserve-order="true" verbose="2">
@@ -150,10 +150,8 @@
     </test>
 
     <!--<test name="Rule-mediator-Test" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.mediator.test.rule"/>-->
-        <!--</packages>-->
+    <!--<packages>-->
+    <!--<package name="org.wso2.carbon.esb.mediator.test.rule"/>-->
+    <!--</packages>-->
     <!--</test>-->
 </suite>
-
-

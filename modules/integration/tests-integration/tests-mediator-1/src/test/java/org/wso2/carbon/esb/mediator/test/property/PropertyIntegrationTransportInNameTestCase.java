@@ -19,7 +19,7 @@
 package org.wso2.carbon.esb.mediator.test.property;
 
 import org.apache.axiom.om.OMElement;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
@@ -39,7 +39,7 @@ public class PropertyIntegrationTransportInNameTestCase extends ESBIntegrationTe
 
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         super.cleanup();
     }
