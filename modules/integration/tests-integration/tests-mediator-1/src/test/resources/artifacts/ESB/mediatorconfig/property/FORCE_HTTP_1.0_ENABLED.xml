@@ -18,7 +18,7 @@
         </target>
     </proxy>
     <endpoint name="Axis2EP">
-        <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+        <address uri="http://localhost:9005/services/SimpleStockQuoteService"/>
     </endpoint>
     <sequence name="fault">
         <log level="full">

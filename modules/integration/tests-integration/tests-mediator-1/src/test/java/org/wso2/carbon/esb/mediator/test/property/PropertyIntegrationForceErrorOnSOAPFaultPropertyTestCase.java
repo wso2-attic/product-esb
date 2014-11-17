@@ -43,7 +43,7 @@ public class PropertyIntegrationForceErrorOnSOAPFaultPropertyTestCase extends
 
     @AfterClass(alwaysRun = true)
     public void stop() throws Exception {
-        cleanup();
+        super.cleanup();
     }
 
     @Test(groups = "wso2.esb", description = "Test-Without No_ENTITY_BODY Property",enabled = false)
