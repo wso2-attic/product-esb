@@ -37,8 +37,6 @@ public class PropertyIntegrationFORCE_HTTP_10TestCase extends ESBIntegrationTest
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        loadESBConfigurationFromClasspath
-                ("/artifacts/ESB/mediatorconfig/property/FORCE_HTTP_1.0_DISABLED.xml");
         tcpMonListener = new TCPMonListener(9005, context.getDefaultInstance().getHosts().
                 get("default"), 9000);
 
@@ -57,6 +55,9 @@ public class PropertyIntegrationFORCE_HTTP_10TestCase extends ESBIntegrationTest
                                              "scenario")
     public void testWithForceHTTP10EnabledFalseTest() throws Exception {
 
+        loadESBConfigurationFromClasspath
+                ("/artifacts/ESB/mediatorconfig/property/FORCE_HTTP_1.0_DISABLED.xml");
+
         OMElement response = axis2Client.sendSimpleStockQuoteRequest
                 (getProxyServiceURLHttp("Axis2ProxyService"), null, "WSO2");
 
@@ -69,8 +70,8 @@ public class PropertyIntegrationFORCE_HTTP_10TestCase extends ESBIntegrationTest
                                                         " should be in HTTP/1.1");
     }
 
-    @Test(groups = "wso2.esb", description = "Test-with FORCE_HTTP_1.0 Property enabled true " +
-                                             "scenario")
+    @Test(groups = "wso2.esb", description = "Test-with FORCE_HTTP_1.0 Property enabled true scenario"
+            , dependsOnMethods = "testWithForceHTTP10EnabledFalseTest")
     public void testWithForceHTTP10EnabledTrueTest() throws Exception {
 
         loadESBConfigurationFromClasspath
