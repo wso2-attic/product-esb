@@ -15,7 +15,7 @@
 *specific language governing permissions and limitations
 *under the License.
 */
-package org.wso2.carbon.esb.samples.test.mediation;
+package org.wso2.carbon.esb.samples.test.proxy;
 
 import org.apache.axiom.om.OMElement;
 import org.testng.Assert;
@@ -23,31 +23,28 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
 /**
- * Sample 1: Simple Content-Based Routing (CBR) of Messages
+ * Sample 150: Introduction to Proxy Services
  */
-public class Sample1TestCase extends ESBIntegrationTest {
-
+public class Sample150TestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-
         super.init();
-        loadSampleESBConfiguration(1);
-
+        loadSampleESBConfiguration(150);
     }
 
-    @Test(groups = { "wso2.esb" },
-          description = "filtering of messages with XPath and regex matches")
-    public void filterMediatorWithSourceAndRegexTest() throws Exception {
-
-        OMElement response = axis2Client
-            .sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuote"), null, "WSO2");
+    @Test(groups = { "wso2.esb" }, description = "Introduction to Proxy Services")
+    public void testFileProcessing() throws Exception {
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(
+            getMainSequenceURL(),
+            getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
+            "WSO2");
 
         Assert.assertTrue(response.toString().contains("GetQuoteResponse"),
                           "GetQuoteResponse not found");
         Assert.assertTrue(response.toString().contains("WSO2 Company"), "WSO2 Company not found");
-
     }
 
     @AfterClass(alwaysRun = true)

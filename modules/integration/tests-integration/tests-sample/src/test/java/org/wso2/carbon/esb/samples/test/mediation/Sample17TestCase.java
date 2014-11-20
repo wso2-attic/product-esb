@@ -17,10 +17,7 @@
 */
 package org.wso2.carbon.esb.samples.test.mediation;
 
-import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
-import org.apache.axiom.om.OMFactory;
-import org.apache.axiom.om.OMNamespace;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -29,6 +26,9 @@ import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
 import static org.testng.Assert.assertTrue;
 
+/**
+ * Sample 17: Transforming / Replacing Message Content with PayloadFactory Mediator
+ */
 public class Sample17TestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
@@ -36,37 +36,25 @@ public class Sample17TestCase extends ESBIntegrationTest {
         loadSampleESBConfiguration(17);
     }
 
-
-    @Test(groups = {"wso2.esb"}, description = "Sample 17:  Introduction to payload Mediator")
+    @Test(groups = { "wso2.esb" },
+          description = "Transforming / Replacing Message Content with PayloadFactory Mediator")
     public void transformUsingPayloadFactory() throws Exception {
         OMElement response;
-        response = axis2Client.sendSimpleStockQuoteRequest(
-                getMainSequenceURL(),
-                getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
-                getCustomPayload("IBM"));
-        assertTrue(response.toString().contains("CheckPriceResponse"), "CheckPriceResponse not found in response message");
+        response = axis2Client.sendCustomQuoteRequest(
+            getMainSequenceURL(),
+            getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
+            "WSO2");
+        assertTrue(response.toString().contains("CheckPriceResponse"),
+                   "CheckPriceResponse not found in response message");
         assertTrue(response.toString().contains("Code"), "Code not found in response message");
         assertTrue(response.toString().contains("Price"), "Price not found in response message");
-        assertTrue(response.toString().contains("IBM"), "Symbol IBM not found in response message");
+        assertTrue(response.toString().contains("WSO2"),
+                   "Symbol WSO2 not found in response message");
 
     }
-
 
     @AfterClass(alwaysRun = true)
     private void destroy() throws Exception {
         super.cleanup();
-    }
-
-    private OMElement getCustomPayload(String symbol) {
-        OMFactory fac = OMAbstractFactory.getOMFactory();
-        OMNamespace omNs = fac.createOMNamespace("http://services.samples", "ns");
-        OMElement payload = fac.createOMElement("getQuote", omNs);
-        OMElement request = fac.createOMElement("request", omNs);
-        OMElement code = fac.createOMElement("Code", omNs);
-        code.setText(symbol);
-
-        request.addChild(code);
-        payload.addChild(request);
-        return payload;
     }
 }
