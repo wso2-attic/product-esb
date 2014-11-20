@@ -324,6 +324,11 @@
                 <artifactId>axiom</artifactId>
                 <version>${axiom.wso2.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.h2database.wso2</groupId>
+                <artifactId>h2-database-engine</artifactId>
+                <version>${wso2.h2.orbit.version}</version>
+            </dependency>
             <!--dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>org.wso2.stratos.esb.styles</artifactId>
@@ -375,8 +380,26 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.activemq</groupId>
-                <artifactId>activemq-core</artifactId>
-                <version>5.2.0</version>
+                <artifactId>activemq-all</artifactId>
+                <version>${activemq.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-broker</artifactId>
+                <version>${activemq.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-client</artifactId>
+                <version>${activemq.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.fusesource.hawtbuf</groupId>
+                <artifactId>hawtbuf</artifactId>
+                <version>1.9</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -389,6 +412,39 @@
                 <groupId>org.apache.geronimo.specs</groupId>
                 <artifactId>geronimo-jms_1.1_spec</artifactId>
                 <version>1.1.1</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <!-- any library that uses commons-logging will be directed to slf4j -->
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <!-- any library that uses slf4j will be directed to java.util.logging -->
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-jdk14</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -455,6 +511,18 @@
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.task.stub</artifactId>
+                <version>${carbon.platform.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.event.client.stub</artifactId>
+                <version>${carbon.platform.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.event.stub</artifactId>
                 <version>${carbon.platform.version}</version>
                 <scope>test</scope>
             </dependency>
@@ -703,6 +771,11 @@
                         </exclusion>
                     </exclusions>
                 </dependency>
+            <dependency>
+                <groupId>org.apache.ibatis</groupId>
+                <artifactId>ibatis-core</artifactId>
+                <version>3.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <properties>
@@ -742,12 +815,15 @@
         <wss4j.version>1.5.11-wso2v7-SNAPSHOT</wss4j.version>
         <emma.version>2.1.5320</emma.version>
         <axiom.wso2.version>1.2.11.wso2v5</axiom.wso2.version>
+        <wso2.h2.orbit.version>1.2.140.wso2v3</wso2.h2.orbit.version>
 
         <!--Automation Framework versions-->
         <automation.framework.verion>4.3.1-SNAPSHOT</automation.framework.verion>
         <automation.framework.utills.version>4.3.0-SNAPSHOT</automation.framework.utills.version>
         <operadriver.version>0.8.1</operadriver.version>
         <selenium.version>2.40.0</selenium.version>
+        <slf4j.version>1.7.5</slf4j.version>
+        <activemq.version>5.9.1</activemq.version>
     </properties>
     <pluginRepositories>
         <pluginRepository>
