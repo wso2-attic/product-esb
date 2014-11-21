@@ -80,7 +80,7 @@ public class Sample653TestCase extends ESBIntegrationTest {
 
         Thread.sleep(15000);
         Assert.assertTrue("Symbol with higher priority header took more time than Symbol" +
-                " with lower priority ", senderMSTF.getResponseTime() > senderIBM.getResponseTime());
+                " with lower priority ", senderMSTF.getResponseTime() >= senderIBM.getResponseTime());
 
     }
 
