@@ -1,5 +1,5 @@
 /*
-*Copyright (c) 2005-2010, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*Copyright (c) 2005-2014, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *WSO2 Inc. licenses this file to you under the Apache License,
 *Version 2.0 (the "License"); you may not use this file except
@@ -60,7 +60,7 @@ public class HttpInboundTransportTestCase extends ESBIntegrationTest {
             Assert.assertNotNull(response);
             Assert.assertEquals("getQuoteResponse",response.getLocalName());
     } catch (AxisFault expected) {
-         log.error(expected.getMessage());
+         log.error("AxisFault occurred when sending Simple Stock Quote Service",expected);
         }
 
     }
@@ -79,9 +79,9 @@ public class HttpInboundTransportTestCase extends ESBIntegrationTest {
         try {
            synapseConfig = esbUtils.loadResource(relativeFilePath);
         } catch (FileNotFoundException e) {
-           log.error(e.getMessage());
+           log.error("File Location may be incorrect",e);
         } catch (XMLStreamException e) {
-            log.error(e.getMessage());
+            log.error("XML Stream Exception while reading file stream",e);
         }
        return synapseConfig;
     }

@@ -373,14 +373,11 @@ public class ESBTestCaseUtils {
 
     }
 
-
-
     public void isInboundEndpointDeployed(String backEndUrl, String sessionCookie,String name)
             throws Exception {
         InboundAdminClient inboundAdmin = new InboundAdminClient(backEndUrl, sessionCookie);
        InboundEndpointDTO inboundEndpointDTO = inboundAdmin.getInboundEndpointbyName(name);
         Assert.assertNotNull(inboundEndpointDTO);
-
     }
 
     public void deleteInboundEndpointDeployed(String backEndUrl, String sessionCookie,String name)
