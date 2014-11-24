@@ -23,8 +23,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.engine.context.AutomationContext;
-import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
@@ -42,14 +40,11 @@ public class HttpInboundTransportTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        serverConfigurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
-        super.init();
-
           addSequence(getOM("artifacts" + File.separator + "ESB" + File.separator
                   + "http.inbound.transport" + File.separator + "TestIn.xml"));
           addSequence(getOM("artifacts"+ File.separator+"ESB" + File.separator
                 + "http.inbound.transport" + File.separator + "TestOut.xml"));
-           addInboundEndpoint(getOM("artifacts"+ File.separator+"ESB" + File.separator
+          addInboundEndpoint(getOM("artifacts"+ File.separator+"ESB" + File.separator
                    + "http.inbound.transport" + File.separator + "synapse.xml"));
     }
 
@@ -60,30 +55,29 @@ public class HttpInboundTransportTestCase extends ESBIntegrationTest {
             Assert.assertNotNull(response);
             Assert.assertEquals("getQuoteResponse",response.getLocalName());
     } catch (AxisFault expected) {
-         log.error("AxisFault occurred when sending Simple Stock Quote Service",expected);
+            String msg ="AxisFault occurred when sending Simple Stock Quote Service";
+            throw new Exception(msg,expected);
         }
-
     }
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
         super.cleanup();
-        serverConfigurationManager.restoreToLastConfiguration();
     }
 
 
-    private OMElement getOM(String relativeFilePath){
+    private OMElement getOM(String relativeFilePath) throws Exception {
         OMElement synapseConfig =null;
         relativeFilePath = relativeFilePath.replaceAll("[\\\\/]", Matcher.quoteReplacement(File.separator));
-
         try {
            synapseConfig = esbUtils.loadResource(relativeFilePath);
         } catch (FileNotFoundException e) {
-           log.error("File Location may be incorrect",e);
+            String msg = "File Location may be incorrect";
+            throw new Exception(msg,e);
         } catch (XMLStreamException e) {
-            log.error("XML Stream Exception while reading file stream",e);
+            String msg ="XML Stream Exception while reading file stream";
+            throw new Exception(msg,e);
         }
        return synapseConfig;
     }
-
 }
