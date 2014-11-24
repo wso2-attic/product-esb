@@ -23,7 +23,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
 /**
  * Sample 150: Introduction to Proxy Services
@@ -38,9 +37,7 @@ public class Sample150TestCase extends ESBIntegrationTest {
     @Test(groups = { "wso2.esb" }, description = "Introduction to Proxy Services")
     public void testFileProcessing() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(
-            getMainSequenceURL(),
-            getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
-            "WSO2");
+                getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 
         Assert.assertTrue(response.toString().contains("GetQuoteResponse"),
                           "GetQuoteResponse not found");

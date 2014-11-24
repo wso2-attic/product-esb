@@ -34,7 +34,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 
-import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 public class Sample654TestCase extends ESBIntegrationTest {
@@ -65,7 +64,7 @@ public class Sample654TestCase extends ESBIntegrationTest {
                 getResource(COMMON_FILE_LOCATION + "axis2.xml").getPath()));
 
         super.init();
-        addVFSProxy();
+
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
@@ -90,27 +89,31 @@ public class Sample654TestCase extends ESBIntegrationTest {
             e.printStackTrace();
         }
 
+        addVFSProxy();
+
         long currentTime = System.currentTimeMillis();
 
         List<String> response = null;
         while (multiMessageReceiver.getMessageQueueSize() < MSG_COUNT) {
-            System.out.println("Waiting for fill up the list");
+            log.info("Waiting for fill up the list");
             Thread.sleep(1000);
 
-            if ( (System.currentTimeMillis() - currentTime) > 120000) {
+            if ( (System.currentTimeMillis() - currentTime) > 100000) {
                 break;
             }
         }
 
         response = multiMessageReceiver.getIncomingMessages();
+
+        assertTrue(response.size() != 0, "Response is not null");
+
         multiMessageReceiver.stopServer();
         String totalResponse = "";
         for (String temp : response) {
             totalResponse += temp;
         }
 
-        assertNotNull(response, "Response is null");
-        //assertTrue(response.size() > MSG_COUNT, "Message count is mis matching");
+        assertTrue(response.size() >= MSG_COUNT, "Message count is mis matching");
         assertTrue(totalResponse.contains("IBM"), "IBM is not in the response");
         assertTrue(totalResponse.contains("MSFT"), "MSFT is not in the response");
         assertTrue(totalResponse.contains("SUN"), "SUN is not in the response");
@@ -121,10 +124,7 @@ public class Sample654TestCase extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void restoreServerConfiguration() throws Exception {
         try {
-            if(isProxyDeployed)
-            {
-                deleteProxyService("StockQuoteProxy");
-            }
+            deleteProxyService("StockQuoteProxy");
             resourceAdminServiceStub.deleteResource("/_system/config/smooks");
 
         } finally {
