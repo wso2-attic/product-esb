@@ -55,8 +55,7 @@ public class HttpInboundTransportTestCase extends ESBIntegrationTest {
             Assert.assertNotNull(response);
             Assert.assertEquals("getQuoteResponse", response.getLocalName());
         } catch (AxisFault expected) {
-            String msg = "AxisFault occurred when sending Simple Stock Quote Service";
-            throw new AxisFault(msg, expected);
+            throw new AxisFault("AxisFault occurred when sending SimpleStockQuoteService", expected);
         }
     }
 
@@ -72,11 +71,9 @@ public class HttpInboundTransportTestCase extends ESBIntegrationTest {
         try {
             synapseConfig = esbUtils.loadResource(relativeFilePath);
         } catch (FileNotFoundException e) {
-            String msg = "File Location may be incorrect";
-            throw new Exception(msg, e);
+            throw new Exception("File Location may be incorrect", e);
         } catch (XMLStreamException e) {
-            String msg = "XML Stream Exception while reading file stream";
-            throw new XMLStreamException(msg, e);
+            throw new XMLStreamException("XML Stream Exception while reading file stream", e);
         }
         return synapseConfig;
     }

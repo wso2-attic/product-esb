@@ -58,6 +58,11 @@ public class InboundAdminClient {
         AuthenticateStub.authenticateStub(userName, password, endpointAdminStub);
     }
 
+    /**
+     * @return InboundEndpointNames
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
     public String getAllInboundEndpointNames() throws RemoteException, InboundAdminInboundManagementException {
         try {
             return endpointAdminStub.getAllInboundEndpointNames();
@@ -69,6 +74,12 @@ public class InboundAdminClient {
         }
     }
 
+    /**
+     * @param endointName Inbound Endpoint Name
+     * @return InboundEndpointDTO
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
     public InboundEndpointDTO getInboundEndpointbyName(String endointName) throws RemoteException,
             InboundAdminInboundManagementException {
         try {
@@ -81,6 +92,16 @@ public class InboundAdminClient {
         }
     }
 
+    /**
+     * @param name Inbound Name
+     * @param sequence Injecting sequence
+     * @param onError Injecting sequence when error occurred
+     * @param protocol Running protocol
+     * @param classImpl Class for custom Inbounds
+     * @param sParams Inbound specific parameters
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
     public void addInboundEndpoint(String name, String sequence,
                                    String onError, String protocol, String classImpl,
                                    String[] sParams) throws RemoteException, InboundAdminInboundManagementException {
@@ -90,10 +111,15 @@ public class InboundAdminClient {
             throw new RemoteException("Remote Exception occurred when addInboundEndpoint" + name, e);
         } catch (InboundAdminInboundManagementException e) {
             throw new InboundAdminInboundManagementException("InboundAdminInboundManagementException  when add inbound " +
-                    "endpoint" + name + "InboundAdmin Client", e);
+                    "endpoint " + name + " InboundAdmin Client", e);
         }
     }
 
+    /**
+     * @param element String value of element
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
     public void addInboundEndpoint(String element) throws RemoteException, InboundAdminInboundManagementException {
         try {
             endpointAdminStub.addInboundEndpointFromXMLString(element);
@@ -102,6 +128,16 @@ public class InboundAdminClient {
         }
     }
 
+    /**
+     * @param name Inbound Name
+     * @param sequence Injecting sequence
+     * @param onError Injecting sequence when error occurred
+     * @param protocol Running protocol
+     * @param classImpl Class for custom Inbounds
+     * @param sParams Inbound specific parameters
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
     public void updateInboundEndpoint(String name, String sequence,
                                       String onError, String protocol, String classImpl,
                                       String[] sParams) throws RemoteException, InboundAdminInboundManagementException {
@@ -115,6 +151,11 @@ public class InboundAdminClient {
         }
     }
 
+    /**
+     * @param name Inbound Name
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
     public void removeInboundEndpoint(String name) throws RemoteException, InboundAdminInboundManagementException {
         try {
             endpointAdminStub.removeInboundEndpoint(name);
