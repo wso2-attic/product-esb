@@ -250,7 +250,6 @@ public abstract class ESBIntegrationTest {
         try {
             esbUtils.addInboundEndpoint(contextUrls.getBackEndUrl(), sessionCookie, inboundEndpoint);
         } catch (Exception e) {
-           log.error("Error when adding InboundEndpoint",e);
             throw new Exception("Error when adding InboundEndpoint",e);
         }
     }
@@ -265,7 +264,6 @@ public abstract class ESBIntegrationTest {
                 }
             }
         } catch (Exception e) {
-            log.error("Error when deleting InboundEndpoint",e);
             throw new Exception("Error when deleting InboundEndpoint",e);
         }
     }

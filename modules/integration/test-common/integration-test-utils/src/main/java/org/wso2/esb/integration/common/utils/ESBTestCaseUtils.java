@@ -380,7 +380,7 @@ public class ESBTestCaseUtils {
         InboundAdminClient inboundAdmin = new InboundAdminClient(backEndUrl, sessionCookie);
        InboundEndpointDTO inboundEndpointDTO = inboundAdmin.getInboundEndpointbyName(name);
         Assert.assertNotNull(inboundEndpointDTO);
-        
+
     }
 
     public void deleteInboundEndpointDeployed(String backEndUrl, String sessionCookie,String name)
