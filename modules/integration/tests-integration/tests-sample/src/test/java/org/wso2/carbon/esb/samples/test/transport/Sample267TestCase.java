@@ -54,6 +54,11 @@ public class Sample267TestCase extends ESBIntegrationTest {
     @Test(groups = { "wso2.esb" }, description = "Switching from UDP to HTTP/S")
     public void testUdpTransport() throws Exception {
 
+        LogViewerClient logViewerClient =
+                new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+
+        logViewerClient.clearLogs();
+
         String message =
             " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
             "      <soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\">\n" +
@@ -78,9 +83,9 @@ public class Sample267TestCase extends ESBIntegrationTest {
         UDPClient client = new UDPClient("localhost", 9999);
         client.sendMessage(message);
 
-        LogViewerClient logViewerClient =
-            new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
-        LogEvent[] getLogsInfo = logViewerClient.getAllSystemLogs();
+        Thread.sleep(10000);
+
+        LogEvent[] getLogsInfo = logViewerClient.getAllRemoteSystemLogs();
         boolean assertValue = false;
         for (LogEvent event : getLogsInfo) {
             if (event.getMessage().contains("WSO2UDP")) {
