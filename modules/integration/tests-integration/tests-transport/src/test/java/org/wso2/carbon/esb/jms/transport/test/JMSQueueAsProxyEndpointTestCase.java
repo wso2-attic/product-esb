@@ -77,17 +77,17 @@ public class JMSQueueAsProxyEndpointTestCase extends ESBIntegrationTest {
             }
             //wait for messages to reach the destination queue
             Thread.sleep(5000);
-            String expectedOutCome = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"><soapenv:Body><ns:getQuote xmlns:ns=\"http://services.samples\"><ns:request><ns:symbol>JMS</ns:symbol></ns:request></ns:getQuote></soapenv:Body></soapenv:Envelope>";
+            String expectedOutCome = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"><soapenv:Body><ns:getQuote xmlns:ns=\"http://services.samples\"><ns:request><ns:symbol>JMS</ns:symbol></ns:request></ns:getQuote></soapenv:Body></soapenv:Envelope>";
 
             for (int i = 0; i < 5; i++) {
                 String message = consumer.popMessage();
                 Assert.assertNotNull(message, "Message not found. message sent by proxy service not reached to the destination Queue");
-                Assert.assertEquals(message, expectedOutCome, "Message Contains mismatched");
+                //added contains since <?xml version=\"1.0\" encoding=\"UTF-8\"?> " are replaced with ' in jenkins. <?xml version=\'1.0\' encoding=\'UTF-8\'?>
+                Assert.assertTrue(message.contains(expectedOutCome), "Message Contains mismatched");
             }
         } finally {
             consumer.disconnect();
         }
-
     }
 
     @Test(groups = {"wso2.esb"}, description = "Test sending message to jms endpoint with soap12 format from proxy service")
@@ -103,16 +103,16 @@ public class JMSQueueAsProxyEndpointTestCase extends ESBIntegrationTest {
             }
             //wait for messages to reach the destination queue
             Thread.sleep(5000);
-            String expectedOutPut = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><soapenv:Envelope xmlns:soapenv=\"http://www.w3.org/2003/05/soap-envelope\"><soapenv:Body><ns:getQuote xmlns:ns=\"http://services.samples\"><ns:request><ns:symbol>JMS</ns:symbol></ns:request></ns:getQuote></soapenv:Body></soapenv:Envelope>";
+            String expectedOutPut = "<soapenv:Envelope xmlns:soapenv=\"http://www.w3.org/2003/05/soap-envelope\"><soapenv:Body><ns:getQuote xmlns:ns=\"http://services.samples\"><ns:request><ns:symbol>JMS</ns:symbol></ns:request></ns:getQuote></soapenv:Body></soapenv:Envelope>";
             for (int i = 0; i < 5; i++) {
                 String message = consumer.popMessage();
                 Assert.assertNotNull(message, "Message not found. message sent by proxy service not reached to the destination Queue");
-                Assert.assertEquals(message, expectedOutPut, "Message Contains mismatched");
+                //added contains since <?xml version=\"1.0\" encoding=\"UTF-8\"?> " are replaced with ' in jenkins. <?xml version=\'1.0\' encoding=\'UTF-8\'?>
+                Assert.assertTrue(message.contains(expectedOutPut), "Message Contains mismatched");                
             }
         } finally {
             consumer.disconnect();
         }
-
     }
 
     @AfterClass(alwaysRun = true)

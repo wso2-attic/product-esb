@@ -21,11 +21,10 @@
     </test> -->
     
     <test name="Template-Test" preserve-order="true" verbose="2">
-      <packages>
-          <package name="org.wso2.carbon.esb.template.*"/>
-         </packages>
+        <packages>
+            <package name="org.wso2.carbon.esb.template.*"/>
+        </packages>
     </test>
-    
 
     <test name="GetProcessor-Test" preserve-order="true" verbose="2">
         <packages>
@@ -36,6 +35,12 @@
     <test name="Registry-Caching-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.registry.caching"/>
+        </packages>
+    </test>
+
+    <test name="JSON-Tests" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.json"/>
         </packages>
     </test>
 

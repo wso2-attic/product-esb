@@ -47,7 +47,6 @@ public class ProxyServiceWithWSAddressingTestCase extends ESBIntegrationTest {
                 .getText();
         assertEquals(symbol, "addressing", "Mediation Ignored. proxy service invocation failed when WS-addressing is sent");
 
-
     }
 
 
