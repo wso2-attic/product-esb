@@ -90,10 +90,16 @@ public class Sample654TestCase extends ESBIntegrationTest {
             e.printStackTrace();
         }
 
+        long currentTime = System.currentTimeMillis();
+
         List<String> response = null;
         while (multiMessageReceiver.getMessageQueueSize() < MSG_COUNT) {
             System.out.println("Waiting for fill up the list");
             Thread.sleep(1000);
+
+            if ( (System.currentTimeMillis() - currentTime) > 120000) {
+                break;
+            }
         }
 
         response = multiMessageReceiver.getIncomingMessages();
