@@ -59,6 +59,7 @@ public class InboundAdminClient {
     }
 
     /**
+     * Return all Inbound Endpoint Names
      * @return InboundEndpointNames
      * @throws RemoteException
      * @throws InboundAdminInboundManagementException
@@ -75,6 +76,7 @@ public class InboundAdminClient {
     }
 
     /**
+     * Return InboundEndpointDTO for specific InboundEndpoint
      * @param endointName Inbound Endpoint Name
      * @return InboundEndpointDTO
      * @throws RemoteException
@@ -93,6 +95,7 @@ public class InboundAdminClient {
     }
 
     /**
+     * Adding Inbound Endpoint to the underlying stub.
      * @param name Inbound Name
      * @param sequence Injecting sequence
      * @param onError Injecting sequence when error occurred
@@ -116,6 +119,7 @@ public class InboundAdminClient {
     }
 
     /**
+     * Adding Inbound Endpoint to the underlying stub from XMLString
      * @param element String value of element
      * @throws RemoteException
      * @throws InboundAdminInboundManagementException
@@ -129,6 +133,7 @@ public class InboundAdminClient {
     }
 
     /**
+     * Update InboundEndpoint with given details for InboundEndpoint with given name
      * @param name Inbound Name
      * @param sequence Injecting sequence
      * @param onError Injecting sequence when error occurred
@@ -152,6 +157,7 @@ public class InboundAdminClient {
     }
 
     /**
+     * Delete InboundEndpoint with given name
      * @param name Inbound Name
      * @throws RemoteException
      * @throws InboundAdminInboundManagementException
