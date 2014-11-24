@@ -37,7 +37,7 @@ public class Sample500TestCase extends ESBIntegrationTest {
         loadSampleESBConfiguration(500);
     }
 
-    @Test(expectedExceptions = AxisFault.class, groups = {"wso2.esb"}, description = "Sample 500 Call Template Test")
+    @Test(groups = {"wso2.esb"}, description = "Sample 500 Call Template Test")
     public void test() throws AxisFault {
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(proxyServiceName), null, "WSO2");
