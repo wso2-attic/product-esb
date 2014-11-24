@@ -87,7 +87,9 @@
                             </outputDirectory>
                             <includeTypes>jar</includeTypes>
                             <includeArtifactIds>
-                                groovy-all,jruby-complete,mysql-connector-java,activemq-core,geronimo-j2ee-management_1.1_spec,geronimo-jms_1.1_spec
+                                groovy-all,jruby-complete,mysql-connector-java,activemq-core,
+                                hawtbuf,geronimo-j2ee-management_1.1_spec,geronimo-jms_1.1_spec,
+                                activemq-broker,activemq-client
                             </includeArtifactIds>
                             <excludeTransitive>true</excludeTransitive>
                         </configuration>
@@ -291,6 +293,27 @@
         <dependency>
             <groupId>org.apache.ibatis</groupId>
             <artifactId>ibatis-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-j2ee-management_1.1_spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jms_1.1_spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.fusesource.hawtbuf</groupId>
+            <artifactId>hawtbuf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
         </dependency>
     </dependencies>
 
