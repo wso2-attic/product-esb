@@ -39,7 +39,7 @@ public class Sample300TestCase extends ESBIntegrationTest {
         taskAdminClient = new TaskAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
 
-    @Test(groups = { "wso2.esb" }, description = "Test ESB mediation with adding task")
+    @Test(groups = { "wso2.esb" }, description = "Test ESB mediation with adding task" , enabled = false)
     public void testAddTask() throws Exception {
 
         Thread.sleep(30000);
