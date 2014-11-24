@@ -40,23 +40,23 @@ public class HttpInboundTransportTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-          addSequence(getOM("artifacts" + File.separator + "ESB" + File.separator
-                  + "http.inbound.transport" + File.separator + "TestIn.xml"));
-          addSequence(getOM("artifacts"+ File.separator+"ESB" + File.separator
+        addSequence(getOM("artifacts" + File.separator + "ESB" + File.separator
+                + "http.inbound.transport" + File.separator + "TestIn.xml"));
+        addSequence(getOM("artifacts" + File.separator + "ESB" + File.separator
                 + "http.inbound.transport" + File.separator + "TestOut.xml"));
-          addInboundEndpoint(getOM("artifacts"+ File.separator+"ESB" + File.separator
-                   + "http.inbound.transport" + File.separator + "synapse.xml"));
+        addInboundEndpoint(getOM("artifacts" + File.separator + "ESB" + File.separator
+                + "http.inbound.transport" + File.separator + "synapse.xml"));
     }
 
     @Test(groups = "wso2.esb", description = "Inbound Http  test case")
-    public void inboundHttpTest() throws Exception {
+    public void inboundHttpTest() throws AxisFault {
         try {
             OMElement response = axis2Client.sendSimpleStockQuoteRequest("http://localhost:8081/services/StockQuote", null, "IBM");
             Assert.assertNotNull(response);
-            Assert.assertEquals("getQuoteResponse",response.getLocalName());
-    } catch (AxisFault expected) {
-            String msg ="AxisFault occurred when sending Simple Stock Quote Service";
-            throw new Exception(msg,expected);
+            Assert.assertEquals("getQuoteResponse", response.getLocalName());
+        } catch (AxisFault expected) {
+            String msg = "AxisFault occurred when sending Simple Stock Quote Service";
+            throw new AxisFault(msg, expected);
         }
     }
 
@@ -67,17 +67,17 @@ public class HttpInboundTransportTestCase extends ESBIntegrationTest {
 
 
     private OMElement getOM(String relativeFilePath) throws Exception {
-        OMElement synapseConfig =null;
+        OMElement synapseConfig = null;
         relativeFilePath = relativeFilePath.replaceAll("[\\\\/]", Matcher.quoteReplacement(File.separator));
         try {
-           synapseConfig = esbUtils.loadResource(relativeFilePath);
+            synapseConfig = esbUtils.loadResource(relativeFilePath);
         } catch (FileNotFoundException e) {
             String msg = "File Location may be incorrect";
-            throw new Exception(msg,e);
+            throw new Exception(msg, e);
         } catch (XMLStreamException e) {
-            String msg ="XML Stream Exception while reading file stream";
-            throw new Exception(msg,e);
+            String msg = "XML Stream Exception while reading file stream";
+            throw new XMLStreamException(msg, e);
         }
-       return synapseConfig;
+        return synapseConfig;
     }
 }
