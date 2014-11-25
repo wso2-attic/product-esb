@@ -39,6 +39,7 @@ import javax.naming.InitialContext;
 import java.io.File;
 import java.util.Hashtable;
 
+// this class is disabled
 public class Sample263TestCase extends ESBIntegrationTest {
 
     private ServerConfigurationManager serverManager = null;
@@ -48,7 +49,7 @@ public class Sample263TestCase extends ESBIntegrationTest {
             = new ActiveMQServer();
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @BeforeClass(alwaysRun = true)
+    @BeforeClass(alwaysRun = false)
     public void startJMSBrokerAndConfigureESB() throws Exception {
         super.init();
         serverManager = new ServerConfigurationManager(context);
@@ -79,7 +80,7 @@ public class Sample263TestCase extends ESBIntegrationTest {
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @AfterClass(alwaysRun = true)
+    @AfterClass(alwaysRun = false)
     public void stopJMSBrokerRevertESBConfiguration() throws Exception {
 
         //reverting the changes done to esb sever
@@ -92,7 +93,7 @@ public class Sample263TestCase extends ESBIntegrationTest {
         }
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test JMS to Proxy with JBoss messaging ")
+    @Test(groups = {"wso2.esb"}, description = "Test JMS to Proxy with JBoss messaging ", enabled = false)
     public void testJMSProxyWithHornetq() throws Exception {
 
         Queue testQueue;

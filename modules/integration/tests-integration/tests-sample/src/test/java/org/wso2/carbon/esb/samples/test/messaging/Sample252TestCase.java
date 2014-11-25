@@ -75,6 +75,7 @@ public class Sample252TestCase extends ESBIntegrationTest {
        // activeMQServer.stopJMSBrokerRevertESBConfiguration();
         //reverting the changes done to esb sever
         Thread.sleep(10000); //let server to clear the artifact undeployment
+        axis2Server.stop();
         super.cleanup();
     }
 
