@@ -56,6 +56,13 @@ public class Sample266TestCase extends ESBIntegrationTest {
     @Test(groups = { "wso2.esb" }, description = "Switching from TCP to HTTP/S")
     public void testTcpTransport() throws Exception {
 
+        LogViewerClient logViewerClient =
+                new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+
+        logViewerClient.clearLogs();
+
+        Thread.sleep(5000);
+
         String message =
             " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
             "      <soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\">\n" +
@@ -80,9 +87,9 @@ public class Sample266TestCase extends ESBIntegrationTest {
         TCPClient client = new TCPClient("localhost", 6060);
         client.sendMessage(message);
 
-        LogViewerClient logViewerClient =
-            new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
-        LogEvent[] getLogsInfo = logViewerClient.getAllSystemLogs();
+        Thread.sleep(30000);
+
+        LogEvent[] getLogsInfo = logViewerClient.getAllRemoteSystemLogs();
         boolean assertValue = false;
         for (LogEvent event : getLogsInfo) {
             if (event.getMessage().contains("WSO2TCP")) {

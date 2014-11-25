@@ -133,7 +133,7 @@ public class Sample254TestCase extends ESBIntegrationTest {
     private boolean isOutFileExist() throws Exception {
         long startTime = System.currentTimeMillis();
         boolean isOutFileExist = false;
-        while (((System.currentTimeMillis() - startTime) < 180000) && !isOutFileExist) {
+        while (((System.currentTimeMillis() - startTime) < 180000) || isOutFileExist) {
             log.info("Waiting for out.xml file....");
             isOutFileExist = outfile.exists();
             Thread.sleep(3000);
