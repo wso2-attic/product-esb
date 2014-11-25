@@ -72,7 +72,8 @@ public class Sample372TestCase extends ESBIntegrationTest {
     public void testConcurrencyAndRequestBasedPolicyThrottlingRequest()
             throws InterruptedException {
         startClients();
-        while (clientsDone.getCount() < CONCURRENT_CLIENTS) {
+        long startTime = System.currentTimeMillis();
+        while (((System.currentTimeMillis() - startTime) < 120000) && (clientsDone.getCount() < CONCURRENT_CLIENTS)) {
             Thread.sleep(1000);
         }
 
