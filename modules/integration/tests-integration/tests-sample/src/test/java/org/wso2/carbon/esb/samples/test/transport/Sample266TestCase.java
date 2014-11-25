@@ -61,8 +61,6 @@ public class Sample266TestCase extends ESBIntegrationTest {
 
         logViewerClient.clearLogs();
 
-        Thread.sleep(5000);
-
         String message =
             " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
             "      <soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\">\n" +

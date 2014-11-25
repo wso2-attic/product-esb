@@ -83,7 +83,7 @@ public class Sample267TestCase extends ESBIntegrationTest {
         UDPClient client = new UDPClient("localhost", 9999);
         client.sendMessage(message);
 
-        Thread.sleep(10000);
+        Thread.sleep(30000);
 
         LogEvent[] getLogsInfo = logViewerClient.getAllRemoteSystemLogs();
         boolean assertValue = false;
