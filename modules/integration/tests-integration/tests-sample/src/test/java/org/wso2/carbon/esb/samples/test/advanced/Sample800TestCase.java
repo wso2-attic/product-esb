@@ -68,7 +68,7 @@ public class Sample800TestCase extends ESBIntegrationTest {
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @AfterClass(alwaysRun = true)
-    private void destroy() throws Exception {
+    public void destroy() throws Exception {
         try {
             cleanup();
         } finally {
