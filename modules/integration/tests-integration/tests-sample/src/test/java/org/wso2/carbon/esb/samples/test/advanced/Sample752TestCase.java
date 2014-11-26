@@ -57,7 +57,9 @@ public class Sample752TestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         super.init();
-        loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "endpoint" + File.separator + "loadbalancingEndpointConfig" + File.separator + "synapse.xml");
+        loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator +
+                "ESB" + File.separator + "endpoint" + File.separator + "loadbalancingEndpointConfig"
+                + File.separator + "synapse.xml");
 
         axis2Server1 = new SampleAxis2Server("test_axis2_server_9001.xml");
         axis2Server2 = new SampleAxis2Server("test_axis2_server_9002.xml");
