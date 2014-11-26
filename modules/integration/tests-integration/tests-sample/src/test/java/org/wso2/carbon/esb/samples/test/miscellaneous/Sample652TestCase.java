@@ -32,7 +32,7 @@ public class Sample652TestCase extends ESBIntegrationTest {
 
     private PriorityMediationAdminClient priorityMediationAdminClient;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
 
         super.init();

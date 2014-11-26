@@ -46,8 +46,8 @@ public class Sample657TestCase extends ESBIntegrationTest {
 
     private ServerConfigurationManager serverManager = null;
     private final String MYSQL_LIB = "mysql-connector-java-5.1.26.jar";
-    Connection mysqlConnection = null;
-    NDataSourceAdminServiceClient dataSourceAdminServiceClient = null;
+    private Connection mysqlConnection = null;
+    private NDataSourceAdminServiceClient dataSourceAdminServiceClient = null;
 
     private String url = null;
     private String driver = null;
@@ -113,7 +113,7 @@ public class Sample657TestCase extends ESBIntegrationTest {
         Reader readerUserData = new BufferedReader(
                 new FileReader(stock));
 
-        // Exctute script
+        // Execute script
         scriptRunner.runScript(readerSystemData);
         scriptRunner.runScript(readerUserData);
     }
@@ -213,11 +213,12 @@ public class Sample657TestCase extends ESBIntegrationTest {
 
     }
 
-    @AfterClass(alwaysRun = true,  enabled = false)
+    @AfterClass(alwaysRun = true)
     public void deleteService() throws Exception {
 
         mysqlConnection.close();
         super.cleanup();
+        Thread.sleep(5000);
         serverManager.removeFromComponentLib(MYSQL_LIB);
         serverManager.restoreToLastConfiguration();
     }

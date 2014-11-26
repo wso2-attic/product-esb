@@ -53,7 +53,7 @@ public class Sample656TestCase extends ESBIntegrationTest {
     }
 
     @AfterClass(alwaysRun = true)
-    private void destroy() throws Exception {
+    public void destroy() throws Exception {
         super.cleanup();
     }
 }

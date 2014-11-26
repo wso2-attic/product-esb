@@ -42,6 +42,7 @@ public class Sample654TestCase extends ESBIntegrationTest {
     private ResourceAdminServiceClient resourceAdminServiceStub;
     private final int PORT = 8201;
     private boolean isProxyDeployed = false;
+    private MultiMessageReceiver multiMessageReceiver;
     /**
      * MSG_COUNT is depend on the edi.tct file
      */
@@ -56,14 +57,14 @@ public class Sample654TestCase extends ESBIntegrationTest {
         resourceAdminServiceStub = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
                 context.getContextTenant().getContextUser().getUserName()
                 , context.getContextTenant().getContextUser().getPassword());
-        uploadResourcesToConfigRegistry();
-        loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/vfsTransport/" +
-                "vfs_test_smook_config_at_registry.xml");
         serverConfigurationManager = new ServerConfigurationManager(context);
         serverConfigurationManager.applyConfiguration(new File(getClass().
                 getResource(COMMON_FILE_LOCATION + "axis2.xml").getPath()));
 
         super.init();
+        uploadResourcesToConfigRegistry();
+        loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/vfsTransport/" +
+                                          "vfs_test_smook_config_at_registry.xml");
 
     }
 
@@ -71,7 +72,7 @@ public class Sample654TestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb", "local only"}, description = "Smooks configuration refer from" +
             " configuration registry", enabled = true)
     public void testSmookConfigFromConfigRegistry() throws Exception {
-        MultiMessageReceiver multiMessageReceiver = new MultiMessageReceiver(PORT);
+        multiMessageReceiver = new MultiMessageReceiver(PORT);
 
         multiMessageReceiver.startServer();
         try {
@@ -117,19 +118,21 @@ public class Sample654TestCase extends ESBIntegrationTest {
         assertTrue(totalResponse.contains("IBM"), "IBM is not in the response");
         assertTrue(totalResponse.contains("MSFT"), "MSFT is not in the response");
         assertTrue(totalResponse.contains("SUN"), "SUN is not in the response");
-
-        deleteProxyService("StockQuoteProxy");
     }
 
     @AfterClass(alwaysRun = true)
     public void restoreServerConfiguration() throws Exception {
         try {
-            deleteProxyService("StockQuoteProxy");
+            if(multiMessageReceiver != null) {
+                multiMessageReceiver.stopServer();
+            }
+            deleteProxyService("StockQuoteProxy123");
+            Thread.sleep(5000);
             resourceAdminServiceStub.deleteResource("/_system/config/smooks");
 
         } finally {
             super.cleanup();
-            Thread.sleep(3000);
+            Thread.sleep(15000);
             serverConfigurationManager.restoreToLastConfiguration();
             resourceAdminServiceStub = null;
             serverConfigurationManager = null;
@@ -141,7 +144,7 @@ public class Sample654TestCase extends ESBIntegrationTest {
             throws Exception {
 
         addProxyService(AXIOMUtil.stringToOM("<proxy xmlns=\"http://ws.apache.org/ns/synapse\" " +
-                "name=\"StockQuoteProxy\" transports=\"vfs\">\n" +
+                "name=\"StockQuoteProxy123\" transports=\"vfs\">\n" +
                 "        <parameter name=\"transport.vfs.ContentType\">text/plain</parameter>\n" +
                 "        <!--CHANGE-->\n" +
                 "        <parameter name=\"transport.vfs.FileURI\">file://"

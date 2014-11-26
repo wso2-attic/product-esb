@@ -81,9 +81,9 @@ public class Sample651TestCase extends ESBIntegrationTest {
     public void destroy() throws Exception {
 
         //reverting the changes done to esb sever
-        Thread.sleep(10000); //let server to clear the artifact undeployment
-        super.cleanup();
 
+        super.cleanup();
+        Thread.sleep(10000); //let server to clear the artifact undeployment
         if (serverManager != null) {
             serverManager.restoreToLastConfiguration();
         }

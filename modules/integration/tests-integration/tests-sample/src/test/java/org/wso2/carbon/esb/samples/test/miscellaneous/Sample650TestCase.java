@@ -141,9 +141,9 @@ public class Sample650TestCase extends ESBIntegrationTest {
     }
 
     @AfterClass(alwaysRun = true)
-    private void destroy() throws Exception {
+    public void destroy() throws Exception {
         super.cleanup();
-
+        Thread.sleep(5000);
         if (serverManager != null) {
             serverManager.restoreToLastConfiguration();
         }

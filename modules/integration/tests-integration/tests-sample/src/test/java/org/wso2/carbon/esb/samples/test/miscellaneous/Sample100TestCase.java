@@ -50,7 +50,7 @@ public class Sample100TestCase extends ESBIntegrationTest {
     }
 
     @AfterClass(alwaysRun = true)
-    private void destroy() throws Exception {
+    public void destroy() throws Exception {
         super.cleanup();
     }
 }

@@ -17,12 +17,12 @@
 */
 package org.wso2.carbon.esb.samples.test.miscellaneous;
 
-import junit.framework.Assert;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -44,7 +44,7 @@ public class Sample653TestCase extends ESBIntegrationTest {
     public void startJMSBrokerAndConfigureESB() throws Exception {
         super.init();
         serverManager = new ServerConfigurationManager(context);
-
+//setting <parameter name="priorityConfigFile" locked="false">repository/samples/resources/priority/priority-configuration.xml</parameter>
         serverManager.applyConfiguration(new File(TestConfigurationProvider.getResourceLocation()
                 + File.separator + "artifacts" + File.separator + "ESB"
                 + File.separator + "priority" + File.separator + "axis2.xml"));
@@ -57,9 +57,8 @@ public class Sample653TestCase extends ESBIntegrationTest {
     public void destroy() throws Exception {
 
         //reverting the changes done to esb sever
-        Thread.sleep(10000);
         super.cleanup();
-
+        Thread.sleep(5000);
         if (serverManager != null) {
             serverManager.restoreToLastConfiguration();
         }
@@ -79,8 +78,8 @@ public class Sample653TestCase extends ESBIntegrationTest {
         senderMSTF.start();
 
         Thread.sleep(15000);
-        Assert.assertTrue("Symbol with higher priority header took more time than Symbol" +
-                " with lower priority ", senderMSTF.getResponseTime() >= senderIBM.getResponseTime());
+        Assert.assertTrue(senderMSTF.getResponseTime() >= senderIBM.getResponseTime()
+                , "Symbol with higher priority header took more time than Symbol with lower priority");
 
     }
 
