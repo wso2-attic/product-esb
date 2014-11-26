@@ -52,7 +52,7 @@ public class Sample364TestCase extends ESBIntegrationTest {
     String datasourceBkupPath = null;
     Connection mysqlConnection = null;
 
-    @SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
+    @SetEnvironment(executionEnvironments = { ExecutionEnvironment.PLATFORM })
     @BeforeClass(alwaysRun = true)
     public void initialize() throws Exception {
 
