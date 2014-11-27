@@ -43,14 +43,11 @@ public class Sample705TestCase extends ESBIntegrationTest {
     private SampleAxis2Server axis2Server2 = null;
     private SampleAxis2Server axis2Server3 = null;
 
-    private ActiveMQServer activeMQServer
-            = new ActiveMQServer();
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeClass(alwaysRun = true)
     public void startJMSBrokerAndConfigureESB() throws Exception {
         super.init();
-        activeMQServer.startJMSBrokerAndConfigureESB();
         context = new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN);
         super.init();
         loadSampleESBConfiguration(705);
@@ -72,7 +69,7 @@ public class Sample705TestCase extends ESBIntegrationTest {
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @AfterClass(alwaysRun = true)
-    public void stopJMSBrokerRevertESBConfiguration() throws Exception {
+    public void destroy() throws Exception {
 
         try {
             //reverting the changes done to esb sever
@@ -81,16 +78,12 @@ public class Sample705TestCase extends ESBIntegrationTest {
             axis2Server1.stop();
             axis2Server2.stop();
             axis2Server3.stop();
-            super.cleanup();
+
 
         } finally {
-           // activeMQServer.stopJMSBrokerRevertESBConfiguration();
+            super.cleanup();
         }
 
-    }
-
-    private JMSBrokerConfiguration getJMSBrokerConfiguration() {
-        return JMSBrokerConfigurationProvider.getInstance().getBrokerConfiguration();
     }
 
     @Test(groups = { "wso2.esb" }, description = "Test forwarding with load balancing")

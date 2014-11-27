@@ -45,14 +45,10 @@ public class Sample253TestCase extends ESBIntegrationTest {
     private ServerConfigurationManager serverManager = null;
     private LogViewerClient logViewerClient = null;
 
-    private ActiveMQServer activeMQServer
-            = new ActiveMQServer();
-
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeClass(alwaysRun = true)
     public void startJMSBrokerAndConfigureESB() throws Exception {
         super.init();
-        activeMQServer.startJMSBrokerAndConfigureESB();
         context = new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN);
         super.init();
         loadSampleESBConfiguration(253);
@@ -64,8 +60,6 @@ public class Sample253TestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @AfterClass(alwaysRun = true)
     public void close() throws Exception {
-        //activeMQServer.stopJMSBrokerRevertESBConfiguration();
-        //reverting the changes done to esb sever
         Thread.sleep(10000); //let server to clear the artifact undeployment
         super.cleanup();
     }
