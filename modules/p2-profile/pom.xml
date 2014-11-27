@@ -290,6 +290,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.transport.jms.feature:${wso2carbon.version}
                                 </featureArtifactDef>
+								<featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.transport.commons.feature:${wso2carbon.version}
+                                </featureArtifactDef>
 
 
                                 <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.statistics.transport.feature:${wso2carbon.version}</featureArtifactDef>-->
@@ -568,6 +571,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.transport.fix.feature.group</id>
+                                    <version>${wso2carbon.version}</version>
+                                </feature>
+								<feature>
+                                    <id>org.wso2.carbon.transport.commons.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
                                 <feature>
@@ -990,6 +997,11 @@
                                     <id>org.wso2.carbon.transport.fix.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
+								<feature>
+                                    <id>org.wso2.carbon.transport.commons.feature.group</id>
+                                    <version>${wso2carbon.version}</version>
+                                </feature>
+
                                 <feature>
                                    <id>org.wso2.carbon.message.flows.feature.group</id>
                                    <version>${wso2carbon.version}</version>
