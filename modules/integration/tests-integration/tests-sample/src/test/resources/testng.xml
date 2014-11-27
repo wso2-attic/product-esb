@@ -26,7 +26,7 @@
     </test>
     <test name="ESB-Sample-Mediation-Test" preserve-order="true" verbose="2">
         <packages>
-            <package name="org.wso2.carbon.esb.samples.test.mediation"/>
+            <package name="org.wso2.carbon.esb.samples.test.mediation.*"/>
         </packages>
     </test>
     <test name="ESB-Sample-Messaging-Test" preserve-order="true" verbose="2">

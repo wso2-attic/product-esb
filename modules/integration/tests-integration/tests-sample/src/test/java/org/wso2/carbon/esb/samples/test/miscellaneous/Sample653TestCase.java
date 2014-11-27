@@ -124,7 +124,7 @@ public class Sample653TestCase extends ESBIntegrationTest {
         @Override
         public void run() {
             long currentTime = System.currentTimeMillis();
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 2000; i++) {
                 try {
                     client.execute(httpget, response);
                 } catch (Exception e) {
