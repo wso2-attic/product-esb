@@ -31,7 +31,7 @@
     </test>
     <test name="ESB-Sample-Messaging-Test" preserve-order="true" verbose="2">
         <packages>
-            <package name="org.wso2.carbon.esb.samples.test.messaging"/>
+            <package name="org.wso2.carbon.esb.samples.test.messaging.*"/>
         </packages>
     </test>
     <test name="ESB-Sample-Miscellaneous-Test" preserve-order="true" verbose="2">
