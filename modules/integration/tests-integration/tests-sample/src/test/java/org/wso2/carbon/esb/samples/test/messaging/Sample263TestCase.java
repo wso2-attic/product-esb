@@ -42,93 +42,93 @@ import java.util.Hashtable;
 // this class is disabled
 public class Sample263TestCase extends ESBIntegrationTest {
 
-    private ServerConfigurationManager serverManager = null;
-
-    private final String JBOSS_CLIENT = "jboss-client.jar";
-
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @BeforeClass(alwaysRun = false)
-    public void startJMSBrokerAndConfigureESB() throws Exception {
-        super.init();
-        serverManager = new ServerConfigurationManager(context);
-
-
-        //copping dependency jms jar files to component/lib
-        serverManager.copyToComponentLib(new File(TestConfigurationProvider.getResourceLocation()
-                + File.separator + "artifacts" + File.separator + "ESB" + File.separator + "jar"
-                + File.separator + JBOSS_CLIENT));
-
-        serverManager.applyConfigurationWithoutRestart(new File(TestConfigurationProvider.getResourceLocation()
-                + File.separator + "artifacts" + File.separator + "ESB"
-                + File.separator + "jms" + File.separator + "transport"
-                + File.separator + "axis2config" + File.separator
-                + "hornetq" + File.separator + "axis2.xml"));
-
-        // restart the server with the changes done to carbon.xml & axis2.xml
-        serverManager.applyConfiguration(new File(TestConfigurationProvider.getResourceLocation()
-                + File.separator + "artifacts" + File.separator + "ESB"
-                + File.separator + "jms" + File.separator + "transport"
-                + File.separator + "axis2config" + File.separator
-                + "hornetq" + File.separator + "carbon.xml"));
-
-        super.init();
-       // activeMQServer.startJMSBrokerAndConfigureESB();
-        loadSampleESBConfiguration(263);
-
-    }
-
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @AfterClass(alwaysRun = false)
-    public void stopJMSBrokerRevertESBConfiguration() throws Exception {
-
-        //reverting the changes done to esb sever
-        Thread.sleep(10000); //let server to clear the artifact undeployment
-        super.cleanup();
-
-        if (serverManager != null) {
-            serverManager.removeFromComponentLib(JBOSS_CLIENT);
-            serverManager.restoreToLastConfiguration();
-        }
-    }
-
-    @Test(groups = {"wso2.esb"}, description = "Test JMS to Proxy with JBoss messaging ", enabled = false)
-    public void testJMSProxyWithHornetq() throws Exception {
-
-        Queue testQueue;
-        Connection connection = null;
-
-        Hashtable<String, String> env = new Hashtable<String, String>();
-
-        env.put(Context.PROVIDER_URL, "remote://localhost:14447");
-        env.put(Context.INITIAL_CONTEXT_FACTORY,
-                "org.jboss.naming.remote.client.InitialContextFactory");
-        env.put(Context.URL_PKG_PREFIXES, "org.jboss.naming:org.jnp.interfaces");
-
-        Context ctx = new InitialContext(env);
-
-        ConnectionFactory cf = (ConnectionFactory) ctx.lookup("jms/RemoteConnectionFactory");
-        testQueue = (Queue) ctx.lookup("java:/StockQuoteProxy");
-
-        connection = cf.createConnection();
-
-        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-        MessageProducer producer = session.createProducer(testQueue);
-
-        connection.start();
-
-        TextMessage txtMsg = session.createTextMessage();
-        txtMsg.setJMSDeliveryMode(Message.DEFAULT_DELIVERY_MODE);
-
-        txtMsg.setText("<m:placeOrder xmlns:m=\"http://services.samples\">\n" +
-                "    <m:order>\n" +
-                "        <m:price>10.50</m:price>\n" +
-                "        <m:quantity>100</m:quantity>\n" +
-                "        <m:symbol>IBM</m:symbol>\n" +
-                "    </m:order>\n" +
-                "</m:placeOrder>");
-
-
-        producer.send(txtMsg);
-
-    }
+//    private ServerConfigurationManager serverManager = null;
+//
+//    private final String JBOSS_CLIENT = "jboss-client.jar";
+//
+//    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
+//    @BeforeClass(alwaysRun = false)
+//    public void startJMSBrokerAndConfigureESB() throws Exception {
+//        super.init();
+//        serverManager = new ServerConfigurationManager(context);
+//
+//
+//        //copping dependency jms jar files to component/lib
+//        serverManager.copyToComponentLib(new File(TestConfigurationProvider.getResourceLocation()
+//                + File.separator + "artifacts" + File.separator + "ESB" + File.separator + "jar"
+//                + File.separator + JBOSS_CLIENT));
+//
+//        serverManager.applyConfigurationWithoutRestart(new File(TestConfigurationProvider.getResourceLocation()
+//                + File.separator + "artifacts" + File.separator + "ESB"
+//                + File.separator + "jms" + File.separator + "transport"
+//                + File.separator + "axis2config" + File.separator
+//                + "hornetq" + File.separator + "axis2.xml"));
+//
+//        // restart the server with the changes done to carbon.xml & axis2.xml
+//        serverManager.applyConfiguration(new File(TestConfigurationProvider.getResourceLocation()
+//                + File.separator + "artifacts" + File.separator + "ESB"
+//                + File.separator + "jms" + File.separator + "transport"
+//                + File.separator + "axis2config" + File.separator
+//                + "hornetq" + File.separator + "carbon.xml"));
+//
+//        super.init();
+//       // activeMQServer.startJMSBrokerAndConfigureESB();
+//        loadSampleESBConfiguration(263);
+//
+//    }
+//
+//    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
+//    @AfterClass(alwaysRun = false)
+//    public void stopJMSBrokerRevertESBConfiguration() throws Exception {
+//
+//        //reverting the changes done to esb sever
+//        Thread.sleep(10000); //let server to clear the artifact undeployment
+//        super.cleanup();
+//
+//        if (serverManager != null) {
+//            serverManager.removeFromComponentLib(JBOSS_CLIENT);
+//            serverManager.restoreToLastConfiguration();
+//        }
+//    }
+//
+//    @Test(groups = {"wso2.esb"}, description = "Test JMS to Proxy with JBoss messaging ", enabled = false)
+//    public void testJMSProxyWithHornetq() throws Exception {
+//
+//        Queue testQueue;
+//        Connection connection = null;
+//
+//        Hashtable<String, String> env = new Hashtable<String, String>();
+//
+//        env.put(Context.PROVIDER_URL, "remote://localhost:14447");
+//        env.put(Context.INITIAL_CONTEXT_FACTORY,
+//                "org.jboss.naming.remote.client.InitialContextFactory");
+//        env.put(Context.URL_PKG_PREFIXES, "org.jboss.naming:org.jnp.interfaces");
+//
+//        Context ctx = new InitialContext(env);
+//
+//        ConnectionFactory cf = (ConnectionFactory) ctx.lookup("jms/RemoteConnectionFactory");
+//        testQueue = (Queue) ctx.lookup("java:/StockQuoteProxy");
+//
+//        connection = cf.createConnection();
+//
+//        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+//        MessageProducer producer = session.createProducer(testQueue);
+//
+//        connection.start();
+//
+//        TextMessage txtMsg = session.createTextMessage();
+//        txtMsg.setJMSDeliveryMode(Message.DEFAULT_DELIVERY_MODE);
+//
+//        txtMsg.setText("<m:placeOrder xmlns:m=\"http://services.samples\">\n" +
+//                "    <m:order>\n" +
+//                "        <m:price>10.50</m:price>\n" +
+//                "        <m:quantity>100</m:quantity>\n" +
+//                "        <m:symbol>IBM</m:symbol>\n" +
+//                "    </m:order>\n" +
+//                "</m:placeOrder>");
+//
+//
+//        producer.send(txtMsg);
+//
+//    }
 }
