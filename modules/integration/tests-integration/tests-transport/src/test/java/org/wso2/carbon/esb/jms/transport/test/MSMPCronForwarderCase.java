@@ -23,7 +23,6 @@ import org.apache.axiom.om.util.AXIOMUtil;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-;
 import org.wso2.carbon.automation.extensions.servers.tomcatserver.TomcatServerManager;
 import org.wso2.carbon.automation.extensions.servers.tomcatserver.TomcatServerType;
 import org.wso2.carbon.automation.test.utils.http.client.HttpRequestUtil;
