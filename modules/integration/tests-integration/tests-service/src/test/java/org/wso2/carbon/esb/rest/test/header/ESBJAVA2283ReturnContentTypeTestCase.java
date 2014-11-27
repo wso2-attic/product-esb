@@ -24,7 +24,7 @@ import org.apache.http.HttpResponse;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.engine.frameworkutils.ClientConnectionUtil;
+import org.wso2.carbon.integration.common.utils.ClientConnectionUtil;
 import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
 import org.wso2.carbon.automation.extensions.servers.webserver.SimpleWebServer;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
