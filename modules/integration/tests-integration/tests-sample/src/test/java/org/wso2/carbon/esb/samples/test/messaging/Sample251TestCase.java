@@ -40,14 +40,10 @@ import org.wso2.esb.integration.common.utils.servers.ActiveMQServer;
 
 public class Sample251TestCase extends ESBIntegrationTest {
 
-    private ActiveMQServer activeMQServer
-            = new ActiveMQServer();
-
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        activeMQServer.startJMSBrokerAndConfigureESB();
         context = new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN);
         super.init();
         loadSampleESBConfiguration(251);
@@ -60,7 +56,6 @@ public class Sample251TestCase extends ESBIntegrationTest {
         Thread.sleep(10000); //let server to clear the artifact undeployment
         super.init();
         super.cleanup();
-       // activeMQServer.stopJMSBrokerRevertESBConfiguration();
     }
 
 

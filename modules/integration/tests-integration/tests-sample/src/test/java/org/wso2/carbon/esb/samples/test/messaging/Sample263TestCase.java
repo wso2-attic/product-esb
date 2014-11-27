@@ -45,8 +45,6 @@ public class Sample263TestCase extends ESBIntegrationTest {
     private ServerConfigurationManager serverManager = null;
 
     private final String JBOSS_CLIENT = "jboss-client.jar";
-    private ActiveMQServer activeMQServer
-            = new ActiveMQServer();
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeClass(alwaysRun = false)
