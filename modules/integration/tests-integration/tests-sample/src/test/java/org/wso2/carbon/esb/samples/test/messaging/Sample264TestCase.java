@@ -42,19 +42,18 @@ import org.wso2.esb.integration.common.utils.servers.ActiveMQServer;
 
 public class Sample264TestCase extends ESBIntegrationTest {
 
-    private JMSBrokerController activeMqBroker;
-    private ServerConfigurationManager serverManager = null;
-    LogViewerClient logViewerClient = null;
+    private LogViewerClient logViewerClient = null;
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeClass(alwaysRun = true)
-    public void startJMSBrokerAndConfigureESB() throws Exception {
+    public void init() throws Exception {
         super.init();
         context = new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN);
-        super.init();
-        loadSampleESBConfiguration(264);
 
         logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+        logViewerClient.clearLogs();
+        Thread.sleep(2000);
+        loadSampleESBConfiguration(264);
 
     }
 
@@ -69,19 +68,18 @@ public class Sample264TestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb"}, description = "Test JMS two way transport ")
     public void testJMSProxy() throws Exception {
 
-        logViewerClient.clearLogs();
-        Thread.sleep(2000);
+
 
         AxisServiceClient client = new AxisServiceClient();
         for (int i = 0; i < 5; i++) {
-            client.sendRobust(Utils.getStockQuoteRequest("WSO2"), getMainSequenceURL(), "getQuote");
+            client.sendRobust(Utils.getStockQuoteRequest("Sample264"), getMainSequenceURL(), "getQuote");
         }
-
+        Thread.sleep(2000);
         LogEvent[] logs = logViewerClient.getAllSystemLogs();
         boolean wso2Found = false;
         for (LogEvent item : logs) {
             String message = item.getMessage();
-            if (message.contains("<ns:symbol>WSO2</ns:symbol>")) {
+            if (message.contains("<ns:symbol>Sample264</ns:symbol>")) {
                 wso2Found = true;
                 break;
             }

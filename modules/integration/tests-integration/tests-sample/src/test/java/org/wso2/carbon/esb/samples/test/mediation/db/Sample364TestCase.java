@@ -123,7 +123,7 @@ public class Sample364TestCase extends ESBIntegrationTest {
         scriptRunner.runScript(readerUserData);
 
     }
-
+    @SetEnvironment(executionEnvironments = { ExecutionEnvironment.PLATFORM })
     @Test(groups = {"wso2.esb"}, description = "testDBMediator ")
     public void testDBMediator() throws Exception {
 

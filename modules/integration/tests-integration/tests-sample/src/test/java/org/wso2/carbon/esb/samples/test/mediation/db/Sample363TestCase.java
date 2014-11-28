@@ -94,7 +94,7 @@ public class Sample363TestCase extends ESBIntegrationTest {
                 "synapse.datasources.lookupds.registry=Memory\n" +
                 "synapse.datasources.lookupds.type=BasicDataSource\n" +
                 "synapse.datasources.lookupds.driverClassName=" + sqlDataSourceUtilLookup.getDriver() + "\n" +
-                "synapse.datasources.lookupds.url=" + sqlDataSourceUtilLookup.getJdbcUrlForProxy() + "\n" +
+                "synapse.datasources.lookupds.url=" + sqlDataSourceUtilLookup.getJdbcUrl() + "\n" +
                 "## Optionally you can specifiy a specific password provider implementation which overrides any globally configured provider\n" +
                 "#synapse.datasources.lookupds.secretProvider=org.apache.synapse.commons.security.secret.handler.SharedSecretCallbackHandler\n" +
                 "synapse.datasources.lookupds.username=" + sqlDataSourceUtilLookup.getDatabaseUser() + "\n" +
@@ -126,7 +126,7 @@ public class Sample363TestCase extends ESBIntegrationTest {
                 "synapse.datasources.reportds.type=BasicDataSource\n" +
                 "synapse.datasources.reportds.dsName=" + sqlDataSourceUtilReport.getDatabaseName() + "\n" +
                 "synapse.datasources.reportds.driverClassName=" + sqlDataSourceUtilReport.getDriver() + "\n" +
-                "synapse.datasources.reportds.url=" + sqlDataSourceUtilReport.getJdbcUrlForProxy() + "\n" +
+                "synapse.datasources.reportds.url=" + sqlDataSourceUtilReport.getJdbcUrl() + "\n" +
                 "## Optionally you can specifiy a specific password provider implementation which overrides any globally configured provider\n" +
                 "#synapse.datasources.reportds.secretProvider=org.apache.synapse.commons.security.secret.handler.SharedSecretCallbackHandler\n" +
                 "synapse.datasources.reportds.username=" + sqlDataSourceUtilReport.getDatabaseUser() + "\n" +

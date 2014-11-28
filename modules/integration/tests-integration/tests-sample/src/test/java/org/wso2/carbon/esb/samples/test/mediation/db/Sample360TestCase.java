@@ -85,7 +85,7 @@ public class Sample360TestCase extends ESBIntegrationTest {
                 "                <connection>\n" +
                 "                    <pool>\n" +
                 "                        <driver>" + sqlDataSourceUtil.getDriver() + "</driver>\n" +
-                "                        <url>" + sqlDataSourceUtil.getJdbcUrlForProxy() + "</url>\n" +
+                "                        <url>" + sqlDataSourceUtil.getJdbcUrl() + "</url>\n" +
                 "                        <user>" + sqlDataSourceUtil.getDatabaseUser() +"</user>\n" +
                 "                        <password>"+ sqlDataSourceUtil.getDatabasePassword() +"</password>\n" +
                 "                    </pool>\n" +

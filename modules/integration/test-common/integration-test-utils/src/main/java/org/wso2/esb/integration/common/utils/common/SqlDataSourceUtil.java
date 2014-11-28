@@ -38,6 +38,7 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -194,7 +195,7 @@ public class SqlDataSourceUtil {
         if (jdbcUrl.contains("h2") && jdbcDriver.contains("h2")) {
             //Random number appends to a database name to create new database for H2*//*
             databaseName = System.getProperty("basedir")+ File.separator + "target" + File.separator+ databaseName + new Random().nextInt();
-            jdbcUrl = jdbcUrl + databaseName;
+            jdbcUrl = "jdbc:h2:" + databaseName;
             //create database on in-memory
             H2DataBaseManager h2 = null;
             try {
@@ -217,7 +218,7 @@ public class SqlDataSourceUtil {
         }
 
 //        databaseName = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_NAME);
-        databaseName = dbName;
+        databaseName = dbName + "_" + new Date().getTime();
         databasePassword = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_DB_PASSWORD);
         jdbcUrl = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_URL);
         jdbcDriver = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_DRIVER_CLASS_NAME);
@@ -225,8 +226,8 @@ public class SqlDataSourceUtil {
 
         if (jdbcUrl.contains("h2") && jdbcDriver.contains("h2")) {
             //Random number appends to a database name to create new database for H2*//*
-            databaseName = System.getProperty("basedir")+ File.separator + "target" + File.separator+ databaseName + new Random().nextInt();
-            jdbcUrl = jdbcUrl + databaseName;
+            databaseName = System.getProperty("basedir") + File.separator + "target" + File.separator+ databaseName ;
+            jdbcUrl = "jdbc:h2:" + databaseName;
             //create database on in-memory
             H2DataBaseManager h2 = null;
             try {
