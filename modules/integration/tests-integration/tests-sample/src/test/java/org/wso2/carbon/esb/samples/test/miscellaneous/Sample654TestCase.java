@@ -106,7 +106,7 @@ public class Sample654TestCase extends ESBIntegrationTest {
 
         response = multiMessageReceiver.getIncomingMessages();
 
-        assertTrue(response.size() != 0, "Response is not null");
+        assertTrue(response.size() != 0, "Response is null");
 
         multiMessageReceiver.stopServer();
         String totalResponse = "";

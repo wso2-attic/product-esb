@@ -39,7 +39,6 @@ public class Sample653TestCase extends ESBIntegrationTest {
 
     private ServerConfigurationManager serverManager = null;
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeClass(alwaysRun = true)
     public void startJMSBrokerAndConfigureESB() throws Exception {
         super.init();
