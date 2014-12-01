@@ -42,7 +42,7 @@ public class ESBJAVA3291TestCase extends ESBIntegrationTest {
 	@BeforeClass(alwaysRun = true)
 	public void setEnvironment() throws Exception {
 
-		//init(ProductConstant.ADMIN_USER_ID);
+		init();
 		clearUploadedResource();
 		serverConfigurationManager = new ServerConfigurationManager(context);
 		serverConfigurationManager.copyToComponentLib(new File(getClass()
