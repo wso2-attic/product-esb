@@ -714,7 +714,7 @@
         <!--Axis2-->
         <axis2.wso2.version>1.6.1.wso2v11-SNAPSHOT</axis2.wso2.version>
         <axis2-transports.version>1.6.1-wso2v11-SNAPSHOT</axis2-transports.version>
-        <addressing.version>1.6.1-wso2v11-SNAPSHOT</addressing.version>
+        <addressing.version>1.6.1-wso2v11</addressing.version>
         <!--Axiom-->
         <axiom.api.wso2.version>1.2.11-wso2v5</axiom.api.wso2.version>
         <axiom.wso2.version>1.2.11.wso2v5</axiom.wso2.version>
@@ -739,7 +739,7 @@
         <servlet-api.version>2.4</servlet-api.version>
         <geronimo-jms.version>1.1.1</geronimo-jms.version>
         <rampart.wso2.version>1.6.1.wso2v9</rampart.wso2.version>
-        <wss4j.version>1.5.11-wso2v7-SNAPSHOT</wss4j.version>
+        <wss4j.version>1.5.11-wso2v7</wss4j.version>
         <emma.version>2.1.5320</emma.version>
         <axiom.wso2.version>1.2.11.wso2v5</axiom.wso2.version>
 
