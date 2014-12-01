@@ -20,7 +20,6 @@ public class Sample651TestCase extends ESBIntegrationTest {
     private ServerConfigurationManager serverManager = null;
     private LogViewerClient logViewerClient = null;
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeClass(alwaysRun = true)
     public void startJMSBrokerAndConfigureESB() throws Exception {
 
@@ -57,6 +56,7 @@ public class Sample651TestCase extends ESBIntegrationTest {
         loadSampleESBConfiguration(100);
     }
 
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"}, description = "Test synapse observer ",enabled = false)
     public void testSynapseObservers() throws Exception {
 
@@ -76,7 +76,6 @@ public class Sample651TestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
 

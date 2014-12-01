@@ -46,7 +46,6 @@ public class Sample650TestCase extends ESBIntegrationTest {
     private TaskAdminClient taskAdminClient;
     private ServerConfigurationManager serverManager = null;
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
 
@@ -86,7 +85,7 @@ public class Sample650TestCase extends ESBIntegrationTest {
         taskAdminClient = new TaskAdminClient(contextUrls.getBackEndUrl(),
                 getSessionCookie());
     }
-
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Send sample request")
     public void testSendingToDefinedProxies() throws Exception {
 
@@ -119,22 +118,22 @@ public class Sample650TestCase extends ESBIntegrationTest {
         Assert.assertEquals(ResponseContainsIBM, true, "response is invalid from CustomStockQuoteProxy2");
 
     }
-
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test End points")
     public void testEndPoints() throws Exception {
         assertTrue(endPointAdminClient.getEndpointCount() == 1, "End points not added");
     }
-
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test local entries")
     public void testLocalEntries() throws Exception {
         assertTrue(localEntriesAdminClient.getEntryDataCount() > 1, "local entries not added");
     }
-
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test Sequences")
     public void testSequences() throws Exception {
         assertTrue(sequenceAdminServiceClient.getSequences().length > 3, "Sequences not added");
     }
-
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Test tasks")
     public void testTasks() throws Exception {
         assertTrue(taskAdminClient.getScheduleTaskList().size() == 1, "tasks not added");

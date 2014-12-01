@@ -35,7 +35,7 @@ import org.wso2.esb.integration.common.utils.servers.ActiveMQServer;
 
 public class Sample381TestCase extends ESBIntegrationTest {
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
+
     @BeforeClass(alwaysRun = true)
     public void startJMSBrokerAndConfigureESB() throws Exception {
 
@@ -45,14 +45,13 @@ public class Sample381TestCase extends ESBIntegrationTest {
         loadSampleESBConfiguration(381);
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         //reverting the changes done to esb sever
         super.cleanup();
     }
 
-
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"}, description = "Test JMS broker with topic")
     public void JMSBrokerTopicTest() throws Exception {
         int numberOfMsgToExpect = 5;

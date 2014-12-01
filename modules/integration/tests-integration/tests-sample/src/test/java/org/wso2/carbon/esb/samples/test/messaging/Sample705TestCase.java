@@ -44,7 +44,6 @@ public class Sample705TestCase extends ESBIntegrationTest {
     private SampleAxis2Server axis2Server3 = null;
 
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeClass(alwaysRun = true)
     public void startJMSBrokerAndConfigureESB() throws Exception {
         super.init();
@@ -67,7 +66,6 @@ public class Sample705TestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
 
@@ -86,6 +84,7 @@ public class Sample705TestCase extends ESBIntegrationTest {
 
     }
 
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = { "wso2.esb" }, description = "Test forwarding with load balancing")
     public void loadBalancingTest() throws Exception {
 

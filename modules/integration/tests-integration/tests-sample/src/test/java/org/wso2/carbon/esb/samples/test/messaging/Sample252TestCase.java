@@ -46,7 +46,6 @@ public class Sample252TestCase extends ESBIntegrationTest {
     private final String MTOM_SERVICE = "MTOMSwASampleService";
     private SampleAxis2Server axis2Server;
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeClass(alwaysRun = true)
     public void startJMSBrokerAndConfigureESB() throws Exception {
 
@@ -64,7 +63,6 @@ public class Sample252TestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         //reverting the changes done to esb sever
@@ -78,6 +76,7 @@ public class Sample252TestCase extends ESBIntegrationTest {
         return JMSBrokerConfigurationProvider.getInstance().getBrokerConfiguration();
     }
 
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"}, description = "Pure Text (Binary) and POX Message Support with JMS " +
             "send simple payload to JS rule")
     public void testJMStoPOX() throws Exception {
@@ -267,6 +266,7 @@ public class Sample252TestCase extends ESBIntegrationTest {
                 "File not uploaded and received to ESB");
     }
 
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"}, description = "Pure Text (Binary) and POX Message Support with JMS " +
             "send simple payload to as POX")
     public void testJMSwithPOXM() throws Exception {

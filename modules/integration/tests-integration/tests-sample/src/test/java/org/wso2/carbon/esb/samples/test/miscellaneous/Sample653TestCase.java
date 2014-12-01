@@ -63,7 +63,7 @@ public class Sample653TestCase extends ESBIntegrationTest {
         }
 
     }
-
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"}, description = "NHTTP Transport Priority Based Dispatching ")
     public void testPriorityBasedMessages() throws Exception {
 

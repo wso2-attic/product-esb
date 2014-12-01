@@ -20,7 +20,7 @@ import org.wso2.esb.integration.common.utils.servers.ActiveMQServer;
 
 public class Sample250TestCase extends ESBIntegrationTest {
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
+
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
@@ -37,7 +37,7 @@ public class Sample250TestCase extends ESBIntegrationTest {
     private JMSBrokerConfiguration getJMSBrokerConfiguration() {
         return JMSBrokerConfigurationProvider.getInstance().getBrokerConfiguration();
     }
-
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"}, description = "Test JMS message sending to proxy ")
     public void testJMSProxy() throws Exception {
 

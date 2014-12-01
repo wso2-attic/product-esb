@@ -37,7 +37,6 @@ public class Sample800TestCase extends ESBIntegrationTest {
     private HttpResponse httpResponse;
 
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
         super.init();
@@ -63,7 +62,6 @@ public class Sample800TestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
         try {

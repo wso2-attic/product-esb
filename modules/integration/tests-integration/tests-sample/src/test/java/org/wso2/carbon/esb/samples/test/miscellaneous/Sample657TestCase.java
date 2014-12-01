@@ -56,7 +56,6 @@ public class Sample657TestCase extends ESBIntegrationTest {
     private String datasource1 = "MySqlDS1";
     private String datasource2 = "MySqlDS2";
 
-    @SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
     @BeforeClass(alwaysRun = true)
     public void initialize() throws Exception {
 
@@ -147,6 +146,7 @@ public class Sample657TestCase extends ESBIntegrationTest {
         dataSourceAdminServiceClient.addDataSource(wsDataSourceMetaInfo);
     }
 
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"}, description = "testDtaSources " ,enabled=false)
     public void testDtaSources() throws Exception {
 

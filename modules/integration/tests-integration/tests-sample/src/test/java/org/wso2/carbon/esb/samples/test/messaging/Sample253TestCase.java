@@ -45,7 +45,7 @@ public class Sample253TestCase extends ESBIntegrationTest {
     private ServerConfigurationManager serverManager = null;
     private LogViewerClient logViewerClient = null;
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
+
     @BeforeClass(alwaysRun = true)
     public void startJMSBrokerAndConfigureESB() throws Exception {
         super.init();
@@ -57,7 +57,7 @@ public class Sample253TestCase extends ESBIntegrationTest {
                 new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
+
     @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         Thread.sleep(10000); //let server to clear the artifact undeployment
@@ -68,6 +68,7 @@ public class Sample253TestCase extends ESBIntegrationTest {
         return JMSBrokerConfigurationProvider.getInstance().getBrokerConfiguration();
     }
 
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb"}, description = "Bridging from JMS to HTTP and Replying with a 202 " +
             "Accepted Response " )
     public void testJMSOnewayTransport() throws Exception {
