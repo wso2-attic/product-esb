@@ -40,7 +40,6 @@ public class Sample362TestCase extends ESBIntegrationTest {
 
     private SqlDataSourceUtil sqlDataSourceUtil = null;
 
-    @SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
     @BeforeClass(alwaysRun = true)
     public void initialize() throws Exception {
 
@@ -132,6 +131,7 @@ public class Sample362TestCase extends ESBIntegrationTest {
         updateESBConfiguration(synapseConfig);
     }
 
+    @SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
     @Test(groups = {"wso2.esb"}, description = "testDBMediator ")
     public void testDBMediator() throws Exception {
 

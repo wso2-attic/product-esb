@@ -42,10 +42,9 @@ public class Sample363TestCase extends ESBIntegrationTest {
 
     private SqlDataSourceUtil sqlDataSourceUtilLookup = null;
     private SqlDataSourceUtil sqlDataSourceUtilReport = null;
-    File datasource_original = null;
-    File datasource_backup = null;
+    private File datasource_original = null;
+    private File datasource_backup = null;
 
-    @SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
     @BeforeClass(alwaysRun = true)
     public void initialize() throws Exception {
 
@@ -290,6 +289,7 @@ public class Sample363TestCase extends ESBIntegrationTest {
         updateESBConfiguration(synapseConfig);
     }
 
+    @SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
     @Test(groups = {"wso2.esb"}, description = "testDBMediator ")
     public void testDBMediator() throws Exception {
 
@@ -316,7 +316,6 @@ public class Sample363TestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
     @AfterClass(alwaysRun = true,  enabled = false)
     public void deleteService() throws Exception {
 

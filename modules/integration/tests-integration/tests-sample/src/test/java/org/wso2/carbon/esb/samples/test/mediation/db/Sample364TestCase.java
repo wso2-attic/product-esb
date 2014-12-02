@@ -48,11 +48,10 @@ public class Sample364TestCase extends ESBIntegrationTest {
 
     private ServerConfigurationManager serverManager = null;
     private final String MYSQL_LIB = "mysql-connector-java-5.1.26.jar";
-    String datasourceOriginalPath = null;
-    String datasourceBkupPath = null;
-    Connection mysqlConnection = null;
+    private String datasourceOriginalPath = null;
+    private String datasourceBkupPath = null;
+    private Connection mysqlConnection = null;
 
-    @SetEnvironment(executionEnvironments = { ExecutionEnvironment.PLATFORM })
     @BeforeClass(alwaysRun = true)
     public void initialize() throws Exception {
 
