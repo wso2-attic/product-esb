@@ -763,8 +763,8 @@
         <carbon.kernel.version>4.3.0-SNAPSHOT</carbon.kernel.version>
         <wso2carbon.old.version>4.2.0</wso2carbon.old.version>
         <!--Axis2-->
-        <axis2.wso2.version>1.6.1.wso2v11-SNAPSHOT</axis2.wso2.version>
-        <axis2-transports.version>1.6.1-wso2v11-SNAPSHOT</axis2-transports.version>
+        <axis2.wso2.version>1.6.1.wso2v11</axis2.wso2.version>
+        <axis2-transports.version>1.6.1-wso2v11</axis2-transports.version>
         <addressing.version>1.6.1-wso2v11</addressing.version>
         <!--Axiom-->
         <axiom.api.wso2.version>1.2.11-wso2v5</axiom.api.wso2.version>
@@ -795,7 +795,7 @@
         <axiom.wso2.version>1.2.11.wso2v5</axiom.wso2.version>
 
         <!--Automation Framework versions-->
-        <automation.framework.verion>4.3.1-SNAPSHOT</automation.framework.verion>
+        <automation.framework.verion>4.3.1</automation.framework.verion>
         <automation.framework.utills.version>4.3.0-SNAPSHOT</automation.framework.utills.version>
         <operadriver.version>0.8.1</operadriver.version>
         <selenium.version>2.40.0</selenium.version>
