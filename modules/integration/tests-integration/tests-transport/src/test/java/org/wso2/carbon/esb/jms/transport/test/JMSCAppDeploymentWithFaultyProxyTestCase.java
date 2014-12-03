@@ -12,8 +12,11 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.admin.client.ApplicationAdminClient;
 import org.wso2.carbon.integration.common.admin.client.CarbonAppUploaderClient;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.clients.service.mgt.ServiceAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
@@ -27,6 +30,7 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 public class JMSCAppDeploymentWithFaultyProxyTestCase extends
 		ESBIntegrationTest {
 
+	private ServerConfigurationManager serverConfigurationManager;
 	private CarbonAppUploaderClient carbonAppUploaderClient;
 	private ApplicationAdminClient applicationAdminClient;
 	private final int MAX_TIME = 120000;
@@ -34,9 +38,19 @@ public class JMSCAppDeploymentWithFaultyProxyTestCase extends
 	private boolean isCarFileUploaded = false;
 	private ServiceAdminClient serviceAdminClient;
 	private final String proxyServiceName = "JMSProxyWQConf";
+	private String axis2Path;
 
 	@BeforeClass(alwaysRun = true)
 	protected void uploadCarFileTest() throws Exception {
+		
+		super.init();
+		
+		axis2Path = getClass().getResource(File.separator + "artifacts" + File.separator + "ESB" +
+                File.separator + "jms" + File.separator +
+                "transport" + File.separator + "axis2config"+ File.separator+"activemq"+File.separator).getPath();
+		serverConfigurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
+        serverConfigurationManager.applyConfiguration(new File(axis2Path + File.separator+"axis2.xml"));
+		
 		super.init();
 		carbonAppUploaderClient = new CarbonAppUploaderClient(
 				contextUrls.getBackEndUrl(),getSessionCookie());
@@ -58,10 +72,6 @@ public class JMSCAppDeploymentWithFaultyProxyTestCase extends
 				"Car file deployment failed");
 		TimeUnit.SECONDS.sleep(5);
 		serviceAdminClient = new ServiceAdminClient(contextUrls.getBackEndUrl(),getSessionCookie());
-		System.out.println("is faulty : "
-				+ serviceAdminClient.isServiceFaulty(proxyServiceName));
-		System.out.println("get faulty data : "
-				+ serviceAdminClient.getFaultyData(proxyServiceName));
 		Assert.assertTrue(serviceAdminClient.isServiceFaulty(proxyServiceName),
 				"faulty proxy service deployment failed");
 
