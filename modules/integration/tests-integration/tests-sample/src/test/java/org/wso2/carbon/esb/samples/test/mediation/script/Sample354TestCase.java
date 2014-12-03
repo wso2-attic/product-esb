@@ -83,6 +83,8 @@ public class Sample354TestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Ruby script with the mediator" +
             " -Script from gov registry")
     public void testJRubyScriptMediationScriptFromGovRegistry() throws Exception {
+        updateESBRegistry(File.separator + "artifacts"+ File.separator+"ESB" + File.separator
+                          + "synapseconfig" + File.separator  +"WSO2Registry.xml");
         enableDebugLogging();
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath

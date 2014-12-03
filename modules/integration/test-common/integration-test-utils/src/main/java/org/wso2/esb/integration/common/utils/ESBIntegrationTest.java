@@ -34,6 +34,7 @@ import org.wso2.carbon.integration.common.admin.client.SecurityAdminServiceClien
 import org.wso2.carbon.integration.common.utils.LoginLogoutClient;
 import org.wso2.carbon.security.mgt.stub.config.SecurityAdminServiceSecurityConfigExceptionException;
 import org.wso2.carbon.sequences.stub.types.SequenceEditorException;
+import org.wso2.esb.integration.common.clients.mediation.SynapseConfigAdminClient;
 import org.wso2.esb.integration.common.utils.clients.stockquoteclient.StockQuoteClient;
 import org.xml.sax.SAXException;
 
@@ -615,6 +616,18 @@ public abstract class ESBIntegrationTest {
             }
             scheduledTaskList.clear();
         }
+    }
+
+    protected void updateESBRegistry(String resourcePath) throws Exception {
+        SynapseConfigAdminClient synapseConfigAdminClient =
+                new SynapseConfigAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
+        //getting current configuration
+        OMElement synapseConfig = AXIOMUtil.stringToOM(synapseConfigAdminClient.getConfiguration());
+
+        synapseConfigAdminClient.updateConfiguration(esbUtils.loadResource(resourcePath));
+        //restore configuration
+        updateESBConfiguration(synapseConfig);
+
     }
 
     protected boolean isRunningOnStratos() throws XPathExpressionException {

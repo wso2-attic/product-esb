@@ -19,6 +19,7 @@
 package org.wso2.carbon.esb.samples.test.mediation.script;
 
 import org.apache.axiom.om.OMElement;
+import org.apache.axiom.om.util.AXIOMUtil;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -28,6 +29,7 @@ import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 import org.wso2.esb.integration.common.clients.logging.LoggingAdminClient;
+import org.wso2.esb.integration.common.clients.mediation.SynapseConfigAdminClient;
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
@@ -84,6 +86,8 @@ public class Sample353TestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Ruby script with the mediator" +
             " -Script from gov registry")
     public void testJRubyScriptMediationScriptFromGovRegistry() throws Exception {
+        updateESBRegistry(File.separator + "artifacts"+ File.separator+"ESB" + File.separator
+                          + "synapseconfig" + File.separator  +"WSO2Registry.xml");
         enableDebugLogging();
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath
