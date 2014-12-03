@@ -44,12 +44,16 @@ public class JMSCAppDeploymentWithFaultyProxyTestCase extends
 	protected void uploadCarFileTest() throws Exception {
 		
 		super.init();
-		
-		axis2Path = getClass().getResource(File.separator + "artifacts" + File.separator + "ESB" +
-                File.separator + "jms" + File.separator +
-                "transport" + File.separator + "axis2config"+ File.separator+"activemq"+File.separator).getPath();
-		serverConfigurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
-        serverConfigurationManager.applyConfiguration(new File(axis2Path + File.separator+"axis2.xml"));
+
+		axis2Path = getClass().getResource(
+				File.separator + "artifacts" + File.separator + "ESB"
+						+ File.separator + "jms" + File.separator + "transport"
+						+ File.separator + "axis2config" + File.separator
+						+ "activemq" + File.separator).getPath();
+		serverConfigurationManager = new ServerConfigurationManager(
+				new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
+		serverConfigurationManager.applyConfiguration(new File(axis2Path
+				+ File.separator + "axis2.xml"));
 		
 		super.init();
 		carbonAppUploaderClient = new CarbonAppUploaderClient(
