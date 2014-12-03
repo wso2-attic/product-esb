@@ -63,6 +63,21 @@ public class JMSCAppDeploymentWithFaultyProxyTestCase extends
 				contextUrls.getBackEndUrl(),getSessionCookie());
 
 	}
+	
+	@AfterClass(alwaysRun = true)
+	public void cleanupArtifactsIfExist() throws Exception {
+		if (isCarFileUploaded) {
+			applicationAdminClient.deleteApplication(carFileName);
+			verifyUndeployment();
+		}
+		try {
+			super.cleanup();
+		} finally {
+			Thread.sleep(3000);
+			serverConfigurationManager.restoreToLastConfiguration();
+			serverConfigurationManager = null;
+		}
+	}
 
 	@Test(groups = { "wso2.esb" }, description = "faulty proxy service deployment from car file")
 	public void proxyServiceDeploymentTest() throws Exception {
@@ -93,16 +108,6 @@ public class JMSCAppDeploymentWithFaultyProxyTestCase extends
 
 	}
 
-	@AfterClass(alwaysRun = true)
-	public void cleanupArtifactsIfExist() throws Exception {
-		if (isCarFileUploaded) {
-			applicationAdminClient.deleteApplication(carFileName);
-			verifyUndeployment();
-		}
-		super.cleanup();
-	}
-
-	
 	/**
 	 * @param carFileName - Name of the car file to deploy
 	 * @return true if the car file deployed successfully else, false
