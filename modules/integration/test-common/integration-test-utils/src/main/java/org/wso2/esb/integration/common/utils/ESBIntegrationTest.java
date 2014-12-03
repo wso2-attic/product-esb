@@ -625,6 +625,8 @@ public abstract class ESBIntegrationTest {
         OMElement synapseConfig = AXIOMUtil.stringToOM(synapseConfigAdminClient.getConfiguration());
 
         synapseConfigAdminClient.updateConfiguration(esbUtils.loadResource(resourcePath));
+        //let server to deploy the configuration
+        Thread.sleep(3000);
         //restore configuration
         updateESBConfiguration(synapseConfig);
 
