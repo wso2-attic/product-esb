@@ -59,8 +59,6 @@ public class PropertyIntegrationPropertyInTransportScopeTest extends ESBIntegrat
         }
         String response = wireServer.getCapturedMessage();
         assertTrue(response.contains("TransportProperty: testProperty"), "Property not set");
-
-
     }
 
     @AfterClass(alwaysRun = true)
