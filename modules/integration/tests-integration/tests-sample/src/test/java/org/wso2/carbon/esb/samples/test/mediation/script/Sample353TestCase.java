@@ -62,8 +62,7 @@ public class Sample353TestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
-    })
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Ruby script with the mediator")
     public void testJRubyScriptMediation() throws Exception {
         loadSampleESBConfiguration(353);
@@ -81,15 +80,16 @@ public class Sample353TestCase extends ESBIntegrationTest {
                 new QName("http://services.samples/xsd", "Price")), "Fault response null localpart");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
-    })
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Ruby script with the mediator" +
             " -Script from gov registry")
     public void testJRubyScriptMediationScriptFromGovRegistry() throws Exception {
+        Thread.sleep(5000); //to avoid hanging the ConfigServiceAdmin
         updateESBRegistry(File.separator + "artifacts"+ File.separator+"ESB" + File.separator
                           + "synapseconfig" + File.separator  +"WSO2Registry.xml");
         enableDebugLogging();
         uploadResourcesToConfigRegistry();
+        Thread.sleep(3000);
         loadESBConfigurationFromClasspath
                 ("/artifacts/ESB/synapseconfig/script_mediator/retrieve_script_from_gov_reg_mediation.xml");
 
