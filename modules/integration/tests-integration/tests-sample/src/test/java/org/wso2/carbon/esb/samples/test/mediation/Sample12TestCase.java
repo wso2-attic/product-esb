@@ -38,12 +38,14 @@ public class Sample12TestCase extends ESBIntegrationTest {
     public void setEnvironment() throws Exception {
         super.init();
         loadSampleESBConfiguration(12);
-
+        //let server to persist the file
+        Thread.sleep(3000);
         SynapseConfigAdminClient client =
             new SynapseConfigAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
         String oldConfig = client.getConfiguration();
         oldConfig = oldConfig.replace("localhost:9000", "localhost:9001");
         client.updateConfiguration(oldConfig);
+        Thread.sleep(3000);
 
         listener1 = new TCPMonListener(8281, "localhost", 8280);
         listener1.start();

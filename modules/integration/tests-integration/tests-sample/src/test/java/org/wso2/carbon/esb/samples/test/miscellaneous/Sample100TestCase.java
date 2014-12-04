@@ -25,6 +25,7 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
+import java.io.File;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
@@ -34,6 +35,8 @@ public class Sample100TestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
         super.init();
+        updateESBRegistry(File.separator + "artifacts"+ File.separator+"ESB" + File.separator
+                          + "synapseconfig" + File.separator  +"ESBRegistry.xml");
         loadSampleESBConfiguration(100);
     }
 

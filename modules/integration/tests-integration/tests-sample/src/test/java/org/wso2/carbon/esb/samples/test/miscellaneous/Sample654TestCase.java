@@ -62,6 +62,8 @@ public class Sample654TestCase extends ESBIntegrationTest {
                 getResource(COMMON_FILE_LOCATION + "axis2.xml").getPath()));
 
         super.init();
+        updateESBRegistry(File.separator + "artifacts"+ File.separator+"ESB" + File.separator
+                          + "synapseconfig" + File.separator  +"WSO2Registry.xml");
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/vfsTransport/" +
                                           "vfs_test_smook_config_at_registry.xml");
