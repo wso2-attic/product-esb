@@ -632,6 +632,7 @@ public abstract class ESBIntegrationTest {
         //let server to persist the configuration
         Thread.sleep(3000);
 
+
     }
 
     protected boolean isRunningOnStratos() throws XPathExpressionException {
