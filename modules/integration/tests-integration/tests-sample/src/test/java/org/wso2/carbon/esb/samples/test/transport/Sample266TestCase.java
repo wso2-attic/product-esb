@@ -40,6 +40,7 @@ import java.io.File;
 public class Sample266TestCase extends ESBIntegrationTest {
 
     private ServerConfigurationManager serverManager;
+    private LogViewerClient logViewerClient;
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
@@ -49,6 +50,9 @@ public class Sample266TestCase extends ESBIntegrationTest {
                                                   "sample_266" + File.separator + "axis2.xml"));
 
         super.init();
+        logViewerClient =
+                new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+        logViewerClient.clearLogs();
         loadSampleESBConfiguration(266);
     }
 
@@ -56,10 +60,7 @@ public class Sample266TestCase extends ESBIntegrationTest {
     @Test(groups = { "wso2.esb" }, description = "Switching from TCP to HTTP/S")
     public void testTcpTransport() throws Exception {
 
-        LogViewerClient logViewerClient =
-                new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
-        logViewerClient.clearLogs();
 
         String message =
             " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
@@ -82,7 +83,7 @@ public class Sample266TestCase extends ESBIntegrationTest {
             "      </soapenv:Body>\n" +
             "   </soapenv:Envelope>";
 
-        TCPClient client = new TCPClient("localhost", 6060);
+        TCPClient client = new TCPClient("localhost", 6090);
         client.sendMessage(message);
 
         Thread.sleep(30000);
