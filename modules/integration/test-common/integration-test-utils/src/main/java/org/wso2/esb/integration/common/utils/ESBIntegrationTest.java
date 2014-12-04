@@ -623,12 +623,14 @@ public abstract class ESBIntegrationTest {
                 new SynapseConfigAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
         //getting current configuration
         OMElement synapseConfig = AXIOMUtil.stringToOM(synapseConfigAdminClient.getConfiguration());
-
-        synapseConfigAdminClient.updateConfiguration(esbUtils.loadResource(resourcePath));
-        //let server to deploy the configuration
+        synapseConfig.getFirstChildWithName(new QName(synapseConfig.getNamespace().getNamespaceURI()
+                , "registry")).detach();
+        //adding registry configuration
+        synapseConfig.addChild(esbUtils.loadResource(resourcePath).getFirstElement());
+        synapseConfigAdminClient.updateConfiguration(synapseConfig);
+        esbUtils.verifySynapseDeployment(synapseConfig, contextUrls.getBackEndUrl(), getSessionCookie());
+        //let server to persist the configuration
         Thread.sleep(3000);
-        //restore configuration
-        updateESBConfiguration(synapseConfig);
 
     }
 
