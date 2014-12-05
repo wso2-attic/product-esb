@@ -146,7 +146,7 @@
                                 <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.hl7.feature:${wso2carbon.version}</featureArtifactDef>-->
                                 <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transports.sap.feature:${wso2carbon.version}</featureArtifactDef>-->
                                 <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.identity.oauth.mediator.feature:${wso2carbon.version}</featureArtifactDef>
-                                <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.identity.xacml.mediator.feature:${wso2carbon.version}</featureArtifactDef>
+                                <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.identity.xacml.mediator.feature:${wso2carbon.version}</featureArtifactDef>-->
                                 <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.mediator.bam.feature:${wso2carbon.version}</featureArtifactDef>
 
                                 <!--Carbon-Mediation End here-->
@@ -666,10 +666,10 @@
                                    <id>org.wso2.carbon.identity.oauth.mediator.feature.group</id>
                                    <version>${wso2carbon.version}</version>
                                 </feature>
-                                <feature>
+                                <!--<feature>
                                    <id>org.wso2.carbon.identity.xacml.mediator.feature.group</id>
                                    <version>${wso2carbon.version}</version>
-                                </feature>
+                                </feature>-->
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
                                     <version>${wso2carbon.version}</version>
@@ -1082,10 +1082,10 @@
                                     <id>org.wso2.carbon.identity.oauth.mediator.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
-                                <feature>
+                                <!--<feature>
                                    <id>org.wso2.carbon.identity.xacml.mediator.feature.group</id>
                                    <version>${wso2carbon.version}</version>
-                                </feature>
+                                </feature>-->
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
                                     <version>${wso2carbon.version}</version>
