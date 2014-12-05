@@ -23,9 +23,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
 import static org.testng.Assert.fail;
 
+/**
+ * Sample 5: Creating SOAP Fault Messages and Changing the Direction of a Message
+ */
 public class Sample5TestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
@@ -34,34 +38,44 @@ public class Sample5TestCase extends ESBIntegrationTest {
         loadSampleESBConfiguration(5);
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Sample 5: Creating SOAP fault messages and changing the direction of a message")
-    public void testSOAPFaultCreation() throws AxisFault {
+    @Test(groups = { "wso2.esb" },
+          description = "Sample 5: Creating SOAP fault messages and changing" +
+                        " the direction of a message")
+    public void testSOAPFaultCreation() throws Exception {
         try {
             axis2Client.sendSimpleStockQuoteRequest(
-                    getMainSequenceURL(),
-                    null,
-                    "MSFT");
+                getMainSequenceURL(),
+                getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
+                "MSFT");
             fail("This query must throw an exception.");
         } catch (AxisFault expected) {
             log.info("Fault Message : " + expected.getMessage());
-            Assert.assertTrue((expected.getMessage().contains("Connection refused") || expected.getMessage().contains("Error connecting to the back end")), "Error Message Mismatched. 'Connection refused or' not found. actual: " + expected.getMessage());
+            Assert.assertTrue((expected.getMessage().contains("Connection refused") ||
+                               expected.getMessage().contains("Error connecting to the back end")),
+                              "Error Message Mismatched. 'Connection refused or' not found. actual: " +
+                              expected.getMessage()
+            );
         }
 
         try {
             axis2Client.sendSimpleStockQuoteRequest(
-                    getMainSequenceURL(),
-                    null,
-                    "SUN");
+                getMainSequenceURL(),
+                getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
+                "SUN");
             fail("This query must throw an exception.");
         } catch (AxisFault expected) {
             log.info("Test passed with symbol SUN - Fault Message : " + expected.getMessage());
-            Assert.assertTrue((expected.getMessage().contains("Connection refused") || expected.getMessage().contains("Error connecting to the back end")), "Error Message Mismatched. 'Connection refused or' not found. actual: " + expected.getMessage());
+            Assert.assertTrue((expected.getMessage().contains("Connection refused") ||
+                               expected.getMessage().contains("Error connecting to the back end")),
+                              "Error Message Mismatched. 'Connection refused or' not found. actual: " +
+                              expected.getMessage()
+            );
         }
 
     }
 
     @AfterClass(alwaysRun = true)
-    private void destroy() throws Exception {
+    public void destroy() throws Exception {
         super.cleanup();
     }
 }
