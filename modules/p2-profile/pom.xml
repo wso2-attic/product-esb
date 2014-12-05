@@ -211,6 +211,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.registry.ui.menu.feature:${wso2carbon.version}
                                 </featureArtifactDef>
+								<featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.governance.metadata.server.feature:${wso2carbon.version}
+                                </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.registry.resource.properties.feature:${wso2carbon.version}
                                 </featureArtifactDef>
@@ -286,6 +289,9 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.transport.jms.feature:${wso2carbon.version}
+                                </featureArtifactDef>
+								<featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.transport.commons.feature:${wso2carbon.version}
                                 </featureArtifactDef>
 
 
@@ -567,6 +573,10 @@
                                     <id>org.wso2.carbon.transport.fix.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
+								<feature>
+                                    <id>org.wso2.carbon.transport.commons.feature.group</id>
+                                    <version>${wso2carbon.version}</version>
+                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.rule.mediation.feature.group</id>
                                     <version>${wso2carbon.version}</version>
@@ -590,6 +600,10 @@
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.feature.group</id>
                                     <version>${wso2carbon.version}</version>
+                                </feature>
+								<feature>
+									<id>org.wso2.carbon.governance.metadata.server.feature.group</id>
+									<version>${wso2carbon.version}</version>
                                 </feature>
                                 <feature>
                                    <id>org.wso2.carbon.registry.extensions.feature.group</id>
@@ -983,6 +997,11 @@
                                     <id>org.wso2.carbon.transport.fix.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
+								<feature>
+                                    <id>org.wso2.carbon.transport.commons.feature.group</id>
+                                    <version>${wso2carbon.version}</version>
+                                </feature>
+
                                 <feature>
                                    <id>org.wso2.carbon.message.flows.feature.group</id>
                                    <version>${wso2carbon.version}</version>
@@ -1001,6 +1020,10 @@
                                 </feature-->
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.feature.group</id>
+                                    <version>${wso2carbon.version}</version>
+                                </feature>
+								<feature>
+                                    <id>org.wso2.carbon.governance.metadata.server.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
                                 <feature>

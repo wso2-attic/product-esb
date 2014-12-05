@@ -1,5 +1,5 @@
 /*
-*Copyright (c) 2005-2010, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*Copyright (c) 2005-2014, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *WSO2 Inc. licenses this file to you under the Apache License,
 *Version 2.0 (the "License"); you may not use this file except
@@ -23,67 +23,51 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.engine.context.AutomationContext;
-import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
-import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.regex.Matcher;
 
 
 public class HttpInboundTransportTestCase extends ESBIntegrationTest {
-    private ServerConfigurationManager serverConfigurationManager;
-    private LogViewerClient logViewer;
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        serverConfigurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
-        super.init();
-
-          addSequence(getOM("artifacts" + File.separator + "ESB" + File.separator
-                  + "http.inbound.transport" + File.separator + "TestIn.xml"));
-          addSequence(getOM("artifacts"+ File.separator+"ESB" + File.separator
-                + "http.inbound.transport" + File.separator + "TestOut.xml"));
-           addInboundEndpoint(getOM("artifacts"+ File.separator+"ESB" + File.separator
-                   + "http.inbound.transport" + File.separator + "synapse.xml"));
+        addSequence(getArtifactConfig("TestIn.xml"));
+        addSequence(getArtifactConfig("TestOut.xml"));
+        addInboundEndpoint(getArtifactConfig("synapse.xml"));
     }
 
     @Test(groups = "wso2.esb", description = "Inbound Http  test case")
-    public void inboundHttpTest() throws Exception {
+    public void inboundHttpTest() throws AxisFault {
         try {
             OMElement response = axis2Client.sendSimpleStockQuoteRequest("http://localhost:8081/services/StockQuote", null, "IBM");
             Assert.assertNotNull(response);
-            Assert.assertEquals("getQuoteResponse",response.getLocalName());
-    } catch (AxisFault expected) {
-         log.error(expected.getMessage());
+            Assert.assertEquals("getQuoteResponse", response.getLocalName());
+        } catch (AxisFault axisFault) {
+            throw new AxisFault("AxisFault occurred when sending SimpleStockQuoteService", axisFault);
         }
-
     }
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
         super.cleanup();
-        serverConfigurationManager.restoreToLastConfiguration();
     }
 
 
-    private OMElement getOM(String relativeFilePath){
-        OMElement synapseConfig =null;
-        relativeFilePath = relativeFilePath.replaceAll("[\\\\/]", Matcher.quoteReplacement(File.separator));
-
+    private OMElement getArtifactConfig(String fileName) throws Exception {
+        OMElement synapseConfig = null;
+        String path = "artifacts" + File.separator + "ESB" + File.separator
+                + "http.inbound.transport" + File.separator + fileName;
         try {
-           synapseConfig = esbUtils.loadResource(relativeFilePath);
+            synapseConfig = esbUtils.loadResource(path);
         } catch (FileNotFoundException e) {
-           log.error(e.getMessage());
+            throw new Exception("File Location may be incorrect", e);
         } catch (XMLStreamException e) {
-            log.error(e.getMessage());
+            throw new XMLStreamException("XML Stream Exception while reading file stream", e);
         }
-       return synapseConfig;
+        return synapseConfig;
     }
-
 }

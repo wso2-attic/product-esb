@@ -91,7 +91,6 @@
             <package name="org.wso2.carbon.esb.tenant.test.*"/>
         </packages>
     </test>
-    
 </suite>
 
 
