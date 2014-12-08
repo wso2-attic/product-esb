@@ -324,6 +324,11 @@
                 <artifactId>axiom</artifactId>
                 <version>${axiom.wso2.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.h2database.wso2</groupId>
+                <artifactId>h2-database-engine</artifactId>
+                <version>${wso2.h2.orbit.version}</version>
+            </dependency>
             <!--dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>org.wso2.stratos.esb.styles</artifactId>
@@ -506,6 +511,18 @@
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.task.stub</artifactId>
+                <version>${carbon.platform.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.event.client.stub</artifactId>
+                <version>${carbon.platform.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.event.stub</artifactId>
                 <version>${carbon.platform.version}</version>
                 <scope>test</scope>
             </dependency>
@@ -754,6 +771,11 @@
                         </exclusion>
                     </exclusions>
                 </dependency>
+            <dependency>
+                <groupId>org.apache.ibatis</groupId>
+                <artifactId>ibatis-core</artifactId>
+                <version>3.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <properties>
@@ -793,6 +815,7 @@
         <wss4j.version>1.5.11-wso2v7</wss4j.version>
         <emma.version>2.1.5320</emma.version>
         <axiom.wso2.version>1.2.11.wso2v5</axiom.wso2.version>
+        <wso2.h2.orbit.version>1.2.140.wso2v3</wso2.h2.orbit.version>
 
         <!--Automation Framework versions-->
         <automation.framework.verion>4.3.1</automation.framework.verion>

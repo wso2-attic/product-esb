@@ -44,7 +44,6 @@ public class ActiveMQServer extends ESBIntegrationTest {
     private final String HAWTBUF = "hawtbuf-1.9.jar";
     private final String ACTIVEMQ_CLIENT = "activemq-client-5.9.1.jar";
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     public void startJMSBrokerAndConfigureESB() throws Exception {
         context = new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN);
         serverManager = new ServerConfigurationManager(context);
@@ -76,7 +75,6 @@ public class ActiveMQServer extends ESBIntegrationTest {
                                                                                                                            + "activemq" + File.separator + "axis2.xml"));
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     public void stopJMSBrokerRevertESBConfiguration() throws Exception {
         try {
             //reverting the changes done to esb sever
