@@ -28,6 +28,8 @@ public class ESBTestConstant {
     /**
      * ERROR MESSAGES
      */
+    public static final String UNEXPECTED_SENDING_OUT = "org.apache.synapse.SynapseException: " +
+            "Unexpected error during sending message out";
     public static final String READ_TIME_OUT = "Read timed out";
     public static final String INCOMING_MESSAGE_IS_NULL = "The input stream for an incoming message is null.";
     public static final String ERROR_ADDING_SEQUENCE = "Error adding sequence";     //when invalid sequence is uploaded
