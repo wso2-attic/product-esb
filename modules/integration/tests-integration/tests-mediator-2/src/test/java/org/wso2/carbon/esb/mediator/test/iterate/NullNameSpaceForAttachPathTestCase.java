@@ -61,7 +61,7 @@ public class NullNameSpaceForAttachPathTestCase extends ESBIntegrationTest {
             Assert.fail("This Request must throw AxisFault"); // This will execute when the exception is not thrown as expected
         } catch (AxisFault message) {
             System.out.print(message.getReason());
-            assertEquals(message.getReason(), ESBTestConstant.READ_TIME_OUT,
+            assertEquals(message.getReason(), ESBTestConstant.UNEXPECTED_SENDING_OUT,
               "Iterator mediator worked even with an null name space for 'attachPath' field.");
         }
 
