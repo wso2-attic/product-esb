@@ -19,60 +19,93 @@ package org.wso2.carbon.esb.samples.test.mediation;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axis2.AxisFault;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
+import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.*;
 
-/*This Class tests ESB Sample4*/
+/**
+ * Sample 4: Specifying a Fault Sequence with a Regular Mediation Sequence
+ */
 public class Sample4TestCase extends ESBIntegrationTest {
+
+    private LogViewerClient logViewerClient;
 
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
         super.init();
         loadSampleESBConfiguration(4);
+
+        logViewerClient =
+            new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Sample 4: Introduction to error handling.")
-    public void testErrorHandling() throws AxisFault {
-        OMElement response;
+    @Test(groups = { "wso2.esb" }, description = "Sample 4: Introduction to error handling.")
+    public void testErrorHandling() throws Exception {
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(
+            getMainSequenceURL(),
+            getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
+            "IBM");
+
+        assertTrue(response.toString().contains("IBM"), "IBM not found");
+
+        logViewerClient.clearLogs();
         try {
-            response = axis2Client.sendSimpleStockQuoteRequest(
-                    getMainSequenceURL(),
-                    null,
-                    "MSFT");
+            axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), null, "MSFT");
             fail("This query must throw an exception.");
         } catch (AxisFault expected) {
-            assertEquals(expected.getMessage(), ESBTestConstant.INCOMING_MESSAGE_IS_NULL
-                    , "Error message not contain message > The input stream for an incoming message is null");
+            assertEquals(expected.getMessage(), ESBTestConstant.INCOMING_MESSAGE_IS_NULL,
+                         "Error message not contain message > The input stream for an incoming " +
+                         "message is null");
         }
 
+        String logMessage =
+            "text = An unexpected error occured, message = Couldn't find the endpoint with the " +
+            "key : bogus";
+
+        verifyLogMessages(logMessage);
+
+        logViewerClient.clearLogs();
         try {
-            response = axis2Client.sendSimpleStockQuoteRequest(
-                    getMainSequenceURL(),
-                    null,
-                    "SUN");
+            axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), null, "SUN");
             fail("This query must throw an exception.");
         } catch (AxisFault expected) {
-            assertEquals(expected.getMessage(), ESBTestConstant.INCOMING_MESSAGE_IS_NULL
-                    , "Error message not contain message > The input stream for an incoming message is null");
+            assertEquals(expected.getMessage(), ESBTestConstant.INCOMING_MESSAGE_IS_NULL,
+                         "Error message not contain message > The input stream for an incoming " +
+                         "message is null");
         }
 
-        response = axis2Client.sendSimpleStockQuoteRequest(
-                getMainSequenceURL(),
-                null,
-                "IBM");
-        assertTrue(response.toString().contains("IBM"));
+        logMessage =
+            "text = An unexpected error occured for stock SUN, message = Couldn't find the " +
+            "endpoint with the key : sunPort";
+
+        verifyLogMessages(logMessage);
     }
 
     @AfterClass(alwaysRun = true)
-    private void destroy() throws Exception {
+    public void destroy() throws Exception {
         super.cleanup();
+    }
+
+    private void verifyLogMessages(String logMessage) throws Exception {
+
+        boolean logMessageFound = false;
+        LogEvent[] logEvents = logViewerClient.getAllSystemLogs();
+        for (LogEvent event : logEvents) {
+            if (event.getMessage().contains(logMessage)) {
+                logMessageFound = true;
+                break;
+            }
+        }
+
+        Assert.assertTrue(logMessageFound, "Log message not found - " + logMessage);
     }
 
 }
