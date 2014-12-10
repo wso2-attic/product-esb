@@ -43,7 +43,7 @@
         <classes>
             <class name="org.wso2.carbon.esb.test.servers.CarbonTestServerManager"/>
             <class name="org.wso2.carbon.esb.test.servers.NewInstanceTestCase"/>
-            <!-- class name="org.wso2.carbon.esb.test.servers.OSGIUnsatisfiedServerBundlesTestCase"/-->
+             <class name="org.wso2.carbon.esb.test.servers.OSGIUnsatisfiedServerBundlesTestCase"/>
         </classes>
     </test>
 

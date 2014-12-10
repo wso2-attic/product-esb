@@ -9,6 +9,7 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
 
+
     <!--<test name="Server-Stratup" preserve-order="true" verbose="2">-->
     <!--<classes>-->
     <!--<class name="org.wso2.carbon.esb.ServerStartupTestCase"/>-->
@@ -54,7 +55,11 @@
             <package name="org.wso2.carbon.esb.samples.test.transport.*"/>
         </packages>
     </test>
-
+    <test name="ESB-Sample-StreamingXpath-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.samples.test.streamingxpath.*"/>
+        </packages>
+    </test>
 </suite>
 
 
