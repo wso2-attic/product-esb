@@ -59,7 +59,7 @@ public class ClassMediationWithLoadOfPropertiesTestCase extends ESBIntegrationTe
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/class/class_mediation_with_twenty_properties.xml");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb","localOnly"}, description = "Class Mediator " +
                                   " -Class mediator which has a load of properties to be passed and mediation")

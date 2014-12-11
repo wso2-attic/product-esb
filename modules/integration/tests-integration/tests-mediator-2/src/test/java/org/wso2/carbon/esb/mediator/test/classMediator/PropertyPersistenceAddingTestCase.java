@@ -55,7 +55,7 @@ public class PropertyPersistenceAddingTestCase extends ESBIntegrationTest{
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/class/class_property_persistence_three_properties.xml");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb","localOnly"}, description = "Class Mediator " +
                                                            " -Class mediator property persistence -adding properties")
