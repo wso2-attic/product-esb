@@ -40,18 +40,18 @@ public class GroovySetPayloadJSONTestCase extends ESBIntegrationTest {
     private JSONClient jsonclient;
 
     @BeforeClass(alwaysRun = true)
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     public void setEnvironment() throws Exception {
-        super.init(TestUserMode.SUPER_TENANT_ADMIN);
+        super.init();
         serverManager = new ServerConfigurationManager(context);
         serverManager.copyToComponentLib(new File(getESBResourceLocation() + GROOVY_JAR_LOCATION));
         serverManager.restartGracefully();
-        super.init(TestUserMode.SUPER_TENANT_ADMIN);
+        super.init();
         jsonclient = new JSONClient();
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Groovy script with setPayloadJson")
     public void testGroovySetPayloadJson() throws Exception {
@@ -67,7 +67,7 @@ public class GroovySetPayloadJSONTestCase extends ESBIntegrationTest {
     }
 
     @AfterClass(alwaysRun = true)
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     public void destroy() throws Exception {
         try {

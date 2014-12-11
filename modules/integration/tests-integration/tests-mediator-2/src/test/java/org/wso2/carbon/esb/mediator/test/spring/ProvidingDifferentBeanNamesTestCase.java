@@ -58,7 +58,7 @@ public class ProvidingDifferentBeanNamesTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/spring/spring_mediation.xml");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Spring Mediator " +
                                                             "-Added Simple bean into lib " +
