@@ -15,6 +15,7 @@
             <class name="org.wso2.carbon.esb.ui.test.login.ESBLoginTestCase"/>
             <class name="org.wso2.carbon.esb.ui.test.proxyadmin.ESBProxySaveTestCase"/>
             <class name="org.wso2.carbon.esb.ui.test.proxyadmin.ESBJAVA_2708TestCase"/>
+            <class name="org.wso2.carbon.esb.ui.test.sequence.ESBJAVA_2893TestCase"/>
             <class name="org.wso2.carbon.esb.ui.test.proxyadmin.ESBProxyDeleteTestCase"/>
             <class name="org.wso2.carbon.esb.ui.test.endpoints.EndpointsListTestCase"/>
         </classes>

@@ -57,4 +57,7 @@ public class RestApiAdminClient {
     public String[] getApiNames() throws RestApiAdminAPIException, RemoteException {
         return restApiAdminStub.getApiNames();
     }
+    public String getServerContext() throws RestApiAdminAPIException, RemoteException {
+        return restApiAdminStub.getServerContext();
+    }
 }
