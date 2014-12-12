@@ -24,6 +24,23 @@
             <package name="org.wso2.carbon.esb.proxyservice.test.transformerProxy"/>
             <package name="org.wso2.carbon.esb.proxyservice.test.wsdlBasedProxy"/>
         </packages>
+		<classes>
+           <class name="org.wso2.carbon.esb.mediator.test.loggingProxy.ProxyServiceEnablingHTTPSTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+		   <class name="org.wso2.carbon.esb.mediator.test.loggingProxy.WSDLOptionsSpecifiedSourceUrlTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+		   <class name="org.wso2.carbon.esb.mediator.test.loggingProxy.ProxyServiceEndPointThroughURLTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+		</classes>
         <!--classes>
         <class name="org.wso2.carbon.esb.proxyservice.test.secureProxy.ChangingPoliciesTestCase"/>
         </classes-->
