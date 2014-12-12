@@ -25,17 +25,18 @@
             <package name="org.wso2.carbon.esb.proxyservice.test.wsdlBasedProxy"/>
         </packages>
 		<classes>
-           <class name="org.wso2.carbon.esb.mediator.test.loggingProxy.ProxyServiceEnablingHTTPSTestCase">
+           <class
+                   name="org.wso2.carbon.esb.proxyservice.test.loggingProxy.ProxyServiceEnablingHTTPSTestCase">
                 <methods>
                     <exclude name=".*" />
                 </methods>
            </class>
-		   <class name="org.wso2.carbon.esb.mediator.test.loggingProxy.WSDLOptionsSpecifiedSourceUrlTestCase">
+		   <class name="org.wso2.carbon.esb.proxyservice.test.loggingProxy.WSDLOptionsSpecifiedSourceUrlTestCase">
                 <methods>
                     <exclude name=".*" />
                 </methods>
            </class>
-		   <class name="org.wso2.carbon.esb.mediator.test.loggingProxy.ProxyServiceEndPointThroughURLTestCase">
+		   <class name="org.wso2.carbon.esb.proxyservice.test.loggingProxy.ProxyServiceEndPointThroughURLTestCase">
                 <methods>
                     <exclude name=".*" />
                 </methods>

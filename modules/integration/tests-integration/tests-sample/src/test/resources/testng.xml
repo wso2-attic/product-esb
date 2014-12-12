@@ -31,12 +31,12 @@
             <package name="org.wso2.carbon.esb.samples.test.mediation.*"/>
         </packages>
 		<classes>
-           <class name="org.wso2.carbon.esb.mediator.test.mediation.Sample9TestCase">
+           <class name="org.wso2.carbon.esb.samples.test.mediation.Sample9TestCase">
                 <methods>
                     <exclude name=".*" />
                 </methods>
            </class>
-		   <class name="org.wso2.carbon.esb.mediator.test.mediation.jason.Sample441TestCase">
+		   <class name="org.wso2.carbon.esb.samples.test.mediation.jason.Sample441TestCase">
                 <methods>
                     <exclude name=".*" />
                 </methods>
@@ -53,7 +53,7 @@
             <package name="org.wso2.carbon.esb.samples.test.miscellaneous.*"/>
         </packages>
 		<classes>
-           <class name="org.wso2.carbon.esb.mediator.test.miscellaneous.Sample653TestCase">
+           <class name="org.wso2.carbon.esb.samples.test.miscellaneous.Sample653TestCase">
                 <methods>
                     <exclude name=".*" />
                 </methods>
