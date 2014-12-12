@@ -9,11 +9,13 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
 
-    <!--<test name="Server-Stratup" preserve-order="true" verbose="2">-->
-    <!--<classes>-->
-    <!--<class name="org.wso2.carbon.esb.samples.test.miscellaneous.Sample100TestCase"/>-->
-    <!--</classes>-->
-    <!--</test>-->
+
+    <test name="Server-Stratup" preserve-order="true" verbose="2">
+    <classes>
+
+    <class name="org.wso2.carbon.esb.samples.test.miscellaneous.Sample100TestCase"/>
+    </classes>
+    </test>
     <test name="ESB-Sample-Advance-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.samples.test.advanced.*"/>
@@ -71,7 +73,18 @@
     <test name="ESB-Sample-Transport-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.samples.test.transport.*"/>
+
         </packages>
+    </test>
+    <test name="ESB-Sample-StreamingXpath-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.samples.test.streamingxpath.*"/>
+        </packages>
+    </test>
+    <test name="ESB-Sample-PriorityExecutor" preserve-order="true" verbose="2">
+    <packages>
+    <package name="org.wso2.carbon.esb.samples.test.mediation.priorityexecutor.*"/>
+    </packages>
     </test>
 
 </suite>

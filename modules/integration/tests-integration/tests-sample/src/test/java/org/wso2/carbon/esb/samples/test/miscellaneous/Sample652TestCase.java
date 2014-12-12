@@ -23,7 +23,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.esb.integration.common.clients.prioroty.executor.PriorityMediationAdminClient;
+
+import org.wso2.esb.integration.common.clients.executor.PriorityMediationAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 public class Sample652TestCase extends ESBIntegrationTest {
@@ -41,7 +42,7 @@ public class Sample652TestCase extends ESBIntegrationTest {
                 getSessionCookie());
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test Priority Executor", enabled = false)
+    @Test(groups = {"wso2.esb"}, description = "Test Priority Executor", enabled = true)
     public void priorityExecutorMediaTypeTest() throws Exception {
 
         Thread.sleep(10000);

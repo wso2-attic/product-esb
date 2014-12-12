@@ -16,6 +16,7 @@
     </test>
 
     <test name="Aggregate-mediator-Test" preserve-order="true" verbose="2">
+
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.aggregate"/>
         </packages>
@@ -54,6 +55,7 @@
     </test>
 
     <test name="Call-mediator-Test" preserve-order="true" verbose="2">
+
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.call"/>
         </packages>
@@ -101,11 +103,11 @@
     </test>
 
     <!--ignore this-->
-    <!--    <test name="dblookup-mediator-Test" preserve-order="true" verbose="2">
+        <test name="dblookup-mediator-Test" preserve-order="true" verbose="2">
             <packages>
                 <package name="org.wso2.carbon.esb.mediator.test.db.dblookup"/>
             </packages>
-        </test>-->
+        </test>
 
     <test name="Enrich-mediator-Test" preserve-order="true" verbose="2">
         <packages>
@@ -114,6 +116,7 @@
     </test>
 
     <test name="Fault-mediator-Test" preserve-order="true" verbose="2">
+
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.fault"/>
         </packages>
@@ -186,11 +189,11 @@
     </test>
 
     <!--ignore this-->
-    <!--    <test name="dbreport-mediator-Test" preserve-order="true" verbose="2">
+        <test name="dbreport-mediator-Test" preserve-order="true" verbose="2">
             <packages>
                 <package name="org.wso2.carbon.esb.mediator.test.db.dbreport"/>
             </packages>
-        </test>-->
+        </test>
 
 
     <test name="Property-mediator-Test" preserve-order="true" verbose="2">
@@ -217,10 +220,10 @@
         </packages>
     </test>
 
-    <!--<test name="Rule-mediator-Test" preserve-order="true" verbose="2">-->
-    <!--<packages>-->
-    <!--<package name="org.wso2.carbon.esb.mediator.test.rule"/>-->
-    <!--</packages>-->
-    <!--</test>-->
+    <test name="Rule-mediator-Test" preserve-order="true" verbose="2">
+    <packages>
+    <package name="org.wso2.carbon.esb.mediator.test.rule"/>
+    </packages>
+    </test>
 </suite>
 
