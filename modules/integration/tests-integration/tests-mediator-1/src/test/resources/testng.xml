@@ -19,12 +19,26 @@
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.aggregate"/>
         </packages>
+		<classes>
+           <class name="org.wso2.carbon.esb.mediator.test.aggregate.AggregateWithHighMaxAndLowMinTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+		</classes>
     </test>
 
     <test name="Cache-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.cache"/>
         </packages>
+		<classes>
+           <class name="org.wso2.carbon.esb.mediator.test.cache.LargeCacheTimeOutTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+        </classes>
     </test>
 
     <test name="Call-Template-Mediator-Test" preserve-order="true" verbose="2">
@@ -43,6 +57,23 @@
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.call"/>
         </packages>
+		<classes>
+           <class name="org.wso2.carbon.esb.mediator.test.call.CallMediatorFailOverTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+			<class name="org.wso2.carbon.esb.mediator.test.call.CallMediatorInAPITestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+			<class name="org.wso2.carbon.esb.mediator.test.call.CallMediatorAPIWithNamedSeqCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+        </classes>
     </test>
 
     <test name="Clone-mediator-Test" preserve-order="true" verbose="2">
@@ -86,6 +117,43 @@
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.fault"/>
         </packages>
+        <classes>
+           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap11FaultCodeClientTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap12FaultNodeTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap12FaultCodeSenderTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap12FaultCodeDataEncodingUnknownTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap11FaultDetailsTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap12FaultCodeReceiverTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap12FaultFullTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+        </classes>
     </test>
 
     <test name="Filter-mediator-Test" preserve-order="true" verbose="2">

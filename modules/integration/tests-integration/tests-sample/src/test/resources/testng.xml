@@ -28,6 +28,18 @@
         <packages>
             <package name="org.wso2.carbon.esb.samples.test.mediation.*"/>
         </packages>
+		<classes>
+           <class name="org.wso2.carbon.esb.mediator.test.mediation.Sample9TestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+		   <class name="org.wso2.carbon.esb.mediator.test.mediation.jason.Sample441TestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+        </classes>
     </test>
     <test name="ESB-Sample-Messaging-Test" preserve-order="true" verbose="2">
         <packages>
@@ -38,6 +50,13 @@
         <packages>
             <package name="org.wso2.carbon.esb.samples.test.miscellaneous.*"/>
         </packages>
+		<classes>
+           <class name="org.wso2.carbon.esb.mediator.test.miscellaneous.Sample653TestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+        </classes>
     </test>
     <test name="ESB-Sample-Proxy-Test" preserve-order="true" verbose="2">
         <packages>
