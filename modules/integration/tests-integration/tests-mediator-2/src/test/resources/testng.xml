@@ -92,6 +92,13 @@
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.iterate"/>
         </packages>
+		<classes>
+           <class name="org.wso2.carbon.esb.mediator.test.iterate.InvalidNamespaceTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+           </class>
+		</classes>
     </test>
 
     <test name="Send-mediator-Test" preserve-order="true" verbose="2">

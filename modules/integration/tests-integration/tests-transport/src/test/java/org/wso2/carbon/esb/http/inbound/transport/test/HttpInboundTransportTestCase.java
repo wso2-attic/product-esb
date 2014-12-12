@@ -40,7 +40,7 @@ public class HttpInboundTransportTestCase extends ESBIntegrationTest {
         addInboundEndpoint(getArtifactConfig("synapse.xml"));
     }
 
-    @Test(groups = "wso2.esb", description = "Inbound Http  test case")
+    @Test(groups = "wso2.esb", description = "Inbound Http  test case", enabled = false)
     public void inboundHttpTest() throws AxisFault {
         try {
             OMElement response = axis2Client.sendSimpleStockQuoteRequest("http://localhost:8081/services/StockQuote", null, "IBM");
