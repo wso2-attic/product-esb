@@ -60,12 +60,14 @@
             <package name="org.wso2.carbon.esb.json.test"/>
         </packages>
     </test>
-    <!-- <test name="CAR-Deployment" preserve-order="true" verbose="2">
-    <packages>
-    <package name="org.wso2.carbon.esb.car.deployment.test"/>
-    </packages>
+
+   <test name="CAR-Deployment" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.car.deployment.test"/>
+        </packages>
     </test>
-    -->
+
+
     <test name="ScheduleTask-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.scheduledtask.test"/>

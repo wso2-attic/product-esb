@@ -58,7 +58,7 @@ public class RubyScriptSupportTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Ruby script with the mediator")
     public void testJRubyScriptMediation() throws Exception {
@@ -77,7 +77,7 @@ public class RubyScriptSupportTestCase extends ESBIntegrationTest {
                 new QName("http://services.samples/xsd", "Price")), "Fault response null localpart");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Ruby script with the mediator" +
                                                             " -Script from gov registry")

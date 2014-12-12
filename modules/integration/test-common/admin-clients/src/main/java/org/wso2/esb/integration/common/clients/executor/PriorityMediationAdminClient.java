@@ -34,27 +34,24 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 
 public class PriorityMediationAdminClient {
+
+    private static final Log log = LogFactory.getLog(PriorityMediationAdminClient.class);
+    private String serviceName ="PriorityMediationAdmin";
+
     String backendUrl = null;
     String SessionCookie = null;
     PriorityMediationAdminStub priorityMediationAdmin;
-    private static final Log log = LogFactory.getLog(PriorityMediationAdminClient.class);
 
-    public PriorityMediationAdminClient(String backendUrl, String sessionCookie) {
+    public PriorityMediationAdminClient(String backendUrl, String sessionCookie) throws AxisFault {
         this.backendUrl = backendUrl;
         this.SessionCookie = sessionCookie;
-    }
-
-    private PriorityMediationAdminStub setPriorityExecutorStub() throws AxisFault {
-        final String priorityAdminServiceUrl = backendUrl + "PriorityMediationAdmin";
-        PriorityMediationAdminStub priorityMediator = null;
-        priorityMediator = new PriorityMediationAdminStub(priorityAdminServiceUrl);
-        AuthenticateStub.authenticateStub(SessionCookie, priorityMediator);
-        return priorityMediator;
+        String targetEndpoint = backendUrl+serviceName;
+        priorityMediationAdmin = new PriorityMediationAdminStub(targetEndpoint);
+        AuthenticateStub.authenticateStub(SessionCookie, priorityMediationAdmin);
     }
 
     public void addPriorityMediator(String name, DataHandler dh)
             throws IOException, XMLStreamException {
-        priorityMediationAdmin = this.setPriorityExecutorStub();
         XMLStreamReader parser =
                 XMLInputFactory.newInstance().createXMLStreamReader(dh.getInputStream());
         StAXOMBuilder builder = new StAXOMBuilder(parser);
@@ -63,7 +60,6 @@ public class PriorityMediationAdminClient {
     }
 
     public void addPriorityMediator(String name, OMElement priorityExecutor) throws RemoteException {
-        priorityMediationAdmin = this.setPriorityExecutorStub();
         priorityMediationAdmin.add(name, priorityExecutor);
     }
 

@@ -39,7 +39,7 @@ public class Sample100TestCase extends ESBIntegrationTest {
                           + "synapseconfig" + File.separator  +"ESBRegistry.xml");
         loadSampleESBConfiguration(100);
     }
-
+//https://wso2.org/jira/browse/ESBJAVA-3451
     @Test(groups = {"wso2.esb"}, description = "Adding a policy as a local entry and secure endpoint using it")
     public void testAddPolicyViaLocalEntry() throws IOException,
                                                                  XMLStreamException {

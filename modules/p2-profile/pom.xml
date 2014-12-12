@@ -140,6 +140,9 @@
                                     org.wso2.carbon:org.wso2.carbon.mediation.ntask.feature:${wso2carbon.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.mediation.clustering.feature:${wso2carbon.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.ntask.core.feature:${wso2carbon.version}
                                 </featureArtifactDef>
                                 <!--========================Need to be add adaptors==============================================================================-->
@@ -462,6 +465,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.mediation.ntask.feature.group</id>
+                                    <version>${wso2carbon.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.mediation.clustering.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
                                 <feature>
@@ -860,6 +867,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.mediation.ntask.feature.group</id>
+                                    <version>${wso2carbon.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.mediation.clustering.feature.group</id>
                                     <version>${wso2carbon.version}</version>
                                 </feature>
                                 <feature>
