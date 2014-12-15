@@ -55,7 +55,7 @@ public class Server {
     }
 
     private static File createBaseDirectory() throws IOException {
-        final File base = File.createTempFile( "tmp-", "", new File("/home/dimuthu/Desktop/JMS"));
+        final File base = File.createTempFile( "tmp-", "", new File("/home/dharshana/reaserch/jetty/jetty2/src/main/resources"));
 
         if( !base.delete() ) {
             throw new IOException( "Cannot (re)create base folder: " + base.getAbsolutePath()  );

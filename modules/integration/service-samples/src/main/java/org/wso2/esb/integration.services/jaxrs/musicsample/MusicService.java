@@ -37,7 +37,7 @@ public class MusicService {
     }
 
     final void init() {
-        System.out.println("Welcome To World Of Music .... ");
+        System.out.println("Welcome To The World Of Music .... ");
 
         Music music = new Music();
         music.setAlbum("Gold");
@@ -56,14 +56,7 @@ public class MusicService {
     }
 
     public Music getByAlbum( final String albumName ) {
-        /*  if( music == null ) {
-            throw new PersonNotFoundException( email );
-            Response
-                    .status(Response.Status.NOT_FOUND)
-                    .entity( "Person not found: " + email )
-                    .build()
-        }
-*/
+
         return musicCollection.get(albumName);
     }
 
@@ -74,14 +67,7 @@ public class MusicService {
 
 
     public Singer getBySinger( final String singer ) {
-        /*  if( music == null ) {
-            throw new PersonNotFoundException( email );
-            Response
-                    .status(Response.Status.NOT_FOUND)
-                    .entity( "Person not found: " + email )
-                    .build()
-        }
-*/
+
         return singerCollection.get(singer);
     }
 
