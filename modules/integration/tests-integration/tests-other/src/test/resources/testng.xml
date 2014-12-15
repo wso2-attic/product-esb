@@ -9,7 +9,7 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestReportListener"/>
     </listeners>
 
-    <!--<test name="Server-Startup-verification" preserve-order="true" verbose="2">
+    <test name="Server-Startup-verification" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.ServerStartupTestCase"/>
         </classes>
@@ -51,7 +51,7 @@
         <packages>
             <package name="org.wso2.carbon.esb.synapse.common.formatters"/>
         </packages>
-    </test>-->
+    </test>
 
     <test name="Content-Type-Test" preserve-order="true" verbose="2">
         <packages>
