@@ -63,7 +63,7 @@ public class SmooksMediatorConfigFromConfigRegistryTestCase extends ESBIntegrati
         addVFSProxy();
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "local only"}, description = "Smooks configuration refer form configuration registry", enabled = false)
     public void testSmookConfigFromConfigRegistry() throws Exception {

@@ -79,7 +79,7 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
         }
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Spring Mediator " +
                                                             "- Change the spring xml and see whether message context is changed")
@@ -133,7 +133,7 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Spring Mediator " +
                                                             "-Added Simple bean into lib -referring to an invalid spring xml")
@@ -151,7 +151,7 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
         }
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Spring Mediator " +
                                                             "- referring to an non existing spring xml")
@@ -170,7 +170,7 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
     }
 
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Spring Mediator " +
                                                             "-Added Simple bean into lib " +
@@ -187,7 +187,7 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Spring Mediator -Added Simple bean into lib")
     public void springBeanMediationTest() throws Exception {
