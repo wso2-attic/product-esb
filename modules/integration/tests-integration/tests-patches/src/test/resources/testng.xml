@@ -44,6 +44,12 @@
         </packages>
     </test>
 
+    <test name="synapse-Test" preserve-order="true" verbose="2">
+        <packages>           
+            <package name="org.wso2.carbon.esb.synapse.core.*"/>
+        </packages>
+    </test>
+
 </suite>
 
 
