@@ -794,7 +794,7 @@
         <!--Product Version-->
         <wso2carbon.esb.version>4.9.0-SNAPSHOT</wso2carbon.esb.version>
         <carbon.platform.version>4.3.0-SNAPSHOT</carbon.platform.version>
-        <carbon.kernel.version>4.3.0-SNAPSHOT</carbon.kernel.version>
+        <carbon.kernel.version>4.3.0</carbon.kernel.version>
         <wso2carbon.old.version>4.2.0</wso2carbon.old.version>
         <!--Axis2-->
         <axis2.wso2.version>1.6.1.wso2v11</axis2.wso2.version>
@@ -810,7 +810,9 @@
         <org.apache.httpcomponents.wso2.version>4.2.3.wso2v1</org.apache.httpcomponents.wso2.version>
         <!--Carbon-->
         <wso2carbon.old.version>4.2.0</wso2carbon.old.version>
-        <wso2carbon.version>4.3.0-SNAPSHOT</wso2carbon.version>
+        <wso2carbon.version>4.3.0</wso2carbon.version>
+        <wso2carbon.snapshot.version>4.3.0-SNAPSHOT</wso2carbon.snapshot.version>
+        <wso2carbon.feature.version>4.3.0-SNAPSHOT</wso2carbon.feature.version>
         <!--Stratos-->
         <stratos.version>2.2.0</stratos.version>
         <!--Misc-->
