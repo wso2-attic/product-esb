@@ -416,5 +416,10 @@
             <!--<filtered>true</filtered>-->
             <!--<fileMode>644</fileMode>-->
         <!--</file>-->
+	<!-- Including tasks-config.xml file-->
+	<file>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/tasks-config.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+        </file>
     </files>
 </assembly>
