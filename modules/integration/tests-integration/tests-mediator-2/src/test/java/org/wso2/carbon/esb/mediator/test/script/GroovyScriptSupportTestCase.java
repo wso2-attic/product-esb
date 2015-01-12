@@ -44,7 +44,7 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
     private JSONClient jsonclient;
 
     @BeforeClass(alwaysRun = true)
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     public void setEnvironment() throws Exception {
         super.init();
@@ -56,7 +56,7 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
         jsonclient = new JSONClient();
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "localonly"}, description = "Testing the groovy support in a proxy")
     public void GroovySupportWithinProxyTest() throws Exception {
@@ -71,7 +71,7 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
         assertEquals(symbolResponse, "WSO2", "Symbol is not match");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Groovy script with the mediator")
     public void testGroovyScriptMediation() throws Exception {
@@ -88,7 +88,7 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
         assertEquals(symbol, "IBM", "Fault: value 'symbol' mismatched");
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Groovy script with setPayloadJson")
     public void testGroovySetPayloadJson() throws Exception {
@@ -104,7 +104,7 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
     }
 
     @AfterClass(alwaysRun = true)
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     public void destroy() throws Exception {
         try {

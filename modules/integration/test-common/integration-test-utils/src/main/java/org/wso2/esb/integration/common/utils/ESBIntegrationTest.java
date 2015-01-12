@@ -34,6 +34,7 @@ import org.wso2.carbon.integration.common.admin.client.SecurityAdminServiceClien
 import org.wso2.carbon.integration.common.utils.LoginLogoutClient;
 import org.wso2.carbon.security.mgt.stub.config.SecurityAdminServiceSecurityConfigExceptionException;
 import org.wso2.carbon.sequences.stub.types.SequenceEditorException;
+import org.wso2.esb.integration.common.clients.mediation.SynapseConfigAdminClient;
 import org.wso2.esb.integration.common.utils.clients.stockquoteclient.StockQuoteClient;
 import org.xml.sax.SAXException;
 
@@ -250,8 +251,7 @@ public abstract class ESBIntegrationTest {
         try {
             esbUtils.addInboundEndpoint(contextUrls.getBackEndUrl(), sessionCookie, inboundEndpoint);
         } catch (Exception e) {
-           log.error("Error when adding InboundEndpoint" );
-            throw new Exception(e);
+            throw new Exception("Error when adding InboundEndpoint",e);
         }
     }
 
@@ -265,12 +265,9 @@ public abstract class ESBIntegrationTest {
                 }
             }
         } catch (Exception e) {
-            log.error("Error when adding InboundEndpoint" );
-            throw new Exception(e);
+            throw new Exception("Error when deleting InboundEndpoint",e);
         }
     }
-
-
 
     protected void isProxyDeployed(String proxyServiceName) throws Exception {
         Assert.assertTrue(esbUtils.isProxyDeployed(contextUrls.getBackEndUrl(), sessionCookie,
@@ -615,6 +612,23 @@ public abstract class ESBIntegrationTest {
             }
             scheduledTaskList.clear();
         }
+    }
+
+    protected void updateESBRegistry(String resourcePath) throws Exception {
+        SynapseConfigAdminClient synapseConfigAdminClient =
+                new SynapseConfigAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
+        //getting current configuration
+        OMElement synapseConfig = AXIOMUtil.stringToOM(synapseConfigAdminClient.getConfiguration());
+        synapseConfig.getFirstChildWithName(new QName(synapseConfig.getNamespace().getNamespaceURI()
+                , "registry")).detach();
+        //adding registry configuration
+        synapseConfig.addChild(esbUtils.loadResource(resourcePath).getFirstElement());
+        synapseConfigAdminClient.updateConfiguration(synapseConfig);
+        esbUtils.verifySynapseDeployment(synapseConfig, contextUrls.getBackEndUrl(), getSessionCookie());
+        //let server to persist the configuration
+        Thread.sleep(3000);
+
+
     }
 
     protected boolean isRunningOnStratos() throws XPathExpressionException {

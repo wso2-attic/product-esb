@@ -1,5 +1,5 @@
 /*
-*Copyright (c) 2005-2010, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*Copyright (c) 2005-2014, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *WSO2 Inc. licenses this file to you under the Apache License,
 *Version 2.0 (the "License"); you may not use this file except
@@ -36,109 +36,140 @@ public class InboundAdminClient {
     private InboundAdminStub endpointAdminStub;
 
     /**
-     *
-     * @param backEndUrl
-     * @param sessionCookie
+     * @param backEndUrl    BackEnd URL
+     * @param sessionCookie Session cookie
      * @throws org.apache.axis2.AxisFault
      */
     public InboundAdminClient(String backEndUrl, String sessionCookie) throws AxisFault {
-
         String endPoint = backEndUrl + serviceName;
         endpointAdminStub = new InboundAdminStub(endPoint);
         AuthenticateStub.authenticateStub(sessionCookie, endpointAdminStub);
     }
 
     /**
-     *
-     * @param backEndUrl
-     * @param userName
-     * @param password
+     * @param backEndUrl BackEnd URL
+     * @param userName   Username
+     * @param password   Password
      * @throws org.apache.axis2.AxisFault
      */
-    public InboundAdminClient(String backEndUrl, String userName, String password)
-            throws AxisFault {
-
+    public InboundAdminClient(String backEndUrl, String userName, String password) throws AxisFault {
         String endPoint = backEndUrl + serviceName;
         endpointAdminStub = new InboundAdminStub(endPoint);
         AuthenticateStub.authenticateStub(userName, password, endpointAdminStub);
     }
 
-     public String getAllInboundEndpointNames() throws RemoteException, InboundAdminInboundManagementException {
-         try {
-             return endpointAdminStub.getAllInboundEndpointNames();
-         } catch (RemoteException e) {
-            log.error(e.getMessage());
-             throw new RemoteException("Error when get endpoint names in InboundAdmin Client",e);
-         } catch (InboundAdminInboundManagementException e) {
-             log.error(e.getMessage());
-             throw new InboundAdminInboundManagementException("Error when get endpoint names in InboundAdmin Client",e);
-         }
-     }
+    /**
+     * Return all Inbound Endpoint Names
+     * @return InboundEndpointNames
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
+    public String getAllInboundEndpointNames() throws RemoteException, InboundAdminInboundManagementException {
+        try {
+            return endpointAdminStub.getAllInboundEndpointNames();
+        } catch (RemoteException e) {
+            throw new RemoteException("Exception occurred when get endpoint names in InboundAdminClient", e);
+        } catch (InboundAdminInboundManagementException e) {
+            throw new InboundAdminInboundManagementException
+                    ("Exception occurred when get endpoint names in InboundAdminClient", e);
+        }
+    }
 
-    public InboundEndpointDTO getInboundEndpointbyName(String endointName) throws RemoteException, InboundAdminInboundManagementException {
+    /**
+     * Return InboundEndpointDTO for specific InboundEndpoint
+     * @param endointName Inbound Endpoint Name
+     * @return InboundEndpointDTO
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
+    public InboundEndpointDTO getInboundEndpointbyName(String endointName) throws RemoteException,
+            InboundAdminInboundManagementException {
         try {
             return endpointAdminStub.getInboundEndpointbyName(endointName);
-        }  catch (RemoteException e) {
-            log.error(e.getMessage());
-            throw new RemoteException("Error when get endpoint names in InboundAdmin Client",e);
+        } catch (RemoteException e) {
+            throw new RemoteException("Exception occurred when get endpoint names in InboundAdminClient", e);
         } catch (InboundAdminInboundManagementException e) {
-            log.error(e.getMessage());
-            throw new InboundAdminInboundManagementException("Error when get endpoint names in InboundAdmin Client",e);
+            throw new InboundAdminInboundManagementException("InboundAdminInboundManagementException occurred when getting " +
+                    "Inbound Endpoint by name", e);
         }
     }
 
+    /**
+     * Adding Inbound Endpoint to the underlying stub.
+     * @param name Inbound Name
+     * @param sequence Injecting sequence
+     * @param onError Injecting sequence when error occurred
+     * @param protocol Running protocol
+     * @param classImpl Class for custom Inbounds
+     * @param sParams Inbound specific parameters
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
     public void addInboundEndpoint(String name, String sequence,
-                                   String onError,  String protocol, String classImpl,
+                                   String onError, String protocol, String classImpl,
                                    String[] sParams) throws RemoteException, InboundAdminInboundManagementException {
         try {
-            endpointAdminStub.addInboundEndpoint(name,sequence,onError,protocol,classImpl,sParams);
+            endpointAdminStub.addInboundEndpoint(name, sequence, onError, protocol, classImpl, sParams);
         } catch (RemoteException e) {
-            log.error(e.getMessage());
-            throw new RemoteException("Error when add inbound endpoint InboundAdmin Client",e);
+            throw new RemoteException("Remote Exception occurred when addInboundEndpoint" + name, e);
         } catch (InboundAdminInboundManagementException e) {
-            log.error(e.getMessage());
-            throw new InboundAdminInboundManagementException("Error when add inbound endpoint InboundAdmin Client",e);
+            throw new InboundAdminInboundManagementException("InboundAdminInboundManagementException  when add inbound " +
+                    "endpoint " + name + " InboundAdmin Client", e);
         }
     }
 
+    /**
+     * Adding Inbound Endpoint to the underlying stub from XMLString
+     * @param element String value of element
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
     public void addInboundEndpoint(String element) throws RemoteException, InboundAdminInboundManagementException {
         try {
             endpointAdminStub.addInboundEndpointFromXMLString(element);
         } catch (RemoteException e) {
-            log.error(e.getMessage());
-            throw new RemoteException("Error when add inbound endpoint InboundAdmin Client",e);
+            throw new RemoteException("RemoteException when add inbound endpoint InboundAdmin Client", e);
         }
     }
 
-
-
-
-
+    /**
+     * Update InboundEndpoint with given details for InboundEndpoint with given name
+     * @param name Inbound Name
+     * @param sequence Injecting sequence
+     * @param onError Injecting sequence when error occurred
+     * @param protocol Running protocol
+     * @param classImpl Class for custom Inbounds
+     * @param sParams Inbound specific parameters
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
     public void updateInboundEndpoint(String name, String sequence,
                                       String onError, String protocol, String classImpl,
                                       String[] sParams) throws RemoteException, InboundAdminInboundManagementException {
         try {
-            endpointAdminStub.updateInboundEndpoint(name,sequence,onError,protocol,classImpl,sParams);
+            endpointAdminStub.updateInboundEndpoint(name, sequence, onError, protocol, classImpl, sParams);
         } catch (RemoteException e) {
-            log.error(e.getMessage());
-            throw new RemoteException("Error when update inbound endpoint InboundAdmin Client",e);
+            throw new RemoteException("RemoteException occurred when update inbound endpoint " + name + " InboundAdmin Client", e);
         } catch (InboundAdminInboundManagementException e) {
-            log.error(e.getMessage());
-            throw new InboundAdminInboundManagementException("Error when update inbound endpoint InboundAdmin Client",e);
+            throw new InboundAdminInboundManagementException("InboundAdminInboundManagementException when update inbound " +
+                    "endpoint InboundAdmin Client", e);
         }
     }
 
+    /**
+     * Delete InboundEndpoint with given name
+     * @param name Inbound Name
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
     public void removeInboundEndpoint(String name) throws RemoteException, InboundAdminInboundManagementException {
         try {
             endpointAdminStub.removeInboundEndpoint(name);
         } catch (RemoteException e) {
-            log.error(e.getMessage());
-            throw new RemoteException("Error when removing inbound endpoint InboundAdmin Client",e);
+            throw new RemoteException("RemoteException when removing inbound endpoint " + name + " InboundAdmin Client", e);
         } catch (InboundAdminInboundManagementException e) {
-            log.error(e.getMessage());
-            throw new InboundAdminInboundManagementException("Error when removing inbound endpoint InboundAdmin Client",e);
+            throw new InboundAdminInboundManagementException("InboundAdminInboundManagementException when removing " +
+                    "inbound endpoint " + name + " InboundAdmin Client", e);
         }
     }
-
-
 }

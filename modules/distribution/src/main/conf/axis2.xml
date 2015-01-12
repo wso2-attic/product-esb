@@ -153,7 +153,7 @@
     <!-- expected to be resolved based on the content type. -->
     <messageFormatters>
         <messageFormatter contentType="application/x-www-form-urlencoded"
-                          class="org.apache.axis2.transport.http.XFormURLEncodedFormatter"/>
+                          class="org.apache.synapse.commons.formatters.XFormURLEncodedFormatter"/>
         <messageFormatter contentType="multipart/form-data"
                           class="org.apache.axis2.transport.http.MultipartFormDataFormatter"/>
         <messageFormatter contentType="application/xml"

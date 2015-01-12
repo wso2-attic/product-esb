@@ -146,4 +146,10 @@ public class PeopleRestService {
                 .header(CorsHeaderConstants.HEADER_AC_REQUEST_HEADERS, MediaType.APPLICATION_JSON)
                 .build();
     }
+
+    @POST
+    @Path("/NoBodyNoContentTypeFor201/{param}")
+    public Response DoTest(@PathParam("param") String msg) {
+       return Response.status(201).build();
+    }
 }
