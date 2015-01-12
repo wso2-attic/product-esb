@@ -78,26 +78,31 @@
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.message.store.stub</artifactId>
             <scope>compile</scope>
+            <version>${wso2carbon.snapshot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.transport.mgt.stub</artifactId>
             <scope>compile</scope>
+            <version>${wso2carbon.snapshot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.service.mgt.stub</artifactId>
             <scope>compile</scope>
+            <version>${wso2carbon.snapshot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.inbound.stub</artifactId>
             <scope>compile</scope>
+            <version>${wso2carbon.snapshot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.security.mgt.stub</artifactId>
             <scope>compile</scope>
+            <version>${wso2carbon.snapshot.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.wso2.carbon</groupId>
@@ -151,6 +156,7 @@
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.mediation.configadmin.stub</artifactId>
             <scope>compile</scope>
+            <version>${wso2carbon.snapshot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon</groupId>

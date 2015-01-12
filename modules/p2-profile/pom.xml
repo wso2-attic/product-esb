@@ -899,11 +899,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.common.feature.group</id>
-                                    <version>${wso2carbon.feature.version}</version>
+                                    <version>${wso2carbon.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.server.feature.group</id>
-                                    <version>${wso2carbon.feature.version}</version>
+                                    <version>${wso2carbon.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.runtime.feature.group</id>
