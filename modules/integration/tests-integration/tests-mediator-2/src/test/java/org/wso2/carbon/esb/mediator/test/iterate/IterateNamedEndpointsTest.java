@@ -53,7 +53,7 @@ public class IterateNamedEndpointsTest extends ESBIntegrationTest {
 		axis2Server1.start();
 	}
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
 	@Test(groups = "wso2.esb", description = "Tests for named endpoints")
 	public void testNamedEndpoints() throws Exception {

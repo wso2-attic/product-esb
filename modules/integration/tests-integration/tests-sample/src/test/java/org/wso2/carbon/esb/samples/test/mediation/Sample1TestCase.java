@@ -24,6 +24,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
+/**
+ * Sample 1: Simple Content-Based Routing (CBR) of Messages
+ */
 public class Sample1TestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
@@ -34,24 +37,21 @@ public class Sample1TestCase extends ESBIntegrationTest {
 
     }
 
-    /**
-     * Test for filter mediator  - filter using source and regex
-     *
-     * @throws Exception
-     */
-    @Test
+    @Test(groups = { "wso2.esb" },
+          description = "filtering of messages with XPath and regex matches")
     public void filterMediatorWithSourceAndRegexTest() throws Exception {
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest( getProxyServiceURLHttp("StockQuote"), null, "WSO2");
+        OMElement response = axis2Client
+            .sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuote"), null, "WSO2");
 
-        Assert.assertTrue(response.toString().contains("GetQuoteResponse"));
-        Assert.assertTrue(response.toString().contains("WSO2 Company"));
-
+        Assert.assertTrue(response.toString().contains("GetQuoteResponse"),
+                          "GetQuoteResponse not found");
+        Assert.assertTrue(response.toString().contains("WSO2 Company"), "WSO2 Company not found");
 
     }
 
-    @AfterClass
-    private void destroy() throws Exception {
+    @AfterClass(alwaysRun = true)
+    public void destroy() throws Exception {
         super.cleanup();
     }
 }

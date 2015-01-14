@@ -18,16 +18,15 @@
 package org.wso2.carbon.esb.samples.test.mediation;
 
 import org.apache.axiom.om.OMElement;
-import org.apache.axis2.AxisFault;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
-import static org.testng.Assert.assertTrue;
-
+/**
+ * Sample 6: Manipulating SOAP Headers and Filtering Incoming and Outgoing Messages
+ */
 public class Sample6TestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
@@ -35,21 +34,20 @@ public class Sample6TestCase extends ESBIntegrationTest {
         loadSampleESBConfiguration(6);
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
-    @Test(groups = {"wso2.esb"}, description = "Sample 6: Manipulate soap headers of incoming messages")
-    public void ManipulatingSoupHeader() throws AxisFault {
-        OMElement response;
+    @Test(groups = { "wso2.esb" },
+          description = "Sample 6: Manipulate soap headers of incoming messages")
+    public void ManipulatingSoupHeader() throws Exception {
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(
+            getMainSequenceURL(), null, "WSO2");
 
-        response = axis2Client.sendSimpleStockQuoteRequest(
-                getMainSequenceURL(),
-                null,
-                "IBM");
-        assertTrue(response.toString().contains("IBM"), "Symbol name mismatched");
+        Assert.assertTrue(response.toString().contains("GetQuoteResponse"),
+                          "GetQuoteResponse not found");
+        Assert.assertTrue(response.toString().contains("WSO2 Company"), "WSO2 Company not found");
 
     }
 
     @AfterClass(alwaysRun = true)
-    private void destroy() throws Exception {
+    public void destroy() throws Exception {
         super.cleanup();
     }
 }

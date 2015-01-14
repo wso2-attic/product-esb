@@ -56,7 +56,7 @@ public class SmooksMediatorConfigFromLocalEntryTestCase extends ESBIntegrationTe
         addVFSProxy();
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb", "local only"}, description = "Testing Smooks configuration from local entry", enabled = false)
     public void testSmookConfigFromLocalEntry() throws Exception {
