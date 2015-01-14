@@ -92,6 +92,6 @@ public class ESBJAVA3471 extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void stop() throws Exception {
-        cleanup();
+        super.cleanup();
     }
 }
