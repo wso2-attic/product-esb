@@ -269,7 +269,7 @@
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.mediation.configadmin.stub</artifactId>
-                <version>${wso2carbon.version}</version>
+                <version>${wso2carbon.snapshot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
@@ -317,7 +317,7 @@
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.inbound.stub</artifactId>
-                <version>${wso2carbon.version}</version>
+                <version>${wso2carbon.snapshot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.ws.commons.axiom.wso2</groupId>

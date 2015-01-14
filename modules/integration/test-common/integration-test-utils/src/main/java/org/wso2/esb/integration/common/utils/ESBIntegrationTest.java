@@ -545,25 +545,14 @@ public abstract class ESBIntegrationTest {
 		}
 	}
 
-	private void deleteProxyServices() {
-		if (proxyServicesList != null) {
-			Iterator<String> itr = proxyServicesList.iterator();
-			while (itr.hasNext()) {
-				String proxyName = itr.next();
-				try {
-					if (esbUtils.isProxyServiceExist(contextUrls.getBackEndUrl(), sessionCookie, proxyName)) {
-						esbUtils.deleteProxyService(contextUrls.getBackEndUrl(), sessionCookie, proxyName);
-
-                   /*     if (ExecutionEnvironment.stratos.name().equalsIgnoreCase(getExecutionEnvironment())) {
-                            long deploymentDelay = FrameworkFactory.getFrameworkProperties(
-                                    ProductConstant.ESB_SERVER_NAME).getEnvironmentVariables().getDeploymentDelay();
-                            Assert.assertTrue(isProxyWSDlNotExist(getProxyServiceURL(proxyName), deploymentDelay)
-                                    , "Proxy UnDeployment Synchronizing failed in workers");
-                            Assert.assertTrue(isProxyWSDlNotExist(getProxyServiceURL(proxyName), deploymentDelay)
-                                    , "Proxy UnDeployment Synchronizing failed in workers");
-                            Assert.assertTrue(isProxyWSDlNotExist(getProxyServiceURL(proxyName), deploymentDelay)
-                                    , "Proxy UnDeployment Synchronizing failed in workers");
-                        }*/
+    private void deleteProxyServices() {
+        if (proxyServicesList != null) {
+            Iterator<String> itr = proxyServicesList.iterator();
+            while (itr.hasNext()) {
+                String proxyName = itr.next();
+                try {
+                    if (esbUtils.isProxyServiceExist(contextUrls.getBackEndUrl(), sessionCookie, proxyName)) {
+                        esbUtils.deleteProxyService(contextUrls.getBackEndUrl(), sessionCookie, proxyName);
 					}
 				} catch (Exception e) {
 					Assert.fail("while undeploying Proxy. " + e.getMessage());
