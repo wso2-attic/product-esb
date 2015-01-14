@@ -60,22 +60,24 @@ public class InboundAdminClient {
 		AuthenticateStub.authenticateStub(userName, password, endpointAdminStub);
 	}
 
-	/**
-	 * Return all Inbound Endpoint Names
-	 * @return InboundEndpointNames
-	 * @throws java.rmi.RemoteException
-	 * @throws org.wso2.carbon.inbound.stub.InboundAdminInboundManagementException
-	 */
-	public InboundEndpointDTO[] getAllInboundEndpointNames() throws RemoteException, InboundAdminInboundManagementException {
-		try {
-			return endpointAdminStub.getAllInboundEndpointNames();
-		} catch (RemoteException e) {
-			throw new RemoteException("Exception occurred when get endpoint names in InboundAdminClient", e);
-		} catch (InboundAdminInboundManagementException e) {
-			throw new InboundAdminInboundManagementException
-					("Exception occurred when get endpoint names in InboundAdminClient", e);
-		}
-	}
+
+    /**
+     * Return all Inbound Endpoint Names
+     * @return InboundEndpointNames
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
+    public InboundEndpointDTO[] getAllInboundEndpointNames() throws RemoteException, InboundAdminInboundManagementException {
+        try {
+            return endpointAdminStub.getAllInboundEndpointNames();
+        } catch (RemoteException e) {
+            throw new RemoteException("Exception occurred when get endpoint names in InboundAdminClient", e);
+        } catch (InboundAdminInboundManagementException e) {
+            throw new InboundAdminInboundManagementException
+                    ("Exception occurred when get endpoint names in InboundAdminClient", e);
+        }
+    }
+
 
 	/**
 	 * Return InboundEndpointDTO for specific InboundEndpoint
@@ -96,39 +98,41 @@ public class InboundAdminClient {
 		}
 	}
 
-	/**
-	 * Adding Inbound Endpoint to the underlying stub.
-	 * @param name Inbound Name
-	 * @param sequence Injecting sequence
-	 * @param onError Injecting sequence when error occurred
-	 * @param protocol Running protocol
-	 * @param classImpl Class for custom Inbounds
-	 * @throws java.rmi.RemoteException
-	 * @throws org.wso2.carbon.inbound.stub.InboundAdminInboundManagementException
-	 */
-	public void addInboundEndpoint(String name, String sequence,
-	                               String onError, String protocol, String classImpl,
-	                               Map<String, String> paramsMap) throws RemoteException, InboundAdminInboundManagementException {
-		try {
-			ParameterDTO[] parameterDTOs =null;
-			if(paramsMap != null) {
-				parameterDTOs = new ParameterDTO[paramsMap.size()];
-				int count=0;
-				for(String key:paramsMap.keySet()){
-					parameterDTOs[count] = new ParameterDTO();
-					parameterDTOs[count].setName(key);
-					parameterDTOs[count].setValue(paramsMap.get(key));
-					count++;
-				}
-			}
-			endpointAdminStub.addInboundEndpoint(name, sequence, onError, protocol, classImpl, parameterDTOs);
-		} catch (RemoteException e) {
-			throw new RemoteException("Remote Exception occurred when addInboundEndpoint" + name, e);
-		} catch (InboundAdminInboundManagementException e) {
-			throw new InboundAdminInboundManagementException("InboundAdminInboundManagementException  when add inbound " +
-			                                                 "endpoint " + name + " InboundAdmin Client", e);
-		}
-	}
+
+    /**
+     * Adding Inbound Endpoint to the underlying stub.
+     * @param name Inbound Name
+     * @param sequence Injecting sequence
+     * @param onError Injecting sequence when error occurred
+     * @param protocol Running protocol
+     * @param classImpl Class for custom Inbounds
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
+    public void addInboundEndpoint(String name, String sequence,
+                                   String onError, String protocol, String classImpl,
+                                   Map<String, String> paramsMap) throws RemoteException, InboundAdminInboundManagementException {
+        try {
+            ParameterDTO[] parameterDTOs =null;
+            if(paramsMap != null) {
+                parameterDTOs = new ParameterDTO[paramsMap.size()];
+                int count=0;
+                for(String key:paramsMap.keySet()){
+                    parameterDTOs[count] = new ParameterDTO();
+                    parameterDTOs[count].setName(key);
+                    parameterDTOs[count].setValue(paramsMap.get(key));
+                    count++;
+                }
+            }
+            endpointAdminStub.addInboundEndpoint(name, sequence, onError, protocol, classImpl, parameterDTOs);
+        } catch (RemoteException e) {
+            throw new RemoteException("Remote Exception occurred when addInboundEndpoint" + name, e);
+        } catch (InboundAdminInboundManagementException e) {
+            throw new InboundAdminInboundManagementException("InboundAdminInboundManagementException  when add inbound " +
+                                                             "endpoint " + name + " InboundAdmin Client", e);
+        }
+    }
+
 
 	/**
 	 * Adding Inbound Endpoint to the underlying stub from XMLString
@@ -144,39 +148,41 @@ public class InboundAdminClient {
 		}
 	}
 
-	/**
-	 * Update InboundEndpoint with given details for InboundEndpoint with given name
-	 * @param name Inbound Name
-	 * @param sequence Injecting sequence
-	 * @param onError Injecting sequence when error occurred
-	 * @param protocol Running protocol
-	 * @param classImpl Class for custom Inbounds
-	 * @throws java.rmi.RemoteException
-	 * @throws org.wso2.carbon.inbound.stub.InboundAdminInboundManagementException
-	 */
-	public void updateInboundEndpoint(String name, String sequence,
-	                                  String onError, String protocol, String classImpl,
-	                                  Map<String, String> paramsMap) throws RemoteException, InboundAdminInboundManagementException {
-		try {
-			ParameterDTO[] parameterDTOs =null;
-			if(paramsMap != null) {
-				parameterDTOs = new ParameterDTO[paramsMap.size()];
-				int count = 0;
-				for (String key : paramsMap.keySet()) {
-					parameterDTOs[count] = new ParameterDTO();
-					parameterDTOs[count].setName(key);
-					parameterDTOs[count].setValue(paramsMap.get(key));
-					count++;
-				}
-			}
-			endpointAdminStub.updateInboundEndpoint(name, sequence, onError, protocol, classImpl, parameterDTOs);
-		} catch (RemoteException e) {
-			throw new RemoteException("RemoteException occurred when update inbound endpoint " + name + " InboundAdmin Client", e);
-		} catch (InboundAdminInboundManagementException e) {
-			throw new InboundAdminInboundManagementException("InboundAdminInboundManagementException when update inbound " +
-			                                                 "endpoint InboundAdmin Client", e);
-		}
-	}
+
+    /**
+     * Update InboundEndpoint with given details for InboundEndpoint with given name
+     * @param name Inbound Name
+     * @param sequence Injecting sequence
+     * @param onError Injecting sequence when error occurred
+     * @param protocol Running protocol
+     * @param classImpl Class for custom Inbounds
+     * @throws RemoteException
+     * @throws InboundAdminInboundManagementException
+     */
+    public void updateInboundEndpoint(String name, String sequence,
+                                      String onError, String protocol, String classImpl,
+                                      Map<String, String> paramsMap) throws RemoteException, InboundAdminInboundManagementException {
+        try {
+            ParameterDTO[] parameterDTOs =null;
+            if(paramsMap != null) {
+                parameterDTOs = new ParameterDTO[paramsMap.size()];
+                int count = 0;
+                for (String key : paramsMap.keySet()) {
+                    parameterDTOs[count] = new ParameterDTO();
+                    parameterDTOs[count].setName(key);
+                    parameterDTOs[count].setValue(paramsMap.get(key));
+                    count++;
+                }
+            }
+            endpointAdminStub.updateInboundEndpoint(name, sequence, onError, protocol, classImpl, parameterDTOs);
+        } catch (RemoteException e) {
+            throw new RemoteException("RemoteException occurred when update inbound endpoint " + name + " InboundAdmin Client", e);
+        } catch (InboundAdminInboundManagementException e) {
+            throw new InboundAdminInboundManagementException("InboundAdminInboundManagementException when update inbound " +
+                                                             "endpoint InboundAdmin Client", e);
+        }
+    }
+
 
 	/**
 	 * Delete InboundEndpoint with given name
