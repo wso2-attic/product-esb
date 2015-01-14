@@ -30,6 +30,7 @@ import org.wso2.carbon.automation.engine.context.beans.ContextUrls;
 import org.wso2.carbon.automation.engine.context.beans.Tenant;
 import org.wso2.carbon.automation.engine.context.beans.User;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
+import org.wso2.carbon.inbound.stub.types.carbon.InboundEndpointDTO;
 import org.wso2.carbon.integration.common.admin.client.SecurityAdminServiceClient;
 import org.wso2.carbon.integration.common.utils.LoginLogoutClient;
 import org.wso2.carbon.security.mgt.stub.config.SecurityAdminServiceSecurityConfigExceptionException;
@@ -257,11 +258,10 @@ public abstract class ESBIntegrationTest {
 
     protected void deleteInboundEndpoints() throws Exception {
         try {
-          String name =   esbUtils.getAllInboundEndpoints(contextUrls.getBackEndUrl(), sessionCookie);
-            if(name != null){
-              String[] names =  name.split("~:~");
-                for(String name1:names){
-                    esbUtils.deleteInboundEndpointDeployed(contextUrls.getBackEndUrl(), sessionCookie,name1);
+          InboundEndpointDTO[]names =  esbUtils.getAllInboundEndpoints(contextUrls.getBackEndUrl(), sessionCookie);
+            if(names != null){
+                for(InboundEndpointDTO name:names){
+                    esbUtils.deleteInboundEndpointDeployed(contextUrls.getBackEndUrl(), sessionCookie,name.getName());
                 }
             }
         } catch (Exception e) {
