@@ -1,20 +1,20 @@
 /*
-*Copyright (c) 2005-2014, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
-*
-*WSO2 Inc. licenses this file to you under the Apache License,
-*Version 2.0 (the "License"); you may not use this file except
-*in compliance with the License.
-*You may obtain a copy of the License at
-*
-*http://www.apache.org/licenses/LICENSE-2.0
-*
-*Unless required by applicable law or agreed to in writing,
-*software distributed under the License is distributed on an
-*"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-*KIND, either express or implied.  See the License for the
-*specific language governing permissions and limitations
-*under the License.
-*/
+ * Copyright (c) 2005-2014, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 package org.wso2.esb.integration.common.clients.inbound.endpoint;
 
 
@@ -32,33 +32,34 @@ import java.util.Map;
 
 public class InboundAdminClient {
 
-    private static final Log log = LogFactory.getLog(InboundAdminClient.class);
+	private static final Log log = LogFactory.getLog(InboundAdminClient.class);
 
-    private final String serviceName = "InboundAdmin";
-    private InboundAdminStub endpointAdminStub;
+	private final String serviceName = "InboundAdmin";
+	private InboundAdminStub endpointAdminStub;
 
-    /**
-     * @param backEndUrl    BackEnd URL
-     * @param sessionCookie Session cookie
-     * @throws org.apache.axis2.AxisFault
-     */
-    public InboundAdminClient(String backEndUrl, String sessionCookie) throws AxisFault {
-        String endPoint = backEndUrl + serviceName;
-        endpointAdminStub = new InboundAdminStub(endPoint);
-        AuthenticateStub.authenticateStub(sessionCookie, endpointAdminStub);
-    }
+	/**
+	 * @param backEndUrl    BackEnd URL
+	 * @param sessionCookie Session cookie
+	 * @throws org.apache.axis2.AxisFault
+	 */
+	public InboundAdminClient(String backEndUrl, String sessionCookie) throws AxisFault {
+		String endPoint = backEndUrl + serviceName;
+		endpointAdminStub = new InboundAdminStub(endPoint);
+		AuthenticateStub.authenticateStub(sessionCookie, endpointAdminStub);
+	}
 
-    /**
-     * @param backEndUrl BackEnd URL
-     * @param userName   Username
-     * @param password   Password
-     * @throws org.apache.axis2.AxisFault
-     */
-    public InboundAdminClient(String backEndUrl, String userName, String password) throws AxisFault {
-        String endPoint = backEndUrl + serviceName;
-        endpointAdminStub = new InboundAdminStub(endPoint);
-        AuthenticateStub.authenticateStub(userName, password, endpointAdminStub);
-    }
+	/**
+	 * @param backEndUrl BackEnd URL
+	 * @param userName   Username
+	 * @param password   Password
+	 * @throws org.apache.axis2.AxisFault
+	 */
+	public InboundAdminClient(String backEndUrl, String userName, String password) throws AxisFault {
+		String endPoint = backEndUrl + serviceName;
+		endpointAdminStub = new InboundAdminStub(endPoint);
+		AuthenticateStub.authenticateStub(userName, password, endpointAdminStub);
+	}
+
 
     /**
      * Return all Inbound Endpoint Names
@@ -77,24 +78,26 @@ public class InboundAdminClient {
         }
     }
 
-    /**
-     * Return InboundEndpointDTO for specific InboundEndpoint
-     * @param endointName Inbound Endpoint Name
-     * @return InboundEndpointDTO
-     * @throws RemoteException
-     * @throws InboundAdminInboundManagementException
-     */
-    public InboundEndpointDTO getInboundEndpointbyName(String endointName) throws RemoteException,
-            InboundAdminInboundManagementException {
-        try {
-            return endpointAdminStub.getInboundEndpointbyName(endointName);
-        } catch (RemoteException e) {
-            throw new RemoteException("Exception occurred when get endpoint names in InboundAdminClient", e);
-        } catch (InboundAdminInboundManagementException e) {
-            throw new InboundAdminInboundManagementException("InboundAdminInboundManagementException occurred when getting " +
-                    "Inbound Endpoint by name", e);
-        }
-    }
+
+	/**
+	 * Return InboundEndpointDTO for specific InboundEndpoint
+	 * @param endointName Inbound Endpoint Name
+	 * @return InboundEndpointDTO
+	 * @throws java.rmi.RemoteException
+	 * @throws org.wso2.carbon.inbound.stub.InboundAdminInboundManagementException
+	 */
+	public InboundEndpointDTO getInboundEndpointbyName(String endointName) throws RemoteException,
+	                                                                              InboundAdminInboundManagementException {
+		try {
+			return endpointAdminStub.getInboundEndpointbyName(endointName);
+		} catch (RemoteException e) {
+			throw new RemoteException("Exception occurred when get endpoint names in InboundAdminClient", e);
+		} catch (InboundAdminInboundManagementException e) {
+			throw new InboundAdminInboundManagementException("InboundAdminInboundManagementException occurred when getting " +
+			                                                 "Inbound Endpoint by name", e);
+		}
+	}
+
 
     /**
      * Adding Inbound Endpoint to the underlying stub.
@@ -130,19 +133,21 @@ public class InboundAdminClient {
         }
     }
 
-    /**
-     * Adding Inbound Endpoint to the underlying stub from XMLString
-     * @param element String value of element
-     * @throws RemoteException
-     * @throws InboundAdminInboundManagementException
-     */
-    public void addInboundEndpoint(String element) throws RemoteException, InboundAdminInboundManagementException {
-        try {
-            endpointAdminStub.addInboundEndpointFromXMLString(element);
-        } catch (RemoteException e) {
-            throw new RemoteException("RemoteException when add inbound endpoint InboundAdmin Client", e);
-        }
-    }
+
+	/**
+	 * Adding Inbound Endpoint to the underlying stub from XMLString
+	 * @param element String value of element
+	 * @throws java.rmi.RemoteException
+	 * @throws org.wso2.carbon.inbound.stub.InboundAdminInboundManagementException
+	 */
+	public void addInboundEndpoint(String element) throws RemoteException, InboundAdminInboundManagementException {
+		try {
+			endpointAdminStub.addInboundEndpointFromXMLString(element);
+		} catch (RemoteException e) {
+			throw new RemoteException("RemoteException when add inbound endpoint InboundAdmin Client", e);
+		}
+	}
+
 
     /**
      * Update InboundEndpoint with given details for InboundEndpoint with given name
@@ -178,20 +183,21 @@ public class InboundAdminClient {
         }
     }
 
-    /**
-     * Delete InboundEndpoint with given name
-     * @param name Inbound Name
-     * @throws RemoteException
-     * @throws InboundAdminInboundManagementException
-     */
-    public void removeInboundEndpoint(String name) throws RemoteException, InboundAdminInboundManagementException {
-        try {
-            endpointAdminStub.removeInboundEndpoint(name);
-        } catch (RemoteException e) {
-            throw new RemoteException("RemoteException when removing inbound endpoint " + name + " InboundAdmin Client", e);
-        } catch (InboundAdminInboundManagementException e) {
-            throw new InboundAdminInboundManagementException("InboundAdminInboundManagementException when removing " +
-                    "inbound endpoint " + name + " InboundAdmin Client", e);
-        }
-    }
+
+	/**
+	 * Delete InboundEndpoint with given name
+	 * @param name Inbound Name
+	 * @throws java.rmi.RemoteException
+	 * @throws org.wso2.carbon.inbound.stub.InboundAdminInboundManagementException
+	 */
+	public void removeInboundEndpoint(String name) throws RemoteException, InboundAdminInboundManagementException {
+		try {
+			endpointAdminStub.removeInboundEndpoint(name);
+		} catch (RemoteException e) {
+			throw new RemoteException("RemoteException when removing inbound endpoint " + name + " InboundAdmin Client", e);
+		} catch (InboundAdminInboundManagementException e) {
+			throw new InboundAdminInboundManagementException("InboundAdminInboundManagementException when removing " +
+			                                                 "inbound endpoint " + name + " InboundAdmin Client", e);
+		}
+	}
 }
