@@ -133,9 +133,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.smooks.feature:${wso2carbon.feature.version}
                                 </featureArtifactDef>
-                                <!--featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.rule.mediation.feature:${wso2carbon.feature.version}
-                                </featureArtifactDef-->
+                                </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.mediation.ntask.feature:${wso2carbon.feature.version}
                                 </featureArtifactDef>
@@ -584,10 +584,10 @@
                                     <id>org.wso2.carbon.transport.commons.feature.group</id>
                                     <version>${wso2carbon.feature.version}</version>
                                 </feature>
-                                <!--feature>
+                                <feature>
                                     <id>org.wso2.carbon.rule.mediation.feature.group</id>
                                     <version>${wso2carbon.feature.version}</version>
-                                </feature-->
+                                </feature>
                                 <feature>
                                    <id>org.wso2.carbon.message.flows.feature.group</id>
                                    <version>${wso2carbon.feature.version}</version>
@@ -893,10 +893,10 @@
                                     <id>org.wso2.carbon.mediator.bam.feature.group</id>
                                     <version>${wso2carbon.feature.version}</version>
                                 </feature>
-                                <!--feature>
+                                <feature>
                                     <id>org.wso2.carbon.rule.mediation.feature.group</id>
                                     <version>${wso2carbon.feature.version}</version>
-                                </feature-->
+                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.common.feature.group</id>
                                     <version>${wso2carbon.version}</version>
