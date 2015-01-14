@@ -391,7 +391,7 @@ public class ESBTestCaseUtils {
         Assert.assertNull(inboundEndpointDTO);
     }
 
-    public String getAllInboundEndpoints(String backEndUrl, String sessionCookie)
+    public InboundEndpointDTO[] getAllInboundEndpoints(String backEndUrl, String sessionCookie)
             throws Exception {
         InboundAdminClient inboundAdmin = new InboundAdminClient(backEndUrl, sessionCookie);
         return inboundAdmin.getAllInboundEndpointNames();
