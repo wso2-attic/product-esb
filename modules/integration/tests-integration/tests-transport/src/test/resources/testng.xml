@@ -31,26 +31,26 @@
         <packages>
             <package name="org.wso2.carbon.esb.jms.transport.test.*"/>
         </packages>
-		<classes>
-           <class name="org.wso2.carbon.esb.jms.transport.test.JMSOutOnlyTestCase">
+        <classes>
+            <class name="org.wso2.carbon.esb.jms.transport.test.JMSOutOnlyTestCase">
                 <methods>
                     <exclude name=".*" />
                 </methods>
-           </class>
-		   <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA2824MissingResponseTestCase">
+            </class>
+            <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA2824MissingResponseTestCase">
                 <methods>
                     <exclude name=".*" />
                 </methods>
-           </class>
-		</classes>
+            </class>
+        </classes>
     </test>
 
-<!--    <test name="TCP-transport-Test" preserve-order="true" verbose="2">
-        <packages>
-            <package name="org.wso2.carbon.esb.tcp.transport.test.*"/>
-        </packages>
-    </test>
--->
+    <!--    <test name="TCP-transport-Test" preserve-order="true" verbose="2">
+            <packages>
+                <package name="org.wso2.carbon.esb.tcp.transport.test.*"/>
+            </packages>
+        </test>
+    -->
     <!--disabled since feature management is used to install hl7 feature-->
     <!--    <test name="HL7-transport-Test" preserve-order="true" verbose="2">
             <packages>
@@ -63,15 +63,14 @@
             <package name="org.wso2.carbon.esb.passthru.transport.test"/>
         </packages>
     </test>
-<!--    <test name="inbound-Http Endpoint-Test" preserve-order="true" verbose="2">
-        <packages>
-            <package name="org.wso2.carbon.esb.http.inbound.transport.test"/>
-        </packages>
-    </test> -->
+    <!--    <test name="inbound-Http Endpoint-Test" preserve-order="true" verbose="2">
+            <packages>
+                <package name="org.wso2.carbon.esb.http.inbound.transport.test"/>
+            </packages>
+        </test> -->
     <test name="Generic Inbound Test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.generic.inbound.transport.test.GenericInboundTransportTestCase"/>
         </classes>
     </test>
 </suite>
-
