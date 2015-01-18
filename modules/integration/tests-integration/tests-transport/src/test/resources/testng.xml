@@ -68,5 +68,10 @@
             <package name="org.wso2.carbon.esb.http.inbound.transport.test"/>
         </packages>
     </test> -->
+    <test name="Generic Inbound Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.generic.inbound.transport.test.GenericInboundTransportTestCase"/>
+        </classes>
+    </test>
 </suite>
 

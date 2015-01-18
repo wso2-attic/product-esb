@@ -1,0 +1,5 @@
+<sequence name="inFault">
+    <log category="INFO" level="full" separator=",">
+        <property name="fault" value="***********************************"/>
+    </log>
+</sequence>
