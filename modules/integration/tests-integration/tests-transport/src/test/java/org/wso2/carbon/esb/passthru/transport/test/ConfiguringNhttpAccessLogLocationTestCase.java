@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.wso2.carbon.esb.nhttp.transport.test;
+package org.wso2.carbon.esb.passthru.transport.test;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -66,9 +66,6 @@ public class ConfiguringNhttpAccessLogLocationTestCase extends ESBIntegrationTes
 
         applyProperty(srcFile, propertyName, nhttpLogDir);
         applyProperty(log4jProperties, "log4j.logger.org.apache.synapse.transport.http.access", "INFO");
-        serverConfigurationManager.applyConfigurationWithoutRestart(new File(getClass()
-                .getResource("/artifacts/ESB/nhttp/transport/axis2.xml").getPath()));
-
         serverConfigurationManager.restartGracefully();
 
         super.init();
