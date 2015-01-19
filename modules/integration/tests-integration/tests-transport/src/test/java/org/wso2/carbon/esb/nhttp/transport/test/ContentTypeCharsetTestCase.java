@@ -67,43 +67,40 @@ public class ContentTypeCharsetTestCase extends ESBIntegrationTest {
         String contentType = "application/xml;charset=UTF-8";
         String charset = "charset";
 
-        try {
-            SimpleHttpClient httpClient = new SimpleHttpClient();
+        SimpleHttpClient httpClient = new SimpleHttpClient();
 
-            Map<String, String> headers = new HashMap<String, String>();
+        Map<String, String> headers = new HashMap<String, String>();
 
-            headers.put("content-type", contentType);
+        headers.put("content-type", contentType);
 
-            HttpResponse response = httpClient.doGet(getProxyServiceURLHttp("FooProxy"), headers);
+        HttpResponse response = httpClient.doGet(getProxyServiceURLHttp("FooProxy"), headers);
 
-            String contentTypeData = response.getEntity().getContentType().getValue();
+        String contentTypeData = response.getEntity().getContentType().getValue();
 
-            Assert.assertTrue(contentTypeData.contains(charset));
+        Assert.assertTrue(contentTypeData.contains(charset));
 
-            if (contentTypeData.contains(charset)) {
+        if (contentTypeData.contains(charset)) {
 
-                String[] pairs = contentTypeData.split(";");
+            String[] pairs = contentTypeData.split(";");
 
-                for (String pair : pairs) {
+            for (String pair : pairs) {
 
-                    if (pair.contains(charset)) {
+                if (pair.contains(charset)) {
 
-                        String[] charsetDetails = pair.split("=");
+                    String[] charsetDetails = pair.split("=");
 
-                        Assert.assertTrue(!charsetDetails[1].equals(""));
+                    Assert.assertTrue(!charsetDetails[1].equals(""));
 
-                    }
                 }
             }
-        } finally {
-
         }
     }
 
     @AfterClass(alwaysRun = true)
     public void stop() throws Exception {
         try{
-        cleanup();}
+             cleanup();
+        }
         finally{
             Thread.sleep(3000);
             serverManager.restoreToLastConfiguration();

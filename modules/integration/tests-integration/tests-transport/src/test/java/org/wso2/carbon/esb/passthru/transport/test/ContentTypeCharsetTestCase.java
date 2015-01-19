@@ -55,38 +55,34 @@ public class ContentTypeCharsetTestCase extends ESBIntegrationTest {
 
         String charset = "charset";
 
-        try {
-              SimpleHttpClient httpClient = new SimpleHttpClient();
+        SimpleHttpClient httpClient = new SimpleHttpClient();
 
-            Map<String, String> headers = new HashMap<String, String>();
+        Map<String, String> headers = new HashMap<String, String>();
 
-            headers.put("content-type", contentType);
+        headers.put("content-type", contentType);
 
-            HttpResponse response = httpClient.doGet(getProxyServiceURLHttp("FooProxy"), headers);
-        
-            String contentTypeData = response.getEntity().getContentType().getValue();
+        HttpResponse response = httpClient.doGet(getProxyServiceURLHttp("FooProxy"), headers);
 
-            Assert.assertTrue(contentTypeData.contains(charset));
+        String contentTypeData = response.getEntity().getContentType().getValue();
 
-            if (contentTypeData.contains(charset)) {
+        Assert.assertTrue(contentTypeData.contains(charset));
 
-                String[] pairs = contentTypeData.split(";");
+        if (contentTypeData.contains(charset)) {
 
-                for (String pair : pairs) {
+            String[] pairs = contentTypeData.split(";");
 
-                    if (pair.contains(charset)) {
+            for (String pair : pairs) {
 
-                        String[] charsetDetails = pair.split("=");
+                if (pair.contains(charset)) {
 
-                        Assert.assertTrue(!charsetDetails[1].equals(""));
+                    String[] charsetDetails = pair.split("=");
 
-                    }
+                    Assert.assertTrue(!charsetDetails[1].equals(""));
+
                 }
             }
-        } finally {
-
         }
-    }
+     }
 
     @AfterClass(alwaysRun = true)
     public void stop() throws Exception {
