@@ -38,7 +38,6 @@ public class ContentTypeCharsetTestCase extends ESBIntegrationTest {
 
     private Log log = LogFactory.getLog(ContentTypeCharsetTestCase.class);
 
-    // public WireMonitorServer wireServer;
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
@@ -47,34 +46,24 @@ public class ContentTypeCharsetTestCase extends ESBIntegrationTest {
 
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/nhttp_transport"
                 + "/content_type_charset_synapse.xml");
-
-        // wireServer = new WireMonitorServer(8991);
-    }
+  }
 
     @Test(groups = { "wso2.esb" }, description = "Test for charset value proprty in the header response")
     public void testReturnContentType() throws Exception {
-
-        int port = 9005;
 
         String contentType = "application/xml;charset=UTF-8";
 
         String charset = "charset";
 
-        //SimpleWebServer simpleWebServer = new SimulatedService(port, 200);
-
         try {
-            //simpleWebServer.start();
-
-            SimpleHttpClient httpClient = new SimpleHttpClient();
+              SimpleHttpClient httpClient = new SimpleHttpClient();
 
             Map<String, String> headers = new HashMap<String, String>();
 
             headers.put("content-type", contentType);
 
             HttpResponse response = httpClient.doGet(getProxyServiceURLHttp("FooProxy"), headers);
-
-            //simpleWebServer.terminate();
-
+        
             String contentTypeData = response.getEntity().getContentType().getValue();
 
             Assert.assertTrue(contentTypeData.contains(charset));
@@ -96,9 +85,6 @@ public class ContentTypeCharsetTestCase extends ESBIntegrationTest {
             }
         } finally {
 
-            //simpleWebServer.terminate();
-
-            waitForPortCloser(port);
         }
     }
 
