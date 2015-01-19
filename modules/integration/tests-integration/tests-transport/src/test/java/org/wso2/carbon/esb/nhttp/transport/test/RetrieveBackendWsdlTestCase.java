@@ -45,9 +45,6 @@ public class RetrieveBackendWsdlTestCase extends ESBIntegrationTest {
         super.init();
 
         httpClientUtil = new HttpClientUtil();
-
-
-
         serverManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
         serverManager.applyConfiguration(new File(getClass()
                 .getResource("/artifacts/ESB/nhttp/transport/axis2.xml").getPath()));
