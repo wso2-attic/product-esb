@@ -16,66 +16,54 @@
  * under the License.
  */
 
-package org.wso2.carbon.esb.nhttp.transport.test;
+package org.wso2.carbon.esb.passthru.transport.test;
 
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpResponse;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
+import org.wso2.carbon.integration.common.utils.ClientConnectionUtil;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
-import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpResponse;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
-
-import org.wso2.carbon.automation.engine.context.AutomationContext;
-import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
-import org.wso2.carbon.integration.common.utils.ClientConnectionUtil;
-import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
-import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-
 public class ContentTypeCharsetTestCase extends ESBIntegrationTest {
 
     private Log log = LogFactory.getLog(ContentTypeCharsetTestCase.class);
-    private ServerConfigurationManager serverManager;
+
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
         super.init();
-        serverManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
-        serverManager.applyConfiguration(new File(getClass()
-                .getResource("/artifacts/ESB/nhttp/transport/axis2.xml").getPath()));
-        super.init();
+
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/nhttp_transport"
                 + "/content_type_charset_synapse.xml");
-
-    }
+  }
 
     @Test(groups = { "wso2.esb" }, description = "Test for charset value proprty in the header response")
     public void testReturnContentType() throws Exception {
 
-
         String contentType = "application/xml;charset=UTF-8";
+
         String charset = "charset";
 
         try {
-            SimpleHttpClient httpClient = new SimpleHttpClient();
+              SimpleHttpClient httpClient = new SimpleHttpClient();
 
             Map<String, String> headers = new HashMap<String, String>();
 
             headers.put("content-type", contentType);
 
             HttpResponse response = httpClient.doGet(getProxyServiceURLHttp("FooProxy"), headers);
-
+        
             String contentTypeData = response.getEntity().getContentType().getValue();
 
             Assert.assertTrue(contentTypeData.contains(charset));
@@ -102,14 +90,7 @@ public class ContentTypeCharsetTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void stop() throws Exception {
-        try{
-        cleanup();}
-        finally{
-            Thread.sleep(3000);
-            serverManager.restoreToLastConfiguration();
-            serverManager=null;
-        }
-
+        cleanup();
     }
 
     public boolean waitForPortCloser(int port) throws UnknownHostException {

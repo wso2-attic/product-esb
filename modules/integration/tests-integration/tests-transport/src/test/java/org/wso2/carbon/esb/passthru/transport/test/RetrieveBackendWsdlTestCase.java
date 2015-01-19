@@ -15,7 +15,7 @@
 *specific language governing permissions and limitations
 *under the License.
 */
-package org.wso2.carbon.esb.nhttp.transport.test;
+package org.wso2.carbon.esb.passthru.transport.test;
 
 
 import org.apache.axiom.om.OMElement;
@@ -23,13 +23,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.engine.context.AutomationContext;
-import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.test.utils.http.client.HttpClientUtil;
-import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
-import java.io.File;
+
 
 
 public class RetrieveBackendWsdlTestCase extends ESBIntegrationTest {
@@ -37,21 +34,14 @@ public class RetrieveBackendWsdlTestCase extends ESBIntegrationTest {
 
     private HttpClientUtil httpClientUtil;
     private String backendWSDLUrl;
-    private ServerConfigurationManager serverManager;
+
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
 
         super.init();
-
         httpClientUtil = new HttpClientUtil();
-        serverManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
-        serverManager.applyConfiguration(new File(getClass()
-                .getResource("/artifacts/ESB/nhttp/transport/axis2.xml").getPath()));
-
-        super.init();
         backendWSDLUrl=getProxyServiceURLHttp("StockQuoteProxy1")  +"?wsdl";
-
     }
 
     /**
@@ -78,15 +68,8 @@ public class RetrieveBackendWsdlTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void cleanup() throws Exception {
-        try {
-            super.cleanup();
-        } finally {
-            httpClientUtil = null;
-            backendWSDLUrl = null;
-            Thread.sleep(3000);
-            serverManager.restoreToLastConfiguration();
-            serverManager = null;
-        }
-
+        super.cleanup();
+        httpClientUtil = null;
+        backendWSDLUrl = null;
     }
 }
