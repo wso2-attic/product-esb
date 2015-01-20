@@ -10,22 +10,21 @@
     </listeners>
 
     <!--<test name="Server-Stratup" preserve-order="true" verbose="2">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.carbon.esb.ServerStartupTestCase"/>-->
-        <!--</classes>-->
+    <!--<classes>-->
+    <!--<class name="org.wso2.carbon.esb.ServerStartupTestCase"/>-->
+    <!--</classes>-->
     <!--</test>-->
     <!-- <test name="ESB-Test-patches" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.*"/>
         </packages>
     </test> -->
-    
+
     <test name="Template-Test" preserve-order="true" verbose="2">
-      <packages>
-          <package name="org.wso2.carbon.esb.template.*"/>
-         </packages>
+        <packages>
+            <package name="org.wso2.carbon.esb.template.*"/>
+        </packages>
     </test>
-    
 
     <test name="GetProcessor-Test" preserve-order="true" verbose="2">
         <packages>
@@ -38,11 +37,26 @@
             <package name="org.wso2.carbon.esb.registry.caching"/>
         </packages>
     </test>
+
     <test name="QueryParam-Test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.endpoint.test.ESBJAVA3340QueryParamHttpEndpointTestCase"/>
         </classes>
     </test>
+
+    <test name="JSON-Tests" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.json"/>
+        </packages>
+    </test>
+
+		<test name="EmptyStackExceptionTest" preserve-order="true"
+		verbose="2">
+		<classes>
+			<class
+				name="org.wso2.carbon.esb.mediators.clone.ESBJAVA3412EmptyStackExceptionTest" />
+		</classes>
+	</test>
 </suite>
 
 
