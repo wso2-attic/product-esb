@@ -22,10 +22,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.utils.HttpRequestUtil;
-import org.wso2.carbon.automation.core.utils.HttpResponse;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.WireMonitorServer;
+import org.wso2.carbon.automation.test.utils.common.WireMonitorServer;
+import org.wso2.carbon.automation.test.utils.http.client.HttpRequestUtil;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,28 +40,21 @@ public class ESBJAVA3340QueryParamHttpEndpointTestCase extends ESBIntegrationTes
         wireMonitorServer.start();
 
         loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB"
-                + File.separator + "synapseconfig" + File.separator + "rest"
-                + File.separator + "query_params_api.xml");
+                                          + File.separator + "synapseconfig" + File.separator + "rest"
+                                          + File.separator + "query_params_api.xml");
     }
 
     @Test(groups = {"wso2.esb"}, description = "Sending a Message Via REST to test query param works with space character")
-    public void testPassParamsToEndpoint() {
+    public void testPassParamsToEndpoint() throws IOException {
         String requestString = "/my?some%20value";
-        HttpResponse response = null;
-        try {
-            response = HttpRequestUtil.sendGetRequest(getApiInvocationURL("test") + requestString, null);
-        } catch (IOException e) {
-            log.error("Error while sending the request to the endpoint. ", e);
-        } finally {
-            String reply = wireMonitorServer.getCapturedMessage();
-            if (reply.length() > 1) {
-                Assert.assertFalse(reply.toString().split("HTTP/1.1")[0].contains("{query.param.type}"), "Parameters are properly mapped");
-                Assert.assertTrue(reply.toString().split("HTTP/1.1")[0].contains("some%20value"));
+        HttpRequestUtil.sendGetRequest(getApiInvocationURL("test") + requestString, null);
+        String reply = wireMonitorServer.getCapturedMessage();
+        if (reply.length() > 1) {
+            Assert.assertFalse(reply.toString().split("HTTP/1.1")[0].contains("{query.param.type}"), "Parameters are properly mapped");
+            Assert.assertTrue(reply.toString().split("HTTP/1.1")[0].contains("some%20value"));
 
-            } else {
-                Assert.assertTrue(false);
-            }
-
+        } else {
+            Assert.assertTrue(false);
         }
     }
 
@@ -70,6 +62,5 @@ public class ESBJAVA3340QueryParamHttpEndpointTestCase extends ESBIntegrationTes
     public void destroy() throws Exception {
         super.cleanup();
     }
-
 
 }
