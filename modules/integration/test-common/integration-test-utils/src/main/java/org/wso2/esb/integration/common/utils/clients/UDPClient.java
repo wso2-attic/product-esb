@@ -28,40 +28,33 @@ import java.net.*;
  * UDP Client
  */
 public class UDPClient {
-	private static final Log log = LogFactory.getLog(UDPClient.class);
-	private String host;
-	private int port;
+    private static final Log log = LogFactory.getLog(UDPClient.class);
+    private String host;
+    private int port;
 
-	public UDPClient(String host, int port) {
-		this.host = host;
-		this.port = port;
-	}
+    public UDPClient(String host, int port) {
+        this.host = host;
+        this.port = port;
+    }
 
-	/**
-	 * Send UDP message
-	 *
-	 * @param message message
-	 */
-	public void sendMessage(String message) {
-		DatagramSocket clientSocket = null;
+    /**
+     * Send UDP message
+     *
+     * @param message message
+     */
+    public void sendMessage(String message) throws IOException {
+        DatagramSocket clientSocket = null;
 
-		try {
-			clientSocket = new DatagramSocket();
-			InetAddress inetAddress = InetAddress.getByName(host);
-			byte[] sendData = message.getBytes();
-			DatagramPacket sendPacket =
-					new DatagramPacket(sendData, sendData.length, inetAddress, port);
-			clientSocket.send(sendPacket);
-		} catch (SocketException e) {
-			log.error("Error while creating DatagramSocket : " + e.getMessage());
-		} catch (UnknownHostException e) {
-			log.error("Error while determining the IP address of a host : " + e.getMessage());
-		} catch (IOException e) {
-			log.error("Error while sending UDP message : " + e.getMessage());
-		} finally {
-			if (clientSocket != null) {
-				clientSocket.close();
-			}
-		}
-	}
+        try {
+            clientSocket = new DatagramSocket();
+            InetAddress inetAddress = InetAddress.getByName(host);
+            byte[] sendData = message.getBytes();
+            DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, inetAddress, port);
+            clientSocket.send(sendPacket);
+        } finally {
+            if (clientSocket != null) {
+                clientSocket.close();
+            }
+        }
+    }
 }
