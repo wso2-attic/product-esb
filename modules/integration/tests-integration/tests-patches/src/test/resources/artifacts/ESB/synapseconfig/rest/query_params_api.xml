@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <api name="Test" context="/test">
+        <resource methods="GET" url-mapping="/my">
+            <inSequence>
+                <property name="uri.var.all"
+                          expression="fn:substring-after($axis2:REST_URL_POSTFIX, '/my?')"/>
+                <send>
+                    <endpoint>
+                        <http method="get" uri-template="http://localhost:6789/services/echo/solr/content_platform/select?{uri.var.all}"/>
+                    </endpoint>
+                </send>
+            </inSequence>
+        </resource>
+    </api>
+</definitions>
