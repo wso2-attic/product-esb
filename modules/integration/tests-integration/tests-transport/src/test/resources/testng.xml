@@ -69,7 +69,7 @@
                 <package name="org.wso2.carbon.esb.http.inbound.transport.test"/>
             </packages>
         </test> -->
-    
+
     <test name="inbound-File Transport-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.file.inbound.transport.test"/>
@@ -81,5 +81,5 @@
         <package name="org.wso2.carbon.esb.generic.inbound.transport.test"/>
     </packages>
     </test>
-    
+
 </suite>
