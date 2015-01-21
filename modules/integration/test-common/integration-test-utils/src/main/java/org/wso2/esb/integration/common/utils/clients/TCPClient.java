@@ -29,40 +29,38 @@ import java.net.Socket;
  * TCP Client
  */
 public class TCPClient {
-	private static final Log log = LogFactory.getLog(TCPClient.class);
-	private String host;
-	private int port;
+    private static final Log log = LogFactory.getLog(TCPClient.class);
+    private String host;
+    private int port;
 
-	public TCPClient(String host, int port) {
-		this.host = host;
-		this.port = port;
-	}
+    public TCPClient(String host, int port) {
+        this.host = host;
+        this.port = port;
+    }
 
-	/**
-	 * Send a TCP message
-	 *
-	 * @param message message
-	 */
-	public void sendMessage(String message) {
-		Socket socket = null;
-		PrintWriter outToServer;
+    /**
+     * Send a TCP message
+     *
+     * @param message message
+     */
+    public void sendMessage(String message) throws IOException {
+        Socket socket = null;
+        PrintWriter outToServer;
 
-		try {
-			socket = new Socket(host, port);
-			outToServer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
-			outToServer.print(message + '\n');
-			outToServer.flush();
-		} catch (IOException ex) {
-			log.error("Error while sending TCP message : " + ex.getMessage());
-		} finally {
-			if (socket != null) {
-				try {
-					socket.close();
-					socket.close();
-				} catch (IOException ex) {
-					log.error("Error while closing the connection : " + ex.getMessage());
-				}
-			}
-		}
-	}
+        try {
+            socket = new Socket(host, port);
+            outToServer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+            outToServer.print(message + '\n');
+            outToServer.flush();
+        } finally {
+            if (socket != null) {
+                try {
+                    socket.close();
+                    socket.close();
+                } catch (IOException ex) {
+                    log.error("Error while closing the connection : " + ex.getMessage());
+                }
+            }
+        }
+    }
 }

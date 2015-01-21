@@ -38,6 +38,12 @@
         </packages>
     </test>
 
+    <test name="QueryParam-Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.endpoint.test.ESBJAVA3340QueryParamHttpEndpointTestCase"/>
+        </classes>
+    </test>
+
     <test name="JSON-Tests" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.json"/>
