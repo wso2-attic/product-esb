@@ -107,4 +107,10 @@
         </packages>
     </test>
     
+    <test name="Tracer-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.tracer"/>
+        </packages>
+    </test>
+    
 </suite>

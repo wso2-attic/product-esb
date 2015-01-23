@@ -640,6 +640,8 @@
                      class="org.apache.axis2.dispatchers.RequestURIBasedDispatcher">
                 <order phase="Transport"/>
             </handler>
+            <handler name="CarbonContextConfigurator"
+                     class="org.wso2.carbon.mediation.initializer.handler.CarbonContextConfigurator"/>
             <handler name="SOAPActionBasedDispatcher"
                      class="org.apache.axis2.dispatchers.SOAPActionBasedDispatcher">
                 <order phase="Transport"/>

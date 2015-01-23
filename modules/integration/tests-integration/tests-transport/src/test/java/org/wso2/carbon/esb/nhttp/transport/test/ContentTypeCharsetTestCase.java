@@ -18,10 +18,10 @@
 
 package org.wso2.carbon.esb.nhttp.transport.test;
 
-import static org.testng.Assert.assertEquals;
+
 import org.testng.Assert;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+
+import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -32,86 +32,81 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
-import org.wso2.carbon.automation.extensions.servers.webserver.SimpleWebServer;
 import org.wso2.carbon.integration.common.utils.ClientConnectionUtil;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 public class ContentTypeCharsetTestCase extends ESBIntegrationTest {
 
     private Log log = LogFactory.getLog(ContentTypeCharsetTestCase.class);
-
-    // public WireMonitorServer wireServer;
+    private ServerConfigurationManager serverManager;
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
         super.init();
-
+        serverManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
+        serverManager.applyConfiguration(new File(getClass()
+                .getResource("/artifacts/ESB/nhttp/transport/axis2.xml").getPath()));
+        super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/nhttp_transport"
                 + "/content_type_charset_synapse.xml");
 
-        // wireServer = new WireMonitorServer(8991);
     }
 
     @Test(groups = { "wso2.esb" }, description = "Test for charset value proprty in the header response")
     public void testReturnContentType() throws Exception {
 
-        int port = 9005;
 
         String contentType = "application/xml;charset=UTF-8";
-
         String charset = "charset";
 
-        //SimpleWebServer simpleWebServer = new SimulatedService(port, 200);
+        SimpleHttpClient httpClient = new SimpleHttpClient();
 
-        try {
-            //simpleWebServer.start();
+        Map<String, String> headers = new HashMap<String, String>();
 
-            SimpleHttpClient httpClient = new SimpleHttpClient();
+        headers.put("content-type", contentType);
 
-            Map<String, String> headers = new HashMap<String, String>();
+        HttpResponse response = httpClient.doGet(getProxyServiceURLHttp("FooProxy"), headers);
 
-            headers.put("content-type", contentType);
+        String contentTypeData = response.getEntity().getContentType().getValue();
 
-            HttpResponse response = httpClient.doGet(getProxyServiceURLHttp("FooProxy"), headers);
+        Assert.assertTrue(contentTypeData.contains(charset));
 
-            //simpleWebServer.terminate();
+        if (contentTypeData.contains(charset)) {
 
-            String contentTypeData = response.getEntity().getContentType().getValue();
+            String[] pairs = contentTypeData.split(";");
 
-            Assert.assertTrue(contentTypeData.contains(charset));
+            for (String pair : pairs) {
 
-            if (contentTypeData.contains(charset)) {
+                if (pair.contains(charset)) {
 
-                String[] pairs = contentTypeData.split(";");
+                    String[] charsetDetails = pair.split("=");
 
-                for (String pair : pairs) {
+                    Assert.assertTrue(!charsetDetails[1].equals(""));
 
-                    if (pair.contains(charset)) {
-
-                        String[] charsetDetails = pair.split("=");
-
-                        Assert.assertTrue(!charsetDetails[1].equals(""));
-
-                    }
                 }
             }
-        } finally {
-
-            //simpleWebServer.terminate();
-
-            waitForPortCloser(port);
         }
     }
 
     @AfterClass(alwaysRun = true)
     public void stop() throws Exception {
-        cleanup();
+        try{
+             cleanup();
+        }
+        finally{
+            Thread.sleep(3000);
+            serverManager.restoreToLastConfiguration();
+            serverManager=null;
+        }
+
     }
 
     public boolean waitForPortCloser(int port) throws UnknownHostException {

@@ -28,7 +28,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import java.io.File;
@@ -42,9 +45,13 @@ import java.io.File;
 public class MessageWithoutContentTypeTestCase extends ESBIntegrationTest {
 
     private static final Log log = LogFactory.getLog(MessageWithoutContentTypeTestCase.class);
-
+    private ServerConfigurationManager serverManager;
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
+        super.init();
+        serverManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
+        serverManager.applyConfiguration(new File(getClass()
+                .getResource("/artifacts/ESB/nhttp/transport/axis2.xml").getPath()));
         super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/messagewithoutcontent/synapse.xml");
     }
@@ -69,8 +76,8 @@ public class MessageWithoutContentTypeTestCase extends ESBIntegrationTest {
         String strSoapAction = "getQuote";
         // Get file to be posted
         String strXMLFilename = FrameworkPathUtil.getSystemResourceLocation() + "artifacts" + File.separator +
-                                "ESB" + File.separator + "synapseconfig" + File.separator + "messagewithoutcontent" +
-                                File.separator + "request.xml";
+                "ESB" + File.separator + "synapseconfig" + File.separator + "messagewithoutcontent" +
+                File.separator + "request.xml";
 
         File input = new File(strXMLFilename);
         // Prepare HTTP post
@@ -99,6 +106,11 @@ public class MessageWithoutContentTypeTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void close() throws Exception {
-        super.cleanup();
+        try {
+            super.cleanup();
+        }finally{
+            serverManager.restoreToLastConfiguration();
+            serverManager=null;
+        }
     }
 }

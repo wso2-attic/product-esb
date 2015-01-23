@@ -22,40 +22,40 @@ package org.wso2.esb.integration.common.utils.clients;
  * This class holds the response data
  */
 public class ResponseData {
-	private boolean success;
-	private String sessionId;
-	private String responseServer;
+    private boolean success;
+    private String sessionId;
+    private String responseServer;
 
-	public ResponseData(boolean success, String sessionId, String responseServer) {
-		this.success = success;
-		this.sessionId = sessionId;
-		this.responseServer = responseServer;
-	}
+    public ResponseData(boolean success, String sessionId, String responseServer) {
+        this.success = success;
+        this.sessionId = sessionId;
+        this.responseServer = responseServer;
+    }
 
-	/**
-	 * Returns whether the response is success
-	 *
-	 * @return true if response is success
-	 */
-	public boolean isSuccess() {
-		return success;
-	}
+    /**
+     * Returns whether the response is success
+     *
+     * @return true if response is success
+     */
+    public boolean isSuccess() {
+        return success;
+    }
 
-	/**
-	 * Gets the session ID
-	 *
-	 * @return sessionId
-	 */
-	public String getSessionId() {
-		return sessionId;
-	}
+    /**
+     * Gets the session ID
+     *
+     * @return sessionId
+     */
+    public String getSessionId() {
+        return sessionId;
+    }
 
-	/**
-	 * Get Responded Server
-	 *
-	 * @return responseServer
-	 */
-	public String getResponseServer() {
-		return responseServer;
-	}
+    /**
+     * Get Responded Server
+     *
+     * @return responseServer
+     */
+    public String getResponseServer() {
+        return responseServer;
+    }
 }

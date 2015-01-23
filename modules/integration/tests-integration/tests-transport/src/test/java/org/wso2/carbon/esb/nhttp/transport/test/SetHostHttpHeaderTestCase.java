@@ -22,8 +22,13 @@ import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
+
+import java.io.File;
 
 import static org.testng.Assert.assertTrue;
 
@@ -32,18 +37,26 @@ import static org.testng.Assert.assertTrue;
  * be set both with port or without port.
  */
 public class SetHostHttpHeaderTestCase extends ESBIntegrationTest {
+    private ServerConfigurationManager serverManager;
+
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
+        serverManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
+        serverManager.applyConfiguration(new File(getClass()
+                .getResource("/artifacts/ESB/nhttp/transport/axis2.xml").getPath()));
+
+        super.init();
+
     }
 
     @Test(groups = {"wso2.esb"}, description = "Creating Test Case tests REQUEST_HOST_HEADER property functionality. " +
-                                               "This make sure that the header can be formatted without the port number")
+            "This make sure that the header can be formatted without the port number")
     public void testSetHostHttpHeaderTestCase() throws Exception {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/http_transport/set_host_http_header.xml");
         OMElement response;
         response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("HttpHostHeaderSetProxy"),
-                                                           getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
+                getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         assertTrue(response.toString().contains("WSO2"));
 
     }
@@ -53,7 +66,7 @@ public class SetHostHttpHeaderTestCase extends ESBIntegrationTest {
      * formatted with or without the port number.
      */
     @Test(groups = {"wso2.esb"}, description = "Creating Test Case tests REQUEST_HOST_HEADER property functionality. " +
-                                               "This make sure that the header can be formatted with the port number too")
+            "This make sure that the header can be formatted with the port number too")
     public void testSetHostHttpHeaderWithPortTestCase() throws Exception {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/http_transport/set_host_http_header_with_port.xml");
         OMElement response;
@@ -65,8 +78,12 @@ public class SetHostHttpHeaderTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void close() throws Exception {
-        super.cleanup();
+        try {
+            super.cleanup();
+        } finally {
+            serverManager.restoreToLastConfiguration();
+            serverManager = null;
+        }
     }
-
-
 }
+
