@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  ~
@@ -15,3 +16,30 @@
  ~ specific language governing permissions and limitations
  ~ under the License.
  -->
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <template name="HttpEPTemplate">
+        <axis2ns1:parameter xmlns:axis2ns1="http://ws.apache.org/ns/synapse" name="name"/>
+        <axis2ns2:parameter xmlns:axis2ns2="http://ws.apache.org/ns/synapse" name="uri"/>
+        <endpoint name="$name">
+            <http uri-template="$uri" method="post">
+                <suspendOnFailure>
+                    <progressionFactor>1.0</progressionFactor>
+                </suspendOnFailure>
+                <markForSuspension>
+                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                    <retryDelay>0</retryDelay>
+                </markForSuspension>
+            </http>
+        </endpoint>
+    </template>
+    <api name="HttpTemplateTestAPI" context="/HttpTemplateTestAPI">
+        <resource methods="POST" uri-template="/{ser}">
+            <inSequence>
+                <send>
+                    <endpoint template="HttpEPTemplate"
+                              uri="http://{system.prop.hname}:{system.prop.hport}/services/{uri.var.ser}"/>
+                </send>
+            </inSequence>
+        </resource>
+    </api>
+</definitions>
