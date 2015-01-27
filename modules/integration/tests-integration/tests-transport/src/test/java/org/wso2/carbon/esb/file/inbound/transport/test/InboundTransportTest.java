@@ -115,38 +115,7 @@ public class InboundTransportTest extends ESBIntegrationTest {
 	}
 
 	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
-	@Test(groups = "wso2.esb", dependsOnMethods = "testInboundEnpointDeleteFileAfterProcess", description = "Inbound endpoint Reading file with Contect type Plain Test Case")
-	public void testInboundEnpointReadFile_ContentType_Plain() throws Exception {
-
-		addInboundEndpoint(addEndpoint2());
-		// To check the file getting is read
-		boolean isFileRead = false;
-
-		File sourceFile = new File(pathToFtpDir + File.separator + "test.txt");
-		File targetFolder = new File(InboundFileFolder + File.separator + "in");
-		File targetFile = new File(targetFolder + File.separator + "test.txt");
-
-		try {
-			FileUtils.copyFile(sourceFile, targetFile);
-			Thread.sleep(2000);
-		} finally {
-			deleteFile(targetFile);
-		}
-
-		LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
-
-		for (LogEvent logEvent : logs) {
-			String message = logEvent.getMessage();
-			if (message.contains("WSO2 Lanka Pvt Ltd")) {
-				isFileRead = true;
-			}
-		}
-
-		Assert.assertTrue(isFileRead, "The Text file is not getting read");
-	}
-
-	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
-	@Test(groups = { "wso2.esb" }, dependsOnMethods = "testInboundEnpointReadFile_ContentType_Plain", description = "Inbound Endpoint invalid interval Test case")
+	@Test(groups = { "wso2.esb" }, dependsOnMethods = "testInboundEnpointDeleteFileAfterProcess", description = "Inbound Endpoint invalid interval Test case")
 	public void testInboundEndpointPollInterval_NonInteger() throws Exception {
 
 		addInboundEndpoint(addEndpoint3());
@@ -308,29 +277,6 @@ public class InboundTransportTest extends ESBIntegrationTest {
 						+ " <parameter name=\"transport.vfs.ActionAfterErrors\">NONE</parameter>\n"
 						+ " <parameter name=\"transport.vfs.Locking\">enable</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ContentType\">application/xml</parameter>\n"
-						+ " <parameter name=\"transport.vfs.ActionAfterFailure\">NONE</parameter>\n"
-						+ " <parameter name=\"transport.vfs.ActionAfterProcess\">NONE</parameter>\n"
-						+ " <parameter name=\"transport.vfs.FileURI\">file://"
-						+ InboundFileFolder
-						+ File.separator
-						+ "in"
-						+ "</parameter>\n"
-						+ " </parameters>\n"
-						+ "</inboundEndpoint>\n");
-
-		return synapseConfig;
-	}
-
-	private OMElement addEndpoint2() throws Exception {
-		OMElement synapseConfig = null;
-		synapseConfig = AXIOMUtil
-				.stringToOM("<inboundEndpoint name=\"testFile2\" onError=\"inFault\" protocol=\"file\"\n"
-						+ " sequence=\"requestHandlerSeq\" suspend=\"false\" xmlns=\"http://ws.apache.org/ns/synapse\">\"\n"
-						+ " <parameters>\n"
-						+ " <parameter name=\"interval\">1000</parameter>\n"
-						+ " <parameter name=\"transport.vfs.ActionAfterErrors\">NONE</parameter>\n"
-						+ " <parameter name=\"transport.vfs.Locking\">enable</parameter>\n"
-						+ " <parameter name=\"transport.vfs.ContentType\">text/plain</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterFailure\">NONE</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterProcess\">NONE</parameter>\n"
 						+ " <parameter name=\"transport.vfs.FileURI\">file://"
