@@ -47,7 +47,11 @@ public class ESBJAVA3340QueryParamHttpEndpointTestCase extends ESBIntegrationTes
     @Test(groups = {"wso2.esb"}, description = "Sending a Message Via REST to test query param works with space character")
     public void testPassParamsToEndpoint() throws IOException {
         String requestString = "/my?some%20value";
-        HttpRequestUtil.sendGetRequest(getApiInvocationURL("test") + requestString, null);
+        try {
+            HttpRequestUtil.sendGetRequest(getApiInvocationURL("test") + requestString, null);
+        } catch (Exception timeout) {
+            //a timeout is expected
+        }
         String reply = wireMonitorServer.getCapturedMessage();
         if (reply.length() > 1) {
             Assert.assertFalse(reply.toString().split("HTTP/1.1")[0].contains("{query.param.type}"), "Parameters are properly mapped");
