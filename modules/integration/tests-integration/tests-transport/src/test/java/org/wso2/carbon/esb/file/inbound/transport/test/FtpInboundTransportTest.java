@@ -53,7 +53,7 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 		FTPPassword = "admin";
 		String inputFolderName = "ftpin";
 		String outputFolderName = "ftpout";
-		int FTPPort = 8085;
+		int FTPPort = 8095;
 
 		pathToFtpDir = getClass().getResource(
 				File.separator + "artifacts" + File.separator + "ESB"
@@ -211,7 +211,7 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 						+ " <parameter name=\"transport.vfs.ContentType\">application/xml</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterFailure\">NONE</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterProcess\">NONE</parameter>\n"
-						+ " <parameter name=\"transport.vfs.FileURI\">ftp://admin:admin@localhost:8085/ftpin/test.xml"
+						+ " <parameter name=\"transport.vfs.FileURI\">ftp://admin:admin@localhost:8095/ftpin/test.xml"
 						+ "</parameter>\n"
 						+ " </parameters>\n"
 						+ "</inboundEndpoint>\n");
@@ -231,9 +231,9 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 						+ " <parameter name=\"transport.vfs.ContentType\">application/xml</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterFailure\">NONE</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterProcess\">MOVE</parameter>\n"
-						+ "<parameter name=\"transport.vfs.MoveAfterProcess\">ftp://admin:admin@localhost:8085/ftpout"
+						+ "<parameter name=\"transport.vfs.MoveAfterProcess\">ftp://admin:admin@localhost:8095/ftpout"
 						+ "</parameter>"
-						+ " <parameter name=\"transport.vfs.FileURI\">ftp://admin:admin@localhost:8085/ftpin"
+						+ " <parameter name=\"transport.vfs.FileURI\">ftp://admin:admin@localhost:8095/ftpin"
 						+ "</parameter>\n"
 						+ " </parameters>\n"
 						+ "</inboundEndpoint>\n");
@@ -253,9 +253,9 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 						+ " <parameter name=\"transport.vfs.ContentType\">application/xml</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterFailure\">NONE</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterProcess\">MOVE</parameter>\n"
-						+ "<parameter name=\"transport.vfs.MoveAfterProcess\">ftp://admin:admin@localhost:8085/ftpout/test.xml"
+						+ "<parameter name=\"transport.vfs.MoveAfterProcess\">ftp://admin:admin@localhost:8095/ftpout/test.xml"
 						+ "</parameter>"
-						+ " <parameter name=\"transport.vfs.FileURI\">ftp://invalid:admin@localhost:8085/ftpin/test.xml"
+						+ " <parameter name=\"transport.vfs.FileURI\">ftp://invalid:admin@localhost:8095/ftpin/test.xml"
 						+ "</parameter>\n"
 						+ " </parameters>\n"
 						+ "</inboundEndpoint>\n");
