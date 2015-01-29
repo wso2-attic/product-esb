@@ -22,30 +22,23 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.engine.context.AutomationContext;
-import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.extensions.servers.jmsserver.client.JMSQueueMessageConsumer;
 import org.wso2.carbon.automation.extensions.servers.jmsserver.client.JMSQueueMessageProducer;
 import org.wso2.carbon.automation.extensions.servers.jmsserver.controller.config.JMSBrokerConfigurationProvider;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
-import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
-import org.wso2.esb.integration.common.clients.inbound.endpoint.InboundAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-import org.wso2.esb.integration.common.utils.JMSEndpointManager;
 import org.wso2.esb.integration.common.utils.servers.ActiveMQServer;
-
 import javax.jms.JMSException;
 
 /**
- * class tests checking for a successful/unsuccessful jms transactions
+ * Tests JMS transactions with inbound endpoints.
  */
-public class JMSTransactionInboundTestCase extends ESBIntegrationTest {
+public class JMSInboundTransactionTestCase extends ESBIntegrationTest {
 
 	private LogViewerClient logViewerClient = null;
 	private ActiveMQServer activeMQServer = new ActiveMQServer();
-	private LogEvent[] logs;
-	String message = null;
+	String message;
 
 	@BeforeClass(alwaysRun = true)
 	protected void init() throws Exception {
@@ -53,18 +46,12 @@ public class JMSTransactionInboundTestCase extends ESBIntegrationTest {
 		activeMQServer.startJMSBrokerAndConfigureESB();
 		super.init();
 
-		ServerConfigurationManager serverConfigurationManager = new ServerConfigurationManager(
-				new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
 		OMElement synapse =
 				esbUtils.loadResource(
 						"/artifacts/ESB/jms/inbound/transport/jms_inbound_transaction.xml");
-
-		updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
+		updateESBConfiguration(synapse);
 		message = String.valueOf(
 				esbUtils.loadResource("artifacts/ESB/jms/inbound/transport/message.xml"));
-		InboundAdminClient inboundAdminClient =
-				new InboundAdminClient(context.getContextUrls().getBackEndUrl(),
-				                       getSessionCookie());
 		logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 	}
 
@@ -74,25 +61,24 @@ public class JMSTransactionInboundTestCase extends ESBIntegrationTest {
 		int beforeLogCount;
 		boolean successValue = false;
 		String queueName = "localq";
+		LogEvent[] logs;
 		JMSQueueMessageProducer sender =
 				new JMSQueueMessageProducer(
 						JMSBrokerConfigurationProvider.getInstance().getBrokerConfiguration());
 
 		beforeLogCount = logViewerClient.getAllRemoteSystemLogs().length;
-
 		try {
 			sender.connect(queueName);
 			sender.pushMessage(message);
 		} finally {
 			sender.disconnect();
 		}
-
 		try {
 			addInboundEndpoint(esbUtils.loadResource(
 					"artifacts/ESB/jms/inbound/transport/jms_commit_synapse.xml"));
 			Thread.sleep(3000);
 		} catch (JMSException e) {
-			log.info(e);
+			log.info(e + ", Error while adding the inbound endpoint");
 		}
 		logs = logViewerClient.getAllRemoteSystemLogs();
 		for (int i = 0; i < (logs.length - beforeLogCount); i++) {
@@ -101,7 +87,6 @@ public class JMSTransactionInboundTestCase extends ESBIntegrationTest {
 				break;
 			}
 		}
-
 		Assert.assertTrue(successValue, "Error while performing commit");
 		deleteInboundEndpoints();
 		Thread.sleep(3000);
@@ -115,23 +100,19 @@ public class JMSTransactionInboundTestCase extends ESBIntegrationTest {
 		JMSQueueMessageProducer sender =
 				new JMSQueueMessageProducer(
 						JMSBrokerConfigurationProvider.getInstance().getBrokerConfiguration());
-
 		try {
 			sender.connect(queueName);
 			sender.pushMessage(message);
 		} finally {
 			sender.disconnect();
 		}
-
 		addInboundEndpoint(esbUtils.loadResource(
 				"artifacts/ESB/jms/inbound/transport/jms_rollback_synapse.xml"));
 		Thread.sleep(8000);
-
 		successValue = checkForQueue("Rollbacked");
 		Assert.assertTrue(successValue, "Error while performing rollback");
 		deleteInboundEndpoints();
 		Thread.sleep(3000);
-
 	}
 
 	private boolean checkForQueue(String status) throws Exception {
@@ -139,27 +120,22 @@ public class JMSTransactionInboundTestCase extends ESBIntegrationTest {
 		String poppedMessage = null;
 		JMSQueueMessageConsumer consumer = new JMSQueueMessageConsumer(
 				JMSBrokerConfigurationProvider.getInstance().getBrokerConfiguration());
-
 		try {
 			consumer.connect("localq");
 			poppedMessage = consumer.popMessage();
-
 		} finally {
 			consumer.disconnect();
 		}
- 		if (status.equals("Committed") && poppedMessage == null) {
+		if (status.equals("Committed") && poppedMessage == null) {
 			return true;
-
 		} else if (status.equals("Rollbacked") && poppedMessage != null) {
 			return true;
 		}
-
 		return false;
 	}
 
 	@AfterClass(alwaysRun = true)
 	public void destroy() throws Exception {
-
 		super.cleanup();
 		Thread.sleep(3000);
 		activeMQServer.stopJMSBrokerRevertESBConfiguration();
