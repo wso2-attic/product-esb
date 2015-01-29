@@ -16,7 +16,7 @@ import org.wso2.esb.integration.common.utils.JMSEndpointManager;
 import org.wso2.esb.integration.common.utils.servers.ActiveMQServer;
 
 /**
- * Test JMS tenant users with inbound endpoints.
+ * Test tenant users with inbound endpoints.
  */
 public class JMSInboundHttpTenantTestCase extends ESBIntegrationTest {
 	private LogViewerClient logViewerClient;

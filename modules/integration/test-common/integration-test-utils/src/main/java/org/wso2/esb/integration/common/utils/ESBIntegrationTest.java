@@ -109,6 +109,7 @@ public abstract class ESBIntegrationTest {
 		tenantInfo = context.getContextTenant();
 		userInfo = tenantInfo.getContextUser();
 	}
+
 	protected void cleanup() throws Exception {
 		try {
 			if (synapseConfiguration != null) {

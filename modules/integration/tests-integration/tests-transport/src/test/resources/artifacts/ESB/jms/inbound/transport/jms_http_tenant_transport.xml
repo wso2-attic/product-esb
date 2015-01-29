@@ -16,5 +16,4 @@
             <property name="fault" value="Inside the Fault sequence"/>
         </log>
     </sequence>
-
 </definitions>
