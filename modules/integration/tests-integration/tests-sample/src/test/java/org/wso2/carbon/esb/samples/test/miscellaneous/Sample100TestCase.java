@@ -31,25 +31,28 @@ import java.io.IOException;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
+/**
+ * https://wso2.org/jira/browse/ESBJAVA-3451
+ * Unlimited strength policy files for the JDK have to be installed for this test case to succeed
+ */
 public class Sample100TestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
         super.init();
-        updateESBRegistry(File.separator + "artifacts"+ File.separator+"ESB" + File.separator
-                          + "synapseconfig" + File.separator  +"ESBRegistry.xml");
+        updateESBRegistry(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" +
+                          File.separator + "ESBRegistry.xml");
         loadSampleESBConfiguration(100);
     }
-//https://wso2.org/jira/browse/ESBJAVA-3451
+
     @Test(groups = {"wso2.esb"}, description = "Adding a policy as a local entry and secure endpoint using it")
     public void testAddPolicyViaLocalEntry() throws IOException,
                                                                  XMLStreamException {
-        OMElement response=axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(),null,"IBM");
-        assertNotNull(response,"Response is null");
-        assertEquals(response.getLocalName(),"getQuoteResponse","getQuoteResponse mismatch");
-        OMElement omElement=response.getFirstElement();
-        String symbolResponse=omElement.getFirstChildWithName
-                (new QName("http://services.samples/xsd","symbol")).getText();
-        assertEquals(symbolResponse,"IBM","Symbol is not match");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), null, "IBM");
+        assertNotNull(response, "Response is null");
+        assertEquals(response.getLocalName(), "getQuoteResponse", "getQuoteResponse mismatch");
+        OMElement omElement = response.getFirstElement();
+        String symbolResponse = omElement.getFirstChildWithName(new QName("http://services.samples/xsd", "symbol")).getText();
+        assertEquals(symbolResponse, "IBM", "Symbol is not match");
     }
 
     @AfterClass(alwaysRun = true)
