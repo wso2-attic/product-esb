@@ -100,6 +100,15 @@ public abstract class ESBIntegrationTest {
 		userInfo = tenantInfo.getContextUser();
 	}
 
+	protected void init(String instanceName,String tenantName,String userName) throws Exception {
+		axis2Client = new StockQuoteClient();
+		context = new AutomationContext("ESB",instanceName,tenantName,userName);
+		contextUrls = context.getContextUrls();
+		sessionCookie = login(context);
+		esbUtils = new ESBTestCaseUtils();
+		tenantInfo = context.getContextTenant();
+		userInfo = tenantInfo.getContextUser();
+	}
 	protected void cleanup() throws Exception {
 		try {
 			if (synapseConfiguration != null) {
