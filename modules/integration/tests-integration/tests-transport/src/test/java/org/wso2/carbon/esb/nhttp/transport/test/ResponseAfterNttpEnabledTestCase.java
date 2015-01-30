@@ -49,7 +49,6 @@ public class ResponseAfterNttpEnabledTestCase extends ESBIntegrationTest {
     public void init() throws Exception {
 
         super.init();
-
         toUrl = getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE);
         serverConfigurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
     }
@@ -93,9 +92,5 @@ public class ResponseAfterNttpEnabledTestCase extends ESBIntegrationTest {
         serverConfigurationManager.restoreToLastConfiguration();
         serverConfigurationManager = null;
         toUrl = null;
-
-
     }
-
-
 }
