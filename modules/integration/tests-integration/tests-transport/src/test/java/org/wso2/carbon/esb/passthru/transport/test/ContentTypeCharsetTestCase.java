@@ -26,11 +26,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
-import org.wso2.carbon.integration.common.utils.ClientConnectionUtil;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +40,16 @@ public class ContentTypeCharsetTestCase extends ESBIntegrationTest {
     public void setEnvironment() throws Exception {
 
         super.init();
-
+        try {
+            deleteProxyService("echoProxy");
+        } catch (Exception e) {
+            //ignored
+        }
+        try {
+            deleteProxyService("FooProxy");
+        } catch (Exception e) {
+            //ignored
+        }
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/nhttp_transport"
                 + "/content_type_charset_synapse.xml");
   }
@@ -87,25 +93,5 @@ public class ContentTypeCharsetTestCase extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void stop() throws Exception {
         cleanup();
-    }
-
-    public boolean waitForPortCloser(int port) throws UnknownHostException {
-
-        long time = System.currentTimeMillis() + 5000;
-
-        boolean isPortAvailable = true;
-
-        while (System.currentTimeMillis() < time) {
-
-            isPortAvailable =
-                    ClientConnectionUtil.isPortOpen(port, InetAddress.getLocalHost()
-                            .getHostName());
-
-            if (!isPortAvailable) {
-
-                return isPortAvailable;
-            }
-        }
-        return isPortAvailable;
     }
 }
