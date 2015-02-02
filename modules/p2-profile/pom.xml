@@ -203,7 +203,8 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.logging.mgt.feature:${carbon.commons.version}
                                 </featureArtifactDef>
-                                <featureArtifactDef>
+                                <!-- TODO: Removed because not released in carbon-commons-->
+                                <!--<featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.transport.mgt.feature:${carbon.commons.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -223,7 +224,7 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.transport.commons.feature:${carbon.commons.version}
-                                </featureArtifactDef>
+                                </featureArtifactDef>-->
                                 <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.message.flows.feature:${carbon.commons.version}
                                 </featureArtifactDef>
@@ -252,9 +253,6 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.registry:org.wso2.carbon.registry.resource.properties.feature:${carbon.registry.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.extensions.feature:${carbon.registry.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.registry:org.wso2.carbon.registry.handler.configuration.feature:${carbon.registry.version}
@@ -296,7 +294,10 @@
 
                                 <!--7 Carbon Governance -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.governance.metadata.server.feature:${carbon.governance.version}
+                                    org.wso2.carbon.governance:org.wso2.carbon.governance.metadata.server.feature:${carbon.governance.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.governance:org.wso2.carbon.registry.extensions.feature:${carbon.governance.version}
                                 </featureArtifactDef>
 
                                 <!--8 Carbon-MultiTenancy-->
@@ -555,7 +556,8 @@
                                     <id>org.wso2.carbon.soaptracer.feature.group</id>
                                     <version>${carbon.commons.version}</version>
                                 </feature>
-                                <feature>
+                                <!-- TODO: Removed because not released in carbon-commons-->
+                                <!--<feature>
                                     <id>org.wso2.carbon.transport.mgt.feature.group</id>
                                     <version>${carbon.commons.version}</version>
                                 </feature>
@@ -582,7 +584,7 @@
                                 <feature>
                                     <id>org.wso2.carbon.transport.commons.feature.group</id>
                                     <version>${carbon.commons.version}</version>
-                                </feature>
+                                </feature>-->
                                 <feature>
                                     <id>org.wso2.carbon.message.flows.feature.group</id>
                                     <version>${carbon.commons.version}</version>
@@ -642,10 +644,6 @@
                                     <version>${carbon.registry.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.registry.extensions.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.feature.group</id>
                                     <version>${carbon.registry.version}</version>
                                 </feature>
@@ -701,6 +699,10 @@
                                 <!-- 7 Carbon Governance  -->
                                 <feature>
                                     <id>org.wso2.carbon.governance.metadata.server.feature.group</id>
+                                    <version>${carbon.governance.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.registry.extensions.feature.group</id>
                                     <version>${carbon.governance.version}</version>
                                 </feature>
 
@@ -954,7 +956,8 @@
                                     <id>org.wso2.carbon.soaptracer.feature.group</id>
                                     <version>${carbon.commons.version}</version>
                                 </feature>
-                                <feature>
+                                <!-- TODO: Removed because not released in carbon-commons-->
+                                <!--<feature>
                                     <id>org.wso2.carbon.transport.mgt.feature.group</id>
                                     <version>${carbon.commons.version}</version>
                                 </feature>
@@ -981,7 +984,7 @@
                                 <feature>
                                     <id>org.wso2.carbon.transport.commons.feature.group</id>
                                     <version>${carbon.commons.version}</version>
-                                </feature>
+                                </feature>-->
 
                                 <feature>
                                     <id>org.wso2.carbon.message.flows.feature.group</id>
@@ -1046,10 +1049,6 @@
                                     <version>${carbon.registry.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.registry.extensions.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.registry.resource.properties.feature.group</id>
                                     <version>${carbon.registry.version}</version>
                                 </feature>
@@ -1085,6 +1084,10 @@
                                 <!-- 7 Carbon Governance  -->
                                 <feature>
                                     <id>org.wso2.carbon.governance.metadata.server.feature.group</id>
+                                    <version>${carbon.governance.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.registry.extensions.feature.group</id>
                                     <version>${carbon.governance.version}</version>
                                 </feature>
 
