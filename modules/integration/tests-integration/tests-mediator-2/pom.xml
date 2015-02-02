@@ -275,10 +275,9 @@
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>admin-clients</artifactId>
-            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>org.wso2.carbon</groupId>
+                    <groupId>org.wso2.carbon.mediation</groupId>
                     <artifactId>org.wso2.carbon.rest.api</artifactId>
                 </exclusion>
             </exclusions>
@@ -287,10 +286,9 @@
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>integration-test-utils</artifactId>
-            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>org.wso2.carbon</groupId>
+                    <groupId>org.wso2.carbon.mediation</groupId>
                     <artifactId>org.wso2.carbon.rest.api</artifactId>
                 </exclusion>
             </exclusions>
@@ -298,7 +296,6 @@
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>service-samples</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
