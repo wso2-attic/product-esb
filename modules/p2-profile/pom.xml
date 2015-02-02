@@ -1110,11 +1110,11 @@
                                 <!--9 ESB Specific -->
                                 <feature>
                                     <id>org.wso2.esb.styles.feature.group</id>
-                                    <version>${product.esb.version}</version>
+                                    <version>${productesb.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.esb.samples.feature.group</id>
-                                    <version>${product.esb.version}</version>
+                                    <version>${productesb.version}</version>
                                 </feature>
 
                                 <!-- Previous versions -->
