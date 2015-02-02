@@ -72,7 +72,7 @@ public class Sample654TestCase extends ESBIntegrationTest {
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
     @Test(groups = {"wso2.esb", "local only"}, description = "Smooks configuration refer from" +
-            " configuration registry", enabled = true)
+            " configuration registry", enabled = false)
     public void testSmookConfigFromConfigRegistry() throws Exception {
         multiMessageReceiver = new MultiMessageReceiver(PORT);
 

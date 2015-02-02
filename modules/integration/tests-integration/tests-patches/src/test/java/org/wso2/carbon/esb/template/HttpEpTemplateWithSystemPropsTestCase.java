@@ -68,7 +68,7 @@ public class HttpEpTemplateWithSystemPropsTestCase {
 	}
 
 	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.ALL })
-	@Test(groups = { "wso2.esb" })
+	@Test(groups = { "wso2.esb" } , enabled = false)
 	public void testHttpEpTemplateWithSystemProps() throws AxisFault {
 		StockQuoteClient axis2Client = new StockQuoteClient();
 		OMElement response = axis2Client.sendSimpleStockQuoteRequestREST(API_URL, null, "WSO2");
