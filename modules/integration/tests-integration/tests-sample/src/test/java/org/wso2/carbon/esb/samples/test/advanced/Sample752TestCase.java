@@ -140,7 +140,7 @@ public class Sample752TestCase extends ESBIntegrationTest {
     }
 
 
-    @Test(groups = {"wso2.esb"}, description = "Sending a Message to a loadbalancing endpoint in Config Reg")
+    @Test(groups = {"wso2.esb"}, description = "Sending a Message to a loadbalancing endpoint in Config Reg" , enabled = false)
     public void testSendingToLoaBalancingEndpoint_ConfigReg()
             throws IOException, EndpointAdminEndpointAdminException,
             LoginAuthenticationExceptionException,

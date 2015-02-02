@@ -146,7 +146,7 @@ public class Sample271TestCase extends ESBIntegrationTest {
 
     }
 
-    @Test(groups = { "wso2.esb" }, description = "File Processing")
+    @Test(groups = { "wso2.esb" }, description = "File Processing", enabled = false)
     public void testFileProcessing() throws Exception {
         String feedURL = "https://mail.google.com/mail/feed/atom";
         int beforeMaiilCount = getMailCount(feedURL);
