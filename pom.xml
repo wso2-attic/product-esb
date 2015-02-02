@@ -121,8 +121,6 @@
     <dependencyManagement>
         <dependencies>
 
-            <!--Synapse Versions Start-->
-
             <dependency>
                 <groupId>org.apache.synapse</groupId>
                 <artifactId>synapse-core</artifactId>
@@ -158,9 +156,6 @@
                 <artifactId>httpclient</artifactId>
                 <version>${httpclient.version}</version>
             </dependency>
-
-            <!--Synapse Versions End-->
-
             <dependency>
                 <groupId>org.apache.axis2</groupId>
                 <artifactId>addressing</artifactId>
@@ -223,9 +218,6 @@
                 <artifactId>axiom</artifactId>
                 <version>${axiom.wso2.version}</version>
             </dependency>
-
-            <!-- Dependencies for dashboard ui -->
-
             <dependency>
                 <groupId>org.apache.axis2.wso2</groupId>
                 <artifactId>axis2</artifactId>
@@ -246,9 +238,6 @@
                 <artifactId>commons-logging</artifactId>
                 <version>${commons.logging.version}</version>
             </dependency>
-
-            <!-- Dependencies for login ui -->
-
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
@@ -352,9 +341,6 @@
                 <artifactId>org.wso2.stratos.esb.samples</artifactId>
                 <version>${project.version}</version>
             </dependency-->
-
-            <!--Integration Test Dependencies-->
-
             <dependency>
                 <groupId>org.wso2.carbon.identity</groupId>
                 <artifactId>org.wso2.carbon.security.mgt.stub</artifactId>
@@ -383,7 +369,6 @@
                 <artifactId>SecVerifier</artifactId>
                 <version>${carbon.secVerifier.version}</version>
                 <type>aar</type>
-
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
@@ -465,7 +450,6 @@
                 <version>${ca.uhn.hapi.wso2.version}</version>
                 <scope>test</scope>
             </dependency>
-
             <dependency>
                 <groupId>org.wso2.carbon.deployment</groupId>
                 <artifactId>org.wso2.carbon.aarservices.stub</artifactId>
@@ -573,14 +557,12 @@
                 <version>${carbon.mediation.version}</version>
                 <scope>test</scope>
             </dependency>
-
             <dependency>
                 <groupId>org.wso2.carbon.deployment</groupId>
                 <artifactId>org.wso2.carbon.service.mgt.stub</artifactId>
                 <version>${carbon.deployment.version}</version>
                 <scope>test</scope>
             </dependency>
-
             <dependency>
                 <groupId>org.wso2.carbon.registry</groupId>
                 <artifactId>org.wso2.carbon.registry.relations.stub</artifactId>
@@ -653,8 +635,6 @@
                 <version>${carbon.registry.version}</version>
                 <scope>test</scope>
             </dependency>
-
-            <!--Framework Engine dependencies = -->
             <dependency>
                 <groupId>org.wso2.carbon.automation</groupId>
                 <artifactId>org.wso2.carbon.automation.engine</artifactId>
@@ -806,9 +786,6 @@
                 <version>${jersey-client.version}</version>
                 <scope>test</scope>
             </dependency>
-
-
-
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
@@ -894,8 +871,6 @@
                 <groupId>javax.ws.rs</groupId>
                 <artifactId>jsr311-api</artifactId>
             </dependency>
-
-
             <dependency>
                 <groupId>org.wso2.carbon.mediation</groupId>
                 <artifactId>org.wso2.carbon.message.store.stub</artifactId>
@@ -920,7 +895,6 @@
                 <scope>compile</scope>
                 <version>${carbon.mediation.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.wso2.carbon.identity</groupId>
                 <artifactId>org.wso2.carbon.security.mgt.stub</artifactId>
@@ -933,21 +907,18 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-
             <dependency>
                 <groupId>org.wso2.carbon.mediation</groupId>
                 <artifactId>org.wso2.carbon.mediation.configadmin.stub</artifactId>
                 <scope>compile</scope>
                 <version>${carbon.mediation.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.json.wso2</groupId>
                 <artifactId>json</artifactId>
                 <version>${org.wso2.json.version}</version>
                 <scope>compile</scope>
             </dependency>
-
             <dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>admin-clients</artifactId>
@@ -959,7 +930,6 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-
             <dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>integration-test-utils</artifactId>
@@ -976,7 +946,6 @@
                 <artifactId>service-samples</artifactId>
                 <version>${productesb.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>groovy</groupId>
                 <artifactId>groovy-all</artifactId>
@@ -1023,7 +992,6 @@
                 <artifactId>ui-pages</artifactId>
                 <version>${productesb.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.wso2.carbon.commons</groupId>
                 <artifactId>org.wso2.carbon.discovery.stub</artifactId>
@@ -1038,7 +1006,6 @@
         </dependencies>
     </dependencyManagement>
     <properties>
-
 
         <!--Product Version-->
         <productesb.version>4.9.0-SNAPSHOT</productesb.version>
