@@ -258,7 +258,6 @@
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>admin-clients</artifactId>
-            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.wso2.carbon</groupId>
@@ -270,7 +269,6 @@
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>integration-test-utils</artifactId>
-            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.wso2.carbon</groupId>
@@ -281,7 +279,6 @@
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>service-samples</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <!--<dependency>
             <groupId>org.apache.activemq</groupId>
