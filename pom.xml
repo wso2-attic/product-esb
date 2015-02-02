@@ -495,7 +495,7 @@
             <dependency>
                 <groupId>org.wso2.carbon.mediation</groupId>
                 <artifactId>org.wso2.carbon.rest.api.stub</artifactId>
-                <version>${carbon.platform.version}</version>
+                <version>${carbon.mediation.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.mediation</groupId>
@@ -614,7 +614,7 @@
             <dependency>
                 <groupId>org.wso2.carbon.registry</groupId>
                 <artifactId>org.wso2.carbon.registry.extensions.stub</artifactId>
-                <version>${carbon.platform.version}</version>
+                <version>${carbon.registry.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -626,7 +626,7 @@
             <dependency>
                 <groupId>org.wso2.carbon.mediation</groupId>
                 <artifactId>org.wso2.carbon.mediation.library.stub</artifactId>
-                <version>${carbon.platform.version}</version>
+                <version>${carbon.mediation.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -1005,9 +1005,6 @@
 
         <!--Product Version-->
         <productesb.version>4.9.0-SNAPSHOT</productesb.version>
-        <carbon.platform.version>4.3.0-SNAPSHOT</carbon.platform.version>
-        <carbon.kernel.version>4.3.0</carbon.kernel.version>
-        <wso2carbon.old.version>4.2.0</wso2carbon.old.version>
 
         <!-- Axis2 -->
         <axis2.wso2.version>1.6.1.wso2v11</axis2.wso2.version>
