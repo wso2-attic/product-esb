@@ -315,12 +315,12 @@
             <dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>org.wso2.esb.styles</artifactId>
-                <version>${product.esb.version}</version>
+                <version>${productesb.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>org.wso2.esb.samples</artifactId>
-                <version>${product.esb.version}</version>
+                <version>${productesb.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.mediation</groupId>
@@ -813,7 +813,7 @@
 
 
         <!--Product Version-->
-        <product.esb.version>4.9.0-SNAPSHOT</product.esb.version>
+        <productesb.version>4.9.0-SNAPSHOT</productesb.version>
 
         <!-- Carbon Mediation Version -->
         <carbon.mediation.version>4.3.1-SNAPSHOT</carbon.mediation.version>
