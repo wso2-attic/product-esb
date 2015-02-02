@@ -36,19 +36,19 @@
         <drop/>
     </sequence>
 
-    <messageStore class="org.apache.synapse.message.store.jdbc.JDBCMessageStore"
+    <messageStore class="org.apache.synapse.message.store.impl.jdbc.JDBCMessageStore"
                   name="RESTMessageStore">
         <parameter name="store.jdbc.driver">org.h2.Driver</parameter>
-        <parameter name="store.jdbc.connection.url">jdbc:h2:repository/database/WSO2CARBON_DB</parameter>
-        <parameter name="store.jdbc.username">wso2carbon</parameter>
-        <parameter name="store.jdbc.password">wso2carbon</parameter>
+        <parameter name="store.jdbc.connection.url">jdbc:h2:~/test</parameter>
+        <parameter name="store.jdbc.username">sa</parameter>
+        <parameter name="store.jdbc.password"></parameter>
         <parameter name="store.jdbc.table">jdbc_store_table</parameter>
     </messageStore>
 
     <messageProcessor class="org.apache.synapse.message.processor.impl.sampler.SamplingProcessor"
                       name="SamplingProcessor1"
                       messageStore="RESTMessageStore">
-        <parameter name="interval">4000</parameter>
+        <parameter name="interval">1000</parameter>
         <parameter name="sequence">SamplingSeq</parameter>
     </messageProcessor>
 

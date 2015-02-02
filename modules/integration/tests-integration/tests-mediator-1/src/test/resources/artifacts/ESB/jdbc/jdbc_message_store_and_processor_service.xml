@@ -36,11 +36,11 @@
         </out>
         <description>The main sequence for the message mediation</description>
     </sequence>
-    <messageStore class="org.apache.synapse.message.store.jdbc.JDBCMessageStore" name="MyStore">
+    <messageStore class="org.apache.synapse.message.store.impl.jdbc.JDBCMessageStore" name="MyStore">
         <parameter name="store.jdbc.driver">org.h2.Driver</parameter>
-        <parameter name="store.jdbc.connection.url">jdbc:h2:repository/database/WSO2CARBON_DB</parameter>
-        <parameter name="store.jdbc.username">wso2carbon</parameter>
-        <parameter name="store.jdbc.password">wso2carbon</parameter>
+        <parameter name="store.jdbc.connection.url">jdbc:h2:~/test</parameter>
+        <parameter name="store.jdbc.username">sa</parameter>
+        <parameter name="store.jdbc.password"></parameter>
         <parameter name="store.jdbc.table">jdbc_store_table</parameter>
     </messageStore>
 </definitions>

@@ -61,14 +61,15 @@ public class JDBCMessageStoreProcRESTTestCase extends ESBIntegrationTest{
 
         OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jdbc/JDBCMessageStoreREST.xml");
 
-        h2 = new H2DataBaseManager("jdbc:h2:repository/database/WSO2CARBON_DB", "wso2carbon", "wso2carbon");
+        h2 = new H2DataBaseManager("jdbc:h2:~/test", "sa", "");
 
-        h2.execute("CREATE TABLE 'jdbc_store_table' (\n" +
-                   "'indexId' BIGINT( 20 ) NOT NULL ,\n" +
-                   "'msg_id' VARCHAR( 200 ) NOT NULL ,\n" +
-                   "'message' BLOB NOT NULL ,\n" +
-                   "PRIMARY KEY ( 'indexId' )\n" +
+        h2.execute("CREATE TABLE IF NOT EXISTS jdbc_store_table(\n" +
+                   "indexId BIGINT( 20 ) NOT NULL auto_increment ,\n" +
+                   "msg_id VARCHAR( 200 ) NOT NULL ,\n" +
+                   "message BLOB NOT NULL, \n" +
+                   "PRIMARY KEY ( indexId )\n" +
                    ")");
+        h2.disconnect();
 
         updateESBConfiguration(synapse);
         Thread.sleep(1000);
@@ -90,6 +91,9 @@ public class JDBCMessageStoreProcRESTTestCase extends ESBIntegrationTest{
                 ++i;
             }
         }
+
+        Thread.sleep(3000);
+/* Sampling processor always get deactivated due to unknown reason */
         if (i == 3) {
             Assert.assertTrue(true);
         } else {
@@ -99,6 +103,7 @@ public class JDBCMessageStoreProcRESTTestCase extends ESBIntegrationTest{
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
+        h2 = new H2DataBaseManager("jdbc:h2:~/test", "sa", "");
         h2.executeUpdate("DROP TABLE jdbc_store_table");
         super.cleanup();
     }

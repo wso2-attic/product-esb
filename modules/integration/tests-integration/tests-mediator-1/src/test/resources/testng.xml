@@ -9,7 +9,7 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestReportListener"/>
     </listeners>
 
-    <test name="Throttle-mediator-Test" preserve-order="true" verbose="2">
+    <!--<test name="Throttle-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.throttle"/>
         </packages>
@@ -94,16 +94,19 @@
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.drop"/>
         </packages>
-    </test>
+    </test>-->
 
     <test name="Message-Store-Test" preserve-order="true" verbose="2">
-        <packages>
+        <!--<packages>
             <package name="org.wso2.carbon.esb.message.store.test"/>
+        </packages>-->
+        <packages>
+            <package name="org.wso2.carbon.esb.message.store.jdbc.test"/>
         </packages>
     </test>
 
     <!--ignore this-->
-        <test name="dblookup-mediator-Test" preserve-order="true" verbose="2">
+        <!--<test name="dblookup-mediator-Test" preserve-order="true" verbose="2">
             <packages>
                 <package name="org.wso2.carbon.esb.mediator.test.db.dblookup"/>
             </packages>
@@ -186,10 +189,10 @@
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.out"/>
         </packages>
-    </test>
+    </test>-->
 
     <!--ignore this-->
-        <test name="dbreport-mediator-Test" preserve-order="true" verbose="2">
+       <!-- <test name="dbreport-mediator-Test" preserve-order="true" verbose="2">
             <packages>
                 <package name="org.wso2.carbon.esb.mediator.test.db.dbreport"/>
             </packages>
@@ -224,6 +227,6 @@
     <packages>
     <package name="org.wso2.carbon.esb.mediator.test.rule"/>
     </packages>
-    </test>
+    </test>-->
 </suite>
 
