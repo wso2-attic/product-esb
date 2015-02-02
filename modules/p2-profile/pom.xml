@@ -299,7 +299,7 @@
 
                                 <!--7 Carbon Governance -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.governance.metadata.server.feature:${wso2carbon.feature.version}
+                                    org.wso2.carbon:org.wso2.carbon.governance.metadata.server.feature:${carbon.governance.version}
                                 </featureArtifactDef>
 
                                 <!--8 Carbon-MultiTenancy-->
@@ -318,10 +318,10 @@
 
                                 <!--9 ESB Specific-->
                                 <featureArtifactDef>
-                                    org.wso2.esb:org.wso2.esb.samples.feature:${product.esb.version}
+                                    org.wso2.esb:org.wso2.esb.samples.feature:${productesb.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.esb:org.wso2.esb.styles.feature:${product.esb.version}
+                                    org.wso2.esb:org.wso2.esb.styles.feature:${productesb.version}
                                 </featureArtifactDef>
 
                                 <!-- Previous versions features TODO: Refactor code and get rid of these features-->
@@ -727,11 +727,11 @@
                                 <!--9 ESB Specific -->
                                 <feature>
                                     <id>org.wso2.esb.styles.feature.group</id>
-                                    <version>${product.esb.version}</version>
+                                    <version>${productesb.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.esb.samples.feature.group</id>
-                                    <version>${product.esb.version}</version>
+                                    <version>${productesb.version}</version>
                                 </feature>
 
                                 <!-- Previous versions -->
