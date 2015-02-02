@@ -125,9 +125,6 @@
                                     org.wso2.carbon.mediation:org.wso2.carbon.smooks.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.mediation:org.wso2.carbon.rule.mediation.feature:${carbon.mediation.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.wso2.carbon.mediation.ntask.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -324,6 +321,11 @@
                                     org.wso2.esb:org.wso2.esb.styles.feature:${productesb.version}
                                 </featureArtifactDef>
 
+                                <!--10 Carbon-rules-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.rules:org.wso2.carbon.rule.mediation.feature:${carbon.rule.version}
+                                </featureArtifactDef>
+
                                 <!-- Previous versions features TODO: Refactor code and get rid of these features-->
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.datasource.server.feature:${carbon.datasource.version}
@@ -491,10 +493,6 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.application.deployer.synapse.feature.group</id>
-                                    <version>${carbon.mediation.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.rule.mediation.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
                                 <feature>
@@ -734,6 +732,12 @@
                                     <version>${productesb.version}</version>
                                 </feature>
 
+                                <!--10 Carbon rule-->
+                                <feature>
+                                    <id>org.wso2.carbon.rule.mediation.feature.group</id>
+                                    <version>${carbon.rule.version}</version>
+                                </feature>
+
                                 <!-- Previous versions -->
                                 <feature>
                                     <id>org.wso2.carbon.datasource.server.feature.group</id>
@@ -873,11 +877,6 @@
                                     <id>org.wso2.carbon.mediator.bam.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.rule.mediation.feature.group</id>
-                                    <version>${carbon.mediation.version}</version>
-                                </feature>
-
                                 <feature>
                                     <id>org.apache.synapse.transport.nhttp.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
@@ -1115,6 +1114,12 @@
                                 <feature>
                                     <id>org.wso2.esb.samples.feature.group</id>
                                     <version>${productesb.version}</version>
+                                </feature>
+
+                                <!--10 Carbon rule-->
+                                <feature>
+                                    <id>org.wso2.carbon.rule.mediation.feature.group</id>
+                                    <version>${carbon.rule.version}</version>
                                 </feature>
 
                                 <!-- Previous versions -->

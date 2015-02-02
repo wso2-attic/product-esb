@@ -1048,6 +1048,9 @@
         <!-- Carbon Governance version-->
         <carbon.governance.version>4.3.0</carbon.governance.version>
 
+        <!-- Carbon Multitenancy version-->
+        <carbon.multitenancy.version>4.3.0</carbon.multitenancy.version>
+
         <httpcore.version>4.1.2</httpcore.version>
         <httpcore.wso2.version>4.3.0.wso2v1</httpcore.wso2.version>
         <httpclient.wso2.version>4.2.5.wso2v1</httpclient.wso2.version>
