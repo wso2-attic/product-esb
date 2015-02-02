@@ -41,7 +41,7 @@
     </dependencies>
 
     <build>
-       <plugins>
+        <plugins>
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
@@ -55,11 +55,11 @@
                         <configuration>
                             <id>org.wso2.esb.samples</id>
                             <propertiesFile>../etc/feature.properties</propertiesFile>
-			<adviceFile>
-				<properties>
-				    <propertyDef>org.wso2.carbon.p2.category.type:server</propertyDef>
-				</properties>
-		    	</adviceFile>
+                            <adviceFile>
+                                <properties>
+                                    <propertyDef>org.wso2.carbon.p2.category.type:server</propertyDef>
+                                </properties>
+                            </adviceFile>
                             <bundles>
                                 <bundleDef>org.wso2.esb:org.wso2.esb.samples</bundleDef>
                             </bundles>
