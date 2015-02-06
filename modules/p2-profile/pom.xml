@@ -327,16 +327,16 @@
                                     org.wso2.carbon.rules:org.wso2.carbon.rule.mediation.feature:${carbon.rule.version}
                                 </featureArtifactDef>
 
-                                <!-- Previous versions features TODO: Refactor code and get rid of these features-->
-                                <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.datasource.server.feature:${carbon.datasource.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.caching.feature:${carbon.caching.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.rm.feature:${carbon.rm.version}
-                                </featureArtifactDef>
+                                <!-- Previous versions features TODO: Refactor code and get rid of these features, use ndatasource-->
+                                <!--<featureArtifactDef>-->
+                                    <!--org.wso2.carbon:org.wso2.carbon.datasource.server.feature:${carbon.datasource.version}-->
+                                <!--</featureArtifactDef>-->
+                                <!--<featureArtifactDef> TODO: remove if not using anymore-->
+                                    <!--org.wso2.carbon:org.wso2.carbon.caching.feature:${carbon.caching.version}-->
+                                <!--</featureArtifactDef>-->
+                                <!--<featureArtifactDef> TODO: remove if not using anymore-->
+                                    <!--org.wso2.carbon:org.wso2.carbon.rm.feature:${carbon.rm.version}-->
+                                <!--</featureArtifactDef>-->
 
                                 <!-- Commented-out features TODO: Check whether we need to uncomment them-->
                                 <!--Stratos Start here-->
@@ -741,18 +741,19 @@
                                 </feature>
 
                                 <!-- Previous versions -->
-                                <feature>
-                                    <id>org.wso2.carbon.datasource.server.feature.group</id>
-                                    <version>${carbon.datasource.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.caching.feature.group</id>
-                                    <version>${carbon.caching.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.rm.feature.group</id>
-                                    <version>${carbon.rm.version}</version>
-                                </feature>
+
+                                <!--<feature> TODO:  Refactor code to use ndatasource-->
+                                    <!--<id>org.wso2.carbon.datasource.server.feature.group</id>-->
+                                    <!--<version>${carbon.datasource.version}</version>-->
+                                <!--</feature>-->
+                                <!--<feature> TODO: remove if not using anymore-->
+                                    <!--<id>org.wso2.carbon.caching.feature.group</id>-->
+                                    <!--<version>${carbon.caching.version}</version>-->
+                                <!--</feature>-->
+                                <!--<feature> TODO: remove if not using anymore-->
+                                    <!--<id>org.wso2.carbon.rm.feature.group</id>-->
+                                    <!--<version>${carbon.rm.version}</version>-->
+                                <!--</feature>-->
 
                                 <!--========================business-adaptors=================-->
                                 <!--<feature>-->
@@ -1126,18 +1127,19 @@
                                 </feature>
 
                                 <!-- Previous versions -->
-                                <feature>
-                                    <id>org.wso2.carbon.datasource.server.feature.group</id>
-                                    <version>${carbon.datasource.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.caching.feature.group</id>
-                                    <version>${carbon.caching.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.rm.feature.group</id>
-                                    <version>${carbon.rm.version}</version>
-                                </feature>
+
+                                <!--<feature> TODO:  Refactor code to use ndatasource-->
+                                    <!--<id>org.wso2.carbon.datasource.server.feature.group</id>-->
+                                    <!--<version>${carbon.datasource.version}</version>-->
+                                <!--</feature>-->
+                                <!--<feature> TODO: remove if not using anymore-->
+                                    <!--<id>org.wso2.carbon.caching.feature.group</id>-->
+                                    <!--<version>${carbon.caching.version}</version>-->
+                                <!--</feature>-->
+                                <!--<feature> TODO: remove if not using anymore-->
+                                    <!--<id>org.wso2.carbon.rm.feature.group</id>-->
+                                    <!--<version>${carbon.rm.version}</version>-->
+                                <!--</feature>-->
 
                                 <!--========================business-adaptors=================-->
                                 <!--<feature>-->
