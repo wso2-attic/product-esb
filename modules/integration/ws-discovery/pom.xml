@@ -96,7 +96,6 @@
         <dependency>
             <groupId>org.wso2.carbon.commons</groupId>
             <artifactId>org.wso2.carbon.discovery.stub</artifactId>
-            <version>${carbon.platform.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>javax.servlet</groupId>
