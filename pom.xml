@@ -32,6 +32,11 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
+    <parent>
+    	<groupId>org.wso2</groupId>
+    	<artifactId>wso2</artifactId>
+    	<version>1</version>
+    </parent>
     <modules>
         <module>modules/styles</module>
         <module>modules/samples</module>
@@ -41,6 +46,12 @@
         <!--module>modules/org.wso2.stratos.esb.login.ui</module-->
         <module>modules/integration</module>
     </modules>
+    <scm>
+        <connection>scm:git:https://github.com/wso2/product-esb.git</connection>
+        <url>https://github.com/wso2/product-esb.git</url>
+        <developerConnection>scm:git:https://github.com/wso2/product-esb.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
     <build>
         <plugins>
             <plugin>
@@ -53,6 +64,18 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+	    <plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-release-plugin</artifactId>
+        	<configuration>
+            		<preparationGoals>clean install</preparationGoals>
+			<autoVersionSubmodules>true</autoVersionSubmodules>
+        	</configuration>
+    	     </plugin>
+    	     <plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-deploy-plugin</artifactId>
+    	     </plugin>
         </plugins>
     </build>
 
@@ -1130,7 +1153,7 @@
         <slf4j.version>1.7.5</slf4j.version>
         <activemq.version>5.9.1</activemq.version>
         <testng.version>6.1.1</testng.version>
-
+	<project.scm.id>wso2-scm-server</project.scm.id>
 
     </properties>
     <pluginRepositories>
@@ -1202,12 +1225,12 @@
         </repository>
     </repositories>
     <distributionManagement>
-        <repository>
-            <id>wso2.releases</id>
-            <name>WSO2 internal Repository</name>
-            <url>http://maven.wso2.org/nexus/content/repositories/releases/</url>
+	<repository>
+            <id>nexus-releases</id>
+            <name>WSO2 Release Distribution Repository</name>
+            <url>http://maven.wso2.org/nexus/service/local/staging/deploy/maven2/</url>
         </repository>
-        <snapshotRepository>
+	<snapshotRepository>
             <id>wso2.snapshots</id>
             <name>Apache Snapshot Repository</name>
             <url>http://maven.wso2.org/nexus/content/repositories/snapshots/</url>
