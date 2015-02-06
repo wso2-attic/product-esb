@@ -304,12 +304,12 @@
             <dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>org.wso2.esb.styles</artifactId>
-                <version>${productesb.version}</version>
+                <version>${product.esb.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>org.wso2.esb.samples</artifactId>
-                <version>${productesb.version}</version>
+                <version>${product.esb.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.mediation</groupId>
@@ -918,7 +918,7 @@
             <dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>admin-clients</artifactId>
-                <version>${productesb.version}</version>
+                <version>${product.esb.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.wso2.carbon.mediation</groupId>
@@ -929,7 +929,7 @@
             <dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>integration-test-utils</artifactId>
-                <version>${productesb.version}</version>
+                <version>${product.esb.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.wso2.carbon.mediation</groupId>
@@ -940,7 +940,7 @@
             <dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>service-samples</artifactId>
-                <version>${productesb.version}</version>
+                <version>${product.esb.version}</version>
             </dependency>
             <dependency>
                 <groupId>groovy</groupId>
@@ -986,7 +986,7 @@
             <dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>ui-pages</artifactId>
-                <version>${productesb.version}</version>
+                <version>${product.esb.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.commons</groupId>
@@ -1010,7 +1010,7 @@
     <properties>
 
         <!--Product Version-->
-        <productesb.version>4.9.0-SNAPSHOT</productesb.version>
+        <product.esb.version>4.9.0-SNAPSHOT</product.esb.version>
 
         <!-- Axis2 -->
         <axis2.wso2.version>1.6.1.wso2v11</axis2.wso2.version>
