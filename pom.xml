@@ -358,12 +358,12 @@
             <!--dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>org.wso2.stratos.esb.styles</artifactId>
-                <version>${project.version}</version>
+                <version>${product.esb.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>org.wso2.stratos.esb.samples</artifactId>
-                <version>${project.version}</version>
+                <version>${product.esb.version}</version>
             </dependency-->
             <dependency>
                 <groupId>org.wso2.carbon.identity</groupId>

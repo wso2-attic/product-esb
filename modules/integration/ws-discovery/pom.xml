@@ -24,7 +24,7 @@
                     </suiteXmlFiles>
                     <systemProperties>
                         <maven.test.haltafterfailure>false</maven.test.haltafterfailure>
-                        <carbon.zip>${basedir}/../../distribution/target/wso2esb-${project.version}.zip</carbon.zip>
+                        <carbon.zip>${basedir}/../../distribution/target/wso2esb-${product.esb.version}.zip</carbon.zip>
                         <sec.verifier.dir>${basedir}/target/security-verifier/</sec.verifier.dir>
                         <emma.home>${basedir}/target/emma</emma.home>
                         <emma.output>${basedir}/target/emma</emma.output>
