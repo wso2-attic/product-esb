@@ -43,8 +43,8 @@
     </licenses>
 
     <modules>
-        <module>test-common</module>
-        <module>service-samples</module>
+        <!--module>test-common</module>
+        <module>service-samples</module-->
         <!-- Commenting out tests until the mutli tenancy issue is fixed -->
         <!--module>tests-integration/tests-transport</module>
         <module>tests-integration/tests-service</module>
