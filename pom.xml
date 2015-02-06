@@ -495,7 +495,7 @@
             <dependency>
                 <groupId>org.wso2.carbon.mediation</groupId>
                 <artifactId>org.wso2.carbon.rest.api.stub</artifactId>
-                <version>${carbon.platform.version}</version>
+                <version>${carbon.mediation.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.mediation</groupId>
@@ -527,12 +527,12 @@
                 <version>${carbon.mediation.version}</version>
                 <scope>test</scope>
             </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.commons</groupId>
-                <artifactId>org.wso2.carbon.transport.mgt.stub</artifactId>
-                <version>${carbon.commons.version}</version>
-                <scope>test</scope>
-            </dependency>
+            <!--<dependency> TODO: add transport mgt or relavent handler-->
+                <!--<groupId>org.wso2.carbon</groupId>-->
+                <!--<artifactId>org.wso2.carbon.transport.mgt.stub</artifactId>-->
+                <!--<version>4.2.0</version>-->
+                <!--<scope>test</scope>-->
+            <!--</dependency>-->
             <dependency>
                 <groupId>org.wso2.carbon.mediation</groupId>
                 <artifactId>org.wso2.carbon.message.store.stub</artifactId>
@@ -614,7 +614,7 @@
             <dependency>
                 <groupId>org.wso2.carbon.registry</groupId>
                 <artifactId>org.wso2.carbon.registry.extensions.stub</artifactId>
-                <version>${carbon.platform.version}</version>
+                <version>${carbon.registry.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -626,7 +626,7 @@
             <dependency>
                 <groupId>org.wso2.carbon.mediation</groupId>
                 <artifactId>org.wso2.carbon.mediation.library.stub</artifactId>
-                <version>${carbon.platform.version}</version>
+                <version>${carbon.mediation.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -708,19 +708,19 @@
             <dependency>
                 <groupId>org.apache.rampart</groupId>
                 <artifactId>rampart-core</artifactId>
-                <version>${rampart.wso2.version}</version>
+                <version>${rampart.apache.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.rampart</groupId>
                 <artifactId>rampart-policy</artifactId>
-                <version>${rampart.wso2.version}</version>
+                <version>${rampart.apache.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.rampart</groupId>
                 <artifactId>rampart-trust</artifactId>
-                <version>${rampart.wso2.version}</version>
+                <version>${rampart.apache.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -873,12 +873,12 @@
                 <scope>compile</scope>
                 <version>${carbon.mediation.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.commons</groupId>
-                <artifactId>org.wso2.carbon.transport.mgt.stub</artifactId>
-                <scope>compile</scope>
-                <version>${carbon.commons.version}</version>
-            </dependency>
+            <!--<dependency>TODO: add transport mgt or relavent handler -->
+                <!--<groupId>org.wso2.carbon</groupId>-->
+                <!--<artifactId>org.wso2.carbon.transport.mgt.stub</artifactId>-->
+                <!--<scope>compile</scope>-->
+                <!--<version>4.2.0</version>-->
+            <!--</dependency>-->
             <dependency>
                 <groupId>org.wso2.carbon.deployment</groupId>
                 <artifactId>org.wso2.carbon.service.mgt.stub</artifactId>
@@ -1005,9 +1005,6 @@
 
         <!--Product Version-->
         <productesb.version>4.9.0-SNAPSHOT</productesb.version>
-        <carbon.platform.version>4.3.0-SNAPSHOT</carbon.platform.version>
-        <carbon.kernel.version>4.3.0</carbon.kernel.version>
-        <wso2carbon.old.version>4.2.0</wso2carbon.old.version>
 
         <!-- Axis2 -->
         <axis2.wso2.version>1.6.1.wso2v11</axis2.wso2.version>
@@ -1025,7 +1022,7 @@
         <org.apache.httpcomponents.wso2.version>4.2.3.wso2v1</org.apache.httpcomponents.wso2.version>
 
         <!-- Carbon mediation version -->
-        <carbon.mediation.version>4.3.0</carbon.mediation.version>
+        <carbon.mediation.version>4.3.1-SNAPSHOT</carbon.mediation.version>
 
         <!-- Carbon kernel version-->
         <carbon.kernel.version>4.3.0</carbon.kernel.version>
@@ -1075,7 +1072,7 @@
         <mysql-connector-java.version>5.1.6</mysql-connector-java.version>
 
         <!-- Misc -->
-        <carbon.datasource.version>4.2.0</carbon.datasource.version>
+        <!-- TODO: remove after refactor with ndatasource <carbon.datasource.version>4.2.0</carbon.datasource.version>-->
         <carbon.caching.version>4.2.0</carbon.caching.version>
         <carbon.rm.version>4.2.0</carbon.rm.version>
         <log4j.version>1.2.13</log4j.version>
@@ -1083,11 +1080,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <opencsv.version>1.8</opencsv.version>
         <poi.version>3.0-FINAL</poi.version>
+        <rampart.apache.version>1.6.1-wso2v9</rampart.apache.version>
         <rampart.wso2.version>1.6.1.wso2v9</rampart.wso2.version>
         <passthru.transport.patch.version>1.0.2</passthru.transport.patch.version>
         <servlet-api.version>2.4</servlet-api.version>
         <geronimo-jms.version>1.1.1</geronimo-jms.version>
-        <rampart.wso2.version>1.6.1.wso2v9</rampart.wso2.version>
         <wss4j.version>1.5.11-wso2v8</wss4j.version>
         <emma.version>2.1.5320</emma.version>
         <axiom.wso2.version>1.2.11.wso2v5</axiom.wso2.version>
