@@ -316,10 +316,10 @@
 
                                 <!--9 ESB Specific-->
                                 <featureArtifactDef>
-                                    org.wso2.esb:org.wso2.esb.samples.feature:${productesb.version}
+                                    org.wso2.esb:org.wso2.esb.samples.feature:${product.esb.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.esb:org.wso2.esb.styles.feature:${productesb.version}
+                                    org.wso2.esb:org.wso2.esb.styles.feature:${product.esb.version}
                                 </featureArtifactDef>
 
                                 <!--10 Carbon-rules-->
@@ -727,11 +727,11 @@
                                 <!--9 ESB Specific -->
                                 <feature>
                                     <id>org.wso2.esb.styles.feature.group</id>
-                                    <version>${productesb.version}</version>
+                                    <version>${product.esb.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.esb.samples.feature.group</id>
-                                    <version>${productesb.version}</version>
+                                    <version>${product.esb.version}</version>
                                 </feature>
 
                                 <!--10 Carbon rule-->
@@ -1113,11 +1113,11 @@
                                 <!--9 ESB Specific -->
                                 <feature>
                                     <id>org.wso2.esb.styles.feature.group</id>
-                                    <version>${productesb.version}</version>
+                                    <version>${product.esb.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.esb.samples.feature.group</id>
-                                    <version>${productesb.version}</version>
+                                    <version>${product.esb.version}</version>
                                 </feature>
 
                                 <!--10 Carbon rule-->

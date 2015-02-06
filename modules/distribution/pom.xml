@@ -119,10 +119,10 @@
                                 </unzip>
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/"
                                       overwrite="false">
-                                    <fileset dir="${tempdir}/wso2esb-${productesb.version}/repository/components/">
+                                    <fileset dir="${tempdir}/wso2esb-${product.esb.version}/repository/components/">
                                     </fileset>
                                 </copy>
-                                <delete file="target/wso2esb-${productesb.version}.zip"/>
+                                <delete file="target/wso2esb-${product.esb.version}.zip"/>
                                 <delete dir="${tempdir}"/>
                                 <mkdir dir="${tempdir}"/>
                                 <unzip dest="${tempdir}">
