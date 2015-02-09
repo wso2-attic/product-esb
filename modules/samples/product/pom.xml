@@ -17,19 +17,16 @@
   ~  under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
         <groupId>org.wso2.esb</groupId>
     	<artifactId>esb-samples-parent</artifactId>
-        <version>4.9.0-SNAPSHOT</version>
+        <version>4.9.0-M7-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <version>4.9.0-SNAPSHOT</version>
-    <groupId>org.wso2.esb</groupId>
+    <version>4.9.0-M7-SNAPSHOT</version>
     <artifactId>org.wso2.esb.samples</artifactId>
     <packaging>bundle</packaging>
     <name>WSO2 ESB - Samples</name>
@@ -96,7 +93,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Export-Package>
-                            samples.*; version=1.0.0,
+                            org.wso2.esb.samples.*;
                         </Export-Package>
                         <Import-Package>
                             *;resolution:=optional

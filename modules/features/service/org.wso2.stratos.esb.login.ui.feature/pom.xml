@@ -37,14 +37,14 @@
             <groupId>org.wso2.esb</groupId>
             <artifactId>org.wso2.stratos.esb.login.ui</artifactId>
         </dependency>
-	<dependency>
+        <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.ui.menu.stratos</artifactId>
         </dependency>
     </dependencies>
 
     <build>
-       <plugins>
+        <plugins>
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
@@ -62,10 +62,10 @@
                                 <properties>
                                     <propertyDef>org.wso2.carbon.p2.category.type:console</propertyDef>
                                 </properties>
-                            </adviceFile>                            
+                            </adviceFile>
                             <bundles>
                                 <bundleDef>org.wso2.esb:org.wso2.stratos.esb.login.ui</bundleDef>
-				<bundleDef>org.wso2.carbon:org.wso2.carbon.ui.menu.stratos</bundleDef>
+                                <bundleDef>org.wso2.carbon:org.wso2.carbon.ui.menu.stratos</bundleDef>
                             </bundles>
                         </configuration>
                     </execution>

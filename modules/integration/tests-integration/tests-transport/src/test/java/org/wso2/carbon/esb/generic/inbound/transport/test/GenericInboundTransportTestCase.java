@@ -34,7 +34,8 @@ import java.io.File;
 
 public class GenericInboundTransportTestCase extends ESBIntegrationTest {
 	private LogViewerClient logViewerClient = null;
-	private final String CLASS_JAR = "org.wso2.carbon.inbound.endpoint.test-1.0-SNAPSHOT.jar";
+    //TODO: Add this jar to correct location
+	private final String CLASS_JAR = "org.wso2.carbon.inbound.endpoint.test-1.0.jar";
 	private final String JAR_LOCATION = "/artifacts/ESB/jar";
 	private InboundAdminClient inboundAdminClient;
 	private ServerConfigurationManager serverConfigurationManager;

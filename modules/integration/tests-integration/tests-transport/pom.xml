@@ -51,8 +51,8 @@
                         <sec.verifier.dir>${basedir}/target/security-verifier/</sec.verifier.dir>
                         <maven.test.haltafterfailure>false</maven.test.haltafterfailure>
                         <carbon.zip>
-                            <!--${basedir}/../../distribution/target/wso2esb-${project.version}.zip-->
-                            ${basedir}/../../../distribution/target/wso2esb-${project.version}.zip
+                            <!--${basedir}/../../distribution/target/wso2esb-${product.esb.version}.zip-->
+                            ${basedir}/../../../distribution/target/wso2esb-${product.esb.version}.zip
                         </carbon.zip>
                         <emma.home>${basedir}/target/emma</emma.home>
                         <instr.file>${basedir}/src/test/resources/instrumentation.txt</instr.file>
@@ -118,7 +118,7 @@
                                 <artifactItem>
                                     <groupId>org.wso2.esb</groupId>
                                     <artifactId>wso2esb</artifactId>
-                                    <version>${project.version}</version>
+                                    <version>${product.esb.version}</version>
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${basedir}/target/tobeCopied/</outputDirectory>
@@ -159,7 +159,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2esb-${project.version}/repository/resources/security/
+                                        ${basedir}/target/tobeCopied/wso2esb-${product.esb.version}/repository/resources/security/
                                     </directory>
                                     <includes>
                                         <include>**/*.jks</include>
@@ -180,7 +180,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2esb-${project.version}/repository/resources/security/
+                                        ${basedir}/target/tobeCopied/wso2esb-${product.esb.version}/repository/resources/security/
                                     </directory>
                                     <includes>
                                         <include>**/*.jks</include>
@@ -201,7 +201,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2esb-${project.version}/repository/samples/resources/security/
+                                        ${basedir}/target/tobeCopied/wso2esb-${product.esb.version}/repository/samples/resources/security/
                                     </directory>
                                     <includes>
                                         <include>**/*.jks</include>
@@ -222,7 +222,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2esb-${project.version}/repository/deployment/client/modules
+                                        ${basedir}/target/tobeCopied/wso2esb-${product.esb.version}/repository/deployment/client/modules
                                     </directory>
                                     <includes>
                                         <include>**/*.mar</include>
@@ -243,7 +243,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2esb-${project.version}/repository/samples/
+                                        ${basedir}/target/tobeCopied/wso2esb-${product.esb.version}/repository/samples/
                                     </directory>
                                     <includes>
                                         <include>**/*.xml</include>
@@ -260,10 +260,9 @@
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>admin-clients</artifactId>
-            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>org.wso2.carbon</groupId>
+                    <groupId>org.wso2.carbon.mediation</groupId>
                     <artifactId>org.wso2.carbon.rest.api</artifactId>
                 </exclusion>
             </exclusions>
@@ -272,10 +271,9 @@
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>integration-test-utils</artifactId>
-            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>org.wso2.carbon</groupId>
+                    <groupId>org.wso2.carbon.mediation</groupId>
                     <artifactId>org.wso2.carbon.rest.api</artifactId>
                 </exclusion>
             </exclusions>
@@ -283,7 +281,6 @@
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>service-samples</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>ca.uhn.hapi.wso2</groupId>
