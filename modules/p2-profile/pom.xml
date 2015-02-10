@@ -326,6 +326,23 @@
                                     org.wso2.carbon.rules:org.wso2.carbon.rule.mediation.feature:${carbon.rule.version}
                                 </featureArtifactDef>
 
+                                <!--11 Axis2 Transports-->
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.jms.feature:${axis2.transport.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.mail.feature:${axis2.transport.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.tcp.feature:${axis2.transport.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.udp.feature:${axis2.transport.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.xmpp.feature:${axis2.transport.version}
+                                </featureArtifactDef>
+
                                 <!-- Previous versions features TODO: Refactor code and get rid of these features, use ndatasource-->
                                 <!--<featureArtifactDef>-->
                                     <!--org.wso2.carbon:org.wso2.carbon.datasource.server.feature:${carbon.datasource.version}-->
@@ -739,6 +756,28 @@
                                     <version>${carbon.rule.version}</version>
                                 </feature>
 
+                                <!--11 Axis2 Transports-->
+                                <feature>
+                                    <id>org.apache.axis2.transport.jms.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.mail.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.tcp.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.udp.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.xmpp.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+
                                 <!-- Previous versions -->
 
                                 <!--<feature> TODO:  Refactor code to use ndatasource-->
@@ -1123,6 +1162,28 @@
                                 <feature>
                                     <id>org.wso2.carbon.rule.mediation.feature.group</id>
                                     <version>${carbon.rule.version}</version>
+                                </feature>
+
+                                <!--11 Axis2 Transports-->
+                                <feature>
+                                    <id>org.apache.axis2.transport.jms.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.mail.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.tcp.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.udp.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.xmpp.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
                                 </feature>
 
                                 <!-- Previous versions -->
