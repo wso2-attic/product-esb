@@ -894,10 +894,7 @@ check com.sun.mail.pop3 and com.sun.mail.imap package documentation for more det
             <handler name="RelaySecuirtyMessageBuilderDispatchandler"
                      class="org.apache.synapse.transport.passthru.util.RelaySecuirtyMessageBuilderDispatchandler"/>
         </phase>
-        <phase name="PTCacheOutPhase">
-            <handler name="CacheMessageBuilderDispatchandler"
-                     class="org.apache.synapse.transport.passthru.util.CacheMessageBuilderDispatchandler"/>
-        </phase>
+
         <phase name="MessageOut"/>
         <phase name="Security"/>
 

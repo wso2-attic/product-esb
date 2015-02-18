@@ -770,7 +770,6 @@
                 <order phase="Transport"/>
             </handler-->
            <handler class="org.apache.synapse.transport.passthru.util.RelaySecuirtyMessageBuilderDispatchandler" name="RelaySecuirtyMessageBuilderDispatchandler"/>
-           <handler class="org.apache.synapse.transport.passthru.util.CacheMessageBuilderDispatchandler" name="CacheMessageBuilderDispatchandler"/>
         </phase>
         <phase name="Addressing">
             <handler class="org.apache.axis2.dispatchers.AddressingBasedDispatcher" name="AddressingBasedDispatcher">
@@ -817,9 +816,7 @@
         <phase name="PTSecurityOutPhase">
 		<handler class="org.apache.synapse.transport.passthru.util.RelaySecuirtyMessageBuilderDispatchandler" name="RelaySecuirtyMessageBuilderDispatchandler"/>
 	</phase>
-        <phase name="PTCacheOutPhase">
-             <handler class="org.apache.synapse.transport.passthru.util.CacheMessageBuilderDispatchandler" name="CacheMessageBuilderDispatchandler"/>
-        </phase>
+
         <phase name="MessageOut"/>
         <phase name="Security"/>
 

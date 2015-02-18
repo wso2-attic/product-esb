@@ -625,8 +625,7 @@
                      class="org.wso2.carbon.core.transports.smtp.SMTPFaultHandler">
                 <order phase="Transport"/>
             </handler-->
-           <handler name="CacheMessageBuilderDispatchandler"
-                     class="org.wso2.carbon.mediation.initializer.handler.CacheMessageBuilderDispatchandler"/>
+
         </phase>
         <phase name="Addressing">
             <handler name="AddressingBasedDispatcher"
@@ -683,10 +682,7 @@
 		<handler name="RelaySecuirtyMessageBuilderDispatchandler"
                      class="org.apache.synapse.transport.passthru.util.RelaySecuirtyMessageBuilderDispatchandler"/>
 	</phase>
-        <phase name="PTCacheOutPhase">
-             <handler name="CacheMessageBuilderDispatchandler"
-                     class="org.wso2.carbon.mediation.initializer.handler.CacheMessageBuilderDispatchandler"/>
-        </phase>
+
         <phase name="MessageOut"/>
         <phase name="Security"/>
 

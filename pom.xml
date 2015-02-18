@@ -1058,7 +1058,7 @@
         <carbon.kernel.version>4.3.0</carbon.kernel.version>
 
         <!-- Carbon Commons version-->
-        <carbon.commons.version>4.3.4</carbon.commons.version>
+        <carbon.commons.version>4.3.5</carbon.commons.version>
 
         <!-- Carbon Deployment version-->
         <carbon.deployment.version>4.3.1</carbon.deployment.version>
