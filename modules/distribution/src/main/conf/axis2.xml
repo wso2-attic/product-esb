@@ -627,6 +627,10 @@
             </handler-->
         </phase>
         <phase name="Addressing">
+            <handler name="WSAddressingHandler"
+                     class="org.apache.synapse.transport.passthru.util.WSAddressingHandler">
+                <order phase="Addressing"/>
+            </handler>
             <handler name="AddressingBasedDispatcher"
                      class="org.apache.axis2.dispatchers.AddressingBasedDispatcher">
                 <order phase="Addressing"/>
