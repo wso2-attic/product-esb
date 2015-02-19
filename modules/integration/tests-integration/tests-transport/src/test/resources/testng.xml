@@ -64,8 +64,8 @@
             <!--and restore the same once it's done-->
             <!--If your test case needs to explicitly change the server configuration, add it here-->
             <class name="org.wso2.carbon.esb.nhttp.transport.test.DefaultRequestContentTypeTestCase"/>
-            <class name="org.wso2.carbon.esb.nhttp.transport.test.ResponseAfterNttpEnabledTestCase"/>
-            <class name="org.wso2.carbon.esb.nhttp.transport.test.NhttpMaximumOpenConnections"/>
+            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.ResponseAfterNttpEnabledTestCase"/>-->
+            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.NhttpMaximumOpenConnections"/>-->
             <class name="org.wso2.carbon.esb.nhttp.transport.test.ConfiguringNhttpAccessLogLocationTestCase"/>
 
             <!--The SetNhttpAxis2Transport class would set the nhttp axis2 transport and restart the ESB-->
@@ -75,7 +75,7 @@
             <class name="org.wso2.carbon.esb.nhttp.transport.test.SetNhttpAxis2Transport"/>
             <class name="org.wso2.carbon.esb.nhttp.transport.test.ContentTypeCharsetTestCase"/>
             <class name="org.wso2.carbon.esb.nhttp.transport.test.MessageWithoutContentTypeTestCase"/>
-            <class name="org.wso2.carbon.esb.nhttp.transport.test.OCSPCertificateValidationTestCase"/>
+            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.OCSPCertificateValidationTestCase"/>-->
             <class name="org.wso2.carbon.esb.nhttp.transport.test.RetrieveBackendWsdlTestCase"/>
             <class name="org.wso2.carbon.esb.nhttp.transport.test.SetHostHttpHeaderTestCase"/>
             <class name="org.wso2.carbon.esb.nhttp.transport.test.RemoveNhttpAxis2Transport"/>

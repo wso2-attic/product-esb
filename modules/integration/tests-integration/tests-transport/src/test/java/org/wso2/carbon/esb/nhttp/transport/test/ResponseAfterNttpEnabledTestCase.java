@@ -61,7 +61,7 @@ public class ResponseAfterNttpEnabledTestCase extends ESBIntegrationTest {
      * @throws Exception
      */
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
-    @Test(groups = "wso2.esb", enabled = false)
+    @Test(groups = "wso2.esb")
     public void testMessageMediationAfterEnablingNhttp() throws Exception {
 
 
