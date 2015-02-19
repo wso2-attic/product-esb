@@ -63,11 +63,11 @@
         </packages>
     </test>
 
-    <test name="Smook-mediator-Test" preserve-order="true" verbose="2">
+    <!--test name="Smook-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.smooks"/>
         </packages>
-    </test>
+    </test-->
 
     <test name="Script-mediator-Test" preserve-order="true" verbose="2">
         <packages>
@@ -83,8 +83,8 @@
 
     <test name="Message-Processor-Test" preserve-order="true" verbose="2">
         <packages>
-            <package name="org.wso2.carbon.esb.message.processor.test"/>
             <package name="org.wso2.carbon.esb.message.processor.test.forwarding"/>
+            <package name="org.wso2.carbon.esb.message.processor.test"/>
         </packages>
     </test>
 
@@ -107,10 +107,10 @@
         </packages>
     </test>
     
-    <test name="Tracer-mediator-Test" preserve-order="true" verbose="2">
+    <!--test name="Tracer-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.tracer"/>
         </packages>
-    </test>
+    </test-->
     
 </suite>
