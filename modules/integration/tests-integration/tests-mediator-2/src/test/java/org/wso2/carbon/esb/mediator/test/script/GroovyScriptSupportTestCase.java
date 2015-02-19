@@ -58,7 +58,7 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
-    @Test(groups = {"wso2.esb", "localonly"}, description = "Testing the groovy support in a proxy")
+    @Test(groups = {"wso2.esb", "localonly"}, description = "Testing the groovy support in a proxy",enabled =false)
     public void GroovySupportWithinProxyTest() throws Exception {
 
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/groovy/synapse_without_groovy.xml");
@@ -73,7 +73,7 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
-    @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Groovy script with the mediator")
+    @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Groovy script with the mediator",enabled =false)
     public void testGroovyScriptMediation() throws Exception {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/script_mediator/groovy_script_with_the_mediator.xml");
 
@@ -90,7 +90,7 @@ public class GroovyScriptSupportTestCase extends ESBIntegrationTest {
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
-    @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Groovy script with setPayloadJson")
+    @Test(groups = {"wso2.esb", "localOnly"}, description = "Script Mediator -Run a Groovy script with setPayloadJson",enabled =false)
     public void testGroovySetPayloadJson() throws Exception {
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/script_mediator/groovy_script_with_setPayloadJson.xml");
 
