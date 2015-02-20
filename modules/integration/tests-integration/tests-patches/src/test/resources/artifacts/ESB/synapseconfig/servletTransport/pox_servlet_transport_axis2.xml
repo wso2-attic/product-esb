@@ -225,7 +225,7 @@
         <parameter name="non-blocking" locked="false">true</parameter>
         <!--parameter name="bind-address" locked="false">hostname or IP address</parameter-->
         <!--parameter name="WSDLEPRPrefix" locked="false">https://apachehost:port/somepath</parameter-->
-        <parameter name="httpGetProcessor" locked="false">org.wso2.carbon.transport.nhttp.api.NHttpGetProcessor</parameter>
+        <parameter name="httpGetProcessor" locked="false">org.wso2.carbon.mediation.transport.handlers.NHttpGetProcessor</parameter>
     </transportReceiver>
 
     <!-- the non blocking https transport based on HttpCore + SSL-NIO extensions -->
@@ -234,7 +234,7 @@
         <parameter name="non-blocking" locked="false">true</parameter>
         <!--parameter name="bind-address" locked="false">hostname or IP address</parameter-->
         <!--parameter name="WSDLEPRPrefix" locked="false">https://apachehost:port/somepath</parameter-->
-        <parameter name="httpGetProcessor" locked="false">org.wso2.carbon.transport.nhttp.api.NHttpGetProcessor</parameter>
+        <parameter name="httpGetProcessor" locked="false">org.wso2.carbon.mediation.transport.handlers.NHttpGetProcessor</parameter>
         <parameter name="keystore" locked="false">
             <KeyStore>
                 <Location>repository/resources/security/wso2carbon.jks</Location>
