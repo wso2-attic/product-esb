@@ -265,6 +265,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.registry:org.wso2.carbon.registry.community.features.server.feature:${carbon.registry.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.contentsearch.server.feature:${carbon.registry.version}
+                                </featureArtifactDef>
 
                                 <!--5 Carbon-identity -->
                                 <featureArtifactDef>
@@ -676,6 +679,10 @@
                                     <id>org.wso2.carbon.registry.community.features.server.feature.group</id>
                                     <version>${carbon.registry.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.registry.contentsearch.server.feature.group</id>
+                                    <version>${carbon.registry.version}</version>
+                                </feature>
 
                                 <!-- 5 Carbon-identity  -->
                                 <feature>
@@ -1082,6 +1089,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.resource.properties.feature.group</id>
+                                    <version>${carbon.registry.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.registry.contentsearch.server.feature.group</id>
                                     <version>${carbon.registry.version}</version>
                                 </feature>
 
