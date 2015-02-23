@@ -98,7 +98,7 @@ public class GenericInboundTransportTestCase extends ESBIntegrationTest {
 	}
 
 	@Test(groups = { "wso2.esb" }, description = "Test creating Generic Inbound EP without implementation class")
-	public void testWithImplemetationClass() throws Exception {
+	public void testWithoutImplementationClass() throws Exception {
 		int beforeLogCount = logViewerClient.getAllSystemLogs().length;
 		addInboundEndpoint(addEndpoint3());
 		LogEvent[] logs = logViewerClient.getAllSystemLogs();
