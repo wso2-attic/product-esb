@@ -63,11 +63,11 @@
         </packages>
     </test>
 
-    <!--test name="Smook-mediator-Test" preserve-order="true" verbose="2">
+    <test name="Smook-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.smooks"/>
         </packages>
-    </test-->
+    </test>
 
     <test name="Script-mediator-Test" preserve-order="true" verbose="2">
         <packages>
