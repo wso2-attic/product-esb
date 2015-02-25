@@ -112,7 +112,7 @@ public class Sample354TestCase extends ESBIntegrationTest {
             cleanup();
             Thread.sleep(5000);
         } finally {
-            serverManager.removeFromComponentDropins(JRUBY_JAR);
+            //serverManager.removeFromComponentDropins(JRUBY_JAR);
             serverManager.restartGracefully();
             serverManager = null;
         }
