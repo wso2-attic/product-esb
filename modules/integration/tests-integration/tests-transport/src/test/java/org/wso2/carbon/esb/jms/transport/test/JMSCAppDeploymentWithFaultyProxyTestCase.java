@@ -12,8 +12,11 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.admin.client.ApplicationAdminClient;
 import org.wso2.carbon.integration.common.admin.client.CarbonAppUploaderClient;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.clients.service.mgt.ServiceAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
@@ -34,17 +37,32 @@ public class JMSCAppDeploymentWithFaultyProxyTestCase extends
 	private boolean isCarFileUploaded = false;
 	private ServiceAdminClient serviceAdminClient;
 	private final String proxyServiceName = "JMSProxyWQConf";
+	private ServerConfigurationManager configurationManager;
 
 	@BeforeClass(alwaysRun = true)
 	protected void uploadCarFileTest() throws Exception {
 		
 		super.init();
+
+		configurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
+		configurationManager.applyConfiguration(new File(getESBResourceLocation() + File.separator +
+		                                                 "jms" +
+		                                                 File.separator+
+		                                                 "transport"+
+		                                                 File.separator +
+		                                                 "axis2config" +
+		                                                 File.separator +
+		                                                 "activemq"+
+		                                                 File.separator+
+		                                                 "axis2.xml"));
+
+		super.init();
+
 		carbonAppUploaderClient = new CarbonAppUploaderClient(
 				contextUrls.getBackEndUrl(),getSessionCookie());
 
 		applicationAdminClient = new ApplicationAdminClient(
 				contextUrls.getBackEndUrl(),getSessionCookie());
-
 	}
 	
 	@AfterClass(alwaysRun = true)
