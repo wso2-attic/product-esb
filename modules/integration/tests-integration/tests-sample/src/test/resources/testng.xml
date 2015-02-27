@@ -11,10 +11,10 @@
 
 
     <test name="Server-Stratup" preserve-order="true" verbose="2">
-    <classes>
+        <classes>
 
-    <class name="org.wso2.carbon.esb.samples.test.miscellaneous.Sample100TestCase"/>
-    </classes>
+            <class name="org.wso2.carbon.esb.samples.test.miscellaneous.Sample100TestCase"/>
+        </classes>
     </test>
     <test name="ESB-Sample-Advance-Test" preserve-order="true" verbose="2">
         <packages>
@@ -30,17 +30,28 @@
         <packages>
             <package name="org.wso2.carbon.esb.samples.test.mediation.*"/>
         </packages>
-		<classes>
-           <class name="org.wso2.carbon.esb.samples.test.mediation.Sample9TestCase">
+
+        <classes>
+            <class name="org.wso2.carbon.esb.samples.test.mediation.Sample11TestCase">
+            </class>
+            <class name="org.wso2.carbon.esb.samples.test.mediation.Sample13TestCase">
+            </class>
+            <class name="org.wso2.carbon.esb.samples.test.mediation.db.Sample363TestCase">
                 <methods>
-                    <exclude name=".*" />
+                    <exclude name=".*"/>
                 </methods>
-           </class>
-		   <class name="org.wso2.carbon.esb.samples.test.mediation.jason.Sample441TestCase">
+            </class>
+
+            <class name="org.wso2.carbon.esb.samples.test.mediation.Sample9TestCase">
                 <methods>
-                    <exclude name=".*" />
+                    <exclude name=".*"/>
                 </methods>
-           </class>
+            </class>
+            <class name="org.wso2.carbon.esb.samples.test.mediation.jason.Sample441TestCase">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
         </classes>
     </test>
     <test name="ESB-Sample-Messaging-Test" preserve-order="true" verbose="2">
@@ -52,12 +63,12 @@
         <packages>
             <package name="org.wso2.carbon.esb.samples.test.miscellaneous.*"/>
         </packages>
-		<classes>
-           <class name="org.wso2.carbon.esb.samples.test.miscellaneous.Sample653TestCase">
+        <classes>
+            <class name="org.wso2.carbon.esb.samples.test.miscellaneous.Sample653TestCase">
                 <methods>
-                    <exclude name=".*" />
+                    <exclude name=".*"/>
                 </methods>
-           </class>
+            </class>
         </classes>
     </test>
     <test name="ESB-Sample-Proxy-Test" preserve-order="true" verbose="2">
@@ -82,9 +93,9 @@
         </packages>
     </test>
     <test name="ESB-Sample-PriorityExecutor" preserve-order="true" verbose="2">
-    <packages>
-    <package name="org.wso2.carbon.esb.samples.test.mediation.priorityexecutor.*"/>
-    </packages>
+        <packages>
+            <package name="org.wso2.carbon.esb.samples.test.mediation.priorityexecutor.*"/>
+        </packages>
     </test>
 
 </suite>
