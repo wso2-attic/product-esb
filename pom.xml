@@ -37,11 +37,11 @@
         <version>1</version>
     </parent>
     <modules>
-        <module>modules/styles</module>
-        <module>modules/samples</module>
-        <module>modules/features</module>
-        <module>modules/p2-profile</module>
-        <module>modules/distribution</module>
+        <!--<module>modules/styles</module>-->
+        <!--<module>modules/samples</module>-->
+        <!--<module>modules/features</module>-->
+        <!--<module>modules/p2-profile</module>-->
+        <!--<module>modules/distribution</module>-->
         <!--module>modules/org.wso2.stratos.esb.login.ui</module-->
         <module>modules/integration</module>
     </modules>
@@ -683,25 +683,25 @@
                 <groupId>org.wso2.carbon.automationutils</groupId>
                 <artifactId>org.wso2.carbon.integration.common.admin.client</artifactId>
                 <version>${automation.framework.utils.version}</version>
-                <scope>test</scope>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.automationutils</groupId>
                 <artifactId>org.wso2.carbon.integration.common.extensions</artifactId>
                 <version>${automation.framework.utils.version}</version>
-                <scope>test</scope>
+                <!--<scope>compile</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.automationutils</groupId>
                 <artifactId>org.wso2.carbon.integration.common.utils</artifactId>
                 <version>${automation.framework.utils.version}</version>
-                <scope>test</scope>
+                <!--<scope>compile</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.automationutils</groupId>
                 <artifactId>org.wso2.carbon.integration.common.tests</artifactId>
                 <version>${automation.framework.utils.version}</version>
-                <scope>test</scope>
+                <!--<scope>compile</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.commons</groupId>
