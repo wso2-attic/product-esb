@@ -8,12 +8,11 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestSuiteListener"/>
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
-
-
     <test name="Server-Stratup" preserve-order="true" verbose="2">
         <classes>
-
             <class name="org.wso2.carbon.esb.samples.test.miscellaneous.Sample100TestCase"/>
+            <class name="org.wso2.carbon.esb.samples.test.mediation.Sample11TestCase"/>
+            <class name="org.wso2.carbon.esb.samples.test.mediation.Sample13TestCase"/>
         </classes>
     </test>
     <test name="ESB-Sample-Advance-Test" preserve-order="true" verbose="2">
@@ -26,23 +25,32 @@
             <package name="org.wso2.carbon.esb.samples.test.endpoint.*"/>
         </packages>
     </test>
+    <test name="ESB-Sample-Messaging-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.samples.test.messaging.*"/>
+        </packages>
+    </test>
     <test name="ESB-Sample-Mediation-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.samples.test.mediation.*"/>
         </packages>
-
         <classes>
-            <class name="org.wso2.carbon.esb.samples.test.mediation.Sample11TestCase">
-            </class>
-            <class name="org.wso2.carbon.esb.samples.test.mediation.Sample13TestCase">
-            </class>
             <class name="org.wso2.carbon.esb.samples.test.mediation.db.Sample363TestCase">
                 <methods>
                     <exclude name=".*"/>
                 </methods>
             </class>
-
+            <class name="org.wso2.carbon.esb.samples.test.mediation.Sample13TestCase">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
             <class name="org.wso2.carbon.esb.samples.test.mediation.Sample9TestCase">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+            <class name="org.wso2.carbon.esb.samples.test.mediation.Sample11TestCase">
                 <methods>
                     <exclude name=".*"/>
                 </methods>
@@ -54,17 +62,17 @@
             </class>
         </classes>
     </test>
-    <test name="ESB-Sample-Messaging-Test" preserve-order="true" verbose="2">
-        <packages>
-            <package name="org.wso2.carbon.esb.samples.test.messaging.*"/>
-        </packages>
-    </test>
     <test name="ESB-Sample-Miscellaneous-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.samples.test.miscellaneous.*"/>
         </packages>
         <classes>
             <class name="org.wso2.carbon.esb.samples.test.miscellaneous.Sample653TestCase">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+            <class name="org.wso2.carbon.esb.samples.test.miscellaneous.Sample100TestCase">
                 <methods>
                     <exclude name=".*"/>
                 </methods>
@@ -99,5 +107,4 @@
     </test>
 
 </suite>
-
 
