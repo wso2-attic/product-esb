@@ -56,7 +56,7 @@ public class MailToTransportUtil {
     private static char[] receiverPassword;
     private static String domain;
     private static int WAIT_TIME_MS = 180 * 1000; // Max time to wait for a email and string search in log
-    private static final String INBOX = "INBOX";
+    private static final String EMAIL_INBOX = "EMAIL_INBOX";
     private static final String EMAIL_CREDENTIAL_PARENT_XPATH = "//emailCredentials";
     private static final String EMAIL_CREDENTIAL_SENDER_XPATH = "//emailCredentials/sender";
     private static final String EMAIL_CREDENTIAL_SENDER_PASSWORD_XPATH = "//emailCredentials/senderPassword";
@@ -101,6 +101,8 @@ public class MailToTransportUtil {
     }
 
     /**
+     * Check a particular email has received to a given email folder by email subject.
+     *
      * @param emailSubject - Email emailSubject to find email is in inbox or not
      * @return - found the email or not
      * @throws ESBMailTransportIntegrationTestException - Is thrown if an error occurred while reading the emails
@@ -151,7 +153,7 @@ public class MailToTransportUtil {
         long startTime = System.currentTimeMillis();
 
         while ((System.currentTimeMillis() - startTime) < WAIT_TIME_MS) {
-            if (!isMailReceivedBySubject(emailSubject, INBOX)) {
+            if (!isMailReceivedBySubject(emailSubject, EMAIL_INBOX)) {
                 log.info("Email has deleted successfully");
                 isEmailDeleted = true;
                 break;
@@ -206,7 +208,7 @@ public class MailToTransportUtil {
     public static void deleteAllUnreadEmailsFromGmail() throws ESBMailTransportIntegrationTestException {
         Store store = null;
         Folder inbox = null;
-        String folderName = INBOX;
+        String folderName = EMAIL_INBOX;
         try {
             store = getConnection();
             inbox = store.getFolder(folderName);
@@ -297,7 +299,7 @@ public class MailToTransportUtil {
         boolean mailReceived = false;
         long startTime = System.currentTimeMillis();
         while ((System.currentTimeMillis() - startTime) < WAIT_TIME_MS) {
-            if (isMailReceivedBySubject(subjectToCheck, INBOX)) {
+            if (isMailReceivedBySubject(subjectToCheck, EMAIL_INBOX)) {
                 log.info("Found the expected email in mailbox : " + subjectToCheck);
                 mailReceived = true;
                 break;

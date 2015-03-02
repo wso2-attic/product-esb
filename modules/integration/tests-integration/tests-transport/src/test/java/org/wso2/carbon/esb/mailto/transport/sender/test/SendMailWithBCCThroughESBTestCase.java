@@ -66,8 +66,8 @@ public class SendMailWithBCCThroughESBTestCase extends ESBIntegrationTest {
 
         MailToTransportUtil.readXMLforEmailCredentials();
 
-        MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
         // Since ESB reads all unread emails one by one, we have to delete the all unread emails to run the test
+        MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
     }
 
     @Test(groups = {"wso2.esb"}, description = "Test email sender with BCC ")
