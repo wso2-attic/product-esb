@@ -26,6 +26,7 @@ import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.logging.view.stub.LogViewerLogViewerException;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.exception.ESBMailTransportIntegrationTestException;
+
 import javax.mail.Authenticator;
 import javax.mail.Flags;
 import javax.mail.Folder;
@@ -56,7 +57,7 @@ public class MailToTransportUtil {
     private static char[] receiverPassword;
     private static String domain;
     private static int WAIT_TIME_MS = 180 * 1000; // Max time to wait for a email and string search in log
-    private static final String EMAIL_INBOX = "EMAIL_INBOX";
+    private static final String EMAIL_INBOX = "INBOX";
     private static final String EMAIL_CREDENTIAL_PARENT_XPATH = "//emailCredentials";
     private static final String EMAIL_CREDENTIAL_SENDER_XPATH = "//emailCredentials/sender";
     private static final String EMAIL_CREDENTIAL_SENDER_PASSWORD_XPATH = "//emailCredentials/senderPassword";
@@ -111,20 +112,18 @@ public class MailToTransportUtil {
             throws ESBMailTransportIntegrationTestException {
         Store store = null;
         boolean emailReceived = false;
+        Folder mailFolder = null;
         try {
             store = getConnection();
-            long startTime = System.currentTimeMillis();
-            while (!emailReceived && (System.currentTimeMillis() - startTime) < WAIT_TIME_MS) {
-                Folder mailFolder = store.getFolder(folder);
-                mailFolder.open(Folder.READ_WRITE);
-                SearchTerm searchTerm = new AndTerm(new SubjectTerm(emailSubject), new BodyTerm(emailSubject));
-                Message[] messages = mailFolder.search(searchTerm);
-                for (Message message : messages) {
-                    if (message.getSubject().contains(emailSubject)) {
-                        log.info("Found the email emailSubject : " + emailSubject);
-                        emailReceived = true;
-                        break;
-                    }
+            mailFolder = store.getFolder(folder);
+            mailFolder.open(Folder.READ_WRITE);
+            SearchTerm searchTerm = new AndTerm(new SubjectTerm(emailSubject), new BodyTerm(emailSubject));
+            Message[] messages = mailFolder.search(searchTerm);
+            for (Message message : messages) {
+                if (message.getSubject().contains(emailSubject)) {
+                    log.info("Found the email emailSubject : " + emailSubject);
+                    emailReceived = true;
+                    break;
                 }
             }
             return emailReceived;
@@ -145,7 +144,7 @@ public class MailToTransportUtil {
     /**
      * @param emailSubject - Subject of the email which should be deleted by ESB
      * @return - Email has deleted successfully or not
-     * @throws ESBMailTransportIntegrationTestException   - Is thrown if an error occurred when reading the emails
+     * @throws ESBMailTransportIntegrationTestException - Is thrown if an error occurred when reading the emails
      */
     public static boolean checkDeletedEmail(String emailSubject)
             throws ESBMailTransportIntegrationTestException {
@@ -205,13 +204,13 @@ public class MailToTransportUtil {
      *
      * @throws ESBMailTransportIntegrationTestException - Is thrown if an error when deleting the emails
      */
-    public static void deleteAllUnreadEmailsFromGmail() throws ESBMailTransportIntegrationTestException {
+    public static void deleteAllUnreadEmailsFromGmail()
+            throws ESBMailTransportIntegrationTestException {
         Store store = null;
         Folder inbox = null;
-        String folderName = EMAIL_INBOX;
         try {
             store = getConnection();
-            inbox = store.getFolder(folderName);
+            inbox = store.getFolder(EMAIL_INBOX);
             inbox.open(Folder.READ_WRITE);
             Message[] messages = inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
 
@@ -277,10 +276,10 @@ public class MailToTransportUtil {
                 }
             }
             return expectedStringFound;
-        }catch (LogViewerLogViewerException e){
+        } catch (LogViewerLogViewerException e) {
             log.error("Error when reading the log to find a string ", e);
             throw new ESBMailTransportIntegrationTestException("Error when reading the log to find a string ", e);
-        }catch (RemoteException e){
+        } catch (RemoteException e) {
             log.error("Error when getting the log ", e);
             throw new ESBMailTransportIntegrationTestException("Error when getting the log ", e);
         }
@@ -291,8 +290,8 @@ public class MailToTransportUtil {
      *
      * @param subjectToCheck - Email Subject to check in the inbox
      * @return boolean - If found the email true , else false
-     * @throws InterruptedException - Error occurred in thread sleep
-     * @throws ESBMailTransportIntegrationTestException   - Is thrown if an error while reading the emails
+     * @throws InterruptedException                     - Error occurred in thread sleep
+     * @throws ESBMailTransportIntegrationTestException - Is thrown if an error while reading the emails
      */
     public static boolean waitToCheckEmailReceived(String subjectToCheck)
             throws ESBMailTransportIntegrationTestException {
@@ -316,7 +315,8 @@ public class MailToTransportUtil {
     /**
      * Read automation.xml to set email credentials to relevant variables.
      */
-    public static void readXMLforEmailCredentials() throws ESBMailTransportIntegrationTestException {
+    public static void readXMLforEmailCredentials()
+            throws ESBMailTransportIntegrationTestException {
         try {
 
             AutomationContext automationContext = new AutomationContext();

@@ -37,11 +37,11 @@
         <version>1</version>
     </parent>
     <modules>
-        <!--<module>modules/styles</module>-->
-        <!--<module>modules/samples</module>-->
-        <!--<module>modules/features</module>-->
-        <!--<module>modules/p2-profile</module>-->
-        <!--<module>modules/distribution</module>-->
+        <module>modules/styles</module>
+        <module>modules/samples</module>
+        <module>modules/features</module>
+        <module>modules/p2-profile</module>
+        <module>modules/distribution</module>
         <!--module>modules/org.wso2.stratos.esb.login.ui</module-->
         <module>modules/integration</module>
     </modules>

@@ -38,6 +38,8 @@
                 <send/>
             </outSequence>
         </target>
+        <parameter name="transport.mail.ActionAfterFailure">MOVE</parameter>
+        <parameter name="transport.mail.MoveAfterFailure">Trash</parameter>
         <parameter name="mail.imap.socketFactory.class">javax.net.ssl.SSLSocketFactory</parameter>
         <parameter name="mail.imap.starttls.enable">false</parameter>
         <parameter name="transport.mail.ContentType">application/xml</parameter>
@@ -45,8 +47,6 @@
         <parameter name="transport.mail.Address">test.automation.dummy@gmail.com</parameter>
         <parameter name="mail.imap.user">test.automation.dummy</parameter>
         <parameter name="mail.imap.socketFactory.port">993</parameter>
-        <parameter name="transport.mail.ActionAfterFailure">MOVE</parameter>
-        <parameter name="transport.mail.MoveAfterFailure">Trash</parameter>
         <parameter name="transport.PollInterval">2</parameter>
         <parameter name="mail.imap.port">993</parameter>
         <parameter name="mail.imap.ssl.enable">false</parameter>
