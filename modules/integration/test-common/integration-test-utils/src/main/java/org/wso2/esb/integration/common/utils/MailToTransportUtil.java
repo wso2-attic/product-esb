@@ -89,6 +89,7 @@ public class MailToTransportUtil {
      */
     public static boolean sendMailAndCheckReceived(String emailSubject) throws Exception {
         Properties props = getSMTPProperties();
+        boolean isEmailReceived = false;
         EmailSender emailSender =
                 new EmailSender(props, sender, String.valueOf(senderPassword), domain, receiver + "@" + domain);
         if (emailSender.createSession()) {
@@ -96,9 +97,9 @@ public class MailToTransportUtil {
             emailSender.setBody("Body : " + emailSubject);
             emailSender.sendEmail();
             log.info("Email send by Mail API successfully : " + emailSubject);
-            return waitToCheckEmailReceived(emailSubject);
+            isEmailReceived = waitToCheckEmailReceived(emailSubject);
         }
-        return false;
+        return isEmailReceived;
     }
 
     /**
@@ -135,7 +136,7 @@ public class MailToTransportUtil {
                 try {
                     store.close();
                 } catch (MessagingException e) {
-                    log.error("Error when closing the store ", e);
+                    log.warn("Error when closing the store ", e);
                 }
             }
         }
@@ -227,14 +228,14 @@ public class MailToTransportUtil {
                 try {
                     inbox.close(true);
                 } catch (MessagingException e) {
-                    log.error("Error when closing the email folder : ", e);
+                    log.warn("Error when closing the email folder : ", e);
                 }
             }
             if (store != null) {
                 try {
                     store.close();
                 } catch (MessagingException e) {
-                    log.error("Error when closing the email store : ", e);
+                    log.warn("Error when closing the email store : ", e);
                 }
             }
         }
