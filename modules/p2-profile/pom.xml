@@ -265,6 +265,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.registry:org.wso2.carbon.registry.community.features.server.feature:${carbon.registry.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.contentsearch.server.feature:${carbon.registry.version}
+                                </featureArtifactDef>
 
                                 <!--5 Carbon-identity -->
                                 <featureArtifactDef>
@@ -326,15 +329,29 @@
                                     org.wso2.carbon.rules:org.wso2.carbon.rule.mediation.feature:${carbon.rule.version}
                                 </featureArtifactDef>
 
+                                <!--11 Axis2 Transports-->
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.jms.feature:${axis2.transport.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.mail.feature:${axis2.transport.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.tcp.feature:${axis2.transport.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.udp.feature:${axis2.transport.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.xmpp.feature:${axis2.transport.version}
+                                </featureArtifactDef>
+
                                 <!-- Previous versions features TODO: Refactor code and get rid of these features, use ndatasource-->
                                 <!--<featureArtifactDef>-->
                                     <!--org.wso2.carbon:org.wso2.carbon.datasource.server.feature:${carbon.datasource.version}-->
                                 <!--</featureArtifactDef>-->
                                 <!--<featureArtifactDef> TODO: remove if not using anymore-->
                                     <!--org.wso2.carbon:org.wso2.carbon.caching.feature:${carbon.caching.version}-->
-                                <!--</featureArtifactDef>-->
-                                <!--<featureArtifactDef> TODO: remove if not using anymore-->
-                                    <!--org.wso2.carbon:org.wso2.carbon.rm.feature:${carbon.rm.version}-->
                                 <!--</featureArtifactDef>-->
 
                                 <!-- Commented-out features TODO: Check whether we need to uncomment them-->
@@ -662,6 +679,10 @@
                                     <id>org.wso2.carbon.registry.community.features.server.feature.group</id>
                                     <version>${carbon.registry.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.registry.contentsearch.server.feature.group</id>
+                                    <version>${carbon.registry.version}</version>
+                                </feature>
 
                                 <!-- 5 Carbon-identity  -->
                                 <feature>
@@ -739,6 +760,28 @@
                                     <version>${carbon.rule.version}</version>
                                 </feature>
 
+                                <!--11 Axis2 Transports-->
+                                <feature>
+                                    <id>org.apache.axis2.transport.jms.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.mail.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.tcp.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.udp.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.xmpp.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+
                                 <!-- Previous versions -->
 
                                 <!--<feature> TODO:  Refactor code to use ndatasource-->
@@ -748,10 +791,6 @@
                                 <!--<feature> TODO: remove if not using anymore-->
                                     <!--<id>org.wso2.carbon.caching.feature.group</id>-->
                                     <!--<version>${carbon.caching.version}</version>-->
-                                <!--</feature>-->
-                                <!--<feature> TODO: remove if not using anymore-->
-                                    <!--<id>org.wso2.carbon.rm.feature.group</id>-->
-                                    <!--<version>${carbon.rm.version}</version>-->
                                 <!--</feature>-->
 
                                 <!--========================business-adaptors=================-->
@@ -1052,6 +1091,10 @@
                                     <id>org.wso2.carbon.registry.resource.properties.feature.group</id>
                                     <version>${carbon.registry.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.registry.contentsearch.server.feature.group</id>
+                                    <version>${carbon.registry.version}</version>
+                                </feature>
 
                                 <!-- 5 Carbon-identity  -->
                                 <feature>
@@ -1125,6 +1168,28 @@
                                     <version>${carbon.rule.version}</version>
                                 </feature>
 
+                                <!--11 Axis2 Transports-->
+                                <feature>
+                                    <id>org.apache.axis2.transport.jms.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.mail.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.tcp.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.udp.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.xmpp.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+
                                 <!-- Previous versions -->
 
                                 <!--<feature> TODO:  Refactor code to use ndatasource-->
@@ -1134,10 +1199,6 @@
                                 <!--<feature> TODO: remove if not using anymore-->
                                     <!--<id>org.wso2.carbon.caching.feature.group</id>-->
                                     <!--<version>${carbon.caching.version}</version>-->
-                                <!--</feature>-->
-                                <!--<feature> TODO: remove if not using anymore-->
-                                    <!--<id>org.wso2.carbon.rm.feature.group</id>-->
-                                    <!--<version>${carbon.rm.version}</version>-->
                                 <!--</feature>-->
 
                                 <!--========================business-adaptors=================-->
