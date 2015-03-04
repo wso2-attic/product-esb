@@ -12,7 +12,11 @@
         <classes>
             <class name="org.wso2.carbon.esb.samples.test.miscellaneous.Sample100TestCase"/>
             <class name="org.wso2.carbon.esb.samples.test.mediation.Sample11TestCase"/>
-            <class name="org.wso2.carbon.esb.samples.test.mediation.Sample13TestCase"/>
+            <class name="org.wso2.carbon.esb.samples.test.mediation.Sample13TestCase">
+                <methods>
+                    <exclude name="testDualChannelInvocation"/>
+                </methods>
+            </class>
         </classes>
     </test>
     <test name="ESB-Sample-Advance-Test" preserve-order="true" verbose="2">
