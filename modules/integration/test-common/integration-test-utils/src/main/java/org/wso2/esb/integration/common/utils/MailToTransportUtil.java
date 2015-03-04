@@ -97,7 +97,7 @@ public class MailToTransportUtil {
             emailSender.setBody("Body : " + emailSubject);
             emailSender.sendEmail();
             log.info("Email send by Mail API successfully : " + emailSubject);
-            isEmailReceived = waitToCheckEmailReceived(emailSubject);
+            isEmailReceived = waitToCheckEmailReceived(emailSubject,EMAIL_INBOX);
         }
         return isEmailReceived;
     }
@@ -113,7 +113,7 @@ public class MailToTransportUtil {
             throws ESBMailTransportIntegrationTestException {
         Store store = null;
         boolean emailReceived = false;
-        Folder mailFolder = null;
+        Folder mailFolder;
         try {
             store = getConnection();
             mailFolder = store.getFolder(folder);
@@ -294,12 +294,12 @@ public class MailToTransportUtil {
      * @throws InterruptedException                     - Error occurred in thread sleep
      * @throws ESBMailTransportIntegrationTestException - Is thrown if an error while reading the emails
      */
-    public static boolean waitToCheckEmailReceived(String subjectToCheck)
+    public static boolean waitToCheckEmailReceived(String subjectToCheck, String emailFolder)
             throws ESBMailTransportIntegrationTestException {
         boolean mailReceived = false;
         long startTime = System.currentTimeMillis();
         while ((System.currentTimeMillis() - startTime) < WAIT_TIME_MS) {
-            if (isMailReceivedBySubject(subjectToCheck, EMAIL_INBOX)) {
+            if (isMailReceivedBySubject(subjectToCheck, emailFolder)) {
                 log.info("Found the expected email in mailbox : " + subjectToCheck);
                 mailReceived = true;
                 break;

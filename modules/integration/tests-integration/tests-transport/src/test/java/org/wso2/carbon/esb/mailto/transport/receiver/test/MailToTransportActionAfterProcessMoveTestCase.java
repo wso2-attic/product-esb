@@ -61,12 +61,14 @@ public class MailToTransportActionAfterProcessMoveTestCase extends ESBIntegratio
 
     @Test(groups = {"wso2.esb"}, description = "Test email transport action after process move",
             dependsOnMethods = {"testEmailReceivedActionAfterProcessMove"})
-    public void testEmailTransportActionAfterProcessMove() throws ESBMailTransportIntegrationTestException {
+    public void testEmailTransportActionAfterProcessMove()
+            throws ESBMailTransportIntegrationTestException {
 
         assertTrue(MailToTransportUtil.searchStringInLog(contextUrls.getBackEndUrl(), emailSubject, getSessionCookie()),
                    "Unable to receive the email successfully");
 
-        assertTrue(MailToTransportUtil.isMailReceivedBySubject(emailSubject, "Trash"), "Mail has not moved successfully");
+        assertTrue(MailToTransportUtil.waitToCheckEmailReceived(emailSubject, "Trash"),
+                   "Mail has not moved successfully");
     }
 
     @AfterClass(alwaysRun = true)

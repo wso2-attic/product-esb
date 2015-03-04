@@ -85,7 +85,7 @@ public class SendMailWithBCCThroughESBTestCase extends ESBIntegrationTest {
                 " </soapenv:Envelope>");
 
         axisServiceClient.sendReceive(request, getProxyServiceURLHttp("MailToTransportSenderBCC"), "mediate");
-        assertTrue(MailToTransportUtil.waitToCheckEmailReceived(message), "Mail not received");
+        assertTrue(MailToTransportUtil.waitToCheckEmailReceived(message,"INBOX"), "Mail not received");
     }
 
     @AfterClass(alwaysRun = true)
