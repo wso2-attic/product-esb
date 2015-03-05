@@ -129,8 +129,8 @@ public class MailToTransportUtil {
             }
             return emailReceived;
         } catch (MessagingException ex) {
-            log.error("Error when getting mail count ", ex);
-            throw new ESBMailTransportIntegrationTestException("Error when getting mail count ", ex);
+            log.error("Error when getting the unread emails ", ex);
+            throw new ESBMailTransportIntegrationTestException("Error when getting the unread emails ", ex);
         } finally {
             if (store != null) {
                 try {
