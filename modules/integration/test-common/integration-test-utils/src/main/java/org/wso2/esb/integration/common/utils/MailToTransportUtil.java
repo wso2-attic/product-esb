@@ -220,8 +220,8 @@ public class MailToTransportUtil {
             }
 
         } catch (MessagingException e) {
-            log.error("Error when getting creating the email store ", e);
-            throw new ESBMailTransportIntegrationTestException("Error when getting creating the email store ", e);
+            log.error("Error when deleting the unread emails from inbox ", e);
+            throw new ESBMailTransportIntegrationTestException("Error when deleting the unread emails from inbox ", e);
         } finally {
             if (inbox != null) {
                 try {
