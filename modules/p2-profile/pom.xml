@@ -18,12 +18,12 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-parent</artifactId>
-        <version>4.9.0-M7-SNAPSHOT</version>
+        <version>4.9.0-M7</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2esb-p2-profile</artifactId>
-    <version>4.9.0-M7-SNAPSHOT</version>
+    <version>4.9.0-M7</version>
     <packaging>pom</packaging>
     <name>WSO2 ESB - P2 Profile Generation</name>
     <url>http://www.wso2.org</url>
