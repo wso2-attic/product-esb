@@ -111,11 +111,10 @@ public class MailToTransportUtil {
      */
     public static boolean isMailReceivedBySubject(String emailSubject, String folder)
             throws ESBMailTransportIntegrationTestException {
-        Store store = null;
         boolean emailReceived = false;
         Folder mailFolder;
+        Store store = getConnection();
         try {
-            store = getConnection();
             mailFolder = store.getFolder(folder);
             mailFolder.open(Folder.READ_WRITE);
             SearchTerm searchTerm = new AndTerm(new SubjectTerm(emailSubject), new BodyTerm(emailSubject));
@@ -195,8 +194,8 @@ public class MailToTransportUtil {
             store.connect();
             return store;
         } catch (MessagingException e) {
-            log.error("Error when getting creating the email store ", e);
-            throw new ESBMailTransportIntegrationTestException("Error when getting creating the email store ", e);
+            log.error("Error when creating the email store ", e);
+            throw new ESBMailTransportIntegrationTestException("Error when creating the email store ", e);
         }
     }
 
@@ -207,10 +206,10 @@ public class MailToTransportUtil {
      */
     public static void deleteAllUnreadEmailsFromGmail()
             throws ESBMailTransportIntegrationTestException {
-        Store store = null;
         Folder inbox = null;
+        Store store = getConnection();
         try {
-            store = getConnection();
+
             inbox = store.getFolder(EMAIL_INBOX);
             inbox.open(Folder.READ_WRITE);
             Message[] messages = inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
@@ -221,8 +220,8 @@ public class MailToTransportUtil {
             }
 
         } catch (MessagingException e) {
-            log.error("Error when getting creating the email store ", e);
-            throw new ESBMailTransportIntegrationTestException("Error when getting creating the email store ", e);
+            log.error("Error when deleting emails from inbox", e);
+            throw new ESBMailTransportIntegrationTestException("Error when deleting emails from inbox ", e);
         } finally {
             if (inbox != null) {
                 try {
