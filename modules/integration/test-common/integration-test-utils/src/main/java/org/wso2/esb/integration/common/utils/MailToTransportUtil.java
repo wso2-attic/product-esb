@@ -111,11 +111,11 @@ public class MailToTransportUtil {
      */
     public static boolean isMailReceivedBySubject(String emailSubject, String folder)
             throws ESBMailTransportIntegrationTestException {
-        Store store = null;
+
         boolean emailReceived = false;
         Folder mailFolder;
+        Store store = getConnection();
         try {
-            store = getConnection();
             mailFolder = store.getFolder(folder);
             mailFolder.open(Folder.READ_WRITE);
             SearchTerm searchTerm = new AndTerm(new SubjectTerm(emailSubject), new BodyTerm(emailSubject));
@@ -207,10 +207,9 @@ public class MailToTransportUtil {
      */
     public static void deleteAllUnreadEmailsFromGmail()
             throws ESBMailTransportIntegrationTestException {
-        Store store = null;
         Folder inbox = null;
+        Store store = getConnection();
         try {
-            store = getConnection();
             inbox = store.getFolder(EMAIL_INBOX);
             inbox.open(Folder.READ_WRITE);
             Message[] messages = inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
