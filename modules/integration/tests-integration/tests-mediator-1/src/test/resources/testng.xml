@@ -16,17 +16,9 @@
     </test>
 
     <test name="Aggregate-mediator-Test" preserve-order="true" verbose="2">
-
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.aggregate"/>
         </packages>
-		<classes>
-           <class name="org.wso2.carbon.esb.mediator.test.aggregate.AggregateWithHighMaxAndLowMinTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-           </class>
-		</classes>
     </test>
 
     <test name="Cache-mediator-Test" preserve-order="true" verbose="2">
