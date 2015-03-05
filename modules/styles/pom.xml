@@ -22,13 +22,13 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-parent</artifactId>
-        <version>4.9.0-M7-SNAPSHOT</version>
+        <version>4.9.0-M7</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>esb-styles-parent</artifactId>
-    <version>4.9.0-M7-SNAPSHOT</version>
+    <version>4.9.0-M7</version>
     <packaging>pom</packaging>
     <name>WSO2 ESB - Styles Parent</name>
     <url>http://wso2.com/products/enterprise-service-bus</url>
