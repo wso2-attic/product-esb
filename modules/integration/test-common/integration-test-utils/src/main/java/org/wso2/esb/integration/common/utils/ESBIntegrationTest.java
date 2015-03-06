@@ -34,7 +34,6 @@ import org.wso2.carbon.inbound.stub.types.carbon.InboundEndpointDTO;
 import org.wso2.carbon.integration.common.admin.client.SecurityAdminServiceClient;
 import org.wso2.carbon.integration.common.utils.LoginLogoutClient;
 import org.wso2.carbon.mediation.library.stub.MediationLibraryAdminServiceException;
-import org.wso2.carbon.mediation.library.stub.upload.MediationLibraryUploaderStub;
 import org.wso2.carbon.mediation.library.stub.upload.types.carbon.LibraryFileItem;
 import org.wso2.carbon.security.mgt.stub.config.SecurityAdminServiceSecurityConfigExceptionException;
 import org.wso2.carbon.sequences.stub.types.SequenceEditorException;
@@ -81,7 +80,6 @@ public abstract class ESBIntegrationTest {
 	protected AutomationContext context;
 	protected Tenant tenantInfo;
 	protected User userInfo;
-
 	protected TestUserMode userMode;
 
 	protected void init() throws Exception {
@@ -92,7 +90,7 @@ public abstract class ESBIntegrationTest {
 
 	protected void init(TestUserMode userMode) throws Exception {
 		axis2Client = new StockQuoteClient();
-		context = new AutomationContext("ESB", userMode);
+		context = new AutomationContext(ESBTestConstant.ESB_PRODUCT_GROUP, userMode);
 		contextUrls = context.getContextUrls();
 		sessionCookie = login(context);
 		esbUtils = new ESBTestCaseUtils();
@@ -141,7 +139,7 @@ public abstract class ESBIntegrationTest {
 			deletePriorityExecutors();
 
 			deleteScheduledTasks();
-			deleteInboundEndpoints();
+//			deleteInboundEndpoints();
 
 		} finally {
 			synapseConfiguration = null;
@@ -288,13 +286,14 @@ public abstract class ESBIntegrationTest {
 	protected void deleteInboundEndpoints() throws Exception {
 		try {
 			InboundEndpointDTO[] inboundEndpointDTOs =   esbUtils.getAllInboundEndpoints(contextUrls.getBackEndUrl(), sessionCookie);
-			if(inboundEndpointDTOs != null) {
+			if(inboundEndpointDTOs != null ) {
 				for (InboundEndpointDTO inboundEndpointDTO : inboundEndpointDTOs) {
-					esbUtils.deleteInboundEndpointDeployed(contextUrls.getBackEndUrl(), sessionCookie,
-					                                       inboundEndpointDTO.getName());
+                        esbUtils.deleteInboundEndpointDeployed(contextUrls.getBackEndUrl(), sessionCookie,
+                                                               inboundEndpointDTO.getName());
 				}
 			}
 		} catch (Exception e) {
+            e.printStackTrace();
 			throw new Exception("Error when deleting InboundEndpoint",e);
 		}
 	}
@@ -790,4 +789,13 @@ public abstract class ESBIntegrationTest {
 	protected String[] getUserRole(){
 		return new String[]{"admin"};
 	}
+
+    /**
+     * This method to be used after restart the server to update the sessionCookie variable.
+     * @throws Exception
+     */
+    protected void reloadSessionCookie() throws Exception {
+        context = new AutomationContext(ESBTestConstant.ESB_PRODUCT_GROUP, TestUserMode.SUPER_TENANT_ADMIN);
+        sessionCookie = login(context);
+    }
 }
