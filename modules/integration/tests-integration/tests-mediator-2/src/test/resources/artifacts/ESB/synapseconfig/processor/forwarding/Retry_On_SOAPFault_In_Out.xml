@@ -29,10 +29,16 @@
         <description>The main sequence for the message mediation</description>
     </sequence>
     <messageStore name="MyStore"/>
-    <messageProcessor class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
-                      name="ScheduledProcessor1"
-                      messageStore="MyStore">
-        <parameter name="max.delivery.attempts">5</parameter>
-        <parameter name="interval">100</parameter>
-    </messageProcessor>
+	<messageProcessor
+		class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
+		name="ScheduledProcessor1" messageStore="MyStore">
+		<parameter name="max.delivery.drop">Disabled</parameter>
+		<parameter name="client.retry.interval">4000</parameter>
+		<parameter name="max.delivery.attempts">4</parameter>
+		<parameter name="interval">4000</parameter>
+		<parameter name="member.count">1</parameter>
+		<parameter name="throttle">false</parameter>
+		<parameter name="target.endpoint">SOAPFaultSample</parameter>
+		<parameter name="is.active">true</parameter>
+	</messageProcessor>
 </definitions>
