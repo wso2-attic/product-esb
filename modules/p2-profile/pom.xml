@@ -18,12 +18,12 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-parent</artifactId>
-        <version>4.9.0-M7-SNAPSHOT</version>
+        <version>4.9.0-M8-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2esb-p2-profile</artifactId>
-    <version>4.9.0-M7-SNAPSHOT</version>
+    <version>4.9.0-M8-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>WSO2 ESB - P2 Profile Generation</name>
     <url>http://www.wso2.org</url>
@@ -264,6 +264,9 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.registry:org.wso2.carbon.registry.community.features.server.feature:${carbon.registry.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.contentsearch.server.feature:${carbon.registry.version}
                                 </featureArtifactDef>
 
                                 <!--5 Carbon-identity -->
@@ -676,6 +679,10 @@
                                     <id>org.wso2.carbon.registry.community.features.server.feature.group</id>
                                     <version>${carbon.registry.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.registry.contentsearch.server.feature.group</id>
+                                    <version>${carbon.registry.version}</version>
+                                </feature>
 
                                 <!-- 5 Carbon-identity  -->
                                 <feature>
@@ -1082,6 +1089,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.resource.properties.feature.group</id>
+                                    <version>${carbon.registry.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.registry.contentsearch.server.feature.group</id>
                                     <version>${carbon.registry.version}</version>
                                 </feature>
 

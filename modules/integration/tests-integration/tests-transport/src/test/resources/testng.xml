@@ -9,54 +9,34 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
 
-    <test name="Servlet-transport-Test" preserve-order="true" verbose="2">
-        <packages>
-            <package name="org.wso2.carbon.esb.servlet.transport.test.*"/>
-        </packages>
-    </test>
-    <!-- Commented to avoid build faliures for 4.9.0 M7 -->
-    <!--test name="VFS-transport-Test" preserve-order="true" verbose="2">
-        <packages>
-            <package name="org.wso2.carbon.esb.vfs.transport.test.*"/>
-        </packages>
-    </test-->
-
-    <!--test name="JMS-transport-Test" preserve-order="true" verbose="2">
-        <packages>
-            <package name="org.wso2.carbon.esb.jms.transport.test.*"/>
-        </packages>
-        <classes>
-            <class name="org.wso2.carbon.esb.jms.transport.test.JMSOutOnlyTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-            </class>
-            <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA2824MissingResponseTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-            </class>
-        </classes>
-    </test-->
-
-    <!--    <test name="TCP-transport-Test" preserve-order="true" verbose="2">
-            <packages>
-                <package name="org.wso2.carbon.esb.tcp.transport.test.*"/>
-            </packages>
-        </test>
-    -->
-    <!--disabled since feature management is used to install hl7 feature-->
-    <!--    <test name="HL7-transport-Test" preserve-order="true" verbose="2">
-            <packages>
-                <package name="org.wso2.carbon.esb.hl7.transport.test.*"/>
-            </packages>
-        </test>-->
 
     <test name="passthru-Transport-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.passthru.transport.test"/>
         </packages>
     </test>
+
+    <test name="JMS-transport-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.jms.transport.test.*"/>
+        </packages>
+
+        <classes>
+            <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA2824MissingResponseTestCase">
+ 		<methods>
+                    <exclude name=".*" />
+                </methods>
+	    </class>
+
+        </classes>
+    </test>
+
+    <test name="inbound-Http Endpoint-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.http.inbound.transport.test"/>
+        </packages>
+    </test>
+
 
     <test name="nhttp-Transport-Test" preserve-order="true" verbose="2">
         <classes>
@@ -82,11 +62,30 @@
         </classes>
     </test>
 
-    <!--    <test name="inbound-Http Endpoint-Test" preserve-order="true" verbose="2">
+    <test name="Servlet-transport-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.servlet.transport.test.*"/>
+        </packages>
+    </test>
+
+    <test name="VFS-transport-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.vfs.transport.test.*"/>
+        </packages>
+    </test>
+
+    <test name="TCP-transport-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.tcp.transport.test.*"/>
+        </packages>
+    </test>
+
+    <!--disabled since feature management is used to install hl7 feature-->
+    <!--    <test name="HL7-transport-Test" preserve-order="true" verbose="2">
             <packages>
-                <package name="org.wso2.carbon.esb.http.inbound.transport.test"/>
+                <package name="org.wso2.carbon.esb.hl7.transport.test.*"/>
             </packages>
-        </test> -->
+        </test>-->
 
     <test name="inbound-File Transport-Test" preserve-order="true" verbose="2">
         <packages>
@@ -95,9 +94,15 @@
     </test>
 
     <test name="inbound-Generic Transport-Test" preserve-order="true" verbose="2">
-    <packages>
-        <package name="org.wso2.carbon.esb.generic.inbound.transport.test"/>
-    </packages>
+        <packages>
+            <package name="org.wso2.carbon.esb.generic.inbound.transport.test"/>
+        </packages>
+    </test>
+
+    <test name="local Transport-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.local.transport.test"/>
+        </packages>
     </test>
 
     <test name="inbound-JMS Transport-Test" preserve-order="true" verbose="2">

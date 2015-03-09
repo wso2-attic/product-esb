@@ -261,7 +261,7 @@
         <!--parameter name="bind-address" locked="false">hostname or IP address</parameter-->
         <!--parameter name="WSDLEPRPrefix" locked="false">https://apachehost:port/somepath</parameter-->
         <parameter name="httpGetProcessor" locked="false">
-            org.wso2.carbon.transport.nhttp.api.PassThroughNHttpGetProcessor
+            org.wso2.carbon.mediation.transport.handlers.PassThroughNHttpGetProcessor
         </parameter>
         <!--<parameter name="priorityConfigFile" locked="false">location of priority configuration file</parameter>-->
     </transportReceiver>
@@ -272,7 +272,7 @@
         <parameter name="non-blocking" locked="false">true</parameter> -->
     <!--parameter name="bind-address" locked="false">hostname or IP address</parameter-->
     <!--parameter name="WSDLEPRPrefix" locked="false">https://apachehost:port/somepath</parameter-->
-    <!--<parameter name="httpGetProcessor" locked="false">org.wso2.carbon.transport.nhttp.api.NHttpGetProcessor</parameter> -->
+    <!--<parameter name="httpGetProcessor" locked="false">org.wso2.carbon.mediation.transport.handlers.NHttpGetProcessor</parameter> -->
     <!--<parameter name="priorityConfigFile" locked="false">location of priority configuration file</parameter>-->
     <!--parameter name="disableRestServiceDispatching" locked="false">true</parameter>
 </transportReceiver-->
@@ -284,7 +284,7 @@
     <!--parameter name="bind-address" locked="false">hostname or IP address</parameter-->
     <!--parameter name="WSDLEPRPrefix" locked="false">https://apachehost:port/somepath</parameter-->
     <!--<parameter name="priorityConfigFile" locked="false">location of priority configuration file</parameter>-->
-    <!--parameter name="httpGetProcessor" locked="false">org.wso2.carbon.transport.nhttp.api.NHttpGetProcessor</parameter>
+    <!--parameter name="httpGetProcessor" locked="false">org.wso2.carbon.mediation.transport.handlers.NHttpGetProcessor</parameter>
     <parameter name="disableRestServiceDispatching" locked="false">true</parameter>
     <parameter name="keystore" locked="false">
         <KeyStore>
@@ -312,7 +312,7 @@
         <!--parameter name="bind-address" locked="false">hostname or IP address</parameter-->
         <!--parameter name="WSDLEPRPrefix" locked="false">https://apachehost:port/somepath</parameter-->
         <parameter name="httpGetProcessor" locked="false">
-            org.wso2.carbon.transport.nhttp.api.PassThroughNHttpGetProcessor
+            org.wso2.carbon.mediation.transport.handlers.PassThroughNHttpGetProcessor
         </parameter>
         <parameter name="keystore" locked="false">
             <KeyStore>
