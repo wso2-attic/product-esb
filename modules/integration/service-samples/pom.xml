@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <version>4.9.0-M7-SNAPSHOT</version>
+        <version>4.9.0-M8-SNAPSHOT</version>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-integration-tests</artifactId>
     </parent>
