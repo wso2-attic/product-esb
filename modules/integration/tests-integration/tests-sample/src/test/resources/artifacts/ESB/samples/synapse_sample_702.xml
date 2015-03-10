@@ -43,13 +43,16 @@
             <log level="full"/>
             <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
             <property name="OUT_ONLY" value="true"/>
-            <property name="target.endpoint" value="StockQuoteServiceEp"/>
             <store messageStore="MyStore"/>
         </in>
         <description>The main sequence for the message mediation</description>
     </sequence>
     <messageStore name="MyStore"/>
-    <messageProcessor class="org.apache.synapse.message.processors.forward.ScheduledMessageForwardingProcessor" name="ScheduledProcessor" messageStore="MyStore">
+    <messageProcessor class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor" name="ScheduledProcessor" messageStore="MyStore" targetEndpoint="StockQuoteServiceEp">
         <parameter name="interval">10000</parameter>
+        <parameter name="client.retry.interval">1000</parameter>
+        <parameter name="is.active">true</parameter>
+        <parameter name="max.delivery.drop">Disabled</parameter>
+        <parameter name="member.count">1</parameter>
     </messageProcessor>
 </definitions>
