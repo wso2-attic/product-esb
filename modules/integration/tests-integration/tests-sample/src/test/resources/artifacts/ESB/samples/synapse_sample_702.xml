@@ -43,6 +43,7 @@
             <log level="full"/>
             <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
             <property name="OUT_ONLY" value="true"/>
+            <!--<property name="target.endpoint" value="StockQuoteServiceEp"/>-->
             <store messageStore="MyStore"/>
         </in>
         <description>The main sequence for the message mediation</description>
