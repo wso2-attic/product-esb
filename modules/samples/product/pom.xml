@@ -26,7 +26,6 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <version>4.9.0-M8-SNAPSHOT</version>
     <artifactId>org.wso2.esb.samples</artifactId>
     <packaging>bundle</packaging>
     <name>WSO2 ESB - Samples</name>

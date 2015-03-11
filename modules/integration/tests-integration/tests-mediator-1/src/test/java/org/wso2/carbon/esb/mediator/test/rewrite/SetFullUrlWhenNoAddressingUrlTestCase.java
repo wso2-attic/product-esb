@@ -39,7 +39,7 @@ public class SetFullUrlWhenNoAddressingUrlTestCase extends ESBIntegrationTest {
         super.cleanup();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Setting full url when there is no addressing url", enabled = false)
+    @Test(groups = {"wso2.esb"}, description = "Setting full url when there is no addressing url")
     public void setFulUrlWhenNoAddressingUrl() throws AxisFault {
         OMElement response;
 

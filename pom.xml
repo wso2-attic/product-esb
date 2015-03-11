@@ -43,7 +43,7 @@
         <module>modules/p2-profile</module>
         <module>modules/distribution</module>
         <!--module>modules/org.wso2.stratos.esb.login.ui</module-->
-        <!--module>modules/integration</module-->
+        <module>modules/integration</module>
     </modules>
     <scm>
         <connection>scm:git:https://github.com/wso2/product-esb.git</connection>

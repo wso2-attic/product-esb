@@ -23,7 +23,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2esb-p2-profile</artifactId>
-    <version>4.9.0-M8-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>WSO2 ESB - P2 Profile Generation</name>
     <url>http://www.wso2.org</url>

@@ -35,7 +35,7 @@ public class RemoveReWriteProtocolTestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = {"wso2.esb"}, description = "Remove and rewrite protocol",
-          dataProvider = "addressingUrl", enabled = false)
+          dataProvider = "addressingUrl")
     public void removeAndReWriteProtocol(String addUrl) throws AxisFault {
         OMElement response;
 
