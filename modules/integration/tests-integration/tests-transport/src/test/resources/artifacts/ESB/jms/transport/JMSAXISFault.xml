@@ -3,18 +3,21 @@
     <registry provider="org.wso2.carbon.mediation.registry.WSO2Registry">
         <parameter name="cachableDuration">15000</parameter>
     </registry>
-    <proxy name="FaultTestProxy" statistics="disable" trace="disable" transports="https http">
-        <target>
-            <inSequence>
-                <log category="INFO" level="full" separator=","/>
-                <property action="set" name="target.endpoint"
-                    scope="default" type="STRING" value="AxisEp"/>
-                <property action="set" name="FORCE_ERROR_ON_SOAP_FAULT"
-                    scope="default" type="STRING" value="true"/>
-                <store messageStore="JMSMS"/>
-            </inSequence>
-        </target>
-    </proxy>
+	<proxy name="FaultTestProxy" statistics="disable" trace="disable"
+		transports="https http">
+		<target>
+			<inSequence>
+				<log category="INFO" level="full" separator="," />
+				<property action="set" name="target.endpoint" scope="default"
+					type="STRING" value="AxisEp" />
+				<property action="set" name="FORCE_ERROR_ON_SOAP_FAULT"
+					scope="default" type="STRING" value="true" />
+				<property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"
+					type="STRING"></property>
+				<store messageStore="JMSMS" />
+			</inSequence>
+		</target>
+	</proxy>
     <endpoint name="AxisEp">
         <address statistics="disable" trace="disable" uri="http://localhost:9017/services/echo">
             <timeout>
@@ -89,11 +92,12 @@
         <parameter name="store.jms.JMSSpecVersion">1.1</parameter>
     </messageStore>
     <messageProcessor
-        class="org.apache.synapse.message.processors.forward.ScheduledMessageForwardingProcessor"
-        messageStore="JMSMS" name="SampleMessageForwardingProcessor">
+        class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
+        messageStore="JMSMS" name="SampleMessageForwardingProcessor" targetEndpoint="AxisEp">
         <parameter name="message.processor.reply.sequence">Axis_Ok</parameter>
         <parameter name="max.delivery.attempts">4</parameter>
         <parameter name="interval">1000</parameter>
         <parameter name="message.processor.fault.sequence">Axis_Fault</parameter>
+        <parameter name="is.active">true</parameter>
     </messageProcessor>
 </definitions>
