@@ -7,12 +7,11 @@
         <target>
             <inSequence>
                 <log category="INFO" level="full" separator=","/>
-                <!--<property action="set" name="target.endpoint"-->
-                    <!--scope="default" type="STRING" value="AxisEp"/>-->
+                <!-- property action="set" name="target.endpoint"
+                    scope="default" type="STRING" value="AxisEp"/ -->
                 <property action="set" name="FORCE_ERROR_ON_SOAP_FAULT"
                     scope="default" type="STRING" value="true"/>
                 <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
-                <property name="OUT_ONLY" value="true"/>
                 <store messageStore="JMSMS"/>
             </inSequence>
         </target>
@@ -94,7 +93,7 @@
         class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
         messageStore="JMSMS" name="SampleMessageForwardingProcessor" targetEndpoint="AxisEp">
         <parameter name="message.processor.reply.sequence">Axis_Ok</parameter>
-        <parameter name="max.delivery.attempts">4</parameter>
+        <parameter name="max.delivery.attempts">1</parameter>
         <parameter name="interval">1000</parameter>
         <parameter name="message.processor.fault.sequence">Axis_Fault</parameter>
         <parameter name="client.retry.interval">1000</parameter>

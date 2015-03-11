@@ -22,20 +22,19 @@ import java.rmi.RemoteException;
 import junit.framework.Assert;
 
 import org.apache.axiom.om.OMElement;
-import org.apache.axis2.AxisFault;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
-import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
-import org.wso2.esb.integration.common.utils.clients.axis2client.AxisServiceClient;
+import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 import org.wso2.esb.integration.common.utils.JMSEndpointManager;
 import org.wso2.esb.integration.common.utils.Utils;
-import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
+import org.wso2.esb.integration.common.utils.clients.axis2client.AxisServiceClient;
+import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
 
 /**
  * This test case is written to track the issue reported in
@@ -45,22 +44,18 @@ public class JMSAccessSOAPFaultDataTestCase extends ESBIntegrationTest {
 	private LogViewerClient logViewerClient = null;
 	private SampleAxis2Server axisServer = null;
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @BeforeClass(alwaysRun = true)
+	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
+	@BeforeClass(alwaysRun = true)
 	protected void init() throws Exception {
 		super.init();
 
-		// start the axis2 server and deploy the Echo service
-//		if (FrameworkFactory.getFrameworkProperties(ProductConstant.ESB_SERVER_NAME).getEnvironmentSettings().is_builderEnabled()) {
-			axisServer = new SampleAxis2Server("test_axis2_server_9017.xml");
-			axisServer.start();
-			axisServer.deployService(ESBTestConstant.ECHO_SERVICE);
-//		}
+		axisServer = new SampleAxis2Server("test_axis2_server_9017.xml");
+		axisServer.start();
+		axisServer.deployService(ESBTestConstant.ECHO_SERVICE);
 
 		OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/JMSAXISFault.xml");
 		updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
-		logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(),
-				getSessionCookie());
+		logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
 	}
 
