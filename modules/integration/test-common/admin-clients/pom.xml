@@ -11,5 +11,5 @@
     </parent>
     <artifactId>admin-clients</artifactId>
     <name>ESB Integration Test Admin Clients</name>
-    <packaging>jar</packaging> 
+    <packaging>jar</packaging>
 </project>
