@@ -10,7 +10,7 @@
 		</ser:getSimpleQuote>
 	</task:property>
 	<task:property xmlns:task="http://www.wso2.org/products/wso2commons/tasks"
-		name="to" value="http://localhost:9000/services/SimpleStockQuoteService" />
+		name="to" value="http://localhost:8280/services" />
 	<task:property xmlns:task="http://www.wso2.org/products/wso2commons/tasks"
 		name="format" value="soap11" />
 	<task:property xmlns:task="http://www.wso2.org/products/wso2commons/tasks"

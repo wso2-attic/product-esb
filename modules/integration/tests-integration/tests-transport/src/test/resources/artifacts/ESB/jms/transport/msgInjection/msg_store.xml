@@ -42,7 +42,7 @@
     <messageProcessor class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
                       name="JMSTestMessageProcessor"
                       messageStore="JMS_Store" targetEndpoint="jsmQueueEP">
-        <parameter name="interval">10000</parameter>
+        <parameter name="interval">1000</parameter>
         <parameter name="client.retry.interval">1000</parameter>
         <parameter name="is.active">true</parameter>
         <parameter name="max.delivery.drop">Disabled</parameter>

@@ -694,25 +694,25 @@
                 <groupId>org.wso2.carbon.automationutils</groupId>
                 <artifactId>org.wso2.carbon.integration.common.admin.client</artifactId>
                 <version>${automation.framework.utils.version}</version>
-                <scope>test</scope>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.automationutils</groupId>
                 <artifactId>org.wso2.carbon.integration.common.extensions</artifactId>
                 <version>${automation.framework.utils.version}</version>
-                <scope>test</scope>
+                <!--<scope>compile</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.automationutils</groupId>
                 <artifactId>org.wso2.carbon.integration.common.utils</artifactId>
                 <version>${automation.framework.utils.version}</version>
-                <scope>test</scope>
+                <!--<scope>compile</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.automationutils</groupId>
                 <artifactId>org.wso2.carbon.integration.common.tests</artifactId>
                 <version>${automation.framework.utils.version}</version>
-                <scope>test</scope>
+                <!--<scope>compile</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.commons</groupId>
