@@ -74,6 +74,16 @@
             <driverClassName>org.h2.Driver</driverClassName>
         </datasource>
     </datasources>
+
+    <!-- Mail Transport credentials-->
+    <emailCredentials>
+        <sender>synapse.demo.1</sender>
+        <senderPassword>mailpassword1</senderPassword>
+        <receiver>test.automation.dummy</receiver>
+        <receiverPassword>automation.test</receiverPassword>
+        <domain>gmail.com</domain>
+    </emailCredentials>
+
     <security>
         <!--
                     KeyStore which will be used for encrypting/decrypting passwords
@@ -274,7 +284,7 @@
                     <name>org.wso2.carbon.integration.common.extensions.usermgt.UserPopulateExtension</name>
                 </class>
                 <class>
-                    <name>org.wso2.esb.integration.common.extensions.axis2server.Axis2ServerExtension</name>
+                    <name>org.wso2.carbon.integration.common.extensions.axis2server.Axis2ServerExtension</name>
                 </class>
             </extentionClasses>
         </platformExecutionManager>

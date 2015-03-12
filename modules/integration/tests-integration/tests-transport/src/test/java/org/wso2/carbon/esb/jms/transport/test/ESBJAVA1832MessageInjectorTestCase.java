@@ -20,7 +20,6 @@ package org.wso2.carbon.esb.jms.transport.test;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.axiom.om.OMElement;
-import org.apache.axiom.om.OMNamespace;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -50,7 +49,7 @@ public class ESBJAVA1832MessageInjectorTestCase extends ESBIntegrationTest {
     public void testMessageInjection() throws Exception {
         String queueName = "jmsQueue";
         int numberOfMsgToExpect = 10;
-        TimeUnit.SECONDS.sleep(12);
+        TimeUnit.SECONDS.sleep(15);
         JMSQueueMessageConsumer consumer = new JMSQueueMessageConsumer(JMSBrokerConfigurationProvider.getInstance().getBrokerConfiguration());
         try {
             consumer.connect(queueName);
