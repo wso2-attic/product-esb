@@ -12,28 +12,28 @@
 
     <test name="passthru-Transport-Test" preserve-order="true" verbose="2">
         <packages>
-            <!--<package name="org.wso2.carbon.esb.passthru.transport.test"/>-->
+            <package name="org.wso2.carbon.esb.passthru.transport.test"/>
         </packages>
     </test>
 
-    <!--<test name="JMS-transport-Test" preserve-order="true" verbose="2">-->
+    <test name="JMS-transport-Test" preserve-order="true" verbose="2">
         <packages>
-            <!--<package name="org.wso2.carbon.esb.jms.transport.test.*"/>-->
+            <package name="org.wso2.carbon.esb.jms.transport.test.*"/>
         </packages>
 
-        <!--<classes>-->
-            <!--<class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA2824MissingResponseTestCase">-->
- 		<!--<methods>-->
-                    <!--<exclude name=".*" />-->
-                <!--</methods>-->
-	    <!--</class>-->
+        <classes>
+            <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA2824MissingResponseTestCase">
+ 		<methods>
+                    <exclude name=".*" />
+                </methods>
+	    </class>
 
-        <!--</classes>-->
-    <!--</test>-->
+        </classes>
+    </test>
 
     <test name="inbound-Http Endpoint-Test" preserve-order="true" verbose="2">
         <packages>
-            <!--<package name="org.wso2.carbon.esb.http.inbound.transport.test"/>-->
+            <package name="org.wso2.carbon.esb.http.inbound.transport.test"/>
         </packages>
     </test>
 
@@ -43,40 +43,40 @@
             <!--The following test cases would change the server configuration when starting the test case,-->
             <!--and restore the same once it's done-->
             <!--If your test case needs to explicitly change the server configuration, add it here-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.DefaultRequestContentTypeTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.ResponseAfterNttpEnabledTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.NhttpMaximumOpenConnections"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.ConfiguringNhttpAccessLogLocationTestCase"/>-->
+            <class name="org.wso2.carbon.esb.nhttp.transport.test.DefaultRequestContentTypeTestCase"/>
+            <class name="org.wso2.carbon.esb.nhttp.transport.test.ResponseAfterNttpEnabledTestCase"/>
+            <class name="org.wso2.carbon.esb.nhttp.transport.test.NhttpMaximumOpenConnections"/>
+            <class name="org.wso2.carbon.esb.nhttp.transport.test.ConfiguringNhttpAccessLogLocationTestCase"/>
 
             <!--The SetNhttpAxis2Transport class would set the nhttp axis2 transport and restart the ESB-->
             <!--The test cases that follow it would not change any server configurations-->
             <!--RemoveNhttpAxis2Transport would restore the ESBs default transport-->
             <!--If your test case doesn't need to change the server configuration, add it here-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.SetNhttpAxis2Transport"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.ContentTypeCharsetTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.MessageWithoutContentTypeTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.OCSPCertificateValidationTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.RetrieveBackendWsdlTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.SetHostHttpHeaderTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.RemoveNhttpAxis2Transport"/>-->
+            <class name="org.wso2.carbon.esb.nhttp.transport.test.SetNhttpAxis2Transport"/>
+            <class name="org.wso2.carbon.esb.nhttp.transport.test.ContentTypeCharsetTestCase"/>
+            <class name="org.wso2.carbon.esb.nhttp.transport.test.MessageWithoutContentTypeTestCase"/>
+            <class name="org.wso2.carbon.esb.nhttp.transport.test.OCSPCertificateValidationTestCase"/>
+            <class name="org.wso2.carbon.esb.nhttp.transport.test.RetrieveBackendWsdlTestCase"/>
+            <class name="org.wso2.carbon.esb.nhttp.transport.test.SetHostHttpHeaderTestCase"/>
+            <class name="org.wso2.carbon.esb.nhttp.transport.test.RemoveNhttpAxis2Transport"/>
         </classes>
     </test>
 
     <test name="Servlet-transport-Test" preserve-order="true" verbose="2">
         <packages>
-            <!--<package name="org.wso2.carbon.esb.servlet.transport.test.*"/>-->
+            <package name="org.wso2.carbon.esb.servlet.transport.test.*"/>
         </packages>
     </test>
 
     <test name="VFS-transport-Test" preserve-order="true" verbose="2">
         <packages>
-            <!--<package name="org.wso2.carbon.esb.vfs.transport.test.*"/>-->
+            <package name="org.wso2.carbon.esb.vfs.transport.test.*"/>
         </packages>
     </test>
 
     <test name="TCP-transport-Test" preserve-order="true" verbose="2">
         <packages>
-            <!--<package name="org.wso2.carbon.esb.tcp.transport.test.*"/>-->
+            <package name="org.wso2.carbon.esb.tcp.transport.test.*"/>
         </packages>
     </test>
 
@@ -89,25 +89,25 @@
 
     <test name="inbound-File Transport-Test" preserve-order="true" verbose="2">
         <packages>
-            <!--<package name="org.wso2.carbon.esb.file.inbound.transport.test"/>-->
+            <package name="org.wso2.carbon.esb.file.inbound.transport.test"/>
         </packages>
     </test>
 
     <test name="inbound-Generic Transport-Test" preserve-order="true" verbose="2">
         <packages>
-            <!--<package name="org.wso2.carbon.esb.generic.inbound.transport.test"/>-->
+            <package name="org.wso2.carbon.esb.generic.inbound.transport.test"/>
         </packages>
     </test>
 
     <test name="local Transport-Test" preserve-order="true" verbose="2">
         <packages>
-            <!--<package name="org.wso2.carbon.esb.local.transport.test"/>-->
+            <package name="org.wso2.carbon.esb.local.transport.test"/>
         </packages>
     </test>
 
     <test name="inbound-JMS Transport-Test" preserve-order="true" verbose="2">
         <packages>
-            <!--<package name="org.wso2.carbon.esb.jms.inbound.transport.test"/>-->
+            <package name="org.wso2.carbon.esb.jms.inbound.transport.test"/>
         </packages>
     </test>
 
