@@ -44,8 +44,10 @@
     </sequence>
     <messageStore name="MyStore"/>
     <messageProcessor class="org.apache.synapse.message.processor.impl.sampler.SamplingProcessor" name="SamplingProcessor" messageStore="MyStore">
-        <parameter name="interval">20000</parameter>
+        <parameter name="interval">1000</parameter>
+        <parameter name="concurrency">1</parameter>
         <parameter name="sequence">send_seq</parameter>
         <parameter name="is.active">true</parameter>
+
     </messageProcessor>
 </definitions>
