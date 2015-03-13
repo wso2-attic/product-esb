@@ -28,6 +28,13 @@
         <packages>
             <package name="org.wso2.carbon.esb.samples.test.endpoint.*"/>
         </packages>
+        <classes>
+            <class name="org.wso2.carbon.esb.samples.test.endpoint.Sample62TestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+        </classes>
     </test>
     <test name="ESB-Sample-Messaging-Test" preserve-order="true" verbose="2">
         <packages>

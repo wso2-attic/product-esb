@@ -23,11 +23,15 @@
 
         <classes>
             <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA2824MissingResponseTestCase">
- 		<methods>
+ 		        <methods>
                     <exclude name=".*" />
                 </methods>
-	    </class>
-
+	        </class>
+            <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA1793TestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
         </classes>
     </test>
 
@@ -121,6 +125,13 @@
         <packages>
             <package name="org.wso2.carbon.esb.mailto.transport.sender.test"/>
         </packages>
+        <classes>
+            <class name="org.wso2.carbon.esb.mailto.transport.sender.test.SendMailWithMultipartThroughESBTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+        </classes>
     </test>
 
 </suite>
