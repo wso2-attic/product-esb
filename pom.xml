@@ -799,6 +799,11 @@
                 <version>1.8</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.application.mgt.synapse.stub</artifactId>
+                <version>4.2.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <properties>

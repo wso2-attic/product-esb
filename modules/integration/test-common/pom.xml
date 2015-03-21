@@ -122,6 +122,12 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>commons-digester</groupId>
+            <artifactId>commons-digester</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <groupId>groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <scope>compile</scope>
@@ -271,6 +277,11 @@
         <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.registry.resource.stub</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.application.mgt.synapse.stub</artifactId>
             <scope>compile</scope>
         </dependency>
 <!--        <dependency>
