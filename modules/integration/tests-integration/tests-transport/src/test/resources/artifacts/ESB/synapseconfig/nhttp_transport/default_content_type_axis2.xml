@@ -59,8 +59,8 @@
     <parameter name="ModulesDirectory">axis2modules</parameter>
 
     <!-- User agent and the server details to be used in the http communication -->
-    <parameter name="userAgent" locked="true">WSO2 ESB 4.8.1</parameter>
-    <parameter name="server" locked="true">WSO2 ESB 4.8.1</parameter>
+    <parameter name="userAgent" locked="true">WSO2 ESB 4.9.0</parameter>
+    <parameter name="server" locked="true">WSO2 ESB 4.9.0</parameter>
 
     <!-- During a fault, stacktrace can be sent with the fault message. The following flag -->
     <!-- will control that behaviour -->
@@ -259,7 +259,7 @@
         <parameter name="non-blocking" locked="false">true</parameter>
         <!--parameter name="bind-address" locked="false">hostname or IP address</parameter-->
         <!--parameter name="WSDLEPRPrefix" locked="false">https://apachehost:port/somepath</parameter-->
-        <!--<parameter name="httpGetProcessor" locked="false">org.wso2.carbon.transport.nhttp.api.NHttpGetProcessor</parameter> -->
+        <!--<parameter name="httpGetProcessor" locked="false">org.wso2.carbon.mediation.transport.handlers.NHttpGetProcessor</parameter> -->
         <!--<parameter name="priorityConfigFile" locked="false">location of priority configuration file</parameter>-->
         <parameter name="disableRestServiceDispatching" locked="false">true</parameter>
     </transportReceiver>
@@ -271,7 +271,7 @@
         <!--parameter name="bind-address" locked="false">hostname or IP address</parameter-->
         <!--parameter name="WSDLEPRPrefix" locked="false">https://apachehost:port/somepath</parameter-->
         <!--<parameter name="priorityConfigFile" locked="false">location of priority configuration file</parameter>-->
-        <parameter name="httpGetProcessor" locked="false">org.wso2.carbon.transport.nhttp.api.NHttpGetProcessor</parameter>
+        <parameter name="httpGetProcessor" locked="false">org.wso2.carbon.mediation.transport.handlers.NHttpGetProcessor</parameter>
         <parameter name="disableRestServiceDispatching" locked="false">true</parameter>
         <parameter name="keystore" locked="false">
             <KeyStore>
@@ -632,8 +632,7 @@
                      class="org.wso2.carbon.core.transports.smtp.SMTPFaultHandler">
                 <order phase="Transport"/>
             </handler-->
-           <handler name="CacheMessageBuilderDispatchandler"
-                     class="org.wso2.carbon.mediation.initializer.handler.CacheMessageBuilderDispatchandler"/>
+
         </phase>
         <phase name="Addressing">
             <handler name="AddressingBasedDispatcher"
@@ -690,10 +689,7 @@
 		<handler name="RelaySecuirtyMessageBuilderDispatchandler"
                      class="org.apache.synapse.transport.passthru.util.RelaySecuirtyMessageBuilderDispatchandler"/>
 	</phase>
-        <phase name="PTCacheOutPhase">
-             <handler name="CacheMessageBuilderDispatchandler"
-                     class="org.wso2.carbon.mediation.initializer.handler.CacheMessageBuilderDispatchandler"/>
-        </phase>
+
         <phase name="MessageOut"/>
         <phase name="Security"/>
 

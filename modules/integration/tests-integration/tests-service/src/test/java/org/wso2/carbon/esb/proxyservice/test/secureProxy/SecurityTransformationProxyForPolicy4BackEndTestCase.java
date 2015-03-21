@@ -66,7 +66,7 @@ public class SecurityTransformationProxyForPolicy4BackEndTestCase extends ESBInt
         }
 
     }
-
+/*
     @Test(groups = {"wso2.dss"}, description = "Provides Authentication. Clients have Username Tokens. Backend is secured using policy 4")
     public void securityPolicy1() throws Exception {
         final int policyId = 1;
@@ -342,5 +342,5 @@ public class SecurityTransformationProxyForPolicy4BackEndTestCase extends ESBInt
                 new QName("http://services.samples/xsd", "symbol", "ax21")).getText();
         Assert.assertEquals(symbol, "Secured", "Symbol name mismatched");
     }
-
+*/
 }

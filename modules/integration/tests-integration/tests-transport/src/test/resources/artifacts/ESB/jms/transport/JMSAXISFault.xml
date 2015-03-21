@@ -7,10 +7,11 @@
         <target>
             <inSequence>
                 <log category="INFO" level="full" separator=","/>
-                <property action="set" name="target.endpoint"
-                    scope="default" type="STRING" value="AxisEp"/>
+                <!-- property action="set" name="target.endpoint"
+                    scope="default" type="STRING" value="AxisEp"/ -->
                 <property action="set" name="FORCE_ERROR_ON_SOAP_FAULT"
                     scope="default" type="STRING" value="true"/>
+                <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
                 <store messageStore="JMSMS"/>
             </inSequence>
         </target>
@@ -81,7 +82,7 @@
         <description>The main sequence for the message mediation</description>
     </sequence>
     <messageStore
-        class="org.wso2.carbon.message.store.persistence.jms.JMSMessageStore" name="JMSMS">
+        class="org.apache.synapse.message.store.impl.jms.JmsStore" name="JMSMS">
         <parameter name="java.naming.factory.initial">org.apache.activemq.jndi.ActiveMQInitialContextFactory</parameter>
         <parameter name="store.jms.cache.connection">false</parameter>
         <parameter name="java.naming.provider.url">tcp://localhost:61616</parameter>
@@ -89,11 +90,15 @@
         <parameter name="store.jms.JMSSpecVersion">1.1</parameter>
     </messageStore>
     <messageProcessor
-        class="org.apache.synapse.message.processors.forward.ScheduledMessageForwardingProcessor"
-        messageStore="JMSMS" name="SampleMessageForwardingProcessor">
+        class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
+        messageStore="JMSMS" name="SampleMessageForwardingProcessor" targetEndpoint="AxisEp">
         <parameter name="message.processor.reply.sequence">Axis_Ok</parameter>
-        <parameter name="max.delivery.attempts">4</parameter>
+        <parameter name="max.delivery.attempts">1</parameter>
         <parameter name="interval">1000</parameter>
         <parameter name="message.processor.fault.sequence">Axis_Fault</parameter>
+        <parameter name="client.retry.interval">1000</parameter>
+        <parameter name="is.active">true</parameter>
+        <parameter name="max.delivery.drop">Disabled</parameter>
+        <parameter name="member.count">1</parameter>
     </messageProcessor>
 </definitions>

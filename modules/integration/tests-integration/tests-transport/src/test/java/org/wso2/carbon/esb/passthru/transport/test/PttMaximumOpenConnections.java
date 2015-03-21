@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.carbon.esb.nhttp.transport.test;
+package org.wso2.carbon.esb.passthru.transport.test;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -27,6 +27,7 @@ import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.base.CarbonBaseUtils;
+import org.wso2.carbon.esb.nhttp.transport.test.MaximumOpenConnectionsClient;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
@@ -43,7 +44,6 @@ public class PttMaximumOpenConnections extends ESBIntegrationTest {
     private final int CONCURRENT_CLIENTS = 20;
     private MaximumOpenConnectionsClient[] maxOpenConnectionClients;
     private Thread[] clients;
-    private List list;
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
@@ -69,7 +69,6 @@ public class PttMaximumOpenConnections extends ESBIntegrationTest {
         super.init();
 
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/MaxOpenConnections/max_open_connections.xml");
-        list = Collections.synchronizedList(new ArrayList());
         maxOpenConnectionClients = new MaximumOpenConnectionsClient[CONCURRENT_CLIENTS];
         clients = new Thread[CONCURRENT_CLIENTS];
     }
@@ -111,6 +110,7 @@ public class PttMaximumOpenConnections extends ESBIntegrationTest {
             try {
                 Thread.sleep(1000);
             } catch (Exception e) {
+                //ignored
             }
         }
     }

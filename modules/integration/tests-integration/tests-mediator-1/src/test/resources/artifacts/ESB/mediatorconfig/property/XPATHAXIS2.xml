@@ -14,7 +14,7 @@
       <target>
          <inSequence>
             <log>
-               <property name="stockprop" expression="$axis2:REST_URL_POSTFIX"/>
+               <property name="===============================stockprop" expression="$axis2:REST_URL_POSTFIX"/>
             </log>
             <send>
                <endpoint>
