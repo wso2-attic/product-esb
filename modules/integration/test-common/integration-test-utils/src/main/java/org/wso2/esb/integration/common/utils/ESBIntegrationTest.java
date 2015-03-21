@@ -20,9 +20,12 @@ package org.wso2.esb.integration.common.utils;
 import org.apache.axiom.attachments.ByteArrayDataSource;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.util.AXIOMUtil;
+import org.apache.axis2.AxisFault;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
+import org.wso2.carbon.application.mgt.synapse.stub.ExceptionException;
+import org.wso2.carbon.application.mgt.synapse.stub.types.carbon.SynapseApplicationMetadata;
 import org.wso2.carbon.authenticator.stub.LoginAuthenticationExceptionException;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
@@ -31,12 +34,14 @@ import org.wso2.carbon.automation.engine.context.beans.Tenant;
 import org.wso2.carbon.automation.engine.context.beans.User;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.inbound.stub.types.carbon.InboundEndpointDTO;
+import org.wso2.carbon.integration.common.admin.client.CarbonAppUploaderClient;
 import org.wso2.carbon.integration.common.admin.client.SecurityAdminServiceClient;
 import org.wso2.carbon.integration.common.utils.LoginLogoutClient;
 import org.wso2.carbon.mediation.library.stub.MediationLibraryAdminServiceException;
 import org.wso2.carbon.mediation.library.stub.upload.types.carbon.LibraryFileItem;
 import org.wso2.carbon.security.mgt.stub.config.SecurityAdminServiceSecurityConfigExceptionException;
 import org.wso2.carbon.sequences.stub.types.SequenceEditorException;
+import org.wso2.esb.integration.common.clients.application.mgt.SynapseApplicationAdminClient;
 import org.wso2.esb.integration.common.clients.mediation.SynapseConfigAdminClient;
 import org.wso2.esb.integration.common.utils.clients.stockquoteclient.StockQuoteClient;
 import org.xml.sax.SAXException;
@@ -690,6 +695,19 @@ public abstract class ESBIntegrationTest {
 
 	protected String getBackEndServiceUrl(String serviceName) throws XPathExpressionException {
 		return EndpointGenerator.getBackEndServiceEndpointUrl(serviceName);
+	}
+
+	protected void uploadCapp(String appname, DataHandler dataHandler) throws RemoteException {
+		CarbonAppUploaderClient carbonAppUploaderClient =
+				   new CarbonAppUploaderClient(contextUrls.getBackEndUrl(), sessionCookie);
+		carbonAppUploaderClient.uploadCarbonAppArtifact(appname, dataHandler);
+	}
+
+
+	protected SynapseApplicationMetadata getSynapseAppData(String appName) throws RemoteException, ExceptionException {
+		SynapseApplicationAdminClient synapseApplicationAdminClient =
+				   new SynapseApplicationAdminClient(contextUrls.getBackEndUrl(), sessionCookie);
+		return synapseApplicationAdminClient.getSynapseAppData(appName);
 	}
 
 
