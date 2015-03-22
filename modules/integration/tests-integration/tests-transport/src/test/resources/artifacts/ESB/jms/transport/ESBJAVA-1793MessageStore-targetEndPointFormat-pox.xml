@@ -19,7 +19,6 @@
                 <property name="X-Forwarded-For" scope="transport" action="remove"/>
                 <property name="X-Forwarded-Host" scope="transport" action="remove"/>
                 <property name="X-Forwarded-Server" scope="transport" action="remove"/>
-                <property name="target.endpoint" value="messageStoreTargetEndpoint"/>
                 <store messageStore="TargetEndpointTestMessageStore"/>
             </inSequence>
         </target>
@@ -46,5 +45,12 @@
     </messageStore>
     <messageProcessor class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
                       name="MessageProcessorTEPT"
-                      messageStore="TargetEndpointTestMessageStore"/>
+                      messageStore="TargetEndpointTestMessageStore"
+                      targetEndpoint="messageStoreTargetEndpoint">
+        <parameter name="interval">10000</parameter>
+        <parameter name="client.retry.interval">1000</parameter>
+        <parameter name="is.active">true</parameter>
+        <parameter name="max.delivery.drop">Disabled</parameter>
+        <parameter name="member.count">1</parameter>
+    </messageProcessor>
 </definitions>

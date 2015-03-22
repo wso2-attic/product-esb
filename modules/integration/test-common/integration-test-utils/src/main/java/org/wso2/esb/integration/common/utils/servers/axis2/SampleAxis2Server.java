@@ -35,10 +35,13 @@ import java.io.*;
 public class SampleAxis2Server implements BackendServer {
 
     public static final String SIMPLE_STOCK_QUOTE_SERVICE = "SimpleStockQuoteService";
+    public static final String SIMPLE_STOCK_QUOTE_SERVICE_2 = "SimpleStockQuoteService2";
+    public static final String SIMPLE_STOCK_QUOTE_SERVICE_3 = "SimpleStockQuoteService3";
     public static final String SECURE_STOCK_QUOTE_SERVICE = "SecureStockQuoteService";
     public static final String LB_SERVICE_1 = "LBService1";
     public static final String LB_SERVICE_2 = "LBService2";
     public static final String LB_SERVICE_3 = "LBService3";
+    public static final String LB_SERVICE_4 = "LBService4";
     public static final String SIMPLE_AXIS2_SERVICE = "Axis2Service";
     public static final String STUDENT_REST_SERVICE = "StudentService";
 

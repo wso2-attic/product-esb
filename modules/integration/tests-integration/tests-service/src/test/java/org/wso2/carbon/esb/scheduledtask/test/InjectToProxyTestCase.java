@@ -59,6 +59,7 @@ public class InjectToProxyTestCase extends ESBIntegrationTest {
 
         int beforeLogSize = logViewer.getAllSystemLogs().length;
         addScheduledTask(task);
+        Thread.sleep(4000);
         LogEvent[] logs = logViewer.getAllSystemLogs();
         int afterLogSize = logs.length;
 

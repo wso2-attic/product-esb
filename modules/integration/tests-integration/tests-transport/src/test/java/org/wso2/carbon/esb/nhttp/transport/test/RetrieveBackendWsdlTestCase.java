@@ -33,13 +33,11 @@ public class RetrieveBackendWsdlTestCase extends ESBIntegrationTest {
     private HttpClientUtil httpClientUtil;
     private String backendWSDLUrl;
 
-
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
 
         super.init();
         httpClientUtil = new HttpClientUtil();
-
         backendWSDLUrl=getProxyServiceURLHttp("StockQuoteProxy1")  +"?wsdl";
     }
 
@@ -54,21 +52,21 @@ public class RetrieveBackendWsdlTestCase extends ESBIntegrationTest {
     public void testRetrieveBackendServiceWsdl() throws Exception {
 
         loadSampleESBConfiguration(151);
-
         OMElement result = httpClientUtil.get(backendWSDLUrl);
-
-        // Return the backend service WSDLL instead of  proxy WSDL
-
-        Assert.assertTrue(result.toString().contains("SimpleStockQuoteService"), "Failed to receive service WSDL, Named SimpleStockQuoteService");
-
-
+        // Return the backend service WSDL instead of  proxy WSDL
+        Assert.assertTrue(result.toString().contains("SimpleStockQuoteService"),
+                          "Failed to receive service WSDL, Named SimpleStockQuoteService");
     }
 
 
     @AfterClass(alwaysRun = true)
     public void cleanup() throws Exception {
-        super.cleanup();
-        httpClientUtil = null;
-        backendWSDLUrl = null;
+        try {
+            super.cleanup();
+            httpClientUtil = null;
+            backendWSDLUrl = null;
+        } catch (Exception e) {
+            //ignore
+        }
     }
 }

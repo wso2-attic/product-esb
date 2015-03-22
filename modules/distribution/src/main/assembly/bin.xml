@@ -250,6 +250,12 @@
                 <include>org.apache.rampart:rampart:mar</include>
             </includes>
         </dependencySet>
+        <dependencySet>
+            <outputDirectory>wso2esb-${pom.version}/lib</outputDirectory>
+            <includes>
+                <include>org.apache.sandesha2:sandesha2-core:jar</include>
+            </includes>
+        </dependencySet>
     </dependencySets>
 
     <files>
@@ -407,7 +413,7 @@
             <destName>wss4j_1.5.11.wso2v6.jar</destName>
         </file>
         <file>
-            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/logging-config.xml</source>
+            <source>../../modules/distribution/src/main/conf/etc/logging-config.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
         </file>
         <!--<file>-->
@@ -416,5 +422,10 @@
             <!--<filtered>true</filtered>-->
             <!--<fileMode>644</fileMode>-->
         <!--</file>-->
+	<!-- Including tasks-config.xml file-->
+	<file>
+            <source>../../modules/distribution/src/main/conf/etc/tasks-config.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+        </file>
     </files>
 </assembly>

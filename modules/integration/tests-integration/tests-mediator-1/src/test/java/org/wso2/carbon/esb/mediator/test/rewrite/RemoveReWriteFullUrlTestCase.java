@@ -35,7 +35,7 @@ public class RemoveReWriteFullUrlTestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = {"wso2.esb"}, description = "Remove and rewrite full url",
-          dataProvider = "addressingUrl", enabled = false)
+          dataProvider = "addressingUrl")
     public void removeAndReWriteFulUrl(String addUrl) throws AxisFault {
         OMElement response;
 

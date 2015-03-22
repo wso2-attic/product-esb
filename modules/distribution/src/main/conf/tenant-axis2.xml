@@ -98,12 +98,8 @@
         <messageFormatter contentType="application/soap+xml"
                           class="org.apache.axis2.transport.http.SOAPMessageFormatter"/>
 	<!--JSON Message Formatters-->
-        <!--messageFormatter contentType="application/json"
-                          class="org.apache.axis2.json.JSONMessageFormatter"/-->
 	<messageFormatter contentType="application/json"
                           class="org.apache.synapse.commons.json.JsonStreamFormatter"/>
-        <messageFormatter contentType="text/javascript"
-                          class="org.apache.axis2.json.JSONMessageFormatter"/>
     </messageFormatters>
 
     <!-- ================================================= -->
@@ -117,12 +113,8 @@
         <messageBuilder contentType="application/x-www-form-urlencoded"
                         class="org.apache.axis2.builder.XFormURLEncodedBuilder"/>
 	<!--JSON Message Builders-->
-        <!--messageBuilder contentType="application/json"
-                        class="org.apache.axis2.json.JSONBuilder"/-->
 	<messageBuilder contentType="application/json"
                         class="org.apache.synapse.commons.json.JsonStreamBuilder"/>
-        <messageBuilder contentType="text/javascript"
-                        class="org.apache.axis2.json.JSONBuilder"/>
         <!--Left commented because it adds the depandancy of servlet-api to other modules.
         Please uncomment to Receive messages in multipart/form-data format-->
         <!--<messageBuilder contentType="multipart/form-data"-->
@@ -153,8 +145,7 @@
                      class="org.apache.axis2.dispatchers.SOAPActionBasedDispatcher">
                 <order phase="Transport"/>
             </handler>
-           <handler name="CacheMessageBuilderDispatchandler"
-                     class="org.wso2.carbon.mediation.initializer.handler.CacheMessageBuilderDispatchandler"/>
+
         </phase>
         <phase name="Addressing">
             <handler name="AddressingBasedDispatcher"
@@ -199,10 +190,7 @@
 		<handler name="RelaySecuirtyMessageBuilderDispatchandler"
                      class="org.apache.synapse.transport.passthru.util.RelaySecuirtyMessageBuilderDispatchandler"/>
 	</phase>
-        <phase name="PTCacheOutPhase">
-             <handler name="CacheMessageBuilderDispatchandler"
-                     class="org.wso2.carbon.mediation.initializer.handler.CacheMessageBuilderDispatchandler"/>
-        </phase>
+
         <phase name="MessageOut"/>        
         <phase name="Security"/>
         <!--

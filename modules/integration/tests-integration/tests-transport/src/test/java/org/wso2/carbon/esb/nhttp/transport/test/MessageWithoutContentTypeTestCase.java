@@ -69,8 +69,8 @@ public class MessageWithoutContentTypeTestCase extends ESBIntegrationTest {
         String strSoapAction = "getQuote";
         // Get file to be posted
         String strXMLFilename = FrameworkPathUtil.getSystemResourceLocation() + "artifacts" + File.separator +
-                                "ESB" + File.separator + "synapseconfig" + File.separator + "messagewithoutcontent" +
-                                File.separator + "request.xml";
+                "ESB" + File.separator + "synapseconfig" + File.separator + "messagewithoutcontent" +
+                File.separator + "request.xml";
 
         File input = new File(strXMLFilename);
         // Prepare HTTP post
@@ -99,6 +99,6 @@ public class MessageWithoutContentTypeTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void close() throws Exception {
-        super.cleanup();
+            super.cleanup();
     }
 }

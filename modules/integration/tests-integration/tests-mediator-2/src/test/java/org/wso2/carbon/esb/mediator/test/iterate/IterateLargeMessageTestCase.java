@@ -60,8 +60,8 @@ public class IterateLargeMessageTestCase extends ESBIntegrationTest {
         symbol = FixedSizeSymbolGenerator.generateMessageMB(1);
 
     }
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
-, ExecutionEnvironment.ALL})
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
+, ExecutionEnvironment.PLATFORM})
     @Test(groups = "wso2.esb", description = "Tests large message in small number 5")
     public void testSmallNumbers() throws Exception {
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/iterate/simple_iterator.xml");

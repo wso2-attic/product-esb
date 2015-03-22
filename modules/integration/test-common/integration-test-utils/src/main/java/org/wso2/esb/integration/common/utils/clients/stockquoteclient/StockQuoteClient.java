@@ -27,6 +27,8 @@ import org.apache.axis2.Constants;
 import org.apache.axis2.addressing.EndpointReference;
 import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
+import org.apache.axis2.client.async.AxisCallback;
+import org.apache.axis2.context.MessageContext;
 import org.apache.axis2.transport.http.HTTPConstants;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.logging.Log;
@@ -325,5 +327,95 @@ public class StockQuoteClient {
     private static OMElement buildResponse(OMElement omElement) {
         omElement.build();
         return omElement;
+    }
+
+    /**
+     * Send place order request
+     *
+     * @param trpUrl transport url
+     * @param addUrl address url
+     * @param symbol symbol
+     * @throws AxisFault if error occurs when sending request
+     */
+    public void sendPlaceOrderRequest(String trpUrl, String addUrl, String symbol) throws AxisFault {
+        double price = getRandom(100, 0.9, true);
+        int quantity = (int) getRandom(10000, 1.0, true);
+        ServiceClient serviceClient = getServiceClient(trpUrl, addUrl, "placeOrder");
+        try {
+            serviceClient.fireAndForget(createPlaceOrderRequest(price, quantity, symbol));
+        } finally {
+            serviceClient.cleanupTransport();
+        }
+    }
+
+    private static double getRandom(double base, double varience, boolean onlypositive) {
+        double rand = Math.random();
+        return (base + ((rand > 0.5 ? 1 : -1) * varience * base * rand))
+               * (onlypositive ? 1 : (rand > 0.5 ? 1 : -1));
+    }
+
+    /**
+     * Create place order request
+     *
+     * @param purchasePrice purchase price
+     * @param qty           quantity
+     * @param symbol        symbol
+     * @return OMElement of request
+     */
+    public OMElement createPlaceOrderRequest(double purchasePrice, int qty, String symbol) {
+        OMFactory factory = OMAbstractFactory.getOMFactory();
+        OMNamespace ns = factory.createOMNamespace("http://services.samples", "m0");
+        OMElement placeOrder = factory.createOMElement("placeOrder", ns);
+        OMElement order = factory.createOMElement("order", ns);
+        OMElement price = factory.createOMElement("price", ns);
+        OMElement quantity = factory.createOMElement("quantity", ns);
+        OMElement symb = factory.createOMElement("symbol", ns);
+        price.setText(Double.toString(purchasePrice));
+        quantity.setText(Integer.toString(qty));
+        symb.setText(symbol);
+        order.addChild(price);
+        order.addChild(quantity);
+        order.addChild(symb);
+        placeOrder.addChild(order);
+        return placeOrder;
+    }
+
+    /**
+     * Send dual quote request
+     *
+     * @param trpUrl transport url
+     * @param addUrl address url
+     * @param symbol symbol
+     * @throws AxisFault if error occurs when sending request
+     */
+    public void sendDualQuoteRequest(String trpUrl, String addUrl, String symbol) throws AxisFault {
+        ServiceClient serviceClient = getServiceClient(trpUrl, addUrl);
+        serviceClient.getOptions().setUseSeparateListener(true);
+
+        try {
+            serviceClient.sendReceiveNonBlocking(createStandardRequest(symbol), new AxisCallback() {
+                @Override
+                public void onMessage(MessageContext messageContext) {
+                    log.info("Response received to the callback");
+                }
+
+                @Override
+                public void onFault(MessageContext messageContext) {
+                    log.info("Fault received to the callback : " + messageContext.getEnvelope().getBody().getFault());
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    log.error("Error inside callback", e);
+                }
+
+                @Override
+                public void onComplete() {
+                    log.info("OnComplete called....");
+                }
+            });
+        } finally {
+            serviceClient.cleanupTransport();
+        }
     }
 }

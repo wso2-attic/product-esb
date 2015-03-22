@@ -166,17 +166,8 @@
                           class="org.apache.axis2.format.PlainTextFormatter"/>
 
         <!--JSON Message Formatters-->
-        <!--messageFormatter contentType="application/json"
-                          class="org.apache.synapse.commons.json.JsonFormatter"/-->
         <messageFormatter contentType="application/json"
                           class="org.apache.synapse.commons.json.JsonStreamFormatter"/>
-        <!--messageFormatter contentType="application/json"
-                          class="org.apache.axis2.json.JSONMessageFormatter"/-->
-        <!--messageFormatter contentType="application/json"
-                          class="org.apache.axis2.json.JSONStreamFormatter"/-->
-        <messageFormatter contentType="application/json/badgerfish"
-                          class="org.apache.axis2.json.JSONBadgerfishMessageFormatter"/>
-
         <!--messageFormatter contentType="application/x-www-form-urlencoded"
                         class="org.wso2.carbon.relay.ExpandingMessageFormatter"/-->
         <!--messageFormatter contentType="multipart/form-data"
@@ -215,17 +206,8 @@
                         class="org.apache.axis2.format.PlainTextBuilder"/>
 
         <!--JSON Message Builders-->
-        <!--messageBuilder contentType="application/json"
-                        class="org.apache.synapse.commons.json.JsonBuilder"/-->
         <messageBuilder contentType="application/json"
                         class="org.apache.synapse.commons.json.JsonStreamBuilder"/>
-        <!--messageBuilder contentType="application/json"
-                        class="org.apache.axis2.json.JSONBuilder"/-->
-        <!--messageBuilder contentType="application/json"
-                        class="org.apache.axis2.json.JSONStreamBuilder"/-->
-        <messageBuilder contentType="application/json/badgerfish"
-                        class="org.apache.axis2.json.JSONBadgerfishOMBuilder"/>
-
         <!--messageBuilder contentType="application/xml"
                             class="org.wso2.carbon.relay.BinaryRelayBuilder"/-->
         <!--messageBuilder contentType="application/x-www-form-urlencoded"
@@ -259,7 +241,7 @@
         <parameter name="non-blocking" locked="false">true</parameter>
         <!--parameter name="bind-address" locked="false">hostname or IP address</parameter-->
         <!--parameter name="WSDLEPRPrefix" locked="false">https://apachehost:port/somepath</parameter-->
-        <!--<parameter name="httpGetProcessor" locked="false">org.wso2.carbon.transport.nhttp.api.NHttpGetProcessor</parameter> -->
+        <!--<parameter name="httpGetProcessor" locked="false">org.wso2.carbon.mediation.transport.handlers.NHttpGetProcessor</parameter> -->
         <!--<parameter name="priorityConfigFile" locked="false">location of priority configuration file</parameter>-->
         <parameter name="disableRestServiceDispatching" locked="false">true</parameter>
     </transportReceiver>
@@ -271,7 +253,7 @@
         <!--parameter name="bind-address" locked="false">hostname or IP address</parameter-->
         <!--parameter name="WSDLEPRPrefix" locked="false">https://apachehost:port/somepath</parameter-->
         <!--<parameter name="priorityConfigFile" locked="false">location of priority configuration file</parameter>-->
-        <parameter name="httpGetProcessor" locked="false">org.wso2.carbon.transport.nhttp.api.NHttpGetProcessor</parameter>
+        <parameter name="httpGetProcessor" locked="false">org.wso2.carbon.mediation.transport.handlers.NHttpGetProcessor</parameter>
         <parameter name="disableRestServiceDispatching" locked="false">true</parameter>
         <parameter name="keystore" locked="false">
             <KeyStore>
@@ -640,6 +622,8 @@
                      class="org.apache.axis2.dispatchers.RequestURIBasedDispatcher">
                 <order phase="Transport"/>
             </handler>
+            <handler name="CarbonContextConfigurator"
+                     class="org.wso2.carbon.mediation.initializer.handler.CarbonContextConfigurator"/>
             <handler name="SOAPActionBasedDispatcher"
                      class="org.apache.axis2.dispatchers.SOAPActionBasedDispatcher">
                 <order phase="Transport"/>

@@ -18,50 +18,82 @@
 package org.wso2.carbon.esb.samples.test.mediation;
 
 import org.apache.axiom.om.OMElement;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
+import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
-import javax.xml.xpath.XPathExpressionException;
-import java.rmi.RemoteException;
-
-import static org.testng.AssertJUnit.assertTrue;
-
-
+/**
+ * Sample 2: CBR with the Switch-Case Mediator Using Message Properties
+ */
 public class Sample2TestCase extends ESBIntegrationTest {
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
         super.init();
         loadSampleESBConfiguration(2);
 
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Sample 2: CBR with the Switch-case mediator, using message properties")
-    public void testSample2() throws RemoteException, XPathExpressionException {
-        OMElement response;
+    @Test(groups = { "wso2.esb" },
+          description = "Sample 2: CBR with the Switch-case mediator, using message properties")
+    public void testSample2() throws Exception {
+        LogViewerClient logViewerClient =
+            new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+        logViewerClient.clearLogs();
 
-        response =
-                axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(),
-                                                        getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
-                                                        "IBM");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(
+            getMainSequenceURL(),
+            getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "IBM");
 
-        assertTrue("Requested Symbon not found in Response", response.toString().contains("IBM"));
+        Assert.assertTrue(response.toString().contains("IBM"),
+                          "Requested Symbol not found in Response");
 
-        response =
-                axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(),
-                                                        getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
-                                                        "MSTF");
-        assertTrue("Requested Symbon not found in Response", response.toString().contains("MSTF"));
+        response = axis2Client.sendSimpleStockQuoteRequest(
+            getMainSequenceURL(),
+            getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "MSFT");
 
-        response =
-                axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(),
-                                                        getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE),
-                                                        "WSO2");
+        Assert.assertTrue(response.toString().contains("MSFT"),
+                          "Requested Symbol not found in Response");
 
-        assertTrue("Requested Symbon not found in Response", response.toString().contains("WSO2"));
+        response = axis2Client.sendSimpleStockQuoteRequest(
+            getMainSequenceURL(),
+            getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
+
+        Assert.assertTrue(response.toString().contains("WSO2"),
+                          "Requested Symbol not found in Response");
+
+        String logMessage1 = "symbol = Great stock - IBM";
+        String logMessage2 = "symbol = Are you sure? - MSFT";
+        String logMessage3 = "symbol = Normal Stock - WSO2";
+
+        boolean logMessage1Found = false, logMessage2Found = false, logMessage3Found = false;
+        LogEvent[] logEvents = logViewerClient.getAllSystemLogs();
+        for (LogEvent event : logEvents) {
+            if (!logMessage1Found && event.getMessage().contains(logMessage1)) {
+                logMessage1Found = true;
+            }
+
+            if (!logMessage2Found && event.getMessage().contains(logMessage2)) {
+                logMessage2Found = true;
+            }
+
+            if (!logMessage3Found && event.getMessage().contains(logMessage3)) {
+                logMessage3Found = true;
+            }
+
+            if (logMessage1Found && logMessage2Found && logMessage3Found) {
+                break;
+            }
+        }
+
+        Assert.assertTrue(logMessage1Found, "Log message not found - " + logMessage1);
+        Assert.assertTrue(logMessage2Found, "Log message not found - " + logMessage2);
+        Assert.assertTrue(logMessage3Found, "Log message not found - " + logMessage3);
     }
 
     @AfterClass(alwaysRun = true)

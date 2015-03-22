@@ -80,7 +80,7 @@ public class SmooksIntegrationTestCase extends ESBIntegrationTest {
         }
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL
+    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE
 })
     @Test(groups = {"wso2.esb"}, description = "Sending a Large File To Smooks Mediator")
     public void testSendingToSmooks() throws IOException, EndpointAdminEndpointAdminException,
