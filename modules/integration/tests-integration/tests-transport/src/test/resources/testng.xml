@@ -122,5 +122,25 @@
             <package name="org.wso2.carbon.esb.mailto.transport.sender.test"/>
         </packages>
     </test>
+    
+    	<test name="Message-Forwarding-Processor-Test" preserve-order="true"
+		verbose="2">
+		<classes>
+			<class
+				name="org.wso2.carbon.esb.jms.transport.test.JMSBrokerStartupTestCase" />
+			<class
+				name="org.wso2.carbon.esb.jms.message.processor.test.forwarder.ForwardingMessageProcessorWithJMSQueueTestCase"></class>
+		</classes>
+	</test>
+
+	<test name="Message-Sampling-Processor-Test" preserve-order="true"
+		verbose="2">
+		<classes>
+			<class
+				name="org.wso2.carbon.esb.jms.transport.test.JMSBrokerStartupTestCase" />
+			<class
+				name="org.wso2.carbon.esb.jms.message.processor.test.sampler.SamplingMessageProcessorWithJMSQueueTestCase"></class>
+		</classes>
+	</test>
 
 </suite>
