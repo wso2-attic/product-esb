@@ -1,0 +1,13 @@
+<order id="332">
+    <header>
+        <customer number="123">Joe</customer>
+    </header>
+    <order-items>
+        <order-item id="1">
+            <product>1</product>
+            <quantity>2</quantity>
+            <price>8.80</price>
+        </order-item>
+        <!-- etc etc -->
+    </order-items>
+</order>
