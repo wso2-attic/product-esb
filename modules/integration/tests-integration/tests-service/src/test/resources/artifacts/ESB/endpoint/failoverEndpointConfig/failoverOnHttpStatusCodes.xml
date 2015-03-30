@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+
+    <sequence name="main" onError="errorHandler">
+        <in>
+            <send>
+                <endpoint>
+                    <failover>
+                        <endpoint>
+                            <address uri="http://localhost:9001/services/LBService5">
+                                <enableAddressing/>
+                                <suspendDurationOnFailure>60</suspendDurationOnFailure>
+                                <failoverHttpStatusCodes>400,500,501,502</failoverHttpStatusCodes>
+                            </address>
+                        </endpoint>
+                        <endpoint>
+                            <address uri="http://localhost:9002/services/LBService1">
+                                <enableAddressing/>
+                                <suspendDurationOnFailure>60</suspendDurationOnFailure>
+                                <failoverHttpStatusCodes>300</failoverHttpStatusCodes>
+                            </address>
+                        </endpoint>
+                        <endpoint>
+                            <address uri="http://localhost:9003/services/LBService1">
+                                <enableAddressing/>
+                                <suspendDurationOnFailure>60</suspendDurationOnFailure>
+                            </address>
+                        </endpoint>
+                    </failover>
+                </endpoint>
+            </send>
+            <drop/>
+        </in>
+
+        <out>
+            <send/>
+        </out>
+    </sequence>
+
+    <sequence name="errorHandler">
+        <makefault>
+            <code value="tns:Receiver" xmlns:tns="http://www.w3.org/2003/05/soap-envelope"/>
+            <reason value="COULDN'T SEND THE MESSAGE TO THE SERVER."/>
+        </makefault>
+        <send/>
+    </sequence>
+
+</definitions>
+

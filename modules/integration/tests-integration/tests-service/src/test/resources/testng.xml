@@ -7,11 +7,11 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestSuiteListener"/>
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
-    <test name="Server-Startup" preserve-order="true" verbose="2">
-        <classes>
-            <class name="org.wso2.carbon.esb.proxyservice.test.loggingProxy.WSDLOptionsSpecifiedInlineTestCase"/>
-        </classes>
-    </test>
+    <!--<test name="Server-Startup" preserve-order="true" verbose="2">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.carbon.esb.proxyservice.test.loggingProxy.WSDLOptionsSpecifiedInlineTestCase"/>-->
+        <!--</classes>-->
+    <!--</test>-->
     <test name="ProxyService-Test" preserve-order="true" verbose="2">
         <packages>
             <!--<package name="org.wso2.carbon.esb.proxyservice.test.*"/>-->
@@ -103,5 +103,11 @@
         <packages>
             <package name="org.wso2.carbon.esb.tenant.test.*"/>
         </packages>
+    </test>
+
+    <test name="FailoverOnHttpStatusCodes-Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.endpoint.test.FailoverEndpointonHttpStatusCodesTestCase"/>
+        </classes>
     </test>
 </suite>
