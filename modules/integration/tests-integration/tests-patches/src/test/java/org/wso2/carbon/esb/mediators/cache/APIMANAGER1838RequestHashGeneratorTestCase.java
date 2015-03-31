@@ -1,5 +1,5 @@
 /*
-*Copyright (c) 2014, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *WSO2 Inc. licenses this file to you under the Apache License,
 *Version 2.0 (the "License"); you may not use this file except
@@ -33,10 +33,6 @@ import java.io.File;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-/*import org.wso2.carbon.automation.core.customservers.tomcat.TomcatServerManager;
-import org.wso2.carbon.automation.core.utils.HttpRequestUtil;
-import org.wso2.carbon.automation.core.utils.HttpResponse;
-import org.wso2.carbon.esb.ESBIntegrationTest;*/
 
 /**
  * This test case is for using REQUESTHASHGenerator as the caching Algorithm. For different requests with no request body
