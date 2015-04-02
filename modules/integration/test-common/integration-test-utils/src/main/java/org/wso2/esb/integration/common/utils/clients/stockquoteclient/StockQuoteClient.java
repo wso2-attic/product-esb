@@ -66,7 +66,6 @@ public class StockQuoteClient {
         ServiceClient sc;
         sc=getServiceClient(trpUrl, addUrl);
 
-
         try {
             return buildResponse(sc.sendReceive(createStandardRequest(symbol)));
         } finally {
