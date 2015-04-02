@@ -58,6 +58,11 @@
              <artifactId>org.wso2.carbon.aarservices.stub</artifactId>
              <scope>compile</scope>
          </dependency>
+         <dependency>
+             <groupId>org.apache.httpcomponents.wso2</groupId>
+             <artifactId>httpclient</artifactId>
+             <scope>compile</scope>
+         </dependency>
 
      </dependencies>
 
