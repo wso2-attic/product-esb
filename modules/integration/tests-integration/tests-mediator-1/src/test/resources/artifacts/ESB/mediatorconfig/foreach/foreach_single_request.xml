@@ -38,6 +38,9 @@
                                 <arg evaluator="xml" expression="//ns:CheckPriceRequest//ns:Code"/>
                             </args>
                         </payloadFactory>
+                        <log level="full">
+                            <property name="foreach" value="in"/>
+                        </log>
                     </sequence>
                 </target>
             </foreach>

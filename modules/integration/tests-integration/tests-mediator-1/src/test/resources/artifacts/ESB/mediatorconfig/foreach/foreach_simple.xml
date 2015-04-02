@@ -33,9 +33,6 @@
 		</aggregate>
 	</sequence>
 	<sequence name="iterateMessages">
-        <log level = "full">
-            <property name="before for " value=";;;;;for;;;    AAA"/>
-        </log>
         <foreach expression="//ns:CheckPriceRequest" xmlns:ns="http://services.samples">
             <target>
                 <sequence>
@@ -49,6 +46,9 @@
                             <arg evaluator="xml" expression="//ns:CheckPriceRequest/ns:Code"/>
                         </args>
                     </payloadFactory>
+                    <log level="full">
+                        <property name="foreach" value="in"/>
+                    </log>
                 </sequence>
             </target>
         </foreach>

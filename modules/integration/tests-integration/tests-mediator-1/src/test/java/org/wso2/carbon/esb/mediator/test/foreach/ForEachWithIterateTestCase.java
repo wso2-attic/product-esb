@@ -23,10 +23,16 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.esb.mediator.test.iterate.IterateClient;
+import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
+import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.namespace.QName;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static org.testng.Assert.assertTrue;
 
 public class ForEachWithIterateTestCase extends ESBIntegrationTest {
 
@@ -36,13 +42,35 @@ public class ForEachWithIterateTestCase extends ESBIntegrationTest {
     public void setEnvironment() throws Exception {
         init();
         client = new IterateClient();
+        loadESBConfigurationFromClasspath(
+                "/artifacts/ESB/mediatorconfig/foreach/foreach_simple.xml");
     }
 
-    @Test(groups = "wso2.esb", description = "Tests for http endpoint")
-    public void testForEachWithIterateEndpoint() throws Exception, InterruptedException {
-        loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/foreach/simple_foreach.xml");
-        String response = client.getMultipleCustomResponse(getMainSequenceURL(), "WSO2", 2);
+    @Test(groups = "wso2.esb", description = "Test foreach transformed payload, passed to endpoint using iterate and aggregate mediators")
+    public void testForEachWithIterateEndpoint() throws Exception {
+        LogViewerClient logViewer =
+                new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+        int beforeLogSize = logViewer.getAllRemoteSystemLogs().length;
+
+        String response = client.getMultipleCustomResponse(getMainSequenceURL(), "IBM", 2);
         Assert.assertNotNull(response);
+
+        LogEvent[] logs = logViewer.getAllRemoteSystemLogs();
+        int afterLogSize = logs.length;
+        int forEachCount = 0;
+
+        for (int i = (afterLogSize - beforeLogSize - 1); i >= 0; i--) {
+            String message = logs[i].getMessage();
+            if (message.contains("foreach = in")) {
+                if (!message.contains("IBM")) {
+                    Assert.fail("Incorrect message entered ForEach scope");
+                }
+                forEachCount++;
+            }
+        }
+
+        Assert.assertEquals(forEachCount, 2, "Count of messages entered ForEach scope is incorrect");
+
         OMElement envelope = client.toOMElement(response);
         OMElement soapBody = envelope.getFirstElement();
         Iterator iterator =
@@ -52,9 +80,9 @@ public class ForEachWithIterateTestCase extends ESBIntegrationTest {
         while (iterator.hasNext()) {
             i++;
             OMElement getQuote = (OMElement) iterator.next();
-            Assert.assertTrue(getQuote.toString().contains("WSO2"));
+            Assert.assertTrue(getQuote.toString().contains("IBM"));
         }
-        Assert.assertEquals(i ,2, "Message count mismatched");
+        Assert.assertEquals(i, 2, "Message count mismatched in response");
 
     }
 
