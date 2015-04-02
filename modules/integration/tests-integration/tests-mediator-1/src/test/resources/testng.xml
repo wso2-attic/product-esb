@@ -212,6 +212,12 @@
         </packages>
     </test>
 
+    <test name="Foreach-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.foreach"/>
+        </packages>
+    </test>
+
     <!--<test name="Rule-mediator-Test" preserve-order="true" verbose="2">-->
         <!--<packages>-->
             <!--<package name="org.wso2.carbon.esb.mediator.test.rule"/>-->
