@@ -101,7 +101,6 @@ public class SecureAxisServiceClient implements CallbackHandler {
 
     }
 
-
     /**
      * @param userName
      * @param password
@@ -297,7 +296,9 @@ public class SecureAxisServiceClient implements CallbackHandler {
 
         if (log.isDebugEnabled()) {
             log.debug("Key_Path :" + keyStorePath);
-            log.debug("securityPolicyPath :" + securityPolicyPath);
+            if(securityPolicyPath != null) {
+                log.debug("securityPolicyPath :" + securityPolicyPath);
+            }
         }
 
         System.setProperty("javax.net.ssl.trustStore", keyStorePath);
@@ -314,14 +315,17 @@ public class SecureAxisServiceClient implements CallbackHandler {
 
             sc = new ServiceClient(ConfigurationContextProvider.getInstance().getConfigurationContext(), null);
 
-            sc.engageModule("rampart");
-            sc.engageModule("addressing");
-
+            if (securityPolicyPath != null) {
+                sc.engageModule("rampart");
+                sc.engageModule("addressing");
+            }
             Options opts = new Options();
 
             try {
-                opts.setProperty(RampartMessageData.KEY_RAMPART_POLICY,
-                        loadPolicy(userName, securityPolicyPath, keyStorePath, keyStorePassword, userCertAlias, encryptionUser));
+                if(securityPolicyPath != null) {
+                    opts.setProperty(RampartMessageData.KEY_RAMPART_POLICY,
+                                     loadPolicy(userName, securityPolicyPath, keyStorePath, keyStorePassword, userCertAlias, encryptionUser));
+                }
 
             } catch (Exception e) {
                 log.error(e);

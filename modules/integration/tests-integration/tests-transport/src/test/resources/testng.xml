@@ -129,6 +129,12 @@
         </packages>
     </test>
 
+    <test name="Https Inbound Transport Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.https.inbound.transport.test"/>
+        </packages>
+    </test>
+
 
 </suite>
 
