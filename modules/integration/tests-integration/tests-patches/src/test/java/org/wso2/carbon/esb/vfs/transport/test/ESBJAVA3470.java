@@ -22,7 +22,6 @@ import junit.framework.Assert;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.util.AXIOMUtil;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
 import org.apache.sshd.SshServer;
 import org.apache.sshd.common.NamedFactory;
 import org.apache.sshd.server.Command;
@@ -36,12 +35,12 @@ import org.apache.sshd.server.sftp.SftpSubsystem;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.annotations.ExecutionEnvironment;
-import org.wso2.carbon.automation.core.annotations.SetEnvironment;
-import org.wso2.carbon.automation.core.utils.serverutils.ServerConfigurationManager;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
+import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.carbon.proxyadmin.stub.ProxyServiceAdminProxyAdminException;
 import org.wso2.carbon.utils.ServerConstants;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -81,7 +80,7 @@ public class ESBJAVA3470 extends ESBIntegrationTest {
     public void deployService() throws Exception {
 
         super.init();
-        serverConfigurationManager = new ServerConfigurationManager(esbServer.getBackEndUrl());
+        serverConfigurationManager = new ServerConfigurationManager(context);
         serverConfigurationManager.applyConfiguration(new File(getClass().getResource(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "vfsTransport" + File.separator + "axis2.xml").getPath()));
         super.init();
 
@@ -93,7 +92,7 @@ public class ESBJAVA3470 extends ESBIntegrationTest {
     }
 
     @Test(groups = "wso2.esb", description = "VFS absolute path test for sftp")
-    @SetEnvironment(executionEnvironments = { ExecutionEnvironment.integration_all })
+    @SetEnvironment(executionEnvironments = { ExecutionEnvironment.ALL })
     public void test() throws XMLStreamException, ProxyServiceAdminProxyAdminException, IOException, InterruptedException {
 
         ClassLoader classLoader = getClass().getClassLoader();
@@ -262,9 +261,9 @@ public class ESBJAVA3470 extends ESBIntegrationTest {
 
     protected void addProxyService(OMElement proxyConfig) throws Exception {
         String proxyName = proxyConfig.getAttributeValue(new QName("name"));
-        if (esbUtils.isProxyServiceExist(esbServer.getBackEndUrl(), esbServer.getSessionCookie(), proxyName)) {
-            esbUtils.deleteProxyService(esbServer.getBackEndUrl(), esbServer.getSessionCookie(), proxyName);
+        if (esbUtils.isProxyServiceExist(context.getContextUrls().getBackEndUrl(), sessionCookie, proxyName)) {
+            esbUtils.deleteProxyService(context.getContextUrls().getBackEndUrl(), sessionCookie, proxyName);
         }
-        esbUtils.addProxyService(esbServer.getBackEndUrl(), esbServer.getSessionCookie(), setEndpoints(proxyConfig));
+        esbUtils.addProxyService(context.getContextUrls().getBackEndUrl(), sessionCookie, setEndpoints(proxyConfig));
     }
 }
