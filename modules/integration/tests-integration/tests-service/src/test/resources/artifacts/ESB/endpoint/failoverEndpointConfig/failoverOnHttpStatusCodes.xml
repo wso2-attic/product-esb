@@ -6,18 +6,17 @@
             <send>
                 <endpoint>
                     <failover>
+                        <failoverHttpStatusCodes>400,500,501,502</failoverHttpStatusCodes>
                         <endpoint>
                             <address uri="http://localhost:9001/services/LBService5">
                                 <enableAddressing/>
                                 <suspendDurationOnFailure>60</suspendDurationOnFailure>
-                                <failoverHttpStatusCodes>400,500,501,502</failoverHttpStatusCodes>
                             </address>
                         </endpoint>
                         <endpoint>
                             <address uri="http://localhost:9002/services/LBService1">
                                 <enableAddressing/>
                                 <suspendDurationOnFailure>60</suspendDurationOnFailure>
-                                <failoverHttpStatusCodes>300</failoverHttpStatusCodes>
                             </address>
                         </endpoint>
                         <endpoint>
