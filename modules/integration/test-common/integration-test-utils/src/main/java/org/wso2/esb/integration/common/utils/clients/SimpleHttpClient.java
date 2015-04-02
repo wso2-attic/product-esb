@@ -23,10 +23,7 @@ import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpRequestRetryHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.methods.HttpPatch;
+import org.apache.http.client.methods.*;
 import org.apache.http.entity.ContentProducer;
 import org.apache.http.entity.EntityTemplate;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -145,6 +142,108 @@ public class SimpleHttpClient {
     public HttpResponse doPatch(String url, final Map<String, String> headers,
                                 final String payload, String contentType) throws IOException {
         HttpUriRequest request = new HttpPatch(url);
+        setHeaders(headers, request);
+        HttpEntityEnclosingRequest entityEncReq = (HttpEntityEnclosingRequest) request;
+        final boolean zip = headers != null && "gzip".equals(headers.get(HttpHeaders.CONTENT_ENCODING));
+
+        EntityTemplate ent = new EntityTemplate(new ContentProducer() {
+            public void writeTo(OutputStream outputStream) throws IOException {
+                OutputStream out = outputStream;
+                if (zip) {
+                    out = new GZIPOutputStream(outputStream);
+                }
+                out.write(payload.getBytes());
+                out.flush();
+                out.close();
+            }
+        });
+        ent.setContentType(contentType);
+        if (zip) {
+            ent.setContentEncoding("gzip");
+        }
+        entityEncReq.setEntity(ent);
+        return client.execute(request);
+    }
+
+    /**
+     * Send a HTTP OPTIONS request to the specified URL
+     *
+     * @param url         Target endpoint URL
+     * @param headers     Any HTTP headers that should be added to the request
+     * @param payload     Content payload that should be sent
+     * @param contentType Content-type of the request
+     * @return Returned HTTP response
+     * @throws IOException If an error occurs while making the invocation
+     */
+    public HttpResponse doOptions(String url, final Map<String, String> headers,
+                                  final String payload, String contentType) throws IOException {
+        HttpUriRequest request = new HttpOptions(url);
+        setHeaders(headers, request);
+        if(payload != null) {
+            HttpEntityEnclosingRequest entityEncReq = (HttpEntityEnclosingRequest) request;
+            final boolean zip = headers != null && "gzip".equals(headers.get(HttpHeaders.CONTENT_ENCODING));
+
+            EntityTemplate ent = new EntityTemplate(new ContentProducer() {
+                public void writeTo(OutputStream outputStream) throws IOException {
+                    OutputStream out = outputStream;
+                    if (zip) {
+                        out = new GZIPOutputStream(outputStream);
+                    }
+                    out.write(payload.getBytes());
+                    out.flush();
+                    out.close();
+                }
+            });
+            ent.setContentType(contentType);
+            if (zip) {
+                ent.setContentEncoding("gzip");
+            }
+            entityEncReq.setEntity(ent);
+        }
+        return client.execute(request);
+    }
+
+    /**
+     * Send a HTTP Head request to the specified URL
+     *
+     * @param url         Target endpoint URL
+     * @param headers     Any HTTP headers that should be added to the request
+     * @return Returned HTTP response
+     * @throws IOException If an error occurs while making the invocation
+     */
+    public HttpResponse doHead(String url, final Map<String, String> headers) throws IOException {
+        HttpUriRequest request = new HttpHead(url);
+        setHeaders(headers, request);
+        return client.execute(request);
+    }
+
+    /**
+     * Send a HTTP DELETE request to the specified URL
+     *
+     * @param url         Target endpoint URL
+     * @param headers     Any HTTP headers that should be added to the request
+     * @return Returned HTTP response
+     * @throws IOException If an error occurs while making the invocation
+     */
+    public HttpResponse doDelete(String url, final Map<String, String> headers) throws IOException {
+        HttpUriRequest request = new HttpDelete(url);
+        setHeaders(headers, request);
+        return client.execute(request);
+    }
+
+    /**
+     * Send a HTTP PUT request to the specified URL
+     *
+     * @param url         Target endpoint URL
+     * @param headers     Any HTTP headers that should be added to the request
+     * @param payload     Content payload that should be sent
+     * @param contentType Content-type of the request
+     * @return Returned HTTP response
+     * @throws IOException If an error occurs while making the invocation
+     */
+    public HttpResponse doPut(String url, final Map<String, String> headers,
+                              final String payload, String contentType) throws IOException {
+        HttpUriRequest request = new HttpPut(url);
         setHeaders(headers, request);
         HttpEntityEnclosingRequest entityEncReq = (HttpEntityEnclosingRequest) request;
         final boolean zip = headers != null && "gzip".equals(headers.get(HttpHeaders.CONTENT_ENCODING));
