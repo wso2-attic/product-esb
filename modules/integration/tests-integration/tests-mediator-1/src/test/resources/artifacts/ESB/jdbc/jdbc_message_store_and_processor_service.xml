@@ -37,9 +37,9 @@
         <description>The main sequence for the message mediation</description>
     </sequence>
     <messageStore class="org.apache.synapse.message.store.impl.jdbc.JDBCMessageStore" name="MyStore">
-        <parameter name="store.jdbc.driver">org.h2.Driver</parameter>
-        <parameter name="store.jdbc.connection.url">jdbc:h2:~/test</parameter>
-        <parameter name="store.jdbc.username">sa</parameter>
+        <parameter name="store.jdbc.driver">com.mysql.jdbc.Driver</parameter>
+        <parameter name="store.jdbc.connection.url">jdbc:mysql://localhost:3306/WSO2SampleDBForAutomation</parameter>
+        <parameter name="store.jdbc.username">root</parameter>
         <parameter name="store.jdbc.password"></parameter>
         <parameter name="store.jdbc.table">jdbc_store_table</parameter>
     </messageStore>

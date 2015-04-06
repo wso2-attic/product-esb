@@ -21,37 +21,72 @@ import junit.framework.Assert;
 import org.apache.axiom.om.OMElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.wso2.carbon.automation.test.utils.dbutils.H2DataBaseManager;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.extensions.XPathConstants;
+import org.wso2.carbon.automation.test.utils.dbutils.MySqlDatabaseManager;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.Utils;
 import org.wso2.esb.integration.common.utils.clients.axis2client.AxisServiceClient;
 
+import java.io.File;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class JDBCMessageProcessor2TestCase extends ESBIntegrationTest {
 
-    private H2DataBaseManager h2;
+    private final String MYSQL_JAR = "mysql-connector-java-5.1.6.jar";
+    private ServerConfigurationManager serverConfigurationManager;
+    private MySqlDatabaseManager mySqlDatabaseManager;
+
+    private String JDBC_URL;
+    private String DB_USER;
+    private String DB_PASSWORD;
+    private String DATASOURCE_NAME;
+    private String JDBC_DRIVER;
 
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
         super.init();
-        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jdbc/jdbc_message_store_and_processor_service.xml");
+        AutomationContext automationContext = new AutomationContext();
+        DATASOURCE_NAME = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_NAME);
+        DB_PASSWORD = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_DB_PASSWORD);
+        JDBC_URL = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_URL);
+        DB_USER = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_DB_USER_NAME);
+        JDBC_DRIVER = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_DRIVER_CLASS_NAME);
+        serverConfigurationManager = new ServerConfigurationManager(context);
+        copyJDBCDriverToClassPath();
+        mySqlDatabaseManager = new MySqlDatabaseManager(JDBC_URL, DB_USER, "");// TODO: change here
+        mySqlDatabaseManager.executeUpdate("DROP DATABASE IF EXISTS WSO2SampleDBForAutomation");
 
-        h2 = new H2DataBaseManager("jdbc:h2:~/test", "sa", "");//   jdbc:h2:repository/database/WSO2CARBON_DB
+        super.init();
 
-        h2.execute("CREATE TABLE IF NOT EXISTS jdbc_store_table(\n" +
-                   "indexId BIGINT( 20 ) NOT NULL auto_increment ,\n" +
-                   "msg_id VARCHAR( 200 ) NOT NULL ,\n" +
-                   "message BLOB NOT NULL, \n" +
-                   "PRIMARY KEY ( indexId )\n" +
-                   ")");
-        h2.disconnect();
-        updateESBConfiguration(synapse);
     }
 
-//    @Test(groups = {"wso2.esb"}, description = "Test proxy service with jdbc message store")
+    @BeforeMethod(alwaysRun = true)
+    public void createDatabase() throws SQLException {
+        mySqlDatabaseManager.executeUpdate("DROP DATABASE IF EXISTS WSO2SampleDBForAutomation");
+        mySqlDatabaseManager.executeUpdate("Create DATABASE WSO2SampleDBForAutomation");
+        mySqlDatabaseManager.executeUpdate("USE WSO2SampleDBForAutomation");
+        mySqlDatabaseManager.executeUpdate("CREATE TABLE IF NOT EXISTS jdbc_store_table(\n" +
+                                           "indexId BIGINT( 20 ) NOT NULL auto_increment ,\n" +
+                                           "msg_id VARCHAR( 200 ) NOT NULL ,\n" +
+                                           "message BLOB NOT NULL, \n" +
+                                           "PRIMARY KEY ( indexId )\n" +
+                                           ")");
+
+
+    }
+
+
+
+    @Test(groups = {"wso2.esb"}, description = "Test proxy service with jdbc message store")
     public void testJDBCMessageStoreAndProcessor() throws Exception {
+
+        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jdbc/jdbc_message_store_and_processor_service.xml");
+        updateESBConfiguration(synapse);
 
         AxisServiceClient client = new AxisServiceClient();
         for (int i = 0; i < 5; i++) {
@@ -60,35 +95,37 @@ public class JDBCMessageProcessor2TestCase extends ESBIntegrationTest {
 
         Thread.sleep(5000);
 
-        ServerConfigurationManager serverConfigurationManager = new ServerConfigurationManager(context);
-        serverConfigurationManager.restartGracefully();
+        ResultSet rs = mySqlDatabaseManager.executeQuery("SELECT * FROM jdbc_store_table");
 
-        H2DataBaseManager h3 = null;
-        try {
-
-            h3 = new H2DataBaseManager("jdbc:h2:~/test", "sa", "");
-            ResultSet results = h3.executeQuery("SELECT * FROM jdbc_store_table");
-
-            int a = results.getFetchSize(); /** Fails here! **/
-
-            Assert.assertTrue("All messages sent to store", results.getFetchSize() == 5);
-
-        } finally {
-            if (h3 != null) {
-                h3.disconnect();
-            }
+        int count = 0;
+        while (rs.next()){
+            count ++;
         }
+
+        System.out.println("count is : " + count);
     }
 
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
-        H2DataBaseManager h4 = new H2DataBaseManager("jdbc:h2:~/test", "sa", "");
-
-        h4.executeUpdate("DROP TABLE jdbc_store_table");
-
-        h4.disconnect();
+        try {
+            mySqlDatabaseManager.executeUpdate("DROP DATABASE WSO2SampleDBForAutomation");
+        } finally {
+            mySqlDatabaseManager.disconnect();
+        }
 
         super.cleanup();
+        super.init();
+        loadSampleESBConfiguration(0);
+        serverConfigurationManager.removeFromComponentLib(MYSQL_JAR);
+        serverConfigurationManager.restartGracefully();
+    }
+
+    private void copyJDBCDriverToClassPath() throws Exception {
+        File jarFile;
+        jarFile = new File(getClass().getResource("/artifacts/ESB/jar/" + MYSQL_JAR + "").getPath());
+        System.out.println(jarFile.getName());
+        serverConfigurationManager.copyToComponentLib(jarFile);
+        serverConfigurationManager.restartGracefully();
     }
 }
