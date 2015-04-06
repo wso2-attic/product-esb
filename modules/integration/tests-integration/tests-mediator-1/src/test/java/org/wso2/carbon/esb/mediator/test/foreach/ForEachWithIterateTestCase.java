@@ -42,12 +42,12 @@ public class ForEachWithIterateTestCase extends ESBIntegrationTest {
     public void setEnvironment() throws Exception {
         init();
         client = new IterateClient();
-        loadESBConfigurationFromClasspath(
-                "/artifacts/ESB/mediatorconfig/foreach/foreach_simple.xml");
     }
 
-    @Test(groups = "wso2.esb", description = "Test foreach transformed payload, passed to endpoint using iterate and aggregate mediators")
-    public void testForEachWithIterateEndpoint() throws Exception {
+    @Test(groups = "wso2.esb", description = "Test foreach inline sequence to transform payload, passed to endpoint using iterate and aggregate mediators")
+    public void testForEachInlineSequenceWithIterateEndpoint() throws Exception {
+        loadESBConfigurationFromClasspath(
+                "/artifacts/ESB/mediatorconfig/foreach/foreach_simple.xml");
         LogViewerClient logViewer =
                 new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
         int beforeLogSize = logViewer.getAllRemoteSystemLogs().length;
@@ -85,6 +85,49 @@ public class ForEachWithIterateTestCase extends ESBIntegrationTest {
         Assert.assertEquals(i, 2, "Message count mismatched in response");
 
     }
+
+    @Test(groups = "wso2.esb", description = "Test foreach sequence ref to transform payload, passed to endpoint using iterate and aggregate mediators")
+    public void testForEachSequenceRefWithIterateEndpoint() throws Exception {
+        loadESBConfigurationFromClasspath(
+                "/artifacts/ESB/mediatorconfig/foreach/foreach_simple_sequenceref.xml");
+        LogViewerClient logViewer =
+                new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+        int beforeLogSize = logViewer.getAllRemoteSystemLogs().length;
+
+        String response = client.getMultipleCustomResponse(getMainSequenceURL(), "IBM", 2);
+        Assert.assertNotNull(response);
+
+        LogEvent[] logs = logViewer.getAllRemoteSystemLogs();
+        int afterLogSize = logs.length;
+        int forEachCount = 0;
+
+        for (int i = (afterLogSize - beforeLogSize - 1); i >= 0; i--) {
+            String message = logs[i].getMessage();
+            if (message.contains("foreach = in")) {
+                if (!message.contains("IBM")) {
+                    Assert.fail("Incorrect message entered ForEach scope");
+                }
+                forEachCount++;
+            }
+        }
+
+        Assert.assertEquals(forEachCount, 2, "Count of messages entered ForEach scope is incorrect");
+
+        OMElement envelope = client.toOMElement(response);
+        OMElement soapBody = envelope.getFirstElement();
+        Iterator iterator =
+                soapBody.getChildrenWithName(new QName("http://services.samples",
+                                                       "getQuoteResponse"));
+        int i = 0;
+        while (iterator.hasNext()) {
+            i++;
+            OMElement getQuote = (OMElement) iterator.next();
+            Assert.assertTrue(getQuote.toString().contains("IBM"));
+        }
+        Assert.assertEquals(i, 2, "Message count mismatched in response");
+
+    }
+
 
     @AfterClass
     public void close() throws Exception {
