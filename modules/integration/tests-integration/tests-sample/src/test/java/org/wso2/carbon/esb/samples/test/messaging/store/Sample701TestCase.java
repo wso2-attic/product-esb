@@ -74,13 +74,13 @@ public class Sample701TestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void close() throws Exception {
-        super.cleanup();
+	    super.cleanup();
     }
 
     private OMElement createPayload() {   // creation of payload for placeOrder
 
         OMFactory fac = OMAbstractFactory.getOMFactory();
-        OMNamespace omNs = fac.createOMNamespace("http://services.samples", "ser");
+        OMNamespace omNs = fac.createOMNamespace("http://services.samples", "urn");
         OMNamespace xsdNs = fac.createOMNamespace("http://services.samples", "xsd");
         OMElement payload = fac.createOMElement("placeOrder", omNs);
         OMElement order = fac.createOMElement("order", omNs);

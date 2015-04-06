@@ -10,7 +10,6 @@
                 <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
                 <property name="OUT_ONLY" value="false"/>
                 <log level="full"/>
-                <property name="target.endpoint" value="SimpleStockQuoteService"/>
                 <store messageStore="MyStoreESB1910" sequence="onStoreSequence"/>
             </inSequence>
         </target>
@@ -62,8 +61,13 @@
     </messageStore>
     <messageProcessor class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
                       name="ScheduledProcessor"
-                      messageStore="MyStoreESB1910">
+                      messageStore="MyStoreESB1910"
+                      targetEndpoint="SimpleStockQuoteService">
         <parameter name="message.processor.reply.sequence">replySequence</parameter>
         <parameter name="interval">1000</parameter>
+        <parameter name="client.retry.interval">1000</parameter>
+        <parameter name="is.active">true</parameter>
+        <parameter name="max.delivery.drop">Disabled</parameter>
+        <parameter name="member.count">1</parameter>
     </messageProcessor>
 </definitions>

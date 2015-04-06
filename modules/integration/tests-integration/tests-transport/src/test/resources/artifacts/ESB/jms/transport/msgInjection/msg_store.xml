@@ -27,7 +27,6 @@
             <log level="full"/>
             <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
             <property name="OUT_ONLY" value="true"/>
-            <property name="target.endpoint" value="jsmQueueEP"/>
             <store messageStore="JMS_Store"/>
         </out>
         <description>The main sequence for the message mediation</description>
@@ -42,5 +41,11 @@
     </messageStore>
     <messageProcessor class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
                       name="JMSTestMessageProcessor"
-                      messageStore="JMS_Store"/>
+                      messageStore="JMS_Store" targetEndpoint="jsmQueueEP">
+        <parameter name="interval">1000</parameter>
+        <parameter name="client.retry.interval">1000</parameter>
+        <parameter name="is.active">true</parameter>
+        <parameter name="max.delivery.drop">Disabled</parameter>
+        <parameter name="member.count">1</parameter>
+    </messageProcessor>
 </definitions>

@@ -24,6 +24,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.clients.axis2client.AxisServiceClient;
+import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
@@ -32,15 +34,22 @@ import java.io.FileNotFoundException;
 
 public class HttpInboundTransportTestCase extends ESBIntegrationTest {
 
+	private SampleAxis2Server axis2Server;
+
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
+
+	    axis2Server = new SampleAxis2Server("test_axis2_server_9000.xml");
+	    axis2Server.deployService(SampleAxis2Server.SIMPLE_STOCK_QUOTE_SERVICE);
+	    axis2Server.start();
+
         addSequence(getArtifactConfig("TestIn.xml"));
         addSequence(getArtifactConfig("TestOut.xml"));
         addInboundEndpoint(getArtifactConfig("synapse.xml"));
     }
 
-    @Test(groups = "wso2.esb", description = "Inbound Http  test case", enabled = false)
+    @Test(groups = "wso2.esb", description = "Inbound Http  test case")
     public void inboundHttpTest() throws AxisFault {
         try {
             OMElement response = axis2Client.sendSimpleStockQuoteRequest("http://localhost:8081/services/StockQuote", null, "IBM");
@@ -53,7 +62,11 @@ public class HttpInboundTransportTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
-        super.cleanup();
+	    if (axis2Server.isStarted()) {
+		    axis2Server.stop();
+	    }
+	    axis2Server=null;
+	    super.cleanup();
     }
 
 

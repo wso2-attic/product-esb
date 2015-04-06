@@ -34,7 +34,8 @@ import java.io.File;
 
 public class GenericInboundTransportTestCase extends ESBIntegrationTest {
 	private LogViewerClient logViewerClient = null;
-	private final String CLASS_JAR = "org.wso2.carbon.inbound.endpoint.test-1.0-SNAPSHOT.jar";
+    //TODO: Add this jar to correct location
+	private final String CLASS_JAR = "org.wso2.carbon.inbound.endpoint.test-1.0.jar";
 	private final String JAR_LOCATION = "/artifacts/ESB/jar";
 	private InboundAdminClient inboundAdminClient;
 	private ServerConfigurationManager serverConfigurationManager;
@@ -97,7 +98,7 @@ public class GenericInboundTransportTestCase extends ESBIntegrationTest {
 	}
 
 	@Test(groups = { "wso2.esb" }, description = "Test creating Generic Inbound EP without implementation class")
-	public void testWithImplemetationClass() throws Exception {
+	public void testWithoutImplementationClass() throws Exception {
 		int beforeLogCount = logViewerClient.getAllSystemLogs().length;
 		addInboundEndpoint(addEndpoint3());
 		LogEvent[] logs = logViewerClient.getAllSystemLogs();

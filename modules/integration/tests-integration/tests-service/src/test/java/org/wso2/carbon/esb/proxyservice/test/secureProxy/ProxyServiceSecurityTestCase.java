@@ -54,7 +54,7 @@ public class ProxyServiceSecurityTestCase extends ESBIntegrationTest {
 
         super.cleanup();
     }
-
+/*
     @Test(groups = {"wso2.esb"}, description = "Provides Authentication. Clients have Username Tokens")
     public void securityPolicy1() throws Exception {
         final int policyId = 1;
@@ -366,5 +366,5 @@ public class ProxyServiceSecurityTestCase extends ESBIntegrationTest {
                 new QName("http://services.samples/xsd", "symbol", "ax21")).getText();
         Assert.assertEquals(symbol, "Secured", "Symbol name mismatched");
     }
-
+*/
 }

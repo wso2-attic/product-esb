@@ -49,8 +49,8 @@ public class XMLToJsonTestCase extends ESBIntegrationTest {
         +"</user></xml>";    
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
-        super.init();;
-        loadESBConfigurationFromClasspath("/artifacts/ESB/json/xml-to-json.xml");        
+        super.init();
+        loadESBConfigurationFromClasspath("/artifacts/ESB/json/xml-to-json.xml");
         serverManager = new ServerConfigurationManager(context);
         serverManager.applyConfiguration(new File(FrameworkPathUtil.getSystemResourceLocation()+"artifacts"+File.separator+
                 "ESB"+File.separator+ "json" + File.separator + "synapse.properties"));

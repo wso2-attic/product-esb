@@ -37,7 +37,9 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
     private JMSBrokerController jmsBrokerController;
     private ServerConfigurationManager serverConfigurationManager;
 
-    private final String ACTIVEMQ_CORE = "activemq-core-5.2.0.jar";
+    private final String HAWTBUF = "hawtbuf-1.9.jar";
+    private final String ACTIVEMQ_CLIENT = "activemq-client-5.9.1.jar";
+    private final String ACTIVEMQ_BROKER = "activemq-broker-5.9.1.jar";
     private final String GERONIMO_J2EE_MANAGEMENT = "geronimo-j2ee-management_1.1_spec-1.0.1.jar";
     private final String GERONIMO_JMS = "geronimo-jms_1.1_spec-1.1.1.jar";
     private final String JAR_LOCATION = "/artifacts/ESB/jar";
@@ -57,7 +59,11 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
 
         serverConfigurationManager = new ServerConfigurationManager(context);
         serverConfigurationManager.copyToComponentLib(new File(getClass().
-                getResource(JAR_LOCATION + File.separator + ACTIVEMQ_CORE).toURI()));
+                getResource(JAR_LOCATION + File.separator + HAWTBUF).toURI()));
+        serverConfigurationManager.copyToComponentLib(new File(getClass().
+                getResource(JAR_LOCATION + File.separator + ACTIVEMQ_CLIENT).toURI()));
+        serverConfigurationManager.copyToComponentLib(new File(getClass().
+                getResource(JAR_LOCATION + File.separator + ACTIVEMQ_BROKER).toURI()));
         serverConfigurationManager.copyToComponentLib(new File(getClass().
                 getResource(JAR_LOCATION + File.separator + GERONIMO_J2EE_MANAGEMENT).toURI()));
         serverConfigurationManager.copyToComponentLib(new File(getClass().
@@ -204,7 +210,9 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
                 log.warn("Error while shutting down the HTTP server", e);
             }
             Thread.sleep(3000);
-            serverConfigurationManager.removeFromComponentLib(ACTIVEMQ_CORE);
+            serverConfigurationManager.removeFromComponentLib(ACTIVEMQ_CLIENT);
+            serverConfigurationManager.removeFromComponentLib(ACTIVEMQ_BROKER);
+            serverConfigurationManager.removeFromComponentLib(HAWTBUF);
             serverConfigurationManager.removeFromComponentLib(GERONIMO_J2EE_MANAGEMENT);
             serverConfigurationManager.removeFromComponentLib(GERONIMO_JMS);
             serverConfigurationManager.restoreToLastConfiguration();

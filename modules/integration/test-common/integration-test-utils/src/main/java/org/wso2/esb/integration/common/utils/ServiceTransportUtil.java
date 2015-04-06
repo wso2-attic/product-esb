@@ -20,7 +20,6 @@ package org.wso2.esb.integration.common.utils;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.wso2.esb.integration.common.clients.service.mgt.ServiceAdminClient;
-import org.wso2.esb.integration.common.clients.transport.mgt.TransportManagementAdminServiceClient;
 
 
 public class ServiceTransportUtil {
@@ -41,20 +40,21 @@ public class ServiceTransportUtil {
         return serviceAdminClient.getExposedTransports(serviceName);
     }
 
-    public static void addExposedTransports(String backEndUrl, String sessionCookie, String serviceName,
-                                     String transport)
-            throws Exception {
-        TransportManagementAdminServiceClient transportManagementAdminServiceClient
-                = new TransportManagementAdminServiceClient(backEndUrl, sessionCookie);
-        transportManagementAdminServiceClient.addExposedTransports(serviceName, transport);
-
-    }
-
-    public static void addTransportHttp(String backEndUrl, String sessionCookie, String serviceName)
-            throws Exception {
-        TransportManagementAdminServiceClient transportManagementAdminServiceClient
-                = new TransportManagementAdminServiceClient(backEndUrl, sessionCookie);
-        transportManagementAdminServiceClient.addExposedTransports(serviceName, "http");
-
-    }
+// TODO:Enable after transport management handler imlpementation
+//    public static void addExposedTransports(String backEndUrl, String sessionCookie, String serviceName,
+//                                     String transport)
+//            throws Exception {
+//        TransportManagementAdminServiceClient transportManagementAdminServiceClient
+//                = new TransportManagementAdminServiceClient(backEndUrl, sessionCookie);
+//        transportManagementAdminServiceClient.addExposedTransports(serviceName, transport);
+//
+//    }
+//
+//    public static void addTransportHttp(String backEndUrl, String sessionCookie, String serviceName)
+//            throws Exception {
+//        TransportManagementAdminServiceClient transportManagementAdminServiceClient
+//                = new TransportManagementAdminServiceClient(backEndUrl, sessionCookie);
+//        transportManagementAdminServiceClient.addExposedTransports(serviceName, "http");
+//
+//    }
 }
