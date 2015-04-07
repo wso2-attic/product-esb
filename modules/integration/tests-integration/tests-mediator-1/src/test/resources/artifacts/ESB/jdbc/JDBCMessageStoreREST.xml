@@ -38,15 +38,15 @@
 
     <messageStore class="org.apache.synapse.message.store.impl.jdbc.JDBCMessageStore"
                   name="RESTMessageStore">
-        <parameter name="store.jdbc.driver">org.h2.Driver</parameter>
-        <parameter name="store.jdbc.connection.url">jdbc:h2:~/test</parameter>
-        <parameter name="store.jdbc.username">sa</parameter>
+        <parameter name="store.jdbc.driver">com.mysql.jdbc.Driver</parameter>
+        <parameter name="store.jdbc.connection.url">jdbc:mysql://localhost:3306/WSO2SampleDBForAutomation</parameter>
+        <parameter name="store.jdbc.username">root</parameter>
         <parameter name="store.jdbc.password"></parameter>
         <parameter name="store.jdbc.table">jdbc_store_table</parameter>
     </messageStore>
 
     <messageProcessor class="org.apache.synapse.message.processor.impl.sampler.SamplingProcessor"
-                      name="SamplingProcessor1"
+                      name="SamplingProcessorABC"
                       messageStore="RESTMessageStore">
         <parameter name="interval">1000</parameter>
         <parameter name="sequence">SamplingSeq</parameter>

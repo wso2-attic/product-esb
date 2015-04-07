@@ -22,13 +22,19 @@ import org.apache.http.HttpResponse;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.extensions.XPathConstants;
 import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
-import org.wso2.carbon.automation.test.utils.dbutils.H2DataBaseManager;
+import org.wso2.carbon.automation.test.utils.dbutils.MySqlDatabaseManager;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
+import java.io.File;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,13 +42,10 @@ import static org.testng.Assert.assertEquals;
 
 public class JDBCMessageStoreProcRESTTestCase extends ESBIntegrationTest{
     private static final String url = "http://localhost:8280/jdbc/store";
-    private static final String logLine0 =
-            "MESSAGE = ************RESTProxy IN, IN-Content-Type = application/json, IN-Test-Header-Field = TestHeaderValue";
-    private static final String logLine1 =
-            "MESSAGE = ************SamplingSeq IN, IN-Content-Type = application/json, IN-Test-Header-Field = TestHeaderValue";
-
     private final SimpleHttpClient httpClient = new SimpleHttpClient();
+
     private final Map<String, String> headers = new HashMap<String, String>(1);
+
     private final String payload =  "{\n" +
                                     "  \"email\" : \"jms@yomail.com\",\n" +
                                     "  \"firstName\" : \"Jms\",\n" +
@@ -52,35 +55,65 @@ public class JDBCMessageStoreProcRESTTestCase extends ESBIntegrationTest{
 
     private LogViewerClient logViewer;
 
-    private H2DataBaseManager h2;
+    private static final String logLine0 =
+            "MESSAGE = ************RESTProxy IN, IN-Content-Type = application/json, IN-Test-Header-Field = TestHeaderValue";
+    private static final String logLine1 =
+            "MESSAGE = ************SamplingSeq IN, IN-Content-Type = application/json, IN-Test-Header-Field = TestHeaderValue";
+
+    private final String MYSQL_JAR = "mysql-connector-java-5.1.6.jar";
+    private ServerConfigurationManager serverConfigurationManager;
+    private MySqlDatabaseManager mySqlDatabaseManager;
+
+    private String JDBC_URL;
+    private String DB_USER;
+    private String DB_PASSWORD;
+    private String DATASOURCE_NAME;
+    private String JDBC_DRIVER;
 
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
         super.init();
+        AutomationContext automationContext = new AutomationContext();
+        DATASOURCE_NAME = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_NAME);
+        DB_PASSWORD = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_DB_PASSWORD);
+        JDBC_URL = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_URL);
+        DB_USER = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_DB_USER_NAME);
+        JDBC_DRIVER = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_DRIVER_CLASS_NAME);
+        serverConfigurationManager = new ServerConfigurationManager(context);
+        copyJDBCDriverToClassPath();
+        mySqlDatabaseManager = new MySqlDatabaseManager(JDBC_URL, DB_USER, "");// TODO: change here
+        mySqlDatabaseManager.executeUpdate("DROP DATABASE IF EXISTS WSO2SampleDBForAutomation");
+
+        super.init();
+
         headers.put("Test-Header-Field", "TestHeaderValue");
 
-        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jdbc/JDBCMessageStoreREST.xml");
-
-        h2 = new H2DataBaseManager("jdbc:h2:~/test", "sa", "");
-
-        h2.execute("CREATE TABLE IF NOT EXISTS jdbc_store_table(\n" +
-                   "indexId BIGINT( 20 ) NOT NULL auto_increment ,\n" +
-                   "msg_id VARCHAR( 200 ) NOT NULL ,\n" +
-                   "message BLOB NOT NULL, \n" +
-                   "PRIMARY KEY ( indexId )\n" +
-                   ")");
-        h2.disconnect();
-
-        updateESBConfiguration(synapse);
-        Thread.sleep(1000);
         logViewer = new LogViewerClient(contextUrls.getBackEndUrl(),getSessionCookie());
     }
 
-    @Test(groups = {"wso2.esb"}, description = "JDBC Message store support for RESTful services.")
+
+    @BeforeMethod(alwaysRun = true)
+    public void createDatabase() throws SQLException {
+        mySqlDatabaseManager.executeUpdate("DROP DATABASE IF EXISTS WSO2SampleDBForAutomation");
+        mySqlDatabaseManager.executeUpdate("Create DATABASE WSO2SampleDBForAutomation");
+        mySqlDatabaseManager.executeUpdate("USE WSO2SampleDBForAutomation");
+        mySqlDatabaseManager.executeUpdate("CREATE TABLE IF NOT EXISTS jdbc_store_table(\n" +
+                                           "indexId BIGINT( 20 ) NOT NULL auto_increment ,\n" +
+                                           "msg_id VARCHAR( 200 ) NOT NULL ,\n" +
+                                           "message BLOB NOT NULL, \n" +
+                                           "PRIMARY KEY ( indexId )\n" +
+                                           ")");
+
+    }
+
+    @Test(groups = {"wso2.esb"}, description = "JDBC Message store support for RESTful services." )
     public void testJMSMessageStoreAndProcessor() throws Exception {
+        OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jdbc/JDBCMessageStoreREST.xml");
+        updateESBConfiguration(synapse);
+
         HttpResponse response = httpClient.doPost(url, headers, payload, "application/json");
-        Thread.sleep(10000);
         assertEquals(response.getStatusLine().getStatusCode(), 202);
+
         LogEvent[] logs = logViewer.getAllSystemLogs();
         int i = 1;
         for (LogEvent log : logs) {
@@ -92,9 +125,7 @@ public class JDBCMessageStoreProcRESTTestCase extends ESBIntegrationTest{
             }
         }
 
-        Thread.sleep(3000);
-/* Sampling processor always get deactivated due to unknown reason */
-        if (i == 3) {
+        if (i == 2) {
             Assert.assertTrue(true);
         } else {
             Assert.assertTrue(false);
@@ -103,8 +134,24 @@ public class JDBCMessageStoreProcRESTTestCase extends ESBIntegrationTest{
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
-        h2 = new H2DataBaseManager("jdbc:h2:~/test", "sa", "");
-        h2.executeUpdate("DROP TABLE jdbc_store_table");
+        try {
+            mySqlDatabaseManager.executeUpdate("DROP DATABASE WSO2SampleDBForAutomation");
+        } finally {
+            mySqlDatabaseManager.disconnect();
+        }
+
         super.cleanup();
+        super.init();
+        loadSampleESBConfiguration(0);
+        serverConfigurationManager.removeFromComponentLib(MYSQL_JAR);
+        serverConfigurationManager.restartGracefully();
+    }
+
+    private void copyJDBCDriverToClassPath() throws Exception {
+        File jarFile;
+        jarFile = new File(getClass().getResource("/artifacts/ESB/jar/" + MYSQL_JAR + "").getPath());
+        System.out.println(jarFile.getName());
+        serverConfigurationManager.copyToComponentLib(jarFile);
+        serverConfigurationManager.restartGracefully();
     }
 }
