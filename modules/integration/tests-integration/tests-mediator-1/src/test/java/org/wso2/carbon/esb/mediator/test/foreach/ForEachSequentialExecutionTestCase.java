@@ -56,19 +56,19 @@ public class ForEachSequentialExecutionTestCase extends ESBIntegrationTest {
         int beforeLogSize = logViewer.getAllRemoteSystemLogs().length;
 
         String response = client.send(getMainSequenceURL(), createMultipleSymbolPayLoad(10),
-                                      "urn:getQuote");
+                "urn:getQuote");
         Assert.assertNotNull(response);
 
         LogEvent[] logs = logViewer.getAllRemoteSystemLogs();
         int afterLogSize = logs.length;
         int forEachCount = 0;
 
-	    // Verify logs to check that the order of symbols is same as in the payload. The symbols should be as SYM[1-10]
-	    // as in payload. Since loop iterates from the last log onwards, verifying whether the symbols are in SYM[10-1] order
-	    for (int i = (afterLogSize - beforeLogSize - 1); i >= 0; i--) {
+        // Verify logs to check that the order of symbols is same as in the payload. The symbols should be as SYM[1-10]
+        // as in payload. Since loop iterates from the last log onwards, verifying whether the symbols are in SYM[10-1] order
+        for (int i = (afterLogSize - beforeLogSize - 1); i >= 0; i--) {
             String message = logs[i].getMessage();
             if (message.contains("foreach = in")) {
-	            if (!message.contains("SYM" + forEachCount)) {
+                if (!message.contains("SYM" + forEachCount)) {
                     Assert.fail("Incorrect message entered ForEach scope. Could not find symbol SYM" + forEachCount + " Found : " + message);
                 }
                 forEachCount++;
@@ -79,22 +79,22 @@ public class ForEachSequentialExecutionTestCase extends ESBIntegrationTest {
 
     }
 
-	private OMElement createMultipleSymbolPayLoad(int iterations) {
-		SOAPFactory fac = OMAbstractFactory.getSOAP11Factory();
-		OMNamespace omNs = fac.createOMNamespace("http://services.samples", "ns");
-		OMElement method = fac.createOMElement("getQuote", omNs);
+    private OMElement createMultipleSymbolPayLoad(int iterations) {
+        SOAPFactory fac = OMAbstractFactory.getSOAP11Factory();
+        OMNamespace omNs = fac.createOMNamespace("http://services.samples", "ns");
+        OMElement method = fac.createOMElement("getQuote", omNs);
 
-		for (int i = 0; i < iterations; i++) {
-			OMElement chkPrice = fac.createOMElement("CheckPriceRequest", omNs);
-			OMElement code = fac.createOMElement("Code", omNs);
-			chkPrice.addChild(code);
-			code.setText("SYM" + i);
-			method.addChild(chkPrice);
-		}
-		return method;
-	}
+        for (int i = 0; i < iterations; i++) {
+            OMElement chkPrice = fac.createOMElement("CheckPriceRequest", omNs);
+            OMElement code = fac.createOMElement("Code", omNs);
+            chkPrice.addChild(code);
+            code.setText("SYM" + i);
+            method.addChild(chkPrice);
+        }
+        return method;
+    }
 
-	@AfterClass
+    @AfterClass
     public void close() throws Exception {
         client = null;
         super.cleanup();

@@ -54,7 +54,7 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
         for (int i = 0; i < 5; i++) {
             response =
                     axis2Client.sendCustomQuoteRequest(getMainSequenceURL(),
-                                                       null, "IBM" + symbol);
+                            null, "IBM" + symbol);
             Assert.assertNotNull(response);
             Assert.assertTrue(response.toString().contains("IBM"), "Incorrect symbol in response");
             response = null;
@@ -75,7 +75,7 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
         }
 
         Assert.assertEquals(forEachCount, 5,
-                            "Count of messages entered ForEach scope is incorrect");
+                "Count of messages entered ForEach scope is incorrect");
 
     }
 
@@ -87,7 +87,7 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
         for (int i = 0; i < 10; i++) {
             response =
                     axis2Client.sendCustomQuoteRequest(getMainSequenceURL(),
-                                                       null, "SUN" + symbol);
+                            null, "SUN" + symbol);
             Assert.assertNotNull(response);
             Assert.assertTrue(response.toString().contains("SUN"), "Incorrect symbol in response");
             response = null;
@@ -108,7 +108,7 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
         }
 
         Assert.assertEquals(forEachCount, 10,
-                            "Count of messages entered ForEach scope is incorrect");
+                "Count of messages entered ForEach scope is incorrect");
     }
 
     @Test(groups = "wso2.esb", description = "Tests large message 3MB")
@@ -120,7 +120,7 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
         for (int i = 0; i < 1; i++) {
             response =
                     axis2Client.sendCustomQuoteRequest(getMainSequenceURL(),
-                                                       null, "MSFT" + symbol2);
+                            null, "MSFT" + symbol2);
             Assert.assertNotNull(response);
             Assert.assertTrue(response.toString().contains("MSFT"), "Incorrect symbol in response");
             response = null;
@@ -141,7 +141,7 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
         }
 
         Assert.assertEquals(forEachCount, 1,
-                            "Count of messages entered ForEach scope is incorrect");
+                "Count of messages entered ForEach scope is incorrect");
     }
 
     @AfterClass

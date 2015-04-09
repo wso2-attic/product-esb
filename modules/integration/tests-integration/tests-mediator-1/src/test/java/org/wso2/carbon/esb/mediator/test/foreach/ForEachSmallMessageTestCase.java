@@ -54,7 +54,7 @@ public class ForEachSmallMessageTestCase extends ESBIntegrationTest {
         OMElement response = null;
         for (int i = 0; i < 20; i++) {
             response = axis2Client.sendCustomQuoteRequest(getMainSequenceURL(),
-                                                          null, "IBM" + symbol);
+                    null, "IBM" + symbol);
             Assert.assertNotNull(response);
             Assert.assertTrue(response.toString().contains("IBM"), "Incorrect symbol in response");
             response = null;
@@ -75,7 +75,7 @@ public class ForEachSmallMessageTestCase extends ESBIntegrationTest {
         }
 
         Assert.assertEquals(forEachCount, 20,
-                            "Count of messages entered ForEach scope is incorrect");
+                "Count of messages entered ForEach scope is incorrect");
     }
 
     @Test(groups = "wso2.esb", description = "Tests small message in small number ~100")
@@ -86,7 +86,7 @@ public class ForEachSmallMessageTestCase extends ESBIntegrationTest {
         for (int i = 0; i < 100; i++) {
             response =
                     axis2Client.sendCustomQuoteRequest(getMainSequenceURL(),
-                                                       null, "MSFT" + symbol);
+                            null, "MSFT" + symbol);
             Assert.assertNotNull(response);
             Assert.assertTrue(response.toString().contains("MSFT"), "Incorrect symbol in response. Could not find symbol MSFT ..");
             response = null;
@@ -107,7 +107,7 @@ public class ForEachSmallMessageTestCase extends ESBIntegrationTest {
         }
 
         Assert.assertEquals(forEachCount, 100,
-                            "Count of messages entered ForEach scope is incorrect");
+                "Count of messages entered ForEach scope is incorrect");
     }
 
     @AfterClass

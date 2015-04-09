@@ -79,7 +79,7 @@ public class ForEachWithIterateTestCase extends ESBIntegrationTest {
         OMElement soapBody = envelope.getFirstElement();
         Iterator iterator =
                 soapBody.getChildrenWithName(new QName("http://services.samples",
-                                                       "getQuoteResponse"));
+                        "getQuoteResponse"));
         int i = 0;
         while (iterator.hasNext()) {
             i++;
@@ -121,7 +121,7 @@ public class ForEachWithIterateTestCase extends ESBIntegrationTest {
         OMElement soapBody = envelope.getFirstElement();
         Iterator iterator =
                 soapBody.getChildrenWithName(new QName("http://services.samples",
-                                                       "getQuoteResponse"));
+                        "getQuoteResponse"));
         int i = 0;
         while (iterator.hasNext()) {
             i++;

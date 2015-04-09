@@ -45,8 +45,8 @@ public class Sample18TestCase extends ESBIntegrationTest {
         loadSampleESBConfiguration(18);
     }
 
-    @Test(groups = { "wso2.esb" },
-          description = "Transforming a Message Using ForEachMediator")
+    @Test(groups = {"wso2.esb"},
+            description = "Transforming a Message Using ForEachMediator")
     public void testTransformWithForEachMediator() throws Exception {
 
         LogViewerClient logViewer =
@@ -55,15 +55,15 @@ public class Sample18TestCase extends ESBIntegrationTest {
 
         String request =
                 "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:m0=\"http://services.samples\" xmlns:xsd=\"http://services.samples/xsd\">\n" +
-                "    <soap:Header/>\n" +
-                "    <soap:Body>\n" +
-                "        <m0:getQuote>\n" +
-                "            <m0:request><m0:symbol>IBM</m0:symbol></m0:request>\n" +
-                "            <m0:request><m0:symbol>WSO2</m0:symbol></m0:request>\n" +
-                "            <m0:request><m0:symbol>MSFT</m0:symbol></m0:request>\n" +
-                "        </m0:getQuote>\n" +
-                "    </soap:Body>\n" +
-                "</soap:Envelope>\n";
+                        "    <soap:Header/>\n" +
+                        "    <soap:Body>\n" +
+                        "        <m0:getQuote>\n" +
+                        "            <m0:request><m0:symbol>IBM</m0:symbol></m0:request>\n" +
+                        "            <m0:request><m0:symbol>WSO2</m0:symbol></m0:request>\n" +
+                        "            <m0:request><m0:symbol>MSFT</m0:symbol></m0:request>\n" +
+                        "        </m0:getQuote>\n" +
+                        "    </soap:Body>\n" +
+                        "</soap:Envelope>\n";
         sendRequest(getMainSequenceURL(), request);
 
         LogEvent[] getLogsInfo = logViewer.getAllRemoteSystemLogs();
@@ -85,14 +85,14 @@ public class Sample18TestCase extends ESBIntegrationTest {
                     String quote = payload.substring(start, end);
 
                     assertTrue(quote.contains(
-                                       "<m0:checkPriceRequest><m0:code>IBM</m0:code></m0:checkPriceRequest>"),
-                               "IBM Element not found");
+                                    "<m0:checkPriceRequest><m0:code>IBM</m0:code></m0:checkPriceRequest>"),
+                            "IBM Element not found");
                     assertTrue(quote.contains(
-                                       "<m0:checkPriceRequest><m0:code>WSO2</m0:code></m0:checkPriceRequest>"),
-                               "WSO2 Element not found");
+                                    "<m0:checkPriceRequest><m0:code>WSO2</m0:code></m0:checkPriceRequest>"),
+                            "WSO2 Element not found");
                     assertTrue(quote.contains(
-                                       "<m0:checkPriceRequest><m0:code>MSFT</m0:code></m0:checkPriceRequest>"),
-                               "MSTF Element not found");
+                                    "<m0:checkPriceRequest><m0:code>MSFT</m0:code></m0:checkPriceRequest>"),
+                            "MSTF Element not found");
 
                 }
             }
@@ -111,7 +111,7 @@ public class Sample18TestCase extends ESBIntegrationTest {
         connection.setDoOutput(true);
         connection.setRequestProperty("Accept-Charset", charset);
         connection.setRequestProperty("Content-Type",
-                                      "application/xml;charset=" + charset);
+                "application/xml;charset=" + charset);
         OutputStream output = null;
         try {
             output = connection.getOutputStream();
