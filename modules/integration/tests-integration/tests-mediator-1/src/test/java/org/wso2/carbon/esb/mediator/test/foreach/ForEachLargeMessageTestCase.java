@@ -27,7 +27,9 @@ import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.common.FixedSizeSymbolGenerator;
 
-/* Tests sending different number of large messages through foreach mediator */
+/**
+ * Tests sending different number of large messages through foreach mediator
+ */
 
 public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
 
@@ -54,7 +56,7 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
                     axis2Client.sendCustomQuoteRequest(getMainSequenceURL(),
                                                        null, "IBM" + symbol);
             Assert.assertNotNull(response);
-            Assert.assertTrue(response.toString().contains("IBM"));
+            Assert.assertTrue(response.toString().contains("IBM"), "Incorrect symbol in response");
             response = null;
         }
 
@@ -66,7 +68,7 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
             String message = logs[i].getMessage();
             if (message.contains("foreach = in")) {
                 if (!message.contains("IBM")) {
-                    Assert.fail("Incorrect message entered ForEach scope");
+                    Assert.fail("Incorrect message entered ForEach scope. Could not find symbol IBM ..");
                 }
                 forEachCount++;
             }
@@ -87,7 +89,7 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
                     axis2Client.sendCustomQuoteRequest(getMainSequenceURL(),
                                                        null, "SUN" + symbol);
             Assert.assertNotNull(response);
-            Assert.assertTrue(response.toString().contains("SUN"));
+            Assert.assertTrue(response.toString().contains("SUN"), "Incorrect symbol in response");
             response = null;
         }
 
@@ -99,7 +101,7 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
             String message = logs[i].getMessage();
             if (message.contains("foreach = in")) {
                 if (!message.contains("SUN")) {
-                    Assert.fail("Incorrect message entered ForEach scope");
+                    Assert.fail("Incorrect message entered ForEach scope. Could not find symbol SUN ..");
                 }
                 forEachCount++;
             }
@@ -120,7 +122,7 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
                     axis2Client.sendCustomQuoteRequest(getMainSequenceURL(),
                                                        null, "MSFT" + symbol2);
             Assert.assertNotNull(response);
-            Assert.assertTrue(response.toString().contains("MSFT"));
+            Assert.assertTrue(response.toString().contains("MSFT"), "Incorrect symbol in response");
             response = null;
         }
 
@@ -132,7 +134,7 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
             String message = logs[i].getMessage();
             if (message.contains("foreach = in")) {
                 if (!message.contains("MSFT")) {
-                    Assert.fail("Incorrect message entered ForEach scope");
+                    Assert.fail("Incorrect message entered ForEach scope. Could not find symbol MSFT ..");
                 }
                 forEachCount++;
             }

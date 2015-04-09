@@ -66,7 +66,7 @@ public class Sample18TestCase extends ESBIntegrationTest {
                 "</soap:Envelope>\n";
         sendRequest(getMainSequenceURL(), request);
 
-        LogEvent[] getLogsInfo = logViewer.getAllSystemLogs();
+        LogEvent[] getLogsInfo = logViewer.getAllRemoteSystemLogs();
         for (LogEvent event : getLogsInfo) {
 
             if (event.getMessage().contains("<m0:getQuote>")) {

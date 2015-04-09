@@ -27,7 +27,9 @@ import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.common.FixedSizeSymbolGenerator;
 
-/* Tests sending different number of small messages through foreach mediator */
+/**
+ * Tests sending different number of small messages through foreach mediator
+ */
 
 public class ForEachSmallMessageTestCase extends ESBIntegrationTest {
 
@@ -45,8 +47,7 @@ public class ForEachSmallMessageTestCase extends ESBIntegrationTest {
 
     }
 
-    @Test(groups = "wso2.esb", description = "Tests small message in small number ~20",
-          enabled = true)
+    @Test(groups = "wso2.esb", description = "Tests small message in small number ~20")
     public void testSmallNumbers() throws Exception {
         int beforeLogSize = logViewer.getAllRemoteSystemLogs().length;
 
@@ -55,7 +56,7 @@ public class ForEachSmallMessageTestCase extends ESBIntegrationTest {
             response = axis2Client.sendCustomQuoteRequest(getMainSequenceURL(),
                                                           null, "IBM" + symbol);
             Assert.assertNotNull(response);
-            Assert.assertTrue(response.toString().contains("IBM"));
+            Assert.assertTrue(response.toString().contains("IBM"), "Incorrect symbol in response");
             response = null;
         }
 
@@ -67,7 +68,7 @@ public class ForEachSmallMessageTestCase extends ESBIntegrationTest {
             String message = logs[i].getMessage();
             if (message.contains("foreach = in")) {
                 if (!message.contains("IBM")) {
-                    Assert.fail("Incorrect message entered ForEach scope");
+                    Assert.fail("Incorrect message entered ForEach scope. Could not find symbol IBM ..");
                 }
                 forEachCount++;
             }
@@ -77,8 +78,7 @@ public class ForEachSmallMessageTestCase extends ESBIntegrationTest {
                             "Count of messages entered ForEach scope is incorrect");
     }
 
-    @Test(groups = "wso2.esb", description = "Tests small message in small number ~100",
-          enabled = true)
+    @Test(groups = "wso2.esb", description = "Tests small message in small number ~100")
     public void testLargeNumbers() throws Exception {
         int beforeLogSize = logViewer.getAllRemoteSystemLogs().length;
 
@@ -88,7 +88,7 @@ public class ForEachSmallMessageTestCase extends ESBIntegrationTest {
                     axis2Client.sendCustomQuoteRequest(getMainSequenceURL(),
                                                        null, "MSFT" + symbol);
             Assert.assertNotNull(response);
-            Assert.assertTrue(response.toString().contains("MSFT"));
+            Assert.assertTrue(response.toString().contains("MSFT"), "Incorrect symbol in response. Could not find symbol MSFT ..");
             response = null;
         }
 

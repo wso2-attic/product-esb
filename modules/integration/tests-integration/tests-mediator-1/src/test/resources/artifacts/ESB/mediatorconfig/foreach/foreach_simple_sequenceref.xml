@@ -48,10 +48,7 @@
         </log>
     </sequence>
 	<sequence name="iterateMessages">
-        <foreach expression="//ns:CheckPriceRequest" xmlns:ns="http://services.samples">
-            <target sequence = "foreachseq">
-            </target>
-        </foreach>
+        <foreach expression="//ns:CheckPriceRequest" xmlns:ns="http://services.samples" sequence = "foreachseq"/>
 		<iterate id="iterate1" expression="//m0:getQuote/m0:request"
 			preservePayload="true" attachPath="//m0:getQuote" xmlns:m0="http://services.samples" >
 			<target>
