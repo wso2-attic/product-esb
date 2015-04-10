@@ -300,5 +300,14 @@
             <scope>compile</scope>
         </dependency>-->
     </dependencies>
-
+    <dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.wso2.carbon.automation</groupId>
+            <artifactId>org.wso2.carbon.automation.test.utils</artifactId>
+            <version>4.3.2-SNAPSHOT</version>
+            <!--<scope>test</scope>-->
+        </dependency>
+            </dependencies>
+    </dependencyManagement>
 </project>

@@ -8,7 +8,6 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestManagerListener"/>
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestReportListener"/>
     </listeners>
-<!--
     <test name="Throttle-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.throttle"/>
@@ -103,22 +102,21 @@
             <package name="org.wso2.carbon.esb.mediator.test.drop"/>
         </packages>
     </test>
--->
 
     <test name="Message-Store-Test" preserve-order="true" verbose="2">
-        <!--<packages>
-            <package name="org.wso2.carbon.esb.message.store.test"/>
-        </packages>-->
         <packages>
-            <package name="org.wso2.carbon.esb.message.store.jdbc.test"/>
+            <package name="org.wso2.carbon.esb.message.store.test"/>
         </packages>
+        <!--<packages>
+            <package name="org.wso2.carbon.esb.message.store.jdbc.test"/>
+        </packages>-->
     </test>
 
- <!--   <test name="Enrich-mediator-Test" preserve-order="true" verbose="2">
+    <test name="Enrich-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.enrich"/>
         </packages>
-    </test>-->
+    </test>
 
 
     <!--
@@ -210,7 +208,6 @@
     </test>
 -->
 
-<!--
     <test name="Filter-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.filter"/>
@@ -294,7 +291,6 @@
             <package name="org.wso2.carbon.esb.mediator.test.router"/>
         </packages>
     </test>
--->
 
     <!--
     -->

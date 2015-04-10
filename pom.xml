@@ -37,11 +37,11 @@
         <version>1</version>
     </parent>
     <modules>
-       <!-- <module>modules/styles</module>
+        <module>modules/styles</module>
         <module>modules/samples</module>
         <module>modules/features</module>
         <module>modules/p2-profile</module>
-        <module>modules/distribution</module>-->
+        <module>modules/distribution</module>
         <!--module>modules/org.wso2.stratos.esb.login.ui</module-->
         <module>modules/integration</module>
     </modules>
@@ -1162,8 +1162,8 @@
 
 
         <!-- Automation Framework versions -->
-        <automation.framework.version>4.3.1</automation.framework.version>
-        <automation.framework.utils.version>4.3.0</automation.framework.utils.version>
+        <automation.framework.version>4.3.1</automation.framework.version><!-- 4.3.1 -->
+        <automation.framework.utils.version>4.3.0</automation.framework.utils.version><!-- 4.3.0 --><!-- 4.3.2-SNAPSHOT -->
         <carbon.integration.framework.version>4.2.0</carbon.integration.framework.version>
 
         <operadriver.version>0.8.1</operadriver.version>

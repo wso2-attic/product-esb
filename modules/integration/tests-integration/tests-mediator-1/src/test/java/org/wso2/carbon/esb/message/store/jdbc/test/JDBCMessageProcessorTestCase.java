@@ -59,7 +59,7 @@ public class JDBCMessageProcessorTestCase extends ESBIntegrationTest {
         JDBC_DRIVER = automationContext.getConfigurationValue(XPathConstants.DATA_SOURCE_DRIVER_CLASS_NAME);
         serverConfigurationManager = new ServerConfigurationManager(context);
         copyJDBCDriverToClassPath();
-        mySqlDatabaseManager = new MySqlDatabaseManager(JDBC_URL, DB_USER, "");// TODO: change here
+        mySqlDatabaseManager = new MySqlDatabaseManager(JDBC_URL, DB_USER, DB_PASSWORD);
         mySqlDatabaseManager.executeUpdate("DROP DATABASE IF EXISTS WSO2SampleDBForAutomation");
 
         super.init();
