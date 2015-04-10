@@ -35,7 +35,7 @@ public class Soap12FaultCodeMustUnderstandTestCase extends ESBIntegrationTest {
 
 
     @Test(groups = {"wso2.esb"}, description = "Creating SOAP1.2 fault code MustUnderstand")
-    public void testSOAP12FaultCodeMustUnderstand() throws AxisFault {
+    public void     testSOAP12FaultCodeMustUnderstand() throws AxisFault {
 
         try {
             axis2Client.sendSimpleStockQuoteSoap12(

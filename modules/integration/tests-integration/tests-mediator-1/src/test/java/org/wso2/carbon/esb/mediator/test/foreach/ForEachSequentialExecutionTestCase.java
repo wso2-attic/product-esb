@@ -47,7 +47,7 @@ public class ForEachSequentialExecutionTestCase extends ESBIntegrationTest {
         client = new IterateClient();
     }
 
-    @Test(groups = "wso2.esb", description = "Test foreach inline sequence to transform payload, passed to endpoint using iterate and aggregate mediators")
+    @Test(groups = "wso2.esb", description = "Test foreach inline sequence to sequentially transform payload")
     public void testSequentialExecution() throws Exception {
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/mediatorconfig/foreach/foreach_simple.xml");
