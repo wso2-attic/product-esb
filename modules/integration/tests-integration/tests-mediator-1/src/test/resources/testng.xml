@@ -106,10 +106,10 @@
     <test name="Message-Store-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.message.store.test"/>
+            <!-- The following test package is commented, since it needs
+                org.wso2.carbon.automation.test.utils - 4.3.2-SNAPSHOT
+            <package name="org.wso2.carbon.esb.message.store.jdbc.test"/>-->
         </packages>
-        <!--<packages>
-            <package name="org.wso2.carbon.esb.message.store.jdbc.test"/>
-        </packages>-->
     </test>
 
     <test name="Enrich-mediator-Test" preserve-order="true" verbose="2">
