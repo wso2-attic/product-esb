@@ -39,19 +39,13 @@ public class Sample16TestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void uploadSynapseConfig() throws Exception {
         super.init();
-        File sourceFile = new File(getESBResourceLocation() + File.separator +
-                                   "samples" + File.separator + "synapse_sample_16.xml");
-
-        SynapseConfigAdminClient synapseConfigAdminClient =
-            new SynapseConfigAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
-        oldSynapseConfig = synapseConfigAdminClient.getConfiguration();
-        synapseConfigAdminClient.updateConfiguration(sourceFile);
+        loadSampleESBConfiguration(16);
     }
 
     @Test(groups = { "wso2.esb" }, description = "Dynamic and Static Registry Keys")
     public void testDynamicAndStaticRegistryKeys() throws Exception {
         OMElement response = axis2Client.sendCustomQuoteRequest(getMainSequenceURL()
-            , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
+                , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         assertNotNull(response, "Response message is null");
         assertEquals(response.getLocalName(), "CheckPriceResponse", "CheckPriceResponse not match");
         assertTrue(response.toString().contains("Price"), "No price tag in response");
@@ -65,9 +59,5 @@ public class Sample16TestCase extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
         super.cleanup();
-
-        SynapseConfigAdminClient synapseConfigAdminClient =
-            new SynapseConfigAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
-        synapseConfigAdminClient.updateConfiguration(oldSynapseConfig);
     }
 }
