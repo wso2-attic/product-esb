@@ -1162,8 +1162,8 @@
 
 
         <!-- Automation Framework versions -->
-        <automation.framework.version>4.3.1</automation.framework.version><!-- 4.3.1 -->
-        <automation.framework.utils.version>4.3.0</automation.framework.utils.version><!-- 4.3.0 --><!-- 4.3.2-SNAPSHOT -->
+        <automation.framework.version>4.3.1</automation.framework.version>
+        <automation.framework.utils.version>4.3.0</automation.framework.utils.version>
         <carbon.integration.framework.version>4.2.0</carbon.integration.framework.version>
 
         <operadriver.version>0.8.1</operadriver.version>
