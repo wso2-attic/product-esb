@@ -214,5 +214,29 @@ public class FileManager {
         File jarFile = new File(filePathWithFileName);
         return !jarFile.isDirectory() && jarFile.delete();
     }
+
+    public static byte[] getBytesFromFile(String fileName) throws IOException {
+
+        File file = new File(fileName);
+        InputStream is = new FileInputStream(file);
+        long length = file.length();
+
+        byte[] bytes = new byte[(int) length];
+
+        int offset = 0;
+        int numRead = 0;
+        while (offset < bytes.length
+                && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
+            offset += numRead;
+        }
+
+        // Ensure all the bytes have been read in
+        if (offset < bytes.length) {
+            throw new IOException("Could not completely read file " + file.getName());
+        }
+
+        is.close();
+        return bytes;
+    }
 }
 

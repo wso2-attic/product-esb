@@ -26,9 +26,9 @@ import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
+import org.wso2.carbon.utils.ServerConstants;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
-import org.wso2.carbon.utils.ServerConstants;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,15 +50,15 @@ public class ConfiguringNhttpAccessLogLocationTestCase extends ESBIntegrationTes
         serverConfigurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
         String nhttpFile = /*ProductConstant.getResourceLocations(/*ProductConstant.ESB_SERVER_NAME)*/FrameworkPathUtil.getSystemResourceLocation()  + "artifacts" + separator +
                 "ESB" +separator + "synapseconfig" + separator + "nhttp_transport" + separator
-                           + "nhttp.properties";
+                + "nhttp.properties";
 
         File srcFile = new File(nhttpFile);
         String carbonHome = System.getProperty(ServerConstants.CARBON_HOME);
         nhttpLogDir = carbonHome + File.separator + "repository" + File.separator + "logs"
-                      + File.separator + "nhttpLogs";
+                + File.separator + "nhttpLogs";
 
         File log4jProperties = new File(carbonHome + File.separator + "repository" + File.separator + "conf" +
-                                        File.separator + "log4j.properties");
+                File.separator + "log4j.properties");
 
         String propertyName = "nhttp.log.directory";
 
@@ -66,6 +66,9 @@ public class ConfiguringNhttpAccessLogLocationTestCase extends ESBIntegrationTes
 
         applyProperty(srcFile, propertyName, nhttpLogDir);
         applyProperty(log4jProperties, "log4j.logger.org.apache.synapse.transport.http.access", "INFO");
+        serverConfigurationManager.applyConfigurationWithoutRestart(new File(getClass()
+                .getResource("/artifacts/ESB/nhttp/transport/axis2.xml").getPath()));
+
         serverConfigurationManager.restartGracefully();
 
         super.init();
@@ -84,9 +87,9 @@ public class ConfiguringNhttpAccessLogLocationTestCase extends ESBIntegrationTes
     public void testNhttpAccessLogLocation() throws Exception {
 
         axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("NhttpLogsTestProxy"),
-                                                getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
+                getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         Assert.assertTrue(new File(nhttpLogDir).listFiles().length > 0,
-                          "nhttp access logs were not written to the configured directory " + nhttpLogDir);
+                "nhttp access logs were not written to the configured directory " + nhttpLogDir);
     }
 
     /*
@@ -95,7 +98,7 @@ public class ConfiguringNhttpAccessLogLocationTestCase extends ESBIntegrationTes
     private void createNewDir(String path) throws IOException {
         File dir = new File(path);
         if (dir.exists()) {
-             dir.delete();
+            dir.delete();
         } else {
             dir.mkdir();
         }

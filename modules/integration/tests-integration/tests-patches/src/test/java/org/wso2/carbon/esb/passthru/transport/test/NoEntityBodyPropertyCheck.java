@@ -41,15 +41,15 @@ public class NoEntityBodyPropertyCheck extends ESBIntegrationTest {
     }
 
 
-    @Test(groups = "wso2.esb", description = " Checking NO_ENTITY_BODY_PROPERTY" ,enabled=true)
+    @Test(groups = "wso2.esb", description = " Checking NO_ENTITY_BODY_PROPERTY", enabled = true)
     public void testNoEntityBodyPropertyTestCase() throws Exception {
         String payload =
-                "      <Person>" +
-                        "         <ID>12999E105</ID>" +
-                        "      </Person>";
+                   "      <Person>" +
+                   "         <ID>12999E105</ID>" +
+                   "      </Person>";
 
         HttpResponse response = httpClient.doPost("http://localhost:8280/services/Test",
-                null, payload, "application/xml");
+                                                  null, payload, "application/xml");
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         response.getEntity().writeTo(bos);
         String exPayload = new String(bos.toByteArray());

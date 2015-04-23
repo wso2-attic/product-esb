@@ -18,7 +18,11 @@
 
     <sequence name="main" onError="myFaultHandler">
         <in>
-            <send/>
+            <send>
+                <endpoint>
+                    <address uri="http://localhost:9020/services/NonExistingService"/>
+                </endpoint>
+            </send>
         </in>
 
         <out>

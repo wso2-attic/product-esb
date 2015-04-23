@@ -45,7 +45,7 @@ public class LogMediatorLevelTest extends ESBIntegrationTest {
     }
 
 
-    @Test(groups = "wso2.esb", description = "Tests level log", enabled = false)
+    @Test(groups = "wso2.esb", description = "Tests level log")
     public void testSendingToDefinedEndpoint() throws Exception {
 
         logAdmin.updateLoggerData("org.apache.synapse", LoggingAdminClient.logLevel.DEBUG.name(), true, false);

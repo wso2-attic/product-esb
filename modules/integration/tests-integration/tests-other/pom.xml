@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-integration-tests</artifactId>
-        <version>4.9.0-SNAPSHOT</version>
+        <version>4.9.0-M8-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -19,10 +19,10 @@
                 <version>2.12.4</version>
                 <inherited>false</inherited>
                 <configuration>
-                    <!--<argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m -Xmx1024m -XX:PermSize=256m-->
-                    <!---XX:MaxPermSize=512m -Xdebug -Xnoagent -Djava.compiler=NONE-->
-                    <!---Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006-->
-                    <!--</argLine>-->
+                    <!--<argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m -Xmx1024m -XX:PermSize=256m
+                        -XX:MaxPermSize=512m -Xdebug -Xnoagent -Djava.compiler=NONE
+                        -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006
+                    </argLine>-->
                     <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m</argLine>
                     <testFailureIgnore>true</testFailureIgnore>
                     <disableXmlReport>false</disableXmlReport>
@@ -50,7 +50,7 @@
                         <sec.verifier.dir>${basedir}/target/security-verifier/</sec.verifier.dir>
                         <maven.test.haltafterfailure>false</maven.test.haltafterfailure>
                         <carbon.zip>
-                            ${basedir}/../../../distribution/target/wso2esb-${project.version}.zip
+                            ${basedir}/../../../distribution/target/wso2esb-${product.esb.version}.zip
                         </carbon.zip>
                         <emma.home>${basedir}/target/emma</emma.home>
                         <instr.file>${basedir}/src/test/resources/instrumentation.txt</instr.file>
@@ -116,7 +116,7 @@
                                 <artifactItem>
                                     <groupId>org.wso2.esb</groupId>
                                     <artifactId>wso2esb</artifactId>
-                                    <version>${project.version}</version>
+                                    <version>${product.esb.version}</version>
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${basedir}/target/tobeCopied/</outputDirectory>
@@ -157,7 +157,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2esb-${project.version}/repository/resources/security/
+                                        ${basedir}/target/tobeCopied/wso2esb-${product.esb.version}/repository/resources/security/
                                     </directory>
                                     <includes>
                                         <include>**/*.jks</include>
@@ -178,7 +178,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2esb-${project.version}/repository/resources/security/
+                                        ${basedir}/target/tobeCopied/wso2esb-${product.esb.version}/repository/resources/security/
                                     </directory>
                                     <includes>
                                         <include>**/*.jks</include>
@@ -199,7 +199,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2esb-${project.version}/repository/samples/resources/security/
+                                        ${basedir}/target/tobeCopied/wso2esb-${product.esb.version}/repository/samples/resources/security/
                                     </directory>
                                     <includes>
                                         <include>**/*.jks</include>
@@ -220,7 +220,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2esb-${project.version}/repository/deployment/client/modules
+                                        ${basedir}/target/tobeCopied/wso2esb-${product.esb.version}/repository/deployment/client/modules
                                     </directory>
                                     <includes>
                                         <include>**/*.mar</include>
@@ -241,7 +241,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2esb-${project.version}/repository/samples/
+                                        ${basedir}/target/tobeCopied/wso2esb-${product.esb.version}/repository/samples/
                                     </directory>
                                     <includes>
                                         <include>**/*.xml</include>
@@ -258,10 +258,9 @@
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>admin-clients</artifactId>
-            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>org.wso2.carbon</groupId>
+                    <groupId>org.wso2.carbon.mediation</groupId>
                     <artifactId>org.wso2.carbon.rest.api</artifactId>
                 </exclusion>
             </exclusions>
@@ -270,10 +269,9 @@
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>integration-test-utils</artifactId>
-            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>org.wso2.carbon</groupId>
+                    <groupId>org.wso2.carbon.mediation</groupId>
                     <artifactId>org.wso2.carbon.rest.api</artifactId>
                 </exclusion>
             </exclusions>
@@ -281,12 +279,28 @@
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>service-samples</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.wso2.carbon</groupId>
+            <groupId>org.wso2.carbon.automationutils</groupId>
             <artifactId>org.wso2.carbon.integration.common.tests</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+        </dependency>
+<dependency>
+   <groupId>org.wso2.esb</groupId>
+    <artifactId>extensions</artifactId>
+</dependency>
     </dependencies>
 
 </project>

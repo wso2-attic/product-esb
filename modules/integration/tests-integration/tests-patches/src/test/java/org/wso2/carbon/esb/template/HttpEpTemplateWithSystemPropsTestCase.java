@@ -35,7 +35,6 @@ import org.wso2.esb.integration.common.utils.ESBTestCaseUtils;
 import org.wso2.esb.integration.common.utils.clients.stockquoteclient.StockQuoteClient;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -68,7 +67,7 @@ public class HttpEpTemplateWithSystemPropsTestCase {
 	}
 
 	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.ALL })
-	@Test(groups = { "wso2.esb" })
+	@Test(groups = { "wso2.esb" } , enabled = true)
 	public void testHttpEpTemplateWithSystemProps() throws AxisFault {
 		StockQuoteClient axis2Client = new StockQuoteClient();
 		OMElement response = axis2Client.sendSimpleStockQuoteRequestREST(API_URL, null, "WSO2");

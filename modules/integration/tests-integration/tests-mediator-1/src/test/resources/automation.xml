@@ -61,6 +61,12 @@
                below configuration at test run time
     -->
     <datasources>
+	<datasource name="dataServiceMysql">
+            <url>jdbc:mysql://localhost:3306</url>
+            <username>root</username>
+            <password>root123</password>
+            <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+        </datasource>
         <datasource name="dataService">
             <url>jdbc:h2:testDB</url>
             <username>wso2carbon</username>
@@ -72,7 +78,7 @@
             <username>wso2carbon</username>
             <password>wso2carbon</password>
             <driverClassName>org.h2.Driver</driverClassName>
-        </datasource>
+        </datasource>	
     </datasources>
     <security>
         <!--
@@ -269,6 +275,9 @@
                     <name>org.wso2.carbon.integration.common.extensions.carbonserver.CarbonServerExtension</name>
                     <!--<parameter name="-DportOffset" value="0" />-->
                     <!--<parameter name="cmdArg" value="debug 5005" />-->
+                </class>
+                <class>
+                    <name>org.wso2.carbon.integration.common.extensions.usermgt.UserPopulateExtension</name>
                 </class>
                 <class>
                     <name>org.wso2.esb.integration.common.extensions.axis2server.Axis2ServerExtension</name>

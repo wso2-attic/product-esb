@@ -75,6 +75,33 @@ public class SecureServiceClient {
 
     }
 
+    public OMElement sendSecuredStockQuoteRequest(User userInfo, String trpUrl, String symbol ,boolean teant) throws Exception {
+        boolean isTenant = teant;
+
+        String keyStorePath;
+        String userCertAlias;
+        String encryptionUser;
+        String keyStorePassword;
+
+        if (isTenant) {
+            keyStorePath = TestConfigurationProvider.getResourceLocation() + File.separator + "security"
+                           + File.separator + "keystore" + File.separator + "wso2carbon.jks";// need to include tenants certificate
+            userCertAlias = "wso2carbon";
+            encryptionUser = "wso2carbon";
+            keyStorePassword = "wso2carbon";
+
+        } else {
+            keyStorePath = TestConfigurationProvider.getResourceLocation() + File.separator + "keystores"
+                           + File.separator + "products" + File.separator + "wso2carbon.jks";
+            userCertAlias = "wso2carbon";
+            encryptionUser = "wso2carbon";
+            keyStorePassword = "wso2carbon";
+        }
+        return secureClient.sendReceive(userInfo.getUserName(), userInfo.getPassword(), trpUrl, "getQuote"
+                , createSimpleStockQuoteRequest(symbol), null,userCertAlias, encryptionUser, keyStorePath, keyStorePassword);
+
+    }
+
     private OMElement createSimpleStockQuoteRequest(String symbol) {
         OMFactory fac = OMAbstractFactory.getOMFactory();
         OMNamespace omNs = fac.createOMNamespace("http://services.samples", "ns");

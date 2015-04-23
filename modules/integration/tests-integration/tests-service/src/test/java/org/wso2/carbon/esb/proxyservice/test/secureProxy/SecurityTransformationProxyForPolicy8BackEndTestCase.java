@@ -67,7 +67,7 @@ public class SecurityTransformationProxyForPolicy8BackEndTestCase extends ESBInt
         }
 
     }
-
+/*
     @Test(groups = {"wso2.dss"}, description = "Provides Authentication. Clients have Username Tokens. Backend is secured using policy 8")
     public void securityPolicy1() throws Exception {
         final int policyId = 1;
@@ -357,5 +357,5 @@ public class SecurityTransformationProxyForPolicy8BackEndTestCase extends ESBInt
         isProxyDeployed(serviceName);
         applySecurity(serviceName, policy, getUserRole());
         return serviceName;
-    }
+    }*/
 }
