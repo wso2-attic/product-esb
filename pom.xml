@@ -1022,6 +1022,11 @@
                 <artifactId>andes-client</artifactId>
                 <version>${org.wso2.andes.client.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.maven</groupId>
+                <artifactId>carbon-p2-plugin</artifactId>
+                <version>${carbon.p2.plugin}}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.wso2.esb</groupId>
@@ -1102,6 +1107,8 @@
         <httpcore-nio.version>4.2.3.wso2v3</httpcore-nio.version>
         <rampart.wso2.version>1.6.1.wso2v12</rampart.wso2.version>
         <rampart.mar.version>1.6.1-wso2v12</rampart.mar.version>
+
+        <carbon.p2.plugin>1.5.4</carbon.p2.plugin>
 
 
         <!-- Carbon -->
