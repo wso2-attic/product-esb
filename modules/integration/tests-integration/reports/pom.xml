@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-integration-tests</artifactId>
-        <version>4.9.0-M8-SNAPSHOT</version>
+        <version>4.9.0-M8</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -39,7 +37,7 @@
                         <argument>-Dfilters.file=${basedir}/src/test/java/resources/filters.txt</argument>
                         <argument>-Demma.output=${basedir}/target/emma</argument>
                         <argument>-classpath</argument>
-                        <classpath/>
+                        <classpath />
                         <argument>org.wso2.carbon.integration.common.utils.coverage.TestCoverageGenerator</argument>
                         <!--<mainClass>org.wso2.carbon.automation.core.tests.TestCoverageGenerator</mainClass>-->
                     </arguments>
