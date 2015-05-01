@@ -80,6 +80,13 @@ public class CarbonApplicationDeploymentTestCase extends ESBIntegrationTest {
 
     }
 
+    @Test(groups = {"wso2.esb"}, description = "test API deployment from car file")
+    public void apiDeploymentTest() throws Exception {
+        Assert.assertTrue(esbUtils.isApiDeployed(context.getContextUrls().getBackEndUrl(), getSessionCookie(), "SampleAPI")
+                , "SampleAPI deployment failed");
+
+    }
+
     @Test(groups = {"wso2.esb"}, description = "test LocalEntry deployment from car file")
     public void localEntryDeploymentTest() throws Exception {
         Assert.assertTrue(esbUtils.isLocalEntryDeployed(context.getContextUrls().getBackEndUrl(), getSessionCookie(), "sampleInLineXMLLocalentry")
@@ -103,7 +110,7 @@ public class CarbonApplicationDeploymentTestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = {"wso2.esb"}, description = "test proxy service invocation"
-            , dependsOnMethods = {"proxyServiceDeploymentTest", "sequenceDeploymentTest", "endpointDeploymentTest", "localEntryDeploymentTest"})
+            , dependsOnMethods = {"proxyServiceDeploymentTest", "sequenceDeploymentTest", "endpointDeploymentTest", "localEntryDeploymentTest", "apiDeploymentTest"})
     public void invokeProxyService() throws Exception {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("sampleCustomProxy"), null, "CARDeployment");
         Assert.assertTrue(response.toString().contains("CARDeployment"), "Symbol not found on the response message");
@@ -206,6 +213,9 @@ public class CarbonApplicationDeploymentTestCase extends ESBIntegrationTest {
                 , "sampleFaultSequence Undeployment failed");
         Assert.assertTrue(esbUtils.isSequenceUnDeployed(context.getContextUrls().getBackEndUrl(), getSessionCookie(), "sampleSequenceWithErrorSequence")
                 , "sampleSequenceWithErrorSequence Undeployment failed");
+
+        Assert.assertTrue(esbUtils.isApiUnDeployed(context.getContextUrls().getBackEndUrl(), getSessionCookie(), "SampleAPI")
+                , "SampleAPI Undeployment failed");
 
         Assert.assertTrue(esbUtils.isLocalEntryUnDeployed(context.getContextUrls().getBackEndUrl(), getSessionCookie(), "sampleInLineXMLLocalentry")
                 , "InLine XML Local entry Undeployment failed");

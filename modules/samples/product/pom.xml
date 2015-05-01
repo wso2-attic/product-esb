@@ -22,11 +22,10 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
     	<artifactId>esb-samples-parent</artifactId>
-        <version>4.9.0-M7-SNAPSHOT</version>
+        <version>4.9.0-M8-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <version>4.9.0-M7-SNAPSHOT</version>
     <artifactId>org.wso2.esb.samples</artifactId>
     <packaging>bundle</packaging>
     <name>WSO2 ESB - Samples</name>
@@ -93,7 +92,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Export-Package>
-                            org.wso2.esb.samples.*;
+                            samples.*;
                         </Export-Package>
                         <Import-Package>
                             *;resolution:=optional

@@ -73,6 +73,13 @@
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.script"/>
         </packages>
+        <classes>
+            <class name="org.wso2.carbon.esb.mediator.test.script.ScriptIntegrationToGenerateFaultTestCase">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+        </classes>
     </test>
 
     <test name="Class-mediator-Test" preserve-order="true" verbose="2">
@@ -83,8 +90,8 @@
 
     <test name="Message-Processor-Test" preserve-order="true" verbose="2">
         <packages>
-            <package name="org.wso2.carbon.esb.message.processor.test"/>
             <package name="org.wso2.carbon.esb.message.processor.test.forwarding"/>
+            <package name="org.wso2.carbon.esb.message.processor.test"/>
         </packages>
     </test>
 
