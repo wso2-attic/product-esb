@@ -46,7 +46,7 @@ public class HttpsInboundTransportTenantTestCase extends ESBIntegrationTest {
 
     }
 
-    @Test(groups = "wso2.esb", description = "")
+    @Test(groups = "wso2.esb", description = "" , enabled = false)
     public void testSecureProxyEndPointThruUri() throws Exception {
 
         OMElement response = secureAxisServiceClient.

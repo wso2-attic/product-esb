@@ -21,7 +21,7 @@ public class CallTemplateIntegrationSample750FastXSLTTestCase extends ESBIntegra
     }
 
     @Test(groups = {"wso2.esb"}, description = "Stereotyping Fast XSLT Transformations with Templates " +
-            ":Test using sample 750")
+            ":Test using sample 750" , enabled = false)
     public void testFastXSLTTransformationWithTemplates() throws IOException, XMLStreamException {
         OMElement response=axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy")
                 ,null,"WSO2");

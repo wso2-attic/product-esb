@@ -56,7 +56,7 @@ public class JMSInboundTransactionTestCase extends ESBIntegrationTest {
 		logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 	}
 
-	@Test(groups = { "wso2.esb" }, description = "Successfully committing the message")
+	@Test(groups = { "wso2.esb" }, description = "Successfully committing the message" , enabled = false)
 	public void testTransactionCommit() throws Exception {
 
 		int beforeLogCount;
@@ -93,7 +93,7 @@ public class JMSInboundTransactionTestCase extends ESBIntegrationTest {
 		Thread.sleep(3000);
 	}
 
-	@Test(groups = { "wso2.esb" }, description = "Rolling back the failed message to the queue")
+	@Test(groups = { "wso2.esb" }, description = "Rolling back the failed message to the queue" , enabled = false)
 	public void testTransactionRollBack() throws Exception {
 
 		boolean successValue;
