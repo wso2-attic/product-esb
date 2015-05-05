@@ -44,7 +44,7 @@ public class MailToTransportInvalidFolderTestCase extends ESBIntegrationTest {
         MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test email transport with invalid folder")
+    @Test(groups = {"wso2.esb"}, description = "Test email transport with invalid folder" , enabled = false)
     public void testEmailTransportInvalidFolder() throws ESBMailTransportIntegrationTestException {
         assertTrue(MailToTransportUtil.searchStringInLog(
                 contextUrls.getBackEndUrl(), "FolderABC not found",

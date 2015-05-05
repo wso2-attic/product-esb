@@ -52,14 +52,14 @@ public class HttpInboundTransportTenantTestCase extends ESBIntegrationTest{
         addInboundEndpoint(getArtifactConfig("apidispatch.xml"));
     }
 
-    @Test(groups = "wso2.esb", description = "Inbound Http  test case for tenant")
+    @Test(groups = "wso2.esb", description = "Inbound Http  test case for tenant" , enabled = false)
     public void inboundHttpTest() throws AxisFault {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest("http://localhost:8081/t/wso2.com/", null, "IBM");
         Assert.assertNotNull(response);
         Assert.assertEquals("getQuoteResponse", response.getLocalName());
     }
 
-    @Test(groups = "wso2.esb", description = "Inbound Http  test case for tenant API dispatching")
+    @Test(groups = "wso2.esb", description = "Inbound Http  test case for tenant API dispatching" , enabled = false)
     public void inboundHttpAPITest() throws AxisFault {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest("http://localhost:8082/t/wso2.com/test/map", null, "IBM");
         Assert.assertNotNull(response);

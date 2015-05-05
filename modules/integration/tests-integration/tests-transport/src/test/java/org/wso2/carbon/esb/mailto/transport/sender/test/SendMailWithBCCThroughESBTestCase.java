@@ -70,7 +70,7 @@ public class SendMailWithBCCThroughESBTestCase extends ESBIntegrationTest {
         MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test email sender with BCC ")
+    @Test(groups = {"wso2.esb"}, description = "Test email sender with BCC " , enabled = false)
     public void testEmailTransport()
             throws ESBMailTransportIntegrationTestException, XMLStreamException, AxisFault {
         Date date = new Date();
