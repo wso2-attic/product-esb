@@ -44,7 +44,7 @@ public class ESBJAVA1793TestCase extends ESBIntegrationTest {
 
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test Message Store Target Endpoint format as POX")
+    @Test(groups = {"wso2.esb"}, description = "Test Message Store Target Endpoint format as POX" , enabled = false)
     public void testMessageProcessorTargetEndpointFormatPox() throws Exception {
         AxisServiceClient client = new AxisServiceClient();
 
