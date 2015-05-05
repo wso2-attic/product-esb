@@ -49,7 +49,7 @@ public class Sample352TestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void stop() throws Exception {
-        cleanup();
+        super.cleanup();
     }
 
 }
