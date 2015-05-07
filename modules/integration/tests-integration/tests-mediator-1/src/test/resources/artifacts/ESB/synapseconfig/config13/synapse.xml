@@ -39,6 +39,7 @@
         </iterate>
     </sequence>
     <sequence name="aggregateMessages">
+        <log level="full"/>
         <aggregate id="iterate2">
             <completeCondition>
                 <messageCount min="-1" max="-1"/>

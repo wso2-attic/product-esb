@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>integration-test-common</artifactId>
-        <version>4.9.0-SNAPSHOT</version>
+        <version>4.9.0-M8-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
      <dependencies>
@@ -18,11 +18,6 @@
              <groupId>org.wso2.esb</groupId>
              <artifactId>admin-clients</artifactId>
          </dependency>
-         <!--dependency>
-             <groupId>org.wso2.esb</groupId>
-             <artifactId>extensions</artifactId>
-             <version>4.9.0-SNAPSHOT</version>
-         </dependency-->
          <dependency>
              <groupId>org.wso2.carbon.mediation</groupId>
              <artifactId>org.wso2.carbon.endpoint.stub</artifactId>
@@ -61,6 +56,11 @@
          <dependency>
              <groupId>org.wso2.carbon.deployment</groupId>
              <artifactId>org.wso2.carbon.aarservices.stub</artifactId>
+             <scope>compile</scope>
+         </dependency>
+         <dependency>
+             <groupId>org.apache.httpcomponents.wso2</groupId>
+             <artifactId>httpclient</artifactId>
              <scope>compile</scope>
          </dependency>
 

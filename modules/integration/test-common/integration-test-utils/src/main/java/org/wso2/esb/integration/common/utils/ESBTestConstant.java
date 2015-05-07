@@ -24,10 +24,7 @@ public class ESBTestConstant {
     public static final String STUDENT_REST_SERVICE = "StudentService";
     public static final String ECHO_SERVICE = "Echo";
     public static final java.lang.String CARBON_HOME = "carbon.home";
-
-    /**
-     * ERROR MESSAGES
-     */
+    public static final String ESB_PRODUCT_GROUP = "ESB";
     public static final String UNEXPECTED_SENDING_OUT = "org.apache.synapse.SynapseException: " +
             "Unexpected error during sending message out";
     public static final String READ_TIME_OUT = "Read timed out";

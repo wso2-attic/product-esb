@@ -53,7 +53,7 @@ public class PropertyIntegrationXpathCtxPropertyTestCase extends ESBIntegrationT
     }
 
     @Test(groups = {"wso2.esb"}, description = "Endpoint is a non-existent endpoint reference key , " +
-                                               "$ctx:ERROR_MESSAGE scenario")
+                                               "$ctx:ERROR_MESSAGE scenario", enabled = false)
     public void testRESPONSETEnabledTrue() throws IOException, XMLStreamException {
 
         int beforeLogSize = logViewer.getAllSystemLogs().length;

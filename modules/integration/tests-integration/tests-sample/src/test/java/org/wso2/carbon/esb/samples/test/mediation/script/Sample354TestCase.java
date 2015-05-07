@@ -54,6 +54,7 @@ public class Sample354TestCase extends ESBIntegrationTest {
         init(TestUserMode.SUPER_TENANT_ADMIN);
         serverManager = new ServerConfigurationManager(context);
         serverManager.copyToComponentDropins(new File(getClass().getResource(JRUBY_JAR_LOCATION + JRUBY_JAR).toURI()));
+        Thread.sleep(3000);
         serverManager.restartGracefully();
         init(TestUserMode.SUPER_TENANT_ADMIN);
 
@@ -112,8 +113,9 @@ public class Sample354TestCase extends ESBIntegrationTest {
             cleanup();
             Thread.sleep(5000);
         } finally {
-            serverManager.removeFromComponentDropins(JRUBY_JAR);
             serverManager.restartGracefully();
+            Thread.sleep(3000);
+            serverManager.removeFromComponentDropins(JRUBY_JAR);
             serverManager = null;
         }
 

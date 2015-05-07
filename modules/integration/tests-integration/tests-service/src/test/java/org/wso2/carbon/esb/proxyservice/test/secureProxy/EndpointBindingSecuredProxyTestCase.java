@@ -44,7 +44,7 @@ public class EndpointBindingSecuredProxyTestCase extends ESBIntegrationTest {
 
         super.cleanup();
     }
-
+/*
     @Test(groups = {"wso2.esb"}, description = "Provides Authentication. Clients have Username Tokens")
     public void securityPolicy1() throws Exception {
         final int policyId = 1;
@@ -339,5 +339,5 @@ public class EndpointBindingSecuredProxyTestCase extends ESBIntegrationTest {
         return getProxyServiceURLHttps(proxyServiceName) + "." +
                proxyServiceName + "HttpsSoap11Endpoint";
     }
-
+*/
 }

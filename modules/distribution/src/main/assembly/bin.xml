@@ -250,6 +250,12 @@
                 <include>org.apache.rampart:rampart:mar</include>
             </includes>
         </dependencySet>
+        <dependencySet>
+            <outputDirectory>wso2esb-${pom.version}/lib</outputDirectory>
+            <includes>
+                <include>org.apache.sandesha2:sandesha2-core:jar</include>
+            </includes>
+        </dependencySet>
     </dependencySets>
 
     <files>

@@ -17,6 +17,7 @@
 */
 package org.wso2.carbon.esb.mediator.test.fault;
 
+import org.apache.axiom.om.OMElement;
 import org.apache.axis2.AxisFault;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

@@ -9,7 +9,9 @@
             <detail>fault details by automation</detail>
             <node>automation-node</node>
         </makefault>
-        <log level="full"/>
+        <log level="full">
+            <property name="MESSAGE" value="==============================================="/>
+                </log>
         <!--<header name="To" action="remove"/>-->
         <send/>
     </sequence>

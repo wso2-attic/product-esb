@@ -41,6 +41,7 @@ public class SetNhttpAxis2Transport extends ESBIntegrationTest {
 		ServerConfigurationManager serverConfigurationManager = new ServerConfigurationManager(autoCtx);
 		serverConfigurationManager.applyConfiguration(
 				new File(getClass().getResource("/artifacts/ESB/nhttp/transport/axis2.xml").getPath()));
+        super.init();
 	}
 
 	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.ALL})

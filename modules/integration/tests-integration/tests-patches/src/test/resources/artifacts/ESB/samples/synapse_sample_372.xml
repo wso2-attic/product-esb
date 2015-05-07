@@ -55,7 +55,7 @@
         <target>
             <inSequence>
                 <throttle onReject="onRejectSequence" onAccept="onAcceptSequence" id="A">
-                    <policy key="conf/sample/resources/policy/throttle_policy.xml"/>
+                    <policy key="samples/resources/policy/throttle_policy.xml"/>
                 </throttle>
             </inSequence>
             <outSequence>

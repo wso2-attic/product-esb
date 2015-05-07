@@ -45,6 +45,7 @@
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
+                <version>${carbon.p2.plugin}</version>
                 <executions>
                     <execution>
                         <id>p2-feature-generation</id>

@@ -22,13 +22,12 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-parent</artifactId>
-        <version>4.9.0-M7-SNAPSHOT</version>
+        <version>4.9.0-M8-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2esb</artifactId>
-    <version>4.9.0-M7-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>WSO2 ESB - Distribution</name>
     <url>http://www.wso2.org/projects/esb/java</url>
@@ -51,6 +50,11 @@
             <groupId>org.apache.sandesha2</groupId>
             <artifactId>sandesha2</artifactId>
             <type>mar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.sandesha2</groupId>
+            <artifactId>sandesha2-core</artifactId>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon.mediation</groupId>

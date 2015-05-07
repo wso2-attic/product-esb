@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-integration-tests</artifactId>
-        <version>4.9.0-SNAPSHOT</version>
+        <version>4.9.0-M8-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -286,18 +286,29 @@
             <groupId>ca.uhn.hapi.wso2</groupId>
             <artifactId>hapi</artifactId>
         </dependency>
-      <!--  <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-core</artifactId>
-        </dependency>
+
         <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-j2ee-management_1.1_spec</artifactId>
+            <groupId>org.wso2.esb</groupId>
+            <artifactId>extensions</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jms_1.1_spec</artifactId>
-        </dependency>-->
+            <groupId>org.apache.axis2.transport</groupId>
+            <artifactId>axis2-transport-tcp</artifactId>
+        </dependency>
+
+        <!--  <dependency>
+              <groupId>org.apache.activemq</groupId>
+              <artifactId>activemq-core</artifactId>
+          </dependency>
+          <dependency>
+              <groupId>org.apache.geronimo.specs</groupId>
+              <artifactId>geronimo-j2ee-management_1.1_spec</artifactId>
+          </dependency>
+          <dependency>
+              <groupId>org.apache.geronimo.specs</groupId>
+              <artifactId>geronimo-jms_1.1_spec</artifactId>
+          </dependency>-->
     </dependencies>
 
 </project>
