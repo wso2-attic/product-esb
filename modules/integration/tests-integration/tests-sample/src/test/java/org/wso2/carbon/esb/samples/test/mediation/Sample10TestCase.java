@@ -71,7 +71,7 @@ public class Sample10TestCase extends ESBIntegrationTest {
         listener2.start();
     }
 
-    @Test(groups = { "wso2.esb" }, description = "Dynamic Endpoints with the Registry")
+    @Test(groups = { "wso2.esb" }, description = "Dynamic Endpoints with the Registry" , enabled = false)
     public void testDynamicEndpoints() throws Exception {
 
         updateEndpointFile("1");

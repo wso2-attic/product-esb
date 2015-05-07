@@ -24,7 +24,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-import org.wso2.esb.integration.common.utils.clients.axis2client.AxisServiceClient;
 import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
 
 import javax.xml.stream.XMLStreamException;
@@ -34,42 +33,52 @@ import java.io.FileNotFoundException;
 
 public class HttpInboundTransportTestCase extends ESBIntegrationTest {
 
-	private SampleAxis2Server axis2Server;
+    private SampleAxis2Server axis2Server;
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
 
-	    axis2Server = new SampleAxis2Server("test_axis2_server_9000.xml");
-	    axis2Server.deployService(SampleAxis2Server.SIMPLE_STOCK_QUOTE_SERVICE);
-	    axis2Server.start();
+        axis2Server = new SampleAxis2Server("test_axis2_server_9000.xml");
+        axis2Server.deployService(SampleAxis2Server.SIMPLE_STOCK_QUOTE_SERVICE);
+        axis2Server.start();
 
         addSequence(getArtifactConfig("TestIn.xml"));
         addSequence(getArtifactConfig("reciveSeq.xml"));
         addSequence(getArtifactConfig("TestOut.xml"));
         addInboundEndpoint(getArtifactConfig("synapse.xml"));
+        addApi(getArtifactConfig("Test.xml"));
+        addInboundEndpoint(getArtifactConfig("apidispatch.xml"));
     }
 
-    @Test(groups = "wso2.esb", description = "Inbound Http  test case")
+    @Test(groups = "wso2.esb", description = "Inbound Http  test case" )
     public void inboundHttpTest() throws AxisFault {
-            OMElement response = axis2Client.sendSimpleStockQuoteRequest("http://localhost:8081/services/StockQuote", null, "IBM");
-            Assert.assertNotNull(response);
-            Assert.assertEquals("getQuoteResponse", response.getLocalName());
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest("http://localhost:8081/services/StockQuote", null, "IBM");
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals("getQuoteResponse", response.getLocalName());
+    }
+
+    @Test(groups = "wso2.esb", description = "Inbound Http  test case for API" )
+    public void inboundHttpAPITest() throws AxisFault {
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest("http://localhost:8082/test/map", null, "IBM");
+        Assert.assertNotNull(response);
+        Assert.assertEquals("getQuoteResponse", response.getLocalName());
     }
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
-	    if (axis2Server.isStarted()) {
-		    axis2Server.stop();
-	    }
-	    axis2Server=null;
-	    super.cleanup();
+        if (axis2Server.isStarted()) {
+            axis2Server.stop();
+        }
+        axis2Server = null;
+        super.cleanup();
     }
 
     private OMElement getArtifactConfig(String fileName) throws Exception {
         OMElement synapseConfig = null;
         String path = "artifacts" + File.separator + "ESB" + File.separator
-                + "http.inbound.transport" + File.separator + fileName;
+                      + "http.inbound.transport" + File.separator + fileName;
         try {
             synapseConfig = esbUtils.loadResource(path);
         } catch (FileNotFoundException e) {

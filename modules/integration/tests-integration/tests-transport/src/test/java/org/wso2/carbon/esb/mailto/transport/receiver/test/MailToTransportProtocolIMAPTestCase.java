@@ -52,7 +52,7 @@ public class MailToTransportProtocolIMAPTestCase extends ESBIntegrationTest {
         MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test email sent")
+    @Test(groups = {"wso2.esb"}, description = "Test email sent" , enabled = false)
     public void testEmailReceived() throws Exception {
         Date date = new Date();
         emailSubject = "IMAP Protocol " + new Timestamp(date.getTime());
@@ -62,7 +62,7 @@ public class MailToTransportProtocolIMAPTestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = {"wso2.esb"}, description = "Test email transport with IMAP protocol",
-            dependsOnMethods = {"testEmailReceived"})
+            dependsOnMethods = {"testEmailReceived"} , enabled = false)
     public void testEmailTransportProtocolIMAP() throws Exception {
         assertTrue(MailToTransportUtil.searchStringInLog(
                 contextUrls.getBackEndUrl(), emailSubject,getSessionCookie()), "Mail not found in inbox");

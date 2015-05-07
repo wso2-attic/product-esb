@@ -53,7 +53,7 @@ public class APIMANAGER1838RequestHashGeneratorTestCase extends ESBIntegrationTe
     }
 
 
-    @Test(groups = {"wso2.esb"}, description = "Adding people to PeopleRestService")
+    @Test(groups = {"wso2.esb"}, description = "Adding people to PeopleRestService" , enabled = false)
     public void addPeople() throws Exception {
         Thread.sleep(5000);
         if (tomcatServerManager.isRunning()) {
