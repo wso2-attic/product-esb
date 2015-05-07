@@ -1,5 +1,4 @@
 
-<?xml version="1.0" encoding="UTF-8"?>
 <api xmlns="http://ws.apache.org/ns/synapse"
      name="Test"
      context="/test"
