@@ -55,7 +55,7 @@ public class PropertyPersistenceDeletingAndAddingTstCase extends ESBIntegrationT
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = {"wso2.esb","localOnly"}, description = "Class Mediator " +
-                                                           " -Class mediator property persistence -deleting and adding different properties")
+                                                           " -Class mediator property persistence -deleting and adding different properties" , enabled = false)
     public void testMediationPersistenceDeletingAndAdding() throws Exception {
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(),null, "WSO2");
