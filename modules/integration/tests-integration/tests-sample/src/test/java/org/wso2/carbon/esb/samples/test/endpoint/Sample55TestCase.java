@@ -69,8 +69,8 @@ public class Sample55TestCase extends ESBIntegrationTest {
     }
 
     @SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
-    @Test(groups = { "wso2.esb" },
-          description = "Session Affinity Load Balancing between Failover Endpoints")
+    @Test(groups = { "wso2.esb"  },
+          description = "Session Affinity Load Balancing between Failover Endpoints" , enabled = false)
     public void testLoadBalanceEndpoint() throws Exception {
 
         List<ResponseData> messages =

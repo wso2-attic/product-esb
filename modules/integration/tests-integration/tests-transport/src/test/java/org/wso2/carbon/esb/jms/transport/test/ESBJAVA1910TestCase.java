@@ -25,7 +25,7 @@ public class ESBJAVA1910TestCase extends ESBIntegrationTest {
 
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test Property get-property('HTTP_SC') in message.processor.reply.sequence")
+    @Test(groups = {"wso2.esb"}, description = "Test Property get-property('HTTP_SC') in message.processor.reply.sequence" , enabled = false)
     public void testStatusCode() throws Exception {
         int beforeLogCount = logViewerClient.getAllSystemLogs().length;
         AxisServiceClient client = new AxisServiceClient();

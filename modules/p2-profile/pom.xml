@@ -58,6 +58,8 @@
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
+                <version>${carbon.p2.plugin}</version>
+
                 <executions>
                     <execution>
                         <id>2-p2-repo-generation</id>
