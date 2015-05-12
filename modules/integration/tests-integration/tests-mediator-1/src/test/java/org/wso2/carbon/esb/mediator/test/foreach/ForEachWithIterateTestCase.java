@@ -29,10 +29,6 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.namespace.QName;
 import java.util.Iterator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static org.testng.Assert.assertTrue;
 
 /**
  * Test a complete flow of modifying payload using a payloadfactorymediator within foreach mediator

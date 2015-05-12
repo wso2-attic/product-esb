@@ -55,14 +55,14 @@ public class NestedForEachTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"},
             description = "Transforming a Message Using a Nested ForEach Construct")
-    public void testNestedForEachMediator() throws Exception {
+    public void testNestedForEach() throws Exception {
 
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/mediatorconfig/foreach/nested_foreach.xml");
 
         LogViewerClient logViewer =
                 new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
-        logViewer.clearLogs();
+        int beforeLogSize = logViewer.getAllRemoteSystemLogs().length;
 
         String request =
                 "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:m0=\"http://services.samples\" xmlns:xsd=\"http://services.samples/xsd\">\n" +
@@ -75,22 +75,24 @@ public class NestedForEachTestCase extends ESBIntegrationTest {
                         "        </m0:getQuote>\n" +
                         "    </soap:Body>\n" +
                         "</soap:Envelope>\n";
-        System.out.println(request);
+
         sendRequest(getMainSequenceURL(), request);
 
-        LogEvent[] getLogsInfo = logViewer.getAllRemoteSystemLogs();
-        for (LogEvent event : getLogsInfo) {
+        LogEvent[] logs = logViewer.getAllRemoteSystemLogs();
+        int afterLogSize = logs.length;
 
-            if (event.getMessage().contains("<m0:getQuote>")) {
-                assertTrue(true, "Payload not found");
+        for (int i = (afterLogSize - beforeLogSize - 1); i >= 0; i--) {
+            String message = logs[i].getMessage();
 
-                String payload = event.getMessage();
+            if (message.contains("foreach = after")) {
+                String payload = message;
                 String search = "<m0:getQuote>(.*)</m0:getQuote>";
                 Pattern pattern = Pattern.compile(search, Pattern.DOTALL);
                 Matcher matcher = pattern.matcher(payload);
                 boolean matchFound = matcher.find();
 
                 assertTrue(matchFound, "getQuote element not found");
+
                 if (matchFound) {
                     int start = matcher.start();
                     int end = matcher.end();
