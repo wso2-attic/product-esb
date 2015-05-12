@@ -33,7 +33,7 @@ public class CallMediatorBlockingInboundOutboundPolicySecurityTestCase extends E
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/call/InboundOutboundSecurityTest.xml");
+        loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/call/CallMediatorBlockingInboundOutboundSecurity.xml");
     }
 
     @Test(groups = {"wso2.esb"},description = "Call the inbound & outbound security endpoint with blocking external calls")
