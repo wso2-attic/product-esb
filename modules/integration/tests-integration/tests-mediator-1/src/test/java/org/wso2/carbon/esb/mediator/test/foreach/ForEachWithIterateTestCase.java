@@ -86,7 +86,7 @@ public class ForEachWithIterateTestCase extends ESBIntegrationTest {
 
     }
 
-    @Test(groups = "wso2.esb", enabled = false, description = "Test foreach sequence ref to transform payload, passed to endpoint using iterate and aggregate mediators")
+    @Test(groups = "wso2.esb", description = "Test foreach sequence ref to transform payload, passed to endpoint using iterate and aggregate mediators")
     public void testForEachSequenceRefWithIterateEndpoint() throws Exception {
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/mediatorconfig/foreach/foreach_simple_sequenceref.xml");
