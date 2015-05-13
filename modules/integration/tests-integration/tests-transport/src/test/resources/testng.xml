@@ -21,7 +21,7 @@
             <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA3051HTTPPatchMethodSupportTestCase"/>
         </classes>
     </test>
-    
+
     <test name="JMS-transport-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.jms.transport.test.*"/>
@@ -114,6 +114,12 @@
     <test name="inbound-JMS Transport-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.jms.inbound.transport.test"/>
+        </packages>
+    </test>
+
+    <test name="inbound-HL7 Transport-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.hl7.inbound.transport.test"/>
         </packages>
     </test>
 
