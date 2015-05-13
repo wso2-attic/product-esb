@@ -85,30 +85,27 @@ public class NestedForEachTestCase extends ESBIntegrationTest {
             String message = logs[i].getMessage();
 
             if (message.contains("foreach = after")) {
-                String payload = message;
                 String search = "<m0:getQuote>(.*)</m0:getQuote>";
                 Pattern pattern = Pattern.compile(search, Pattern.DOTALL);
-                Matcher matcher = pattern.matcher(payload);
+                Matcher matcher = pattern.matcher(message);
                 boolean matchFound = matcher.find();
 
                 assertTrue(matchFound, "getQuote element not found");
 
-                if (matchFound) {
-                    int start = matcher.start();
-                    int end = matcher.end();
-                    String quote = payload.substring(start, end);
+                int start = matcher.start();
+                int end = matcher.end();
+                String quote = message.substring(start, end);
 
-                    assertTrue(quote.contains(
-                                    "<m0:checkPriceRequest><m0:symbol>IBM-1</m0:symbol><m0:symbol>IBM-2</m0:symbol></m0:checkPriceRequest>"),
-                            "IBM Element not found");
-                    assertTrue(quote.contains(
-                                    "<m0:checkPriceRequest><m0:symbol>WSO2-1</m0:symbol><m0:symbol>WSO2-2</m0:symbol></m0:checkPriceRequest>"),
-                            "WSO2 Element not found");
-                    assertTrue(quote.contains(
-                                    "<m0:checkPriceRequest><m0:symbol>MSFT-1</m0:symbol><m0:symbol>MSFT-2</m0:symbol></m0:checkPriceRequest>"),
-                            "MSFT Element not found");
+                assertTrue(quote.contains(
+                                "<m0:checkPriceRequest><m0:symbol>IBM-1</m0:symbol><m0:symbol>IBM-2</m0:symbol></m0:checkPriceRequest>"),
+                        "IBM Element not found");
+                assertTrue(quote.contains(
+                                "<m0:checkPriceRequest><m0:symbol>WSO2-1</m0:symbol><m0:symbol>WSO2-2</m0:symbol></m0:checkPriceRequest>"),
+                        "WSO2 Element not found");
+                assertTrue(quote.contains(
+                                "<m0:checkPriceRequest><m0:symbol>MSFT-1</m0:symbol><m0:symbol>MSFT-2</m0:symbol></m0:checkPriceRequest>"),
+                        "MSFT Element not found");
 
-                }
             }
         }
     }
@@ -189,7 +186,6 @@ public class NestedForEachTestCase extends ESBIntegrationTest {
             }
         }
         InputStream response = connection.getInputStream();
-        String out = "[Fault] No Response.";
         if (response != null) {
             StringBuilder sb = new StringBuilder();
             byte[] bytes = new byte[1024];
@@ -197,7 +193,6 @@ public class NestedForEachTestCase extends ESBIntegrationTest {
             while ((len = response.read(bytes)) != -1) {
                 sb.append(new String(bytes, 0, len));
             }
-            out = sb.toString();
         }
     }
 
