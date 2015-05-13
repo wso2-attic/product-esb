@@ -30,10 +30,6 @@ import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
-import javax.xml.namespace.QName;
-import java.io.IOException;
-import java.util.Iterator;
-
 /**
  * Test that foreach will process the payload sequentially. Verify the request payload order against processed order.
  */
