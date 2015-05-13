@@ -345,6 +345,10 @@
                                 <featureArtifactDef>
                                     org.apache.axis2.transport:org.apache.axis2.transport.xmpp.feature:${axis2.transport.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.rabbitmq.feature:${axis2.transport.version}
+                                </featureArtifactDef>
+
 
                                 <!-- Previous versions features TODO: Refactor code and get rid of these features, use ndatasource-->
                                 <!--<featureArtifactDef>-->
@@ -781,6 +785,10 @@
                                     <id>org.apache.axis2.transport.xmpp.feature.group</id>
                                     <version>${axis2.transport.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.rabbitmq.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
 
                                 <!-- Previous versions -->
 
@@ -1187,6 +1195,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.apache.axis2.transport.xmpp.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.rabbitmq.feature.group</id>
                                     <version>${axis2.transport.version}</version>
                                 </feature>
 
