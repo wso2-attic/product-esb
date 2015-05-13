@@ -327,6 +327,12 @@
             <filtered>true</filtered>
         </file>
         <file>
+            <source>src/main/conf/hl7.properties</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
+            <destName>hl7.properties</destName>
+            <filtered>true</filtered>
+        </file>              
+        <file>
             <source>src/main/conf/jndi.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <destName>jndi.properties</destName>
