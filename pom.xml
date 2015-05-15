@@ -905,7 +905,7 @@
             <dependency>
                 <groupId>org.apache.axis2.transport</groupId>
                 <artifactId>axis2-transport-tcp</artifactId>
-                <version>1.1.0-wso2v11</version>
+                <version>${axis2.transport.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.cxf</groupId>
@@ -1076,7 +1076,7 @@
         <carbon.kernel.version>4.4.0</carbon.kernel.version>
 
         <!-- Carbon Commons version-->
-        <carbon.commons.version>4.4.0</carbon.commons.version>
+        <carbon.commons.version>4.4.1</carbon.commons.version>
 
         <!-- Carbon Deployment version-->
         <carbon.deployment.version>4.4.0</carbon.deployment.version>
