@@ -303,6 +303,12 @@
             <filtered>true</filtered>
         </file>
         <file>
+            <source>src/main/conf/synapse-handlers.xml</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
+            <destName>synapse-handlers.xml</destName>
+            <filtered>true</filtered>
+        </file>
+        <file>
             <source>src/main/conf/datasources.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <destName>datasources.properties</destName>
@@ -326,6 +332,12 @@
             <destName>passthru-http.properties</destName>
             <filtered>true</filtered>
         </file>
+        <file>
+            <source>src/main/conf/hl7.properties</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
+            <destName>hl7.properties</destName>
+            <filtered>true</filtered>
+        </file>              
         <file>
             <source>src/main/conf/jndi.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>

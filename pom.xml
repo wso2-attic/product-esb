@@ -905,7 +905,7 @@
             <dependency>
                 <groupId>org.apache.axis2.transport</groupId>
                 <artifactId>axis2-transport-tcp</artifactId>
-                <version>1.1.0-wso2v11</version>
+                <version>${axis2.transport.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.cxf</groupId>
@@ -1061,10 +1061,10 @@
         <axiom.wso2.version>1.2.11.wso2v6</axiom.wso2.version>
 
         <!-- Synapse -->
-        <synapse.version>2.1.3-wso2v4-SNAPSHOT</synapse.version>
+        <synapse.version>2.1.3-wso2v4</synapse.version>
 
         <!-- Axis2 Transport -->
-        <axis2.transport.version>1.1.0-wso2v14-SNAPSHOT</axis2.transport.version>
+        <axis2.transport.version>1.1.0-wso2v14</axis2.transport.version>
 
         <!-- Apache Versions -->
         <org.apache.httpcomponents.wso2.version>4.2.3.wso2v1</org.apache.httpcomponents.wso2.version>
@@ -1076,7 +1076,7 @@
         <carbon.kernel.version>4.4.0</carbon.kernel.version>
 
         <!-- Carbon Commons version-->
-        <carbon.commons.version>4.4.0</carbon.commons.version>
+        <carbon.commons.version>4.4.1</carbon.commons.version>
 
         <!-- Carbon Deployment version-->
         <carbon.deployment.version>4.4.0</carbon.deployment.version>
@@ -1085,7 +1085,7 @@
         <carbon.registry.version>4.4.1</carbon.registry.version>
 
         <!-- Carbon Identity version-->
-        <carbon.identity.version>4.4.0</carbon.identity.version>
+        <carbon.identity.version>4.4.1</carbon.identity.version>
 
         <!-- Carbon Rule version -->
         <carbon.rule.version>4.4.0</carbon.rule.version>
