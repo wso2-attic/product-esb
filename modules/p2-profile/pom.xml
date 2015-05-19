@@ -280,10 +280,6 @@
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.server.feature:${carbon.identity.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.core.server.feature:${carbon.identity.version}
-                                </featureArtifactDef>
-
-                                <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature:${carbon.identity.version}
                                 </featureArtifactDef>
                                 <!--6 Carbon Deployment -->
@@ -701,10 +697,6 @@
                                     <version>${carbon.identity.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.identity.core.server.feature.group</id>
-                                    <version>${carbon.identity.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature.group</id>
                                     <version>${carbon.identity.version}</version>
                                 </feature>
@@ -1118,10 +1110,6 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
-                                    <version>${carbon.identity.version}</version>
-                                </feature>
-				 <feature>
-                                    <id>org.wso2.carbon.identity.core.server.feature.group</id>
                                     <version>${carbon.identity.version}</version>
                                 </feature>
 
