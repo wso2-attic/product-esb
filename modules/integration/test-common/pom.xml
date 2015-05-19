@@ -380,6 +380,11 @@
             <artifactId>org.wso2.carbon.event.stub</artifactId>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.wso2.orbit.org.apache.cxf</groupId>
+            <artifactId>cxf-bundle</artifactId>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>
