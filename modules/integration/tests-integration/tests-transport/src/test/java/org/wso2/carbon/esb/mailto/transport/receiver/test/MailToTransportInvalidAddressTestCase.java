@@ -48,7 +48,7 @@ public class MailToTransportInvalidAddressTestCase extends ESBIntegrationTest {
     }
 
 
-    @Test(groups = {"wso2.esb"}, description = "Test email transport with invalid address parameter and pop3 protocol" , enabled = false)
+    @Test(groups = {"wso2.esb"}, description = "Test email transport with invalid address parameter and pop3 protocol")
     public void testEmailTransportInvalidAddress() throws ESBMailTransportIntegrationTestException {
 
         assertTrue(MailToTransportUtil.searchStringInLog(

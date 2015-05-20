@@ -65,6 +65,10 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 		// create FTP server root folder if not exists
 		if (FTPFolder.exists()) {
 			FileUtils.deleteDirectory(FTPFolder);
+			FTPFolder.mkdir();
+			//this is to clean up and recreate folder in multiple iterations of builds
+			// otherwise ftpin and ftpout wont get created later steps
+			// when FTPFolder doesnt present it will lead to failure in test case 2
 		} else {
 			Assert.assertTrue(FTPFolder.mkdir(),
 					"FTP root file folder not created");
@@ -120,7 +124,7 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 	}
 
 	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
-	@Test(groups = "wso2.esb", description = "Inbound endpoint Reading file in FTP Test Case")
+	@Test(groups = "wso2.esb", description = "Inbound endpoint Reading file in FTP Test Case", enabled = true)
 	public void testInboundEnpointReadFileinFTP() throws Exception {
 
 		addInboundEndpoint(addEndpoint1());
@@ -151,8 +155,9 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 	}
 
 	//  This test case works locally, but in the Jenkins build, it fails due to a lack of permission issue
-	//	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
-	//	@Test(groups = "wso2.esb", dependsOnMethods = "testInboundInvalidFtpUsername", description = "Inbound endpoint move after process in FTP Test Case")
+		@SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
+		@Test(groups = "wso2.esb", dependsOnMethods = "testInboundInvalidFtpUsername", description = "Inbound endpoint move after process in FTP Test Case",enabled = true
+		)
 	public void testInboundEnpointMoveAfterProcessFTP() throws Exception {
 
 		addInboundEndpoint(addEndpoint2());
@@ -166,6 +171,7 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 		try {
 			FileUtils.copyFile(sourceFile, targetFile);
 			Thread.sleep(2000);
+
 			Assert.assertTrue(outFile.exists(),
 					"Input file is not moved after processing the file");
 			Assert.assertFalse(targetFile.exists(),
@@ -178,7 +184,7 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 	}
 
 	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
-	@Test(groups = "wso2.esb", description = "Inbound endpoint invalid FTP username Test Case")
+	@Test(groups = "wso2.esb", description = "Inbound endpoint invalid FTP username Test Case", enabled = true)
 	public void testInboundInvalidFtpUsername() throws Exception {
 
 		addInboundEndpoint(addEndpoint3());

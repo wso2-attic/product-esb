@@ -51,7 +51,7 @@ public class MailToTransportActionAfterFailureMOVETestCase extends ESBIntegratio
         MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test email sent" , enabled = false)
+    @Test(groups = {"wso2.esb"}, description = "Test email sent")
     public void testEmailReceivedActionAfterFailureMOVE() throws Exception {
         Date date = new Date();
         emailSubject = "Failure Move : " + new Timestamp(date.getTime());

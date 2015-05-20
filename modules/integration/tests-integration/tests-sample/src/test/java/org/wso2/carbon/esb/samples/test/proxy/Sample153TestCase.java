@@ -43,7 +43,7 @@ public class Sample153TestCase extends ESBIntegrationTest {
         loadSampleESBConfiguration(153);
     }
 
-    @Test(groups = "wso2.esb", description = "Custom sequences and endpoints with proxy services")
+    @Test(groups = "wso2.esb", description = "Custom sequences and endpoints with proxy services", enabled = false)
     public void sample153Test() throws Exception {
         String policyPath = FrameworkPathUtil.getSystemResourceLocation() + "security"+ File.separator +"policies"+ File.separator +"scenario27-policy.xml";
         OMElement response = new SecureStockQuoteClient().sendSecuredSimpleStockQuoteRequest(null, null, getProxyServiceURLHttp("StockQuoteProxy"),

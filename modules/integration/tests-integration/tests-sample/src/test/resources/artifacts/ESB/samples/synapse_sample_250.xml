@@ -20,6 +20,7 @@
 
 <!-- Introduction to switching transports - JMS to http/s -->
 <definitions xmlns="http://ws.apache.org/ns/synapse">
+
     <proxy name="StockQuoteProxy" transports="jms">
         <target>
             <inSequence>
@@ -32,11 +33,13 @@
                 <send/>
             </outSequence>
         </target>
+        <publishWSDL uri="file:repository/samples/resources/proxy/sample_proxy_1.wsdl"/>
         <parameter name="transport.jms.ContentType">
             <rules>
                 <jmsProperty>contentType</jmsProperty>
-                <default>text/xml</default>
+                <default>application/xml</default>
             </rules>
         </parameter>
     </proxy>
+
 </definitions>
