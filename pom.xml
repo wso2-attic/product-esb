@@ -1045,6 +1045,12 @@
                 </exclusions>
             </dependency>
 
+            <dependency>
+                <groupId>com.rabbitmq.wso2</groupId>
+                <artifactId>amqp-client</artifactId>
+                <version>${rabbitmq.orbit.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
     <properties>
@@ -1085,7 +1091,7 @@
         <carbon.registry.version>4.4.1</carbon.registry.version>
 
         <!-- Carbon Identity version-->
-        <carbon.identity.version>4.4.1</carbon.identity.version>
+        <carbon.identity.version>4.4.0</carbon.identity.version>
 
         <!-- Carbon Rule version -->
         <carbon.rule.version>4.4.0</carbon.rule.version>
@@ -1179,6 +1185,8 @@
         <activemq.version>5.9.1</activemq.version>
         <testng.version>6.1.1</testng.version>
         <project.scm.id>wso2-scm-server</project.scm.id>
+
+        <rabbitmq.orbit.version>3.4.4.wso2v1</rabbitmq.orbit.version>
 
     </properties>
     <pluginRepositories>
