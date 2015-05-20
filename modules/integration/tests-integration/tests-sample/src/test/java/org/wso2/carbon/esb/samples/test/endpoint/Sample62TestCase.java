@@ -78,7 +78,7 @@ public class Sample62TestCase extends ESBIntegrationTest {
 
 	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
 	@Test(groups = { "wso2.esb" },
-	      description = "Routing a Message to a Dynamic List of Recipients and Aggregating Responses", enabled = false)
+	      description = "Routing a Message to a Dynamic List of Recipients and Aggregating Responses")
 	public void testRoutingMessagesAndAggregatingResponses() throws Exception {
 
 		OMElement response = axis2Client.sendSimpleQuoteRequest("http://localhost:8280/", null, "WSO2");

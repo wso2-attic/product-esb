@@ -66,7 +66,7 @@ public class VFSQueryParameterAppendESBJAVA2373TestCase extends ESBIntegrationTe
     @Test(groups = {"wso2.esb"}, description = "Sending a file through VFS Transport : transport.vfs.Append added to FileURI, tests if file gets saved with correct file name")
     public void testVFSFileURI() throws Exception {
         //<header name="To" value="vfs:file:///home/ravi/SupportProjects/carbon/4.0.0/platform/trunk/trunk/products/esb/4.5.1/modules/integration/tests/target/test-classes/artifacts/ESB/synapseconfig/vfsTransport/out/vfs-ESBJAVA2373-file?transport.vfs.Append=true"/>
-        //getClass().getResource(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "vfsTransport" + File.separator).getPath() + "out/vfs-ESBJAVA2373-file?transport.vfs.Append=true" + "\"/>";
+        //System.out.println("<header name=\"To\" value=\"vfs:file://" + getClass().getResource(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "vfsTransport" + File.separator).getPath() + "out/vfs-ESBJAVA2373-file?transport.vfs.Append=true" + "\"/>");
         addProxyService(AXIOMUtil.stringToOM("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "    <proxy name=\"VFSProxy\"\n" +
                 "           xmlns=\"http://ws.apache.org/ns/synapse\"" +
@@ -166,15 +166,12 @@ public class VFSQueryParameterAppendESBJAVA2373TestCase extends ESBIntegrationTe
         File appendFalseFile = new File(getClass().getResource(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "vfsTransport" + File.separator).getPath() + "out/vfs-ESBJAVA2373-append-false");
         Assert.assertTrue(appendFalseFile.exists(), "File with transport.vfs.Append=false file has been created?");
 
-        fileSize = appendFalseFile.length();//corrected test case failure due to reassigning file length to test case 2
-
         try {
             OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("VFSProxy")
                     , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
         } catch(AxisFault e) {}
 
         Thread.sleep(5000);
-
         Assert.assertTrue(fileSize == appendFalseFile.length(), "File has been overwritten - no appending");
 
         deleteProxyService("VFSProxy");

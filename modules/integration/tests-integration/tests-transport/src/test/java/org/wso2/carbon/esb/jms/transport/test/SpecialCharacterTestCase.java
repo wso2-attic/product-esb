@@ -52,7 +52,7 @@ public class SpecialCharacterTestCase extends ESBIntegrationTest {
     private TestRequestInterceptor interceptor;
     private SimpleHttpServer httpServer;
 
-    @BeforeClass(alwaysRun = true)
+//    @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         httpServer = new SimpleHttpServer(8097, new Properties());
         httpServer.start();
@@ -71,8 +71,8 @@ public class SpecialCharacterTestCase extends ESBIntegrationTest {
 
     }
 
-    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-   @Test(groups = {"wso2.esb"},enabled = false)
+//    @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
+//    @Test(groups = {"wso2.esb"})
     public void testSpecialCharacterMediation() throws Exception {
 //        SimpleHttpClient httpClient = new SimpleHttpClient();
         String payload = "<test>This payload is üsed to check special character mediation</test>";
@@ -111,7 +111,7 @@ public class SpecialCharacterTestCase extends ESBIntegrationTest {
         }
     }
 
-    @AfterClass(alwaysRun = true)
+//    @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
         try {
             super.cleanup();

@@ -68,7 +68,7 @@ public class POXOverServletTransportTestCase extends ESBIntegrationTest {
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @Test(groups = "wso2.esb", description = "Tests SOAP to POX Conversion" , enabled = true)
+    @Test(groups = "wso2.esb", description = "Tests SOAP to POX Conversion" , enabled = false)
     public void testSoapToPOXConversion() throws IOException, InterruptedException {
 
 

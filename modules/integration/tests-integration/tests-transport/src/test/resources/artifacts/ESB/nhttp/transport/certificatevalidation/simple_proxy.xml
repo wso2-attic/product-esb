@@ -40,7 +40,7 @@
                 </payloadFactory>
                 <send>
                     <endpoint>
-                        <address uri="http://localhost:8280/services/echo" format="soap11"/>
+                        <address uri="https://stratoslive.wso2.com/services/echo" format="soap11"/>
                     </endpoint>
                 </send>
             </inSequence>

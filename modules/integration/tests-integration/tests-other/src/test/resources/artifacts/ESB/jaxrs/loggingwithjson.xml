@@ -35,7 +35,7 @@
                   <send>
                      <endpoint>
                         <http method="GET"
-                              uri-template="http://localhost:8080/rest/api/music/get?album=California"/>
+                              uri-template="http://localhost:8080/rest/api/music/get?album=Desperado"/>
                      </endpoint>
                   </send>
                </else>
