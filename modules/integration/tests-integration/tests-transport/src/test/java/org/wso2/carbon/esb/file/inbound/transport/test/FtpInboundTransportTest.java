@@ -154,10 +154,9 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 		Assert.assertTrue(isFileRead, "The XML file is not getting read");
 	}
 
-	//  This test case works locally, but in the Jenkins build, it fails due to a lack of permission issue
-		@SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
-		@Test(groups = "wso2.esb", dependsOnMethods = "testInboundInvalidFtpUsername", description = "Inbound endpoint move after process in FTP Test Case",enabled = true
-		)
+	//This test case works locally, but in the Jenkins build, it fails due to a lack of permission issue
+	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
+	@Test(groups = "wso2.esb", dependsOnMethods = "testInboundInvalidFtpUsername", description = "Inbound endpoint move after process in FTP Test Case",enabled = true)
 	public void testInboundEnpointMoveAfterProcessFTP() throws Exception {
 
 		addInboundEndpoint(addEndpoint2());
