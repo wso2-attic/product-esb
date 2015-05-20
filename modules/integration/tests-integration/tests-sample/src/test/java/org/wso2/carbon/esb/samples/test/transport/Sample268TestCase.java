@@ -58,7 +58,7 @@ public class Sample268TestCase extends ESBIntegrationTest {
     }
 
     @SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
-    @Test(groups = { "wso2.esb" }, description = "Proxy Services with the Local Transport")
+    @Test(groups = { "wso2.esb" }, description = "Proxy Services with the Local Transport",enabled = false)
     public void testLocalTransport() throws Exception {
 
         OMElement response = axis2Client

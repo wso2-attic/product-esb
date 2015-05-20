@@ -52,7 +52,7 @@ public class MailToTransportActionAfterFailureDELETETestCase extends ESBIntegrat
 
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test email has sent successfully" , enabled = false)
+    @Test(groups = {"wso2.esb"}, description = "Test email has sent successfully")
     public void testEmailReceivedActionAfterFailureDELETE() throws Exception {
         Date date = new Date();
         emailSubject = "Failure Delete : " + new Timestamp(date.getTime());

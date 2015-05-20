@@ -91,7 +91,7 @@ public class ESBJAVA3470 extends ESBIntegrationTest {
         Thread.sleep(15000);
     }
 
-    @Test(groups = "wso2.esb", description = "VFS absolute path test for sftp")
+    @Test(groups = "wso2.esb", description = "VFS absolute path test for sftp",enabled = false)
     @SetEnvironment(executionEnvironments = { ExecutionEnvironment.ALL })
     public void test() throws XMLStreamException, ProxyServiceAdminProxyAdminException, IOException, InterruptedException {
 

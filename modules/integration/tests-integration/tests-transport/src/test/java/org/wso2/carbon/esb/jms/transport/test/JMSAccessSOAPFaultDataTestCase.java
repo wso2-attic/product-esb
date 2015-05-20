@@ -60,7 +60,7 @@ public class JMSAccessSOAPFaultDataTestCase extends ESBIntegrationTest {
 	}
 
 	@Test(groups = { "wso2.esb" }, description = "Test whether the fault data can be retrieved by properties such as ERROR_CODE,ERROR_MESSAGE,ERROR_DETAIL  when soap fault received from backend" ,
-			   enabled = false
+			   enabled = true
 	)
 	public void readSOAPFaultDetails() {
 		int beforeLogCount = 0;
