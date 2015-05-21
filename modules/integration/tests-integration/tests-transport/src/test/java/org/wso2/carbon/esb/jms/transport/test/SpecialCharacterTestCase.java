@@ -72,7 +72,7 @@ public class SpecialCharacterTestCase extends ESBIntegrationTest {
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-   @Test(groups = {"wso2.esb"},enabled = false)
+    @Test(groups = {"wso2.esb"},enabled = false)
     public void testSpecialCharacterMediation() throws Exception {
 //        SimpleHttpClient httpClient = new SimpleHttpClient();
         String payload = "<test>This payload is üsed to check special character mediation</test>";
