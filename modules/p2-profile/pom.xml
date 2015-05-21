@@ -311,6 +311,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.common.feature:${carbon.multitenancy.version}
                                 </featureArtifactDef>
+				<featureArtifactDef>
+				    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.mgt.core.feature:${carbon.multitenancy.version}
+				</featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.usage.agent.feature:${carbon.multitenancy.version}
                                 </featureArtifactDef>
@@ -744,6 +747,10 @@
                                     <id>org.wso2.carbon.tenant.common.feature.group</id>
                                     <version>${carbon.multitenancy.version}</version>
                                 </feature>
+				<feature>
+			 	    <id>org.wso2.carbon.tenant.mgt.core.feature.group</id>
+				    <version>${carbon.multitenancy.version}</version>
+				</feature>
                                 <feature>
                                     <id>org.wso2.carbon.tenant.usage.agent.feature.group</id>
                                     <version>${carbon.multitenancy.version}</version>
@@ -1164,6 +1171,10 @@
                                     <id>org.wso2.carbon.tenant.common.feature.group</id>
                                     <version>${carbon.multitenancy.version}</version>
                                 </feature>
+				<feature>
+				   <id>org.wso2.carbon.tenant.mgt.core.feature.group</id>
+				   <version>${carbon.multitenancy.version}</version>
+				</feature>
                                 <feature>
                                     <id>org.wso2.carbon.tenant.usage.agent.feature.group</id>
                                     <version>${carbon.multitenancy.version}</version>
