@@ -280,6 +280,9 @@
 
                                 <!--5 Carbon-identity -->
                                 <featureArtifactDef>
+                                    org.wso2.carbon.identity:org.wso2.carbon.captcha.mgt.feature:${carbon.identity.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.security.mgt.feature:${carbon.identity.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -708,6 +711,10 @@
                                 </feature>
 
                                 <!-- 5 Carbon-identity  -->
+                                <feature>
+                                    <id>org.wso2.carbon.captcha.mgt.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature> 
                                 <feature>
                                     <id>org.wso2.carbon.security.mgt.feature.group</id>
                                     <version>${carbon.identity.version}</version>
@@ -1140,6 +1147,10 @@
                                 </feature>
 
                                 <!-- 5 Carbon-identity  -->
+                                <feature>
+                                    <id>org.wso2.carbon.captcha.mgt.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>  
                                 <feature>
                                     <id>org.wso2.carbon.security.mgt.feature.group</id>
                                     <version>${carbon.identity.version}</version>
