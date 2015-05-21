@@ -53,9 +53,6 @@ public class InboundEndpointContentTypePlainTest extends ESBIntegrationTest {
         // create InboundFileFolder if not exists
         if (InboundFileFolder.exists()) {
             FileUtils.deleteDirectory(InboundFileFolder);
-            InboundFileFolder.mkdir();
-            //this is to clean up and recreate folder in multiple iterations of builds
-            // when InboundFileFolder doesnt present it will lead to failure in test case
         } else {
             Assert.assertTrue(InboundFileFolder.mkdir(),
                     "InboundFileFolder not created");

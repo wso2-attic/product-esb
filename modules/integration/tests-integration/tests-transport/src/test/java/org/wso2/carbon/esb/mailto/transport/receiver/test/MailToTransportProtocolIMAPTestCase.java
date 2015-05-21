@@ -52,7 +52,7 @@ public class MailToTransportProtocolIMAPTestCase extends ESBIntegrationTest {
         MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test email sent" )
+    @Test(groups = {"wso2.esb"}, description = "Test email sent" , enabled = false)
     public void testEmailReceived() throws Exception {
         Date date = new Date();
         emailSubject = "IMAP Protocol " + new Timestamp(date.getTime());

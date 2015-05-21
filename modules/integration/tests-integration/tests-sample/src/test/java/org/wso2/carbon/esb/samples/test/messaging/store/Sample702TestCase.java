@@ -49,7 +49,7 @@ public class Sample702TestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = { "wso2.esb" }, description = "Introduction to Message Forwarding Processor " +
-            "test case", enabled = false)
+            "test case")
     public void messageStoringTest() throws Exception {
         // The count should be 0 as soon as the message store is created
         Assert.assertTrue(messageStoreAdminClient.getMessageCount(MESSAGE_STORE_NAME) == 0,

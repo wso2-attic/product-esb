@@ -104,7 +104,7 @@ public class ESBJAVA3430TestCase extends ESBIntegrationTest {
 
 	}
 
-	@Test(groups = "wso2.esb", description = "VFS NPE in Creating a File in FTP directly in root directory",enabled = false)
+	@Test(groups = "wso2.esb", description = "VFS NPE in Creating a File in FTP directly in root directory")
 	public void TestCreateFileInRoot() throws Exception {
 
 		// To check the timed out exception happened

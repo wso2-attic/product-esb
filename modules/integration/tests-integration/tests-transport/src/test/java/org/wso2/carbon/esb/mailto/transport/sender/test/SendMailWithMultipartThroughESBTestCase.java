@@ -69,7 +69,7 @@ public class SendMailWithMultipartThroughESBTestCase extends ESBIntegrationTest 
         MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test email transport with multipart email")
+    @Test(groups = {"wso2.esb"}, description = "Test email transport with multipart email" , enabled = false)
     public void testEmailTransport()
             throws ESBMailTransportIntegrationTestException, AxisFault, XMLStreamException {
         Date date = new Date();

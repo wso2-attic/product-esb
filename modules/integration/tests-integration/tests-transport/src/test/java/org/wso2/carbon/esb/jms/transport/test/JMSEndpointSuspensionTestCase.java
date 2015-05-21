@@ -17,7 +17,7 @@ import org.wso2.esb.integration.common.utils.JMSEndpointManager;
 public class JMSEndpointSuspensionTestCase extends ESBIntegrationTest {
     private EndPointAdminClient endPointAdminClient;
 
-    @BeforeClass(alwaysRun = true)
+//    @BeforeClass(alwaysRun = true)
     public void deployService() throws Exception {
         super.init();
         OMElement synapse = esbUtils.loadResource("/artifacts/ESB/jms/transport/jms_transport_jms_suspension.xml");
@@ -26,7 +26,7 @@ public class JMSEndpointSuspensionTestCase extends ESBIntegrationTest {
     }
 
         /* Disabling this test case as it is not properly written and it does not properly test the intention of the author. */
-    @Test(groups = {"wso2.esb"}, description = "Test JMS Endpoint suspension")
+//    @Test(groups = {"wso2.esb"}, description = "Test JMS Endpoint suspension")
     public void testJMSProxy() throws Exception {
 
         int initialEndpoints = endPointAdminClient.getEndpointCount();
@@ -62,7 +62,7 @@ public class JMSEndpointSuspensionTestCase extends ESBIntegrationTest {
 
     }
 
-    @AfterClass(alwaysRun = true)
+//    @AfterClass(alwaysRun = true)
     public void UndeployeService() throws Exception {
         super.cleanup();
         endPointAdminClient = null;

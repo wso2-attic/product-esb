@@ -42,7 +42,7 @@ public class Sample16TestCase extends ESBIntegrationTest {
         loadSampleESBConfiguration(16);
     }
 
-    @Test(groups = { "wso2.esb" }, description = "Dynamic and Static Registry Keys",enabled = false)
+    @Test(groups = { "wso2.esb" }, description = "Dynamic and Static Registry Keys")
     public void testDynamicAndStaticRegistryKeys() throws Exception {
         OMElement response = axis2Client.sendCustomQuoteRequest(getMainSequenceURL()
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");

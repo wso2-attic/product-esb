@@ -94,7 +94,7 @@ public class Sample254TestCase extends ESBIntegrationTest {
     }
 
     @SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
-    @Test(groups = { "wso2.esb" }, description = "Testing VFS transport",enabled = false)
+    @Test(groups = { "wso2.esb" }, description = "Testing VFS transport")
     public void testVfsTransport() throws Exception {
         File sourceFile = new File(pathToVfsDir + "test.xml");
         File targetFile = new File(inFolder.getAbsolutePath() + File.separator + "test.xml");
