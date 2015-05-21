@@ -48,7 +48,7 @@ public class JSONWithAPITestCase extends ESBIntegrationTest {
         super.cleanup();
     }
 
-    @Test(groups = "wso2.esb", description = "Testing json requests with API - POST request scenario" ,  enabled=false)
+    @Test(groups = "wso2.esb", description = "Testing json requests with API - POST request scenario" )
     public void testJSONWithAPIHTTPPostScenario() throws Exception {
 
         WebResource webResource = client

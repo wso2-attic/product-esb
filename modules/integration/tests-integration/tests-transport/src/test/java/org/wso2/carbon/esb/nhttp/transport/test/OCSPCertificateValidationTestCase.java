@@ -38,7 +38,7 @@ public class OCSPCertificateValidationTestCase extends ESBIntegrationTest{
 
     @Test(groups = {"wso2.esb"},
             description = "Sends https request to the backend with OCSP certificate validation " +
-                    "enabled ", enabled = false)
+                    "enabled ", enabled=false)
     public void sendHTTPSRequest() throws Exception {
 
         //HttpResponse response = HttpRequestUtil.sendGetRequest(esbServer.getServiceUrl().replace("/services","") + "/slive/echo/WSO2", null);

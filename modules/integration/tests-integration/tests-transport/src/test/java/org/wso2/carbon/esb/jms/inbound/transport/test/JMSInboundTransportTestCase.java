@@ -54,7 +54,7 @@ public class JMSInboundTransportTestCase extends ESBIntegrationTest {
 		inboundAdminClient = new InboundAdminClient(context.getContextUrls().getBackEndUrl(),getSessionCookie());
 	}
 
-	@Test(groups = { "wso2.esb" }, description = "Adding New JMS Inbound End point")
+	@Test(groups = { "wso2.esb" }, description = "Adding New JMS Inbound End point",enabled = false)
 	public void testAddingNewJMSInboundEndpoint() throws Exception {
 
 		int beforeCount = 0;
@@ -66,7 +66,7 @@ public class JMSInboundTransportTestCase extends ESBIntegrationTest {
 
 	}
 
-	@Test(groups = { "wso2.esb" }, description = "Updationg Existing JMS Inbound End point")
+	@Test(groups = { "wso2.esb" }, description = "Updationg Existing JMS Inbound End point", enabled = false)
 	public void testUpdatingJMSInboundEndpoint() throws Exception {
 		addInboundEndpoint(addEndpoint1());
 		updateInboundEndpoint(addEndpoint2());
@@ -85,7 +85,7 @@ public class JMSInboundTransportTestCase extends ESBIntegrationTest {
 
 	}
 
-	@Test(groups = { "wso2.esb" }, description = "Deleting an JMS Inbound End point")
+	@Test(groups = { "wso2.esb" }, description = "Deleting an JMS Inbound End point", enabled = false)
 	public void testDeletingJMSInboundEndpoint() throws Exception {
 		addInboundEndpoint(addEndpoint1());
 		int beforeCount = inboundAdminClient.getAllInboundEndpointNames().length;

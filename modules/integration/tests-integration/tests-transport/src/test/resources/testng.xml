@@ -78,6 +78,7 @@
         <packages>
             <package name="org.wso2.carbon.esb.vfs.transport.test.*"/>
         </packages>
+
     </test>
 
     <test name="TCP-transport-Test" preserve-order="true" verbose="2">
@@ -90,14 +91,14 @@
     <!--    <test name="HL7-transport-Test" preserve-order="true" verbose="2">
             <packages>
                 <package name="org.wso2.carbon.esb.hl7.transport.test.*"/>
-            </packages>
-        </test>-->
+            </packages>   -->
+    <!--    </test>-->
 
-    <!--<test name="inbound-File Transport-Test" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.file.inbound.transport.test"/>-->
-        <!--</packages>-->
-    <!--</test>-->
+    <test name="inbound-File Transport-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.file.inbound.transport.test"/>
+        </packages>
+    </test>
 
     <test name="inbound-Generic Transport-Test" preserve-order="true" verbose="2">
         <packages>
@@ -117,24 +118,23 @@
         </packages>
     </test>
 
-    <!--<test name="MailTo-transport-Test-Receiver" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.mailto.transport.receiver.test"/>-->
-        <!--</packages>-->
-    <!--</test>-->
+    <test name="MailTo-transport-Test-Receiver" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mailto.transport.receiver.test"/>
+         </packages>
+    </test>
 
-    <!--<test name="MailTo-transport-Test-Sender" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.mailto.transport.sender.test"/>-->
-        <!--</packages>-->
-    <!--</test>-->
+    <test name="MailTo-transport-Test-Sender" preserve-order="true" verbose="2">
+        <packages>
+             <package name="org.wso2.carbon.esb.mailto.transport.sender.test"/>
+         </packages>
+    </test>
 
-    <!--<test name="Https Inbound Transport Test" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.https.inbound.transport.test"/>-->
-        <!--</packages>-->
-    <!--</test>-->
-
+    <test name="Https Inbound Transport Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.https.inbound.transport.test"/>
+        </packages>
+    </test>
 
 </suite>
 

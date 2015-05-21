@@ -98,11 +98,10 @@ public class LoggingWithJSONTestCase extends ESBIntegrationTest {
                 .get(ClientResponse.class);
 
         Thread.sleep(3000);
-
+        logs = logViewer.getAllSystemLogs();
         afterLogSize = logs.length;
 
-        String responseMessage = "<soapenv:Body><jsonObject><album>Desperado</album><singer>Eagles</singer>" +
-                "</jsonObject></soapenv:Body>";
+        String responseMessage = "Direction: response, Payload: "+JSON_PAYLOAD;
 
         for (int i = (afterLogSize - beforeLogSize); i >= 0; i--) {
             if (logs[i].getMessage().contains(responseMessage)) {

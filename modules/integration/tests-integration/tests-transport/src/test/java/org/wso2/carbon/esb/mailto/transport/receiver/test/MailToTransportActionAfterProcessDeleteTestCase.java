@@ -50,7 +50,7 @@ public class MailToTransportActionAfterProcessDeleteTestCase extends ESBIntegrat
         MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test email sent" , enabled = false)
+    @Test(groups = {"wso2.esb"}, description = "Test email sent")
     public void testEmailReceivedActionAfterProcessDelete() throws Exception {
         Date date = new Date();
         emailSubject = "Process Delete : " + new Timestamp(date.getTime());

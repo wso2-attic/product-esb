@@ -50,7 +50,7 @@ public class MailToTransportActionAfterProcessMoveTestCase extends ESBIntegratio
         MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test email sent", enabled =false)
+    @Test(groups = {"wso2.esb"}, description = "Test email sent")
     public void testEmailReceivedActionAfterProcessMove() throws Exception {
         Date date = new Date();
         emailSubject = "Process Move : " + new Timestamp(date.getTime());
