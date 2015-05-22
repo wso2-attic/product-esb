@@ -22,7 +22,6 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 public class ESBJAVA_3698_MessageBuildingWithDifferentPayloadAndContentTypeTestCase extends
                                                                                    ESBIntegrationTest {
     private final DefaultHttpClient httpClient = new DefaultHttpClient();
-    // private LogViewerClient logViewerClient;
     final String carbonLogFile = CarbonBaseUtils.getCarbonHome() +
                                  "/repository/logs/wso2carbon.log";
     private ServerConfigurationManager serverConfigurationManager;
@@ -34,9 +33,6 @@ public class ESBJAVA_3698_MessageBuildingWithDifferentPayloadAndContentTypeTestC
         serverConfigurationManager = new ServerConfigurationManager(context);
         loadESBConfigurationFromClasspath("artifacts" + File.separator + "ESB" + File.separator +
                                           "json" + File.separator + "StockQuoteAPI.xml");
-        // logViewerClient =
-        // new LogViewerClient(esbServer.getBackEndUrl(),
-        // esbServer.getSessionCookie());
 
         final String log4jSourceFile =
                                        System.getProperty("framework.resource.location") +
@@ -64,17 +60,6 @@ public class ESBJAVA_3698_MessageBuildingWithDifferentPayloadAndContentTypeTestC
         HttpResponse response = httpClient.execute(post);
 
         Thread.sleep(2000);
-
-        // boolean responseInLog = false;
-        // LogEvent[] logs = logViewerClient.getAllSystemLogs();
-        //
-        // for (LogEvent logEvent : logs) {
-        // String message = logEvent.getMessage();
-        // if (message.contains("No JSON payload provided")) {
-        // responseInLog = true;
-        // break;
-        // }
-        // }
 
         // Asserting the results here.
         Assert.assertTrue(FileUtil.containsInFile(carbonLogFile, "org.apache.axis2.AxisFault: No JSON payload provided"),
