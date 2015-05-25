@@ -21,7 +21,7 @@
     <groupId>org.wso2.esb</groupId>
     <artifactId>esb-parent</artifactId>
     <packaging>pom</packaging>
-    <version>4.9.0-M9-SNAPSHOT</version>
+    <version>4.9.0-BETA-SNAPSHOT</version>
     <name>WSO2 ESB - Aggregator Module</name>
     <url>http://wso2.com/products/enterprise-service-bus</url>
     <description>WSO2 Enterprise Service Bus (ESB)</description>
@@ -1050,7 +1050,9 @@
     <properties>
 
         <!--Product Version-->
-        <product.esb.version>4.9.0-M9-SNAPSHOT</product.esb.version>
+
+        <product.esb.version>4.9.0-BETA-SNAPSHOT</product.esb.version>
+
 
         <!-- Axis2 -->
         <axis2.wso2.version>1.6.1.wso2v12</axis2.wso2.version>
@@ -1070,16 +1072,16 @@
         <org.apache.httpcomponents.wso2.version>4.2.3.wso2v1</org.apache.httpcomponents.wso2.version>
 
         <!-- Carbon mediation version -->
-        <carbon.mediation.version>4.4.1-SNAPSHOT</carbon.mediation.version>
+        <carbon.mediation.version>4.4.1</carbon.mediation.version>
 
         <!-- Carbon kernel version-->
         <carbon.kernel.version>4.4.0</carbon.kernel.version>
 
         <!-- Carbon Commons version-->
-        <carbon.commons.version>4.4.2</carbon.commons.version>
+        <carbon.commons.version>4.4.3</carbon.commons.version>
 
         <!-- Carbon Deployment version-->
-        <carbon.deployment.version>4.4.1-SNAPSHOT</carbon.deployment.version>
+        <carbon.deployment.version>4.4.1</carbon.deployment.version>
 
         <!-- Carbon Registry version-->
         <carbon.registry.version>4.4.1</carbon.registry.version>
@@ -1094,7 +1096,7 @@
         <carbon.governance.version>4.4.1</carbon.governance.version>
 
         <!-- Carbon Multitenancy version-->
-        <carbon.multitenancy.version>4.4.1-SNAPSHOT</carbon.multitenancy.version>
+        <carbon.multitenancy.version>4.4.1</carbon.multitenancy.version>
 
         <httpcore.version>4.1.2</httpcore.version>
         <httpcore.wso2.version>4.3.0.wso2v1</httpcore.wso2.version>
