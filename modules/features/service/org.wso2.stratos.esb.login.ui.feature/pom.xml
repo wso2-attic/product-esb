@@ -27,7 +27,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.stratos.esb.login.ui.feature</artifactId>
-    <version>4.9.0-ALPHA-SNAPSHOT</version>
+    <version>4.9.0-BETA-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>WSO2 Stratos ESB - Login UI Feature</name>
     <url>http://wso2.org</url>

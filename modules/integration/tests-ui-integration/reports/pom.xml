@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-integration-tests</artifactId>
-        <version>4.9.0-ALPHA-SNAPSHOT</version>
+        <version>4.9.0-BETA-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
