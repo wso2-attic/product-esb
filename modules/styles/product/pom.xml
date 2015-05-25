@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
     	<artifactId>esb-styles-parent</artifactId>
-        <version>4.9.0-M8-SNAPSHOT</version>
+        <version>4.9.0-BETA-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -52,7 +52,6 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
