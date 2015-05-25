@@ -359,6 +359,18 @@
     <!-- <transportReceiver name="idoc" class="org.wso2.carbon.transports.sap.SAPTransportListener"/> -->
     <!-- <transportReceiver name="bapi" class="org.wso2.carbon.transports.sap.SAPTransportListener"/> -->
 
+    <!--Uncomment this and configure as appropriate for RabbitMQ transport support
+    <transportReceiver name="rabbitmq" class="org.apache.axis2.transport.rabbitmq.RabbitMQListener">
+        <parameter name="AMQPConnectionFactory" locked="false">
+            <parameter name="rabbitmq.server.host.name" locked="false">localhost</parameter>
+            <parameter name="rabbitmq.server.port" locked="false">5672</parameter>
+            <parameter name="rabbitmq.server.user.name" locked="false"></parameter>
+            <parameter name="rabbitmq.server.password" locked="false"></parameter>
+            <parameter name="rabbitmq.connection.retry.interval" locked="false">10000</parameter>
+            <parameter name="rabbitmq.connection.retry.count" locked="false">5</parameter>
+        </parameter>
+    </transportReceiver-->
+
     <!-- ================================================= -->
     <!--             Transport Outs (Senders)              -->
     <!-- ================================================= -->
@@ -423,6 +435,9 @@
     <!-- SAP Transport Senders -->
     <!-- <transportSender name="idoc" class="org.wso2.carbon.transports.sap.SAPTransportSender"/> -->
     <!-- <transportSender name="bapi" class="org.wso2.carbon.transports.sap.SAPTransportSender"/> -->
+
+    <!-- Uncomment this and configure to use RabbitMQ connection pools for sending messages
+    <transportSender name="rabbitmq" class="org.apache.axis2.transport.rabbitmq.RabbitMQSender"/-->
 
     <!-- ================================================= -->
     <!--             Global Engaged Modules                -->
