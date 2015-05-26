@@ -58,7 +58,9 @@ public class RabbitMQProducerClient {
         try {
             channel.queueDeclarePassive(routeKey);
         } catch (IOException e) {
-            if (!channel.isOpen()) channel = connection.createChannel();
+            if (!channel.isOpen()) {
+                channel = connection.createChannel();
+            }
             channel.queueDeclare(routeKey, false, false, false, null);
         }
 
@@ -70,9 +72,17 @@ public class RabbitMQProducerClient {
                 new AMQP.BasicProperties.Builder().contentType("text/plain").build(), message.getBytes());
     }
 
-    public void disconnect() throws IOException {
-        channel.close();
-        connection.close();
+    public void disconnect(){
+        try {
+            channel.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            connection.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

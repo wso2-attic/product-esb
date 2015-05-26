@@ -31,7 +31,6 @@ public class RabbitMQConsumerClient {
     private ConnectionFactory factory = null;
     private Connection connection = null;
     private Channel channel = null;
-    private String exchangeName = "EXCHANGE";
     private String routeKey = "QUEUE";
 
     public RabbitMQConsumerClient(String host) {
@@ -42,7 +41,6 @@ public class RabbitMQConsumerClient {
     public void connect(String exchangeName, String routeKey) throws IOException {
         connection = factory.newConnection();
         channel = connection.createChannel();
-        this.exchangeName = exchangeName;
         this.routeKey = routeKey;
 
         try {
@@ -59,6 +57,9 @@ public class RabbitMQConsumerClient {
         try {
             channel.queueDeclarePassive(routeKey);
         } catch (IOException e) {
+            if (!channel.isOpen()) {
+                channel = connection.createChannel();
+            }
             channel.queueDeclare(routeKey, false, false, false, null);
         }
 
@@ -69,14 +70,22 @@ public class RabbitMQConsumerClient {
         List<String> messages = new ArrayList<String>();
         GetResponse response = null;
 
-        while ((response = channel.basicGet(routeKey, true))!=null) {
+        while ((response = channel.basicGet(routeKey, true)) != null) {
             messages.add(new String(response.getBody()));
         }
         return messages;
     }
 
-    public void disconnect() throws IOException {
-        channel.close();
-        connection.close();
+    public void disconnect(){
+        try {
+            channel.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            connection.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

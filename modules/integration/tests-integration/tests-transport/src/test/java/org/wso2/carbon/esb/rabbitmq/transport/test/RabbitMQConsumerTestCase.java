@@ -17,7 +17,7 @@
 
 package org.wso2.carbon.esb.rabbitmq.transport.test;
 
-import junit.framework.Assert;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -25,6 +25,8 @@ import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.clients.rabbitmqclient.RabbitMQProducerClient;
+
+import java.io.IOException;
 
 public class RabbitMQConsumerTestCase extends ESBIntegrationTest {
 
@@ -80,7 +82,6 @@ public class RabbitMQConsumerTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void end() throws Exception {
-        super.init();
         super.cleanup();
         logViewer = null;
     }
