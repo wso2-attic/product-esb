@@ -46,7 +46,12 @@ public class RabbitMQProducerTestCase extends ESBIntegrationTest {
         Thread.sleep(10000);
 
         RabbitMQConsumerClient consumer = new RabbitMQConsumerClient("localhost");
-        consumer.connect("exchange1", "queue1");
+
+        try {
+            consumer.connect("exchange1", "queue1");
+        } catch (IOException e) {
+            Assert.fail("Could not connect to RabbitMQ broker");
+        }
 
         List<String> messages = consumer.popAllMessages();
         if (messages == null || messages.size() == 0) {

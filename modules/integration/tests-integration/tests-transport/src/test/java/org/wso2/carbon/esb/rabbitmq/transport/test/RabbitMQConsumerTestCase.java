@@ -28,7 +28,7 @@ import org.wso2.esb.integration.common.utils.clients.rabbitmqclient.RabbitMQProd
 
 public class RabbitMQConsumerTestCase extends ESBIntegrationTest {
 
-    LogViewerClient logViewer;
+    private LogViewerClient logViewer;
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
@@ -56,6 +56,8 @@ public class RabbitMQConsumerTestCase extends ESBIntegrationTest {
                                 "</ser:placeOrder>";
                 sender.sendBasicMessage(message);
             }
+        } catch (IOException e) {
+            Assert.fail("Could not connect to RabbitMQ broker");
         } finally {
             sender.disconnect();
         }
