@@ -190,6 +190,7 @@ public class NestedForEachTestCase extends ESBIntegrationTest {
                 sb.append(new String(bytes, 0, len));
             }
         }
+        response.close();
     }
 
     @AfterClass(alwaysRun = true)

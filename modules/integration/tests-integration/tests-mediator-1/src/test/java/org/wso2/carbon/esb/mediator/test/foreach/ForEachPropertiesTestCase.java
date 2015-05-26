@@ -574,5 +574,6 @@ public class ForEachPropertiesTestCase extends ESBIntegrationTest {
             }
             out = sb.toString();
         }
+        response.close();
     }
 }

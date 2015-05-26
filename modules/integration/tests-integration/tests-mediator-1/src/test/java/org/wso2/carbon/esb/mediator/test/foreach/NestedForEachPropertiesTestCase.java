@@ -281,5 +281,6 @@ public class NestedForEachPropertiesTestCase extends ESBIntegrationTest {
                 sb.append(new String(bytes, 0, len));
             }
         }
+        response.close();
     }
 }
