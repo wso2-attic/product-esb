@@ -28,11 +28,11 @@ import java.util.List;
 
 public class RabbitMQConsumerClient {
 
-    ConnectionFactory factory = null;
-    Connection connection = null;
-    Channel channel = null;
-    String exchangeName = "EXCHANGE";
-    String routeKey = "QUEUE";
+    private ConnectionFactory factory = null;
+    private Connection connection = null;
+    private Channel channel = null;
+    private String exchangeName = "EXCHANGE";
+    private String routeKey = "QUEUE";
 
     public RabbitMQConsumerClient(String host) {
         factory = new ConnectionFactory();

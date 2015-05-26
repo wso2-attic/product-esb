@@ -25,7 +25,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import java.io.IOException;
 
 public class RabbitMQProducerClient {
-    ConnectionFactory factory = null;
+    private ConnectionFactory factory = null;
     private Connection connection = null;
     private Channel channel = null;
     private String exchangeName = "EXCHANGE";
