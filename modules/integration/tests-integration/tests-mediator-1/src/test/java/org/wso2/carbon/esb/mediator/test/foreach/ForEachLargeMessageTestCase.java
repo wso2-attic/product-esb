@@ -33,8 +33,8 @@ import org.wso2.esb.integration.common.utils.common.FixedSizeSymbolGenerator;
 
 public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
 
-    String symbol;
-    LogViewerClient logViewer;
+    private String symbol;
+    private LogViewerClient logViewer;
 
     @BeforeClass
     public void setEnvironment() throws Exception {
@@ -117,14 +117,12 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
 
         String symbol2 = FixedSizeSymbolGenerator.generateMessageMB(3);
         OMElement response;
-        for (int i = 0; i < 1; i++) {
-            response =
-                    axis2Client.sendCustomQuoteRequest(getMainSequenceURL(),
-                            null, "MSFT" + symbol2);
-            Assert.assertNotNull(response);
-            Assert.assertTrue(response.toString().contains("MSFT"), "Incorrect symbol in response");
-            response = null;
-        }
+
+        response =
+                axis2Client.sendCustomQuoteRequest(getMainSequenceURL(),
+                        null, "MSFT" + symbol2);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.toString().contains("MSFT"), "Incorrect symbol in response");
 
         LogEvent[] logs = logViewer.getAllRemoteSystemLogs();
         int afterLogSize = logs.length;

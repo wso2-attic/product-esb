@@ -33,8 +33,8 @@ import org.wso2.esb.integration.common.utils.common.FixedSizeSymbolGenerator;
 
 public class ForEachSmallMessageTestCase extends ESBIntegrationTest {
 
-    String symbol;
-    LogViewerClient logViewer;
+    private String symbol;
+    private LogViewerClient logViewer;
 
     @BeforeClass
     public void setEnvironment() throws Exception {

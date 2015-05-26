@@ -205,11 +205,7 @@ public class ForEachPropertyMediatorTestCase extends ESBIntegrationTest {
             output.write(query.getBytes(charset));
         } finally {
             if (output != null) {
-                try {
-                    output.close();
-                } catch (IOException logOrIgnore) {
-                    log.error("Error while closing the connection");
-                }
+                output.close();
             }
         }
         InputStream response = connection.getInputStream();

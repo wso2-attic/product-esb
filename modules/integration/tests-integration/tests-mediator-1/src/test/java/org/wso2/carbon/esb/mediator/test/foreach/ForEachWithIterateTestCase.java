@@ -125,7 +125,6 @@ public class ForEachWithIterateTestCase extends ESBIntegrationTest {
             Assert.assertTrue(getQuote.toString().contains("IBM"));
         }
         Assert.assertEquals(i, 2, "Message count mismatched in response");
-
     }
 
 
