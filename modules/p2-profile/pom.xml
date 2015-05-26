@@ -18,7 +18,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-parent</artifactId>
-        <version>4.9.0-M8-SNAPSHOT</version>
+        <version>4.9.0-BETA-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -141,6 +141,12 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.wso2.carbon.identity.xacml.mediator.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.event.sink.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.mediator.publishevent.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
 
                                 <!--2 Carbon-Kernel-->
                                 <featureArtifactDef>
@@ -153,6 +159,9 @@
                                 </featureArtifactDef>           
 
                                 <!--3 Carbon Commons-->
+				<featureArtifactDef>
+                                    org.wso2.carbon.commons:org.wso2.carbon.tenant.mgt.common.feature:${carbon.commons.version}
+                                </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.discovery.core.feature:${carbon.commons.version}
                                 </featureArtifactDef>
@@ -270,6 +279,9 @@
                                 </featureArtifactDef>
 
                                 <!--5 Carbon-identity -->
+                                <!--<featureArtifactDef>
+                                    org.wso2.carbon.identity:org.wso2.carbon.captcha.mgt.feature:${carbon.identity.version}
+                                </featureArtifactDef>-->
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.security.mgt.feature:${carbon.identity.version}
                                 </featureArtifactDef>
@@ -279,10 +291,6 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.server.feature:${carbon.identity.version}
                                 </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.core.server.feature:${carbon.identity.version}
-                                </featureArtifactDef>
-
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature:${carbon.identity.version}
                                 </featureArtifactDef>
@@ -309,6 +317,12 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.common.feature:${carbon.multitenancy.version}
                                 </featureArtifactDef>
+				<featureArtifactDef>
+				    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.mgt.core.feature:${carbon.multitenancy.version}
+				</featureArtifactDef>	
+				<featureArtifactDef>
+				    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.mgt.server.feature:${carbon.multitenancy.version}
+				</featureArtifactDef>					
                                 <featureArtifactDef>
                                     org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.usage.agent.feature:${carbon.multitenancy.version}
                                 </featureArtifactDef>
@@ -527,6 +541,14 @@
                                    <id>org.wso2.carbon.identity.xacml.mediator.feature.group</id>
                                    <version>${carbon.mediation.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.event.sink.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.mediator.publishevent.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
 
                                 <!-- 2 Carbon-Kernel -->
                                 <feature>
@@ -617,6 +639,10 @@
                                     <version>${carbon.commons.version}</version>
                                 </feature>
                                 <feature>
+                                    <id>org.wso2.carbon.tenant.mgt.common.feature.group</id>
+                                    <version>${carbon.commons.version}</version>
+                                </feature>
+                                <feature>
                                     <id>org.wso2.carbon.discovery.core.feature.group</id>
                                     <version>${carbon.commons.version}</version>
                                 </feature>
@@ -688,6 +714,10 @@
                                 </feature>
 
                                 <!-- 5 Carbon-identity  -->
+                                <!--<feature>
+                                    <id>org.wso2.carbon.captcha.mgt.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature> -->
                                 <feature>
                                     <id>org.wso2.carbon.security.mgt.feature.group</id>
                                     <version>${carbon.identity.version}</version>
@@ -698,10 +728,6 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
-                                    <version>${carbon.identity.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.identity.core.server.feature.group</id>
                                     <version>${carbon.identity.version}</version>
                                 </feature>
                                 <feature>
@@ -738,6 +764,14 @@
                                     <id>org.wso2.carbon.tenant.common.feature.group</id>
                                     <version>${carbon.multitenancy.version}</version>
                                 </feature>
+				<feature>
+			 	    <id>org.wso2.carbon.tenant.mgt.core.feature.group</id>
+				    <version>${carbon.multitenancy.version}</version>
+				</feature>
+				<feature>
+			 	    <id>org.wso2.carbon.tenant.mgt.server.feature.group</id>
+				    <version>${carbon.multitenancy.version}</version>
+				</feature>
                                 <feature>
                                     <id>org.wso2.carbon.tenant.usage.agent.feature.group</id>
                                     <version>${carbon.multitenancy.version}</version>
@@ -957,6 +991,14 @@
                                     <id>org.wso2.carbon.identity.xacml.mediator.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.event.sink.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.mediator.publishevent.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
 
                                 <!-- 2 Carbon-Kernel -->
                                 <feature>
@@ -1045,6 +1087,10 @@
                                     <version>${carbon.commons.version}</version>
                                 </feature>
                                 <feature>
+                                    <id>org.wso2.carbon.tenant.mgt.common.feature.group</id>
+                                    <version>${carbon.commons.version}</version>
+                                </feature> 
+                                <feature>
                                     <id>org.wso2.carbon.discovery.core.feature.group</id>
                                     <version>${carbon.commons.version}</version>
                                 </feature>
@@ -1108,6 +1154,10 @@
                                 </feature>
 
                                 <!-- 5 Carbon-identity  -->
+                                <!--<feature>
+                                    <id>org.wso2.carbon.captcha.mgt.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>-->
                                 <feature>
                                     <id>org.wso2.carbon.security.mgt.feature.group</id>
                                     <version>${carbon.identity.version}</version>
@@ -1118,10 +1168,6 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
-                                    <version>${carbon.identity.version}</version>
-                                </feature>
-				 <feature>
-                                    <id>org.wso2.carbon.identity.core.server.feature.group</id>
                                     <version>${carbon.identity.version}</version>
                                 </feature>
 
@@ -1154,6 +1200,14 @@
                                     <id>org.wso2.carbon.tenant.common.feature.group</id>
                                     <version>${carbon.multitenancy.version}</version>
                                 </feature>
+				<feature>
+				   <id>org.wso2.carbon.tenant.mgt.core.feature.group</id>
+				   <version>${carbon.multitenancy.version}</version>
+				</feature>
+				<feature>
+			 	    <id>org.wso2.carbon.tenant.mgt.server.feature.group</id>
+				    <version>${carbon.multitenancy.version}</version>
+				</feature> 
                                 <feature>
                                     <id>org.wso2.carbon.tenant.usage.agent.feature.group</id>
                                     <version>${carbon.multitenancy.version}</version>

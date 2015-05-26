@@ -21,6 +21,8 @@
 <!-- Introduction to Tasks with simple trigger -->
 <definitions xmlns="http://ws.apache.org/ns/synapse">
 
+    <taskManager provider="org.wso2.carbon.mediation.ntask.NTaskTaskManager"/>
+
     <task class="org.apache.synapse.startup.tasks.MessageInjector" name="CheckPrice">
         <property name="to" value="http://localhost:9000/services/SimpleStockQuoteService"/>
         <property name="soapAction" value="urn:getQuote"/>
