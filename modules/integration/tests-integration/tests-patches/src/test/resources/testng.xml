@@ -80,6 +80,12 @@
         </classes>
     </test>
 
+    <test name="JMS Test">
+        <classes>
+            <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA3714JMXPauseJMSListener" />
+        </classes>
+    </test>
+
     <test name="VFS SFTP test"
           preserve-order="true" verbose="2">
         <classes>
