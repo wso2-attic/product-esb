@@ -83,12 +83,12 @@ public class TaskAdminClient {
 
     public OMElement getScheduleTask(String name, String group)
             throws TaskManagementException, RemoteException {
-        return taskAdminStub.getTaskDescription(name, group);
+        return (OMElement) taskAdminStub.getTaskDescription(name, group);
 
     }
 
     public OMElement getAllTaskDescriptions() throws RemoteException, TaskManagementException {
-        return taskAdminStub.getAllTaskDescriptions();
+        return (OMElement) taskAdminStub.getAllTaskDescriptions(null);
     }
 
     public List<String> getScheduleTaskList() throws RemoteException, TaskManagementException {

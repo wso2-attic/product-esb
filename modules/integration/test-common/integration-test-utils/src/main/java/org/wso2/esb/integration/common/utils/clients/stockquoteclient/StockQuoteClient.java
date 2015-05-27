@@ -191,6 +191,18 @@ public class StockQuoteClient {
         }
     }
 
+    public OMElement sendMultipleCustomQuoteRequest(String trpUrl, String addUrl, String symbol,
+                                                    int n) throws AxisFault {
+
+        ServiceClient serviceClient = getServiceClient(trpUrl, addUrl);
+        try {
+            return buildResponse(
+                    serviceClient.sendReceive(createMultipleCustomQuoteRequest(symbol, n)));
+        } finally {
+            serviceClient.cleanupTransport();
+        }
+    }
+
     public OMElement sendMultipleQuoteRequest(String trpUrl, String addUrl, String symbol, int n)
             throws AxisFault {
 
@@ -322,6 +334,21 @@ public class StockQuoteClient {
         chkPrice.addChild(code);
         code.setText(symbol);
         return chkPrice;
+    }
+
+    private OMElement createMultipleCustomQuoteRequest(String symbol, int iterations) {
+        OMFactory fac = OMAbstractFactory.getOMFactory();
+        OMNamespace omNs = fac.createOMNamespace("http://services.samples", "ns");
+        OMElement method = fac.createOMElement("getQuote", omNs);
+
+        for (int i = 0; i < iterations; i++) {
+            OMElement chkPrice = fac.createOMElement("CheckPriceRequest", omNs);
+            OMElement code = fac.createOMElement("Code", omNs);
+            chkPrice.addChild(code);
+            code.setText(symbol);
+            method.addChild(chkPrice);
+        }
+        return method;
     }
 
     private static OMElement buildResponse(OMElement omElement) {
