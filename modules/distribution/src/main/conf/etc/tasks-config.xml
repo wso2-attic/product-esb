@@ -12,7 +12,7 @@
       To be used in CLUSTERED mode to notify how many servers are there in 
       the task server cluster, the servers wait till this amount of servers
       are activated before the tasks are scheduled -->
-    <taskServerCount>2</taskServerCount>
+    <taskServerCount>1</taskServerCount>
 
     <!-- The default location resolver configuration -->
     <defaultLocationResolver>
