@@ -33,6 +33,7 @@ public class SimpleSocketServer extends Thread {
     private int port;
     private String expectedOutput;
     private ServerSocket serverSocket;
+    private StringBuffer receivedRequest;
 
     public SimpleSocketServer(int port, String expectedOutput) {
         this.port = port;
@@ -56,6 +57,10 @@ public class SimpleSocketServer extends Thread {
                     if ((s = in.readLine()) != null) {
                         System.out.println(s);
                         if (!s.isEmpty()) {
+                            if (receivedRequest == null) {
+                                receivedRequest = new StringBuffer();
+                            }
+                            receivedRequest.append(s);
                             continue;
                         }
                     }
@@ -76,13 +81,26 @@ public class SimpleSocketServer extends Thread {
     }
 
 
+    public String getReceivedRequest() {
+        if (receivedRequest == null) {
+            return null;
+        }
+        return receivedRequest.toString();
+    }
+
+
+    public void resetServerDetails() {
+        receivedRequest = null;
+    }
+
+
     public void shutdown() {
         if (serverSocket != null && !serverSocket.isClosed()) {
             try {
-                System.err.println("Server shutting down");
+                System.err.println("Simple socket server shutting down");
                 serverSocket.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                //NO need to handle
             }
         }
     }
