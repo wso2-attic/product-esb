@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+
+    <proxy name="Proxy1"
+           transports="https http"
+           startOnLoad="true"
+           trace="disable">
+        <description/>
+        <target>
+            <inSequence>
+                <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
+                <property name="OUT_ONLY" value="true"/>
+                <log level="full"/>
+                <store messageStore="JMSMS"/>
+            </inSequence>
+        </target>
+    </proxy>
+
+    <endpoint name="SimpleStockQuoteService">
+        <address uri="http://localhost:1989"/>
+    </endpoint>
+
+    <sequence name="fault">
+        <log level="full">
+            <property name="MESSAGE" value="Executing default 'fault' sequence"/>
+            <property name="ERROR_CODE" expression="get-property('ERROR_CODE')"/>
+            <property name="ERROR_MESSAGE" expression="get-property('ERROR_MESSAGE')"/>
+        </log>
+        <drop/>
+    </sequence>
+
+    <messageStore class="org.apache.synapse.message.store.impl.jms.JmsStore"
+                  name="JMSMS">
+        <parameter name="java.naming.factory.initial">org.apache.activemq.jndi.ActiveMQInitialContextFactory</parameter>
+        <parameter name="store.jms.cache.connection">false</parameter>
+        <parameter name="java.naming.provider.url">tcp://127.0.0.1:61616</parameter>
+        <parameter name="store.jms.JMSSpecVersion">1.1</parameter>
+    </messageStore>
+    <messageProcessor class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
+                      name="processor2"
+                      targetEndpoint="SimpleStockQuoteService"
+                      messageStore="JMSMS">
+        <parameter name="max.delivery.attempts">60</parameter>
+        <parameter name="client.retry.interval">1000</parameter>
+        <parameter name="interval">1000</parameter>
+        <parameter name="non.retry.status.codes">200,202</parameter>
+        <parameter name="is.active">true</parameter>
+    </messageProcessor>
+
+</definitions>

@@ -98,5 +98,17 @@ public class ActiveMQServer extends ESBIntegrationTest {
     private JMSBrokerConfiguration getJMSBrokerConfiguration() {
         return JMSBrokerConfigurationProvider.getInstance().getBrokerConfiguration();
     }
+
+    public void stop() {
+        if (activeMqBroker != null) {
+            assertTrue(activeMqBroker.stop(), "JMS Broker(ActiveMQ) Stopping failed");
+        }
+    }
+
+    public void start() {
+        if (activeMqBroker != null) {
+            assertTrue(activeMqBroker.start(), "JMS Broker(ActiveMQ) Start failed");
+        }
+    }
 }
 

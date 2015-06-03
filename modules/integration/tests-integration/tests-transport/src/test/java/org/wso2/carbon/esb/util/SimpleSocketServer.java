@@ -15,7 +15,7 @@
 *specific language governing permissions and limitations
 *under the License.
 */
-package org.wso2.carbon.esb.passthru.transport.test.util;
+package org.wso2.carbon.esb.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -34,6 +34,7 @@ public class SimpleSocketServer extends Thread {
     private String expectedOutput;
     private ServerSocket serverSocket;
     private StringBuffer receivedRequest;
+    private static int requestCount;
 
     public SimpleSocketServer(int port, String expectedOutput) {
         this.port = port;
@@ -49,6 +50,7 @@ public class SimpleSocketServer extends Thread {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 System.err.println("Client connected");
+                ++requestCount;
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
 
@@ -105,4 +107,7 @@ public class SimpleSocketServer extends Thread {
         }
     }
 
+    public static int getRequestCount() {
+        return requestCount;
+    }
 }

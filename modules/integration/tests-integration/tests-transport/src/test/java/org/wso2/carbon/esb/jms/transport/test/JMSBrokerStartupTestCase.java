@@ -26,7 +26,7 @@ import org.wso2.esb.integration.common.utils.servers.ActiveMQServer;
 
 public class JMSBrokerStartupTestCase extends ESBIntegrationTest {
 
-    private ActiveMQServer activeMQServer
+    private static ActiveMQServer activeMQServer
             = new ActiveMQServer();
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
@@ -41,6 +41,14 @@ public class JMSBrokerStartupTestCase extends ESBIntegrationTest {
     public void close() throws Exception {
         activeMQServer.stopJMSBrokerRevertESBConfiguration();
 
+    }
+
+    public static void stop() {
+        activeMQServer.stop();
+    }
+
+    public static void start() {
+        activeMQServer.start();
     }
 }
 

@@ -24,7 +24,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
-import org.wso2.carbon.esb.passthru.transport.test.util.SimpleSocketServer;
+import org.wso2.carbon.esb.util.SimpleSocketServer;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestCaseUtils;
 
@@ -84,9 +84,12 @@ public class ESBJAVA3686DuplicateTransferEncodingTestCase extends ESBIntegration
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
-        if (simpleSocketServer != null) {
-            simpleSocketServer.shutdown();
+        try {
+            super.cleanup();
+        } finally {
+            if (simpleSocketServer != null) {
+                simpleSocketServer.shutdown();
+            }
         }
-        super.cleanup();
     }
 }
