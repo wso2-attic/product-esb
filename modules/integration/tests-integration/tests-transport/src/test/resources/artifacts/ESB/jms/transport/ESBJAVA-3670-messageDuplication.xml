@@ -16,7 +16,7 @@
         </target>
     </proxy>
 
-    <endpoint name="SimpleStockQuoteService">
+    <endpoint name="simpleBackendService">
         <address uri="http://localhost:1989"/>
     </endpoint>
 
@@ -38,7 +38,7 @@
     </messageStore>
     <messageProcessor class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
                       name="processor2"
-                      targetEndpoint="SimpleStockQuoteService"
+                      targetEndpoint="simpleBackendService"
                       messageStore="JMSMS">
         <parameter name="max.delivery.attempts">60</parameter>
         <parameter name="client.retry.interval">1000</parameter>
