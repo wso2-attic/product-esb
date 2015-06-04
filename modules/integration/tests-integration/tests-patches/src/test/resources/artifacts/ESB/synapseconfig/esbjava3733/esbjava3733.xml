@@ -42,70 +42,19 @@
         </out>
         <description>The main sequence for the message mediation</description>
     </sequence>
-    <api name="Devices" context="/devices">
-        <resource methods="GET" uri-template="/getDevices/{limit}">
-            <inSequence>
-                <property name="LIMIT"
-                          expression="get-property('uri.var.limit')"
-                          scope="default"
-                          type="DOUBLE"/>
-                <call>
-                    <endpoint>
-                        <http method="get" uri-template="http://localhost:8280/alldevices/"/>
-                    </endpoint>
-                </call>
-                <iterate id="iterator-id"
-                         expression="//deviceId"
-                         sequential="true">
-                    <target>
-                        <sequence>
-                            <log level="custom">
-                                <property name="STATUS"
-                                          value="--------------------------- Device found ------------------------"/>
-                            </log>
-                            <send>
-                                <endpoint>
-                                    <http method="post" uri-template="http://localhost:8280/deviceid/"/>
-                                </endpoint>
-                            </send>
-                        </sequence>
-                    </target>
-                </iterate>
-            </inSequence>
-            <outSequence>
-                <property name="root" scope="default">
-                    <root:rootelement xmlns:root="http://ws.wso2.org/dataservice"/>
-                </property>
-                <log level="custom">
-                    <property name="STATUS"
-                              value="--------------------------- Aggregate ------------------------"/>
-                    <property name="INTLIMIT" expression="get-property('LIMIT')"/>
-                </log>
-                <aggregate id="iterator-id">
-                    <completeCondition>
-                        <messageCount min="-1" max="{get-property('LIMIT')}"/>
-                    </completeCondition>
-                    <onComplete expression="//jsonObject" enclosingElementProperty="root">
-                        <log level="custom">
-                            <property name="aggregate devices" value="finished"/>
-                        </log>
-                        <send/>
-                    </onComplete>
-                </aggregate>
-                <log level="full">
-                    <property name="STATUS"
-                              value="--------------------------- Final ------------------------"/>
-                </log>
-            </outSequence>
-        </resource>
-    </api>
     <api name="DeviceID" context="/deviceid">
-        <resource methods="POST" uri-template="/">
+        <resource methods="POST" uri-template="/{id}">
             <inSequence>
                 <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
+                <property name="ID"
+                          expression="get-property('uri.var.id')"
+                          scope="default"
+                          type="INTEGER"/>
                 <payloadFactory media-type="json">
-                    <format>{ "deviceId": "dev-1111"}</format>
-                    <args/>
+                    <format>{ "deviceId": "device-$1"}</format>
+                    <args>
+                        <arg evaluator="xml" expression="get-property('ID')"/>
+                    </args>
                 </payloadFactory>
                 <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
                 <property name="messageType"
@@ -121,7 +70,9 @@
             <inSequence>
                 <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
                 <payloadFactory media-type="json">
-                    <format>{    "devices" : [    {    "deviceId": "dev-007" }, {    "deviceId": "dev-006" }, {    "deviceId": "dev-005" }, {    "deviceId": "dev-004" }, {    "deviceId": "dev-003" } ]}</format>
+                    <format>{ "devices" : [ { "deviceId": "1" }, { "deviceId": "2" }, { "deviceId": "3" }, { "deviceId":
+                        "4" }, { "deviceId": "5" } ]}
+                    </format>
                     <args/>
                 </payloadFactory>
                 <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
@@ -133,5 +84,49 @@
             </inSequence>
         </resource>
     </api>
-
+    <api name="Devices" context="/devices">
+        <resource methods="GET" uri-template="/getDevices/{limit}">
+            <inSequence>
+                <property name="LIMIT"
+                          expression="get-property('uri.var.limit')"
+                          scope="default"
+                          type="DOUBLE"/>
+                <call>
+                    <endpoint>
+                        <http method="get" uri-template="http://localhost:8280/alldevices/"/>
+                    </endpoint>
+                </call>
+                <iterate id="iterator-id" expression="//deviceId" sequential="true">
+                    <target>
+                        <sequence>
+                            <property
+                                    name="uri.var.id"
+                                    expression="//deviceId"
+                                    scope="default"
+                                    type="STRING"/>
+                            <send>
+                                <endpoint>
+                                    <http method="post"
+                                          uri-template="http://localhost:8280/deviceid/{uri.var.id}"/>
+                                </endpoint>
+                            </send>
+                        </sequence>
+                    </target>
+                </iterate>
+            </inSequence>
+            <outSequence>
+                <property name="root" scope="default">
+                    <root:rootelement xmlns:root="http://ws.wso2.org/dataservice"/>
+                </property>
+                <aggregate id="iterator-id">
+                    <completeCondition>
+                        <messageCount min="-1" max="{get-property('LIMIT')}"/>
+                    </completeCondition>
+                    <onComplete expression="//jsonObject" enclosingElementProperty="root">
+                        <send/>
+                    </onComplete>
+                </aggregate>
+            </outSequence>
+        </resource>
+    </api>
 </definitions>

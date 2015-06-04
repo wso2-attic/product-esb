@@ -50,35 +50,32 @@ public class ESBJAVA3733TestCase extends ESBIntegrationTest {
 
         String response = sendRequest(serviceUrl + "/getDevices/1");
 
-        Assert.assertEquals(response, "{\"rootelement\":{\"deviceId\":\"dev-1111\"}}");
-
+        Assert.assertEquals(response, "{\"rootelement\":{\"deviceId\":\"device-1\"}}");
     }
 
     @Test
     public void testAggregateMaximumCountGreaterThanOne() {
         String response = sendRequest(serviceUrl + "/getDevices/2");
 
-        Assert.assertEquals(response, "{\"rootelement\":[{\"deviceId\":\"dev-1111\"},{\"deviceId\":\"dev-1111\"}]}");
+        Assert.assertEquals(response, "{\"rootelement\":[{\"deviceId\":\"device-1\"},{\"deviceId\":\"device-2\"}]}");
 
         response = sendRequest(serviceUrl + "/getDevices/6");
 
-        Assert.assertEquals(response, "{\"rootelement\":[{\"deviceId\":\"dev-1111\"},{\"deviceId\":\"dev-1111\"}," +
-                "{\"deviceId\":\"dev-1111\"},{\"deviceId\":\"dev-1111\"},{\"deviceId\":\"dev-1111\"}]}");
-
+        Assert.assertEquals(response, "{\"rootelement\":[{\"deviceId\":\"device-1\"},{\"deviceId\":\"device-2\"}," +
+                "{\"deviceId\":\"device-3\"},{\"deviceId\":\"device-4\"},{\"deviceId\":\"device-5\"}]}");
     }
 
     @Test
     public void testAggregateMaximumCountLessThanOne() {
         String response = sendRequest(serviceUrl + "/getDevices/0");
 
-        Assert.assertEquals(response, "{\"rootelement\":[{\"deviceId\":\"dev-1111\"},{\"deviceId\":\"dev-1111\"}," +
-                "{\"deviceId\":\"dev-1111\"},{\"deviceId\":\"dev-1111\"},{\"deviceId\":\"dev-1111\"}]}");
+        Assert.assertEquals(response, "{\"rootelement\":[{\"deviceId\":\"device-1\"},{\"deviceId\":\"device-2\"}," +
+                "{\"deviceId\":\"device-3\"},{\"deviceId\":\"device-4\"},{\"deviceId\":\"device-5\"}]}");
 
         response = sendRequest(serviceUrl + "/getDevices/-1");
 
-        Assert.assertEquals(response, "{\"rootelement\":[{\"deviceId\":\"dev-1111\"},{\"deviceId\":\"dev-1111\"}," +
-                "{\"deviceId\":\"dev-1111\"},{\"deviceId\":\"dev-1111\"},{\"deviceId\":\"dev-1111\"}]}");
-
+        Assert.assertEquals(response, "{\"rootelement\":[{\"deviceId\":\"device-1\"},{\"deviceId\":\"device-2\"}," +
+                "{\"deviceId\":\"device-3\"},{\"deviceId\":\"device-4\"},{\"deviceId\":\"device-5\"}]}");
     }
 
     private String sendRequest(String requestUrl) {
