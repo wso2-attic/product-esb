@@ -51,7 +51,7 @@
                           scope="default"
                           type="INTEGER"/>
                 <payloadFactory media-type="json">
-                    <format>{ "deviceId": "device-$1"}</format>
+                    <format>{ "deviceId": "device"}</format>
                     <args>
                         <arg evaluator="xml" expression="get-property('ID')"/>
                     </args>
