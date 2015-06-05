@@ -54,9 +54,6 @@ public class ESBJAVA2575_ContentEncodingPostTest extends ESBIntegrationTest {
         post.addHeader("Content-Encoding", "gzip");
         boolean gzipException = false;
         org.apache.http.HttpResponse response = httpclient.execute(post);
-
-        System.out.println("*************************");
-        System.out.println(response.getStatusLine().getStatusCode());
         assertEquals(response.getStatusLine().getStatusCode(), 202, "response code doesn't match");
     }
 }
