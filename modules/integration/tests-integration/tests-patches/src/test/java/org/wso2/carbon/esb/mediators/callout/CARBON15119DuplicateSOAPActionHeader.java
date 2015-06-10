@@ -23,9 +23,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.core.utils.HttpRequestUtil;
-import org.wso2.carbon.esb.ESBIntegrationTest;
-import org.wso2.carbon.esb.util.WireMonitorServer;
+import org.wso2.carbon.automation.test.utils.common.WireMonitorServer;
+import org.wso2.carbon.automation.test.utils.http.client.HttpRequestUtil;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -53,7 +53,7 @@ public class CARBON15119DuplicateSOAPActionHeader extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Test to check whether there are duplicate SOAPAction headers in the request to the service from callout mediator")
     public void testCheckForDuplicateSOAPActionHeaders() throws Exception {
 
-        String proxyServiceUrl = getProxyServiceURL("DuplicateSOAPActionHeader");
+        String proxyServiceUrl = getProxyServiceURLHttp("DuplicateSOAPActionHeader");
 
         String requestPayload = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' >"
                 + "<soapenv:Body xmlns:ser='http://services.samples' xmlns:xsd='http://services.samples/xsd'> "
