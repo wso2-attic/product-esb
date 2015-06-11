@@ -124,7 +124,7 @@ public class InboundAdminClient {
                     count++;
                 }
             }
-            endpointAdminStub.addInboundEndpoint(name, sequence, onError, protocol, classImpl, parameterDTOs);
+            endpointAdminStub.addInboundEndpoint(name, sequence, onError, protocol, classImpl,"false", parameterDTOs);
         } catch (RemoteException e) {
             throw new RemoteException("Remote Exception occurred when addInboundEndpoint" + name, e);
         } catch (InboundAdminInboundManagementException e) {
@@ -174,7 +174,7 @@ public class InboundAdminClient {
                     count++;
                 }
             }
-            endpointAdminStub.updateInboundEndpoint(name, sequence, onError, protocol, classImpl, parameterDTOs);
+            endpointAdminStub.updateInboundEndpoint(name, sequence, onError, protocol, classImpl,"false", parameterDTOs);
         } catch (RemoteException e) {
             throw new RemoteException("RemoteException occurred when update inbound endpoint " + name + " InboundAdmin Client", e);
         } catch (InboundAdminInboundManagementException e) {
