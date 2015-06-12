@@ -87,6 +87,21 @@
                 <send/>
             </outSequence>
         </resource>
+        <resource methods="GET" uri-template="/special_case/{+value}">
+            <inSequence>
+                <log level="custom">
+                    <property name="decodedQueryParamValue" expression="get-property('uri.var.value')"></property>
+                </log>
+                <send>
+                    <endpoint>
+                        <http method="GET" uri-template="{uri.var.value}"/>
+                    </endpoint>
+                </send>
+            </inSequence>
+            <outSequence>
+                <send/>
+            </outSequence>
+        </resource>
     </api>
     <api context="/services/test" name="ServerApi_v1">
         <resource methods="GET">

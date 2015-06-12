@@ -24,10 +24,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.logging.LogViewerClient;
-import org.wso2.carbon.automation.core.utils.HttpRequestUtil;
-import org.wso2.carbon.automation.core.utils.HttpResponse;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
+import org.wso2.carbon.automation.test.utils.http.client.HttpRequestUtil;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 
 
@@ -40,8 +40,7 @@ public class ESBJAVA3751UriTemplateReservedCharacterEncodingTest extends ESBInte
         loadESBConfigurationFromClasspath("artifacts" + File.separator + "ESB"
                 + File.separator + "synapseconfig" + File.separator + "rest"
                 + File.separator + "uri-template-encoding.xml");
-        logViewerClient = new LogViewerClient(esbServer.getBackEndUrl(),
-                esbServer.getSessionCookie());
+        logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
 
     @Test(groups = { "wso2.esb" }, description = "Sending http request with a query param consist of" +
@@ -212,6 +211,26 @@ public class ESBJAVA3751UriTemplateReservedCharacterEncodingTest extends ESBInte
                 "Reserved character should not be percent encoded while uri-template expansion");
     }
 
+    @Test(groups = { "wso2.esb" }, description = "Sending http request with a path param consist of" +
+            " whole URL including protocol , host , port etc. ")
+    public void testURITemplateSpecialCaseVariableWithFullURL() throws Exception {
+        boolean isPercentEncoded = false;
+        logViewerClient.clearLogs();
+        HttpResponse response = HttpRequestUtil.sendGetRequest(
+                getApiInvocationURL("services/client/special_case/http://localhost:8280/services/test_2/special_case"),
+                null);
+        LogEvent[] logs = logViewerClient.getAllSystemLogs();
+        for (LogEvent logEvent : logs) {
+            String message = logEvent.getMessage();
+            if (message.contains("To: /services/test_2/special_case")) {
+                isPercentEncoded = true;
+                break;
+            }
+        }
+        Assert.assertTrue(isPercentEncoded,
+                "The Special case of of Full URL expansion should be identified and should not percent encode full URL");
+
+    }
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
