@@ -49,10 +49,10 @@ public class JMSInboundSharedSubscriberTestCase extends ESBIntegrationTest{
 
 	@BeforeClass(alwaysRun = true)
 	protected void init() throws Exception {
-		//hornetQLoader.startJMSBrokerAndConfigureESB();
+		hornetQLoader.startJMSBrokerAndConfigureESB();
 		super.init();
-		serverConfigurationManager =
-				new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
+	//	serverConfigurationManager =
+	//			new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
 		OMElement synapse =
 				esbUtils.loadResource("/artifacts/ESB/jms/inbound/transport/jms_transport_proxy_service.xml");
 		updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
@@ -106,7 +106,7 @@ public class JMSInboundSharedSubscriberTestCase extends ESBIntegrationTest{
 
 	@AfterClass(alwaysRun = true)
 	public void destroy() throws Exception {
-		//hornetQLoader.stopJMSBrokerRevertESBConfiguration();
+		hornetQLoader.stopJMSBrokerRevertESBConfiguration();
 		super.cleanup();
 	}
 
