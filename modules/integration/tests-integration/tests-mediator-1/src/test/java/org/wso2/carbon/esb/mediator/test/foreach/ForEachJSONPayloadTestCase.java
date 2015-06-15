@@ -85,11 +85,7 @@ public class ForEachJSONPayloadTestCase extends ESBIntegrationTest {
                 assertTrue(quote.contains(
                                 "<checkPriceRequest xmlns=\"http://ws.apache.org/ns/synapse\"><code>MSFT</code></checkPriceRequest>"),
                         "MSTF Element not found");
-
-
             }
-
-
         }
         assertTrue(reachedEnd, "Transformed json payload");
     }
