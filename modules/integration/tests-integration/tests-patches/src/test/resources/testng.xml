@@ -93,17 +93,15 @@
         </classes>
     </test>
 
-<test name="Xml payload and json Content Type Test Case"
-	preserve-order="true" verbose="2">
-	<classes>
-		<class
-			name="org.wso2.carbon.esb.json.ESBJAVA_3698_MessageBuildingWithDifferentPayloadAndContentTypeTestCase" />
-	</classes>
-</test>
+    <test name="Xml payload and json Content Type Test Case" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.json.ESBJAVA_3698_MessageBuildingWithDifferentPayloadAndContentTypeTestCase" />
+        </classes>
+    </test>
 
 	<test name="Duplicate SOAP Action Header Test" preserve-order="true" verbose="2">
         <classes>
-            <class>org.wso2.carbon.esb.mediators.callout.CARBON15119DuplicateSOAPActionHeader</class>
+            <class name="org.wso2.carbon.esb.mediators.callout.CARBON15119DuplicateSOAPActionHeader" />
         </classes>
 	</test>
 </suite>
