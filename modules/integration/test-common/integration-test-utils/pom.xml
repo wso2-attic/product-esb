@@ -61,6 +61,10 @@
              <artifactId>httpclient</artifactId>
              <scope>compile</scope>
          </dependency>
+         <dependency>
+             <groupId>com.rabbitmq.wso2</groupId>
+             <artifactId>amqp-client</artifactId>
+         </dependency>
 
      </dependencies>
 

@@ -123,6 +123,12 @@
         </packages>
     </test>
 
+    <test name="RabbitMQ-transport-test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.rabbitmq.transport.test.*"/>
+        </packages>
+    </test>
+
     <!--<test name="MailTo-transport-Test-Receiver" preserve-order="true" verbose="2">-->
         <!--<packages>-->
             <!--<package name="org.wso2.carbon.esb.mailto.transport.receiver.test"/>-->
