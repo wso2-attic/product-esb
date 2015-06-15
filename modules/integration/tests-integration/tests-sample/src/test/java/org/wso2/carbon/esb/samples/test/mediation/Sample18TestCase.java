@@ -136,6 +136,6 @@ public class Sample18TestCase extends ESBIntegrationTest {
             }
             out = sb.toString();
         }
-
+        response.close();
     }
 }
