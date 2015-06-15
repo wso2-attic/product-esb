@@ -15,7 +15,7 @@
  * under the License.
  */
 
-package org.wso2.carbon.esb.mediators.aggregate;
+package org.wso2.carbon.esb.mediator.test.aggregate;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -32,7 +32,7 @@ import java.io.IOException;
 /**
  * Testcase for aggregate mediator NPE for JSON payload with maximum message count = 1
  */
-public class ESBJAVA3733TestCase extends ESBIntegrationTest {
+public class AggregateWithJSONAndMaxMinLimits extends ESBIntegrationTest {
 
     String serviceUrl;
 
@@ -42,12 +42,11 @@ public class ESBJAVA3733TestCase extends ESBIntegrationTest {
 
         serviceUrl = getApiInvocationURL("devices");
 
-        loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/esbjava3733/esbjava3733.xml");
+        loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/aggregate/aggregate_json.xml");
     }
 
     @Test
     public void testAggregateMaximumCountOne() {
-
         String response = sendRequest(serviceUrl + "/getDevices/1");
 
         Assert.assertEquals(response, "{\"rootelement\":{\"deviceId\":\"device\"}}");

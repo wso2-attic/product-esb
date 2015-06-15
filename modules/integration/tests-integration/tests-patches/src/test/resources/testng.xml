@@ -101,12 +101,6 @@
 	</classes>
 </test>
 
-    <test name="AggregateMediator JSON Payload with Maximum Message Count">
-        <classes>
-            <class name="org.wso2.carbon.esb.mediators.aggregate.ESBJAVA3733TestCase"/>
-        </classes>
-    </test>
-
 </suite>
 
 
