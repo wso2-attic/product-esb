@@ -101,6 +101,11 @@
 	</classes>
 </test>
 
+	<test name="Duplicate SOAP Action Header Test" preserve-order="true" verbose="2">
+        <classes>
+            <class>org.wso2.carbon.esb.mediators.callout.CARBON15119DuplicateSOAPActionHeader</class>
+        </classes>
+	</test>
 </suite>
 
 
