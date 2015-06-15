@@ -564,7 +564,6 @@ public class ForEachPropertiesTestCase extends ESBIntegrationTest {
             }
         }
         InputStream response = connection.getInputStream();
-        String out = "[Fault] No Response.";
         if (response != null) {
             StringBuilder sb = new StringBuilder();
             byte[] bytes = new byte[1024];
@@ -572,8 +571,7 @@ public class ForEachPropertiesTestCase extends ESBIntegrationTest {
             while ((len = response.read(bytes)) != -1) {
                 sb.append(new String(bytes, 0, len));
             }
-            out = sb.toString();
+            response.close();
         }
-        response.close();
     }
 }
