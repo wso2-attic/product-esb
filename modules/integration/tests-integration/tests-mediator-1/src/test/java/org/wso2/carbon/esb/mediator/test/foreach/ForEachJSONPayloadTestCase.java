@@ -17,19 +17,12 @@
 
 package org.wso2.carbon.esb.mediator.test.foreach;
 
-import org.apache.axiom.om.OMAbstractFactory;
-import org.apache.axiom.om.OMElement;
-import org.apache.axiom.om.OMNamespace;
-import org.apache.axiom.soap.SOAPFactory;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.esb.mediator.test.iterate.IterateClient;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-import org.wso2.esb.integration.common.utils.clients.JSONClient;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,9 +62,7 @@ public class ForEachJSONPayloadTestCase extends ESBIntegrationTest {
 
         LogEvent[] getLogsInfo = logViewer.getAllRemoteSystemLogs();
         for (LogEvent event : getLogsInfo) {
-
             if (event.getMessage().contains("STATE = END")) {
-
                 reachedEnd = true;
                 String payload = event.getMessage();
                 String search = "<jsonObject><getQuote>(.*)</getQuote></jsonObject>";
@@ -80,22 +71,22 @@ public class ForEachJSONPayloadTestCase extends ESBIntegrationTest {
                 boolean matchFound = matcher.find();
 
                 assertTrue(matchFound, "getQuote element not found");
-                if (matchFound) {
-                    int start = matcher.start();
-                    int end = matcher.end();
-                    String quote = payload.substring(start, end);
 
-                    assertTrue(quote.contains(
-                                    "<checkPriceRequest xmlns=\"http://ws.apache.org/ns/synapse\"><code>IBM</code></checkPriceRequest>"),
-                            "IBM Element not found");
-                    assertTrue(quote.contains(
-                                    "<checkPriceRequest xmlns=\"http://ws.apache.org/ns/synapse\"><code>WSO2</code></checkPriceRequest>"),
-                            "WSO2 Element not found");
-                    assertTrue(quote.contains(
-                                    "<checkPriceRequest xmlns=\"http://ws.apache.org/ns/synapse\"><code>MSFT</code></checkPriceRequest>"),
-                            "MSTF Element not found");
+                int start = matcher.start();
+                int end = matcher.end();
+                String quote = payload.substring(start, end);
 
-                }
+                assertTrue(quote.contains(
+                                "<checkPriceRequest xmlns=\"http://ws.apache.org/ns/synapse\"><code>IBM</code></checkPriceRequest>"),
+                        "IBM Element not found");
+                assertTrue(quote.contains(
+                                "<checkPriceRequest xmlns=\"http://ws.apache.org/ns/synapse\"><code>WSO2</code></checkPriceRequest>"),
+                        "WSO2 Element not found");
+                assertTrue(quote.contains(
+                                "<checkPriceRequest xmlns=\"http://ws.apache.org/ns/synapse\"><code>MSFT</code></checkPriceRequest>"),
+                        "MSTF Element not found");
+
+
             }
 
 
@@ -122,15 +113,10 @@ public class ForEachJSONPayloadTestCase extends ESBIntegrationTest {
             output.write(query.getBytes(charset));
         } finally {
             if (output != null) {
-                try {
-                    output.close();
-                } catch (IOException logOrIgnore) {
-                    log.error("Error while closing the connection");
-                }
+                output.close();
             }
         }
         InputStream response = connection.getInputStream();
-        String out = "[Fault] No Response.";
         if (response != null) {
             StringBuilder sb = new StringBuilder();
             byte[] bytes = new byte[1024];
@@ -138,8 +124,7 @@ public class ForEachJSONPayloadTestCase extends ESBIntegrationTest {
             while ((len = response.read(bytes)) != -1) {
                 sb.append(new String(bytes, 0, len));
             }
-            out = sb.toString();
+            response.close();
         }
-
     }
 }
