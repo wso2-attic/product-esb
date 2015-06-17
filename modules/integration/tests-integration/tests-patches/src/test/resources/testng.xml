@@ -80,6 +80,12 @@
         </classes>
     </test>
 
+    <test name="JMS Test">
+        <classes>
+            <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA3714JMXPauseJMSListener" />
+        </classes>
+    </test>
+
     <test name="VFS SFTP test"
           preserve-order="true" verbose="2">
         <classes>
@@ -87,14 +93,17 @@
         </classes>
     </test>
 
-<test name="Xml payload and json Content Type Test Case"
-	preserve-order="true" verbose="2">
-	<classes>
-		<class
-			name="org.wso2.carbon.esb.json.ESBJAVA_3698_MessageBuildingWithDifferentPayloadAndContentTypeTestCase" />
-	</classes>
-</test>
+    <test name="Xml payload and json Content Type Test Case" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.json.ESBJAVA_3698_MessageBuildingWithDifferentPayloadAndContentTypeTestCase" />
+        </classes>
+    </test>
 
+	<test name="Duplicate SOAP Action Header Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.mediators.callout.CARBON15119DuplicateSOAPActionHeader" />
+        </classes>
+	</test>
 </suite>
 
 

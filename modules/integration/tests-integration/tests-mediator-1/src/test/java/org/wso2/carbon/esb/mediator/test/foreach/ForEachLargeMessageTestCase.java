@@ -90,7 +90,6 @@ public class ForEachLargeMessageTestCase extends ESBIntegrationTest {
                             null, "SUN" + symbol);
             Assert.assertNotNull(response);
             Assert.assertTrue(response.toString().contains("SUN"), "Incorrect symbol in response");
-            response = null;
         }
 
         LogEvent[] logs = logViewer.getAllRemoteSystemLogs();
