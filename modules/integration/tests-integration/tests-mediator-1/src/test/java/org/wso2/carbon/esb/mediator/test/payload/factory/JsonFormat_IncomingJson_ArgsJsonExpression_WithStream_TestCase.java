@@ -85,8 +85,7 @@ public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase exte
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @Test(groups = {"wso2.esb"}, description = "With Stream B&F, json format, json evaluators, incoming json, " +
-                                               "outgoing json " , enabled = false)
+    @Test(groups = {"wso2.esb"}, description = "With Stream B&F, json format, json evaluators, incoming json, outgoing json " , enabled = false)
     public void incomingJsontransformJsonPayloadByArgsJsonExpressions() throws Exception {
 
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/payload/factory/jsonFormat_JsonExpressiosns.xml");
