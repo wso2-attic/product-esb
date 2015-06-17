@@ -36,7 +36,7 @@ public class CallMediatorBlockingSecurityTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/call/CallMediatorBlockingSecurity.xml");
     }
 
-    @Test(groups = {"wso2.esb"},description = "Call the security endpoint with blocking external calls")
+    @Test(groups = {"wso2.esb"},description = "Call the security endpoint with blocking external calls", enabled = false)
     public void callMediatorBlockingSecurityTest() throws AxisFault, XPathExpressionException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(""), "", "WSO2");
         boolean ResponseContainsWSO2 = response.toString().contains("WSO2");

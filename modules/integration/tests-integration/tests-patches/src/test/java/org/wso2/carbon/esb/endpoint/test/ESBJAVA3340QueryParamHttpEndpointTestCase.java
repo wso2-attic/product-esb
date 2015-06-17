@@ -44,7 +44,7 @@ public class ESBJAVA3340QueryParamHttpEndpointTestCase extends ESBIntegrationTes
                                           + File.separator + "query_params_api.xml");
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Sending a Message Via REST to test query param works with space character")
+    @Test(groups = {"wso2.esb"}, description = "Sending a Message Via REST to test query param works with space character", enabled = false)
     public void testPassParamsToEndpoint() throws IOException {
         String requestString = "/my?some%20value";
         try {

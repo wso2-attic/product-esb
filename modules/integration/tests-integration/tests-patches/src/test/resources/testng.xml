@@ -61,13 +61,13 @@
             <class name="org.wso2.carbon.esb.mediators.clone.ESBJAVA3412EmptyStackExceptionTest"/>
         </classes>
     </test>
-    <test name="Endpoint Exisitance Test Case in Tenant Deployed through CAPP"
-          preserve-order="true" verbose="2">
-        <classes>
-            <class
-                    name="org.wso2.carbon.esb.car.deployment.test.ESBJAVA3611EndpointTestCase"/>
-        </classes>
-    </test>
+    <!--<test name="Endpoint Exisitance Test Case in Tenant Deployed through CAPP"-->
+          <!--preserve-order="true" verbose="2">-->
+        <!--<classes>-->
+            <!--<class-->
+                    <!--name="org.wso2.carbon.esb.car.deployment.test.ESBJAVA3611EndpointTestCase"/>-->
+        <!--</classes>-->
+    <!--</test>-->
     <!--<test name="Cache mediator with REQUESTHASHGenerator test" preserve-order="true" verbose="2">-->
         <!--<classes>-->
             <!--<class name="org.wso2.carbon.esb.mediators.cache.APIMANAGER1838RequestHashGeneratorTestCase"/>-->

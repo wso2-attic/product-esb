@@ -48,7 +48,7 @@ public class FilterMediatorTest extends ESBIntegrationTest {
      * @throws Exception
      */
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @Test(groups = {"wso2.esb"})
+    @Test(groups = {"wso2.esb"}, enabled = false)
     public void filterMediatorWithSourceAndRegexTest() throws Exception {
 
         loadSampleESBConfiguration(1);

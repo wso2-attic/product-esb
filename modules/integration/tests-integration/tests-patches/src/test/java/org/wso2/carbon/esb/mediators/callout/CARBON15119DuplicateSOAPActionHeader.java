@@ -50,7 +50,7 @@ public class CARBON15119DuplicateSOAPActionHeader extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/callout/DuplicateSOAPActionHeader.xml");
     }
 
-    @Test(groups = "wso2.esb", description = "Test to check whether there are duplicate SOAPAction headers in the request to the service from callout mediator")
+    @Test(groups = "wso2.esb", description = "Test to check whether there are duplicate SOAPAction headers in the request to the service from callout mediator", enabled = false)
     public void testCheckForDuplicateSOAPActionHeaders() throws Exception {
 
         String proxyServiceUrl = getProxyServiceURLHttp("DuplicateSOAPActionHeader");
