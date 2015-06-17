@@ -61,7 +61,7 @@ public class ESBJAVA_3698_MessageBuildingWithDifferentPayloadAndContentTypeTestC
 		super.init();
 	}
 
-	@Test(groups = { "wso2.esb" }, description = "Check for Axis Fault when xml payload is sent with application/json content type")
+	@Test(groups = { "wso2.esb" }, description = "Check for Axis Fault when xml payload is sent with application/json content type", enabled = false)
 	public void testAxisFaultWithXmlPayloadAndJSONContentType() throws ClientProtocolException,
 	                                                           IOException, InterruptedException {
 		final Map<String, String> headers = new HashMap<String, String>();

@@ -34,7 +34,7 @@ public class CallMediatorInFaultSeqTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/call/synapse15.xml");
     }
 
-    @Test(groups = {"wso2.esb"})
+    @Test(groups = {"wso2.esb"}, enabled = false)
     public void callMediatorInFaultSeqTestCase() throws AxisFault {
 
         OMElement response =

@@ -52,7 +52,7 @@ public class AppendProtocolTestCase extends ESBIntegrationTest {
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @Test(groups = {"wso2.esb"}, description = "Conditional URL Rewriting")
+    @Test(groups = {"wso2.esb"}, description = "Conditional URL Rewriting", enabled = false)
     public void invalidUrl() throws AxisFault {
         try {
             axis2Client.sendSimpleStockQuoteRequest(

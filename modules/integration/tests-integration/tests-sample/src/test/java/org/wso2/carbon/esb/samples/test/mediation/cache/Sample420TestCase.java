@@ -41,7 +41,7 @@ public class Sample420TestCase extends ESBIntegrationTest {
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @Test(groups = {"wso2.esb"}, description = "Creating simple cache sample 420 Test Case")
+    @Test(groups = {"wso2.esb"}, description = "Creating simple cache sample 420 Test Case", enabled = false)
     public void testSimpleCashing() throws AxisFault, XPathExpressionException, InterruptedException {
         OMElement response;
 

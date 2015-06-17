@@ -17,18 +17,16 @@
 */
 package org.wso2.carbon.esb.samples.test.mediation;
 
+import javax.xml.namespace.QName;
 import org.apache.axiom.om.OMElement;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.esb.integration.common.clients.mediation.SynapseConfigAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestConstant;
-
-import javax.xml.namespace.QName;
-import java.io.File;
-
-import static org.testng.Assert.*;
 
 /**
  * Sample 16: Introduction to Dynamic and Static Registry Keys
@@ -42,7 +40,7 @@ public class Sample16TestCase extends ESBIntegrationTest {
         loadSampleESBConfiguration(16);
     }
 
-    @Test(groups = { "wso2.esb" }, description = "Dynamic and Static Registry Keys")
+    @Test(groups = { "wso2.esb" }, description = "Dynamic and Static Registry Keys", enabled = false)
     public void testDynamicAndStaticRegistryKeys() throws Exception {
         OMElement response = axis2Client.sendCustomQuoteRequest(getMainSequenceURL()
                 , getBackEndServiceUrl(ESBTestConstant.SIMPLE_STOCK_QUOTE_SERVICE), "WSO2");
