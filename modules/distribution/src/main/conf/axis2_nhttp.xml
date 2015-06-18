@@ -384,6 +384,16 @@
         </parameter>
     </transportReceiver-->
 
+    <!-- <transportReceiver name="mqtt" class="org.apache.axis2.transport.mqtt.MqttListener">
+         <parameter locked="false" name="mqttConFactory">
+             <parameter locked="false" name="mqtt.server.host.name">localhost</parameter>
+             <parameter name="mqtt.connection.factory">mqttConFactory</parameter>
+             <parameter locked="false" name="mqtt.server.port">1883</parameter>
+             <parameter locked="false" name="mqtt.client.id">client-id-1234</parameter>
+             <parameter locked="false" name="mqtt.topic.name">esb.test</parameter>
+         </parameter>
+     </transportReceiver>-->
+
     <!-- ================================================= -->
     <!--             Transport Outs (Senders)              -->
     <!-- ================================================= -->
@@ -468,6 +478,8 @@
 
     <!-- Uncomment this and configure to use RabbitMQ connection pools for sending messages
     <transportSender name="rabbitmq" class="org.apache.axis2.transport.rabbitmq.RabbitMQSender"/-->
+
+    <!--<transportSender name="mqtt" class="org.apache.axis2.transport.mqtt.MqttSender"/>-->
 
     <!-- ================================================= -->
     <!--             Global Engaged Modules                -->
