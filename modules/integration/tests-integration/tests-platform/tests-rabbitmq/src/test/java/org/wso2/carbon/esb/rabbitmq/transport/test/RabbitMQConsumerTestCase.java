@@ -21,34 +21,21 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.engine.context.AutomationContext;
-import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
-import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.clients.rabbitmqclient.RabbitMQProducerClient;
+import org.wso2.esb.integration.common.utils.servers.RabbitMQServer;
 
-import java.io.File;
 import java.io.IOException;
 
 public class RabbitMQConsumerTestCase extends ESBIntegrationTest {
 
     private LogViewerClient logViewer;
-    private ServerConfigurationManager configurationManagerAxis2;
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         super.init();
-
-        configurationManagerAxis2 =
-                new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
-        File customAxisConfigAxis2 = new File(getESBResourceLocation() + File.separator +
-                "axis2config" + File.separator + "axis2.xml");
-        System.out.println("File axis2 : " + customAxisConfigAxis2.exists() + customAxisConfigAxis2.getAbsolutePath());
-        configurationManagerAxis2.applyConfiguration(customAxisConfigAxis2);
-        super.init();
-
         loadESBConfigurationFromClasspath("/artifacts/ESB/rabbitmq/transport/rabbitmq_consumer_proxy.xml");
         logViewer = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
@@ -98,6 +85,5 @@ public class RabbitMQConsumerTestCase extends ESBIntegrationTest {
     public void end() throws Exception {
         super.cleanup();
         logViewer = null;
-        configurationManagerAxis2.restoreToLastConfiguration();
     }
 }
