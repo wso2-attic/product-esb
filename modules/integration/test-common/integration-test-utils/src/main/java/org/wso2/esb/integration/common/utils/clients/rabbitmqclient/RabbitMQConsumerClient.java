@@ -31,7 +31,7 @@ public class RabbitMQConsumerClient {
     private ConnectionFactory factory = null;
     private Connection connection = null;
     private Channel channel = null;
-    private String routeKey = "QUEUE";
+    private String routeKey;
 
     public RabbitMQConsumerClient(String host) {
         factory = new ConnectionFactory();

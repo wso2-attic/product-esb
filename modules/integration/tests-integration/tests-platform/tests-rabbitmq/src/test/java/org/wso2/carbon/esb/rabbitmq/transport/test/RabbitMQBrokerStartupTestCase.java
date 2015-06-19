@@ -32,6 +32,7 @@ public class RabbitMQBrokerStartupTestCase extends ESBIntegrationTest {
 
     private RabbitMQServer rabbitMQServer;
     private ServerConfigurationManager configurationManagerAxis2;
+    private final String RABBITMQ_HOME_XPATH = "//rabbitmq/rabbitmqhome";
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeTest(alwaysRun = true)
@@ -39,7 +40,7 @@ public class RabbitMQBrokerStartupTestCase extends ESBIntegrationTest {
         super.init();
 
         AutomationContext automationContext = new AutomationContext();
-        String rabbitMQHome = automationContext.getConfigurationValue("//rabbitmq/rabbitmqhome");
+        String rabbitMQHome = automationContext.getConfigurationValue(RABBITMQ_HOME_XPATH);
 
         rabbitMQServer = new RabbitMQServer(rabbitMQHome);
 

@@ -22,10 +22,6 @@ package org.wso2.esb.integration.common.utils.exception;
  */
 public class RabbitMQTransportException extends ESBIntegrationTestException {
 
-    public RabbitMQTransportException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
     public RabbitMQTransportException(String message) {
         super(message);
     }
