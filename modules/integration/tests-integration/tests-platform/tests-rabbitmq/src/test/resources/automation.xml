@@ -286,9 +286,6 @@
                 <class>
                     <name>org.wso2.carbon.integration.common.extensions.axis2server.Axis2ServerExtension</name>
                 </class>
-                <class>
-                    <name>org.wso2.esb.integration.common.extensions.rabbitmqserver.RabbitMQServerExtension</name>
-                </class>
             </extentionClasses>
         </platformExecutionManager>
 
