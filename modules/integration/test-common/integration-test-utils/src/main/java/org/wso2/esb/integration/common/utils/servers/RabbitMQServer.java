@@ -1,4 +1,4 @@
-package org.wso2.esb.integration.common.utils.servers;/*
+/*
  * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
@@ -15,9 +15,11 @@ package org.wso2.esb.integration.common.utils.servers;/*
  * under the License.
  */
 
+package org.wso2.esb.integration.common.utils.servers;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.wso2.esb.integration.common.utils.exception.RabbitMQTransportException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,27 +30,54 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 
+/**
+ * RabbitMQ server management class
+ */
 public class RabbitMQServer {
     private static final Log log = LogFactory.getLog(org.wso2.esb.integration.common.utils.servers.RabbitMQServer.class);
     private boolean started;
-    //TODO : get from automation.xml
     private File rabbitMQHome;
 
-    public RabbitMQServer() {
-        rabbitMQHome = new File("/Users/maheeka/ESB_WORK/RABBITMQ/rabbitmq_server-3.5.0/sbin");
-        log.info("Using the RabbitMQ server path : " + rabbitMQHome.getAbsolutePath());
+    public RabbitMQServer(String rabbitmqHome) throws RabbitMQTransportException {
+        rabbitMQHome = new File(rabbitmqHome);
+        if (rabbitMQHome.exists() && isValidRabbitMQHome()) {
+            log.info("Using the RabbitMQ_HOME : " + rabbitMQHome.getAbsolutePath());
+        } else {
+            rabbitMQHome = null;
+            log.error("Invalid RabbitMQ_HOME. RabbitMQ Broker will not connect as expected");
+            throw new RabbitMQTransportException("Invalid RabbitMQ_HOME. RabbitMQ Broker will not connect as expected");
+        }
+    }
+
+    private boolean isValidRabbitMQHome() {
+        boolean rabbitmqctlFound = false;
+        boolean rabbitmqserverFound = false;
+        File[] files = rabbitMQHome.listFiles();
+        if (files == null) {
+            return false;
+        }
+        for (File f : files) {
+            if (f.getName().contains("rabbitmqctl")) {
+                rabbitmqctlFound = true;
+            } else if (f.getName().contains("rabbitmq-server")) {
+                rabbitmqserverFound = true;
+            }
+        }
+        return (rabbitmqctlFound && rabbitmqserverFound);
     }
 
     public void start() {
         log.info("Starting RabbitMQ Broker");
         execute("sh rabbitmq-server -detached");
         started = true;
+
     }
 
     public void stop() {
         log.info("Stopping RabbitMQ Broker");
         execute("sh rabbitmqctl stop");
         started = false;
+
     }
 
     public void initialize() {
@@ -56,6 +85,7 @@ public class RabbitMQServer {
         execute("sh rabbitmqctl stop_app");
         execute("sh rabbitmqctl reset");
         execute("sh rabbitmqctl start_app");
+
     }
 
     public boolean isStarted() {

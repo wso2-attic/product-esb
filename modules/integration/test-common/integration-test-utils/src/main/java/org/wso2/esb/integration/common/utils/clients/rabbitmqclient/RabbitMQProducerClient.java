@@ -72,7 +72,7 @@ public class RabbitMQProducerClient {
                 new AMQP.BasicProperties.Builder().contentType("text/plain").build(), message.getBytes());
     }
 
-    public void disconnect(){
+    public void disconnect() {
         try {
             channel.close();
         } catch (IOException e) {

@@ -84,6 +84,11 @@
         <domain>gmail.com</domain>
     </emailCredentials>
 
+    <!-- RabbitMQ Broker configurations -->
+    <rabbitmq>
+        <rabbitmqhome></rabbitmqhome>
+    </rabbitmq>
+
     <security>
         <!--
                     KeyStore which will be used for encrypting/decrypting passwords
@@ -314,4 +319,6 @@
         </PlatformReportManager>
 
     </listenerExtensions>
+
+
 </automation>

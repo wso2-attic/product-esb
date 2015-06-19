@@ -67,8 +67,8 @@ public class RabbitMQConsumerClient {
     }
 
     public List<String> popAllMessages() throws IOException, InterruptedException {
-        List<String> messages = new ArrayList<String>();
-        GetResponse response = null;
+        List<String> messages = new ArrayList<>();
+        GetResponse response;
 
         while ((response = channel.basicGet(routeKey, true)) != null) {
             messages.add(new String(response.getBody()));
@@ -76,7 +76,7 @@ public class RabbitMQConsumerClient {
         return messages;
     }
 
-    public void disconnect(){
+    public void disconnect() {
         try {
             channel.close();
         } catch (IOException e) {

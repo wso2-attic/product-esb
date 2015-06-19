@@ -17,7 +17,6 @@
 package org.wso2.carbon.esb.rabbitmq.transport.test;
 
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
@@ -31,13 +30,18 @@ import java.io.File;
 
 public class RabbitMQBrokerStartupTestCase extends ESBIntegrationTest {
 
-    private RabbitMQServer rabbitMQServer = new RabbitMQServer();
+    private RabbitMQServer rabbitMQServer;
     private ServerConfigurationManager configurationManagerAxis2;
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeTest(alwaysRun = true)
     public void startRabbitMQBrokerAndConfigureESB() throws Exception {
         super.init();
+
+        AutomationContext automationContext = new AutomationContext();
+        String rabbitMQHome = automationContext.getConfigurationValue("//rabbitmq/rabbitmqhome");
+
+        rabbitMQServer = new RabbitMQServer(rabbitMQHome);
 
         rabbitMQServer.start();
         rabbitMQServer.initialize();
