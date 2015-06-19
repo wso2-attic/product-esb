@@ -286,7 +286,7 @@
     </dependencies>
 
     <properties>
-        <skipPlatformTests>false</skipPlatformTests>
+        <skipPlatformTests>true</skipPlatformTests>
     </properties>
 
 </project>
