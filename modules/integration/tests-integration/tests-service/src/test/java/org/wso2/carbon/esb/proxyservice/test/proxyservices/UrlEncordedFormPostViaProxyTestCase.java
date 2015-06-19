@@ -52,7 +52,7 @@ public class UrlEncordedFormPostViaProxyTestCase extends ESBIntegrationTest {
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @Test(groups = {"wso2.esb"}, description = "Patch : ESBJAVA-1696 : Encoded Special characters in the URL is decoded at the Gateway and not re-encoded")
+    @Test(groups = {"wso2.esb"}, description = "Patch : ESBJAVA-1696 : Encoded Special characters in the URL is decoded at the Gateway and not re-encoded", enabled = false)
     public void testEncodingSpecialCharacterViaHttpProxy() throws IOException {
         HttpClient client = new HttpClient();
         client.getParams().setParameter(

@@ -36,7 +36,7 @@ public class SecurityTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/callout/SecurityTest.xml");
     }
 
-    @Test(groups = {"wso2.esb"})
+    @Test(groups = {"wso2.esb"}, enabled = false)
     public void securityTest() throws AxisFault, XPathExpressionException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(""), "", "IBM");
         boolean ResponseContainsIBM = response.getFirstElement().toString().contains("IBM");

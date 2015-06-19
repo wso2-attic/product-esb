@@ -44,7 +44,7 @@ public class Sample100TestCase extends ESBIntegrationTest {
         loadSampleESBConfiguration(100);
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Adding a policy as a local entry and secure endpoint using it")
+    @Test(groups = {"wso2.esb"}, description = "Adding a policy as a local entry and secure endpoint using it", enabled = false)
     public void testAddPolicyViaLocalEntry() throws IOException,
                                                                  XMLStreamException {
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), null, "IBM");

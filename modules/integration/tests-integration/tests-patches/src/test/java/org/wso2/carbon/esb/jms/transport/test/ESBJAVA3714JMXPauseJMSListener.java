@@ -59,7 +59,7 @@ public class ESBJAVA3714JMXPauseJMSListener extends ESBIntegrationTest {
         mbsc = jmxClient.connect();
     }
 
-    @Test(groups = "wso2.esb", description = "JMS Consumer Test before pause")
+    @Test(groups = "wso2.esb", description = "JMS Consumer Test before pause", enabled = false)
     public void testJMSListner() throws Exception {
         String msg = "";
         // Put message in queue.
@@ -69,7 +69,7 @@ public class ESBJAVA3714JMXPauseJMSListener extends ESBIntegrationTest {
 
     }
 
-    @Test(groups = "wso2.esb", description = "JMS Consumer Test after pause")
+    @Test(groups = "wso2.esb", description = "JMS Consumer Test after pause", enabled = false)
     public void testJMSPause() throws Exception {
 
         // pause JMS Listener from JMXClient
@@ -90,7 +90,7 @@ public class ESBJAVA3714JMXPauseJMSListener extends ESBIntegrationTest {
 
     }
 
-    @Test(groups = "wso2.esb", description = "JMS Consumer Test after resume")
+    @Test(groups = "wso2.esb", description = "JMS Consumer Test after resume", enabled = false)
     public void testJMSResume() throws Exception {
 
         // redeploy proxy service
