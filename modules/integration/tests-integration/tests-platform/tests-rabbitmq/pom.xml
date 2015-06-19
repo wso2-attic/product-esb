@@ -8,7 +8,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.carbon.esb.tests.platform.rabbitmq</artifactId>
-    <name>ESB test Module - Platform - RabbitMQTransport</name>
+    <name>ESB test Module - Platform - RabbitMQ Transport</name>
     <packaging>jar</packaging>
     <build>
         <plugins>
@@ -41,6 +41,7 @@
                     <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m</argLine>
                     <testFailureIgnore>true</testFailureIgnore>
                     <disableXmlReport>false</disableXmlReport>
+                    <skipTests>${skipPlatformTests}</skipTests>
                     <parallel>false</parallel>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
@@ -295,5 +296,9 @@
             <artifactId>extensions</artifactId>
         </dependency>
     </dependencies>
+
+    <properties>
+        <skipPlatformTests>false</skipPlatformTests>
+    </properties>
 
 </project>

@@ -39,7 +39,7 @@ public class RabbitMQProducerClient {
         factory.setPassword(password);
     }
 
-    public void connect(String exchangeName, String routeKey) throws IOException {
+    public void declareAndConnect(String exchangeName, String routeKey) throws IOException {
         connection = factory.newConnection();
         channel = connection.createChannel();
 

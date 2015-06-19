@@ -38,7 +38,7 @@ public class RabbitMQConsumerClient {
         factory.setHost(host);
     }
 
-    public void connect(String exchangeName, String routeKey) throws IOException {
+    public void declareAndConnect(String exchangeName, String routeKey) throws IOException {
         connection = factory.newConnection();
         channel = connection.createChannel();
         this.routeKey = routeKey;
