@@ -18,58 +18,84 @@
 
 package org.wso2.carbon.esb.rest.test.header;
 
+import com.sun.net.httpserver.Headers;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
+import org.apache.axiom.om.OMElement;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import static org.testng.Assert.assertEquals;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.wso2.carbon.integration.common.utils.ClientConnectionUtil;
-import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
-import org.wso2.carbon.automation.extensions.servers.webserver.SimpleWebServer;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.testng.Assert.assertEquals;
+import org.wso2.esb.integration.common.utils.ESBTestCaseUtils;
 
 public class ContentTypeTestCase extends ESBIntegrationTest {
     private Log log = LogFactory.getLog(ContentTypeTestCase.class);
+	private HttpServer server = null;
+	public static String contentType;
 
-    @BeforeClass(alwaysRun = true)
-    public void init() throws Exception {
-        super.init();
-        loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/esbjava2283/synapse.xml");
+	@BeforeClass(alwaysRun = true)
+	public void init() throws Exception {
+		super.init();
+		String relativePath = "/artifacts/ESB/synapseconfig/esbjava2283/api.xml";
+		ESBTestCaseUtils util = new ESBTestCaseUtils();
+		relativePath = relativePath.replaceAll("[\\\\/]", File.separator);
+		OMElement apiConfig = util.loadResource(relativePath);
+		addApi(apiConfig);
+	}
+
+    @Test(groups = {"wso2.esb"}, description = "Test different content types", dataProvider = "contentTypeProvider")
+    public void testReturnContentType(String dataProviderContentType) throws Exception {
+	    contentType = dataProviderContentType;
+	    int port = 8089;
+	    server = HttpServer.create(new InetSocketAddress(port), 0);
+	    server.createContext("/gettest", new MyHandler());
+	    server.setExecutor(null); // creates a default executor
+	    server.start();
+	    DefaultHttpClient httpclient = new DefaultHttpClient();
+	    String url = "http://localhost:8280/serviceTest/test";
+	    HttpGet httpGet = new HttpGet(url);
+	    HttpResponse response = null;
+	    try {
+		    response = httpclient.execute(httpGet);
+	    } catch (IOException e) {
+		    log.error("Error Occurred while sending http get request. " + e);
+	    }
+	    log.info(response.getEntity().getContentType());
+	    log.info(response.getStatusLine().getStatusCode());
+
+	    assertEquals(response.getFirstHeader("Content-Type").getValue(), contentType, "Expected content type doesn't match");
+	    assertEquals(response.getStatusLine().getStatusCode(), 200, "response code doesn't match");
+
+	    server.stop(0);
     }
 
-    //TODO Re-enable the code
-    @Test(groups = {"wso2.esb"}, description = "Test different content types",
-          dataProvider = "contentTypeProvider",enabled = false)
-    public void testReturnContentType(String contentType) throws Exception {
-        int port = 9005;
-        SimpleWebServer simpleWebServer = new SimpleWebServer(port, 200);
-        log.info("Running the test for context type -" + contentType);
-        try {
-            simpleWebServer.start();
-            SimpleHttpClient httpClient = new SimpleHttpClient();
-            Map<String, String> headers = new HashMap<String, String>();
-            headers.put("Content-Type", contentType);
-            HttpResponse response = httpClient.doGet(context.getContextUrls().getServiceUrl() + "/passThoughProxy", headers);
-            log.info(response.getEntity().getContentType());
-            log.info(response.getStatusLine().getStatusCode());
-            simpleWebServer.terminate();
+	private class MyHandler implements HttpHandler {
+		public void handle(HttpExchange t) throws IOException {
 
-            assertEquals(response.getEntity().getContentType().getValue(), contentType, "Expected content type doesn't match");
-            assertEquals(response.getStatusLine().getStatusCode(), 200, "response code doesn't match");
-        } finally {
-            simpleWebServer.terminate();
-            waitForPortCloser(port);
-        }
-    }
+			Headers h = t.getResponseHeaders();
+			h.add("Content-Type", contentType);
+			String response = "This Content type test case";
+			t.sendResponseHeaders(200, response.length());
+			OutputStream os = t.getResponseBody();
+			os.write(response.getBytes());
+			os.close();
+		}
+	}
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
