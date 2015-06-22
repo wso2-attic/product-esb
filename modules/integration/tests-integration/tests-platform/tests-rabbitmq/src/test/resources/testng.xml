@@ -12,6 +12,10 @@
     <test name="RabbitMQ-Transport-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.rabbitmq.transport.test"/>
+
+            <!--Add independent tests to a different package. Recovery tests are added to a different package since it involves
+            server stopping and restarting and cannot be handled with RabbitMQBrokerStartup testcase alone-->
+            <package name="org.wso2.carbon.esb.rabbitmq.transport.recovery.test"/>
         </packages>
     </test>
 

@@ -22,6 +22,7 @@ import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.carbon.esb.rabbitmq.utils.RabbitMQTestUtils;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.servers.RabbitMQServer;
@@ -32,18 +33,13 @@ public class RabbitMQBrokerStartupTestCase extends ESBIntegrationTest {
 
     private RabbitMQServer rabbitMQServer;
     private ServerConfigurationManager configurationManagerAxis2;
-    private final String RABBITMQ_HOME_XPATH = "//rabbitmq/rabbitmqhome";
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @BeforeTest(alwaysRun = true)
     public void startRabbitMQBrokerAndConfigureESB() throws Exception {
         super.init();
 
-        AutomationContext automationContext = new AutomationContext();
-        String rabbitMQHome = automationContext.getConfigurationValue(RABBITMQ_HOME_XPATH);
-
-        rabbitMQServer = new RabbitMQServer(rabbitMQHome);
-
+        rabbitMQServer = RabbitMQTestUtils.getRabbitMQServerInstance();
         rabbitMQServer.start();
         rabbitMQServer.initialize();
 
