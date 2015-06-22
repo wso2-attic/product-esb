@@ -78,8 +78,7 @@ public class ContentTypeTestCase extends ESBIntegrationTest {
 	    log.info(response.getEntity().getContentType());
 	    log.info(response.getStatusLine().getStatusCode());
 
-	    assertEquals(response.getFirstHeader("Content-Type").getValue(), contentType,
-	                 "Expected content type doesn't match");
+	    assertEquals(response.getFirstHeader("Content-Type").getValue(), contentType, "Expected content type doesn't match");
 	    assertEquals(response.getStatusLine().getStatusCode(), 200, "response code doesn't match");
 
 	    server.stop(0);
