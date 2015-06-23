@@ -29,6 +29,10 @@ import org.wso2.esb.integration.common.utils.servers.RabbitMQServer;
 
 import java.io.File;
 
+/**
+ * Starts rabbitmq server, loads axi2.xml before running other tests in the package and stops server and restore axis2
+ * config after all tests in the package is executed.
+ */
 public class RabbitMQBrokerStartupTestCase extends ESBIntegrationTest {
 
     private RabbitMQServer rabbitMQServer;

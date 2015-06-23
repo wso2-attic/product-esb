@@ -28,36 +28,27 @@ import org.wso2.esb.integration.common.utils.clients.rabbitmqclient.RabbitMQProd
 
 import java.io.IOException;
 
-public class RabbitMQConsumerTestCase extends ESBIntegrationTest {
+public class RabbitMQJSONConsumerTestCase extends ESBIntegrationTest {
 
     private LogViewerClient logViewer;
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         super.init();
-        loadESBConfigurationFromClasspath("/artifacts/ESB/rabbitmq/transport/rabbitmq_consumer_proxy.xml");
+        loadESBConfigurationFromClasspath("/artifacts/ESB/rabbitmq/transport/rabbitmq_consumer_json.xml");
         logViewer = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test ESB as a RabbitMQ Consumer ")
-    public void testRabbitMQConsumer() throws Exception {
+    @Test(groups = {"wso2.esb"}, description = "Test ESB as a RabbitMQ consumer for JSON messages ")
+    public void testRabbitMQJSONConsumer() throws Exception {
         int beforeLogSize = logViewer.getAllRemoteSystemLogs().length;
 
         RabbitMQProducerClient sender = new RabbitMQProducerClient("localhost", 5672, "guest", "guest");
 
         try {
             sender.declareAndConnect("exchange2", "queue2");
-            for (int i = 0; i < 200; i++) {
-                String message =
-                        "<ser:placeOrder xmlns:ser=\"http://services.samples\">\n" +
-                                "<ser:order>\n" +
-                                "<ser:price>100</ser:price>\n" +
-                                "<ser:quantity>2000</ser:quantity>\n" +
-                                "<ser:symbol>RMQ</ser:symbol>\n" +
-                                "</ser:order>\n" +
-                                "</ser:placeOrder>";
-                sender.sendBasicMessage(message);
-            }
+            String message = "'{\"name\":\"device1\"}'";
+            sender.sendMessage(message, "application/json");
         } catch (IOException e) {
             Assert.fail("Could not connect to RabbitMQ broker");
         } finally {
@@ -74,10 +65,11 @@ public class RabbitMQConsumerTestCase extends ESBIntegrationTest {
             String message = logs[i].getMessage();
             if (message.contains("received = true")) {
                 count++;
+                System.out.println("message = " + message);
             }
         }
 
-        Assert.assertEquals(count, 200, "All messages are not received from queue");
+        Assert.assertEquals(count, 1, "All messages are not received from queue");
     }
 
     @AfterClass(alwaysRun = true)
