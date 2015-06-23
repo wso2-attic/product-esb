@@ -17,6 +17,8 @@
 */
 package org.wso2.carbon.esb.jms.inbound.transport.test.utills;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.automation.extensions.servers.jmsserver.controller.config.JMSBrokerConfiguration;
 
 import javax.jms.*;
@@ -24,14 +26,17 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.util.Properties;
 
-public class JMS2TopicMessageProducer {
+public class JMS2TopicMessageConsumer implements Runnable {
+	private Log log = LogFactory.getLog(this.getClass());
 	private Connection connection = null;
 	private Session session = null;
-	private MessageProducer producer = null;
+	private MessageConsumer consumer = null;
 	private TopicConnectionFactory connectionFactory = null;
 	private Topic destination = null;
+	private volatile boolean stopFlag;
+	private int msgCount;
 
-	public JMS2TopicMessageProducer(JMSBrokerConfiguration brokerConfiguration)
+	public JMS2TopicMessageConsumer(JMSBrokerConfiguration brokerConfiguration)
 			throws NamingException {
 		Properties props = new Properties();
 		props.setProperty("java.naming.factory.initial",
@@ -39,21 +44,38 @@ public class JMS2TopicMessageProducer {
 		props.setProperty("java.naming.provider.url", brokerConfiguration.getProviderURL());
 		InitialContext ctx = new InitialContext(props);
 		this.connectionFactory = (TopicConnectionFactory) ctx.lookup("TopicConnectionFactory");
-		this.destination = (Topic)ctx.lookup("/topic/exampleTopic");
+		this.destination = (Topic) ctx.lookup("/topic/exampleTopic");
 	}
 
-	public void connect() throws JMSException, NamingException {
+	public void consume() throws JMSException, NamingException {
+		setStopFlag(false);
+		msgCount = 0;
 		this.connection = this.connectionFactory.createConnection();
 		this.connection.start();
 		this.session = this.connection.createSession(false, 1);
-		this.producer = this.session.createProducer(destination);
-		this.producer.setDeliveryMode(1);
+		this.consumer = this.session.createSharedConsumer(destination, "mySubscription");
+		TextMessage messageReceived;
+		while (!stopFlag) {
+			messageReceived = (TextMessage) consumer.receive(1);
+			if (messageReceived != null) {
+				msgCount++;
+			}
+		}
+		disconnect();
+	}
+
+	public void setStopFlag(boolean state) {
+		this.stopFlag = state;
+	}
+
+	public int getMessageCount() {
+		return msgCount;
 	}
 
 	public void disconnect() {
-		if (this.producer != null) {
+		if (this.consumer != null) {
 			try {
-				this.producer.close();
+				this.consumer.close();
 			} catch (JMSException var4) {
 				;
 			}
@@ -77,19 +99,14 @@ public class JMS2TopicMessageProducer {
 
 	}
 
-	public void pushMessage(String messageContent) throws Exception {
-		if (this.producer == null) {
-			throw new Exception("No Connection with Queue. Please connect");
-		} else {
-			TextMessage message = this.session.createTextMessage(messageContent);
-			this.producer.send(message);
+	@Override
+	public void run() {
+		try {
+			consume();
+		} catch (JMSException e) {
+			log.info(e + ", Can not create sample JMS Consumer");
+		} catch (NamingException e) {
+			log.info(e + ", Can not create sample JMS Consumer");
 		}
 	}
-
-	public void sendBytesMessage(byte[] payload) throws Exception {
-		BytesMessage bm = this.session.createBytesMessage();
-		bm.writeBytes(payload);
-		this.producer.send(bm);
-	}
 }
-

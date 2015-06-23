@@ -17,7 +17,6 @@
 */
 package org.wso2.carbon.esb.jms.inbound.transport.test;
 
-
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.util.AXIOMUtil;
 import org.testng.Assert;
@@ -27,7 +26,7 @@ import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.esb.jms.inbound.transport.test.utills.HornetQBrokerConfigurationProvider;
-import org.wso2.carbon.esb.jms.inbound.transport.test.utills.HornetQLoader;
+import org.wso2.carbon.esb.jms.inbound.transport.test.utills.JMS2TopicMessageConsumer;
 import org.wso2.carbon.esb.jms.inbound.transport.test.utills.JMS2TopicMessageProducer;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
@@ -35,28 +34,40 @@ import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.clients.inbound.endpoint.InboundAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.JMSEndpointManager;
-import org.wso2.esb.integration.common.utils.servers.ActiveMQServer;
+import org.wso2.esb.integration.common.utils.common.TestConfigurationProvider;
+
+import java.io.File;
 
 /**
  * JMS 2.0 Test
  * class tests consuming message from a shared topic subscription
  */
-public class JMSInboundSharedSubscriberTestCase extends ESBIntegrationTest{
+public class JMSInboundSharedSubscriberTestCase extends ESBIntegrationTest {
 	private LogViewerClient logViewerClient = null;
 	private ServerConfigurationManager serverConfigurationManager;
 	private InboundAdminClient inboundAdminClient;
-	private HornetQLoader hornetQLoader = new HornetQLoader();
 
 	@BeforeClass(alwaysRun = true)
 	protected void init() throws Exception {
-		hornetQLoader.startJMSBrokerAndConfigureESB();
 		super.init();
-	//	serverConfigurationManager =
-	//			new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
+		serverConfigurationManager =
+				new ServerConfigurationManager(
+						new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
+		//Load libs to ESB instance
+		serverConfigurationManager.copyToComponentLib(new File(
+				TestConfigurationProvider.getResourceLocation() + File.separator + "artifacts" +
+				File.separator + "ESB" + File.separator + "jar" + File.separator +
+				"hornetq-all-new.jar"));
+		serverConfigurationManager.copyToComponentLib(new File(
+				TestConfigurationProvider.getResourceLocation() + File.separator + "artifacts" +
+				File.separator + "ESB" + File.separator + "jar" + File.separator +
+				"javax.jms-api-2.0.1.jar"));
 		OMElement synapse =
-				esbUtils.loadResource("/artifacts/ESB/jms/inbound/transport/jms_transport_proxy_service.xml");
+				esbUtils.loadResource(
+						"/artifacts/ESB/jms/inbound/transport/jms_transport_proxy_service.xml");
 		updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
-		inboundAdminClient = new InboundAdminClient(context.getContextUrls().getBackEndUrl(),getSessionCookie());
+		inboundAdminClient = new InboundAdminClient(context.getContextUrls().getBackEndUrl(),
+		                                            getSessionCookie());
 		logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 	}
 
@@ -64,8 +75,20 @@ public class JMSInboundSharedSubscriberTestCase extends ESBIntegrationTest{
 	public void testSharedTopic() throws Exception {
 		deleteInboundEndpoints();
 		JMS2TopicMessageProducer sender =
-				new JMS2TopicMessageProducer(HornetQBrokerConfigurationProvider.getInstance().getBrokerConfiguration());
+				new JMS2TopicMessageProducer(
+						HornetQBrokerConfigurationProvider.getInstance().getBrokerConfiguration());
 		int messageCount = 5;
+
+		//Starting Sample message consumer
+		JMS2TopicMessageConsumer receiver =
+				new JMS2TopicMessageConsumer(
+						HornetQBrokerConfigurationProvider.getInstance().getBrokerConfiguration());
+		Thread receiverThread = new Thread(receiver);
+		receiverThread.start();
+
+		int beforeLogCount = logViewerClient.getAllSystemLogs().length;
+		addInboundEndpoint(addEndpoint1());
+		//Thread.sleep(3000);
 
 		try {
 			sender.connect();
@@ -79,7 +102,7 @@ public class JMSInboundSharedSubscriberTestCase extends ESBIntegrationTest{
 				                   "         <ser:order>" +
 				                   "            <xsd:price>100</xsd:price>" +
 				                   "            <xsd:quantity>2000</xsd:quantity>" +
-				                   "            <xsd:symbol>WSO2ESB</xsd:symbol>" +
+				                   "            <xsd:symbol>WSO2-ESB</xsd:symbol>" +
 				                   "         </ser:order>" +
 				                   "      </ser:placeOrder>" +
 				                   "   </soapenv:Body>" +
@@ -89,38 +112,42 @@ public class JMSInboundSharedSubscriberTestCase extends ESBIntegrationTest{
 			sender.disconnect();
 		}
 
-		int beforeLogCount = logViewerClient.getAllSystemLogs().length;
-		addInboundEndpoint(addEndpoint1());
 		Thread.sleep(3000);
+		receiver.setStopFlag(true);
+		int simpleClientMsgCount = receiver.getMessageCount();
 		LogEvent[] logs = logViewerClient.getAllSystemLogs();
-		int count = 0;
+		int ESBMsgCount = 0;
 		for (int i = 0; i < (logs.length - beforeLogCount); i++) {
-			if (logs[i].getMessage().contains("<xsd:symbol>WSO2ESB</xsd:symbol>")) {
-				count++;
+			if (logs[i].getMessage().contains("<xsd:symbol>WSO2-ESB</xsd:symbol>")) {
+				ESBMsgCount++;
 			}
 		}
-
-		Assert.assertTrue(count==messageCount, "Couldn't Consume messages from the topic");
+		log.info(
+				"TESTSharedTopicSubscriber - Number of messages Inbound consumed : " + ESBMsgCount);
+		log.info("TESTSharedTopicSubscriber - Number of messages Java client consumed : " +
+		         simpleClientMsgCount);
+		Assert.assertTrue((ESBMsgCount + simpleClientMsgCount) == messageCount,
+		                  "Couldn't Consume messages from the topic");
 		deleteInboundEndpoints();
 	}
 
 	@AfterClass(alwaysRun = true)
 	public void destroy() throws Exception {
-		hornetQLoader.stopJMSBrokerRevertESBConfiguration();
 		super.cleanup();
+		//hornetQLoader.stopJMSBrokerRevertESBConfiguration();
 	}
 
 	private OMElement addEndpoint1() throws Exception {
 		OMElement synapseConfig = null;
 		synapseConfig = AXIOMUtil
 				.stringToOM("<inboundEndpoint xmlns=\"http://ws.apache.org/ns/synapse\"\n" +
-				            "                 name=\"TestJMS\"\n" +
+				            "                 name=\"TestJMS3\"\n" +
 				            "                 sequence=\"requestHandlerSeq\"\n" +
 				            "                 onError=\"inFault\"\n" +
 				            "                 protocol=\"jms\"\n" +
 				            "                 suspend=\"false\">\n" +
 				            "    <parameters>\n" +
-				            "        <parameter name=\"interval\">10000</parameter>\n" +
+				            "        <parameter name=\"interval\">1000</parameter>\n" +
 				            "        <parameter name=\"transport.jms.Destination\">/topic/exampleTopic</parameter>\n" +
 				            "        <parameter name=\"transport.jms.CacheLevel\">5</parameter>\n" +
 				            "        <parameter name=\"transport.jms" +
