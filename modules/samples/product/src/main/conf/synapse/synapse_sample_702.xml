@@ -21,6 +21,7 @@
         <!-- Introduction to Synapse Scheduled Message Forwarding Processor -->
 
 <definitions xmlns="http://ws.apache.org/ns/synapse">
+    <taskManager provider="org.wso2.carbon.mediation.ntask.NTaskTaskManager"/>
 
     <endpoint name="StockQuoteServiceEp">
         <address uri="http://localhost:9000/services/SimpleStockQuoteService">
