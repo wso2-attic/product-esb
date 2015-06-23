@@ -19,8 +19,7 @@ public class CallTemplateIntegrationSample750FastXSLTTestCase extends ESBIntegra
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/fast_xslt/calltemplate_integration_fastxslt_sample750_synapse.xml");
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Stereotyping Fast XSLT Transformations with Templates " +
-            ":Test using sample 750")
+    @Test(groups = {"wso2.esb"}, description = "Stereotyping Fast XSLT Transformations with Templates :Test using sample 750")
     public void testFastXSLTTransformationWithTemplates() throws IOException, XMLStreamException {
         OMElement response=axis2Client.sendCustomQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy")
                 ,null,"WSO2");
