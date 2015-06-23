@@ -48,18 +48,24 @@ public class RabbitMQProducerTestCase extends ESBIntegrationTest {
             Assert.fail("Could not connect to RabbitMQ broker");
         }
 
+        List<String> messages = consumer.popAllMessages();
+        int beforeMessageCount = messages.size();
+
         for (int i = 0; i < 5; i++) {
             client.sendRobust(Utils.getStockQuoteRequest("RMQ"), getProxyServiceURLHttp("RabbitMQProducerProxy"), "getQuote");
         }
         Thread.sleep(10000);
 
-        List<String> messages = consumer.popAllMessages();
-        if (messages == null || messages.size() == 0) {
+        messages = consumer.popAllMessages();
+        int afterMessagesCount = messages.size();
+
+        if (messages.size() == 0) {
             Assert.fail("Messages not received at RabbitMQ Broker");
         } else {
-            for (int i = 0; i < 5; i++) {
-                org.testng.Assert.assertNotNull(messages.get(i), "Message not found. message sent by proxy service not reached to the destination Queue");
-                org.testng.Assert.assertTrue(messages.get(i).contains("<ns:getQuote xmlns:ns=\"http://services.samples\"><" +
+            Assert.assertEquals(afterMessagesCount - beforeMessageCount, 5, "Messages not received at RabbitMQBroker");
+            for (int i = beforeMessageCount; i < afterMessagesCount; i++) {
+                Assert.assertNotNull(messages.get(i), "Message not found. message sent by proxy service not reached to the destination Queue");
+                Assert.assertTrue(messages.get(i).contains("<ns:getQuote xmlns:ns=\"http://services.samples\"><" +
                         "ns:request><ns:symbol>RMQ</ns:symbol></ns:request></ns:getQuote>")
                         , "Message mismatched");
             }
