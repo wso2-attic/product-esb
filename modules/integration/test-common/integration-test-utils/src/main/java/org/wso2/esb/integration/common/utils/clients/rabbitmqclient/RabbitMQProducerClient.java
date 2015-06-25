@@ -72,7 +72,7 @@ public class RabbitMQProducerClient {
                 new AMQP.BasicProperties.Builder().contentType("text/plain").build(), message.getBytes());
     }
 
-    public void sendBasicMessage(String message, String contentType) throws IOException {
+    public void sendMessage(String message, String contentType) throws IOException {
         channel.basicPublish(exchangeName, routeKey,
                 new AMQP.BasicProperties.Builder().contentType(contentType).build(), message.getBytes());
     }
