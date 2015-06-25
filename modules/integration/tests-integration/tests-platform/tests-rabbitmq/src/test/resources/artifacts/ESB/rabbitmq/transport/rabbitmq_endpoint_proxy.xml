@@ -29,7 +29,7 @@
                 <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
                 <send>
                     <endpoint>
-                        <address uri="rabbitmq:/RabbitMQProxy?rabbitmq.server.host.name=localhost&amp;rabbitmq.server.port=5672&amp;rabbitmq.queue.routing.key=queue1&amp;rabbitmq.exchange.name=exchange1"/>
+                        <address uri="rabbitmq:/RabbitMQProxy?rabbitmq.server.host.name=localhost&amp;rabbitmq.server.port=5672&amp;rabbitmq.queue.name=queue1&amp;rabbitmq.exchange.name=exchange1"/>
                     </endpoint>
                 </send>
             </inSequence>
