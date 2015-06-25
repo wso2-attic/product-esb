@@ -49,7 +49,7 @@
         <description>The main sequence for the message mediation</description>
     </sequence>
     <messageStore name="MyStore"/>
-    <messageProcessor class="org.apache.synapse.message.processors.forward.ScheduledMessageForwardingProcessor" name="ScheduledProcessor" messageStore="MyStore" targetEndpoint="StockQuoteServiceEp">
+    <messageProcessor class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor" name="ScheduledProcessor" messageStore="MyStore" targetEndpoint="StockQuoteServiceEp">
         <parameter name="interval">10000</parameter>
     </messageProcessor>
 </definitions>
