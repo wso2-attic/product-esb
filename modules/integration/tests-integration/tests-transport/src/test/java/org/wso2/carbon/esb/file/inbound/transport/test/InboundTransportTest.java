@@ -75,7 +75,7 @@ public class InboundTransportTest extends ESBIntegrationTest {
 	}
 
 	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
-	@Test(groups = "wso2.esb", description = "Inbound endpoint Reading file with Contect type XML Test Case" ,enabled = false)
+	@Test(groups = "wso2.esb", description = "Inbound endpoint Reading file with Contect type XML Test Case")
 	public void testInboundEnpointReadFile_ContentType_XML() throws Exception {
 
 		addInboundEndpoint(addEndpoint1());
