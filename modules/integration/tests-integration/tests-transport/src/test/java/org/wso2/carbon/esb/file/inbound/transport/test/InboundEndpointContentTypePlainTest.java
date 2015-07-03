@@ -43,11 +43,10 @@ public class InboundEndpointContentTypePlainTest extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        pathToFtpDir = FrameworkPathUtil.getSystemResourceLocation() + File.separator + "artifacts" + File.separator
-                       + "ESB" + File.separator + "synapseconfig" + File.separator  + "vfsTransport";
+	    pathToFtpDir = FrameworkPathUtil.getSystemResourceLocation() + File.separator + "artifacts" + File.separator
+	                   + "ESB" + File.separator + "synapseconfig" + File.separator + "vfsTransport";
 
-        InboundFileFolder = new File(pathToFtpDir + File.separator
-                + "InboundFileFolder");
+        InboundFileFolder = new File(pathToFtpDir + File.separator + "InboundFileFolder");
 
         // create InboundFileFolder if not exists
         if (InboundFileFolder.exists()) {
