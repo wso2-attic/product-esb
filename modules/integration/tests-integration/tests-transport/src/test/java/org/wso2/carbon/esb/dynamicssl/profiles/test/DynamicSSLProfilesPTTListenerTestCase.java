@@ -166,10 +166,10 @@ public class DynamicSSLProfilesPTTListenerTestCase extends ESBIntegrationTest {
     @AfterTest(alwaysRun = true)
     public void destroy() throws Exception {
         deleteProxyService(proxyService);
+        super.cleanup();
         if (serverManager != null) {
             serverManager.restoreToLastConfiguration();
         }
-        super.cleanup();
     }
 
     /**
@@ -179,8 +179,8 @@ public class DynamicSSLProfilesPTTListenerTestCase extends ESBIntegrationTest {
      */
     private void updateProfileConfigurationFiles() throws Exception {
         File sourceFile = new File(configLocation + "updatedlistenerprofiles.xml");
-
         FileManager.deleteFile(configLocation + "listenerprofiles.xml");
+
         try {
             FileManager.copyFile(sourceFile, (configLocation + "listenerprofiles.xml"));
         } catch (IOException e) {
@@ -196,8 +196,8 @@ public class DynamicSSLProfilesPTTListenerTestCase extends ESBIntegrationTest {
      */
     private void rollbackProfileConfigurationFiles() throws Exception {
         File sourceFile = new File(configLocation + "restorelistenerprofiles.xml");
-
         FileManager.deleteFile(configLocation + "listenerprofiles.xml");
+
         try {
             FileManager.copyFile(sourceFile, (configLocation + "listenerprofiles.xml"));
         } catch (IOException e) {
