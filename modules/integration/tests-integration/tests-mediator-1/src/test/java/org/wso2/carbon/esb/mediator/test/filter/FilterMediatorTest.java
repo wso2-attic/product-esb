@@ -48,12 +48,12 @@ public class FilterMediatorTest extends ESBIntegrationTest {
      * @throws Exception
      */
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @Test(groups = {"wso2.esb"}, enabled = false)
+    @Test(groups = {"wso2.esb"})
     public void filterMediatorWithSourceAndRegexTest() throws Exception {
 
         loadSampleESBConfiguration(1);
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuote"), toUrl, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuote"), null, "WSO2");
 
 
         Assert.assertTrue(response.toString().contains("GetQuoteResponse"));

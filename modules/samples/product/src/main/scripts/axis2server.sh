@@ -112,7 +112,7 @@ do
   AXIS2_CLASSPATH="$AXIS2_CLASSPATH":$f
 done
 
-AXIS2_CLASSPATH="$JAVA_HOME/lib/tools.jar":"$AXIS2_CLASSPATH":"$CLASSPATH":"../../repository/axis2/client/lib/bcprov-jdk15.jar":"../../repository/axis2/client/lib/wss4j_1.5.11.wso2v6.jar"
+AXIS2_CLASSPATH="$JAVA_HOME/lib/tools.jar":"$AXIS2_CLASSPATH":"$CLASSPATH":"../../repository/axis2/client/lib/bcprov-jdk15on.jar":"../../repository/axis2/client/lib/wss4j_1.5.11.wso2v6.jar"
 
 for f in $AXIS2_HOME/../../repository/lib/*.jar
 do

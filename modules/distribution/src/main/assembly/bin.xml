@@ -240,7 +240,7 @@
         <dependencySet>
             <outputDirectory>wso2esb-${pom.version}/repository/axis2/client/lib</outputDirectory>
             <includes>
-                <include>bouncycastle:bcprov-jdk15:jar</include>
+                <include>org.bouncycastle:bcprov-jdk15on:jar</include>
             </includes>
             <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
         </dependencySet>

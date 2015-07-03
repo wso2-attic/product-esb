@@ -36,7 +36,7 @@ public class InboundOutboundPolicySecurityTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/callout/InboundOutboundSecurityTest.xml");
     }
 
-    @Test(groups = {"wso2.esb"}, enabled = false)
+    @Test(groups = {"wso2.esb"})
     public void inboundOutboundPolicySecurityTest() throws AxisFault, XPathExpressionException {
         log.info("inboundOutboundPolicySecurityTest getMainSequenceURL : " + getMainSequenceURL());
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(""), "", "IBM");

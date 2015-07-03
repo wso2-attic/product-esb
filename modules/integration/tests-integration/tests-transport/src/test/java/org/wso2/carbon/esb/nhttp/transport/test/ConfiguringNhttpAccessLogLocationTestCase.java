@@ -48,9 +48,8 @@ public class ConfiguringNhttpAccessLogLocationTestCase extends ESBIntegrationTes
 
         super.init();
         serverConfigurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
-        String nhttpFile = /*ProductConstant.getResourceLocations(/*ProductConstant.ESB_SERVER_NAME)*/FrameworkPathUtil.getSystemResourceLocation()  + "artifacts" + separator +
-                "ESB" +separator + "synapseconfig" + separator + "nhttp_transport" + separator
-                + "nhttp.properties";
+	    String nhttpFile = FrameworkPathUtil.getSystemResourceLocation() + "artifacts" + separator + "ESB" + separator +
+	                       "synapseconfig" + separator + "nhttp_transport" + separator + "nhttp.properties";
 
         File srcFile = new File(nhttpFile);
         String carbonHome = System.getProperty(ServerConstants.CARBON_HOME);
@@ -66,8 +65,9 @@ public class ConfiguringNhttpAccessLogLocationTestCase extends ESBIntegrationTes
 
         applyProperty(srcFile, propertyName, nhttpLogDir);
         applyProperty(log4jProperties, "log4j.logger.org.apache.synapse.transport.http.access", "INFO");
-        serverConfigurationManager.applyConfigurationWithoutRestart(new File(getClass()
-                .getResource("/artifacts/ESB/nhttp/transport/axis2.xml").getPath()));
+	    serverConfigurationManager.applyConfigurationWithoutRestart(
+			    new File(FrameworkPathUtil.getSystemResourceLocation() + "artifacts" + separator +
+			             "ESB" + separator + "nhttp" + separator + "transport" + separator + "axis2.xml"));
 
         serverConfigurationManager.restartGracefully();
 

@@ -29,6 +29,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
+import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
@@ -42,13 +43,10 @@ public class InboundEndpointContentTypePlainTest extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        pathToFtpDir = getClass().getResource(
-                File.separator + "artifacts" + File.separator + "ESB"
-                        + File.separator + "synapseconfig" + File.separator
-                        + "vfsTransport" + File.separator).getPath();
+	    pathToFtpDir = FrameworkPathUtil.getSystemResourceLocation() + File.separator + "artifacts" + File.separator
+	                   + "ESB" + File.separator + "synapseconfig" + File.separator + "vfsTransport";
 
-        InboundFileFolder = new File(pathToFtpDir + File.separator
-                + "InboundFileFolder");
+        InboundFileFolder = new File(pathToFtpDir + File.separator + "InboundFileFolder");
 
         // create InboundFileFolder if not exists
         if (InboundFileFolder.exists()) {
@@ -76,7 +74,7 @@ public class InboundEndpointContentTypePlainTest extends ESBIntegrationTest {
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @Test(groups = "wso2.esb", description = "Inbound endpoint Reading file with Contect type Plain Test Case")
+    @Test(groups = "wso2.esb", description = "Inbound endpoint Reading file with Content type Plain Test Case")
     public void testInboundEnpointReadFile_ContentType_Plain() throws Exception {
 
         addInboundEndpoint(addEndpoint());
