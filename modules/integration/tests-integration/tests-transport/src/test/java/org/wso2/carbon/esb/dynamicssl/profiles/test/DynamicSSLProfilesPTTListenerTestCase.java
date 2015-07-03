@@ -71,8 +71,8 @@ public class DynamicSSLProfilesPTTListenerTestCase extends ESBIntegrationTest {
      * add echo proxy , use https endpoint for connection
      *
      * @throws Exception
+     *
      */
-
     private void addTestProxy() throws Exception {
         addProxyService(AXIOMUtil.stringToOM("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                                              "<proxy xmlns=\"http://ws.apache.org/ns/synapse\"\n" +
