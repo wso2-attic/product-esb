@@ -53,6 +53,7 @@
         <module>tests-integration/tests-other</module>
         <module>tests-integration/reports</module>
         <module>tests-ui-integration/tests-ui</module>
+        <module>tests-integration/tests-platform</module>
     </modules>
 
     <build>
