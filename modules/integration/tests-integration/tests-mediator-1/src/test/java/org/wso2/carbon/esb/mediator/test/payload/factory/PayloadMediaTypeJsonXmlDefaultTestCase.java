@@ -52,7 +52,7 @@ public class PayloadMediaTypeJsonXmlDefaultTestCase extends ESBIntegrationTest {
         super.cleanup();
     }
 
-    @Test(groups = "wso2.esb", description = "sending xml request using media-type application/xml", enabled = false)
+    @Test(groups = "wso2.esb", description = "sending xml request using media-type application/xml")
     public void invokeServiceFromXmlRequest() throws Exception {
 
         // xml request payload
@@ -82,7 +82,7 @@ public class PayloadMediaTypeJsonXmlDefaultTestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = "wso2.esb", description = "sending json request using media-type application/json",
-            dependsOnMethods = "invokeServiceFromXmlRequest", enabled = false)
+            dependsOnMethods = "invokeServiceFromXmlRequest")
     public void invokeServiceFromJsonRequest() throws Exception {
 
         // json request payload
@@ -125,7 +125,7 @@ public class PayloadMediaTypeJsonXmlDefaultTestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = "wso2.esb", description = "sending default request using no value media-type ",
-            dependsOnMethods = "invokeServiceFromJsonRequest", enabled = false)
+            dependsOnMethods = "invokeServiceFromJsonRequest")
     public void invokeServiceFromDefaultRequest() throws Exception {
 
         // xml request payload
