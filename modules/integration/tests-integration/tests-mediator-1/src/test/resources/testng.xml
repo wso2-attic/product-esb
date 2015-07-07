@@ -119,6 +119,11 @@
     </test>
 
 
+    <test name="Fault-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.fault"/>
+        </packages>
+    </test>
     <!--
     <test name="Fault NEW" preserve-order="true" verbose="2">
         <classes>
@@ -298,17 +303,17 @@
         </packages>
     </test>
 
-    <!--<test name="Rule-mediator-Test" preserve-order="true" verbose="2">-->
-        <!--<packages>-->
-            <!--<package name="org.wso2.carbon.esb.mediator.test.rule"/>-->
-        <!--</packages>-->
-    <!--</test>-->
+    <test name="Rule-mediator-Test" preserve-order="true" verbose="2">-->
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.rule"/>
+        </packages>
+    </test>
     <!--This has been commented out due to an issue in the automation framework. Once it is fixed (pull request already sent), we can uncomment this.-->
-    <!--test name="dbreport-mediator-Test" preserve-order="true" verbose="2">
+    <test name="dbreport-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.db.dbreport"/>
         </packages>
-    </test-->
+    </test>
 
 
 </suite>
