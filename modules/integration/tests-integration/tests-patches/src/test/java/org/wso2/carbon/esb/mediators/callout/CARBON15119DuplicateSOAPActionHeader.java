@@ -18,7 +18,9 @@
 
 package org.wso2.carbon.esb.mediators.callout;
 
-import org.apache.commons.lang.StringUtils;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -26,10 +28,6 @@ import org.testng.annotations.Test;
 import org.wso2.carbon.automation.test.utils.common.WireMonitorServer;
 import org.wso2.carbon.automation.test.utils.http.client.HttpRequestUtil;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Test Scenario: If there are headers different in case (uppercase and lowercase), Axis2 HTTPSender processes them as
@@ -50,7 +48,7 @@ public class CARBON15119DuplicateSOAPActionHeader extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/callout/DuplicateSOAPActionHeader.xml");
     }
 
-    @Test(groups = "wso2.esb", description = "Test to check whether there are duplicate SOAPAction headers in the request to the service from callout mediator", enabled = false)
+    @Test(groups = "wso2.esb", description = "Test to check whether there are duplicate SOAPAction headers in the request to the service from callout mediator")
     public void testCheckForDuplicateSOAPActionHeaders() throws Exception {
 
         String proxyServiceUrl = getProxyServiceURLHttp("DuplicateSOAPActionHeader");
@@ -65,9 +63,8 @@ public class CARBON15119DuplicateSOAPActionHeader extends ESBIntegrationTest {
 
         HttpRequestUtil.doPost(new URL(proxyServiceUrl), requestPayload, headers);
         String capturedMsg = wireMonitorServer.getCapturedMessage();
-        int matchesCount = StringUtils.countMatches(capturedMsg.toLowerCase(), "soapaction");
-
-        Assert.assertTrue(matchesCount == 1);
+	    Assert.assertFalse(capturedMsg.contains("Soapaction"));
+	    Assert.assertTrue(capturedMsg.contains("SOAPAction"));
     }
 
     @AfterTest(alwaysRun = true)
