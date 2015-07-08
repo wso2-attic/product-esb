@@ -48,7 +48,7 @@ public class FilterFromJSONPathTestCase extends ESBIntegrationTest {
         super.cleanup();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Tests with filter mediator - JSON path Scenario - Filter condition true" , enabled=false)
+    @Test(groups = {"wso2.esb"}, description = "Tests with filter mediator - JSON path Scenario - Filter condition true")
     public void testJSONFilterFromJSONPathConditionTrueTestScenario() throws Exception {
 
         String JSON_PAYLOAD = "{\"album\":\"Hello\",\"singer\":\"Peter\"}";
