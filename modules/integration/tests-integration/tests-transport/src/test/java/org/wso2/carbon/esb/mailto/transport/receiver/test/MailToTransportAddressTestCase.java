@@ -52,7 +52,7 @@ public class MailToTransportAddressTestCase extends ESBIntegrationTest {
         MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test email sent" , enabled = false)
+    @Test(groups = {"wso2.esb"}, description = "Test email sent" )
     public void testEmailReceivedAddress() throws Exception {
         Date date = new Date();
         emailSubject = "Address Test : " + new Timestamp(date.getTime());

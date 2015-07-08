@@ -50,7 +50,7 @@ public class MailToTransportHeadersTestCase extends ESBIntegrationTest {
         MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test email sent" , enabled = false)
+    @Test(groups = {"wso2.esb"}, description = "Test email sent" )
     public void testEmailReceivedHeaders() throws Exception {
         Date date = new Date();
         String emailSubject = "Preserve Headers Test : " + new Timestamp(date.getTime());
