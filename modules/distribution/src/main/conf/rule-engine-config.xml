@@ -1,0 +1,12 @@
+<ruleEngineConfig xmlns="http://wso2.org/carbon/rules/conf">
+    <!--<ruleEngineProvider className="org.wso2.carbon.rule.backend.jsr94.JSR94BackendRuntimeFactory">
+        <property name="propertyProvider"
+                  value="org.wso2.carbon.rule.backend.jsr94.drools.DroolsJSR94DefaultPropertiesProvider"/>
+        <property name="class"
+                  value="org.drools.jsr94.rules.RuleServiceProviderImpl"/>
+        <property name="uri"
+                  value="http://drools.org/"/>
+    </ruleEngineProvider> -->
+    <ruleEngineProvider className="org.wso2.carbon.rule.backend.drools.DroolsBackendRuntimeFactory"/>
+</ruleEngineConfig>
+
