@@ -9,16 +9,16 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
 
-    <!--<test name="Server-Stratup" preserve-order="true" verbose="2">-->
-    <!--<classes>-->
-    <!--<class name="org.wso2.carbon.esb.ServerStartupTestCase"/>-->
-    <!--</classes>-->
-    <!--</test>-->
-    <!-- <test name="ESB-Test-patches" preserve-order="true" verbose="2">
+    <test name="Server-Stratup" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.ServerStartupTestCase"/>
+         </classes>
+    </test>
+    <test name="ESB-Test-patches" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.*"/>
         </packages>
-    </test> -->
+    </test>
 
 
     <test name="Template-Test" preserve-order="true" verbose="2">
@@ -61,18 +61,17 @@
             <class name="org.wso2.carbon.esb.mediators.clone.ESBJAVA3412EmptyStackExceptionTest"/>
         </classes>
     </test>
-    <!--<test name="Endpoint Exisitance Test Case in Tenant Deployed through CAPP"-->
-          <!--preserve-order="true" verbose="2">-->
-        <!--<classes>-->
-            <!--<class-->
-                    <!--name="org.wso2.carbon.esb.car.deployment.test.ESBJAVA3611EndpointTestCase"/>-->
-        <!--</classes>-->
-    <!--</test>-->
-    <!--<test name="Cache mediator with REQUESTHASHGenerator test" preserve-order="true" verbose="2">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.carbon.esb.mediators.cache.APIMANAGER1838RequestHashGeneratorTestCase"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Endpoint Exisitance Test Case in Tenant Deployed through CAPP" preserve-order="true" verbose="2">
+        <classes>
+            <class>
+                    <name="org.wso2.carbon.esb.car.deployment.test.ESBJAVA3611EndpointTestCase"/>
+        </classes>
+    </test>
+    <test name="Cache mediator with REQUESTHASHGenerator test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.mediators.cache.APIMANAGER1838RequestHashGeneratorTestCase"/>
+        </classes>
+    </test>
 
     <test name="Enrich Mediator Tests" preserve-order="true" verbose="2">
         <classes>
