@@ -95,8 +95,6 @@
         </packages>
     </test>
 
-
-
     <test name="Drop-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.drop"/>
@@ -118,100 +116,11 @@
         </packages>
     </test>
 
-
     <test name="Fault-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.fault"/>
         </packages>
     </test>
-    <!--
-    <test name="Fault NEW" preserve-order="true" verbose="2">
-        <classes>
-            <class name="org.wso2.carbon.esb.mediator.test.fault.Soap11FaultActorTestCase"/>
-            <class name="org.wso2.carbon.esb.mediator.test.fault.Soap11FaultCodeVersionMismatchedTestCase"/>
-        </classes>
-    </test>
-
-
-    <test name="Fault-mediator-Test" preserve-order="true" verbose="2">
-
-        <packages>
-            <package name="org.wso2.carbon.esb.mediator.test.fault"/>
-        </packages>
-        <classes>
-           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap11FaultCodeClientTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-           </class>
-           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap12FaultNodeTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-           </class>
-           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap12FaultCodeSenderTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-           </class>
-           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap12FaultCodeDataEncodingUnknownTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-           </class>
-           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap11FaultDetailsTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-           </class>
-           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap12FaultCodeReceiverTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-           </class>
-           <class name="org.wso2.carbon.esb.mediator.test.fault.Soap12FaultFullTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-           </class>
-            <class name="org.wso2.carbon.esb.mediator.test.fault.Soap11FaultActorTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-            </class>
-            <class name="org.wso2.carbon.esb.mediator.test.fault.Soap11FaultCodeVersionMismatchedTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-            </class>
-            <class name="org.wso2.carbon.esb.mediator.test.fault.Soap11FaultStringValueTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-            </class>
-            <class name="org.wso2.carbon.esb.mediator.test.fault.Soap12FaultDetailAsElementTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-            </class>
-            <class name="org.wso2.carbon.esb.mediator.test.fault.Soap12FaultStringValueTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-            </class>
-            <class name="org.wso2.carbon.esb.mediator.test.fault.ESBJAVA2615TestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-            </class>
-            <class name="org.wso2.carbon.esb.mediator.test.fault.Soap11FaultWithAttributeResponseFalseWithAddressingTestCase">
-                <methods>
-                    <exclude name=".*" />
-                </methods>
-            </class>
-        </classes>
-    </test>
--->
 
     <test name="Filter-mediator-Test" preserve-order="true" verbose="2">
         <packages>
@@ -309,11 +218,11 @@
         </packages>
     </test>
     <!--This has been commented out due to an issue in the automation framework. Once it is fixed (pull request already sent), we can uncomment this.-->
-    <test name="dbreport-mediator-Test" preserve-order="true" verbose="2">
+    <!--test name="dbreport-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.db.dbreport"/>
         </packages>
-    </test>
+    </test-->
 
 
 </suite>
