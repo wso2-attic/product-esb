@@ -1,4 +1,0 @@
-<ruleEngineConfig xmlns="http://wso2.org/carbon/rules/conf">
-    <ruleEngineProvider className="org.wso2.carbon.rule.backend.drools.DroolsBackendRuntimeFactory"/>
-</ruleEngineConfig>
-
