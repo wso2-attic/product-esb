@@ -44,33 +44,9 @@
     </test>
 
 
-    <!--<test name="nhttp-Transport-Test" preserve-order="true" verbose="2">-->
-        <!--<classes>-->
-            <!--&lt;!&ndash;The following test cases would change the server configuration when starting the test case,&ndash;&gt;-->
-            <!--&lt;!&ndash;and restore the same once it's done&ndash;&gt;-->
-            <!--&lt;!&ndash;If your test case needs to explicitly change the server configuration, add it here&ndash;&gt;-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.DefaultRequestContentTypeTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.ResponseAfterNttpEnabledTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.NhttpMaximumOpenConnections"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.ConfiguringNhttpAccessLogLocationTestCase"/>-->
-
-            <!--&lt;!&ndash;The SetNhttpAxis2Transport class would set the nhttp axis2 transport and restart the ESB&ndash;&gt;-->
-            <!--&lt;!&ndash;The test cases that follow it would not change any server configurations&ndash;&gt;-->
-            <!--&lt;!&ndash;RemoveNhttpAxis2Transport would restore the ESBs default transport&ndash;&gt;-->
-            <!--&lt;!&ndash;If your test case doesn't need to change the server configuration, add it here&ndash;&gt;-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.SetNhttpAxis2Transport"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.ContentTypeCharsetTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.MessageWithoutContentTypeTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.OCSPCertificateValidationTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.RetrieveBackendWsdlTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.SetHostHttpHeaderTestCase"/>-->
-            <!--<class name="org.wso2.carbon.esb.nhttp.transport.test.RemoveNhttpAxis2Transport"/>-->
-        <!--</classes>-->
-    <!--</test>-->
-
-    <test name="Servlet-transport-Test" preserve-order="true" verbose="2">
+    <test name="nhttp-Transport-Test" preserve-order="true" verbose="2">
         <packages>
-            <package name="org.wso2.carbon.esb.servlet.transport.test.*"/>
+            <package name="org.wso2.carbon.esb.nhttp.transport.test"/>
         </packages>
     </test>
 
@@ -126,12 +102,6 @@
     <test name="MailTo-transport-Test-Receiver" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mailto.transport.receiver.test"/>
-        </packages>
-    </test>
-
-    <test name="MailTo-transport-Test-Sender" preserve-order="true" verbose="2">
-        <packages>
-            <package name="org.wso2.carbon.esb.mailto.transport.sender.test"/>
         </packages>
     </test>
 
