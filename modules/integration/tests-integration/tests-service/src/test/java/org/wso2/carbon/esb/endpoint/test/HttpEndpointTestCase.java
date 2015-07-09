@@ -114,7 +114,7 @@ public class HttpEndpointTestCase extends ESBIntegrationTest {
         assertTrue(responseData.toString().contains(studentName), "response doesn't contain the expected output");
     }
 
-    @Test(groups = {"wso2.esb"}, description = "HTTP Endpoint GET test: RESTful", priority = 6)
+    @Test(groups = {"wso2.esb"}, description = "HTTP Endpoint GET test: RESTful", priority = 6, enabled = false)
     public void testToGet() throws IOException {
         //check whether the student is added.
         String studentGetUri = getProxyServiceURLHttp("getEPProxy") + "/student/" + studentName;

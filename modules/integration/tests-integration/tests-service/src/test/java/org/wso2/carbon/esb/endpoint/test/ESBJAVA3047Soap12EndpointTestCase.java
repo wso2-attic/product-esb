@@ -75,12 +75,11 @@ public class ESBJAVA3047Soap12EndpointTestCase extends ESBIntegrationTest {
         String contentTypeHeader = null;
 
         for (String headerOrPayLoadFragment : tokenizedPayload) {
-
             if (headerOrPayLoadFragment.startsWith("Content-Type:")) {
                 contentTypeHeader = headerOrPayLoadFragment;
                 // we found the content-type http header
                 isContentTypeHeaderFound =
-                        headerOrPayLoadFragment.contains(";action=\"urn:getQuote\"");
+                        headerOrPayLoadFragment.contains("action=\"urn:getQuote\"");
                 break;
             }
 
