@@ -52,7 +52,7 @@ public class MQTTInboundTransportTestCase extends ESBIntegrationTest{
         int beforeCount = 0;
         addInboundEndpoint(addEndpoint1());
         int afterCount = inboundAdminClient.getAllInboundEndpointNames().length;
-        System.out.println("afterCount Adding : "+afterCount);
+        log.info("afterCount Adding : "+afterCount);
         assertEquals(1, afterCount - beforeCount);
         deleteInboundEndpoints();
 
@@ -62,10 +62,10 @@ public class MQTTInboundTransportTestCase extends ESBIntegrationTest{
     public void testDeletingMQTTInboundEndpoint() throws Exception {
         addInboundEndpoint(addEndpoint1());
         int beforeCount = inboundAdminClient.getAllInboundEndpointNames().length;
-        System.out.println("Before Adding : "+beforeCount);
+        log.info("Before Adding : "+beforeCount);
         deleteInboundEndpointFromName("Test");
         int afterCount = 0;
-        System.out.println("afterCount adding : "+afterCount);
+        log.info("afterCount adding : "+afterCount);
         assertEquals(1, beforeCount - afterCount);
         deleteInboundEndpoints();
 

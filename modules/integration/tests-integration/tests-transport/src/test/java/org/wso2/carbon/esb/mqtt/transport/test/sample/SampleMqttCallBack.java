@@ -16,6 +16,8 @@
 
 package org.wso2.carbon.esb.mqtt.transport.test.sample;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -23,21 +25,23 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class SampleMqttCallBack implements MqttCallback {
     public static String message;
 
+    private static final Log log = LogFactory.getLog(SampleMqttCallBack.class);
+
     public void connectionLost(Throwable throwable) {
-        System.out.println("Connection lost...");
+        log.info("Connection lost...");
     }
 
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-        System.out.println("Message arrived...");
-        System.out.println("Topic : " + s);
-        System.out.println("Message : " + mqttMessage.toString());
+        log.info("Message arrived...");
+        log.info("Topic : " + s);
+        log.info("Message : " + mqttMessage.toString());
         this.message=mqttMessage.toString();
         boolean isMessage=message.contains("Wso2");
         assert (isMessage);
     }
 
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-        System.out.println("Delivery complete....");
-        System.out.println("Delivery Token : " + iMqttDeliveryToken.toString());
+        log.info("Delivery complete....");
+        log.info("Delivery Token : " + iMqttDeliveryToken.toString());
     }
 }

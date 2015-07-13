@@ -44,7 +44,7 @@ public class MQTTEndpointTestCase extends ESBIntegrationTest {
             mqttClient.setCallback(new SampleMqttCallBack());
             mqttClient.connect(clientOptions); // actual connection happens
             if (mqttClient.isConnected()) {
-                System.out.println("Mqtt client connected successfully...");
+                log.info("Mqtt client connected successfully...");
                 MqttTopic topic = mqttClient.getTopic("esb.test2");
                 MqttMessage message = new MqttMessage();
                 message.setPayload(PAYLOAD.getBytes());
@@ -57,7 +57,7 @@ public class MQTTEndpointTestCase extends ESBIntegrationTest {
             mqttClient.setCallback(new SampleMqttCallBack());
             mqttClient.connect(cleintOptions); // actual connection happens
             if (mqttClient1.isConnected()) {
-                System.out.println("Mqtt client connected successfully...");
+                log.info("Mqtt client connected successfully...");
                 MqttTopic topic = mqttClient.getTopic("esb.test2");
                 mqttClient1.subscribe(topic.toString());
             }
