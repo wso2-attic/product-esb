@@ -64,6 +64,7 @@ public class MQTTEndpointTestCase extends ESBIntegrationTest {
         }
         catch(Exception e)
         {
+            log.info("Error in connecting to client");
         }
     }
 
