@@ -103,6 +103,7 @@ public class HttpInboundDispatchTestCase extends ESBIntegrationTest {
         addProxyService(getArtifactConfig("tenant/proxy-services", "TestProxy.xml"));
         addInboundEndpoint(getArtifactConfig("tenant/inbound-endpoints", "ie1.xml"));
 
+        Thread.sleep(15000);
         logViewerClient.clearLogs();
 
         axis2Client.sendSimpleStockQuoteRequest("http://localhost:9090/t/wso2.com/tenantAPI", null, "WSO2");
