@@ -149,7 +149,6 @@ public class HttpInboundDispatchTestCase extends ESBIntegrationTest {
     }
 
     protected boolean stringExistsInLog(String string) throws Exception {
-        LogViewerClient logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
         LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
         boolean logFound = false;
         for (LogEvent item : logs) {
