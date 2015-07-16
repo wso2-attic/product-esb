@@ -7,40 +7,10 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestSuiteListener"/>
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
-    <test name="Server-Startup" preserve-order="true" verbose="2">
-        <classes>
-            <class name="org.wso2.carbon.esb.proxyservice.test.loggingProxy.WSDLOptionsSpecifiedInlineTestCase"/>
-        </classes>
-    </test>
     <test name="ProxyService-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.proxyservice.test.*"/>
         </packages>
-        <classes>
-            <class name="org.wso2.carbon.esb.proxyservice.test.loggingProxy.ProxyServiceEnablingHTTPSTestCase">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-            <class name="org.wso2.carbon.esb.proxyservice.test.loggingProxy.WSDLOptionsSpecifiedSourceUrlTestCase">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-            <class name="org.wso2.carbon.esb.proxyservice.test.loggingProxy.ProxyServiceEndPointThroughURLTestCase">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-            <class name="org.wso2.carbon.esb.proxyservice.test.loggingProxy.WSDLOptionsSpecifiedInlineTestCase">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-        </classes>
-        <!--classes>
-        <class name="org.wso2.carbon.esb.proxyservice.test.secureProxy.ChangingPoliciesTestCase"/>
-        </classes-->
     </test>
     <test name="Endpoint-Test" preserve-order="true" verbose="2">
         <packages>
@@ -63,11 +33,11 @@
             <package name="org.wso2.carbon.esb.rest.test.header"/>
         </packages>
     </test>
-    <test name="POX-security-Test" preserve-order="true" verbose="2">
+    <!--test name="POX-security-Test" preserve-order="true" verbose="2">
     	<packages>
     		<package name="org.wso2.carbon.esb.rest.test.security"/>
     	</packages>
-    </test>   
+    </test-->   
     <test name="Rest-JSON-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.json.test"/>
@@ -94,11 +64,11 @@
             <package name="org.wso2.carbon.esb.scheduledtask.test"/>
         </packages>
     </test>
-    <test name="email-Transport-Test" preserve-order="true" verbose="2">-->
+    <!--test name="email-Transport-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.email.transport.test"/>
         </packages>
-    </test>
+    </test-->
     <!-- 
     Commented since this is causing a build break in jenkins and ec2
      -->
