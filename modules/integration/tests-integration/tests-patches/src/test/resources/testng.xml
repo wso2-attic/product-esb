@@ -114,5 +114,11 @@
 				name="org.wso2.carbon.esb.security.policy.ESBJAVA3899_PolicyReferenceInWSDLBindingsTestCase" />
 		</classes>
 	</test>
+
+    <test name="proxy-start-on-load-false-test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.car.deployment.test.ESBJAVA3546CAppProxyOnLoadTestCase"/>
+        </classes>
+    </test>
 </suite>
 
