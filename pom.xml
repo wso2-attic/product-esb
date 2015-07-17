@@ -1050,6 +1050,12 @@
                 <artifactId>amqp-client</artifactId>
                 <version>${rabbitmq.orbit.version}</version>
             </dependency>
+            <!-- Adding cipertool feature to the product -->
+            <dependency>
+                <groupId>org.wso2.ciphertool</groupId>
+    		<artifactId>org.wso2.ciphertool</artifactId>
+    		<version>${cipher.tool.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -1174,7 +1180,7 @@
         <ibatis-core.version>3.0</ibatis-core.version>
         <javax.ws.rs.version>1.1.1</javax.ws.rs.version>
         <jersey-client.version>1.8</jersey-client.version>
-
+        <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
 
         <!-- Automation Framework versions -->
         <automation.framework.version>4.3.1</automation.framework.version>
