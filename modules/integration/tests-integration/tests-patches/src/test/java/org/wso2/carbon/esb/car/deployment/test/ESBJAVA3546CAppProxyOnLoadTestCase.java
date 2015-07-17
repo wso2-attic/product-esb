@@ -14,7 +14,6 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class ESBJAVA3546CAppProxyOnLoadTestCase extends ESBIntegrationTest {
-    private SampleAxis2Server axis2Server;
 
     @BeforeClass(alwaysRun = true)
     protected void uploadCarFileTest() throws Exception {
