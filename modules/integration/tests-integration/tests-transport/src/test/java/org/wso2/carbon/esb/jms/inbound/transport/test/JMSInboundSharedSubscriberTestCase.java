@@ -40,6 +40,7 @@ import java.io.File;
 
 /**
  * JMS 2.0 Test
+ * You need to run the HornetQ broker with the specific configuration before running this
  * class tests consuming message from a shared topic subscription
  */
 public class JMSInboundSharedSubscriberTestCase extends ESBIntegrationTest {

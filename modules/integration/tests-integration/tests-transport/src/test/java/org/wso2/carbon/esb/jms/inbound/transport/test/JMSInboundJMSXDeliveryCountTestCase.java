@@ -39,6 +39,7 @@ import java.io.File;
 
 /**
  * JMS 2.0 Test
+ * You need to run the HornetQ broker with the specific configuration before running this
  * class tests the JMSXDeliveryCount header
  */
 public class JMSInboundJMSXDeliveryCountTestCase extends ESBIntegrationTest {
