@@ -70,7 +70,8 @@ public class JMSInboundJMSXDeliveryCountTestCase extends ESBIntegrationTest {
 		logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 	}
 
-	@Test(groups = { "wso2.esb" }, description = "Retrieving the delivery count value from the JMS header")
+	@Test(groups = {
+			"wso2.esb" }, description = "Retrieving the delivery count value from the JMS header")
 	public void testSharedTopic() throws Exception {
 		deleteInboundEndpoints();
 		JMS2QueueMessageProducer sender =
@@ -111,7 +112,7 @@ public class JMSInboundJMSXDeliveryCountTestCase extends ESBIntegrationTest {
 			}
 		}
 		log.info(" Was message delivered once : " + isCountOne);
-		Assert.assertTrue(isCountOne,"Couldn't Consume messages from the topic");
+		Assert.assertTrue(isCountOne, "Couldn't Consume messages from the topic");
 		deleteInboundEndpoints();
 	}
 
