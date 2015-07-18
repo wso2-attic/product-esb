@@ -72,7 +72,7 @@ public class JMSInboundJMSXDeliveryCountTestCase extends ESBIntegrationTest {
 
 	@Test(groups = {
 			"wso2.esb" }, description = "Retrieving the delivery count value from the JMS header")
-	public void testSharedTopic() throws Exception {
+	public void testDeliveryCount() throws Exception {
 		deleteInboundEndpoints();
 		JMS2QueueMessageProducer sender =
 				new JMS2QueueMessageProducer(
