@@ -75,9 +75,11 @@ public class JMSInboundSharedSubscriberTestCase extends ESBIntegrationTest {
 	@Test(groups = { "wso2.esb" }, description = "Consuming messages from a shared topic")
 	public void testSharedTopic() throws Exception {
 		deleteInboundEndpoints();
+		String topicName = "/topic/exampleTopic";
 		JMS2TopicMessageProducer sender =
 				new JMS2TopicMessageProducer(
-						HornetQBrokerConfigurationProvider.getInstance().getBrokerConfiguration());
+						HornetQBrokerConfigurationProvider.getInstance().getBrokerConfiguration(),
+						topicName);
 		int messageCount = 5;
 
 		//Starting Sample message consumer

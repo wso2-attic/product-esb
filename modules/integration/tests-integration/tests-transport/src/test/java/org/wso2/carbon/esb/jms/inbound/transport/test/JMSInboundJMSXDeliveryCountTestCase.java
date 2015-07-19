@@ -75,9 +75,11 @@ public class JMSInboundJMSXDeliveryCountTestCase extends ESBIntegrationTest {
 			"wso2.esb" }, description = "Retrieving the delivery count value from the JMS header")
 	public void testDeliveryCount() throws Exception {
 		deleteInboundEndpoints();
+		String queueName = "queue/mySampleQueue";
 		JMS2QueueMessageProducer sender =
 				new JMS2QueueMessageProducer(
-						HornetQBrokerConfigurationProvider.getInstance().getBrokerConfiguration());
+						HornetQBrokerConfigurationProvider.getInstance().getBrokerConfiguration(),
+						queueName);
 
 		int beforeLogCount = logViewerClient.getAllSystemLogs().length;
 		addInboundEndpoint(addEndpoint1());

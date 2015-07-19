@@ -31,7 +31,7 @@ public class JMS2QueueMessageProducer {
 	private QueueConnectionFactory connectionFactory = null;
 	private Queue destination = null;
 
-	public JMS2QueueMessageProducer(JMSBrokerConfiguration brokerConfiguration)
+	public JMS2QueueMessageProducer(JMSBrokerConfiguration brokerConfiguration, String queue)
 			throws NamingException {
 		Properties props = new Properties();
 		props.setProperty("java.naming.factory.initial",
@@ -39,7 +39,7 @@ public class JMS2QueueMessageProducer {
 		props.setProperty("java.naming.provider.url", brokerConfiguration.getProviderURL());
 		InitialContext ctx = new InitialContext(props);
 		this.connectionFactory = (QueueConnectionFactory) ctx.lookup("QueueConnectionFactory");
-		this.destination = (Queue)ctx.lookup("queue/mySampleQueue");
+		this.destination = (Queue)ctx.lookup(queue);
 	}
 
 	public void connect() throws JMSException, NamingException {

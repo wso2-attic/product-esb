@@ -31,7 +31,7 @@ public class JMS2TopicMessageProducer {
 	private TopicConnectionFactory connectionFactory = null;
 	private Topic destination = null;
 
-	public JMS2TopicMessageProducer(JMSBrokerConfiguration brokerConfiguration)
+	public JMS2TopicMessageProducer(JMSBrokerConfiguration brokerConfiguration, String topic)
 			throws NamingException {
 		Properties props = new Properties();
 		props.setProperty("java.naming.factory.initial",
@@ -39,7 +39,7 @@ public class JMS2TopicMessageProducer {
 		props.setProperty("java.naming.provider.url", brokerConfiguration.getProviderURL());
 		InitialContext ctx = new InitialContext(props);
 		this.connectionFactory = (TopicConnectionFactory) ctx.lookup("TopicConnectionFactory");
-		this.destination = (Topic)ctx.lookup("/topic/exampleTopic");
+		this.destination = (Topic)ctx.lookup(topic);
 	}
 
 	public void connect() throws JMSException, NamingException {
