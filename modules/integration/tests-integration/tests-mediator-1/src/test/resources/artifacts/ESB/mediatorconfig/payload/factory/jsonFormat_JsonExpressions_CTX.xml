@@ -17,8 +17,10 @@
   ~  under the License.
   ~
   -->
+
 <!-- Introduction to Payload-factory mediator  -->
 <definitions xmlns="http://ws.apache.org/ns/synapse">
+
     <proxy xmlns="http://ws.apache.org/ns/synapse"
            name="Dummy"
            transports="https http"
@@ -29,6 +31,9 @@
             <inSequence>
                 <header name="To" action="remove"/>
                 <property name="RESPONSE" value="true"/>
+
+                <property name="hashTag" expression="json-eval($.entities.hashtags)"/>
+                <property name="userId" expression="json-eval($.user.id)"/>
                 <payloadFactory media-type="json">
                     <format>
                         {
@@ -36,20 +41,14 @@
                         "created_at": "Fri Jun 24 17:43:26 +0000 2011",
                         "truncated": false,
                         "favorited": false,
-                        "id_str": "$1",
+                        "id_str": "$ctx:userId",
                         "entities": {
                         "urls": [
+
                         ],
-                        "hashtags": [
-                        {
-                        "text": "$2",
-                        "indices": [
-                        35,
-                        45
-                        ]
-                        }
-                        ],
+                        "hashtags":$ctx:hashTag,
                         "user_mentions": [
+
                         ]
                         },
                         "in_reply_to_user_id_str": null,
@@ -71,10 +70,6 @@
                         "in_reply_to_status_id": null
                         }
                     </format>
-                    <args>
-                        <arg evaluator="xml" expression="//entities/hashtags/text"/>
-                        <arg evaluator="xml" expression="//user/id"/>
-                    </args>
                 </payloadFactory>
                 <property name="messageType" value="application/json" scope="axis2"/>
                 <log level="full"/>
@@ -85,12 +80,16 @@
             </faultSequence>
         </target>
     </proxy>
+
     <sequence name="main">
         <in>
             <log level="full"/>
+
             <send/>
         </in>
+
         <out>
+
         </out>
         <send/>
     </sequence>
