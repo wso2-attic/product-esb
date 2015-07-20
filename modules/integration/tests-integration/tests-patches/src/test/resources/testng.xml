@@ -21,6 +21,11 @@
         </packages>
     </test-->
 
+    <test name="API-Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.api.test.ESBJAVA3751UriTemplateReservedCharacterEncodingTest"/>
+        </classes>
+    </test>
 
     <test name="Template-Test" preserve-order="true" verbose="2">
         <packages>
