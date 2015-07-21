@@ -320,6 +320,38 @@
             <destName>cipher-text.properties</destName>
             <filtered>true</filtered>
         </file>
+         <!-- Cipher Tool Files -->
+        <file>
+	    <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/ciphertool.sh</source>
+	    <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+	    <fileMode>755</fileMode>
+        </file>
+        <file>
+	    <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/ciphertool.bat</source>
+	    <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+        </file>
+        <file>
+	    <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/lib/org.wso2.ciphertool-${cipher.tool.version}.jar</source>
+	    <outputDirectory>${pom.artifactId}-${pom.version}/lib</outputDirectory>
+        </file>
+        <file>
+            <source>src/main/conf/security/cipher-text.properties</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf/security</outputDirectory>
+            <destName>cipher-text.properties</destName>
+            <filtered>true</filtered>
+        </file>
+        <file>
+            <source>src/main/conf/security/cipher-tool.properties</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf/security</outputDirectory>
+            <destName>cipher-tool.properties</destName>
+            <filtered>true</filtered>
+        </file>
+        <file>
+            <source>src/main/conf/security/secret-conf.properties</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf/security</outputDirectory>
+            <destName>secret-conf.properties</destName>
+            <filtered>true</filtered>
+        </file>
         <file>
             <source>src/main/conf/nhttp.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
