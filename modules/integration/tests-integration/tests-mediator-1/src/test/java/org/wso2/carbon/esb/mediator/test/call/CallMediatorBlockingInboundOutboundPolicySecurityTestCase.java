@@ -26,6 +26,8 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import java.io.File;
+
 import static org.testng.Assert.assertTrue;
 
 public class CallMediatorBlockingInboundOutboundPolicySecurityTestCase extends ESBIntegrationTest {
@@ -33,7 +35,7 @@ public class CallMediatorBlockingInboundOutboundPolicySecurityTestCase extends E
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/call/CallMediatorBlockingInboundOutboundSecurity.xml");
+        loadESBConfigurationFromClasspath(File.separator+"artifacts"+File.separator+"ESB"+File.separator+"mediatorconfig"+File.separator+"call"+File.separator+"CallMediatorBlockingInboundOutboundSecurity.xml");
     }
 
     @Test(groups = {"wso2.esb"},description = "Call the inbound & outbound security endpoint with blocking external calls")

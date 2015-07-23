@@ -24,6 +24,8 @@ import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.servers.WireMonitorServer;
 
+import java.io.File;
+
 /**
  * This test case is written to track the issue reported in
  * https://wso2.org/jira/browse/ESBJAVA-2671 With this test case it will load a
@@ -40,7 +42,7 @@ public class CallMediatorBlockingTransportHeaderTestCase extends ESBIntegrationT
         init();
         wireServer = new WireMonitorServer(8991);
         wireServer.start();
-        loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/call/CallMediatorBlockingTransportHeader.xml");
+        loadESBConfigurationFromClasspath(File.separator+"artifacts"+File.separator+"ESB"+File.separator+"mediatorconfig"+File.separator+"call"+File.separator+"CallMediatorBlockingTransportHeader.xml");
     }
 
     @Test(groups = "wso2.esb", description = "Transport header is set in request for soap 1.1")

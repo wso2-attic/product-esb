@@ -24,6 +24,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
+import java.io.File;
+
 import static org.testng.Assert.assertTrue;
 
 public class CallMediatorBlockingProxyWithNamedSeqCase extends ESBIntegrationTest {
@@ -31,7 +33,7 @@ public class CallMediatorBlockingProxyWithNamedSeqCase extends ESBIntegrationTes
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/call/synapse19.xml");
+        loadESBConfigurationFromClasspath(File.separator+"artifacts"+File.separator+"ESB"+File.separator+"mediatorconfig"+File.separator+"call"+File.separator+"synapse19.xml");
     }
 
     @Test(groups = {"wso2.esb"},description = "Call the proxy with named sequence and blocking external calls")
