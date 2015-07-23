@@ -28,6 +28,13 @@
         <send/>
     </sequence>
     <sequence name="main">
-        <drop/>
+        <in>
+            <filter source="get-property('To')" regex="http://localhost:9000.*">
+                <send/>
+            </filter>
+        </in>
+        <out>
+            <send/>
+        </out>
     </sequence>
 </definitions>
