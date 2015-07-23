@@ -24,7 +24,7 @@
     <sequence name="main">
         <in>
             <cache timeout="20" scope="per-host" collector="false"
-                   hashGenerator="org.wso2.caching.digest.DOMHASHGenerator">
+                   hashGenerator="org.wso2.carbon.mediator.cache.digest.DOMHASHGenerator">
                 <implementation type="memory" maxSize="100"/>
             </cache>
             <send>
