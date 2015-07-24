@@ -19,7 +19,6 @@
 package org.wso2.carbon.esb.nhttp.transport.test;
 
 
-import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
