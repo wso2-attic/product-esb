@@ -54,11 +54,11 @@ public class ResponseAfterNttpEnabledTestCase extends ESBIntegrationTest {
 	    URL url = getClass().getResource(separator + "artifacts" + separator + "ESB" + separator
 	                                     + "synapseconfig" + separator + "nhttp_transport" + separator
 	                                     + "nhttp.properties");
-
 	    File srcFile = new File(url.getPath());
-
 	    serverConfigurationManager.applyConfiguration(srcFile);
 	    super.init();
+        loadESBConfigurationFromClasspath(separator + "artifacts" + separator + "ESB" + separator + "synapseconfig" +
+                                          separator + "nhttp_transport" + separator + "response_nhttp_synapse.xml");
     }
 
     /**
@@ -71,9 +71,6 @@ public class ResponseAfterNttpEnabledTestCase extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
     @Test(groups = "wso2.esb")
     public void testMessageMediationAfterEnablingNhttp() throws Exception {
-
-
-
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), toUrl, "WSO2");
 
         Assert.assertTrue(response.toString().contains("WSO2 Company"), "'WSO2 Company' String " +
@@ -89,10 +86,13 @@ public class ResponseAfterNttpEnabledTestCase extends ESBIntegrationTest {
      */
     @AfterClass(alwaysRun = true)
     public void atEnd() throws Exception {
-        super.cleanup();
-        Thread.sleep(3000);
-        serverConfigurationManager.restoreToLastConfiguration();
-        serverConfigurationManager = null;
-        toUrl = null;
+        try {
+            super.cleanup();
+        } finally {
+            Thread.sleep(3000);
+            serverConfigurationManager.restoreToLastConfiguration();
+            serverConfigurationManager = null;
+            toUrl = null;
+        }
     }
 }
