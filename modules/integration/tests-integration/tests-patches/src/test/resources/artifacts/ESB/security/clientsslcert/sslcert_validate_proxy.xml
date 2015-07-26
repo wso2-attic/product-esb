@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="sslcert_validate_proxy"
+       transports="https http"
+       startOnLoad="true"
+       trace="disable">
+   <description/>
+   <target>
+      <inSequence>
+         <class name="org.wso2.test.mediators.CertMediator"/>
+         <log level="full"/>
+         <respond/>
+      </inSequence>
+   </target>
+</proxy>
