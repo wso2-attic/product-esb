@@ -41,7 +41,6 @@ public class ProxyServiceEndPointThroughURLTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Proxy service with providing endpoint through url")
     public void testLoggingProxy() throws Exception {
-
         OMElement response = axis2Client.sendSimpleStockQuoteRequest
                 (getProxyServiceURLHttp("StockQuoteLoggingProxy"), null, "WSO2");
 
@@ -58,9 +57,11 @@ public class ProxyServiceEndPointThroughURLTestCase extends ESBIntegrationTest {
     public void testVerifyLogs() throws Exception {
         LogViewerClient logViewerClient = new LogViewerClient(context.getContextUrls().getBackEndUrl(),
                 getSessionCookie());
-        assertNotNull(logViewerClient.getLogs("INFO", "getSimpleQuote?symbol=WSO2", "", ""),
+        assertNotNull(logViewerClient.getRemoteLogs("INFO", "getQuote", "", ""),
                       "Request INFO log entry not found");
-        assertNotNull(logViewerClient.getLogs("INFO", "ns:getSimpleQuoteResponse", "", ""),
+        assertNotNull(logViewerClient.getRemoteLogs("INFO", "<ns:symbol>WSO2</ns:symbol>", "", ""),
+                      "Request INFO log entry not found");
+        assertNotNull(logViewerClient.getRemoteLogs("INFO", "ns:getQuoteResponse", "", ""),
                       "Request INFO log entry not found");
     }
 
