@@ -31,6 +31,7 @@ import org.wso2.carbon.automation.extensions.servers.jmsserver.controller.config
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.JMSEndpointManager;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
+import org.wso2.esb.integration.common.utils.servers.ActiveMQServer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,12 +53,13 @@ public class JMSMessageStoreProcRESTTestCase extends ESBIntegrationTest {
                               "  \"lastName\" : \"Broker\",\n" +
                               "  \"id\" : 10\n" +
                               "}";
-
+    private ActiveMQServer activeMQServer = new ActiveMQServer();
     private LogViewerClient logViewer;
 
 
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
+        activeMQServer.startJMSBrokerAndConfigureESB();
         super.init();
         headers.put("Test-Header-Field", "TestHeaderValue");
         //headers.put("Content-Type", "application/json");
@@ -99,6 +101,7 @@ public class JMSMessageStoreProcRESTTestCase extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
         super.cleanup();
+        activeMQServer.stopJMSBrokerRevertESBConfiguration();
     }
 }
 
