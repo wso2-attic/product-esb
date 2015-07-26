@@ -194,8 +194,15 @@ public class ESBJAVA3751UriTemplateReservedCharacterEncodingTest extends ESBInte
                 null);
         String decodedMessageContextProperty="decodedQueryParamValue = ESB+WSO2";
         LogEvent[] logs = logViewerClient.getAllSystemLogs();
+
+        //introduced since clearLogs() is not clearing previoues URL call logs, and need to stop
+        // searching after 4 messages
+        int count = 0;
         for (LogEvent logEvent : logs) {
             String message = logEvent.getMessage();
+            if (count++ >= 4) {
+                break;
+            }
             if (message.contains(decodedMessageContextProperty)) {
                 isMessageContextPropertyPercentDecoded = true;
                 continue;
