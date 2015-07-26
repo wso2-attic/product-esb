@@ -53,13 +53,11 @@ public class JMSMessageStoreProcRESTTestCase extends ESBIntegrationTest {
                               "  \"lastName\" : \"Broker\",\n" +
                               "  \"id\" : 10\n" +
                               "}";
-    private ActiveMQServer activeMQServer = new ActiveMQServer();
     private LogViewerClient logViewer;
 
 
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
-        activeMQServer.startJMSBrokerAndConfigureESB();
         super.init();
         headers.put("Test-Header-Field", "TestHeaderValue");
         //headers.put("Content-Type", "application/json");
@@ -101,7 +99,6 @@ public class JMSMessageStoreProcRESTTestCase extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
         super.cleanup();
-        activeMQServer.stopJMSBrokerRevertESBConfiguration();
     }
 }
 
