@@ -121,6 +121,10 @@
         </packages>
     </test>-->
 
-
+    <test name="Dynamic SSL Profiles Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.dynamicssl.profiles.test"/>
+        </packages>
+    </test>
 </suite>
 
