@@ -145,6 +145,16 @@
         <fileSet>
             <directory>src/main/conf/synapse-configs</directory>
             <outputDirectory>wso2esb-${pom.version}/repository/deployment/server/synapse-configs</outputDirectory>
+            <excludes>
+                <exclude>**/empty.txt</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/conf/carbonapps</directory>
+            <outputDirectory>wso2esb-${pom.version}/repository/deployment/server/carbonapps</outputDirectory>
+            <excludes>
+                <exclude>empty.txt</exclude>
+            </excludes>
         </fileSet>
         <fileSet>
             <directory>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/advanced/</directory>
