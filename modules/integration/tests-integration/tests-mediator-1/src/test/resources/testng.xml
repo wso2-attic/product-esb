@@ -212,7 +212,7 @@
         </packages>
     </test>
 
-    <test name="Rule-mediator-Test" preserve-order="true" verbose="2">-->
+    <test name="Rule-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.rule"/>
         </packages>
