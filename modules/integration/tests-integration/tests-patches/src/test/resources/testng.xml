@@ -15,11 +15,6 @@
             <class name="org.wso2.carbon.esb.ServerStartupTestCase"/>
          </classes>
     </test-->
-    <!--test name="ESB-Test-patches" preserve-order="true" verbose="2">
-        <packages>
-            <package name="org.wso2.carbon.esb.*"/>
-        </packages>
-    </test-->
 
     <test name="API-Test" preserve-order="true" verbose="2">
         <classes>
@@ -44,6 +39,7 @@
             <package name="org.wso2.carbon.esb.registry.caching"/>
         </packages>
     </test>
+
     <test name="No Entity Body Check" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.passthru.transport.test.NoEntityBodyPropertyCheck"/>
@@ -67,13 +63,13 @@
             <class name="org.wso2.carbon.esb.mediators.clone.ESBJAVA3412EmptyStackExceptionTest"/>
         </classes>
     </test>
-    <!--test name="Endpoint Exisitance Test Case in Tenant Deployed through CAPP" preserve-order="true" verbose="2">
+
+    <test name="Endpoint Exisitance Test Case in Tenant Deployed through CAPP" preserve-order="true" verbose="2">
         <classes>
-            <class>
-                    <name="org.wso2.carbon.esb.car.deployment.test.ESBJAVA3611EndpointTestCase"/>
+            <class name="org.wso2.carbon.esb.car.deployment.test.ESBJAVA3611EndpointTestCase"/>
         </classes>
     </test>
-    <test name="Cache mediator with REQUESTHASHGenerator test" preserve-order="true" verbose="2">
+    <!--test name="Cache mediator with REQUESTHASHGenerator test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.mediators.cache.APIMANAGER1838RequestHashGeneratorTestCase"/>
         </classes>
@@ -125,6 +121,7 @@
             <class name="org.wso2.carbon.esb.car.deployment.test.ESBJAVA3546CAppProxyOnLoadTestCase"/>
         </classes>
     </test>
+
     <test name="Carbon-app-file-re-deployment-test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.car.deployment.test.CarbonApplicationReDeploymentTestCase"/>
