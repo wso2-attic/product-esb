@@ -29,11 +29,10 @@
 
         <classes>
             <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA2824MissingResponseTestCase">
- 		<methods>
-                    <exclude name=".*" />
+                <methods>
+                    <exclude name=".*"/>
                 </methods>
-	    </class>
-
+            </class>
         </classes>
     </test>
 
@@ -114,13 +113,10 @@
         </packages>
     </test>
 
-	<!-- Commented since it's failing in jenkins -->
-    <!--test name="Https Inbound Transport Test" preserve-order="true" verbose="2">
+    <test name="Https Inbound Transport Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.https.inbound.transport.test"/>
         </packages>
-    </test>-->
-
-
+    </test>
 </suite>
 
