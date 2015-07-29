@@ -369,6 +369,9 @@
                                     org.apache.axis2.transport:org.apache.axis2.transport.rabbitmq.feature:${axis2.transport.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.mqtt.feature:${axis2.transport.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.ciphertool:org.wso2.ciphertool.feature:${cipher.tool.version}
                                 </featureArtifactDef>
 
@@ -836,6 +839,10 @@
                                     <id>org.apache.axis2.transport.rabbitmq.feature.group</id>
                                     <version>${axis2.transport.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.mqtt.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
                                 
                                 <!-- 12 Ciphertool -->
                                  <feature>
@@ -1280,6 +1287,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.apache.axis2.transport.rabbitmq.feature.group</id>
+                                    <version>${axis2.transport.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.mqtt.feature.group</id>
                                     <version>${axis2.transport.version}</version>
                                 </feature>
 
