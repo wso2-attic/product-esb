@@ -48,7 +48,8 @@ public class ESBJAVA3546CAppProxyOnLoadTestCase extends ESBIntegrationTest {
         log.info(carFileStartOnLoadFalse + " car file uploaded");
 
         //Sleep allowing artifacts to be deployed
-        TimeUnit.SECONDS.sleep(10);
+        log.info("Waiting 60 seconds to deploy artifacts");
+        TimeUnit.SECONDS.sleep(60);
     }
 
     @Test(groups = {"wso2.esb"}, description = "proxy service with startOnLoad=true deployed " +
