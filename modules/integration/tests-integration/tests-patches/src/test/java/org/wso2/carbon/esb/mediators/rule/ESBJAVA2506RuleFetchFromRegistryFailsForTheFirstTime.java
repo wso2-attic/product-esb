@@ -18,7 +18,6 @@
 
 package org.wso2.carbon.esb.mediators.rule;
 
-import junit.framework.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -40,7 +39,7 @@ public class ESBJAVA2506RuleFetchFromRegistryFailsForTheFirstTime extends ESBInt
                 , new DataHandler(new URL("file:" + File.separator + File.separator
                 + getESBResourceLocation() + File.separator + "car"
                 + File.separator + carFileName)));
-        TimeUnit.SECONDS.sleep(5);
+        TimeUnit.SECONDS.sleep(20);
         log.info(carFileName + " uploaded successfully");
     }
 
@@ -48,15 +47,6 @@ public class ESBJAVA2506RuleFetchFromRegistryFailsForTheFirstTime extends ESBInt
             "mediator which fetch custom rules from registry in sequence get deployed through capp")
     public void testRuleMediatorProxyDeployed() throws Exception {
         Thread.sleep(6000);
-        String[] proxyServices = getSynapseAppData("esb-artifacts-rule-mediator-car_1.0.0")
-                .getProxyServices();
-        boolean proxyExist = false;
-        for (String proxy : proxyServices) {
-            if (proxy.equals("proxyService2")) {
-                proxyExist = true;
-            }
-        }
-        Assert.assertTrue(proxyExist);
         org.testng.Assert.assertTrue(
                 esbUtils.isProxyDeployed(contextUrls.getBackEndUrl(), getSessionCookie(),
                         "proxyService2")
