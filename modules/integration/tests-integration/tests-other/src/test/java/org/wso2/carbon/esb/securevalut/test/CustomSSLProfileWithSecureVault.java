@@ -35,107 +35,75 @@ import static java.io.File.separator;
 import static org.testng.Assert.assertTrue;
 
 public class CustomSSLProfileWithSecureVault extends ESBIntegrationTest {
-    private ServerConfigurationManager serverConfigurationManagerAxis2;
-    private ServerConfigurationManager serverConfigurationManagerCipherText;
-    private ServerConfigurationManager serverConfigurationManagerCipherTool;
-    private ServerConfigurationManager serverConfigurationManagerSecretConf;
-    private ServerConfigurationManager serverConfigurationManagerKeyStore;
-    private ServerConfigurationManager serverConfigurationManagerTrustStore;
-    private ServerConfigurationManager serverConfigurationManagerPasswordTmp;
+    private ServerConfigurationManager serverConfigurationManager;
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         super.init();
 
-        serverConfigurationManagerCipherText = new ServerConfigurationManager(context);
-        String sourceCText = FrameworkPathUtil.getSystemResourceLocation() +"artifacts"+File.separator+"ESB"+
-                separator + "synapseconfig" + separator + "customSSLprofileWithsecurevault" + separator
-                + "cipher-text.properties";
-
+        //cipher-text.properties file update
+        serverConfigurationManager = new ServerConfigurationManager(context);
+        String sourceCText = FrameworkPathUtil.getSystemResourceLocation() + "artifacts" + File.separator + "ESB" +
+                             separator + "synapseconfig" + separator + "customSSLprofileWithsecurevault" + separator
+                             + "cipher-text.properties";
         String targetCText = CarbonBaseUtils.getCarbonHome() + File.separator + "repository" +
-                File.separator + "conf" + File.separator + "security" + File.separator + "cipher-text.properties";
-
+                             File.separator + "conf" + File.separator + "security" + File.separator + "cipher-text.properties";
         File sourceFileCText = new File(sourceCText);
         File targetFileCText = new File(targetCText);
-        serverConfigurationManagerCipherText.applyConfigurationWithoutRestart(sourceFileCText, targetFileCText, true);
+        serverConfigurationManager.applyConfigurationWithoutRestart(sourceFileCText, targetFileCText, true);
 
-        serverConfigurationManagerCipherTool = new ServerConfigurationManager(context);
-        String sourceCTool = FrameworkPathUtil.getSystemResourceLocation() +"artifacts"+File.separator+"ESB"+
-                separator + "synapseconfig" + separator + "customSSLprofileWithsecurevault" + separator
-                + "cipher-tool.properties";
-
+        //cipher-tool.properties file update
+        String sourceCTool = FrameworkPathUtil.getSystemResourceLocation() + "artifacts" + File.separator + "ESB" +
+                             separator + "synapseconfig" + separator + "customSSLprofileWithsecurevault" + separator
+                             + "cipher-tool.properties";
         String targetCTool = CarbonBaseUtils.getCarbonHome() + File.separator + "repository" + File.separator +
-                "conf" + File.separator + "security" + File.separator + "cipher-tool.properties";
-
+                             "conf" + File.separator + "security" + File.separator + "cipher-tool.properties";
         File sourceFileCTool = new File(sourceCTool);
         File targetFileCTool = new File(targetCTool);
-        serverConfigurationManagerCipherTool.applyConfigurationWithoutRestart(sourceFileCTool, targetFileCTool, true);
+        serverConfigurationManager.applyConfigurationWithoutRestart(sourceFileCTool, targetFileCTool, true);
 
-
-        serverConfigurationManagerSecretConf = new ServerConfigurationManager(context);
-        String sourceSecret = FrameworkPathUtil.getSystemResourceLocation() +"artifacts"+File.separator+"ESB"+
-                separator + "synapseconfig" + separator + "customSSLprofileWithsecurevault" + separator
-                + "secret-conf.properties";
-
+        //secret-conf.properties file update
+        String sourceSecret = FrameworkPathUtil.getSystemResourceLocation() + "artifacts" + File.separator + "ESB" +
+                              separator + "synapseconfig" + separator + "customSSLprofileWithsecurevault" + separator
+                              + "secret-conf.properties";
         String targetSecret = CarbonBaseUtils.getCarbonHome() + File.separator + "repository" + File.separator +
-                "conf" + File.separator + "security" + File.separator + "secret-conf.properties";
-
+                              "conf" + File.separator + "security" + File.separator + "secret-conf.properties";
         File sourceFileSecret = new File(sourceSecret);
         File targetFileSecret = new File(targetSecret);
-        serverConfigurationManagerSecretConf.applyConfigurationWithoutRestart(sourceFileSecret, targetFileSecret, true);
+        serverConfigurationManager.applyConfigurationWithoutRestart(sourceFileSecret, targetFileSecret, true);
 
-        serverConfigurationManagerTrustStore = new ServerConfigurationManager(context);
-        String sourceTrust = FrameworkPathUtil.getSystemResourceLocation() +"artifacts"+File.separator+"ESB"+
-                separator + "synapseconfig" + separator + "customSSLprofileWithsecurevault" + separator
-                + "client-truststore.jks";
-
-        String targetTrust = CarbonBaseUtils.getCarbonHome() + File.separator + "repository" + File.separator +
-                "resources" + File.separator + "security" + File.separator + "client-truststore.jks";
-
-        File sourceFileTrust = new File(sourceTrust);
-        File targetFileTrust = new File(targetTrust);
-        serverConfigurationManagerTrustStore.applyConfigurationWithoutRestart(sourceFileTrust, targetFileTrust, true);
-
-        serverConfigurationManagerKeyStore = new ServerConfigurationManager(context);
-        String sourceKey = FrameworkPathUtil.getSystemResourceLocation() +"artifacts"+File.separator+"ESB"+
-                separator + "synapseconfig" + separator + "customSSLprofileWithsecurevault" + separator
-                + "wso2carbon.jks";
-
-        String targetKey = CarbonBaseUtils.getCarbonHome() + File.separator + "repository" + File.separator +
-                "resources" + File.separator + "security" + File.separator + "wso2carbon.jks";
-
-        File sourceFileKey = new File(sourceKey);
-        File targetFileKey = new File(targetKey);
-        serverConfigurationManagerKeyStore.applyConfigurationWithoutRestart(sourceFileKey, targetFileKey, true);
-
-        serverConfigurationManagerAxis2 = new ServerConfigurationManager(context);
-        String sourceAxis2 = FrameworkPathUtil.getSystemResourceLocation() +"artifacts"+File.separator+"ESB"+
-                separator + "synapseconfig" + separator + "customSSLprofileWithsecurevault" + separator
-                + "axis2.xml";
-
+        //axis2.xml file update
+        String sourceAxis2 = FrameworkPathUtil.getSystemResourceLocation() + "artifacts" + File.separator + "ESB" +
+                             separator + "synapseconfig" + separator + "customSSLprofileWithsecurevault" + separator
+                             + "axis2.xml";
         String targetAxis2 = CarbonBaseUtils.getCarbonHome() + File.separator + "repository" + File.separator +
-                "conf" + File.separator + "axis2" + File.separator + "axis2.xml";
-
+                             "conf" + File.separator + "axis2" + File.separator + "axis2.xml";
         File sourceFileAxis2 = new File(sourceAxis2);
         File targetFileAxis2 = new File(targetAxis2);
-        serverConfigurationManagerAxis2.applyConfigurationWithoutRestart(sourceFileAxis2, targetFileAxis2, true);
+        serverConfigurationManager.applyConfigurationWithoutRestart(sourceFileAxis2, targetFileAxis2, true);
 
+        //catalina-server.xml file update - this is required after carbon kernel 4.4.1
+        String sourceTomcat = FrameworkPathUtil.getSystemResourceLocation() + "artifacts" + File.separator + "ESB" +
+                              separator + "synapseconfig" + separator + "customSSLprofileWithsecurevault" + separator
+                              + "catalina-server.xml";
+        String targetTomcat = CarbonBaseUtils.getCarbonHome() + File.separator + "repository" + File.separator +
+                              "conf" + File.separator + "tomcat" + File.separator + "catalina-server.xml";
+        File sourceFileTomcat = new File(sourceTomcat);
+        File targetFileTomcat = new File(targetTomcat);
+        serverConfigurationManager.applyConfigurationWithoutRestart(sourceFileTomcat, targetFileTomcat, true);
 
-        serverConfigurationManagerPasswordTmp = new ServerConfigurationManager(context);
-        String sourcePassTmp = FrameworkPathUtil.getSystemResourceLocation() +"artifacts"+File.separator+"ESB"+
-                separator + "synapseconfig" + separator + "customSSLprofileWithsecurevault" + separator
-                + "password-tmp";
-
+        //password-tmp file update
+        String sourcePassTmp = FrameworkPathUtil.getSystemResourceLocation() + "artifacts" + File.separator + "ESB" +
+                               separator + "synapseconfig" + separator + "customSSLprofileWithsecurevault" + separator
+                               + "password-tmp";
         String targetPassTmp = CarbonBaseUtils.getCarbonHome() + separator + "password-tmp";
-
         File sourceFilePassTmp = new File(sourcePassTmp);
         File targetFilePassTmp = new File(targetPassTmp);
-        serverConfigurationManagerPasswordTmp.applyConfigurationWithoutRestart(sourceFilePassTmp, targetFilePassTmp, false);
-        serverConfigurationManagerPasswordTmp.restartGracefully();
+        serverConfigurationManager.applyConfigurationWithoutRestart(sourceFilePassTmp, targetFilePassTmp, false);
+        serverConfigurationManager.restartGracefully();
 
         super.init();
     }
-
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
     @Test(groups = "wso2.esb", description = "Tests Secure Vault Protected Custom SSL Profiles")
@@ -144,11 +112,11 @@ public class CustomSSLProfileWithSecureVault extends ESBIntegrationTest {
 
         try {
             BufferedReader bf = new BufferedReader(new FileReader(CarbonBaseUtils.getCarbonHome() + File.separator +
-                    "repository" + File.separator + "logs" + File.separator + "wso2carbon.log"));
+                                                                  "repository" + File.separator + "logs" + File.separator + "wso2carbon.log"));
 
             String line;
             boolean found = false;
-            while (( line = bf.readLine()) != null) {
+            while ((line = bf.readLine()) != null) {
                 int indexfound = line.indexOf(logString);
                 if (indexfound > -1) {
                     found = true;
@@ -156,7 +124,6 @@ public class CustomSSLProfileWithSecureVault extends ESBIntegrationTest {
                 }
             }
             assertTrue(!found, "Server started successfully with Custom SSL Profile using Secure Vault.");
-
             bf.close();
         } catch (FileNotFoundException e) {
             assertTrue(true, "wso2carbon.log file not found.");
@@ -165,10 +132,8 @@ public class CustomSSLProfileWithSecureVault extends ESBIntegrationTest {
         }
     }
 
-
-
     /**
-     * Replace custom files.
+     * Reset configurations
      *
      * @throws Exception
      */
@@ -178,25 +143,8 @@ public class CustomSSLProfileWithSecureVault extends ESBIntegrationTest {
             super.cleanup();
         } finally {
             Thread.sleep(3000);
-            serverConfigurationManagerCipherText.restoreToLastConfiguration();
-            serverConfigurationManagerCipherText = null;
-
-            serverConfigurationManagerCipherTool.restoreToLastConfiguration();
-            serverConfigurationManagerCipherTool = null;
-
-            serverConfigurationManagerSecretConf.restoreToLastConfiguration();
-            serverConfigurationManagerSecretConf = null;
-
-            serverConfigurationManagerKeyStore.restoreToLastConfiguration();
-            serverConfigurationManagerKeyStore = null;
-
-            serverConfigurationManagerTrustStore.restoreToLastConfiguration();
-            serverConfigurationManagerTrustStore = null;
-
-            serverConfigurationManagerPasswordTmp = null;
-
-            serverConfigurationManagerAxis2.restoreToLastConfiguration();
-            serverConfigurationManagerAxis2 = null;
+            serverConfigurationManager.restoreToLastConfiguration();
+            serverConfigurationManager = null;
         }
     }
 }
