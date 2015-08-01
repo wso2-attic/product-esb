@@ -236,7 +236,7 @@
                 <Location>repository/resources/security/wso2carbon.jks</Location>
                 <Type>JKS</Type>
                 <Password svns:secretAlias="Axis2.Https.Listener.KeyStore.Password">password</Password>
-                <KeyPassword>wso2carbon</KeyPassword>
+                <KeyPassword svns:secretAlias="Axis2.Https.Listener.KeyStore.KeyPassword">password</KeyPassword>
             </KeyStore>
         </parameter>
         <parameter locked="false" name="truststore">
@@ -377,19 +377,35 @@
 
     <transportSender class="org.apache.synapse.transport.passthru.PassThroughHttpSSLSender" name="https">
         <parameter locked="false" name="non-blocking">true</parameter>
+ 	<parameter name="customSSLProfiles"> 
+	     <profile name="Profile1">
+		<servers>localhost:9443</servers>
+		<KeyStore>
+		    <Location>repository/resources/security/wso2carbon.jks</Location>
+		    <Type>JKS</Type>
+		    <Password svns:secretAlias="Axis2.Https.Sender.CustomSSLProfile.Profile1.KeyStore.Password">password</Password>
+		    <KeyPassword svns:secretAlias="Axis2.Https.Sender.CustomSSLProfile.Profile1.KeyStore.KeyPassword">password</KeyPassword>
+		</KeyStore>
+		<TrustStore>
+		    <Location>repository/resources/security/client-truststore.jks</Location>
+		    <Type>JKS</Type>
+		    <Password svns:secretAlias="Axis2.Https.Sender.CustomSSLProfile.Profile1.TrustStore.Password">password</Password>
+		</TrustStore>
+	    </profile>
+    	</parameter>
         <parameter locked="false" name="keystore">
             <KeyStore>
                 <Location>repository/resources/security/wso2carbon.jks</Location>
                 <Type>JKS</Type>
-                <Password>wso2carbon</Password>
-                <KeyPassword>wso2carbon</KeyPassword>
+                <Password svns:secretAlias="Axis2.Https.Sender.KeyStore.Password">password</Password>
+                <KeyPassword svns:secretAlias="Axis2.Https.Sender.KeyStore.KeyPassword">password</KeyPassword>
             </KeyStore>
         </parameter>
         <parameter locked="false" name="truststore">
             <TrustStore>
                 <Location>repository/resources/security/client-truststore.jks</Location>
                 <Type>JKS</Type>
-                <Password>wso2carbon</Password>
+                <Password svns:secretAlias="Axis2.Https.Sender.TrustStore.Password">password</Password>
             </TrustStore>
         </parameter>
         <!--<parameter name="HostnameVerifier">DefaultAndLocalhost</parameter>-->
