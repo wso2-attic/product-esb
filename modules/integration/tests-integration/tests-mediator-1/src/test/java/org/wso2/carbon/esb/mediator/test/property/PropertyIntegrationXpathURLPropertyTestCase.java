@@ -27,6 +27,7 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;
 
@@ -59,6 +60,12 @@ public class PropertyIntegrationXpathURLPropertyTestCase extends ESBIntegrationT
         int beforeLogSize = logViewer.getAllSystemLogs().length;
 
         HttpRequestUtil.sendGetRequest(getApiInvocationURL("editing") + "/edit?a=wso2&b=2.4", null);
+
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            log.warn("Sleep Inturrupted : logs may not updated with required text");
+        }
 
         // after sending the message reading the log file
         LogEvent[] logs = logViewer.getAllSystemLogs();
