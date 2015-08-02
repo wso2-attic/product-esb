@@ -40,7 +40,7 @@ public class ESBJAVA3611EndpointTestCase extends ESBIntegrationTest {
         uploadCapp(carFileName
                    , new DataHandler(new URL("file:" + File.separator + File.separator + getESBResourceLocation()
                                              + File.separator + "car" + File.separator + carFileName)));
-        TimeUnit.SECONDS.sleep(5);
+        TimeUnit.SECONDS.sleep(30);
         log.info(carFileName + " uploaded successfully");
     }
 
