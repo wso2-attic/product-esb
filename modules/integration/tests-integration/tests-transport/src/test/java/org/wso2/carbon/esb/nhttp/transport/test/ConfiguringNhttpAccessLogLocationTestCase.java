@@ -73,6 +73,7 @@ public class ConfiguringNhttpAccessLogLocationTestCase extends ESBIntegrationTes
 
         super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/nhttp_transport/nhttp_test_synapse.xml");
+        Thread.sleep(30000);
     }
 
     /**
