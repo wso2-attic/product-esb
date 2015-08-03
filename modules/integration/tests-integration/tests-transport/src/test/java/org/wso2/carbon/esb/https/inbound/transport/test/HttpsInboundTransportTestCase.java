@@ -41,6 +41,7 @@ public class HttpsInboundTransportTestCase extends ESBIntegrationTest {
         addSequence(getArtifactConfig("reciveSeq.xml"));
         addSequence(getArtifactConfig("TestOut.xml"));
         addInboundEndpoint(getArtifactConfig("synapse.xml"));
+        Thread.sleep(30000);
 
     }
 
