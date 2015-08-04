@@ -54,7 +54,7 @@ public class ContentTypeCharsetTestCase extends ESBIntegrationTest {
                 + "/content_type_charset_synapse.xml");
   }
 
-    @Test(groups = { "wso2.esb" }, description = "Test for charset value proprty in the header response", enabled = false)
+    @Test(groups = { "wso2.esb" }, description = "Test for charset value proprty in the header response")
     public void testReturnContentType() throws Exception {
 
         String contentType = "application/xml;charset=UTF-8";
