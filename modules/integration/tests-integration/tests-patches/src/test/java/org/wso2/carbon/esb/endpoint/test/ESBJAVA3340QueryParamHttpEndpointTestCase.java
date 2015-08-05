@@ -22,44 +22,51 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.test.utils.common.WireMonitorServer;
 import org.wso2.carbon.automation.test.utils.http.client.HttpRequestUtil;
+import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
+import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import java.io.File;
-import java.io.IOException;
 
 public class ESBJAVA3340QueryParamHttpEndpointTestCase extends ESBIntegrationTest {
 
-    public WireMonitorServer wireMonitorServer;
+    private LogViewerClient logViewerClient;
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         super.init();
-        wireMonitorServer = new WireMonitorServer(6789);
-        wireMonitorServer.start();
+        logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
         loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB"
-                                          + File.separator + "synapseconfig" + File.separator + "rest"
-                                          + File.separator + "query_params_api.xml");
+                + File.separator + "synapseconfig" + File.separator + "rest"
+                + File.separator + "query_params_api.xml");
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Sending a Message Via REST to test query param works with space character", enabled = false)
-    public void testPassParamsToEndpoint() throws IOException {
-        String requestString = "/my?some%20value";
+    @Test(groups = {"wso2.esb"}, description = "Sending a Message Via REST to test query param works with space character", enabled = true)
+    public void testPassParamsToEndpoint() throws Exception {
+        String requestString = "/context?queryParam=some%20value";
+        boolean isSpaceCharacterEscaped = false;
+        logViewerClient.clearLogs();
+
         try {
             HttpRequestUtil.sendGetRequest(getApiInvocationURL("test") + requestString, null);
         } catch (Exception timeout) {
             //a timeout is expected
         }
-        String reply = wireMonitorServer.getCapturedMessage();
-        if (reply.length() > 1) {
-            Assert.assertFalse(reply.toString().split("HTTP/1.1")[0].contains("{query.param.type}"), "Parameters are properly mapped");
-            Assert.assertTrue(reply.toString().split("HTTP/1.1")[0].contains("some%20value"));
 
-        } else {
-            Assert.assertTrue(false);
+        LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
+        for (LogEvent logEvent : logs) {
+            String message = logEvent.getMessage();
+            if (message.contains("queryParam = some%20value")) {
+                isSpaceCharacterEscaped = true;
+                break;
+            }
         }
+
+        Assert.assertTrue(isSpaceCharacterEscaped,
+                "Fail to send a message via REST when query parameter consist of space character");
+
     }
 
     @AfterClass(alwaysRun = true)
