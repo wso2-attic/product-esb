@@ -56,7 +56,8 @@ public class ServiceChainingTest extends ESBIntegrationTest {
         // load configuration in tenant space
         esbUtils.loadESBConfigurationFrom("artifacts/ESB/ServiceChainingConfig.xml", contextUrls.getBackEndUrl(), session);
         // Create service client
-        ServiceClient sc = getServiceClient("http://localhost:8280/carbon/service/t/t5.com/ServiceChainingProxy", null, "wso2");
+        ServiceClient sc = getServiceClient("http://localhost:8280/services/t/t5.com/ServiceChainingProxy", null,
+                                            "wso2");
         sc.fireAndForget(createStandardSimpleRequest("wso2"));
         // Get logs by tenant name
         LogViewerClient logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), sessionCookie);
