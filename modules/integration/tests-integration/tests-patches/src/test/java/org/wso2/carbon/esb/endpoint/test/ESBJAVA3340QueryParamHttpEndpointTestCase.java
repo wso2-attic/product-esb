@@ -24,6 +24,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.test.utils.http.client.HttpRequestUtil;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
+import org.wso2.carbon.logging.view.stub.LogViewerLogViewerException;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
@@ -45,7 +46,7 @@ public class ESBJAVA3340QueryParamHttpEndpointTestCase extends ESBIntegrationTes
     }
 
     @Test(groups = {"wso2.esb"}, description = "Sending a Message Via REST to test query param works with space character", enabled = true)
-    public void testPassParamsToEndpoint() throws IOException {
+    public void testPassParamsToEndpoint() throws Exception {
         String requestString = "/context?queryParam=some%20value";
         boolean isSpaceCharacterEscaped = false;
         logViewerClient.clearLogs();
@@ -56,7 +57,7 @@ public class ESBJAVA3340QueryParamHttpEndpointTestCase extends ESBIntegrationTes
             //a timeout is expected
         }
 
-        LogEvent[] logs = logViewerClient.getAllSystemLogs();
+        LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
         for (LogEvent logEvent : logs) {
             String message = logEvent.getMessage();
             if (message.contains("queryParam = some%20value")) {
