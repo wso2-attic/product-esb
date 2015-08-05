@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://ws.apache.org/ns/synapse">
     <api name="Test" context="/test">
-        <resource methods="GET" url-mapping="/my">
+        <resource methods="GET" uri-template="/context?queryParam={+query}">
             <inSequence>
-                <property name="uri.var.all"
-                          expression="fn:substring-after($axis2:REST_URL_POSTFIX, '/my?')"/>
                 <send>
                     <endpoint>
-                        <http method="get" uri-template="http://localhost:6789/services/echo/solr/content_platform/select?{uri.var.all}"/>
+                        <http method="GET" uri-template="http://localhost:8280/services/test/select?queryParam={uri.var.query}"/>
                     </endpoint>
                 </send>
             </inSequence>
+        </resource>
+    </api>
+    <api context="/services/test" name="Server">
+        <resource methods="GET">
+            <inSequence>
+                <log level="custom">
+                    <property expression="fn:substring-after($axis2:REST_URL_POSTFIX,'/select?queryParam=')" name="queryParam"/>
+                </log>
+            </inSequence>
+            <outSequence>
+                <send/>
+            </outSequence>
         </resource>
     </api>
 </definitions>
