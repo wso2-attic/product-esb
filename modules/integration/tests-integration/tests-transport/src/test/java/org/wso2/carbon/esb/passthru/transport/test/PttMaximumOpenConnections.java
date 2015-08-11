@@ -57,7 +57,7 @@ public class PttMaximumOpenConnections extends ESBIntegrationTest {
                                         "config" + File.separator + "passthru-http.properties";
         File propFile = new File(pttFile);
         File targetPropertyFile = new File(targetPropertyFilePath);
-        serverConfigurationManagerProp.applyConfiguration(propFile, targetPropertyFile);
+        serverConfigurationManagerProp.applyConfigurationWithoutRestart(propFile, targetPropertyFile, true);
 
         serverConfigurationManagerAxis2 = new ServerConfigurationManager(context);
         String pttAxis2xml = /*ProductConstant.getResourceLocations(ProductConstant.ESB_SERVER_NAME)*/FrameworkPathUtil.getSystemResourceLocation()  + "artifacts" + separator +
@@ -128,7 +128,7 @@ public class PttMaximumOpenConnections extends ESBIntegrationTest {
             super.cleanup();
         } finally {
             Thread.sleep(3000);
-            serverConfigurationManagerProp.restoreToLastConfiguration();
+            serverConfigurationManagerProp.restoreToLastConfiguration(false);
             serverConfigurationManagerProp = null;
             serverConfigurationManagerAxis2.restoreToLastConfiguration();
             serverConfigurationManagerAxis2 = null;

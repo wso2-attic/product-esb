@@ -72,6 +72,8 @@ public class JMSCAppDeploymentWithFaultyProxyTestCase extends
 			verifyUndeployment();
 			super.cleanup();
 		}
+        configurationManager.restoreToLastConfiguration();
+        configurationManager = null;
 	}
 
 	@Test(groups = { "wso2.esb" }, description = "faulty proxy service deployment from car file")
