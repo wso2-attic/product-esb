@@ -53,13 +53,13 @@
             <class name="org.wso2.carbon.esb.nhttp.transport.test.ResponseAfterNttpEnabledTestCase"/>
             <class name="org.wso2.carbon.esb.nhttp.transport.test.NhttpMaximumOpenConnections"/>
             <class name="org.wso2.carbon.esb.nhttp.transport.test.ConfiguringNhttpAccessLogLocationTestCase"/>
+            <class name="org.wso2.carbon.esb.nhttp.transport.test.ContentTypeCharsetTestCase"/>
 
             <!--The SetNhttpAxis2Transport class would set the nhttp axis2 transport and restart the ESB-->
             <!--The test cases that follow it would not change any server configurations-->
             <!--RemoveNhttpAxis2Transport would restore the ESBs default transport-->
             <!--If your test case doesn't need to change the server configuration, add it here-->
             <class name="org.wso2.carbon.esb.nhttp.transport.test.SetNhttpAxis2Transport"/>
-            <class name="org.wso2.carbon.esb.nhttp.transport.test.ContentTypeCharsetTestCase"/>
             <class name="org.wso2.carbon.esb.nhttp.transport.test.MessageWithoutContentTypeTestCase"/>
             <class name="org.wso2.carbon.esb.nhttp.transport.test.OCSPCertificateValidationTestCase"/>
             <class name="org.wso2.carbon.esb.nhttp.transport.test.RetrieveBackendWsdlTestCase"/>
