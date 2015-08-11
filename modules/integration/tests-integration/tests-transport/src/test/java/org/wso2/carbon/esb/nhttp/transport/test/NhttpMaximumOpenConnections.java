@@ -59,7 +59,7 @@ public class NhttpMaximumOpenConnections extends ESBIntegrationTest {
         File srcFile = new File(nhttpFile);
 
 
-        serverConfigurationManagerProp.applyConfiguration(srcFile);
+        serverConfigurationManagerProp.applyConfigurationWithoutRestart(srcFile);
 
         serverConfigurationManagerAxis2 = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
         String nhttpAxis2xml = /*ProductConstant.getResourceLocations(ProductConstant.ESB_SERVER_NAME)*/FrameworkPathUtil.getSystemResourceLocation()  + "artifacts" + separator +
@@ -138,7 +138,7 @@ public class NhttpMaximumOpenConnections extends ESBIntegrationTest {
             super.cleanup();
         } finally {
             Thread.sleep(3000);
-            serverConfigurationManagerProp.restoreToLastConfiguration();
+            serverConfigurationManagerProp.restoreToLastConfiguration(false);
             serverConfigurationManagerProp = null;
             serverConfigurationManagerAxis2.restoreToLastConfiguration();
             serverConfigurationManagerAxis2 = null;
