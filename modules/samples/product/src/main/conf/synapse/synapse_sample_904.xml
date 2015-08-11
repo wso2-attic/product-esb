@@ -27,15 +27,10 @@
       <parameter name="consumer.type">highlevel</parameter>
       <parameter name="content.type">application/xml</parameter>
       <parameter name="coordination">false</parameter>
-      <parameter name="simple.brokers">localhost</parameter>
       <parameter name="sequential">false</parameter>
       <parameter name="topics">test</parameter>
-      <parameter name="simple.partition">1</parameter>
       <parameter name="zookeeper.connect">localhost:2181</parameter>
       <parameter name="group.id">test-1</parameter>
-      <parameter name="simple.port">9092</parameter>
-      <parameter name="simple.topic">test</parameter>
-      <parameter name="simple.max.messages.to.read">1000</parameter>
    </parameters>
 </inboundEndpoint>
  
