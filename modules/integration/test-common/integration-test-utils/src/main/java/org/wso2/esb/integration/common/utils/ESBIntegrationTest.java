@@ -144,7 +144,8 @@ public abstract class ESBIntegrationTest {
 			deletePriorityExecutors();
 
 			deleteScheduledTasks();
-//			deleteInboundEndpoints();
+
+			deleteInboundEndpoints();
 
 		} finally {
 			synapseConfiguration = null;
