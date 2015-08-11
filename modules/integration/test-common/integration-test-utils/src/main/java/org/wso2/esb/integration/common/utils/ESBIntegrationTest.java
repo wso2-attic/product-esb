@@ -290,19 +290,21 @@ public abstract class ESBIntegrationTest {
 
 
 	protected void deleteInboundEndpoints() throws Exception {
-		try {
-			InboundEndpointDTO[] inboundEndpointDTOs =   esbUtils.getAllInboundEndpoints(contextUrls.getBackEndUrl(), sessionCookie);
-			if(inboundEndpointDTOs != null ) {
-				for (InboundEndpointDTO inboundEndpointDTO : inboundEndpointDTOs) {
+        try {
+            InboundEndpointDTO[] inboundEndpointDTOs = esbUtils.getAllInboundEndpoints(contextUrls.getBackEndUrl(), sessionCookie);
+            if (inboundEndpointDTOs != null) {
+                for (InboundEndpointDTO inboundEndpointDTO : inboundEndpointDTOs) {
+                    if (inboundEndpointDTO != null && inboundEndpointDTO.getName() != null) {
                         esbUtils.deleteInboundEndpointDeployed(contextUrls.getBackEndUrl(), sessionCookie,
                                                                inboundEndpointDTO.getName());
-				}
-			}
-		} catch (Exception e) {
+                    }
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-			throw new Exception("Error when deleting InboundEndpoint",e);
-		}
-	}
+            throw new Exception("Error when deleting InboundEndpoint", e);
+        }
+    }
 
 	protected void deleteInboundEndpointFromName(String name) throws Exception {
 		try {
