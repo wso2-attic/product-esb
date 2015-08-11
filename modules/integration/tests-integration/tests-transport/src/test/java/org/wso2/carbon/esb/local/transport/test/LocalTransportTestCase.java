@@ -70,7 +70,7 @@ public class LocalTransportTestCase extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void unDeployProxyServices() throws Exception {
         super.cleanup();
-        configurationManagerAxis2.restoreToLastConfiguration();
+        configurationManagerAxis2.restoreToLastConfiguration(false);
         configurationManagerCarbon.restoreToLastConfiguration();
     }
 
