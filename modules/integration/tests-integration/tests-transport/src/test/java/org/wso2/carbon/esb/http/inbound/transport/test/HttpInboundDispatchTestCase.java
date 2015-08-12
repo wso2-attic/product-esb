@@ -58,7 +58,8 @@ public class HttpInboundDispatchTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Inbound HTTP Super Tenant Sequence Dispatch" )
     public void inboundHttpSuperSequenceTest() throws Exception {
         axis2Client.sendSimpleStockQuoteRequest("http://localhost:9090/", null, "WSO2");
-        Assert.assertTrue(stringExistsInLog("CARBON_SUPER"));
+        //this case matches with the regex but there is no api or proxy so dispatch to  super tenant main sequence
+        Assert.assertTrue(stringExistsInLog("SUPER_MAIN"));
     }
 
     @Test(groups = "wso2.esb", description = "Inbound HTTP Super Tenant API Dispatch" )
@@ -69,11 +70,12 @@ public class HttpInboundDispatchTestCase extends ESBIntegrationTest {
         Assert.assertTrue(stringExistsInLog("BOO"));
 
         /**
-         * Test API dispatch to non existent API - this should trigger super tenant defined sequence.
+         * Test API dispatch to non existent API - this should trigger super tenant main sequence.
+         * since this matches with inbound regex but no api or proxy found to be dispatched
          */
         logViewerClient.clearLogs();
         axis2Client.sendSimpleStockQuoteRequest("http://localhost:9090/idontexist", null, "WSO2");
-        Assert.assertTrue(stringExistsInLog("CARBON_SUPER"));
+        Assert.assertTrue(stringExistsInLog("SUPER_MAIN"));
     }
 
     @Test(groups = "wso2.esb", description = "Inbound HTTP Super Tenant Default Main Sequence Dispatch" )
@@ -118,7 +120,8 @@ public class HttpInboundDispatchTestCase extends ESBIntegrationTest {
          * Test non existent tenant - should hit carbon super (or dispatch to any API with tenant like context on carbon super).
          */
         axis2Client.sendSimpleStockQuoteRequest("http://localhost:9090/t/idontexist", null, "WSO2");
-        Assert.assertTrue(stringExistsInLog("CARBON_SUPER"), "Dispatch to http://localhost:9090/t/idontexist");
+        //matches with inbound regex but no api or proxy should be dispatched to super tenant main sequence
+        Assert.assertTrue(stringExistsInLog("SUPER_MAIN"), "Dispatch to http://localhost:9090/t/idontexist");
 
         axis2Client.sendSimpleStockQuoteRequest("http://localhost:9090/t/idoexistassupertenantapi", null, "WSO2");
         Assert.assertTrue(stringExistsInLog("SUPER_TENANT_API_WITH_TENANT_CONTEXT"),
