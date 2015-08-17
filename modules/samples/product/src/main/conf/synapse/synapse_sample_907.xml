@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <taskManager provider="org.wso2.carbon.mediation.ntask.NTaskTaskManager"/>
+    <sequence name="TestIn">
+        <log level="full"/>
+        <drop/>
+    </sequence>  
+    <inboundEndpoint name="test" onError="fault" protocol="rabbitmq"
+        sequence="TestIn" suspend="false">
+        <parameters>
+            <parameter name="sequential">true</parameter>
+            <parameter name="coordination">true</parameter>
+	    <parameter name="rabbitmq.server.host.name">localhost</parameter>
+            <parameter name="rabbitmq.server.port">5672</parameter>
+            <parameter name="rabbitmq.connection.factory">AMQPConnectionFactoryTest</parameter>
+            <parameter name="rabbitmq.server.user.name">guest</parameter>
+	    <parameter name="rabbitmq.server.password">guest</parameter>
+            <parameter name="rabbitmq.queue.name">queue</parameter>
+            <parameter name="rabbitmq.exchange.name">exchange</parameter>
+        </parameters>
+    </inboundEndpoint>
+</definitions>
