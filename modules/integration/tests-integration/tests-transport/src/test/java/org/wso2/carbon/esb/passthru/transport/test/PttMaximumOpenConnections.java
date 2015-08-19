@@ -53,11 +53,8 @@ public class PttMaximumOpenConnections extends ESBIntegrationTest {
         String pttFile = /*ProductConstant.getResourceLocations(ProductConstant.ESB_SERVER_NAME)*/FrameworkPathUtil.getSystemResourceLocation()  + "artifacts" + separator +
                 "ESB" +separator + "synapseconfig" + separator + "MaxOpenConnections" + separator
                          + "passthru-http.properties";
-        String targetPropertyFilePath = CarbonBaseUtils.getCarbonHome() + File.separator + "repository" + File.separator +
-                                        "config" + File.separator + "passthru-http.properties";
         File propFile = new File(pttFile);
-        File targetPropertyFile = new File(targetPropertyFilePath);
-        serverConfigurationManagerProp.applyConfigurationWithoutRestart(propFile, targetPropertyFile, true);
+        serverConfigurationManagerProp.applyConfigurationWithoutRestart(propFile);
 
         serverConfigurationManagerAxis2 = new ServerConfigurationManager(context);
         String pttAxis2xml = /*ProductConstant.getResourceLocations(ProductConstant.ESB_SERVER_NAME)*/FrameworkPathUtil.getSystemResourceLocation()  + "artifacts" + separator +
