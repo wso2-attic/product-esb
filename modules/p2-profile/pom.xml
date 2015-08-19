@@ -127,6 +127,9 @@
                                     org.wso2.carbon.mediation:org.wso2.carbon.mediation.ntask.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.mediation.throttle.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.wso2.carbon.mediation.clustering.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -524,6 +527,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.mediation.ntask.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.mediation.throttle.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
                                 <feature>
@@ -1004,6 +1011,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.mediation.ntask.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.mediation.throttle.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
                                 <feature>
