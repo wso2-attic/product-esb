@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <registry provider="org.wso2.carbon.mediation.registry.WSO2Registry">
+        <parameter name="cachableDuration">15000</parameter>
+    </registry>
+    <sequence name="fault">
+        <log category="INFO" level="full" separator=",">
+            <property name="MESSAGE" value="Executing default 'fault' sequence"/>
+            <property expression="get-property('ERROR_CODE')" name="ERROR_CODE"/>
+            <property expression="get-property('ERROR_MESSAGE')" name="ERROR_MESSAGE"/>
+        </log>
+        <drop/>
+    </sequence>
+    <sequence name="main">
+        <in>
+            <log category="INFO" level="full" separator=","/>
+            <filter regex="http://localhost:9000.*" source="get-property('To')">
+                <then>
+                    <send/>
+                </then>
+                <else/>
+            </filter>
+        </in>
+        <out>
+            <send/>
+        </out>
+        <description>The main sequence for the message mediation</description>
+    </sequence>
+    <proxy name="TestProxy"
+           transports="https http"
+           startOnLoad="true"
+           trace="disable">
+        <description/>
+        <target>
+            <inSequence>
+                <property name="uri.var.test1"
+                          value="WSO2 Lanka Pvt Ltd"
+                          scope="default"
+                          type="STRING"/>
+                <property name="uri.var.test2"
+                          value="20, Palm Grove, CMB 3"
+                          scope="default"
+                          type="STRING"/>
+                <property name="uri.var.test3"
+                          value="+Goofle  fadfasfsf @ acsff ** ad ascs 999999900000000999999    !@#$^*()"
+                          scope="default"
+                          type="STRING"/>
+                <property name="uri.var.test5"
+                          value="dddddddddddddddddddddd@ddd  ddddddddddddddd"
+                          scope="default"
+                          type="STRING"/>
+                <property name="uri.var.host"
+                          value="http://10.100.7.20:9770/jaxrs_basic"
+                          scope="default"
+                          type="STRING"/>
+                <script language="js">var test1 = encodeURIComponent(mc.getProperty('uri.var.test1'));
+                    mc.setProperty('uri.var.test1', test1);
+
+
+                    var test3 = encodeURIComponent(mc.getProperty('uri.var.test3'));
+                    mc.setProperty('uri.var.test3', test3);
+
+                    var test2 = encodeURIComponent(mc.getProperty('uri.var.test2'));
+                    mc.setProperty('uri.var.test2', test2);</script>
+                <log level="custom">
+                    <property name="test4" value="$uri.var.test4"/>
+                </log>
+                <send>
+                    <endpoint name="HTTPEP">
+                        <http method="get"
+                              uri-template="legacy-encoding:http://localhost:8280/services/test_2?let=asdada!@asda&amp;test1={uri.var.test1}&amp;test2={uri.var.test2}&amp;test3={uri.var.test3}&amp;test5={uri.var.test5}"/>
+                    </endpoint>
+                </send>
+            </inSequence>
+            <outSequence>
+                <send/>
+            </outSequence>
+        </target>
+    </proxy>
+    <api context="/services/test_2" name="ServerApi_v2">
+        <resource methods="GET">
+            <inSequence>
+                <log level="full">
+                </log>
+            </inSequence>
+            <outSequence>
+                <send/>
+            </outSequence>
+        </resource>
+    </api>
+</definitions>
