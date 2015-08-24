@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-parent</artifactId>
-        <version>4.9.0-RC1-SNAPSHOT</version>
+        <version>4.9.0-RC1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -165,20 +165,12 @@
                                     </fileset>
                                 </copy>
                                 <delete dir="${tempdir}" />
-                                <replace
-                                        file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/user-mgt.xml"
-                                        token="&lt;Property name=&quot;GetAllRolesOfUserEnabled&quot;&gt;true&lt;/Property&gt;"
-                                        value="&lt;!--Property name=&quot;GetAllRolesOfUserEnabled&quot;&gt;true&lt;/Property--&gt;"/>
-                                <property name="tempdir2" value="target/identity-ui"/>
-                                <mkdir dir="${tempdir2}"/>
-                                <unzip src="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.identity.account.mgt.menu.ui_${carbon.identity.version}.jar"
-                                       dest="${tempdir2}"/>
-                                <replace
-                                        file="${tempdir2}/META-INF/component.xml"
-                                        token="&lt;parent-menu&gt;identity_menu&lt;/parent-menu&gt;"
-                                        value="&lt;parent-menu&gt;configure_menu&lt;/parent-menu&gt;"/>
-                                <zip destfile="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.identity.account.mgt.menu.ui_${carbon.identity.version}.jar"
-                                     basedir="${tempdir2}"/>
+                                <replace file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/user-mgt.xml" token="&lt;Property name=&quot;GetAllRolesOfUserEnabled&quot;&gt;true&lt;/Property&gt;" value="&lt;!--Property name=&quot;GetAllRolesOfUserEnabled&quot;&gt;true&lt;/Property--&gt;" />
+                                <property name="tempdir2" value="target/identity-ui" />
+                                <mkdir dir="${tempdir2}" />
+                                <unzip src="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.identity.account.mgt.menu.ui_${carbon.identity.version}.jar" dest="${tempdir2}" />
+                                <replace file="${tempdir2}/META-INF/component.xml" token="&lt;parent-menu&gt;identity_menu&lt;/parent-menu&gt;" value="&lt;parent-menu&gt;configure_menu&lt;/parent-menu&gt;" />
+                                <zip destfile="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.identity.account.mgt.menu.ui_${carbon.identity.version}.jar" basedir="${tempdir2}" />
                             </tasks>
                         </configuration>
                     </execution>
@@ -194,7 +186,7 @@
                                 <delete dir="target/sources" />
                                 <delete dir="target/site" />
                                 <delete dir="src/site" />
-                                <delete dir="target/identity-ui"/>
+                                <delete dir="target/identity-ui" />
                             </tasks>
                         </configuration>
                         <goals>
