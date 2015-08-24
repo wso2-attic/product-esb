@@ -81,9 +81,6 @@
     <profiles>
         <profile>
             <id>signed-build</id>
-            <properties>
-              <javadoc.doclint.none>-Xdoclint:none</javadoc.doclint.none>
-            </properties>
             <activation>
                 <property>
                     <name>sign</name>
