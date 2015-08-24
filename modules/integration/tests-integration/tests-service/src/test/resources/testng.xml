@@ -19,6 +19,18 @@
                 in SecurityConfigAdmin -->
             <!--package name="org.wso2.carbon.esb.proxyservice.test.secureProxy"/-->
         </packages>
+        <classes>
+            <class name="org.wso2.carbon.esb.proxyservice.test.loggingProxy.WSDLOptionsPickedFromRegistryTestCase">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+            <class name="org.wso2.carbon.esb.proxyservice.test.loggingProxy.ProxyServiceEnablingHTTPSTestCase">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+        </classes>
     </test>
     <test name="Endpoint-Test" preserve-order="true" verbose="2">
         <packages>
