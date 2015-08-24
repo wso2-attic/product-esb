@@ -59,12 +59,12 @@
         <classes>
             <class name="org.wso2.carbon.esb.mediator.test.callOut.InboundOutboundPolicySecurityTestCase">
                 <methods>
-                    <exclude name=".*" />
+                    <exclude name=".*"/>
                 </methods>
-                </class>
-                <class name="org.wso2.carbon.esb.mediator.test.callOut.SecurityTestCase">
+            </class>
+            <class name="org.wso2.carbon.esb.mediator.test.callOut.SecurityTestCase">
                 <methods>
-                    <exclude name=".*" />
+                    <exclude name=".*"/>
                 </methods>
             </class>
         </classes>
