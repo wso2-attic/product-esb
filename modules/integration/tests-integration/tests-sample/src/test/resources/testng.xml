@@ -10,7 +10,6 @@
     </listeners>
     <test name="Server-Stratup" preserve-order="true" verbose="2">
         <classes>
-            <class name="org.wso2.carbon.esb.samples.test.miscellaneous.Sample100TestCase"/>
             <class name="org.wso2.carbon.esb.samples.test.mediation.Sample16TestCase"/>
             <class name="org.wso2.carbon.esb.samples.test.mediation.Sample11TestCase"/>
             <class name="org.wso2.carbon.esb.samples.test.mediation.Sample13TestCase">
@@ -132,6 +131,13 @@
         <packages>
             <package name="org.wso2.carbon.esb.samples.test.proxy.*"/>
         </packages>
+        <classes>
+            <class name="org.wso2.carbon.esb.samples.test.proxy.Sample153TestCase">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+        </classes>
     </test>
     <test name="ESB-Sample-Template-Test" preserve-order="true" verbose="2">
         <packages>
