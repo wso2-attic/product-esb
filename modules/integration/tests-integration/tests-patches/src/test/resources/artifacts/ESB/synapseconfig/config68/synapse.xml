@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <registry provider="org.wso2.carbon.mediation.registry.WSO2Registry">
+        <parameter name="cachableDuration">15000</parameter>
+    </registry>
+    <proxy xmlns="http://ws.apache.org/ns/synapse"
+           name="SimpleStockQuoteService"
+           transports="http,https"
+           statistics="disable"
+           trace="disable"
+           startOnLoad="true">
+        <target>
+            <outSequence>
+                <send/>
+            </outSequence>
+            <endpoint>
+                <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+            </endpoint>
+        </target>
+        <description/>
+    </proxy>
+
+</definitions>
+
+
