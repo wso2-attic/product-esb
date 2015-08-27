@@ -79,7 +79,7 @@
     <emailCredentials>
         <sender>synapse.demo.1</sender>
         <senderPassword>mailpassword1</senderPassword>
-        <receiver>test.automation.dummy</receiver>
+        <receiver>test.automation.dummy.esb</receiver>
         <receiverPassword>automation.test</receiverPassword>
         <domain>gmail.com</domain>
     </emailCredentials>
