@@ -414,6 +414,12 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.wso2.carbon.cloud.gateway.agent.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.bam.mediation.agent.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.bam.service.agent.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
                                 <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.xfer.feature:${wso2carbon.old.version}</featureArtifactDef>-->
                                 <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.mex.feature:${wso2carbon.old.version}</featureArtifactDef>-->
                                 <!--TODO Add required adaptors-->
@@ -908,8 +914,18 @@
                                 <!--<id>org.wso2.carbon.transports.sap.feature.group</id>-->
                                 <!--<version>${wso2carbon.feature.version}</version>-->
                                 <!--</feature>-->
+                                
+                                
                                 <feature>
                                     <id>org.wso2.carbon.cloud.gateway.agent.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.bam.mediation.agent.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.bam.service.agent.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
                                 <!--<feature>-->
@@ -1441,8 +1457,18 @@
                                 <!--<id>org.wso2.carbon.throttle.feature.group</id>-->
                                 <!--<version>${wso2carbon.feature.version}</version>-->
                                 <!--</feature>-->
+                                
+ 
                                 <feature>
                                     <id>org.wso2.carbon.cloud.gateway.agent.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.bam.mediation.agent.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.bam.service.agent.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
 
