@@ -431,7 +431,7 @@
         <parameter name="mail.smtp.user">synapse.demo.1</parameter>
         <parameter name="mail.smtp.password">mailpassword1</parameter>
         <parameter name="mail.smtp.from">synapse.demo.1@gmail.com</parameter>
-        <parameter name="transport.mail.SMTPBccAddresses">test.automation.dummy@gmail.com</parameter>
+        <parameter name="transport.mail.SMTPBccAddresses">test.automation.dummy.esb@gmail.com</parameter>
     </transportSender>
 
     <!--Uncomment this for FIX transport support
