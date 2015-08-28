@@ -127,6 +127,7 @@
     <test name="Carbon-app-file-re-deployment-test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.car.deployment.test.CarbonApplicationReDeploymentTestCase"/>
+            <class name="org.wso2.carbon.esb.car.deployment.test.ESBJAVA4116CAppArtifactDeploymentFailureDueToNameTestCase"/>
         </classes>
     </test>
 </suite>
