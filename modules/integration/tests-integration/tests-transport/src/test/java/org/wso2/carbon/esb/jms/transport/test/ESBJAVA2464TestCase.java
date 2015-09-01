@@ -20,23 +20,11 @@ public class ESBJAVA2464TestCase extends ESBIntegrationTest {
 	private static final String logLine0 =
 	                                       "org.wso2.carbon.proxyadmin.service.ProxyServiceAdmin is not an admin service. Service name ";
 
-	private ServerConfigurationManager configurationManager;
 	private LogViewerClient logViewer;
 
 	@BeforeClass(alwaysRun = true)
 	public void setEnvironment() throws Exception {
 		super.init();
-
-		configurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
-
-		configurationManager.applyConfiguration(new File(getESBResourceLocation() + File.separator +
-		                                                                                "synapseconfig" +
-		                                                                                File.separator +
-		                                                                                "nonBlockingHTTP" +
-		                                                                                File.separator +
-		                                                                                "axis2.xml"));
-
-		super.init(); // After restarting, this will establish the sessions.
 		logViewer = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 		uploadSynapseConfig();
 	}
@@ -81,10 +69,8 @@ public class ESBJAVA2464TestCase extends ESBIntegrationTest {
 
 	@AfterClass(alwaysRun = true)
 	public void destroy() throws Exception {
-
 		// Restore the axis2 configuration altered by this test case
 		super.cleanup();
-		configurationManager.restoreToLastConfiguration();
 	}
 
 }
