@@ -34,6 +34,7 @@
                 <exclude>**/services/sample01.aar</exclude>
                 <exclude>**/repository/services/version/**</exclude>
                 <exclude>**/version.txt</exclude>
+                <exclude>**/wso2carbon-version.txt</exclude>
                 <exclude>**/wso2server.bat</exclude>
                 <exclude>**/README.txt</exclude>
                 <exclude>**/LICENSE.txt</exclude>
@@ -498,6 +499,12 @@
 	<file>
             <source>../../modules/distribution/src/main/conf/etc/tasks-config.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+        </file>
+        <file>
+            <source>src/main/conf/wso2carbon-version.txt</source>
+            <outputDirectory>wso2esb-${pom.version}/bin/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
     </files>
 </assembly>
