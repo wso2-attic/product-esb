@@ -64,7 +64,7 @@ System Requirements
 4. To compile and run the sample clients, an Ant version is required. Ant 1.7.0
    version is recommended
 5. To build WSO2 ESB from the Source distribution, it is necessary that you have
-   JDK 1.6.24 version and Maven 3.0.4 or later
+   JDK 1.7 version and Maven 3.0.4 or later
 
 For more details see
     http://docs.wso2.org/wiki/display/ESB481/Installation+Prerequisites
@@ -73,7 +73,7 @@ Running Samples
 =======================
 ESB samples are available at CARBON_HOME/repository/samples directory.
 The instructions to run samples are given in the samples guide in the WSO2 ESB
-Documentation, http://docs.wso2.org/display/ESB480/Samples.
+Documentation, http://docs.wso2.org/display/ESB490/Samples.
 
 To run the ESB server in sample mode use,
 
