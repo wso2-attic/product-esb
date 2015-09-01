@@ -1090,7 +1090,7 @@
         <carbon.kernel.version>4.4.1</carbon.kernel.version>
 
         <!-- Carbon Commons version-->
-        <carbon.commons.version>4.4.4</carbon.commons.version>
+        <carbon.commons.version>4.4.5</carbon.commons.version>
 
         <!-- Carbon Deployment version-->
         <carbon.deployment.version>4.5.0</carbon.deployment.version>
@@ -1099,7 +1099,7 @@
         <carbon.registry.version>4.4.5</carbon.registry.version>
 
         <!-- Carbon Identity version-->
-        <carbon.identity.version>4.5.4</carbon.identity.version>
+        <carbon.identity.version>4.5.5</carbon.identity.version>
 
         <!-- Carbon Rule version -->
         <carbon.rule.version>4.4.0</carbon.rule.version>
