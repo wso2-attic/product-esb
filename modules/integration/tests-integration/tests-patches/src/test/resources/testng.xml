@@ -9,6 +9,12 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
 
+    <test name="Rule mediator Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.mediators.rule.ESBJAVA2506RuleFetchFromRegistryFailsForTheFirstTime"/>
+        </classes>
+    </test>
+
     <!-- FIX - Cannot find class in classpath: org.wso2.carbon.esb.ServerStartupTestCase -->
     <!--test name="Server-Stratup" preserve-order="true" verbose="2">
         <classes>
