@@ -37,6 +37,7 @@ import org.wso2.esb.integration.common.utils.clients.stockquoteclient.StockQuote
 import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class HttpEpTemplateWithSystemPropsTestCase {
 
@@ -83,7 +84,7 @@ public class HttpEpTemplateWithSystemPropsTestCase {
 	}
 
 	private void deploySynapseConfig() throws Exception {
-
+        TimeUnit.SECONDS.sleep(30);
 		AuthenticatorClient authenticatorClient = new AuthenticatorClient(BACKEND_URL);
 		ClientConnectionUtil.waitForPort(SERVER_PORT, HOST);
 		ClientConnectionUtil.waitForLogin(context);// (SERVER_PORT, HOST,
