@@ -140,5 +140,11 @@
     <test name="soap-header-handling-test" preserve-order="true" verbose="2">
         <classes><class name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4118_SOAPHeaderHandlingTest"></class></classes>
     </test>
+
+    <test name="Mediation Flow Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediation.flow.test"/>
+        </packages>
+    </test>
 </suite>
 
