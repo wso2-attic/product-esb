@@ -86,6 +86,7 @@ public class JMSInboundMessagePollingTestCase extends ESBIntegrationTest{
 		} finally {
 			sender.disconnect();
 		}
+        Thread.sleep(5000);
 
 		int beforeLogCount = logViewerClient.getAllSystemLogs().length;
 		addInboundEndpoint(addEndpoint1());
