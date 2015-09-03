@@ -84,11 +84,11 @@ public class HttpEpTemplateWithSystemPropsTestCase {
 	}
 
 	private void deploySynapseConfig() throws Exception {
-        TimeUnit.SECONDS.sleep(30);
 		AuthenticatorClient authenticatorClient = new AuthenticatorClient(BACKEND_URL);
 		ClientConnectionUtil.waitForPort(SERVER_PORT, HOST);
 		ClientConnectionUtil.waitForLogin(context);// (SERVER_PORT, HOST,
 		// BACKEND_URL);
+        TimeUnit.SECONDS.sleep(15);
 		String sessionCookie = authenticatorClient.login("admin", "admin",
 				new URL(BACKEND_URL).getHost());
 
