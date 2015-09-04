@@ -181,6 +181,6 @@ fi
 
 cd "$AXIS2_HOME"
 $JAVACMD -Dcarbon.home="$AXIS2_HOME/../../" $PROGRAM_PARAMS -Djava.io.tmpdir="$AXIS2_HOME/../../tmp/" \
- -Djava.endorsed.dirs="$AXIS2_ENDORSED" -classpath "$AXIS2_CLASSPATH" samples.util.SampleAxis2Server \
+ -Djava.endorsed.dirs="$AXIS2_ENDORSED" -Dhttp.socket.reuseaddr="true" -classpath "$AXIS2_CLASSPATH" samples.util.SampleAxis2Server \
  -repo "$AXIS2_HOME/repository" -conf "$AXIS2_HOME/repository/conf/axis2.xml"
 
