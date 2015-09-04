@@ -151,9 +151,10 @@ public class ESBJAVA3470 extends ESBIntegrationTest {
     }
 
     @AfterClass(alwaysRun = true)
-    public void stopSFTPServer() throws InterruptedException {
+    public void stopSFTPServer() throws Exception {
         //sshd.stop();
         log.info("SFTP Server stopped successfully");
+        serverConfigurationManager.restoreToLastConfiguration();
     }
 
     /**
