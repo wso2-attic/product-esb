@@ -61,7 +61,7 @@ public class HttpInboundTransportTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Inbound Http  test case for API" )
     public void inboundHttpAPITest() throws AxisFault {
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest("http://localhost:8082/test/map", null, "IBM");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest("http://localhost:8082/testapi/map", null, "IBM");
         Assert.assertNotNull(response);
         Assert.assertEquals("getQuoteResponse", response.getLocalName());
     }
