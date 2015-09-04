@@ -271,7 +271,7 @@
                     <!--<parameter name="cmdArg" value="debug 5005" />-->
                 </class>
                 <class>
-                    <name>org.wso2.carbon.automation.extensions.servers.Axis2ServerExtension</name>
+                    <name>org.wso2.carbon.automation.extensions.servers.axis2server.Axis2ServerExtension</name>
                 </class>
                 <class>
                     <name>org.wso2.carbon.integration.common.extensions.usermgt.UserPopulateExtension</name>
