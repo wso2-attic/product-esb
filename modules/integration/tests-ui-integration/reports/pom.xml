@@ -16,36 +16,36 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>exec-maven-plugin</artifactId>-->
+                <!--<version>1.2.1</version>-->
 
-                <executions>
-                    <execution>
-                        <id>my-exec</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <executable>java</executable>
-                    <arguments>
-                        <argument>-Demma.home=${basedir}/target/emma</argument>
-                        <argument>-Dbasedir=${basedir}</argument>
-                        <argument>-Dinstr.file=${basedir}/src/test/java/resources/instrumentation.txt</argument>
-                        <argument>-Dfilters.file=${basedir}/src/test/java/resources/filters.txt</argument>
-                        <argument>-Demma.output=${basedir}/target/emma</argument>
-                        <argument>-classpath</argument>
-                        <classpath/>
-                        <argument>org.wso2.carbon.integration.common.utils.coverage.TestCoverageGenerator</argument>
-                        <!--<mainClass>org.wso2.carbon.automation.core.tests.TestCoverageGenerator</mainClass>-->
-                    </arguments>
-                    <workingDirectory>${basedir}/target</workingDirectory>
-                </configuration>
-            </plugin>
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>my-exec</id>-->
+                        <!--<phase>install</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>exec</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<executable>java</executable>-->
+                    <!--<arguments>-->
+                        <!--<argument>-Demma.home=${basedir}/target/emma</argument>-->
+                        <!--<argument>-Dbasedir=${basedir}</argument>-->
+                        <!--<argument>-Dinstr.file=${basedir}/src/test/java/resources/instrumentation.txt</argument>-->
+                        <!--<argument>-Dfilters.file=${basedir}/src/test/java/resources/filters.txt</argument>-->
+                        <!--<argument>-Demma.output=${basedir}/target/emma</argument>-->
+                        <!--<argument>-classpath</argument>-->
+                        <!--<classpath/>-->
+                        <!--<argument>org.wso2.carbon.integration.common.utils.coverage.TestCoverageGenerator</argument>-->
+                        <!--&lt;!&ndash;<mainClass>org.wso2.carbon.automation.core.tests.TestCoverageGenerator</mainClass>&ndash;&gt;-->
+                    <!--</arguments>-->
+                    <!--<workingDirectory>${basedir}/target</workingDirectory>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
 
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>

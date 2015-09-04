@@ -1183,9 +1183,9 @@
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
 
         <!-- Automation Framework versions -->
-        <automation.framework.version>4.3.1</automation.framework.version>
-        <automation.framework.utils.version>4.3.0</automation.framework.utils.version>
-        <carbon.integration.framework.version>4.2.0</carbon.integration.framework.version>
+        <automation.framework.version>4.4.2</automation.framework.version>
+        <automation.framework.utils.version>4.4.2</automation.framework.utils.version>
+        <carbon.integration.framework.version>4.4.2</carbon.integration.framework.version>
 
         <operadriver.version>0.8.1</operadriver.version>
         <selenium.version>2.40.0</selenium.version>

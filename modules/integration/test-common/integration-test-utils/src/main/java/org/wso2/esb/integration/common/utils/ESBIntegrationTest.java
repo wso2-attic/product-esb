@@ -37,6 +37,7 @@ import org.wso2.carbon.inbound.stub.types.carbon.InboundEndpointDTO;
 import org.wso2.carbon.integration.common.admin.client.CarbonAppUploaderClient;
 import org.wso2.carbon.integration.common.admin.client.SecurityAdminServiceClient;
 import org.wso2.carbon.integration.common.utils.LoginLogoutClient;
+import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
 import org.wso2.carbon.mediation.library.stub.MediationLibraryAdminServiceException;
 import org.wso2.carbon.mediation.library.stub.upload.types.carbon.LibraryFileItem;
 import org.wso2.carbon.security.mgt.stub.config.SecurityAdminServiceSecurityConfigExceptionException;
@@ -798,7 +799,7 @@ public abstract class ESBIntegrationTest {
 
 	protected String login(AutomationContext context)
 			throws IOException, XPathExpressionException, URISyntaxException, SAXException,
-			       XMLStreamException, LoginAuthenticationExceptionException {
+			XMLStreamException, LoginAuthenticationExceptionException, AutomationUtilException {
 		LoginLogoutClient loginLogoutClient = new LoginLogoutClient(context);
 		return loginLogoutClient.login();
 	}
