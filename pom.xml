@@ -992,10 +992,17 @@
                 <artifactId>groovy-all</artifactId>
                 <version>${groovy.version}</version>
             </dependency>
+
+            <!-- Removing emma and adding jacoco reporting plugin -->
+            <!--<dependency>-->
+                <!--<groupId>emma</groupId>-->
+                <!--<artifactId>emma</artifactId>-->
+                <!--<version>${emma.version}</version>-->
+            <!--</dependency>-->
             <dependency>
-                <groupId>emma</groupId>
-                <artifactId>emma</artifactId>
-                <version>${emma.version}</version>
+                <groupId>org.jacoco</groupId>
+                <artifactId>org.jacoco.agent</artifactId>
+                <version>${jacoco.agent.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.testng</groupId>
@@ -1150,7 +1157,8 @@
         <servlet-api.version>2.4</servlet-api.version>
         <geronimo-jms.version>1.1.1</geronimo-jms.version>
         <wss4j.version>1.5.11-wso2v8</wss4j.version>
-        <emma.version>2.1.5320</emma.version>
+        <!--<emma.version>2.1.5320</emma.version>-->
+        <jacoco.agent.version>0.7.4.201502262128</jacoco.agent.version>
         <axiom.wso2.version>1.2.11.wso2v5</axiom.wso2.version>
         <wso2.h2.orbit.version>1.2.140.wso2v3</wso2.h2.orbit.version>
         <org.apache.cxf.version>2.7.2</org.apache.cxf.version>
