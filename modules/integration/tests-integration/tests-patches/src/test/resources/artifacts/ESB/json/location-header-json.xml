@@ -17,7 +17,7 @@
                 <send/>
             </outSequence>
             <endpoint>
-                <address uri="http://localhost:8280/services/service"/>
+                <address uri="http://localhost:8480/services/service"/>
             </endpoint>
         </target>
         <description/>

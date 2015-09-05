@@ -59,7 +59,7 @@ public class ESBJAVA3546CAppProxyOnLoadTestCase extends ESBIntegrationTest {
 
         try {
             axis2Client.sendSimpleStockQuoteRequest(
-                    "http://127.0.0.1:8280/services/samplePassThroughProxy",
+                    "http://127.0.0.1:8480/services/samplePassThroughProxy",
                     null,
                     "IBM");
 
@@ -79,7 +79,7 @@ public class ESBJAVA3546CAppProxyOnLoadTestCase extends ESBIntegrationTest {
 
         try {
             axis2Client.sendSimpleStockQuoteRequest(
-                    "http://127.0.0.1:8280/services/InactiveProxy",
+                    "http://127.0.0.1:8480/services/InactiveProxy",
                     null,
                     "IBM");
         } catch (AxisFault axisFault) {

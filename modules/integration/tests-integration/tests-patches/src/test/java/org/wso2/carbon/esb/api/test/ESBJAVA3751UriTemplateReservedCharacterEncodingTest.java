@@ -224,7 +224,7 @@ public class ESBJAVA3751UriTemplateReservedCharacterEncodingTest extends ESBInte
         boolean isPercentEncoded = false;
         logViewerClient.clearLogs();
         HttpResponse response = HttpRequestUtil.sendGetRequest(
-                getApiInvocationURL("services/client/special_case/http://localhost:8280/services/test_2/special_case"),
+                getApiInvocationURL("services/client/special_case/http://localhost:8480/services/test_2/special_case"),
                 null);
         LogEvent[] logs = logViewerClient.getAllSystemLogs();
         for (LogEvent logEvent : logs) {

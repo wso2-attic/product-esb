@@ -48,7 +48,7 @@ public class NoEntityBodyPropertyCheck extends ESBIntegrationTest {
                    "         <ID>12999E105</ID>" +
                    "      </Person>";
 
-        HttpResponse response = httpClient.doPost("http://localhost:8280/services/Test",
+        HttpResponse response = httpClient.doPost("http://localhost:8480/services/Test",
                                                   null, payload, "application/xml");
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         response.getEntity().writeTo(bos);
