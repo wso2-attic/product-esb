@@ -10,7 +10,7 @@
                 <send>
                     <endpoint>
                         <http method="head"
-                              uri-template="http://localhost:8280/services/HEADTestProxy"/>
+                              uri-template="http://localhost:8480/services/HEADTestProxy"/>
                     </endpoint>
                 </send>
             </inSequence>

@@ -39,7 +39,7 @@ public class CallMediatorFaultHandlingTests extends ESBIntegrationTest {
 
         OMElement response =
                 axis2Client.sendSimpleStockQuoteRequest(
-                        "http://localhost:8280/services/InlineInSeqInlineFaultSeqProxy", null, "IBM");
+                        "http://localhost:8480/services/InlineInSeqInlineFaultSeqProxy", null, "IBM");
 
         assertTrue(response.toString().contains("Failure"), "Fault: Fault Sequence is not invoked");
 
@@ -51,7 +51,7 @@ public class CallMediatorFaultHandlingTests extends ESBIntegrationTest {
 
         OMElement response =
                 axis2Client.sendSimpleStockQuoteRequest(
-                        "http://localhost:8280/services/TargetInSeqInlineFaultSeqProxy", null, "IBM");
+                        "http://localhost:8480/services/TargetInSeqInlineFaultSeqProxy", null, "IBM");
 
         assertTrue(response.toString().contains("Failure"), "Fault: Fault Sequence is not invoked");
 
@@ -63,7 +63,7 @@ public class CallMediatorFaultHandlingTests extends ESBIntegrationTest {
 
         OMElement response =
                 axis2Client.sendSimpleStockQuoteRequest(
-                        "http://localhost:8280/services/TargetInSeqTargetFaultSeqProxy", null, "IBM");
+                        "http://localhost:8480/services/TargetInSeqTargetFaultSeqProxy", null, "IBM");
 
         assertTrue(response.toString().contains("Failure"), "Fault: Fault Sequence is not invoked");
 
@@ -75,7 +75,7 @@ public class CallMediatorFaultHandlingTests extends ESBIntegrationTest {
 
         OMElement response =
                 axis2Client.sendSimpleStockQuoteRequest(
-                        "http://localhost:8280/services/InlineInSeqTargetFaultSeqProxy", null, "IBM");
+                        "http://localhost:8480/services/InlineInSeqTargetFaultSeqProxy", null, "IBM");
 
         assertTrue(response.toString().contains("Failure"), "Fault: Fault Sequence is not invoked");
 
@@ -88,7 +88,7 @@ public class CallMediatorFaultHandlingTests extends ESBIntegrationTest {
 
         OMElement response =
                 axis2Client.sendSimpleStockQuoteRequest(
-                        "http://localhost:8280/callFaultTest/InlineInSeqInlineFaultSeq", null, "IBM");
+                        "http://localhost:8480/callFaultTest/InlineInSeqInlineFaultSeq", null, "IBM");
 
         assertTrue(response.toString().contains("Failure"), "Fault: Fault Sequence is not invoked");
 
@@ -100,7 +100,7 @@ public class CallMediatorFaultHandlingTests extends ESBIntegrationTest {
 
         OMElement response =
                 axis2Client.sendSimpleStockQuoteRequest(
-                        "http://localhost:8280/callFaultTest/InlineInSeqTargetFaultSeq", null, "IBM");
+                        "http://localhost:8480/callFaultTest/InlineInSeqTargetFaultSeq", null, "IBM");
 
         assertTrue(response.toString().contains("Failure"), "Fault: Fault Sequence is not invoked");
 
@@ -112,7 +112,7 @@ public class CallMediatorFaultHandlingTests extends ESBIntegrationTest {
 
         OMElement response =
                 axis2Client.sendSimpleStockQuoteRequest(
-                        "http://localhost:8280/callFaultTest/TargetInSeqTargetFaultSeq", null, "IBM");
+                        "http://localhost:8480/callFaultTest/TargetInSeqTargetFaultSeq", null, "IBM");
 
         assertTrue(response.toString().contains("Failure"), "Fault: Fault Sequence is not invoked");
 
@@ -124,7 +124,7 @@ public class CallMediatorFaultHandlingTests extends ESBIntegrationTest {
 
         OMElement response =
                 axis2Client.sendSimpleStockQuoteRequest(
-                        "http://localhost:8280/callFaultTest/TargetInSeqInlineFaultSeq", null, "IBM");
+                        "http://localhost:8480/callFaultTest/TargetInSeqInlineFaultSeq", null, "IBM");
 
         assertTrue(response.toString().contains("Failure"), "Fault: Fault Sequence is not invoked");
 

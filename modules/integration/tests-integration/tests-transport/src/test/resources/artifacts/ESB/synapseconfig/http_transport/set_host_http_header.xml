@@ -9,7 +9,7 @@
                 <property name="REQUEST_HOST_HEADER" value="www.example.com" scope="axis2"/>
                 <send>
                     <endpoint>
-                        <address uri="http://localhost:8280/services/HttpHostHeaderTestProxy"/>
+                        <address uri="http://localhost:8480/services/HttpHostHeaderTestProxy"/>
                     </endpoint>
                 </send>
             </inSequence>

@@ -55,7 +55,7 @@ public class JsonFormat_IncomingXml_XmlCTXValues_WithOutStream_TestCase extends 
 				+"<id>819797</id>"
 				+"</user></xml>";
 
-		String url="http://localhost:8280/services/Dummy";
+		String url="http://localhost:8480/services/Dummy";
 		String contentType="application/xml";
 		Reader data = new StringReader(payload);
 		Writer writer = new StringWriter();

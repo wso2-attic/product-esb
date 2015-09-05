@@ -46,7 +46,7 @@ public class Sample155TestCase extends ESBIntegrationTest {
         oldConfig = oldConfig.replace("localhost:9000", "localhost:9001");
         client.updateConfiguration(oldConfig);
 
-        listener1 = new TCPMonListener(8281, "localhost", 8280);
+        listener1 = new TCPMonListener(8481, "localhost", 8480);
         listener1.start();
 
         listener2 = new TCPMonListener(9001, "localhost", 9000);
@@ -57,7 +57,7 @@ public class Sample155TestCase extends ESBIntegrationTest {
                                                  "and Server Side of Synapse with Proxy Services")
     public void testDualChannelInvocation() throws Exception {
 
-        axis2Client.sendDualQuoteRequest(null, "http://localhost:8281/services/StockQuoteProxy",
+        axis2Client.sendDualQuoteRequest(null, "http://localhost:8481/services/StockQuoteProxy",
                                          "WSO2");
         Thread.sleep(10000);
 
