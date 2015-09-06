@@ -56,7 +56,7 @@ Installing  WSO2 Enterprise Service Bus (ESB) 4.9.0
 System Requirements
 =======================
 1. Minimum memory - 2GB
-2. Java SE Development Kit 1.6.24 or higher
+2. Java 1.7 or higher
 3. The Management Console requires you to enable Javascript of the Web browser,
    with MS IE 7. In addition to JavaScript, ActiveX should also be enabled
    with IE. This can be achieved by setting your security level to
