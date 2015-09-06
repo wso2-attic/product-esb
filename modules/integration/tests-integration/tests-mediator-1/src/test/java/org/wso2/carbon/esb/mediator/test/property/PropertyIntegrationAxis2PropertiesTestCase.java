@@ -103,8 +103,8 @@ public class PropertyIntegrationAxis2PropertiesTestCase extends ESBIntegrationTe
         JMXServiceURL url =
                 new JMXServiceURL("service:jmx:rmi://" +
                                   context.getDefaultInstance().getHosts().get("default") +
-                                  ":11111/jndi/rmi://" + context.getDefaultInstance().getHosts().
-                        get("default") + ":9999/jmxrmi");
+                                  ":11311/jndi/rmi://" + context.getDefaultInstance().getHosts().
+                        get("default") + ":10199/jmxrmi");
 
         HashMap<String, String[]> environment = new HashMap<String, String[]>();
         String[] credentials = new String[]{"admin", "admin"};
