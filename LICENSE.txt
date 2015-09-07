@@ -583,4 +583,6 @@ bsd            Berkeley License
 bouncy         Bouncy Castle License
                http://www.bouncycastle.org/licence.html
 edl            Eclipse Distribution License - v 1.0
-   	       http://www.eclipse.org/org/documents/edl-v10.php  
+   	           http://www.eclipse.org/org/documents/edl-v10.php
+gpl2           GNU General Public License, version 2
+               http://www.gnu.org/licenses/gpl-2.0.html
