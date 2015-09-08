@@ -136,7 +136,7 @@
                 fixed in ESB 4.9.0 are recorded at following locations:
             </p>
             <ul>
-				<li><a href="https://wso2.org/jira/issues/?filter=11719">
+				<li><a href="https://wso2.org/jira/issues/?filter=12393">
                     Fixed ESB specific issues</a></li>
             </ul>
 
@@ -146,7 +146,7 @@
                 locations:
             </p>
             <ul>
-                <li><a href="https://wso2.org/jira/issues/?filter=11178">
+                <li><a href="https://wso2.org/jira/issues/?filter=12394">
                     WSO2 ESB 4.9.0 component issues</a></li>
             </ul>
 
