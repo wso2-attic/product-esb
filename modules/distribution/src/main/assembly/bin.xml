@@ -45,6 +45,9 @@
                 <exclude>**/lib/endorsed/xalan*.jar</exclude>
                 <exclude>**/repository/conf/tomcat/catalina-server.xml</exclude>
                 <exclude>**/repository/conf/registry.xml</exclude>
+                <exclude>**/repository/conf/tomcat/web.xml</exclude>
+                <exclude>**/webapp-mode/WEB-INF/web.xml</exclude>
+                <exclude>**/repository/conf/tomcat/carbon/WEB-INF/web.xml</exclude>
             </excludes>
         </fileSet>
         <fileSet>
