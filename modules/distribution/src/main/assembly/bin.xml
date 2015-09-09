@@ -44,6 +44,7 @@
                 <exclude>**/repository/components/plugins/saxon*.jar</exclude>
                 <exclude>**/lib/endorsed/xalan*.jar</exclude>
                 <exclude>**/repository/conf/tomcat/catalina-server.xml</exclude>
+                <exclude>**/repository/conf/registry.xml</exclude>
             </excludes>
         </fileSet>
         <fileSet>
@@ -279,6 +280,12 @@
             <source>src/main/conf/axis2.xml</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/axis2</outputDirectory>
             <destName>axis2.xml</destName>
+        </file>
+        <file>
+            <source>src/main/conf/registry.xml</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
+            <destName>registry.xml</destName>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/main/conf/web.xml</source>
