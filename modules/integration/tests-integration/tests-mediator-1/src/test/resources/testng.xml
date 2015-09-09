@@ -141,6 +141,13 @@
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.fault"/>
         </packages>
+        <classes>
+            <class name="org.wso2.carbon.esb.mediator.test.fault.Soap11FaultFullTestCase">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+        </classes>
     </test>
 
     <test name="Filter-mediator-Test" preserve-order="true" verbose="2">
@@ -188,22 +195,22 @@
         <classes>
             <class name="org.wso2.carbon.esb.mediator.test.property.PropertyIntegrationXpathAxis2PropertyTestCase">
                 <methods>
-                    <exclude name=".*" />
+                    <exclude name=".*"/>
                 </methods>
             </class>
             <class name="org.wso2.carbon.esb.mediator.test.property.PropertyIntegrationXPathTrpPropertyTestCase">
                 <methods>
-                    <exclude name=".*" />
+                    <exclude name=".*"/>
                 </methods>
             </class>
             <class name="org.wso2.carbon.esb.mediator.test.property.PropertyIntegrationXPathExtensionTestCase">
                 <methods>
-                    <exclude name=".*" />
+                    <exclude name=".*"/>
                 </methods>
             </class>
             <class name="org.wso2.carbon.esb.mediator.test.property.PropertyIntegrationXPathBodyTestCase">
                 <methods>
-                    <exclude name=".*" />
+                    <exclude name=".*"/>
                 </methods>
             </class>
         </classes>
