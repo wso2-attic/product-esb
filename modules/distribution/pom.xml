@@ -261,6 +261,11 @@
                                 <!--<descriptor>src/main/assembly/src.xml</descriptor>-->
                                 <!--<descriptor>src/main/assembly/docs.xml</descriptor>-->
                             </descriptors>
+                            <archiverConfig>
+                                <defaultDirectoryMode>0775</defaultDirectoryMode>
+                                <directoryMode>0775</directoryMode>
+                                <defaultFileMode>0664</defaultFileMode>
+                            </archiverConfig>
                         </configuration>
                     </execution>
                 </executions>
