@@ -290,11 +290,11 @@
                 <artifactId>org.wso2.carbon.mediation.configadmin.stub</artifactId>
                 <version>${carbon.mediation.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon</groupId>
-                <artifactId>org.wso2.carbon.integration.framework</artifactId>
-                <version>${carbon.integration.framework.version}</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.wso2.carbon</groupId>-->
+                <!--<artifactId>org.wso2.carbon.integration.framework</artifactId>-->
+                <!--<version>${carbon.integration.framework.version}</version>-->
+            <!--</dependency>-->
             <dependency>
                 <groupId>org.wso2.carbon.mediation</groupId>
                 <artifactId>org.wso2.carbon.mediator.bridge</artifactId>
@@ -1193,7 +1193,7 @@
         <!-- Automation Framework versions -->
         <automation.framework.version>4.4.2</automation.framework.version>
         <automation.framework.utils.version>4.4.2</automation.framework.utils.version>
-        <carbon.integration.framework.version>4.4.2</carbon.integration.framework.version>
+        <!--<carbon.integration.framework.version>4.4.2</carbon.integration.framework.version>-->
 
         <operadriver.version>0.8.1</operadriver.version>
         <selenium.version>2.40.0</selenium.version>
