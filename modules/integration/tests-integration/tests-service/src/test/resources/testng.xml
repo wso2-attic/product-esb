@@ -88,4 +88,9 @@
             <package name="org.wso2.carbon.esb.tenant.test.*"/>
         </packages>
     </test>
+    <test name="Pinned-Server-Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.proxyservice.test.proxyservices.ESBJAVA4201" />
+        </classes>
+     </test>
 </suite>

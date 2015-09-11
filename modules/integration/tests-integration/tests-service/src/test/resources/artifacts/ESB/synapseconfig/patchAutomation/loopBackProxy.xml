@@ -1,0 +1,32 @@
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <proxy xmlns="http://ws.apache.org/ns/synapse" name="loopBackProxy" transports="http https" startOnLoad="true" trace="disable">
+        <description/>
+        <target>
+            <inSequence>
+                <log level="full" />
+                <payloadFactory>
+                    <format>
+                        <testResponse><foo/></testResponse>
+                    </format>
+                    <args/>
+                </payloadFactory>
+                <respond/>
+            </inSequence>
+        </target>
+    </proxy>
+    <proxy xmlns="http://ws.apache.org/ns/synapse" name="localhostPinnedServerProxy" transports="http https" pinnedServers="localhost" startOnLoad="true" trace="disable">
+        <description/>
+        <target>
+            <inSequence>
+                <log level="full" />
+                <payloadFactory>
+                    <format>
+                        <testResponse><foo/></testResponse>
+                    </format>
+                    <args/>
+                </payloadFactory>
+                <respond/>
+            </inSequence>
+        </target>
+    </proxy>
+</definitions>
