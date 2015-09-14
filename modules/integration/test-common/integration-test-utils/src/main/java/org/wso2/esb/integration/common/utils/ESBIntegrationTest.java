@@ -90,7 +90,6 @@ public abstract class ESBIntegrationTest {
 	protected void init() throws Exception {
 		userMode = TestUserMode.SUPER_TENANT_ADMIN;
 		init(userMode);
-
 	}
 
 	protected void init(TestUserMode userMode) throws Exception {
@@ -192,8 +191,11 @@ public abstract class ESBIntegrationTest {
 	protected void loadSampleESBConfiguration(int sampleNo) throws Exception {
 		OMElement synapseSample = esbUtils.loadESBSampleConfiguration(sampleNo);
 		updateESBConfiguration(synapseSample);
-
 	}
+
+    protected OMElement loadSampleESBConfigurationWithoutApply(int sampleNo) throws Exception {
+        return esbUtils.loadESBSampleConfiguration(sampleNo);
+    }
 
 	protected void loadESBConfigurationFromClasspath(String relativeFilePath) throws Exception {
 		relativeFilePath = relativeFilePath.replaceAll("[\\\\/]", Matcher.quoteReplacement(File.separator));
