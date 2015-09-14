@@ -31,6 +31,7 @@ public class RequestLogLevelFullResponseLogLevelFullTestCase extends ESBIntegrat
         super.init();
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/request_log_level_full_response_log_level_full.xml");
+        isProxyDeployed("StockQuoteProxy");
 
     }
 

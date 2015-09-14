@@ -30,6 +30,7 @@ public class RequestLogLevelSimpleResponseLogLevelSimpleTestCase extends ESBInte
         super.init();
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/request_log_level_simple_response_log_level_simple.xml");
+        isProxyDeployed("StockQuoteProxy");
 
     }
 
