@@ -17,13 +17,14 @@
 */
 package org.wso2.carbon.esb.samples.test.proxy;
 
+import org.apache.axiom.om.OMElement;
+import org.apache.axiom.om.util.AXIOMUtil;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.test.utils.tcpmon.client.ConnectionData;
 import org.wso2.carbon.automation.test.utils.tcpmon.client.TCPMonListener;
-import org.wso2.esb.integration.common.clients.mediation.SynapseConfigAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 /**
@@ -38,13 +39,7 @@ public class Sample155TestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        loadSampleESBConfiguration(155);
-
-        SynapseConfigAdminClient client =
-            new SynapseConfigAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
-        String oldConfig = client.getConfiguration();
-        oldConfig = oldConfig.replace("localhost:9000", "localhost:9001");
-        client.updateConfiguration(oldConfig);
+        updateESBConfiguration(loadAndEditSample(155));
 
         listener1 = new TCPMonListener(8281, "localhost", 8280);
         listener1.start();
@@ -89,5 +84,16 @@ public class Sample155TestCase extends ESBIntegrationTest {
         super.cleanup();
         listener1.stop();
         listener2.stop();
+    }
+
+    /**
+     * This method is to update the original Sample 155 configuration end point port 9000 to 9001 in order to run
+     * with TCPMonListener
+     */
+    private OMElement loadAndEditSample(int sampleNo) throws Exception {
+        OMElement synapseConfig = loadSampleESBConfigurationWithoutApply(sampleNo);
+        String updatedConfig = synapseConfig.toString().replace("localhost:9000", "localhost:9001");
+        synapseConfig = AXIOMUtil.stringToOM(updatedConfig);
+        return synapseConfig;
     }
 }
