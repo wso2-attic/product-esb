@@ -42,6 +42,7 @@ public class WSDLOptionsPickedFromRegistryTestCase extends ESBIntegrationTest {
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/wsdl_options_pick_from_registry.xml");
+        isProxyDeployed("StockQuoteProxy");
 
     }
 

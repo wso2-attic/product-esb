@@ -35,6 +35,7 @@ public class WSDLOptionsSpecifiedInlineTestCase extends ESBIntegrationTest {
         super.init();
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/wsdl_options_specified_inline.xml");
+        isProxyDeployed("StockQuoteProxy");
 
     }
 
