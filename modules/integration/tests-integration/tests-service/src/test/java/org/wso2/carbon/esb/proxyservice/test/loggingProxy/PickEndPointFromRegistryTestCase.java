@@ -41,6 +41,7 @@ public class PickEndPointFromRegistryTestCase extends ESBIntegrationTest {
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/pick_end_point_from_registry.xml");
+        isProxyDeployed("StockQuoteProxy");
 
     }
 
