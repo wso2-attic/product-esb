@@ -200,7 +200,7 @@ margin-left:10px;
 padding:10px;
 margin-bottom:10px;
 }
-/* chanaka end */
+
 
 a.fact-selector-icon-link {
     background-image: url( ../images/facts-selector.gif );
@@ -248,10 +248,8 @@ div#workArea table.styledLeft thead th {
 	color:#fff;
 }
 div#workArea table.styledLeft tbody tr td {
-	padding-bottom: 2px;
 	padding-left: 8px !important;
 	padding-right: 13px !important;
-	padding-top: 2px;
 	vertical-align: middle !important;
 	background-color: #f4f4f4 !important;
 	height: 25px;
@@ -280,3 +278,126 @@ div#workArea table.styledLeft tbody tr td.middle-header{
 	border: 1px solid #260155;
 }
 a.icon-link {color: #333;}
+
+.button, .button:hover{
+	background-color: #542989 !important;
+}
+.button, .button:visited {
+	font-family: Arial;
+	color: #fff !important;
+	font-size: 13px;
+	text-decoration: none;
+	-webkit-border-radius: 0px!important;
+	-moz-border-radius: 0px !important;
+	text-shadow:none !important;
+	border: 0!important;
+	background: #2A0658 !important;
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+	padding: 5px 10px !important;
+}
+div#workArea table.styledLeft tbody tr td.buttonRow {background-image: none !important;}
+
+
+a:link {
+	color: #333;}
+a:visited {
+	color: #333;}
+
+div#middle div#workArea {
+	padding: 10px;
+	background-color: white !important;
+}
+#tabs ul li {
+	background-image:none !important;
+	padding: 2px 8px 3px;
+	color: #fff;
+	text-decoration: none;
+	line-height: 1;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom: none;
+	height: 20px;
+	margin-right: 5px;
+	border-top: solid 1px #b2ccdd;
+	border-left: solid 1px #b2ccdd;
+	border-right: solid 1px #b2ccdd;
+	border-bottom: 1px solid #ccc;
+	background-color: #260155 !important;
+}
+.ui-tabs-nav li a {
+	color: #333 !important;
+	background: none !important;
+}
+#tabs ul li.ui-tabs-selected {
+	background-image: none;
+	background-color: #fff !important;
+}
+#tabs ul li.ui-tabs-selected a {
+	color: #333 !important;
+}
+#tabs ul li a {
+	color: #fff !important;
+	padding: 2px;
+	font-size: .8em;
+}
+.longInput {
+	width: 250px;
+	height: 21px;
+}
+th>a.icon-link {
+	color:#fff!important;}
+.ui-tabs-nav li {
+	border: 0px !important;}
+.box1-head{
+	background-color:#2A0658 !important;
+	color: #fff !important; background-image: none !important;}
+.box1-head h2 {
+	color: #fff !important;}
+.sub-headding-search{color:#fff !important;}
+.treeView-Selected {
+ background-color: #ffffff !important;
+	color: #2A0658 !important;
+}
+.stdView-notSelected {
+	color: #A4A4A4 !important;
+	background: #2A0658 !important;
+	background-image: none !important;
+}
+div.box1-head h2 {
+	color: #fff !important;}
+
+#doUpload{background-color:#2A0658;
+	color: #fff;
+	border-radius: 0px;
+	cursor: pointer;
+	padding: 5px 10px;
+	border: 0px;}
+#doUpload:hover{
+	background-color:#542989;
+	color: #fff;
+	border-radius: 0px;
+	border: 0px; }
+input[type="button"]{
+	background-color:#2A0658;
+	color: #fff;
+	border-radius: 0px;
+	cursor: pointer;
+	padding: 5px 10px;
+	border: 0px;
+	margin-right: 5px;
+	min-width: 27px;
+}
+input[type="button"]:hover{
+	background-color:#542989;
+	color: #fff;
+	border-radius: 0px;
+	border: 0px;}
+
+.toolsClass{height:19px;}
+.yui-skin-sam .yui-panel .hd {
+	background: #2A0658 !important; color: #fff !important; padding: 3px 10px;}
+#jarResourceDiv{margin-bottom: 10px;}
