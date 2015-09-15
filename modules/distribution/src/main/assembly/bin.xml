@@ -44,6 +44,10 @@
                 <exclude>**/repository/components/plugins/saxon*.jar</exclude>
                 <exclude>**/lib/endorsed/xalan*.jar</exclude>
                 <exclude>**/repository/conf/tomcat/catalina-server.xml</exclude>
+                <exclude>**/repository/conf/registry.xml</exclude>
+                <exclude>**/repository/conf/tomcat/web.xml</exclude>
+                <exclude>**/webapp-mode/WEB-INF/web.xml</exclude>
+                <exclude>**/repository/conf/tomcat/carbon/WEB-INF/web.xml</exclude>
             </excludes>
         </fileSet>
         <fileSet>
@@ -85,6 +89,8 @@
         <fileSet>
             <directory>../../modules/samples/product/services</directory>
             <outputDirectory>wso2esb-${pom.version}/samples/axis2Server/src</outputDirectory>
+            <fileMode>644</fileMode>
+            <directoryMode>775</directoryMode>
         </fileSet>
         <fileSet>
             <directory>../../modules/samples/product/src/main/resources</directory>
@@ -92,6 +98,8 @@
             <includes>
                 <include>**/*.pdf</include>
             </includes>
+            <fileMode>644</fileMode>
+            <directoryMode>775</directoryMode>
         </fileSet>
         <fileSet>
             <directory>../../modules/samples/product/src/main/java</directory>
@@ -100,6 +108,8 @@
                 <exclude>**/target</exclude>
                 <exclude>**/target/**/*</exclude>
             </excludes>
+            <fileMode>644</fileMode>
+            <directoryMode>775</directoryMode>
         </fileSet>
         <fileSet>
             <directory>../../modules/samples/product/src/main/scripts</directory>
@@ -107,6 +117,8 @@
             <includes>
                 <include>build.xml</include>
             </includes>
+            <fileMode>644</fileMode>
+            <directoryMode>775</directoryMode>
         </fileSet>
         <fileSet>
             <directory>../../modules/samples/product/src/main/scripts</directory>
@@ -273,32 +285,59 @@
 	    <file>
             <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-broker.xml</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
+            <fileMode>644</fileMode>
         </file>
 
         <file>
             <source>src/main/conf/axis2.xml</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/axis2</outputDirectory>
             <destName>axis2.xml</destName>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/main/conf/registry.xml</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
+            <destName>registry.xml</destName>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/main/conf/web.xml</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf/tomcat</outputDirectory>
+            <destName>web.xml</destName>
+        </file>
+        <file>
+            <source>src/main/conf/carbon/web.xml</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf/tomcat/carbon/WEB-INF</outputDirectory>
+            <destName>web.xml</destName>
+        </file>
+        <file>
+            <source>src/main/conf/webapp-mode/web.xml</source>
+            <outputDirectory>wso2esb-${pom.version}/webapp-mode/WEB-INF</outputDirectory>
+            <destName>web.xml</destName>
         </file>
         <file>
             <source>src/main/conf/tenant-axis2.xml</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/axis2</outputDirectory>
             <destName>tenant-axis2.xml</destName>
+            <fileMode>644</fileMode>
         </file>
-	<file>
+        <file>
             <source>src/main/conf/axis2_nhttp.xml</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/axis2</outputDirectory>
             <destName>axis2_nhttp.xml</destName>
+            <fileMode>644</fileMode>
         </file>
-	<file>
+        <file>
             <source>src/main/conf/axis2_pt.xml</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/axis2</outputDirectory>
             <destName>axis2_pt.xml</destName>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/main/conf/axis2_blocking_client.xml</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/axis2</outputDirectory>
             <destName>axis2_blocking_client.xml</destName>
+            <fileMode>644</fileMode>
         </file>
 
         <file>
@@ -306,62 +345,72 @@
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <destName>log4j.properties</destName>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/main/conf/synapse.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <destName>synapse.properties</destName>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/main/conf/synapse-handlers.xml</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <destName>synapse-handlers.xml</destName>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/main/conf/datasources.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <destName>datasources.properties</destName>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/main/conf/cipher-text.properties</source>
             <outputDirectory>wso2esb-${pom.version}/lib</outputDirectory>
             <destName>cipher-text.properties</destName>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
          <!-- Cipher Tool Files -->
         <file>
-	    <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/ciphertool.sh</source>
-	    <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-	    <fileMode>755</fileMode>
+            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/ciphertool.sh</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <fileMode>755</fileMode>
         </file>
         <file>
-	    <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/ciphertool.bat</source>
-	    <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/ciphertool.bat</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <fileMode>644</fileMode>
         </file>
         <file>
-	    <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/lib/org.wso2.ciphertool-${cipher.tool.version}.jar</source>
-	    <outputDirectory>${pom.artifactId}-${pom.version}/lib</outputDirectory>
+            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/lib/org.wso2.ciphertool-${cipher.tool.version}.jar</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/lib</outputDirectory>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/main/conf/security/cipher-text.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/security</outputDirectory>
             <destName>cipher-text.properties</destName>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/main/conf/security/cipher-tool.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/security</outputDirectory>
             <destName>cipher-tool.properties</destName>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/main/conf/security/secret-conf.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/security</outputDirectory>
             <destName>secret-conf.properties</destName>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/governance.xml</source>
@@ -380,34 +429,40 @@
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <destName>nhttp.properties</destName>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/main/conf/passthru-http.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <destName>passthru-http.properties</destName>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/main/conf/hl7.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <destName>hl7.properties</destName>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>             
         <file>
             <source>src/main/conf/access-log.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <destName>access-log.properties</destName>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>               
         <file>
             <source>src/main/conf/jndi.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <destName>jndi.properties</destName>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/rule-engine-config.xml</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>../../LICENSE.txt</source>
@@ -449,45 +504,54 @@
             <source>target/wso2carbon-core-${carbon.kernel.version}/bin/wso2server.bat</source>
             <outputDirectory>wso2esb-${pom.version}/bin/</outputDirectory>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/carbon.xml</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>../../modules/samples/product/src/main/conf/client/axis2.xml</source>
             <outputDirectory>wso2esb-${pom.version}/samples/axis2Client/client_repo/conf</outputDirectory>
             <destName>axis2.xml</destName>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>../../modules/samples/product/src/main/conf/server/axis2.xml</source>
             <outputDirectory>wso2esb-${pom.version}/samples/axis2Server/repository/conf</outputDirectory>
             <destName>axis2.xml</destName>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>../../modules/samples/product/src/main/conf/server/sample-server-wrapper.conf</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <destName>sample-server-wrapper.conf</destName>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>../../modules/samples/product/src/main/conf/server/README.txt</source>
             <outputDirectory>wso2esb-${pom.version}/tmp/sampleServer</outputDirectory>
             <destName>README.txt</destName>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>../../modules/samples/product/src/main/conf/client/README.txt</source>
             <outputDirectory>wso2esb-${pom.version}/tmp/sampleClient</outputDirectory>
             <destName>README.txt</destName>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>../../modules/samples/product/src/main/resources/wss4j_1.5.11.wso2v6.jar</source>
             <outputDirectory>wso2esb-${pom.version}/repository/axis2/client/lib</outputDirectory>
             <destName>wss4j_1.5.11.wso2v6.jar</destName>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>../../modules/distribution/src/main/conf/etc/logging-config.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <fileMode>644</fileMode>
         </file>
         <!--<file>-->
             <!--<source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity.xml</source>-->
@@ -496,7 +560,7 @@
             <!--<fileMode>644</fileMode>-->
         <!--</file>-->
 	<!-- Including tasks-config.xml file-->
-	<file>
+        <file>
             <source>../../modules/distribution/src/main/conf/etc/tasks-config.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
         </file>

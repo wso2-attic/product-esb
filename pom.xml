@@ -21,7 +21,7 @@
     <groupId>org.wso2.esb</groupId>
     <artifactId>esb-parent</artifactId>
     <packaging>pom</packaging>
-    <version>4.9.0-RC5-SNAPSHOT</version>
+    <version>4.9.1-SNAPSHOT</version>
     <name>WSO2 ESB - Aggregator Module</name>
     <url>http://wso2.com/products/enterprise-service-bus</url>
     <description>WSO2 Enterprise Service Bus (ESB)</description>
@@ -74,6 +74,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -1070,7 +1073,7 @@
 
         <!--Product Version-->
 
-        <product.esb.version>4.9.0-RC5-SNAPSHOT</product.esb.version>
+        <product.esb.version>4.9.1-SNAPSHOT</product.esb.version>
 
 
         <!-- Axis2 -->

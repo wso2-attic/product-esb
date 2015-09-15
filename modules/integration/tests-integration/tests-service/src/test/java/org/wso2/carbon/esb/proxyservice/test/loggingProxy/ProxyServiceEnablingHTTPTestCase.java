@@ -35,6 +35,7 @@ public class ProxyServiceEnablingHTTPTestCase extends ESBIntegrationTest {
         super.init();
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/proxy_service_enabling_only_http.xml");
+        isProxyDeployed("StockQuoteProxy");
 
     }
 

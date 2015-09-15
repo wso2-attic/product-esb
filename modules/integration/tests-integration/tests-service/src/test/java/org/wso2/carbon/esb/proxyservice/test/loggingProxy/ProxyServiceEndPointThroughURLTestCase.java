@@ -36,6 +36,7 @@ public class ProxyServiceEndPointThroughURLTestCase extends ESBIntegrationTest {
         super.init();
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/proxy_service_with_end_point_through_url.xml");
+        isProxyDeployed("StockQuoteLoggingProxy");
 
     }
 

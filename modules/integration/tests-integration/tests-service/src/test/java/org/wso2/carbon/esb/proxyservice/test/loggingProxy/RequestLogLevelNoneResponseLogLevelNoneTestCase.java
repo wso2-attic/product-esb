@@ -31,6 +31,7 @@ public class RequestLogLevelNoneResponseLogLevelNoneTestCase extends ESBIntegrat
         super.init();
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/request_log_level_none_response_log_level_none.xml");
+        isProxyDeployed("StockQuoteProxy");
 
     }
 

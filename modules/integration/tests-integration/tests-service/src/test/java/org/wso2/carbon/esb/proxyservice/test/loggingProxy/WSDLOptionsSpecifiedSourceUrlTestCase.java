@@ -35,6 +35,8 @@ public class WSDLOptionsSpecifiedSourceUrlTestCase extends ESBIntegrationTest {
         super.init();
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/wsdl_options_specified_source_url.xml");
+        isProxyDeployed("StockQuoteProxy");
+
 
     }
 
