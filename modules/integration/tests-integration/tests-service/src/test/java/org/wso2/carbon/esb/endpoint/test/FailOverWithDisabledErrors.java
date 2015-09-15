@@ -80,8 +80,8 @@ public class FailOverWithDisabledErrors extends ESBIntegrationTest {
         axis2Server3 = null;
         super.cleanup();
     }
-
-    /*@AfterMethod(groups = "wso2.esb")
+    /*
+    @AfterMethod(groups = "wso2.esb")
     public void startServersA() throws InterruptedException, IOException {
         if (!axis2Server1.isStarted()) {
             axis2Server1.start();
@@ -90,7 +90,7 @@ public class FailOverWithDisabledErrors extends ESBIntegrationTest {
             axis2Server3.start();
         }
         Thread.sleep(1000);
-    }
+    }*/
 
     @BeforeMethod(groups = "wso2.esb")
     public void startServersB() throws InterruptedException, IOException {
@@ -101,7 +101,7 @@ public class FailOverWithDisabledErrors extends ESBIntegrationTest {
             axis2Server3.start();
         }
         Thread.sleep(1000);
-    }*/
+    }
 
     private static final String[] logPatterns = new String[]{
             "primary_0 is marked as TIMEOUT and will be retried : 1 more time/s after",
