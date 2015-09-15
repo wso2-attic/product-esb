@@ -35,7 +35,6 @@
 
     </sequence>
     <sequence name="main" onError="myFaultHandler">
-
         <in>
             <send>
                 <!--this configuration is used to hit myFaultHandler. Otherwise it will hit fault sequence-->
