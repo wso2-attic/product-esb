@@ -35,10 +35,10 @@ public class CallMediatorBlockingInboundOutboundPolicySecurityTestCase extends E
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        loadESBConfigurationFromClasspath(File.separator+"artifacts"+File.separator+"ESB"+File.separator+"mediatorconfig"+File.separator+"call"+File.separator+"CallMediatorBlockingInboundOutboundSecurity.xml");
+        loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "mediatorconfig" + File.separator + "call" + File.separator + "CallMediatorBlockingInboundOutboundSecurity.xml");
     }
 
-    @Test(groups = {"wso2.esb"},description = "Call the inbound & outbound security endpoint with blocking external calls")
+    @Test(groups = {"wso2.esb"}, description = "Call the inbound & outbound security endpoint with blocking external calls")
     public void CallMediatorBlockingInboundOutboundPolicySecurityTest() throws AxisFault, XPathExpressionException {
         log.info("BlockingInboundOutboundPolicySecurityTest getMainSequenceURL : " + getMainSequenceURL());
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(""), "", "WSO2");

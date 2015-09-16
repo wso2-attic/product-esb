@@ -33,10 +33,10 @@ public class CallMediatorBlockingProxyWithNamedSeqCase extends ESBIntegrationTes
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        loadESBConfigurationFromClasspath(File.separator+"artifacts"+File.separator+"ESB"+File.separator+"mediatorconfig"+File.separator+"call"+File.separator+"synapse19.xml");
+        loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "mediatorconfig" + File.separator + "call" + File.separator + "synapse19.xml");
     }
 
-    @Test(groups = {"wso2.esb"},description = "Call the proxy with named sequence and blocking external calls")
+    @Test(groups = {"wso2.esb"}, description = "Call the proxy with named sequence and blocking external calls")
     public void callMediatorBlockingProxyWithNamedSeqCase() throws AxisFault {
 
         OMElement response =

@@ -33,10 +33,10 @@ public class CallMediatorBlockingDirectEndpointTestCase extends ESBIntegrationTe
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        loadESBConfigurationFromClasspath(File.separator+"artifacts"+File.separator+"ESB"+File.separator+"mediatorconfig"+File.separator+"call"+File.separator+"CallMediatorBlockingDirectEndpointTest.xml");
+        loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "mediatorconfig" + File.separator + "call" + File.separator + "CallMediatorBlockingDirectEndpointTest.xml");
     }
 
-    @Test(groups = {"wso2.esb"},description = "Call the direct endpoint with blocking external calls")
+    @Test(groups = {"wso2.esb"}, description = "Call the direct endpoint with blocking external calls")
     public void callMediatorBlockingDirectEndpointTest() throws AxisFault {
 
         OMElement response =
