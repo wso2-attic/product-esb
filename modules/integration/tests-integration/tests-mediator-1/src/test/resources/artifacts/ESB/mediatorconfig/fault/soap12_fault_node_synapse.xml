@@ -20,6 +20,7 @@
             <send>
                 <endpoint key="nonExisitentEndpint"/>
             </send>
+            <drop/>
         </in>
         <out>
             <send/>
