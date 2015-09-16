@@ -59,6 +59,9 @@ public class TestFunctionStackDeepClone extends ESBIntegrationTest {
             httpClient.doGet(contextUrls.getServiceUrl() + "/CallerProxy", null);
         }
 
+        //This sleep is added to wait till all the necessary logs are printed
+        Thread.sleep(5000);
+
         LogEvent[] logs = logViewer.getAllSystemLogs();
         int call1Count = 0, call2Count = 0, call3Count = 0;
 
