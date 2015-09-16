@@ -11,16 +11,16 @@
         <header name="To" action="remove"/>
         <log level="full"/>
         <send/>
+        <drop/>
     </sequence>
 
     <sequence name="main" onError="myFaultHandler">
         <in>
             <log level="full"/>
             <send>
-                <endpoint>
-                    <address uri="http://localhost:9020/services/NonExistingService"/>
-                </endpoint>
+                <endpoint key="nonExisitentEndpint"/>
             </send>
+            <drop/>
         </in>
 
         <out>
@@ -41,7 +41,6 @@
         <property name="RESPONSE" value="true"/>
         <header name="To" action="remove"/>
         <send/>
-
     </sequence>
 
 </definitions>

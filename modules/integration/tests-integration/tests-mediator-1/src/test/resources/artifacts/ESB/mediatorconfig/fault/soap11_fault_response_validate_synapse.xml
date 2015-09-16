@@ -16,6 +16,7 @@
         <property name="RESPONSE" value="true"/>
         <header name="To" action="remove"/>
         <send/>
+        <drop/>
     </sequence>
 
     <sequence name="fault">
@@ -35,17 +36,12 @@
 
     </sequence>
     <sequence name="main" onError="myFaultHandler">
-
-        <in>
-            <send>
-                <!--this configuration is used to hit myFaultHandler. Otherwise it will hit fault sequence-->
-                <endpoint>
-                    <default/>
-                </endpoint>
-            </send>
-        </in>
-        <out>
-            <send/>
-        </out>
+        <log level="full"/>
+        <call>
+            <endpoint>
+                <default/>
+            </endpoint>
+        </call>
+        <respond/>
     </sequence>
 </definitions>

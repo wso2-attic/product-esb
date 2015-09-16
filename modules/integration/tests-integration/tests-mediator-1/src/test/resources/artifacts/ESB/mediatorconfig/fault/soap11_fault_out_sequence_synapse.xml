@@ -14,23 +14,18 @@
         <property name="RESPONSE" value="true"/>
         <header name="To" action="remove"/>
         <send/>
+        <drop/>
     </sequence>
 
     <sequence name="main" onError="myFaultHandler">
         <in>
-            <send>
-                <endpoint>
-                    <address uri="http://localhost:9020/services/NonExistingService"/>
-                </endpoint>
-            </send>
+            <send/>
+            <drop/>
         </in>
-
         <out>
             <log level="full"/>
             <send>
-                <endpoint>
-                    <address uri="http://localhost:9020/services/NonExistingService"/>
-                </endpoint>
+                <endpoint key="nonExisitentEndpint"/>
             </send>
         </out>
     </sequence>
@@ -41,7 +36,6 @@
                   value="soap11Env:Server"/>
             <reason value="Default Fault sequence Executed instead of myFaultHandler"/>
         </makefault>
-
         <log level="full">
             <property name="ERROR_CODE" expression="get-property('ERROR_CODE')"/>
             <property name="ERROR_MESSAGE" expression="get-property('ERROR_MESSAGE')"/>
@@ -49,7 +43,6 @@
         <property name="RESPONSE" value="true"/>
         <header name="To" action="remove"/>
         <send/>
-
     </sequence>
 
 </definitions>

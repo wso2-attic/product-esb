@@ -6,7 +6,6 @@
             <reason expression="get-property('ERROR_MESSAGE')"/>
             <detail expression="get-property('ERROR_DETAIL')"/>
         </makefault>
-
         <log level="full">
             <property name="MESSAGE" value="Executing  &quot;myFaultHandler&quot; sequence"/>
             <property name="ERROR_CODE" expression="get-property('ERROR_CODE')"/>
@@ -15,6 +14,7 @@
         <property name="RESPONSE" value="true"/>
         <header name="To" action="remove"/>
         <send/>
+        <drop/>
     </sequence>
 
     <sequence name="fault">
@@ -22,7 +22,6 @@
             <code xmlns:tns="http://www.w3.org/2003/05/soap-envelope" value="tns:Receiver"/>
             <reason value="Default Fault sequence Executed instead of myFaultHandler"/>
         </makefault>
-
         <log level="full">
             <property name="ERROR_CODE" expression="get-property('ERROR_CODE')"/>
             <property name="ERROR_MESSAGE" expression="get-property('ERROR_MESSAGE')"/>
@@ -30,22 +29,14 @@
         <property name="RESPONSE" value="true"/>
         <header name="To" action="remove"/>
         <send/>
-
     </sequence>
     <sequence name="main" onError="myFaultHandler">
-
-        <in>
-
-            <send>
-                <!--this configuration is used to hit myFaultHandler. Otherwise it will hit fault sequence-->
-                <endpoint>
-                    <default/>
-                </endpoint>
-            </send>
-
-        </in>
-        <out>
-            <send/>
-        </out>
+        <log level="full"/>
+        <call>
+            <endpoint>
+                <address uri="http://localhost:8695/services/NonExistingService"/>
+            </endpoint>
+        </call>
+        <respond/>
     </sequence>
 </definitions>
