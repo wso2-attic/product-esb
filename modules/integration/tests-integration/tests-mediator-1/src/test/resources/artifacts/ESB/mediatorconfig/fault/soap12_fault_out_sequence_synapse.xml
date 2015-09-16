@@ -26,9 +26,7 @@
         <out>
             <log level="full"/>
             <send>
-                <send>
-                    <endpoint key="nonExisitentEndpint"/>
-                </send>
+                <endpoint key="nonExisitentEndpint"/>
             </send>
             <drop/>
         </out>
