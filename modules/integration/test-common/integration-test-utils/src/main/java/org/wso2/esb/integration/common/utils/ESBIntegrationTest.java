@@ -53,11 +53,9 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -154,6 +152,7 @@ public abstract class ESBIntegrationTest {
 			deleteInboundEndpoints();
 
 		} finally {
+			restoreSynapseConfig();
 			synapseConfiguration = null;
 			proxyServicesList = null;
 			messageProcessorsList = null;
@@ -167,7 +166,6 @@ public abstract class ESBIntegrationTest {
 			axis2Client = null;
 			esbUtils = null;
 			scheduledTaskList = null;
-			restoreSynapseConfig();
 		}
 	}
 
@@ -514,19 +512,12 @@ public abstract class ESBIntegrationTest {
 		String defaultSynapseConfigPath = TestConfigurationProvider.getResourceLocation("ESB") +
 		                                  File.separator + "defaultconfigs" + File.separator + "synapse.xml";
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(fullPath));
-			if (br.readLine() == null) {
+			if(esbUtils.isFileEmpty(fullPath)) {
 				log.info("Synapse config is empty copying Backup Config to the location.");
 				esbUtils.copyFile(defaultSynapseConfigPath, fullPath);
 			}
-		} catch (FileNotFoundException ignored) {
-			//synapse config is not found therefore it should copy original file to the location
-			log.info("Synapse config file cannot be found in " + fullPath + " copying Backup Config to the location.");
-			esbUtils.copyFile(defaultSynapseConfigPath, fullPath);
-		} catch (IOException ioException) {
-			throw new Exception("Error while reading the synapse configuration file.", ioException);
-		} catch (Exception exception) {
-			throw new Exception("Exception occurred while reading the synapse configuration file.", exception);
+		} catch (IOException exception) {
+			throw new Exception("Exception occurred while restoring the default synapse configuration.", exception);
 		}
 	}
 

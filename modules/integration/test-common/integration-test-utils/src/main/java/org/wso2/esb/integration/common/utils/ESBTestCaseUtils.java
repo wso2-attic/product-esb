@@ -59,10 +59,12 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.rmi.RemoteException;
@@ -2059,5 +2061,22 @@ public class ESBTestCaseUtils {
 			IOUtils.closeQuietly(fileInputStream);
 			IOUtils.closeQuietly(fileOutputStream);
 		}
+	}
+
+	public boolean isFileEmpty(String fullPath){
+		try{
+		BufferedReader br = new BufferedReader(new FileReader(fullPath));
+		if (br.readLine() == null) {
+			return true;
+		}
+		} catch (FileNotFoundException fileNotFoundException) {
+			//synapse config is not found therefore it should copy original file to the location
+			log.info("Synapse config file cannot be found in " + fullPath + " copying Backup Config to the location.");
+			return true;
+		} catch (IOException ioException){
+			//exception ignored
+			log.info("Couldn't read the synapse config from the location "+ fullPath);
+		}
+		return false;
 	}
 }
