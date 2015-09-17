@@ -213,7 +213,7 @@ public abstract class ESBIntegrationTest {
 	}
     protected void deleteLibrary(String fullQualifiedName)
             throws MediationLibraryAdminServiceException, RemoteException {
-        esbUtils.deleteLibrary(contextUrls.getBackEndUrl(),sessionCookie,fullQualifiedName);
+        esbUtils.deleteLibrary(contextUrls.getBackEndUrl(), sessionCookie, fullQualifiedName);
     }
 
     protected  String[]  getAllImports() throws RemoteException {
@@ -377,12 +377,13 @@ public abstract class ESBIntegrationTest {
 		uploadLibraryInfoList.add(uploadedFileItem);
 		LibraryFileItem[] uploadServiceTypes = new LibraryFileItem[uploadLibraryInfoList.size()];
 		uploadServiceTypes = uploadLibraryInfoList.toArray(uploadServiceTypes);
-		esbUtils.uploadConnector(contextUrls.getBackEndUrl(),sessionCookie,uploadServiceTypes);
+		esbUtils.uploadConnector(contextUrls.getBackEndUrl(), sessionCookie, uploadServiceTypes);
 	}
 
 	protected void updateConnectorStatus(String libQName, String libName,
 	                                     String packageName, String status) throws RemoteException {
-		esbUtils.updateConnectorStatus(contextUrls.getBackEndUrl(),sessionCookie,libQName, libName, packageName, status);
+		esbUtils.updateConnectorStatus(contextUrls.getBackEndUrl(), sessionCookie, libQName, libName, packageName,
+		                               status);
 	}
 
 
@@ -525,8 +526,8 @@ public abstract class ESBIntegrationTest {
 			esbUtils.copyFile(defaultSynapseConfigPath, fullPath);
 		} catch (IOException ioException) {
 			throw new Exception("Error while reading the synapse configuration file.", ioException);
-		} catch (Exception e) {
-			throw new Exception("Exception occurred while reading the synapse configuration file.", e);
+		} catch (Exception exception) {
+			throw new Exception("Exception occurred while reading the synapse configuration file.", exception);
 		}
 	}
 
