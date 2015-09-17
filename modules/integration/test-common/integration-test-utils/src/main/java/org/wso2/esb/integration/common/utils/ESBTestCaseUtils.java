@@ -2063,19 +2063,25 @@ public class ESBTestCaseUtils {
 		}
 	}
 
-	public boolean isFileEmpty(String fullPath){
-		try{
-		BufferedReader br = new BufferedReader(new FileReader(fullPath));
-		if (br.readLine() == null) {
-			return true;
-		}
+	/**
+	 * This method can be used to check whether file specified by the location has contents
+	 *
+	 * @param fullPath path to file
+	 * @return true if file has no contents
+	 */
+	public boolean isFileEmpty(String fullPath) {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(fullPath));
+			if (br.readLine() == null) {
+				return true;
+			}
 		} catch (FileNotFoundException fileNotFoundException) {
 			//synapse config is not found therefore it should copy original file to the location
 			log.info("Synapse config file cannot be found in " + fullPath + " copying Backup Config to the location.");
 			return true;
-		} catch (IOException ioException){
+		} catch (IOException ioException) {
 			//exception ignored
-			log.info("Couldn't read the synapse config from the location "+ fullPath);
+			log.info("Couldn't read the synapse config from the location " + fullPath);
 		}
 		return false;
 	}

@@ -512,7 +512,7 @@ public abstract class ESBIntegrationTest {
 		String defaultSynapseConfigPath = TestConfigurationProvider.getResourceLocation("ESB") +
 		                                  File.separator + "defaultconfigs" + File.separator + "synapse.xml";
 		try {
-			if(esbUtils.isFileEmpty(fullPath)) {
+			if (esbUtils.isFileEmpty(fullPath)) {
 				log.info("Synapse config is empty copying Backup Config to the location.");
 				esbUtils.copyFile(defaultSynapseConfigPath, fullPath);
 			}
