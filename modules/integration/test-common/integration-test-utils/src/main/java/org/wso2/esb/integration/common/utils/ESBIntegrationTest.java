@@ -525,8 +525,8 @@ public abstract class ESBIntegrationTest {
 			esbUtils.copyFile(defaultSynapseConfigPath, fullPath);
 		} catch (IOException ioException) {
 			throw new Exception("Error while reading the synapse configuration file.", ioException);
-		} catch (Exception e) {
-			throw new Exception("Exception occurred while reading the synapse configuration file.", e);
+		} catch (Exception exception) {
+			throw new Exception("Exception occurred while reading the synapse configuration file.", exception);
 		}
 	}
 
