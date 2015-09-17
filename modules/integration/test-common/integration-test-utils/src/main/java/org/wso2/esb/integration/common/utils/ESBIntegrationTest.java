@@ -41,9 +41,11 @@ import org.wso2.carbon.mediation.library.stub.MediationLibraryAdminServiceExcept
 import org.wso2.carbon.mediation.library.stub.upload.types.carbon.LibraryFileItem;
 import org.wso2.carbon.security.mgt.stub.config.SecurityAdminServiceSecurityConfigExceptionException;
 import org.wso2.carbon.sequences.stub.types.SequenceEditorException;
+import org.wso2.carbon.utils.ServerConstants;
 import org.wso2.esb.integration.common.clients.application.mgt.SynapseApplicationAdminClient;
 import org.wso2.esb.integration.common.clients.mediation.SynapseConfigAdminClient;
 import org.wso2.esb.integration.common.utils.clients.stockquoteclient.StockQuoteClient;
+import org.wso2.esb.integration.common.utils.common.TestConfigurationProvider;
 import org.xml.sax.SAXException;
 
 import javax.activation.DataHandler;
@@ -51,9 +53,11 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -82,6 +86,9 @@ public abstract class ESBIntegrationTest {
 	private List<String> apiList = null;
 	private List<String> priorityExecutorList = null;
 	private List<String[]> scheduledTaskList = null;
+	private static final String synapsePathFormBaseUri =
+			File.separator + "repository" + File.separator + "deployment" + File.separator + "server" + File.separator +
+			"synapse-configs" + File.separator + "default" + File.separator + "synapse.xml";
 	protected AutomationContext context;
 	protected Tenant tenantInfo;
 	protected User userInfo;
@@ -160,7 +167,7 @@ public abstract class ESBIntegrationTest {
 			axis2Client = null;
 			esbUtils = null;
 			scheduledTaskList = null;
-
+			restoreSynapseConfig();
 		}
 	}
 
@@ -499,6 +506,28 @@ public abstract class ESBIntegrationTest {
 
 		Thread.sleep(1000);
 
+	}
+
+	protected void restoreSynapseConfig() throws Exception {
+		String carbonHome = System.getProperty(ServerConstants.CARBON_HOME);
+		String fullPath = carbonHome + synapsePathFormBaseUri;
+		String defaultSynapseConfigPath = TestConfigurationProvider.getResourceLocation("ESB") +
+		                                  File.separator + "defaultconfigs" + File.separator + "synapse.xml";
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(fullPath));
+			if (br.readLine() == null) {
+				log.info("Synapse config is empty copying Backup Config to the location.");
+				esbUtils.copyFile(defaultSynapseConfigPath, fullPath);
+			}
+		} catch (FileNotFoundException ignored) {
+			//synapse config is not found therefore it should copy original file to the location
+			log.info("Synapse config file cannot be found in " + fullPath + " copying Backup Config to the location.");
+			esbUtils.copyFile(defaultSynapseConfigPath, fullPath);
+		} catch (IOException ioException) {
+			throw new Exception("Error while reading the synapse configuration file.", ioException);
+		} catch (Exception e) {
+			throw new Exception("Exception occurred while reading the synapse configuration file.", e);
+		}
 	}
 
 	private void deleteMessageProcessors() {

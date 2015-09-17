@@ -23,6 +23,7 @@ import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
 import org.apache.axiom.om.OMNamespace;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -61,7 +62,9 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -2024,6 +2027,37 @@ public class ESBTestCaseUtils {
 			} else {
 				log.info(entry.getKey() + " was not deployed");
 			}
+		}
+	}
+
+	/**
+	 * Copy the given source file to the given destination
+	 *
+	 * @param sourceUri source file location
+	 * @param destUri   destination file location
+	 * @throws IOException
+	 */
+	public static void copyFile(String sourceUri, String destUri) throws IOException {
+		File sourceFile = new File(sourceUri);
+		File destFile = new File(destUri);
+
+		if (destFile.exists()) {
+			destFile.delete();
+		}
+		destFile.createNewFile();
+		FileInputStream fileInputStream = null;
+		FileOutputStream fileOutputStream = null;
+
+		try {
+			fileInputStream = new FileInputStream(sourceFile);
+			fileOutputStream = new FileOutputStream(destFile);
+
+			FileChannel source = fileInputStream.getChannel();
+			FileChannel destination = fileOutputStream.getChannel();
+			destination.transferFrom(source, 0, source.size());
+		} finally {
+			IOUtils.closeQuietly(fileInputStream);
+			IOUtils.closeQuietly(fileOutputStream);
 		}
 	}
 }
