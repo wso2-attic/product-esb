@@ -511,13 +511,13 @@ public abstract class ESBIntegrationTest {
 		String fullPath = carbonHome + synapsePathFormBaseUri;
 		String defaultSynapseConfigPath = TestConfigurationProvider.getResourceLocation("ESB") +
 		                                  File.separator + "defaultconfigs" + File.separator + "synapse.xml";
-		try {
-			if (esbUtils.isFileEmpty(fullPath)) {
+		if (esbUtils.isFileEmpty(fullPath)) {
+			try {
 				log.info("Synapse config is empty copying Backup Config to the location.");
 				esbUtils.copyFile(defaultSynapseConfigPath, fullPath);
+			} catch (IOException exception) {
+				throw new Exception("Exception occurred while restoring the default synapse configuration.", exception);
 			}
-		} catch (IOException exception) {
-			throw new Exception("Exception occurred while restoring the default synapse configuration.", exception);
 		}
 	}
 
