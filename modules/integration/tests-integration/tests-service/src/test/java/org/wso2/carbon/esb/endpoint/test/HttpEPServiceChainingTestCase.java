@@ -43,7 +43,7 @@ public class HttpEPServiceChainingTestCase extends ESBIntegrationTest {
     public void testHTTPEPServiceChaining() throws Exception {
         OMElement response =
                 axis2Client.sendSimpleStockQuoteRequest(
-                        "http://localhost:8280/services/ChainingTestProxy", null, "IBM");
+                        "http://localhost:8480/services/ChainingTestProxy", null, "IBM");
 
         assertTrue(response.toString().contains("Service3"),
                    "Services in the chain are not invoked properly");

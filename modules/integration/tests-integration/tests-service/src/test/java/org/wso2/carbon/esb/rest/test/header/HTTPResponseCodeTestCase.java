@@ -64,11 +64,11 @@ public class HTTPResponseCodeTestCase extends ESBIntegrationTest {
 		switch (responseCode) {
 			case 200:
 				String contentType = "text/xml";
-				String url = "http://localhost:8280/serviceTest/test";
+				String url = "http://localhost:8480/serviceTest/test";
 				sendRequest(url, 200, contentType);
 			case 404:
 				contentType = "text/html";
-				url = "http://localhost:8280/serviceTest/notfound";
+				url = "http://localhost:8480/serviceTest/notfound";
 				sendRequest(url, 404, contentType);
 		}
 

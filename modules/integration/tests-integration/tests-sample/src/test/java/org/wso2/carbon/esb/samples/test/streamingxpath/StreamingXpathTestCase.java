@@ -55,7 +55,7 @@ public class StreamingXpathTestCase extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = " Streaming XPath Running", enabled = true)
     public void streamingXpathTestCase() throws Exception {
-       OMElement result =    axis2Client.sendSimpleQuoteRequest("http://localhost:8280/services/Streaming",null,"IBM");
+       OMElement result =    axis2Client.sendSimpleQuoteRequest("http://localhost:8480/services/Streaming",null,"IBM");
         Assert.assertNotNull(result);
     }
 

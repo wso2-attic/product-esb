@@ -22,7 +22,7 @@
 <definitions xmlns="http://ws.apache.org/ns/synapse">
 
     <sequence name="main">
-        <callout serviceURL="http://localhost:8280/services/MakeFaultProxy"
+        <callout serviceURL="http://localhost:8480/services/MakeFaultProxy"
                  action="urn:mediate">
             <source xmlns:s12="http://www.w3.org/2003/05/soap-envelope"
                     xmlns:s11="http://schemas.xmlsoap.org/soap/envelope/"
@@ -36,6 +36,7 @@
         <send/>
         <drop/>
     </sequence>
+
 
     <sequence name="fault">
          <property name="RESPONSE" value="true" scope="default" type="STRING"/>

@@ -76,14 +76,11 @@ public class SpecialCharacterTestCase extends ESBIntegrationTest {
     public void testSpecialCharacterMediation() throws Exception {
 //        SimpleHttpClient httpClient = new SimpleHttpClient();
         String payload = "<test>This payload is üsed to check special character mediation</test>";
-        try {
-            Map<String, String> header = new HashMap<String, String>();
-            header.put("Content-Type", "application/xml");
-//            HttpResponse response = httpClient.doPost(getProxyServiceURLHttp("InOutProxy"), null, payload, "application/xml");
-            HttpRequestUtil.doPost(new URL(getProxyServiceURLHttp("InOutProxy")), payload, header);
-        } catch (AxisFault e) {
-            log.error("Response not expected here, Exception can be accepted ");
-        }
+
+        Map<String, String> header = new HashMap<String, String>();
+        header.put("Content-Type", "application/xml");
+//        HttpResponse response = httpClient.doPost(getProxyServiceURLHttp("InOutProxy"), null, payload, "application/xml");
+        HttpRequestUtil.doPost(new URL(getProxyServiceURLHttp("InOutProxy")), payload, header);
         Thread.sleep(5000);
         assertTrue(interceptor.getPayload().contains(payload));
     }

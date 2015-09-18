@@ -86,7 +86,7 @@ public class JsonFormat_IncomingJson_CTXJsonValues_WithStream_TestCase extends E
 	private void postRequestWithJsonPayload(String payload,String contentType) throws Exception{
 
 
-		String url="http://localhost:8280/services/Dummy";
+		String url="http://localhost:8480/services/Dummy";
 		Reader data = new StringReader(JSON_PAYLOAD);
 		Writer writer = new StringWriter();
 

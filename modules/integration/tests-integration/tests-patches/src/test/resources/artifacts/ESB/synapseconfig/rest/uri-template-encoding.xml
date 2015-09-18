@@ -34,7 +34,7 @@
                 </log>
                 <send>
                     <endpoint>
-                         <http method="GET" uri-template="http://localhost:8280/services/test/urlEncoded?queryParam={uri.var.value}"/>
+                         <http method="GET" uri-template="http://localhost:8480/services/test/urlEncoded?queryParam={uri.var.value}"/>
                     </endpoint>
                 </send>
             </inSequence>
@@ -49,7 +49,7 @@
                 </log>
                 <send>
                     <endpoint>
-                         <http method="GET" uri-template="http://localhost:8280/services/test/escapeUrlEncoded?queryParam={+uri.var.value}"/>
+                         <http method="GET" uri-template="http://localhost:8480/services/test/escapeUrlEncoded?queryParam={+uri.var.value}"/>
                     </endpoint>
                 </send>
             </inSequence>
@@ -64,7 +64,7 @@
                 </log>
                 <send>
                     <endpoint>
-                         <http method="GET" uri-template="http://localhost:8280/services/test_2/{uri.var.value}"/>
+                         <http method="GET" uri-template="http://localhost:8480/services/test_2/{uri.var.value}"/>
                     </endpoint>
                 </send>
             </inSequence>
@@ -79,7 +79,7 @@
                 </log>
                 <send>
                     <endpoint>
-                         <http method="GET" uri-template="http://localhost:8280/services/test_2/{+uri.var.value}"/>
+                         <http method="GET" uri-template="http://localhost:8480/services/test_2/{+uri.var.value}"/>
                     </endpoint>
                 </send>
             </inSequence>

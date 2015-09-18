@@ -131,7 +131,7 @@ public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase exte
     private void postRequestWithJsonPayload(String payload,String contentType) throws Exception{
 
         SimpleHttpClient httpClient=new SimpleHttpClient();
-        String url="http://localhost:8280/services/Dummy";
+        String url="http://localhost:8480/services/Dummy";
         HttpResponse httpResponse = httpClient.doPost(url, null, payload, contentType);
         responsePayload = httpClient.getResponsePayload(httpResponse);
 

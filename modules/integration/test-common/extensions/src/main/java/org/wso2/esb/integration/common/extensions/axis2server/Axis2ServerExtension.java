@@ -20,27 +20,35 @@ package org.wso2.esb.integration.common.extensions.axis2server;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.wso2.carbon.automation.engine.exceptions.AutomationFrameworkException;
 import org.wso2.carbon.automation.engine.extensions.ExecutionListenerExtension;
+
+import java.io.IOException;
 
 public class Axis2ServerExtension extends ExecutionListenerExtension {
     private Axis2ServerManager serverManager;
     private static final Log log = LogFactory.getLog(Axis2ServerExtension.class);
 
-    public void initiate() throws Exception {
+    public void initiate() throws AutomationFrameworkException {
 
     }
 
-    public void onExecutionStart() throws Exception {
+    public void onExecutionStart() throws AutomationFrameworkException {
         serverManager = new Axis2ServerManager();
-        serverManager.start();
-        log.info(".................Deploying services..............");
-        serverManager.deployService(ServiceNameConstants.LB_SERVICE_1);
-        serverManager.deployService(ServiceNameConstants.SIMPLE_STOCK_QUOTE_SERVICE);
-        serverManager.deployService(ServiceNameConstants.SECURE_STOCK_QUOTE_SERVICE);
-        serverManager.deployService(ServiceNameConstants.SIMPLE_AXIS2_SERVICE);
+
+        try {
+            serverManager.start();
+            log.info(".................Deploying services..............");
+            serverManager.deployService(ServiceNameConstants.LB_SERVICE_1);
+            serverManager.deployService(ServiceNameConstants.SIMPLE_STOCK_QUOTE_SERVICE);
+            serverManager.deployService(ServiceNameConstants.SECURE_STOCK_QUOTE_SERVICE);
+            serverManager.deployService(ServiceNameConstants.SIMPLE_AXIS2_SERVICE);
+        } catch (IOException e) {
+            handleException("Error While Deploying services", e);
+        }
     }
 
-    public void onExecutionFinish() throws Exception {
+    public void onExecutionFinish() throws AutomationFrameworkException {
         serverManager.stop();
     }
 

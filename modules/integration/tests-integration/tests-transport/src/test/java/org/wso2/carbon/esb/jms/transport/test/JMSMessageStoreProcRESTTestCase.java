@@ -38,7 +38,7 @@ import java.util.Map;
 import static org.testng.Assert.assertEquals;
 
 public class JMSMessageStoreProcRESTTestCase extends ESBIntegrationTest {
-    private static final String url = "http://localhost:8280/services/RESTProxy/new/add?name=jms";
+    private static final String url = "http://localhost:8480/services/RESTProxy/new/add?name=jms";
     private static final String logLine0 =
             "MESSAGE = ************RESTProxy IN, IN-Content-Type = application/json, IN-Test-Header-Field = TestHeaderValue";
     private static final String logLine1 =

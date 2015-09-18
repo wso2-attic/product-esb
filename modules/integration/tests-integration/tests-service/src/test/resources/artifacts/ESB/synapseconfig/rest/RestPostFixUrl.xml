@@ -30,7 +30,7 @@
             <inSequence>
                 <send>
                     <endpoint>
-                        <address statistics="disable" trace="disable" uri="http://localhost:8280/services/test">
+                        <address statistics="disable" trace="disable" uri="http://localhost:8480/services/test">
                             <timeout>
                                 <duration>0</duration>
                                 <responseAction>discard</responseAction>
