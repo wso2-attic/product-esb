@@ -23,6 +23,7 @@ import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
 import org.apache.axiom.om.OMNamespace;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,10 +59,14 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -2025,5 +2030,59 @@ public class ESBTestCaseUtils {
 				log.info(entry.getKey() + " was not deployed");
 			}
 		}
+	}
+
+	/**
+	 * Copy the given source file to the given destination
+	 *
+	 * @param sourceUri source file location
+	 * @param destUri   destination file location
+	 * @throws IOException
+	 */
+	public static void copyFile(String sourceUri, String destUri) throws IOException {
+		File sourceFile = new File(sourceUri);
+		File destFile = new File(destUri);
+
+		if (destFile.exists()) {
+			destFile.delete();
+		}
+		destFile.createNewFile();
+		FileInputStream fileInputStream = null;
+		FileOutputStream fileOutputStream = null;
+
+		try {
+			fileInputStream = new FileInputStream(sourceFile);
+			fileOutputStream = new FileOutputStream(destFile);
+
+			FileChannel source = fileInputStream.getChannel();
+			FileChannel destination = fileOutputStream.getChannel();
+			destination.transferFrom(source, 0, source.size());
+		} finally {
+			IOUtils.closeQuietly(fileInputStream);
+			IOUtils.closeQuietly(fileOutputStream);
+		}
+	}
+
+	/**
+	 * This method can be used to check whether file specified by the location has contents
+	 *
+	 * @param fullPath path to file
+	 * @return true if file has no contents
+	 */
+	public boolean isFileEmpty(String fullPath) {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(fullPath));
+			if (br.readLine() == null) {
+				return true;
+			}
+		} catch (FileNotFoundException fileNotFoundException) {
+			//synapse config is not found therefore it should copy original file to the location
+			log.info("Synapse config file cannot be found in " + fullPath + " copying Backup Config to the location.");
+			return true;
+		} catch (IOException ioException) {
+			//exception ignored
+			log.info("Couldn't read the synapse config from the location " + fullPath);
+		}
+		return false;
 	}
 }
