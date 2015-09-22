@@ -32,12 +32,14 @@ public class WSDLOptionsSpecifiedSourceUrlTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
+        log.info("Initializing environment");
         super.init();
+        log.info("Loading ESB configuration from classpath");
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/wsdl_options_specified_source_url.xml");
+        log.info("Assert isProxyDeployed");
         isProxyDeployed("StockQuoteProxy");
-
-
+        log.info("Initializing environment completed");
     }
 
     @Test(groups = "wso2.esb", description = "- Logging proxy" +
