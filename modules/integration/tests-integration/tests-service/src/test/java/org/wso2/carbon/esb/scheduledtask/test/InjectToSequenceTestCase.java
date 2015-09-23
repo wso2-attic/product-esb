@@ -25,6 +25,8 @@ import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.testng.Assert.assertTrue;
 
 public class InjectToSequenceTestCase extends ESBIntegrationTest {
@@ -59,6 +61,7 @@ public class InjectToSequenceTestCase extends ESBIntegrationTest {
 
         int beforeLogSize = logViewer.getAllSystemLogs().length;
         addScheduledTask(task);
+        TimeUnit.SECONDS.sleep(5);
         LogEvent[] logs = logViewer.getAllSystemLogs();
         int afterLogSize = logs.length;
 

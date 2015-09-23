@@ -56,7 +56,7 @@ public class ProxyServiceEnablingHTTPTestCase extends ESBIntegrationTest {
 
     }
 
-    @Test(groups = "wso2.esb", description = "- Logging proxy -Proxy service enabling only http -Log")
+    @Test(groups = "wso2.esb", description = "- Logging proxy -Proxy service enabling only http -Log", enabled = false)
     public void testLoggingProxyLogging() throws Exception {
         //ToDo Assert Logs
     }
