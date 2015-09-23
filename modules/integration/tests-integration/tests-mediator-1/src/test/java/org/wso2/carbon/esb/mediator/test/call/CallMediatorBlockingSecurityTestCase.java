@@ -30,6 +30,9 @@ import java.io.File;
 
 import static org.testng.Assert.assertTrue;
 
+/**
+ * Tests for calling the security endpoint with blocking external calls
+ */
 public class CallMediatorBlockingSecurityTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)

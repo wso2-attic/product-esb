@@ -28,6 +28,9 @@ import java.io.File;
 
 import static org.testng.Assert.assertTrue;
 
+/**
+ * Tests for calling the wsdl endpoint with blocking external calls
+ */
 public class CallMediatorBlockingWSDLEndpointTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
@@ -38,7 +41,6 @@ public class CallMediatorBlockingWSDLEndpointTestCase extends ESBIntegrationTest
 
     @Test(groups = {"wso2.esb"}, description = "Call the wsdl endpoint with blocking external calls")
     public void callMediatorBlockingWSDLEndpointTest() throws AxisFault {
-
         OMElement response =
                 axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("TestCallProxy"), null, "WSO2");
         boolean responseContainsWSO2 = response.getFirstElement().toString().contains("WSO2");

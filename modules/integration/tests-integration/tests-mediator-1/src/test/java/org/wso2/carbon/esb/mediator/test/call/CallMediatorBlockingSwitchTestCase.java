@@ -28,6 +28,9 @@ import java.io.File;
 
 import static org.testng.Assert.assertTrue;
 
+/**
+ * Tests for calling the endpoint with blocking external calls according to the switch case
+ */
 public class CallMediatorBlockingSwitchTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
@@ -38,7 +41,6 @@ public class CallMediatorBlockingSwitchTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "Call the endpoint with blocking external calls according to the switch case")
     public void callMediatorBlockingSwitchTest() throws AxisFault {
-
         OMElement response =
                 axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("TestCallProxy"), null, "WSO2");
         boolean responseContainsWSO2 = response.getFirstElement().toString().contains("WSO2");
@@ -53,7 +55,6 @@ public class CallMediatorBlockingSwitchTestCase extends ESBIntegrationTest {
                 axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("TestCallProxy"), null, "MSFT");
         boolean responseContainsMSFT = response.getFirstElement().toString().contains("MSFT");
         assertTrue(responseContainsMSFT);
-
     }
 
     @AfterClass(alwaysRun = true)
