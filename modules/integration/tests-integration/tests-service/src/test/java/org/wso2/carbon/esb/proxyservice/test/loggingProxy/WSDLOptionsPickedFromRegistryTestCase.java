@@ -63,12 +63,6 @@ public class WSDLOptionsPickedFromRegistryTestCase extends ESBIntegrationTest {
 
     }
 
-    @Test(groups = "wso2.esb", description = "- Logging proxy -Publish WSDL Options - Picked from registry -Log")
-    public void testLoggingProxyLogging() throws Exception {
-        //ToDo Assert Logs
-    }
-
-
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception, InterruptedException, RemoteException {
         clearUploadedResource();

@@ -66,14 +66,6 @@ public class PickEndPointFromRegistryTestCase extends ESBIntegrationTest {
 
     }
 
-
-    @Test(groups = "wso2.esb", description = "- Logging proxy" +
-                                             "- Create a proxy service and pick the endpoint from registry (config) -Log")
-    public void testLoggingProxyLogging() throws Exception {
-        //ToDo Assert Logs
-    }
-
-
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
         clearUploadedResource();
