@@ -68,7 +68,8 @@ public class PickEndPointFromRegistryTestCase extends ESBIntegrationTest {
 
 
     @Test(groups = "wso2.esb", description = "- Logging proxy" +
-                                             "- Create a proxy service and pick the endpoint from registry (config) -Log")
+                                             "- Create a proxy service and pick the endpoint from registry (config) -" +
+                                             " Log", enabled = false)
     public void testLoggingProxyLogging() throws Exception {
         //ToDo Assert Logs
     }

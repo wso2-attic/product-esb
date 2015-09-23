@@ -59,7 +59,8 @@ public class WSDLOptionsSpecifiedSourceUrlTestCase extends ESBIntegrationTest {
     }
 
 
-    @Test(groups = "wso2.esb", description = "- Logging proxy -Publish WSDL Options - Specified source url -Log")
+    @Test(groups = "wso2.esb", description = "- Logging proxy -Publish WSDL Options - Specified source url -Log",
+            enabled = false)
     public void testLoggingProxyLogging() throws Exception {
         //ToDo Assert Logs
     }

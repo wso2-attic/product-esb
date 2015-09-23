@@ -35,7 +35,8 @@ public class RequestLogLevelNoneResponseLogLevelNoneTestCase extends ESBIntegrat
 
     }
 
-    @Test(groups = "wso2.esb", description = "- Logging proxy -Request log level none response log level none")
+    @Test(groups = "wso2.esb", description = "- Logging proxy -Request log level none response log level none",
+            enabled = false)
     public void testLoggingProxyLoggingLevel() throws Exception {
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
