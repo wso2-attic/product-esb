@@ -34,7 +34,8 @@ public class RequestLogLevelSimpleResponseLogLevelSimpleTestCase extends ESBInte
 
     }
 
-    @Test(groups = "wso2.esb", description = "- Logging proxy -Request log level simple response log level simple")
+    @Test(groups = "wso2.esb", description = "- Logging proxy -Request log level simple response log level simple",
+            enabled = false)
     public void testLoggingProxyLoggingLevel() throws Exception {
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");

@@ -19,14 +19,18 @@
 package org.wso2.carbon.esb.mediator.test.property;
 
 import org.apache.axiom.om.OMElement;
+import org.apache.commons.io.FileUtils;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.automation.extensions.servers.jmsserver.client.JMSQueueMessageProducer;
 import org.wso2.carbon.automation.extensions.servers.jmsserver.controller.config.JMSBrokerConfigurationProvider;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
+import org.wso2.carbon.utils.FileUtil;
+import org.wso2.carbon.utils.ServerConstants;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.JMSEndpointManager;
 import org.wso2.esb.integration.common.utils.common.TestConfigurationProvider;
@@ -39,6 +43,7 @@ import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 import java.io.File;
 import java.lang.management.ManagementFactory;
+import java.nio.file.Files;
 import java.util.HashMap;
 
 import static org.testng.Assert.assertTrue;
@@ -64,9 +69,15 @@ public class PropertyIntegrationAxis2PropertiesTestCase extends ESBIntegrationTe
 
     @AfterClass(alwaysRun = true)
     public void close() throws Exception {
+        String carbonHome = System.getProperty(ServerConstants.CARBON_HOME);
+        String confDir = carbonHome + File.separator + "repository" + File.separator + "conf"
+                + File.separator;
+        File configTemp = new File(confDir + "axis2" + File.separator + "property_axis2_server.xml");
+        FileUtils.deleteQuietly(configTemp);
         activeMqServer.stopJMSBrokerRevertESBConfiguration();
         super.init();
         super.cleanup();
+        serverManager.restoreToLastConfiguration();
     }
 
 
@@ -74,18 +85,26 @@ public class PropertyIntegrationAxis2PropertiesTestCase extends ESBIntegrationTe
                                                "and MaxConcurrentConsumers Axis2 level properties")
     public void maxConcurrentConsumersTest() throws Exception {
 
+        String carbonHome = System.getProperty(ServerConstants.CARBON_HOME);
+        String confDir = carbonHome + File.separator + "repository" + File.separator + "conf"
+                + File.separator;
+
         //enabling jms transport with ActiveMQ
-        serverManager.applyConfiguration(new File(TestConfigurationProvider.getResourceLocation()
-                                                  + File.separator + "artifacts" + File.separator
-                                                  + "AXIS2" + File.separator + "config" +
-                                                  File.separator + "property_axis2_server.xml"));
+        File originalConfig = new File(TestConfigurationProvider.getResourceLocation()
+                + File.separator + "artifacts" + File.separator
+                + "AXIS2" + File.separator + "config" +
+                File.separator + "property_axis2_server.xml");
+        File destDir = new File(confDir + "axis2" + File.separator);
+        FileUtils.copyFileToDirectory(originalConfig,destDir);
+
+        serverManager.restartGracefully();
 
         super.init();  // after restart the server instance initialization
         JMXServiceURL url =
                 new JMXServiceURL("service:jmx:rmi://" +
                                   context.getDefaultInstance().getHosts().get("default") +
-                                  ":11111/jndi/rmi://" + context.getDefaultInstance().getHosts().
-                        get("default") + ":9999/jmxrmi");
+                                  ":11311/jndi/rmi://" + context.getDefaultInstance().getHosts().
+                        get("default") + ":10199/jmxrmi");
 
         HashMap<String, String[]> environment = new HashMap<String, String[]>();
         String[] credentials = new String[]{"admin", "admin"};

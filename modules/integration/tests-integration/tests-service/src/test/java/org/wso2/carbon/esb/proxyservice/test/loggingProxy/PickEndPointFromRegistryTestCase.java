@@ -37,12 +37,16 @@ import static org.testng.Assert.assertNotNull;
 public class PickEndPointFromRegistryTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
+        log.info("Initializing environment");
         super.init();
+        log.info("Uploading registry resources");
         uploadResourcesToConfigRegistry();
+        log.info("Loading ESB configuration from classpath");
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/pick_end_point_from_registry.xml");
+        log.info("Assert isProxyDeployed");
         isProxyDeployed("StockQuoteProxy");
-
+        log.info("Initializing environment completed");
     }
 
     @Test(groups = "wso2.esb", description = "- Logging proxy" +
@@ -64,7 +68,8 @@ public class PickEndPointFromRegistryTestCase extends ESBIntegrationTest {
 
 
     @Test(groups = "wso2.esb", description = "- Logging proxy" +
-                                             "- Create a proxy service and pick the endpoint from registry (config) -Log")
+                                             "- Create a proxy service and pick the endpoint from registry (config) -" +
+                                             " Log", enabled = false)
     public void testLoggingProxyLogging() throws Exception {
         //ToDo Assert Logs
     }

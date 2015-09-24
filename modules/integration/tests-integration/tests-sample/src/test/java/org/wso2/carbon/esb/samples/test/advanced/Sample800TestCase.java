@@ -49,13 +49,13 @@ public class Sample800TestCase extends ESBIntegrationTest {
 
         SimpleHttpClient httpClient=new SimpleHttpClient();
 
-        url="http://127.0.0.1:8280/stockquote/view/IBM";
+        url="http://127.0.0.1:8480/stockquote/view/IBM";
         httpResponse = httpClient.doGet(url, null);
         responsePayload = httpClient.getResponsePayload(httpResponse);
         assertTrue(responsePayload.contains("IBM"), "Symbol IBM not found in response message");
 
 
-        url="http://127.0.0.1:8280/stockquote/view/MSFT";
+        url="http://127.0.0.1:8480/stockquote/view/MSFT";
         httpResponse = httpClient.doGet(url, null);
         responsePayload = httpClient.getResponsePayload(httpResponse);
         assertTrue(responsePayload.contains("MSFT"), "Symbol MSFT not found in response message");

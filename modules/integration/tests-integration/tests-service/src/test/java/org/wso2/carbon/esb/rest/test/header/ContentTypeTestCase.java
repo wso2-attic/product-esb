@@ -67,7 +67,7 @@ public class ContentTypeTestCase extends ESBIntegrationTest {
 	    server.setExecutor(null); // creates a default executor
 	    server.start();
 	    DefaultHttpClient httpclient = new DefaultHttpClient();
-	    String url = "http://localhost:8280/serviceTest/test";
+	    String url = "http://localhost:8480/serviceTest/test";
 	    HttpGet httpGet = new HttpGet(url);
 	    HttpResponse response = null;
 	    try {

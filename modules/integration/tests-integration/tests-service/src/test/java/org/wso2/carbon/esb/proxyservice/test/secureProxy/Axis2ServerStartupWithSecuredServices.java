@@ -24,6 +24,7 @@ import org.wso2.carbon.authenticator.stub.LoginAuthenticationExceptionException;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.utils.LoginLogoutClient;
+import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
 import org.wso2.esb.integration.common.utils.ServiceDeploymentUtil;
 import org.wso2.esb.integration.common.utils.common.TestConfigurationProvider;
 import org.wso2.esb.integration.common.utils.servers.axis2.SampleAxis2Server;
@@ -41,7 +42,7 @@ public class Axis2ServerStartupWithSecuredServices {
     @BeforeTest(alwaysRun = true)
     public void deployServices()
             throws IOException, LoginAuthenticationExceptionException, ExceptionException,
-                   XPathExpressionException, XMLStreamException, SAXException, URISyntaxException {
+            XPathExpressionException, XMLStreamException, SAXException, URISyntaxException, AutomationUtilException {
 
         if (TestConfigurationProvider.isIntegration()) {
             axis2Server1 = new SampleAxis2Server("test_axis2_server_9007.xml");
@@ -76,7 +77,7 @@ public class Axis2ServerStartupWithSecuredServices {
     @AfterTest(alwaysRun = true)
     public void unDeployServices()
             throws IOException, LoginAuthenticationExceptionException, ExceptionException,
-                   XPathExpressionException, URISyntaxException, SAXException, XMLStreamException {
+            XPathExpressionException, URISyntaxException, SAXException, XMLStreamException, AutomationUtilException {
         if (TestConfigurationProvider.isIntegration() && axis2Server1 != null && axis2Server1.isStarted()) {
             axis2Server1.stop();
         } else {

@@ -18,6 +18,7 @@
 
 package org.wso2.carbon.esb.nhttp.transport.test;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -31,7 +32,9 @@ import org.wso2.carbon.automation.engine.annotations.SetEnvironment;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
+import org.wso2.carbon.utils.ServerConstants;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.common.TestConfigurationProvider;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,11 +51,14 @@ public class DefaultRequestContentTypeTestCase extends ESBIntegrationTest {
         serverConfigurationManager =
                 new ServerConfigurationManager(new AutomationContext("ESB",
                                                                      TestUserMode.SUPER_TENANT_ADMIN));
-        serverConfigurationManager.
-                applyConfiguration(new File(getESBResourceLocation() + File.separator +
-                                            "synapseconfig" + File.separator +
-                                            "nhttp_transport" + File.separator +
-                                            "default_content_type_axis2.xml"));
+
+        String carbonHome = System.getProperty(ServerConstants.CARBON_HOME);
+        String confDir = carbonHome + File.separator + "repository" + File.separator + "conf" + File.separator;
+        File originalConfig = new File(getESBResourceLocation() + File.separator + "synapseconfig" + File.separator +
+                "nhttp_transport" + File.separator + "default_content_type_axis2.xml");
+        File destDir = new File(confDir + "axis2" + File.separator);
+        FileUtils.copyFileToDirectory(originalConfig, destDir);
+        serverConfigurationManager.restartGracefully();
         super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/nhttp_transport"
                                           + "/default_content_type_synapse.xml");
@@ -78,6 +84,10 @@ public class DefaultRequestContentTypeTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void stop() throws Exception {
+        String carbonHome = System.getProperty(ServerConstants.CARBON_HOME);
+        String confDir = carbonHome + File.separator + "repository" + File.separator + "conf" + File.separator;
+        File configTemp = new File(confDir + "axis2" + File.separator + "default_content_type_axis2.xml");
+        FileUtils.deleteQuietly(configTemp);
         cleanup();
         serverConfigurationManager.restoreToLastConfiguration();
     }

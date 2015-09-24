@@ -67,7 +67,7 @@ public class ESBJAVA_3698_MessageBuildingWithDifferentPayloadAndContentTypeTestC
 	                                                           IOException, InterruptedException {
 		final Map<String, String> headers = new HashMap<String, String>();
 
-		final HttpPost post = new HttpPost("http://localhost:8280/stockquote/test");
+		final HttpPost post = new HttpPost("http://localhost:8480/stockquote/test");
 		post.addHeader("Content-Type", "application/json");
 		post.addHeader("SOAPAction", "urn:getQuote");
 		StringEntity se = new StringEntity(getPayload());

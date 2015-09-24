@@ -47,7 +47,7 @@ public class Sample12TestCase extends ESBIntegrationTest {
         client.updateConfiguration(oldConfig);
         Thread.sleep(3000);
 
-        listener1 = new TCPMonListener(8281, "localhost", 8280);
+        listener1 = new TCPMonListener(8481, "localhost", 8480);
         listener1.start();
 
         listener2 = new TCPMonListener(9001, "localhost", 9000);
@@ -58,7 +58,7 @@ public class Sample12TestCase extends ESBIntegrationTest {
                                                  " through ESB")
     public void testOneWayMessaging() throws Exception {
 
-        axis2Client.sendPlaceOrderRequest("http://localhost:8281", null, null);
+        axis2Client.sendPlaceOrderRequest("http://localhost:8481", null, null);
         Thread.sleep(5000);
 
         boolean foundHTTP202Accepted = false;

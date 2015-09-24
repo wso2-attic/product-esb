@@ -56,7 +56,8 @@ public class WSDLOptionsSpecifiedInlineTestCase extends ESBIntegrationTest {
 
     }
 
-    @Test(groups = "wso2.esb", description = "- Logging proxy -Publish WSDL Options - Specified Inline -Log")
+    @Test(groups = "wso2.esb", description = "- Logging proxy -Publish WSDL Options - Specified Inline -Log", enabled
+            = false)
     public void testLoggingProxyLogging() throws Exception {
         //ToDo Assert Logs
     }

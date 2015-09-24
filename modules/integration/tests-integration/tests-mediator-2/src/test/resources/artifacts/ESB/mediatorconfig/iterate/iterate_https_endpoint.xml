@@ -22,7 +22,7 @@
 				<sequence>
 					<send>
 						<endpoint>
-							<address uri="https://localhost:8243/services/StockQuoteProxy" />
+							<address uri="https://localhost:8443/services/StockQuoteProxy" />
 						</endpoint>
 					</send>
 				</sequence>

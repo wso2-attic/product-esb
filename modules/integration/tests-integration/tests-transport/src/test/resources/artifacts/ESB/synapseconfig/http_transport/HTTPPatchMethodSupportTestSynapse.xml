@@ -11,7 +11,7 @@
          <log level="full"/>
          <send>
             <endpoint>
-               <address uri="http://localhost:8280/services/PatchRespondProxy"/>
+               <address uri="http://localhost:8480/services/PatchRespondProxy"/>
             </endpoint>
          </send>
       </inSequence>
