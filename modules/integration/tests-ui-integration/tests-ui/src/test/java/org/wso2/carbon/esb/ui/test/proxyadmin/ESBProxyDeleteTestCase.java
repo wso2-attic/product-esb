@@ -51,6 +51,7 @@ public class ESBProxyDeleteTestCase extends ESBIntegrationUITest {
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         driver.quit();
+        super.cleanup();
     }
 
     private void deleteService(String serviceName){
