@@ -119,6 +119,7 @@ public class ESBJAVA_2841TestCase extends ESBIntegrationUITest {
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         driver.close();
+        super.cleanup();
     }
 
 
