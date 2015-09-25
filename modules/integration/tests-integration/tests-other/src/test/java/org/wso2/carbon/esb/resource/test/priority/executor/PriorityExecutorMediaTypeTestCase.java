@@ -30,7 +30,6 @@ import org.wso2.esb.integration.common.clients.executor.PriorityMediationAdminCl
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
-import java.rmi.RemoteException;
 
 public class PriorityExecutorMediaTypeTestCase extends ESBIntegrationTest{
     private Log log = LogFactory.getLog(PriorityExecutorMediaTypeTestCase.class);
@@ -42,6 +41,7 @@ public class PriorityExecutorMediaTypeTestCase extends ESBIntegrationTest{
 
     @BeforeClass
     public void init() throws Exception {
+        super.init();
         priorityMediationAdminClient = new PriorityMediationAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
         resourceAdmin = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),getSessionCookie());
     }
@@ -68,9 +68,10 @@ public class PriorityExecutorMediaTypeTestCase extends ESBIntegrationTest{
     }
 
     @AfterClass
-    public void destroy() throws RemoteException {
+    public void destroy() throws Exception {
         if (isPriorityExecutorExist) {
             priorityMediationAdminClient.remove(PRIORITY_EXECUTOR_NAME);
         }
+        super.cleanup();
     }
 }
