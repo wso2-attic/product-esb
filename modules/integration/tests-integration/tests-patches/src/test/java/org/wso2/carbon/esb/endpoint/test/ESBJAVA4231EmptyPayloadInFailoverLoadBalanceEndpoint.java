@@ -52,7 +52,7 @@ public class ESBJAVA4231EmptyPayloadInFailoverLoadBalanceEndpoint extends ESBInt
 
 
 
-	@Test(groups = "wso2.esb", description = "Test sending request to Fail Over Endpoint")
+	@Test(groups = "wso2.esb", description = "Test sending request to LoadBalancing Endpoint")
 	public void testSendingToLoaBalancingEndpoint()	throws IOException, EndpointAdminEndpointAdminException,
 	                                                          LoginAuthenticationExceptionException, XMLStreamException {
 		String response = lbClient.sendLoadBalanceRequest(getProxyServiceURLHttp("loadbalanceproxy"), null);
