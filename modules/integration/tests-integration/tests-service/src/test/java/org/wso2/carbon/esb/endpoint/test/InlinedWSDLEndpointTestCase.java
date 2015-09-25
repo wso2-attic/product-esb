@@ -19,6 +19,8 @@
 package org.wso2.carbon.esb.endpoint.test;
 
 import org.apache.axiom.om.OMElement;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.endpoint.stub.types.EndpointAdminEndpointAdminException;
 import org.wso2.carbon.esb.endpoint.test.util.EndpointTestUtils;
@@ -37,16 +39,24 @@ public class InlinedWSDLEndpointTestCase extends ESBIntegrationTest {
     private final String ENDPOINT_NAME = "wsdlEpTest";
     private EndPointAdminClient endPointAdminClient;
 
-    @Test(groups = {"wso2.esb"})
-    public void testInlineWSDLEndpoint() throws Exception {
+    @BeforeClass(alwaysRun = true)
+    public void init() throws Exception {
         super.init();
         endPointAdminClient = new EndPointAdminClient(context.getContextUrls().getBackEndUrl(), getSessionCookie());
-
         cleanupEndpoints();
+    }
+
+    @Test(groups = {"wso2.esb"})
+    public void testInlineWSDLEndpoint() throws Exception {
         endpointAdditionScenario();
         endpointStatisticsScenario();
         endpointDeletionScenario();
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void cleanup() throws Exception {
         endPointAdminClient = null;
+        super.cleanup();
     }
 
     private void cleanupEndpoints()
