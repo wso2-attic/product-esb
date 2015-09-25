@@ -39,5 +39,6 @@ public class ESBProxySaveTestCase  extends ESBIntegrationUITest {
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         driver.quit();
+        super.cleanup();
     }
 }
