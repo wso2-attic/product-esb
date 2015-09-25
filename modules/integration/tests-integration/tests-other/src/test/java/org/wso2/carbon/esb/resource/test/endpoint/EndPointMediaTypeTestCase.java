@@ -25,13 +25,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.endpoint.stub.types.EndpointAdminEndpointAdminException;
 import org.wso2.carbon.registry.resource.stub.beans.xsd.MetadataBean;
 import org.wso2.esb.integration.common.clients.endpoint.EndPointAdminClient;
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-
-import java.rmi.RemoteException;
 
 public class EndPointMediaTypeTestCase extends ESBIntegrationTest {
     private Log log = LogFactory.getLog(EndPointMediaTypeTestCase.class);
@@ -105,12 +102,13 @@ public class EndPointMediaTypeTestCase extends ESBIntegrationTest {
     }
 
     @AfterClass(alwaysRun = true)
-    public void destroy() throws EndpointAdminEndpointAdminException, RemoteException {
+    public void destroy() throws Exception {
         if(isDefinedEndpointExist){
            endpointAdminClient.deleteEndpoint(DEFINED_ENDPOINT_NAME) ;
         }
         if(isDynamicEndpointExist){
            endpointAdminClient.deleteDynamicEndpoint(KEY);
         }
+        super.cleanup();
     }
 }
