@@ -82,6 +82,7 @@ public class JMSInboundMessagePollingTestCase extends ESBIntegrationTest{
 				                   "      </ser:placeOrder>" +
 				                   "   </soapenv:Body>" +
 				                   "</soapenv:Envelope>");
+                log.info("Message " + i + " pushed to the JMS Queue");
 			}
 		} finally {
 			sender.disconnect();
@@ -90,7 +91,7 @@ public class JMSInboundMessagePollingTestCase extends ESBIntegrationTest{
 
 		int beforeLogCount = logViewerClient.getAllSystemLogs().length;
 		addInboundEndpoint(addEndpoint1());
-		Thread.sleep(3000);
+		Thread.sleep(30000);
 		LogEvent[] logs = logViewerClient.getAllSystemLogs();
 		boolean status = false;
 		for (int i = 0; i < (logs.length - beforeLogCount); i++) {
@@ -122,7 +123,7 @@ public class JMSInboundMessagePollingTestCase extends ESBIntegrationTest{
 				            "    <parameters>\n" +
 				            "        <parameter name=\"interval\">10000</parameter>\n" +
 				            "        <parameter name=\"transport.jms.Destination\">localq</parameter>\n" +
-				            "        <parameter name=\"transport.jms.CacheLevel\">0</parameter>\n" +
+				            "        <parameter name=\"transport.jms.CacheLevel\">1</parameter>\n" +
 				            "        <parameter name=\"transport.jms" +
 				            ".ConnectionFactoryJNDIName\">QueueConnectionFactory</parameter>\n" +
 				            "        <parameter name=\"java.naming.factory.initial\">org.apache.activemq.jndi.ActiveMQInitialContextFactory</parameter>\n" +
