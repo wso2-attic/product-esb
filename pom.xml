@@ -1196,7 +1196,6 @@
         <!-- Automation Framework versions -->
         <automation.framework.version>4.4.2</automation.framework.version>
         <automation.framework.utils.version>4.4.2</automation.framework.utils.version>
-        <!--<carbon.integration.framework.version>4.4.2</carbon.integration.framework.version>-->
 
         <operadriver.version>0.8.1</operadriver.version>
         <selenium.version>2.40.0</selenium.version>
