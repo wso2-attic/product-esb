@@ -278,11 +278,11 @@ public abstract class ESBIntegrationTest {
 		}
 	}
 
-	protected void addInboundEndpointFromParams(OMElement inboundEndpoint) throws Exception {
+	protected void isInboundUndeployed(String inboundEndpoint) throws Exception {
 		try {
-			esbUtils.addInboundEndpointFromParams(contextUrls.getBackEndUrl(), sessionCookie, inboundEndpoint);
+			esbUtils.isInboundEndpointUndeployed(contextUrls.getBackEndUrl(), sessionCookie, inboundEndpoint);
 		} catch (Exception e) {
-			throw new Exception("Error when adding InboundEndpoint",e);
+			throw new Exception("Error when adding InboundEndpoint", e);
 		}
 	}
 
