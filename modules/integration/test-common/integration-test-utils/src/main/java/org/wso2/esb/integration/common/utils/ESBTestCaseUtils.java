@@ -471,12 +471,35 @@ public class ESBTestCaseUtils {
 		return paramMap;
 	}
 
-	public void isInboundEndpointDeployed(String backEndUrl, String sessionCookie, String name)
-			throws Exception {
+	/**
+	 * Checks whether inbound endpoint exists till time interval specified by SERVICE_DEPLOYMENT_DELAY.
+	 *
+	 * @param backEndUrl    backendURL
+	 * @param sessionCookie session Cookie for the Test
+	 * @param name          name of the inbound Endpoint
+	 * @throws Exception If an error occurs while checking for inbound
+	 */
+	public void isInboundEndpointDeployed(String backEndUrl, String sessionCookie, String name) throws Exception {
 		InboundAdminClient inboundAdmin = new InboundAdminClient(backEndUrl, sessionCookie);
-		InboundEndpointDTO inboundEndpointDTO = inboundAdmin.getInboundEndpointbyName(name);
-		Assert.assertNotNull(inboundEndpointDTO);
+		InboundEndpointDTO inboundEndpointDTO = null;
+		log.info("waiting " + SERVICE_DEPLOYMENT_DELAY + " millis for Inbound Endpoint " + name);
+		Calendar startTime = Calendar.getInstance();
+		long time;
 
+		while ((time = (Calendar.getInstance().getTimeInMillis() - startTime.getTimeInMillis())) <
+		       SERVICE_DEPLOYMENT_DELAY) {
+			inboundEndpointDTO = inboundAdmin.getInboundEndpointbyName(name);
+			if (inboundEndpointDTO != null) {
+				log.info(name + "Inbound Endpoint Found in " + time + " millis");
+				break;
+			}
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				//ignore
+			}
+		}
+		Assert.assertNotNull(inboundEndpointDTO);
 	}
 
 	public void isInboundEndpointUndeployed(String backEndUrl, String sessionCookie, String name)
