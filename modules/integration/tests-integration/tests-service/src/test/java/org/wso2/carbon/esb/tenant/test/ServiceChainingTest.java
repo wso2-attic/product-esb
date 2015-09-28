@@ -26,6 +26,7 @@ import org.apache.axis2.addressing.EndpointReference;
 import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.test.utils.axis2client.ConfigurationContextProvider;
@@ -68,6 +69,12 @@ public class ServiceChainingTest extends ESBIntegrationTest {
         LogEvent receiveSeqLog_2 = getLogEventByMessage(logs, "DEBUG SEQ 2 = SECOND RECEIVE SEQUENCE");
         Assert.assertNotNull(receiveSeqLog_2);
     }
+
+    @AfterClass(alwaysRun = true)
+    public void cleanup() throws Exception {
+        super.cleanup();
+    }
+    
     private LogEvent getLogEventByMessage(LogEvent[] logs, String msg) {
         for (LogEvent evt : logs) {
             if (evt.getMessage().equals(msg)) {

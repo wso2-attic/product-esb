@@ -19,6 +19,8 @@
 package org.wso2.carbon.esb.endpoint.test;
 
 import org.apache.axiom.om.util.AXIOMUtil;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.endpoint.stub.types.EndpointAdminEndpointAdminException;
 import org.wso2.carbon.esb.endpoint.test.util.EndpointTestUtils;
@@ -47,19 +49,26 @@ public class DynamicDefaultEpTestCase extends ESBIntegrationTest {
                                                "</endpoint>";
 
 
-    @Test(groups = {"wso2.esb"})
-    public void testDynamicDefaultEndpoint() throws Exception {
+    @BeforeClass(alwaysRun = true)
+    public void init() throws Exception {
         super.init();
         endPointAdminClient = new EndPointAdminClient(context.getContextUrls().getBackEndUrl(), getSessionCookie());
-
         cleanupEndpoints();
+    }
 
+    @Test(groups = {"wso2.esb"})
+    public void testDynamicDefaultEndpoint() throws Exception {
         dynamicEndpointAdditionScenario(ENDPOINT_PATH_1);
         dynamicEndpointAdditionScenario(ENDPOINT_PATH_2);
         Thread.sleep(1000);
         dynamicEndpointDeletionScenario(ENDPOINT_PATH_1);
         dynamicEndpointDeletionScenario(ENDPOINT_PATH_2);
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void cleanup() throws Exception {
         endPointAdminClient = null;
+        super.cleanup();
     }
 
     private void cleanupEndpoints()

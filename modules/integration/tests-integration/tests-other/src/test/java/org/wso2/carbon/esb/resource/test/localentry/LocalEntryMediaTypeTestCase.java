@@ -25,13 +25,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.localentry.stub.types.LocalEntryAdminException;
 import org.wso2.carbon.registry.resource.stub.beans.xsd.MetadataBean;
 import org.wso2.esb.integration.common.clients.localentry.LocalEntriesAdminClient;
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-
-import java.rmi.RemoteException;
 
 public class LocalEntryMediaTypeTestCase extends ESBIntegrationTest{
     private LocalEntriesAdminClient localEntriesAdminClient;
@@ -41,6 +38,7 @@ public class LocalEntryMediaTypeTestCase extends ESBIntegrationTest{
 
     @BeforeClass
     public void init() throws Exception {
+        super.init();
         localEntriesAdminClient = new LocalEntriesAdminClient(contextUrls.getBackEndUrl(),getSessionCookie());
         resourceAdmin = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
@@ -58,7 +56,8 @@ public class LocalEntryMediaTypeTestCase extends ESBIntegrationTest{
     }
 
     @AfterClass
-    public void destroy() throws LocalEntryAdminException, RemoteException {
+    public void destroy() throws Exception {
         localEntriesAdminClient.deleteLocalEntry(ENTRY_NAME);
+        super.cleanup();
     }
 }

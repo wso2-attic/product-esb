@@ -37,6 +37,7 @@ public class JMSBrokerStartupTestCase extends ESBIntegrationTest {
     @AfterTest(alwaysRun = true)
     public void close() throws Exception {
         activeMQServer.stopJMSBrokerRevertESBConfiguration();
+        super.cleanup();
     }
 }
 

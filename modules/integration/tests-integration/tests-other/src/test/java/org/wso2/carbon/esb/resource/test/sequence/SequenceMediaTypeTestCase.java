@@ -26,12 +26,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.registry.resource.stub.beans.xsd.MetadataBean;
-import org.wso2.carbon.sequences.stub.types.SequenceEditorException;
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.esb.integration.common.clients.sequences.SequenceAdminServiceClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-
-import java.rmi.RemoteException;
 
 public class SequenceMediaTypeTestCase extends ESBIntegrationTest {
     private Log log = LogFactory.getLog(SequenceMediaTypeTestCase.class);
@@ -102,12 +99,13 @@ public class SequenceMediaTypeTestCase extends ESBIntegrationTest {
     }
 
     @AfterClass
-    public void destroy() throws SequenceEditorException, RemoteException {
+    public void destroy() throws Exception {
         if (isDefinedSequenceExist) {
             sequenceAdminServiceClient.deleteSequence(DEFINED_SEQUENCE_NAME);
         }
         if (isDynamicSequenceExist) {
             sequenceAdminServiceClient.deleteDynamicSequence(KEY);
         }
+        super.cleanup();
     }
 }

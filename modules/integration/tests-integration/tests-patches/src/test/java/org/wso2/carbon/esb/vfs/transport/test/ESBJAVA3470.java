@@ -164,6 +164,7 @@ public class ESBJAVA3470 extends ESBIntegrationTest {
         //sshd.stop();
         log.info("SFTP Server stopped successfully");
         serverConfigurationManager.restoreToLastConfiguration();
+        super.cleanup();
     }
 
     /**
