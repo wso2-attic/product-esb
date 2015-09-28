@@ -44,7 +44,6 @@ public class JMSInboundTransportTestCase extends ESBIntegrationTest {
 	private ServerConfigurationManager serverConfigurationManager;
 	private InboundAdminClient inboundAdminClient;
 	private ActiveMQServer activeMQServer = new ActiveMQServer();
-	private ESBTestCaseUtils esbTestCaseUtils;
 
 	@BeforeClass(alwaysRun = true)
 	protected void init() throws Exception {
@@ -56,15 +55,12 @@ public class JMSInboundTransportTestCase extends ESBIntegrationTest {
 				esbUtils.loadResource("/artifacts/ESB/jms/inbound/transport/jms_transport_proxy_service.xml");
 		updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
 		inboundAdminClient = new InboundAdminClient(context.getContextUrls().getBackEndUrl(),getSessionCookie());
-		esbTestCaseUtils = new ESBTestCaseUtils();
 	}
 
 	@Test(groups = {"wso2.esb" }, description = "Adding New JMS Inbound End point")
 	public void testAddingNewJMSInboundEndpoint()
 			throws Exception {
 		addInboundEndpoint(addEndpoint1());
-		esbTestCaseUtils.isInboundEndpointDeployed(contextUrls.getBackEndUrl(), sessionCookie,
-		                                           addEndpoint1().getAttributeValue(new QName("name")));
 	}
 
 	@Test(groups = { "wso2.esb" }, description = "Updating Existing JMS Inbound End point", dependsOnMethods = "testAddingNewJMSInboundEndpoint")
@@ -86,8 +82,7 @@ public class JMSInboundTransportTestCase extends ESBIntegrationTest {
 			"testUpdatingJMSInboundEndpoint")
 	public void testDeletingJMSInboundEndpoint() throws Exception {
 		deleteInboundEndpointFromName(addEndpoint1().getAttributeValue(new QName("name")));
-		esbTestCaseUtils.isInboundEndpointUndeployed(contextUrls.getBackEndUrl(), sessionCookie,
-		                                             addEndpoint1().getAttributeValue(new QName("name")));
+		isInboundUndeployed(addEndpoint1().getAttributeValue(new QName("name")));
 	}
 
 	@AfterClass(alwaysRun = true)
