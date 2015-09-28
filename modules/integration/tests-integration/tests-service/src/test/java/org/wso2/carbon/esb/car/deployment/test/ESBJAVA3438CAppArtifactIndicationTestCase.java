@@ -18,6 +18,7 @@
 package org.wso2.carbon.esb.car.deployment.test;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.integration.common.admin.client.CarbonAppUploaderClient;
@@ -67,5 +68,10 @@ public class ESBJAVA3438CAppArtifactIndicationTestCase extends ESBIntegrationTes
                 ());
         Assert.assertNotNull(serviceMetaData.isCAppArtifactSpecified(), service + " is not a " +
                 "CApp artifact");*/
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void cleanup() throws Exception {
+        super.cleanup();
     }
 }

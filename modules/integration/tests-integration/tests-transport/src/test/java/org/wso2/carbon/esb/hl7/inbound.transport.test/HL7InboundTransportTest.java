@@ -3,6 +3,7 @@ package org.wso2.carbon.esb.hl7.inbound.transport.test;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.util.AXIOMUtil;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
@@ -31,10 +32,10 @@ public class HL7InboundTransportTest extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-        init();
+        super.init();
         loadESBConfigurationFromClasspath("artifacts/ESB/hl7/inbound/transport/hl7_inbound.xml");
 
-        init();
+        super.init();
         logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
 
@@ -71,6 +72,11 @@ public class HL7InboundTransportTest extends ESBIntegrationTest {
         Assert.assertTrue(response.contains("ACK^A01"));
         Assert.assertTrue(found, "Found HL7 message in ESB log");
         deleteInboundEndpoints();
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void destroy() throws Exception {
+        super.cleanup();
     }
 
     private OMElement addEndpoint0() throws Exception {

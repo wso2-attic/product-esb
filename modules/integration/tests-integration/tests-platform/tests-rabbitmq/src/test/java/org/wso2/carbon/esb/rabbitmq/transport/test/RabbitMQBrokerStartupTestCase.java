@@ -60,6 +60,7 @@ public class RabbitMQBrokerStartupTestCase extends ESBIntegrationTest {
     public void stopRabbitMQBrokerAndRestoreESB() throws Exception {
         rabbitMQServer.stop();
         configurationManagerAxis2.restoreToLastConfiguration();
+        super.cleanup();
     }
 }
 
