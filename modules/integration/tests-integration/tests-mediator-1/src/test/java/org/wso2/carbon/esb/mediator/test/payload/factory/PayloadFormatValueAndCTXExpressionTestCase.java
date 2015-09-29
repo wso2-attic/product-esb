@@ -39,45 +39,45 @@ import java.io.File;
  */
 public class PayloadFormatValueAndCTXExpressionTestCase extends ESBIntegrationTest {
 
-	@BeforeClass(alwaysRun = true)
-	public void setEnvironment() throws Exception {
-		super.init();
+    @BeforeClass(alwaysRun = true)
+    public void setEnvironment() throws Exception {
+        super.init();
         loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "payloadmediatype" + File.separator + "ctxExpression.xml");
-	}
+    }
 
-	@AfterClass(alwaysRun = true)
-	public void destroy() throws Exception {
-		super.cleanup();
-	}
+    @AfterClass(alwaysRun = true)
+    public void destroy() throws Exception {
+        super.cleanup();
+    }
 
-	@Test(groups = "wso2.esb", description = "invoke service - operation placeOrder")
-	public void invokeServiceFromXmlRequest() throws AxisFault {
-		ServiceClient sender;
-		Options options;
-		sender = new ServiceClient();
-		options = new Options();
-		options.setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED, Boolean.FALSE);
-		options.setAction("urn:placeOrder");
-		options.setProperty(Constants.Configuration.TRANSPORT_URL, getProxyServiceURLHttps("ProxyPF"));
-		sender.setOptions(options);
-		sender.sendRobust(createPayload());
-	}
+    @Test(groups = "wso2.esb", description = "invoke service - operation placeOrder")
+    public void invokeServiceFromXmlRequest() throws AxisFault {
+        ServiceClient sender;
+        Options options;
+        sender = new ServiceClient();
+        options = new Options();
+        options.setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED, Boolean.FALSE);
+        options.setAction("urn:placeOrder");
+        options.setProperty(Constants.Configuration.TRANSPORT_URL, getProxyServiceURLHttps("ProxyPF"));
+        sender.setOptions(options);
+        sender.sendRobust(createPayload());
+    }
 
-	private OMElement createPayload() {
-	    // creation of payload for placeOrder
-		SOAPFactory fac = OMAbstractFactory.getSOAP11Factory();
-		OMNamespace omXsdNs = fac.createOMNamespace("http://services.samples", "xsd");
-		OMNamespace omSerNs = fac.createOMNamespace("http://services.samples", "ser");
-		OMElement operation = fac.createOMElement("placeOrder", omSerNs);
-		OMElement method = fac.createOMElement("order", omSerNs);
-		OMElement getPrice = fac.createOMElement("price", omXsdNs);
-		OMElement getQuantity = fac.createOMElement("quantity", omXsdNs);
-		OMElement getSymbol = fac.createOMElement("symbol", omXsdNs);
-		method.addChild(fac.createOMText(getPrice, "123.32"));
-		method.addChild(fac.createOMText(getQuantity, "4"));
-		method.addChild(fac.createOMText(getSymbol, "IBM"));
-		operation.addChild(method);
+    private OMElement createPayload() {
+        // creation of payload for placeOrder
+        SOAPFactory fac = OMAbstractFactory.getSOAP11Factory();
+        OMNamespace omXsdNs = fac.createOMNamespace("http://services.samples", "xsd");
+        OMNamespace omSerNs = fac.createOMNamespace("http://services.samples", "ser");
+        OMElement operation = fac.createOMElement("placeOrder", omSerNs);
+        OMElement method = fac.createOMElement("order", omSerNs);
+        OMElement getPrice = fac.createOMElement("price", omXsdNs);
+        OMElement getQuantity = fac.createOMElement("quantity", omXsdNs);
+        OMElement getSymbol = fac.createOMElement("symbol", omXsdNs);
+        method.addChild(fac.createOMText(getPrice, "123.32"));
+        method.addChild(fac.createOMText(getQuantity, "4"));
+        method.addChild(fac.createOMText(getSymbol, "IBM"));
+        operation.addChild(method);
 
-		return operation;
-	}
+        return operation;
+    }
 }
