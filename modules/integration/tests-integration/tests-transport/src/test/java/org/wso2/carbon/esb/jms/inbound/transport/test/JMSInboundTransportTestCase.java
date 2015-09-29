@@ -68,7 +68,7 @@ public class JMSInboundTransportTestCase extends ESBIntegrationTest {
 		updateInboundEndpoint(addEndpoint2());
 		InboundEndpointDTO inboundEndpoint =
 				inboundAdminClient.getInboundEndpointbyName(addEndpoint1().getAttributeValue(new QName("name")));
-		assertNotNull(inboundEndpoint, "JMS Inbound Endpoint is not null");
+		assertNotNull(inboundEndpoint, "JMS Inbound Endpoint is null");
 		log.info("Inbound endpoint injected : " + inboundEndpoint.getInjectingSeq());
 		assertEquals("main", inboundEndpoint.getInjectingSeq(), "Inbound Endpoint has not been updated properly");
 	}
