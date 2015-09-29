@@ -70,8 +70,8 @@ public class JMSInboundTransportTestCase extends ESBIntegrationTest {
 				inboundAdminClient.getInboundEndpointbyName(addEndpoint1().getAttributeValue(new QName("name")));
 		assertNotNull(inboundEndpoint, "JMS Inbound Endpoint is null");
 		log.info("Inbound endpoint injected : " + inboundEndpoint.getInjectingSeq());
-		assertEquals("main", inboundEndpoint.getInjectingSeq(), "Inbound Endpoint has not been updated properly");
-	}
+        assertEquals(inboundEndpoint.getInjectingSeq(), "main", "Inbound Endpoint has not been updated properly");
+    }
 
 	@Test(groups = {"wso2.esb" }, description = "Deleting an JMS Inbound End point", dependsOnMethods =
 			"testUpdatingJMSInboundEndpoint")
