@@ -28,14 +28,13 @@ import org.wso2.carbon.inbound.stub.types.carbon.InboundEndpointDTO;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.clients.inbound.endpoint.InboundAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-import org.wso2.esb.integration.common.utils.ESBTestCaseUtils;
 import org.wso2.esb.integration.common.utils.JMSEndpointManager;
 import org.wso2.esb.integration.common.utils.servers.ActiveMQServer;
 
 import javax.xml.namespace.QName;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.assertNotNull;
 
 /**
  * class tests adding,updating and deleting inbound endpoints
@@ -63,19 +62,15 @@ public class JMSInboundTransportTestCase extends ESBIntegrationTest {
 		addInboundEndpoint(addEndpoint1());
 	}
 
-	@Test(groups = { "wso2.esb" }, description = "Updating Existing JMS Inbound End point", dependsOnMethods = "testAddingNewJMSInboundEndpoint")
+	@Test(groups = { "wso2.esb" }, description = "Updating Existing JMS Inbound End point",
+			dependsOnMethods = "testAddingNewJMSInboundEndpoint")
 	public void testUpdatingJMSInboundEndpoint() throws Exception {
 		updateInboundEndpoint(addEndpoint2());
-		InboundEndpointDTO[] inboundEndpoints = inboundAdminClient.getAllInboundEndpointNames();
-		if (inboundEndpoints != null && inboundEndpoints.length > 0 && inboundEndpoints[0] != null) {
-			for(int i=0;i<inboundEndpoints.length;i++){
-				System.out.println("Inbound endpoint injected : "+inboundEndpoints[i].getInjectingSeq());
-				assertEquals("main", inboundEndpoints[i].getInjectingSeq());
-				break;
-			}
-		} else {
-			fail("Inbound Endpoint has not been updated properly");
-		}
+		InboundEndpointDTO inboundEndpoint =
+				inboundAdminClient.getInboundEndpointbyName(addEndpoint1().getAttributeValue(new QName("name")));
+		assertNotNull(inboundEndpoint, "JMS Inbound Endpoint is not null");
+		log.info("Inbound endpoint injected : " + inboundEndpoint.getInjectingSeq());
+		assertEquals("main", inboundEndpoint.getInjectingSeq(), "Inbound Endpoint has not been updated properly");
 	}
 
 	@Test(groups = {"wso2.esb" }, description = "Deleting an JMS Inbound End point", dependsOnMethods =
