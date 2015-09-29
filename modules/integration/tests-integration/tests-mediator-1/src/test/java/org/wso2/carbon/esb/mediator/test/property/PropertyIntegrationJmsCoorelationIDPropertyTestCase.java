@@ -64,10 +64,10 @@ public class PropertyIntegrationJmsCoorelationIDPropertyTestCase extends ESBInte
 
     @AfterClass(alwaysRun = true)
     public void close() throws Exception {
+        super.cleanup();
         activeMQServer.stopJMSBrokerRevertESBConfiguration();
         consumer.close();
         connection.close();
-        super.cleanup();
     }
 
     @Test(groups = {"wso2.esb"}, description = "Test adding of JMS_COORELATION_ID - " +
