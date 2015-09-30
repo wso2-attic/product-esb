@@ -51,6 +51,7 @@ public class Sample254TestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
+        super.init();
         // Create folders
         pathToVfsDir = getESBResourceLocation() + File.separator + "sample_254" + File.separator;
 
