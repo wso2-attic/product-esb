@@ -44,6 +44,7 @@ public class Sample266TestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
+        super.init();
         AutomationContext context = new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN);
         serverManager = new ServerConfigurationManager(context);
         serverManager.applyConfiguration(new File(getESBResourceLocation() + File.separator +
