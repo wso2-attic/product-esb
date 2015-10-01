@@ -64,12 +64,13 @@ public class DynamicEndpointTestCase extends ESBIntegrationTest {
                 "/_system/config/SimpleStockQuoteServiceEndpoint", "application/xml", "Endpoint Configuration",
                 setEndpoints(new DataHandler(new URL("file:///" + getESBResourceLocation() +
                                                      "/endpoint/addressEndpointConfig/addressEP_Test.xml"))));
-        Thread.sleep(1000);
+        Thread.sleep(3000);
     }
 
     private void clearRegistry() throws Exception {
         new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
                 getSessionCookie()).deleteResource("/_system/config/SimpleStockQuoteServiceEndpoint");
+        Thread.sleep(3000);
     }
 
 }

@@ -35,12 +35,13 @@ public class InvokeAfterRemovingPropertiesTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
+        loadSampleESBConfiguration(380);
 
     }
 
     @Test(groups = "wso2.esb", description = "Invoke after removing some properties")
     public void testAfterRemovingProperties() throws Exception {
-        loadSampleESBConfiguration(380);
+
         OMElement response, editedResponse;
 
         response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), null, "WSO2");
