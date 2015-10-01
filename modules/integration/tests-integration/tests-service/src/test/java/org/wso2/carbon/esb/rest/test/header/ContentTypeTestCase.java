@@ -48,8 +48,12 @@ import org.wso2.esb.integration.common.utils.ESBTestCaseUtils;
 public class ContentTypeTestCase extends ESBIntegrationTest {
     private Log log = LogFactory.getLog(ContentTypeTestCase.class);
     private HttpServer server = null;
-    public static String contentType;
+    private String contentType;
     private static final String API_URL = "http://localhost:8280/serviceTest/test";
+    private static final int HTTP_OK = 200;
+    private static final int PORT = 8089;
+    private static final String CONTENT_TYPE = "Content-Type";
+    private static final String CONTEXT_URL = "/gettest";
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
@@ -64,9 +68,8 @@ public class ContentTypeTestCase extends ESBIntegrationTest {
     @Test(groups = {"wso2.esb"}, description = "Test different content types", dataProvider = "contentTypeProvider")
     public void testReturnContentType(String dataProviderContentType) throws Exception {
         contentType = dataProviderContentType;
-        int port = 8089;
-        server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/gettest", new ContentTypeHandler());
+        server = HttpServer.create(new InetSocketAddress(PORT), 0);
+        server.createContext(CONTEXT_URL, new ContentTypeHandler());
         server.setExecutor(null); // creates a default executor
         server.start();
         DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -80,11 +83,11 @@ public class ContentTypeTestCase extends ESBIntegrationTest {
                 instream = entity.getContent();
                 log.info("Content-Type of the HTTP response is : " + response.getEntity().getContentType());
                 log.info("Status Code of the Http response is : " + response.getStatusLine().getStatusCode());
-                assertEquals(response.getFirstHeader("Content-Type").getValue(), contentType, "Expected content type doesn't match");
-                assertEquals(response.getStatusLine().getStatusCode(), 200, "response code doesn't match");
+                assertEquals(response.getFirstHeader(CONTENT_TYPE).getValue(), contentType, "Expected content type doesn't match");
+                assertEquals(response.getStatusLine().getStatusCode(), HTTP_OK, "response code doesn't match");
             }
         } catch (IOException e) {
-            log.error("Error Occurred while sending http get request. " + e);
+            log.error("Error Occurred while sending http get request.", e);
         } finally {
             if (instream != null) {
                 instream.close();
@@ -97,21 +100,21 @@ public class ContentTypeTestCase extends ESBIntegrationTest {
         public void handle(HttpExchange exchange) throws IOException {
 
             Headers responseHeaders = exchange.getResponseHeaders();
-            responseHeaders.add("Content-Type", contentType);
+            responseHeaders.add(CONTENT_TYPE, contentType);
             String response = "This Content type test case";
             OutputStream os = null;
             try {
-                exchange.sendResponseHeaders(200, response.length());
+                exchange.sendResponseHeaders(HTTP_OK, response.length());
                 os = exchange.getResponseBody();
                 os.write(response.getBytes());
             } catch (IOException e) {
-                log.error("Error Occurred while writing the response. " + e);
+                log.error("Error Occurred while writing the response.", e);
             } finally {
                 if (os != null) {
                     try {
                         os.close();
                     } catch (IOException e) {
-                        log.error("Error Occurred while closing the ContentTypeHandler output stream. " + e);
+                        log.error("Error Occurred while closing the ContentTypeHandler output stream.", e);
                     }
                 }
             }

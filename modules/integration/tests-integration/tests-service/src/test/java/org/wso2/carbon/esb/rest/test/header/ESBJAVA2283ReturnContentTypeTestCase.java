@@ -45,6 +45,11 @@ public class ESBJAVA2283ReturnContentTypeTestCase extends ESBIntegrationTest {
     private Log log = LogFactory.getLog(ESBJAVA2283ReturnContentTypeTestCase.class);
     private HttpServer server = null;
     private static final String API_URL = "http://localhost:8280/serviceTest/test";
+    private static final int HTTP_OK = 200;
+    private static final int PORT = 8089;
+    private static final String CONTENT_TYPE = "Content-Type";
+    private static final String CONTEXT_URL = "/gettest";
+    private static final String TEXT_XML = "text/xml";
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
@@ -58,10 +63,8 @@ public class ESBJAVA2283ReturnContentTypeTestCase extends ESBIntegrationTest {
 
     @Test(groups = {"wso2.esb"}, description = "test return content type")
     public void testReturnContentType() throws Exception {
-        int port = 8089;
-        String contentType = "text/xml";
-        server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/gettest", new ContentTypeHandler());
+        server = HttpServer.create(new InetSocketAddress(PORT), 0);
+        server.createContext(CONTEXT_URL, new ContentTypeHandler());
         server.setExecutor(null); // creates a default executor
         server.start();
         DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -75,11 +78,11 @@ public class ESBJAVA2283ReturnContentTypeTestCase extends ESBIntegrationTest {
                 instream = entity.getContent();
                 log.info("Content-Type of the HTTP response is : " + response.getEntity().getContentType());
                 log.info("Status Code of the Http response is : " + response.getStatusLine().getStatusCode());
-                assertEquals(response.getFirstHeader("Content-Type").getValue(), contentType, "Expected content type doesn't match");
-                assertEquals(response.getStatusLine().getStatusCode(), 200, "response code doesn't match");
+                assertEquals(response.getFirstHeader(CONTENT_TYPE).getValue(), TEXT_XML, "Expected content type doesn't match");
+                assertEquals(response.getStatusLine().getStatusCode(), HTTP_OK, "response code doesn't match");
             }
         } catch (IOException e) {
-            log.error("Error Occurred while sending http get request. " + e);
+            log.error("Error Occurred while sending http get request.", e);
         } finally {
             if (instream != null) {
                 instream.close();
@@ -92,21 +95,21 @@ public class ESBJAVA2283ReturnContentTypeTestCase extends ESBIntegrationTest {
     private class ContentTypeHandler implements HttpHandler {
         public void handle(HttpExchange exchange)  {
             Headers responseHeaders = exchange.getResponseHeaders();
-            responseHeaders.add("Content-Type", "text/xml");
+            responseHeaders.add(CONTENT_TYPE, TEXT_XML);
             String response = "This is the test case for ESBJAVA-2283";
             OutputStream os = null;
             try {
-                exchange.sendResponseHeaders(200, response.length());
+                exchange.sendResponseHeaders(HTTP_OK, response.length());
                 os = exchange.getResponseBody();
                 os.write(response.getBytes());
             } catch (IOException e) {
-                log.error("Error Occurred while writing the response. " + e);
+                log.error("Error Occurred while writing the response.", e);
             } finally {
                 if (os != null) {
                     try {
                         os.close();
                     } catch (IOException e) {
-                        log.error("Error Occurred while closing the ContentTypeHandler output stream. " + e);
+                        log.error("Error Occurred while closing the ContentTypeHandler output stream.", e);
                     }
                 }
             }
