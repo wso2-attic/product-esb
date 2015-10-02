@@ -123,7 +123,7 @@ public class Sample268TestCase extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void stop() throws Exception {
         try {
-            cleanup();
+            super.cleanup();
         } finally {
             Thread.sleep(3000);
             serverConfigurationManager.restoreToLastConfiguration(true);
