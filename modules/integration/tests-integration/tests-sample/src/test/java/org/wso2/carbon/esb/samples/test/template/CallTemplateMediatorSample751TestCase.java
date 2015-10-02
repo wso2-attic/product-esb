@@ -45,10 +45,8 @@ public class CallTemplateMediatorSample751TestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-
         super.init();
         loadSampleESBConfiguration(751);
-
     }
 
     @AfterClass(alwaysRun = true)

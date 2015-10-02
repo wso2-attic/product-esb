@@ -56,6 +56,6 @@ public class CallTemplateIntegrationSample750TestCase extends ESBIntegrationTest
 
     @AfterClass(alwaysRun = true)
     public void cleanUp() throws Exception {
-        cleanup();
+        super.cleanup();
     }
 }
