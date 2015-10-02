@@ -37,7 +37,7 @@ public class TransportHeaderTestCase extends ESBIntegrationTest {
 
 	@BeforeClass(alwaysRun = true)
 	public void setEnvironment() throws Exception {
-		init();
+		super.init();
 		wireServer = new WireMonitorServer(8991);
 		wireServer.start();
 		loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/callout/transport_headers.xml");
@@ -47,12 +47,12 @@ public class TransportHeaderTestCase extends ESBIntegrationTest {
 	public void testContentTypeSoap11() throws Exception {
 		try {
 			axis2Client.sendSimpleStockQuoteRequest(
-					getProxyServiceURLHttp("SimpleStockQuote"), null,
-					"transport_header_test");
-		} catch (Exception e) {
-
-		}
-		String response = wireServer.getCapturedMessage();
+                    getProxyServiceURLHttp("SimpleStockQuote"), null,
+                    "transport_header_test");
+        } catch (Exception e) {
+            log.warn("Error sending SimpleStockQuoteRequest ", e);
+        }
+        String response = wireServer.getCapturedMessage();
 		Assert.assertNotNull(response);
 		Assert.assertTrue(response
 				.contains("Authorization: Basic cHVubmFkaTpwYXNzd29yZA=="));
@@ -65,7 +65,7 @@ public class TransportHeaderTestCase extends ESBIntegrationTest {
 					getProxyServiceURLHttp("SimpleStockQuote"), null,
 					"transport_header_test");
 		} catch (Exception e) {
-
+            log.warn("Error sending SimpleStockQuoteRequest ", e);
 		}
 		String response = wireServer.getCapturedMessage();
 		Assert.assertNotNull(response);
@@ -75,6 +75,6 @@ public class TransportHeaderTestCase extends ESBIntegrationTest {
 
 	@AfterClass(alwaysRun = true)
 	public void stop() throws Exception {
-		cleanup();
+		super.cleanup();
 	}
 }

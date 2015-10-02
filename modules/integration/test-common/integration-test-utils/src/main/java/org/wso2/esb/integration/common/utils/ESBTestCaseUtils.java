@@ -229,8 +229,9 @@ public class ESBTestCaseUtils {
 				Assert.assertTrue(localEntryAdminServiceClient.deleteLocalEntry(le), le + " Local Entry deletion failed");
 				Assert.assertTrue(isLocalEntryUnDeployed(backendURL, sessionCookie, le), le + " Local Entry undeployment failed");
 			}
-			Assert.assertTrue(localEntryAdminServiceClient.addLocalEntry(localEntry), le + " Local Entry addition failed");
-			log.info(le + " LocalEntry Uploaded");
+            Assert.assertTrue(localEntryAdminServiceClient.addLocalEntry(localEntry), " Local Entry addition failed");
+            Assert.assertTrue(isLocalEntryDeployed(backendURL, sessionCookie, le), " Local Entry deployment failed");
+            log.info(le + " LocalEntry Uploaded");
 		}
 
 		Iterator<OMElement> endpoints = synapseConfig.getChildrenWithLocalName(ENDPOINT);
@@ -241,8 +242,9 @@ public class ESBTestCaseUtils {
 				Assert.assertTrue(endPointAdminClient.deleteEndpoint(ep), ep + " Endpoint deletion failed");
 				Assert.assertTrue(isEndpointUnDeployed(backendURL, sessionCookie, ep), ep + " Endpoint undeployment failed");
 			}
-			Assert.assertTrue(endPointAdminClient.addEndPoint(endpoint), ep + " Endpoint addition failed");
-			log.info(ep + " Endpoint Uploaded");
+            Assert.assertTrue(endPointAdminClient.addEndPoint(endpoint)," Endpoint addition failed");
+            Assert.assertTrue(isEndpointDeployed(backendURL, sessionCookie, ep), " Endpoint deployment failed");
+            log.info(ep + " Endpoint Uploaded");
 		}
 
 		Iterator<OMElement> sequences = synapseConfig.getChildrenWithLocalName(SEQUENCE);
@@ -258,6 +260,7 @@ public class ESBTestCaseUtils {
 					Assert.assertTrue(isSequenceUnDeployed(backendURL, sessionCookie, sqn), sqn + " Sequence undeployment failed");
 				}
 				sequenceAdminClient.addSequence(sequence);
+                Assert.assertTrue(isSequenceDeployed(backendURL, sessionCookie, sqn), " Sequence deployment failed");
 			}
 			log.info(sqn + " Sequence Uploaded");
 		}
@@ -271,6 +274,7 @@ public class ESBTestCaseUtils {
 				Assert.assertTrue(isProxyUnDeployed(backendURL, sessionCookie, proxyName), proxyName + " Undeployment failed");
 			}
 			proxyAdmin.addProxyService(proxy);
+            Assert.assertTrue(isProxyDeployed(backendURL, sessionCookie, proxyName), proxyName + " deployment failed");
 			log.info(proxyName + " Proxy Uploaded");
 		}
 
@@ -283,6 +287,8 @@ public class ESBTestCaseUtils {
 				Assert.assertTrue(isMessageStoreUnDeployed(backendURL, sessionCookie, mStore), mStore + " Message Store undeployment failed");
 			}
 			messageStoreAdminClient.addMessageStore(messageStore);
+            Assert.assertTrue(isMessageStoreDeployed(backendURL, sessionCookie, mStore), " Message Store deployment " +
+                                                                                         "failed");
 			log.info(mStore + " Message Store Uploaded");
 		}
 
@@ -296,6 +302,9 @@ public class ESBTestCaseUtils {
 						, mProcessor + " Message Processor undeployment failed");
 			}
 			messageProcessorClient.addMessageProcessor(messageProcessor);
+            Assert.assertTrue(isMessageProcessorDeployed(backendURL, sessionCookie, mProcessor), " Message Processor " +
+                                                                                                 " deployment" +
+                                                                                                 " failed");
 			log.info(mProcessor + " Message Processor Uploaded");
 		}
 
@@ -311,7 +320,10 @@ public class ESBTestCaseUtils {
 							, templateName + " Sequence Template undeployment failed");
 				}
 				sequenceTemplateAdminServiceClient.addSequenceTemplate(template);
-
+                Assert.assertTrue(isSequenceTemplateDeployed(backendURL, sessionCookie, templateName), " Sequence " +
+                                                                                                       " Template " +
+                                                                                                       " deployment "
+                                                                                                       + " failed");
 			} else {
 
 				if (ArrayUtils.contains(endpointTemplateAdminServiceClient.getEndpointTemplates(), templateName)) {
@@ -320,6 +332,10 @@ public class ESBTestCaseUtils {
 							, templateName + " Endpoint Template undeployment failed");
 				}
 				endpointTemplateAdminServiceClient.addEndpointTemplate(template);
+                Assert.assertTrue(isEndpointTemplateDeployed(backendURL, sessionCookie, templateName), " Endpoint " +
+                                                                                                       " Template " +
+                                                                                                       " deployment "
+                                                                                                       + " failed");
 			}
 			log.info(templateName + " Template Uploaded");
 		}
@@ -334,6 +350,7 @@ public class ESBTestCaseUtils {
 						, apiName + " Api undeployment failed");
 			}
 			apiAdminClient.add(api);
+            Assert.assertTrue(isApiDeployed(backendURL, sessionCookie, apiName), " Api deployment failed");
 			log.info(apiName + " API Uploaded");
 		}
 
@@ -347,6 +364,8 @@ public class ESBTestCaseUtils {
 						, executorName + " Priority Executor undeployment failed");
 			}
 			priorityMediationAdminClient.addPriorityMediator(executorName, executor);
+            Assert.assertTrue(isPriorityExecutorDeployed(backendURL, sessionCookie, executorName), " Priority " +
+                                                                                                   "Executor failed");
 			log.info(executorName + " Priority Executor Uploaded");
 		}
 
@@ -359,6 +378,7 @@ public class ESBTestCaseUtils {
 				continue;
 			}
 			taskAdminClient.addTask(task);
+            Assert.assertTrue(isScheduleTaskDeployed(backendURL, sessionCookie, taskName), " Task deployment failed");
 			log.info(taskName + " Task Uploaded");
 		}
 
