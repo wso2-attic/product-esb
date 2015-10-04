@@ -97,9 +97,7 @@ public class ValidPathAxis2RepoTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void cleanup() throws Exception {
-
         super.cleanup();
     }
-
 
 }

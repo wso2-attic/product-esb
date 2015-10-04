@@ -92,10 +92,7 @@ public class ValidPathAxis2XmlTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void cleanup() throws Exception {
-
         super.cleanup();
-
     }
-
 
 }
