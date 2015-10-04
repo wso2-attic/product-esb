@@ -145,7 +145,6 @@
     </mailingLists>
     <dependencyManagement>
         <dependencies>
-
             <dependency>
                 <groupId>org.apache.synapse</groupId>
                 <artifactId>synapse-core</artifactId>
