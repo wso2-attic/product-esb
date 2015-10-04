@@ -36,6 +36,6 @@ public class CallTemplateIntegrationSample750FastXSLTTestCase extends ESBIntegra
 
     @AfterClass(alwaysRun = true)
     public void cleanUp() throws Exception {
-        cleanup();
+        super.cleanup();
     }
 }
