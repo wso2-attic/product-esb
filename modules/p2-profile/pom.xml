@@ -91,8 +91,8 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.wso2.carbon.application.deployer.synapse.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
-                                <featureArtifactDef>org.wso2.carbon.mediation:org.wso2.carbon.task.feature:${carbon.mediation.version}
-                                </featureArtifactDef>
+                                <!--featureArtifactDef>org.wso2.carbon.mediation:org.wso2.carbon.task.feature:${carbon.mediation.version}
+                                </featureArtifactDef-->
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.wso2.carbon.mediation.initializer.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
@@ -489,10 +489,10 @@
                                     <id>org.apache.synapse.transport.fix.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
-                                <feature>
+                                <!--feature>
                                     <id>org.wso2.carbon.task.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
-                                </feature>
+                                </feature-->
                                 <feature>
                                     <id>org.wso2.carbon.mediation.initializer.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
@@ -991,10 +991,10 @@
                                     <id>org.apache.synapse.transport.fix.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
-                                <feature>
+                                <!--feature>
                                     <id>org.wso2.carbon.task.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
-                                </feature>
+                                </feature-->
                                 <feature>
                                     <id>org.wso2.carbon.mediation.initializer.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
