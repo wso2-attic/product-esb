@@ -17,6 +17,8 @@
 */
 package org.wso2.carbon.esb.samples.test.transport;
 
+import org.apache.axiom.om.OMElement;
+import org.apache.axiom.om.util.AXIOMUtil;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -48,7 +50,7 @@ public class Sample267TestCase extends ESBIntegrationTest {
         serverManager.applyConfiguration(new File(getESBResourceLocation() + File.separator +
                                                   "sample_267" + File.separator + "axis2.xml"));
         super.init();
-        loadSampleESBConfiguration(267);
+        updateESBConfiguration(loadAndEditSample(267));
     }
 
     @SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
@@ -107,5 +109,17 @@ public class Sample267TestCase extends ESBIntegrationTest {
             serverManager = null;
         }
 
+    }
+
+    /**
+     * This method is to update the original Sample 267 configuration Proxy Name to Sample267Proxy. When changing
+     * transport to udp, it tries to apply it for all available proxy. If StockQuoteProxy is already exists, it gives
+     * error in starting up with UDP transport and therefore sample configuration apply procedure failed in test cases.
+     */
+    private OMElement loadAndEditSample(int sampleNo) throws Exception {
+        OMElement synapseConfig = loadSampleESBConfigurationWithoutApply(sampleNo);
+        String updatedConfig = synapseConfig.toString().replace("StockQuoteProxy", "Sample267Proxy");
+        synapseConfig = AXIOMUtil.stringToOM(updatedConfig);
+        return synapseConfig;
     }
 }
