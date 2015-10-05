@@ -2,7 +2,7 @@
                         WSO2 Enterprise Service Bus 4.9.0
 ================================================================================
 
-Welcome to the WSO2 ESB 4.9.0 release
+Welcome to the WSO2 ESB 4.10.0 release
 
 WSO2 ESB is a lightweight and easy-to-use Open Source Enterprise Service Bus
 (ESB) available under the Apache Software License v2.0. WSO2 ESB allows
