@@ -135,9 +135,8 @@ public class SmooksMediatorXMLtoXMLTransformTestCase extends ESBIntegrationTest 
                 deleteProxyService("StockQuoteProxy");
             }
             resourceAdminServiceStub.deleteResource("/_system/config/smooks");
-            super.cleanup();
         } finally {
-            Thread.sleep(3000);
+            super.cleanup();
             serverConfigurationManager.restoreToLastConfiguration();
             resourceAdminServiceStub = null;
             serverConfigurationManager = null;
