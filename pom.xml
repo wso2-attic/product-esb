@@ -696,7 +696,6 @@
                 <groupId>org.wso2.carbon.automationutils</groupId>
                 <artifactId>org.wso2.carbon.integration.common.extensions</artifactId>
                 <version>${automation.framework.utils.version}</version>
-                <!--<scope>compile</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.automationutils</groupId>
