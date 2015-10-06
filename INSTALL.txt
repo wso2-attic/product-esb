@@ -1,4 +1,4 @@
-Installing  WSO2 Enterprise Service Bus (ESB) 4.9.0
+Installing  WSO2 Enterprise Service Bus (ESB) 4.10.0
 ===================================================
 
 1. The directory containing this INSTALL.txt file will be the root and it will be
