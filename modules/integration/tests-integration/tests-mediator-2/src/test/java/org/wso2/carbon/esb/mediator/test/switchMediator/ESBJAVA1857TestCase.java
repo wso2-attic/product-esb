@@ -20,7 +20,7 @@ import org.wso2.esb.integration.common.utils.ESBTestConstant;
 public class ESBJAVA1857TestCase extends ESBIntegrationTest {
 	@BeforeClass(alwaysRun = true)
 	public void beforeClass() throws Exception {
-		init();
+		super.init();
 		loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/filters/switchMediator/ESBJAVA_1857_switch_case_synapse.xml");
 	}
 
@@ -41,7 +41,7 @@ public class ESBJAVA1857TestCase extends ESBIntegrationTest {
 
 	@AfterClass(alwaysRun = true)
 	public void afterClass() throws Exception {
-		cleanup();
+		super.cleanup();
 	}
 	
 	

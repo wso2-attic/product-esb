@@ -34,7 +34,7 @@ import static org.testng.Assert.assertEquals;
 public class InvokeOnErrorSequenceFromSwitchIntegrationTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void beforeClass() throws Exception {
-        init();
+        super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/filters/switchMediator/onerror_sequence_within_switch_config.xml");
     }
 
@@ -55,7 +55,7 @@ public class InvokeOnErrorSequenceFromSwitchIntegrationTestCase extends ESBInteg
 
     @AfterClass(alwaysRun = true)
     public void afterClass() throws Exception {
-        cleanup();
+        super.cleanup();
     }
 
 }

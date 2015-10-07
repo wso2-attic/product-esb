@@ -35,9 +35,9 @@ import java.util.Iterator;
 
 public class IterateIDTestCase extends ESBIntegrationTest {
 
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public void setEnvironment() throws Exception {
-		init();
+		super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/iterate/iterate_different_ID.xml");
 	}
 
@@ -61,7 +61,7 @@ public class IterateIDTestCase extends ESBIntegrationTest {
 		Assert.assertEquals(i, 2);
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void close() throws Exception {
 		super.cleanup();
 	}

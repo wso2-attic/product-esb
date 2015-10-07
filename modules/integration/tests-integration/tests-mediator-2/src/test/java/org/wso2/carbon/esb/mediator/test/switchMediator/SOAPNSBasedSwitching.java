@@ -32,13 +32,13 @@ public class SOAPNSBasedSwitching extends ESBIntegrationTest {
 
 	@BeforeClass(alwaysRun = true)
 	public void beforeClass() throws Exception {
-		init();
+        super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/filters/switchMediator/SOAP11_SOAP12_XPath.xml");
 	}
 
 	@AfterClass(alwaysRun = true)
 	public void afterClass() throws Exception {
-		cleanup();
+        super.cleanup();
 	}
 
 	@Test(groups = { "wso2.esb" }, description = "Switch Mediator:Write xpath expression using SOAP 1.1/1.2 NS Send SOAP 1.1/1.2 response and assert switch")

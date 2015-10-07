@@ -39,9 +39,9 @@ import java.util.Iterator;
 public class IterateAttachPathTest extends ESBIntegrationTest {
 
 
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public void setEnvironment() throws Exception {
-		init();
+		super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/iterate/iterator_attach_path.xml");
 	}
 
@@ -67,7 +67,7 @@ public class IterateAttachPathTest extends ESBIntegrationTest {
         Assert.assertEquals(i ,2, "Response count mismatched");
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void close() throws Exception {
 		super.cleanup();
 	}

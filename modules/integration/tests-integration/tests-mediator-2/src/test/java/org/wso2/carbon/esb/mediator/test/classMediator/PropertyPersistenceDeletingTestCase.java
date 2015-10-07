@@ -44,13 +44,13 @@ public class PropertyPersistenceDeletingTestCase extends ESBIntegrationTest{
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        init();
+        super.init();
         serverConfigurationManager=new ServerConfigurationManager(context);
         serverConfigurationManager.copyToComponentLib
                 (new File(getClass().getResource(JAR_LOCATION + File.separator + CLASS_JAR_FIVE_PROPERTIES).toURI()));
         serverConfigurationManager.restartGracefully();
 
-        init();
+        super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/class/class_property_persistence_five_properties.xml");
     }
 
@@ -92,10 +92,10 @@ public class PropertyPersistenceDeletingTestCase extends ESBIntegrationTest{
         loadSampleESBConfiguration(0);
         serverConfigurationManager.restartGracefully();
 
-        init();
+        super.init();
 
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/class/class_property_persistence_three_properties.xml");
-        Thread.sleep(2000);
+
         response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(),null, "IBM");
 
         lastPrice=response.getFirstElement()

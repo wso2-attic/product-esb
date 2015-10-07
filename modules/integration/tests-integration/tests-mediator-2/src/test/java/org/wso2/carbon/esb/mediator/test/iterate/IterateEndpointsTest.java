@@ -34,9 +34,9 @@ public class IterateEndpointsTest extends ESBIntegrationTest {
 
 	private IterateClient client;
 
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public void setEnvironment() throws Exception {
-		init();
+		super.init();
 		client = new IterateClient();
 	}
 
@@ -63,7 +63,6 @@ public class IterateEndpointsTest extends ESBIntegrationTest {
 	@Test(groups = "wso2.esb", description = "Tests for https endpoint")
 	public void testHTTPS() throws Exception, InterruptedException {
 		loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/iterate/iterate_https_endpoint.xml");
-        Thread.sleep(5000);
 		String response = client.getMultipleResponse(getMainSequenceURL(), "WSO2", 2);
 		Assert.assertNotNull(response);
 		OMElement envelope = client.toOMElement(response);
@@ -81,7 +80,7 @@ public class IterateEndpointsTest extends ESBIntegrationTest {
 
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void close() throws Exception {
         client = null;
 		super.cleanup();

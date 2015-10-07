@@ -63,7 +63,7 @@ public class InvalidTargetAddressTestCase extends ESBIntegrationTest {
         }
     }
 
-    @AfterClass(groups = "wso2.esb")
+    @AfterClass(groups = "wso2.esb", alwaysRun = true)
     public void close() throws Exception {
         symbol = null;
         super.cleanup();

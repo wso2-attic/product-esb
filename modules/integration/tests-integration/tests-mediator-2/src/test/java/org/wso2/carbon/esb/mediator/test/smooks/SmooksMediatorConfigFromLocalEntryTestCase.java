@@ -145,9 +145,8 @@ public class SmooksMediatorConfigFromLocalEntryTestCase extends ESBIntegrationTe
             if (isProxyDeployed) {
                 deleteProxyService("StockQuoteProxy");
             }
-            super.cleanup();
         } finally {
-            Thread.sleep(3000);
+            super.cleanup();
             serverConfigurationManager.restoreToLastConfiguration();
             serverConfigurationManager = null;
 

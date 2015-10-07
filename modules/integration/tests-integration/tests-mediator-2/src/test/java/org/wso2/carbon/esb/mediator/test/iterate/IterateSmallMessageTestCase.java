@@ -30,9 +30,9 @@ import org.wso2.esb.integration.common.utils.common.FixedSizeSymbolGenerator;
 
 public class IterateSmallMessageTestCase extends ESBIntegrationTest {
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-        init();
+        super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/iterate/simple_iterator.xml");
 
     }
@@ -66,7 +66,7 @@ public class IterateSmallMessageTestCase extends ESBIntegrationTest {
         symbol = null;
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         super.cleanup();
     }

@@ -71,8 +71,7 @@ public class SmooksIntegrationTestCase extends ESBIntegrationTest {
             }
             resourceAdminServiceClient.deleteResource("/_system/config/smooks_config.xml");
         } finally {
-            cleanup();
-            Thread.sleep(3000);
+            super.cleanup();
             serverConfigurationManager.restoreToLastConfiguration();
             resourceAdminServiceClient = null;
             serverConfigurationManager = null;
