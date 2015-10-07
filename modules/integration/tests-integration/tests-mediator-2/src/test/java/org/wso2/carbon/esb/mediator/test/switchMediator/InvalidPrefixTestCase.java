@@ -28,7 +28,7 @@ public class InvalidPrefixTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() throws Exception {
-        init();
+        super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/filters/switchMediator/invalid_prefix.xml");
     }
 
@@ -49,6 +49,6 @@ public class InvalidPrefixTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void afterClass() throws Exception {
-        cleanup();
+        super.cleanup();
     }
 }

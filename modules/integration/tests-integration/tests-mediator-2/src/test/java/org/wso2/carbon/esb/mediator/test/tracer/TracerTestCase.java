@@ -33,7 +33,7 @@ public class TracerTestCase extends ESBIntegrationTest {
 				+ "wso2-esb-trace.log";
 	}
 
-	@AfterClass(groups = "wso2.esb")
+	@AfterClass(groups = "wso2.esb", alwaysRun = true)
 	public void close() throws Exception {
 		super.cleanup();
 	}

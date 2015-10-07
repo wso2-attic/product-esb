@@ -40,9 +40,9 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 public class IterateAnonymousEndpointsTest extends ESBIntegrationTest {
 
 
-	@BeforeClass
-	public void setEnvironment() throws Exception {
-		init();
+    @BeforeClass(alwaysRun = true)
+    public void setEnvironment() throws Exception {
+		super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/iterate/Iterate_anonymous_endpoints.xml");
 	}
 
@@ -68,8 +68,8 @@ public class IterateAnonymousEndpointsTest extends ESBIntegrationTest {
 
 	}
 
-	@AfterClass
-	public void close() throws Exception {
+    @AfterClass(alwaysRun = true)
+    public void close() throws Exception {
 		super.cleanup();
 	}
 

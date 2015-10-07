@@ -29,7 +29,7 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 public class IterateContinueParentTest extends ESBIntegrationTest {
 
 
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public void setEnvironment() throws Exception {
 		super.init();
 	}
@@ -53,7 +53,7 @@ public class IterateContinueParentTest extends ESBIntegrationTest {
 	}
 
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void close() throws Exception {
 		super.cleanup();
 	}

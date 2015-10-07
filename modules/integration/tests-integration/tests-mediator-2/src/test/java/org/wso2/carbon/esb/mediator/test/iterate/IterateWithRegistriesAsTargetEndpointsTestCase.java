@@ -42,9 +42,9 @@ public class IterateWithRegistriesAsTargetEndpointsTestCase extends ESBIntegrati
     private IterateClient client;
     private EndPointAdminClient endPointAdminClient;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-        init();
+        super.init();
         client = new IterateClient();
         endPointAdminClient = new EndPointAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
@@ -95,7 +95,7 @@ public class IterateWithRegistriesAsTargetEndpointsTestCase extends ESBIntegrati
         endPointAdminClient.deleteDynamicEndpoint("conf:/myEndpoint/iterateEndpoint");
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         client = null;
         endPointAdminClient = null;

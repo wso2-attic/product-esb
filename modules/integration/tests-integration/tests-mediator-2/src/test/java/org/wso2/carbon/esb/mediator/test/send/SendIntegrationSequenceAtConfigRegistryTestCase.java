@@ -80,7 +80,7 @@ public class SendIntegrationSequenceAtConfigRegistryTestCase extends ESBIntegrat
                         "/mediatorconfig/send/sequence/test_sequence_build_message_conf.xml"))));
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     private void destroy() throws Exception{
         resourceAdminServiceStub.deleteResource("/_system/config/endpoints");
         resourceAdminServiceStub.deleteResource("/_system/config/sequence_conf");

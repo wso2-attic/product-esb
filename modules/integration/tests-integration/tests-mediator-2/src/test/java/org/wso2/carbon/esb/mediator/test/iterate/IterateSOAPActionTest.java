@@ -35,10 +35,9 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 public class IterateSOAPActionTest extends ESBIntegrationTest {
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-        init();
-
+        super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/iterate/iterate_SOAP_Action.xml");
     }
 
@@ -51,7 +50,7 @@ public class IterateSOAPActionTest extends ESBIntegrationTest {
         Assert.assertTrue(response.toString().contains("WSO2"));
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         super.cleanup();
     }

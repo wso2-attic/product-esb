@@ -38,7 +38,7 @@ public class IterateSequentialPropertySavingTestCase extends ESBIntegrationTest 
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-        init();
+        super.init();
         addProxyService(esbUtils.loadResource("/artifacts/ESB/mediatorconfig/iterate/iterateSequentialTruePropertyWithOutProperty.xml"));
         proxyServiceAdminClient = new ProxyServiceAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }

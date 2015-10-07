@@ -31,7 +31,7 @@ import static org.testng.Assert.assertNotNull;
 
 public class SequenceWhichHasJsFunctionsForBothInOutTestCase extends ESBIntegrationTest {
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
         enableDebugLogging();

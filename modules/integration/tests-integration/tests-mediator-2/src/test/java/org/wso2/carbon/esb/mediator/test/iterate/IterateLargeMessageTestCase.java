@@ -54,9 +54,9 @@ import org.wso2.esb.integration.common.utils.common.FixedSizeSymbolGenerator;
 public class IterateLargeMessageTestCase extends ESBIntegrationTest {
     private String symbol;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-        init();
+        super.init();
         symbol = FixedSizeSymbolGenerator.generateMessageMB(1);
 
     }
@@ -107,7 +107,7 @@ public class IterateLargeMessageTestCase extends ESBIntegrationTest {
     }
 
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         symbol = null;
         super.cleanup();

@@ -43,9 +43,9 @@ public class IterateNamedEndpointsTest extends ESBIntegrationTest {
 
 	private SampleAxis2Server axis2Server1;
 
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public void setEnvironment() throws Exception {
-		init();
+		super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/iterate/iterate_named_endpoints.xml");
 		axis2Server1 = new SampleAxis2Server("test_axis2_server_9001.xml");
 

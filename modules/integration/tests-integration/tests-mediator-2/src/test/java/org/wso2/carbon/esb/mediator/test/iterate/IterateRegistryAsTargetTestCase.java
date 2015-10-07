@@ -44,7 +44,7 @@ public class IterateRegistryAsTargetTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-        init();
+        super.init();
         client = new IterateClient();
         resourceAdminServiceClient =
                 new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),
