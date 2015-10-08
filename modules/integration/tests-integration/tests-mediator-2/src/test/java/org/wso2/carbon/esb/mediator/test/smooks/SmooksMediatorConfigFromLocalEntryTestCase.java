@@ -147,6 +147,7 @@ public class SmooksMediatorConfigFromLocalEntryTestCase extends ESBIntegrationTe
             }
         } finally {
             super.cleanup();
+            Thread.sleep(3000);
             serverConfigurationManager.restoreToLastConfiguration();
             serverConfigurationManager = null;
 
