@@ -106,6 +106,7 @@ public class RubyScriptSupportTestCase extends ESBIntegrationTest {
     public void destroy() throws Exception {
         try {
             deleteSequence("main");
+            Thread.sleep(5000);
             super.cleanup();
         } finally {
             serverManager.removeFromComponentDropins(JRUBY_JAR);
