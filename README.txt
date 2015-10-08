@@ -85,7 +85,7 @@ Installation & Running
     ./wso2esb-samples.sh -sn 0
     ./wso2esb-samples.bat -sn 0
 
-WSO2 ESB 4.9.0 distribution directory structure
+WSO2 ESB 4.10.0 distribution directory structure
 =============================================
 
 	CARBON_HOME
