@@ -165,7 +165,7 @@ For additional support information please refer to http://wso2.com/support/
 
 For more information on WSO2 ESB, visit the WSO2 Oxygen Tank (http://wso2.org)
 
-Known issues of WSO2 ESB 4.9.0
+Known issues of WSO2 ESB 4.10.0
 ==================================
 
  * Dependency management within the configuration is not handled properly
