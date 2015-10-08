@@ -67,7 +67,7 @@ Key Features of WSO2 ESB
 Installation & Running
 ==================================
 
-1. Extract the wso2esb-4.9.0.zip and go to the extracted directory
+1. Extract the wso2esb-4.10.0.zip and go to the extracted directory
 2. Run the wso2server.sh or wso2server.bat as appropriate
 3. Point your favourite browser to
 
