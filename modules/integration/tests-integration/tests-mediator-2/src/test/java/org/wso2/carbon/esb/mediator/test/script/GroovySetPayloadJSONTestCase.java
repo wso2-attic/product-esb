@@ -72,6 +72,7 @@ public class GroovySetPayloadJSONTestCase extends ESBIntegrationTest {
     public void destroy() throws Exception {
         try {
             super.cleanup();
+            Thread.sleep(5000);
         } finally {
             serverManager.removeFromComponentLib(GROOVY_JAR);
             serverManager.restartGracefully();

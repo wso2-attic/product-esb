@@ -81,6 +81,7 @@ public class ProvidingDifferentBeanNamesTestCase extends ESBIntegrationTest {
         clearUploadedResource();
         Thread.sleep(5000);
         super.cleanup();
+        Thread.sleep(30000);//wait till the main sequence get deleted before restarting.
         serverConfigurationManager.removeFromComponentLib(SIMPLE_BEAN_JAR);
         serverConfigurationManager.restartGracefully();
 

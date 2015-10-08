@@ -110,6 +110,7 @@ public class SmooksMediatorConfigFromConfigRegistryTestCase extends ESBIntegrati
 
         } finally {
             super.cleanup();
+            Thread.sleep(3000);
             serverConfigurationManager.restoreToLastConfiguration();
             resourceAdminServiceStub = null;
             serverConfigurationManager = null;
