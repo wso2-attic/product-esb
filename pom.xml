@@ -323,7 +323,6 @@
                 <artifactId>bcprov-jdk15on</artifactId>
                 <version>${bouncycastle.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>org.wso2.esb.styles</artifactId>
