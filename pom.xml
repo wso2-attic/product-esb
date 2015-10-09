@@ -1065,7 +1065,6 @@
 
         <product.esb.version>4.9.1-SNAPSHOT</product.esb.version>
 
-
         <!-- Axis2 -->
         <axis2.wso2.version>1.6.1.wso2v12</axis2.wso2.version>
         <addressing.version>1.6.1-wso2v11</addressing.version>
