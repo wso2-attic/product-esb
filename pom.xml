@@ -817,7 +817,6 @@
                 <artifactId>org.wso2.carbon.application.mgt.synapse.stub</artifactId>
                 <version>4.2.0</version>
             </dependency>
-
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
