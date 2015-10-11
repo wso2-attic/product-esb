@@ -152,7 +152,7 @@ WSO2 ESB 4.10.0 distribution directory structure
       This document will contain information on installing WSO2 ESB
 
     - release-notes.html
-	  Release information for WSO2 ESB 4.9.0
+	  Release information for WSO2 ESB 4.10.0
 
 Support
 ==================================
