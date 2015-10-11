@@ -1025,7 +1025,6 @@
                 <artifactId>carbon-p2-plugin</artifactId>
                 <version>${carbon.p2.plugin}}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.wso2.esb</groupId>
                 <artifactId>ui-pages</artifactId>
