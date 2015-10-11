@@ -1041,7 +1041,6 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-
             <dependency>
                 <groupId>com.rabbitmq.wso2</groupId>
                 <artifactId>amqp-client</artifactId>
