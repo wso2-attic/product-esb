@@ -1,5 +1,7 @@
 package org.wso2.carbon.esb.json;
 
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -24,7 +26,10 @@ public class HttpRelativeLocationHeaderTestCase extends ESBIntegrationTest {
         String query = "{\"employees\": [{\"id\": 0,\"name\": \"Carlene Pope\"},{\"id\": 1,\"name\": \"Jewell Richard\"}]}";
         String expectedResult = "{\"employees\":[{\"id\":0,\"name\":\"Carlene Pope\"},{\"id\":1,\"name\":\"Jewell Richard\"}]}";
         String actualResult = jsonclient.sendUserDefineRequest(addUrl, query).toString();
-        assertEquals(actualResult, expectedResult, "Could not process relative Location header.");
+        final ObjectMapper mapper = new ObjectMapper();
+        final JsonNode expectedJsonObject = mapper.readTree(expectedResult);
+        final JsonNode actualJsonObject = mapper.readTree(actualResult);
+        assertEquals(actualJsonObject, expectedJsonObject, "Could not process relative Location header.");
     }
 
     @AfterClass(alwaysRun = true)
