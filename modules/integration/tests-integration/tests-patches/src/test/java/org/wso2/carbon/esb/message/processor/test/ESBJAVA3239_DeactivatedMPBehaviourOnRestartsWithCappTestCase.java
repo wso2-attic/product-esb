@@ -40,7 +40,8 @@ public class ESBJAVA3239_DeactivatedMPBehaviourOnRestartsWithCappTestCase extend
         context = new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN);
         serverConfigurationManager = new ServerConfigurationManager(context);
         carbonAppUploaderClient =
-                                  new CarbonAppUploaderClient(contextUrls.getBackEndUrl(),getSessionCookie());
+                                  new CarbonAppUploaderClient(contextUrls.getBackEndUrl(),
+                                                              getSessionCookie());
         axis2Server = new SampleAxis2Server("test_axis2_server_9001.xml");
         axis2Server.deployService(SampleAxis2Server.SIMPLE_STOCK_QUOTE_SERVICE);
         axis2Server.start();
@@ -84,7 +85,10 @@ public class ESBJAVA3239_DeactivatedMPBehaviourOnRestartsWithCappTestCase extend
          * Wait till the MP deactivates successfully. It usually takes 2 * 4
          * secs with this configuration.
          */
-        Thread.sleep(20000);
+        Thread.sleep(15000);
+
+        axis2Server.start();
+        Thread.sleep(5000);
 
         /*
          * Restart the ESB Server after the MP is deactivated.
@@ -92,20 +96,14 @@ public class ESBJAVA3239_DeactivatedMPBehaviourOnRestartsWithCappTestCase extend
         serverConfigurationManager.restartGracefully();
 
         super.init();
-        logViewerClient =
-                new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+        logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
         // Waits until the ESB restarts
         Thread.sleep(10000);
 
-        Thread.sleep(6000);
-
-        axis2Server.start();
-
         LogEvent[] logs = logViewerClient.getAllSystemLogs();
         for (LogEvent logEvent : logs) {
             String message = logEvent.getMessage();
-            System.out.println("***************************************************" + message);
             if (message.contains(EXPECTED_ERROR_MESSAGE)) {
                 isDeploymentError = true;
             }

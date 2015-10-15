@@ -141,5 +141,16 @@
     <test name="soap-header-handling-test" preserve-order="true" verbose="2">
         <classes><class name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4118_SOAPHeaderHandlingTest"></class></classes>
     </test>
+
+	<test
+		name="DeactivatedMPFailedToDeplyUponServerRestartsWhenUploadedViaCappTestCase"
+		preserve-order="true" verbose="2">
+		<classes>
+			<class
+				name="org.wso2.carbon.esb.jms.transport.test.JMSBrokerStartupTestCase" />
+			<class
+				name="org.wso2.carbon.esb.message.processor.test.ESBJAVA3239_DeactivatedMPBehaviourOnRestartsWithCappTestCase" />
+		</classes>
+	</test>
 </suite>
 
