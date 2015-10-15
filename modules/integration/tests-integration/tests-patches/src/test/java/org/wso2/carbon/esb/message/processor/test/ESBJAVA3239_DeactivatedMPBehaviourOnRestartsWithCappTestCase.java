@@ -84,10 +84,8 @@ public class ESBJAVA3239_DeactivatedMPBehaviourOnRestartsWithCappTestCase extend
     @Test(groups = { "wso2.esb" }, description = "Test whether a deactivated Message Forwarding Processor is deployed successfully upon ESB server reestarts when it is uploaded via a capp.")
     public void testDeactivatedMPUponServerRestart() throws Exception {
         boolean isDeploymentError = false;
-        // invoking the service through the proxy service
         final String proxyUrl = getProxyServiceURLHttp(PROXY_SERVICE_NAME);
 
-        // invoking the service through the proxy service
         AxisServiceClient client = new AxisServiceClient();
 
         // Stopping the axis2 Server before sending the client request.
@@ -116,7 +114,7 @@ public class ESBJAVA3239_DeactivatedMPBehaviourOnRestartsWithCappTestCase extend
         super.init();
         logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
-        // Waits until the ESB restarts
+        // Wait till the log appears
         Thread.sleep(10000);
 
         LogEvent[] logs = logViewerClient.getAllSystemLogs();
