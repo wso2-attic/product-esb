@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://ws.apache.org/ns/synapse">
-   <proxy name="Axis2ProxyService"
+   <proxy name="Axis2ProxyOutOnlyService"
           transports="https http"
           startOnLoad="true"
           trace="disable">
@@ -8,6 +8,7 @@
       <target>
          <inSequence>
             <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
+            <property name="OUT_ONLY" value="true"/>
             <send>
                <endpoint key="Axis2EP"/>
             </send>
