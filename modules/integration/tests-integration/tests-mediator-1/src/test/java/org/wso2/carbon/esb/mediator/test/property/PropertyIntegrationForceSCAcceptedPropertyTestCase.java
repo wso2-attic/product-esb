@@ -91,13 +91,13 @@ public class PropertyIntegrationForceSCAcceptedPropertyTestCase extends ESBInteg
 
         String strXMLFilename = FrameworkPathUtil.getSystemResourceLocation() + "artifacts"
                                 + File.separator + "ESB" + File.separator + "mediatorconfig" +
-                                File.separator + "property" + File.separator + "GetQuoteRequest.xml";
+                                File.separator + "property" + File.separator + "PlaceOrder.xml";
 
         File input = new File(strXMLFilename);
-        PostMethod post = new PostMethod(getProxyServiceURLHttp("Axis2ProxyService"));
+        PostMethod post = new PostMethod(getProxyServiceURLHttp("Axis2ProxyOutOnlyService"));
         RequestEntity entity = new FileRequestEntity(input, "text/xml");
         post.setRequestEntity(entity);
-        post.setRequestHeader("SOAPAction", "getQuote");
+        post.setRequestHeader("SOAPAction", "placeOrder");
 
         HttpClient httpclient = new HttpClient();
 
