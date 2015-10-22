@@ -141,5 +141,16 @@
     <test name="soap-header-handling-test" preserve-order="true" verbose="2">
         <classes><class name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4118_SOAPHeaderHandlingTest"></class></classes>
     </test>
+
+	<test
+		name="MessageProcessorRetryUponHTTP-SC-500-With-200-202-as-non-retrysc-TestCase"
+		preserve-order="true" verbose="2">
+		<classes>
+			<class
+				name="org.wso2.carbon.esb.jms.transport.test.JMSBrokerStartupTestCase" />
+			<class
+				name="org.wso2.carbon.esb.message.processor.test.ESBJAVA4279_MPRetryUponResponseSC_500_withNonRetryStatusCodes_200_and_202_TestCase" />
+		</classes>
+	</test>
 </suite>
 
