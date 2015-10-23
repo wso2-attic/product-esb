@@ -38,10 +38,11 @@ public class Sample420TestCase extends ESBIntegrationTest {
         super.init();
        // loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/cache/synapse_sample_420.xml");
         loadSampleESBConfiguration(420);
+
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @Test(groups = {"wso2.esb"}, description = "Creating simple cache sample 420 Test Case")
+    @Test(groups = {"wso2.esb"}, description = "Creating simple cache sample 420 Test Case", enabled = false)
     public void testSimpleCashing() throws AxisFault, XPathExpressionException, InterruptedException {
         OMElement response;
 
