@@ -18,13 +18,13 @@
 
 package org.wso2.carbon.esb.json;
 
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.authenticators.AuthenticatorClient;
-import org.wso2.carbon.automation.api.clients.stratos.tenant.mgt.TenantMgtAdminServiceClient;
-import org.wso2.carbon.automation.core.utils.HttpRequestUtil;
 
+import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.carbon.automation.test.utils.http.client.HttpRequestUtil;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.servers.WireMonitorServer;
 
@@ -37,25 +37,16 @@ import static org.testng.Assert.assertTrue;
 
 public class ESBJAVA4290JSONPayloadNotFormattedProperlyTenantMode extends ESBIntegrationTest {
 
-    public WireMonitorServer wireServer;
-
+    private WireMonitorServer wireServer;
     private final String configLocation = "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File
             .separator + "rest" + File.separator + "ESBJAVA4290" + File.separator + "ESBJAVA4290SynapseConfig.xml";
 
     @BeforeClass(alwaysRun = true)
     public void deployService() throws Exception {
-        super.init(5);
+        super.init(TestUserMode.TENANT_ADMIN);
         wireServer = new WireMonitorServer(9002);
         wireServer.start();
-
-        TenantMgtAdminServiceClient tenantMgtAdminServiceClient =
-                new TenantMgtAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
-        tenantMgtAdminServiceClient.addTenant("testtenant.com", "admin", "admin", "demo");
-
-        AuthenticatorClient authClient = new AuthenticatorClient(esbServer.getBackEndUrl());
-        String session = authClient.login("admin@testtenant.com", "admin", "localhost");
-
-        esbUtils.loadESBConfigurationFromClasspath(configLocation, esbServer.getBackEndUrl(), session);
+        loadESBConfigurationFromClasspath(configLocation);
     }
 
     @Test(groups = "wso2.esb", description = "Check whether JSON message formatting works properly in tenant mode")
@@ -70,17 +61,24 @@ public class ESBJAVA4290JSONPayloadNotFormattedProperlyTenantMode extends ESBInt
         try {
             Map<String, String> headers = new HashMap<String, String>();
             headers.put("Content-Type", "application/json");
-            HttpRequestUtil.doPost(new URL("http://localhost:8280/t/testtenant.com/context"), JSON_PAYLOAD, headers);
+            HttpRequestUtil.doPost(new URL("http://localhost:8480/t/wso2.com/context"), JSON_PAYLOAD, headers);
         } catch (Exception e) {
             log.error("Error while sending the request to the endpoint. ", e);
         } finally {
             String response = wireServer.getCapturedMessage();
-            assertTrue(!response.contains("{\"emails\":{\"value\":\"kevin@wso2.com\"}}"),
-                    "JSON message is not properly formatted in tenant " +
-                            "Mode when flowing through Tenant transport senders");
-            assertTrue(response.contains(JSON_PAYLOAD),
-                    "JSON message is not properly formatted in tenant " +
-                            "Mode when flowing through Tenant transport senders");
+            if (response.length() > 1) {
+                //we check whether un-formatted JSON payload is NOT present
+                assertTrue(!response.contains("{\"emails\":{\"value\":\"kevin@wso2.com\"}}"),
+                        "JSON message is not properly formatted in tenant " +
+                                "Mode when flowing through Tenant transport senders");
+                //we check whether formatted JSON payload is present
+                assertTrue(response.contains(JSON_PAYLOAD),
+                        "JSON message is not properly formatted in tenant " +
+                                "Mode when flowing through Tenant transport senders");
+            } else {
+                //invalid case no invocation for Backend wire monitor server
+                Assert.assertTrue(false);
+            }
         }
     }
 

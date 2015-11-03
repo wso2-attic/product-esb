@@ -18,7 +18,7 @@
 
 <definitions xmlns="http://ws.apache.org/ns/synapse">
     <registry provider="org.wso2.carbon.mediation.registry.WSO2Registry"/>
-    <api name="testapi" context="/t/testtenant.com/context">
+    <api name="testapi" context="/t/wso2.com/context">
         <resource methods="POST">
             <inSequence>
                 <log level="full"/>
