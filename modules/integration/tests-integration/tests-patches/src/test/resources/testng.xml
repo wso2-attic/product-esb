@@ -139,7 +139,10 @@
     </test>
 
     <test name="soap-header-handling-test" preserve-order="true" verbose="2">
-        <classes><class name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4118_SOAPHeaderHandlingTest"></class></classes>
+        <classes>
+            <class name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4118_SOAPHeaderHandlingTest"></class>
+            <class name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4239_HTTP_SC_HandlingTests"></class>
+        </classes>
     </test>
 </suite>
 
