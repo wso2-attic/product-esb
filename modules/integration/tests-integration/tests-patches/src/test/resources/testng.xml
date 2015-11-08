@@ -150,5 +150,11 @@
         </classes>
     </test>
 
+    <test name="content-type application/json GET request test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.json.ESBJAVA4270TestCase"></class>
+        </classes>
+    </test>
+
 </suite>
 
