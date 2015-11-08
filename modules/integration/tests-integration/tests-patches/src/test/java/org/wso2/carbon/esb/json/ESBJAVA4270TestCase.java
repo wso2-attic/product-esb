@@ -45,7 +45,6 @@ public class ESBJAVA4270TestCase extends ESBIntegrationTest {
         super.init(TestUserMode.SUPER_TENANT_ADMIN);
         loadESBConfigurationFromClasspath("artifacts" + File.separator + "ESB" + File.separator +
                 "json" + File.separator + "stock-quote-json.xml");
-        //url = context.getContextUrls().getBackEndUrl() + "/stockquote/view?Name=MSFT";
     }
 
     @Test(groups = "wso2.esb", description = "Call API with GET request and content type = application/json in NHTTP " +
