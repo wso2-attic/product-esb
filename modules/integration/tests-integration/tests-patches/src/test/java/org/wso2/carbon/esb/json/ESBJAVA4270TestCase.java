@@ -54,7 +54,7 @@ public class ESBJAVA4270TestCase extends ESBIntegrationTest {
         headers.put("Content-Type", "application/json");
         HttpResponse response = httpClient.doGet(url, headers);
         Thread.sleep(2000);
-        assertEquals(response.getStatusLine().getStatusCode(), 202);
+        assertEquals(response.getStatusLine().getStatusCode(), 200);
 
     }
 
