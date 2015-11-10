@@ -129,7 +129,7 @@ public class JMSInboundSharedSubscriberTestCase extends ESBIntegrationTest {
 				"TESTSharedTopicSubscriber - Number of messages Inbound consumed : " + ESBMsgCount);
 		log.info("TESTSharedTopicSubscriber - Number of messages Java client consumed : " +
 		         simpleClientMsgCount);
-		Assert.assertTrue((ESBMsgCount + simpleClientMsgCount) == messageCount,
+		Assert.assertTrue((ESBMsgCount + simpleClientMsgCount) == messageCount && ESBMsgCount >= 1,
 		                  "Couldn't Consume messages from the topic");
 		deleteInboundEndpoints();
 	}
