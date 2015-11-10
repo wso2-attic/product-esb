@@ -150,5 +150,9 @@
         </classes>
     </test>
 
+    <test name="ut-scenario-401-on-wrong-credentials-test" preserve-order="true" verbose="2">
+        <classes><class name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4118_SOAPHeaderHandlingTest"></class></classes>
+    </test>
+
 </suite>
 
