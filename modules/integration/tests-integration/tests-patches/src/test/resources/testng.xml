@@ -160,5 +160,13 @@
         <classes><class name="org.wso2.carbon.esb.security.policy.UTResponseCode401UTauthFailure"></class></classes>
     </test>
 
+	<test name="SecuringProxyUsingPolicyFileResideInLocalEntry"
+		preserve-order="true" verbose="2">
+		<classes>
+			<class
+				name="org.wso2.carbon.esb.security.policy.ESBJAVA4312_SecuringProxy_UsingPolicyFileInLocalEntryTestCase" />
+		</classes>
+	</test>
+
 </suite>
 
