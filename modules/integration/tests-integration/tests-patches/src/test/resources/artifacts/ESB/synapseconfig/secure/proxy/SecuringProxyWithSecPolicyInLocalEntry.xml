@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+   <registry provider="org.wso2.carbon.mediation.registry.WSO2Registry">
+      <parameter name="cachableDuration">15000</parameter>
+   </registry>
+   <proxy name="SecPolicyWithLocalEntryProxy"
+          transports="https"
+          startOnLoad="true"
+          trace="disable">
+      <description/>
+      <target>
+         <endpoint>
+            <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+         </endpoint>
+         <outSequence>
+            <send/>
+         </outSequence>
+      </target>
+      <policy key="server-policy"/>
+      <parameter name="ScenarioID">scenario1</parameter>
+      <enableSec/>
+   </proxy>
+   <localEntry key="server-policy">
+      <localEntry key="server-policy">
+         <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+                     xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+                     wsu:Id="UTOverTransport">
+            <wsp:ExactlyOne>
+               <wsp:All>
+                  <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+                     <wsp:Policy>
+                        <sp:TransportToken>
+                           <wsp:Policy>
+                              <sp:HttpsToken RequireClientCertificate="true"/>
+                           </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                           <wsp:Policy>
+                              <sp:Basic256/>
+                           </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                           <wsp:Policy>
+                              <sp:Lax/>
+                           </wsp:Policy>
+                        </sp:Layout>
+                     </wsp:Policy>
+                  </sp:TransportBinding>
+                  <rampart:RampartConfig xmlns:rampart="http://ws.apache.org/rampart/policy">
+                     <rampart:encryptionUser>useReqSigCert</rampart:encryptionUser>
+                     <rampart:timestampPrecisionInMilliseconds>true</rampart:timestampPrecisionInMilliseconds>
+                     <rampart:timestampTTL>300</rampart:timestampTTL>
+                     <rampart:timestampMaxSkew>300</rampart:timestampMaxSkew>
+                     <rampart:tokenStoreClass>org.wso2.carbon.security.util.SecurityTokenStore</rampart:tokenStoreClass>
+                     <rampart:nonceLifeTime>300</rampart:nonceLifeTime>
+                  </rampart:RampartConfig>
+               </wsp:All>
+            </wsp:ExactlyOne>
+         </wsp:Policy>
+         <description/>
+      </localEntry>
+      <description/>
+   </localEntry>
+   <sequence name="fault">
+      <log level="full">
+         <property name="MESSAGE" value="Executing default 'fault' sequence"/>
+         <property name="ERROR_CODE" expression="get-property('ERROR_CODE')"/>
+         <property name="ERROR_MESSAGE" expression="get-property('ERROR_MESSAGE')"/>
+      </log>
+      <drop/>
+   </sequence>
+   <sequence name="main">
+      <in>
+         <log level="full"/>
+         <filter source="get-property('To')" regex="http://localhost:9000.*">
+            <send/>
+         </filter>
+      </in>
+      <out>
+         <send/>
+      </out>
+      <description>The main sequence for the message mediation</description>
+   </sequence>
+</definitions>
