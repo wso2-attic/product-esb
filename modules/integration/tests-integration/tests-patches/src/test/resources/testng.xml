@@ -150,6 +150,12 @@
         </classes>
     </test>
 
+    <test name="content-type application/json GET request test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.json.ESBJAVA4270TestCase"></class>
+        </classes>
+    </test>
+
     <test name="ut-scenario-401-on-wrong-credentials-test" preserve-order="true" verbose="2">
         <classes><class name="org.wso2.carbon.esb.security.policy.UTResponseCode401UTauthFailure"></class></classes>
     </test>
