@@ -17,10 +17,7 @@ package org.wso2.carbon.esb.json;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -29,59 +26,52 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.base.CarbonBaseUtils;
-import org.wso2.carbon.esb.util.FileUtil;
-import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
+import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
+import org.wso2.carbon.logging.view.stub.LogViewerLogViewerException;
+import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 public class ESBJAVA_3698_MessageBuildingWithDifferentPayloadAndContentTypeTestCase extends
                                                                                    ESBIntegrationTest {
 	private final DefaultHttpClient httpClient = new DefaultHttpClient();
-	final String carbonLogFile = CarbonBaseUtils.getCarbonHome() +
-	                             "/repository/logs/wso2carbon.log";
-	private ServerConfigurationManager serverConfigurationManager;
+    private LogViewerClient logViewerClient;
 
 	@BeforeClass(alwaysRun = true)
 	public void setEnvironment() throws Exception {
 		super.init();
-
-		serverConfigurationManager = new ServerConfigurationManager(context);
 		loadESBConfigurationFromClasspath("artifacts" + File.separator + "ESB" + File.separator +
 		                                  "json" + File.separator + "StockQuoteAPI.xml");
-
-		final String log4jSourceFile =
-		                               System.getProperty("framework.resource.location") +
-		                                       "/artifacts/ESB/json/log4j.properties";
-		final String log4jDestinationFile =
-		                                    CarbonBaseUtils.getCarbonHome() +
-		                                            "/repository/conf/log4j.properties";
-
-		serverConfigurationManager.applyConfiguration(new File(log4jSourceFile),
-		                                              new File(log4jDestinationFile));
-		super.init();
+        logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 	}
 
 	@Test(groups = { "wso2.esb" }, description = "Check for Axis Fault when xml payload is sent with application/json" +
 	                                             " content type", enabled = true)
 	public void testAxisFaultWithXmlPayloadAndJSONContentType() throws ClientProtocolException,
-	                                                           IOException, InterruptedException {
-		final Map<String, String> headers = new HashMap<String, String>();
-
+	                                                           IOException, InterruptedException,
+                                                               LogViewerLogViewerException {
 		final HttpPost post = new HttpPost("http://localhost:8480/stockquote/test");
 		post.addHeader("Content-Type", "application/json");
 		post.addHeader("SOAPAction", "urn:getQuote");
 		StringEntity se = new StringEntity(getPayload());
-
 		post.setEntity(se);
-		HttpResponse response = httpClient.execute(post);
 
-		Thread.sleep(2000);
+        logViewerClient.clearLogs();
 
-		// Asserting the results here.
-		Assert.assertTrue(FileUtil.containsInFile(carbonLogFile,
-		                                          "org.apache.axis2.AxisFault: No JSON payload provided"),
-		                  "Expected SOAP Response was NOT found in the LOG stream.");
+		httpClient.execute(post);
 
+		Thread.sleep(10000);
+
+        boolean isError = false;
+
+        LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
+        for (int i = 0; i < logs.length; i++) {
+            if (logs[i].getMessage().contains("Could not save JSON payload")) {
+                isError = true;
+                break;
+            }
+        }
+
+        Assert.assertEquals(isError, true, "Expected SOAP Response was NOT found in the LOG stream.");
 	}
 
 	private String getPayload() {
@@ -101,10 +91,7 @@ public class ESBJAVA_3698_MessageBuildingWithDifferentPayloadAndContentTypeTestC
 
 	@AfterClass(alwaysRun = true)
 	public void destroy() throws Exception {
+        logViewerClient = null;
 		super.cleanup();
-		// reverting the changes done to esb sever
-		serverConfigurationManager.restoreToLastConfiguration();
-		serverConfigurationManager = null;
 	}
-
 }
