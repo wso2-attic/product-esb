@@ -9,13 +9,15 @@
                 <iterate xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd" xmlns:m0="http://services.samples" id="iterate1" preservePayload="true" attachPath="//m0:getQuotes" expression="//m0:getQuotes/m0:getQuote" sequential="true">
                     <target>
                         <sequence>
-                            <log level="full" category="DEBUG">
+                            <log level="full" category="INFO">
                                 <property name="target1" value="************After 1st Iterate before 2nd Iterate*************"/>
                             </log>
                             <iterate id="iterate2" preservePayload="true" attachPath="//m0:getQuote" expression="//m0:getQuotes/m0:getQuote/m0:request">
                                 <target sequence="anon">
                                     <sequence>
-                                        <log level="full" category="DEBUG"/>
+                                        <log level="custom">
+                                            <property name="target2" value="************2nd Iterate*************"/>
+                                        </log>
                                         <payloadFactory>
                                             <format>
                                                 <m0:getQuote>
@@ -28,8 +30,8 @@
                                                 <arg expression="//m0:getQuotes/m0:getQuote/m0:request/m0:symbol"/>
                                             </args>
                                         </payloadFactory>
-                                        <log level="full" category="DEBUG">
-                                            <property name="target1" value="************after payload factory*************"/>
+                                        <log level="custom">
+                                            <property name="outSequence" value="************after payload factory*************"/>
                                         </log>
                                         <send>
                                             <endpoint>
@@ -44,6 +46,9 @@
                 </iterate>
             </inSequence>
             <outSequence>
+                <log level="full" category="INFO">
+                    <property name="outSequence" value="*****Received*****"/>
+                </log>
                 <aggregate id="iterate2">
                     <completeCondition>
                         <messageCount min="2" max="100"/>
