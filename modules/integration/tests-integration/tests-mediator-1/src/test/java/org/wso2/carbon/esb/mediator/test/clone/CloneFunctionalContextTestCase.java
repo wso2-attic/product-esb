@@ -25,8 +25,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
-import org.wso2.esb.integration.common.clients.logging.LoggingAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+
+import java.util.concurrent.TimeUnit;
 
 /*
  * This tests tests endpoints from governors registry and configuration registry
@@ -36,29 +37,30 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 public class CloneFunctionalContextTestCase extends ESBIntegrationTest {
 
     private LogViewerClient logViewer;
-    private LoggingAdminClient logAdmin;
 
     @BeforeClass(groups = "wso2.esb")
     public void setEnvironment() throws Exception {
         super.init();
-        logAdmin = new LoggingAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
         logViewer = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/clone/clone_functional_context.xml");
     }
 
     @Test(groups = "wso2.esb", description = "Tests SEQUENCES from  the governance registry and configuration registry")
     public void testSequence() throws Exception {
-        logAdmin.updateLoggerData("org.apache.synapse", LoggingAdminClient.logLevel.DEBUG.name(), true, false);
         logViewer.clearLogs();
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "IBM");
         Assert.assertNotNull(response);
 
-        LogEvent[] getLogsInfo = logViewer.getAllSystemLogs();
+        //Added to ensure that carbon log is updated with required entries
+        TimeUnit.SECONDS.sleep(10);
+
+        LogEvent[] getLogsInfo = logViewer.getAllRemoteSystemLogs();
         boolean assertValue = false;
         for (LogEvent event : getLogsInfo) {
             if (event.getMessage().contains("REQUEST PARAM VALUE")) {
                 assertValue = true;
+                break;
             }
         }
         Assert.assertTrue(assertValue, "Synapse functional context not cloned.");
@@ -67,7 +69,6 @@ public class CloneFunctionalContextTestCase extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         super.cleanup();
-        logAdmin.updateLoggerData("org.apache.synapse", LoggingAdminClient.logLevel.INFO.name(), true, false);
     }
 
 }
