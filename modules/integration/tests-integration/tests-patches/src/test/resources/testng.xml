@@ -165,5 +165,12 @@
         <classes><class name="org.wso2.carbon.esb.security.policy.UTResponseCode401UTauthFailure"></class></classes>
     </test>
 
+	<test name="Access HTTP SC after Callout mediator test">
+		<classes>
+			<class
+				name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4239_AccessHTTPSCAfterCallout"></class>
+		</classes>
+	</test>
+
 </suite>
 
