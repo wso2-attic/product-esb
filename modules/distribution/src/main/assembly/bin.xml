@@ -38,7 +38,6 @@
                 <exclude>**/wso2server.bat</exclude>
                 <exclude>**/README.txt</exclude>
                 <exclude>**/LICENSE.txt</exclude>
-                <exclude>**/INSTALL.txt</exclude>
                 <exclude>**/release-notes.html</exclude>
                 <exclude>**/carbon.xml</exclude>
                 <exclude>**/repository/components/plugins/saxon*.jar</exclude>
@@ -472,12 +471,6 @@
         </file>
         <file>
             <source>../../README.txt</source>
-            <outputDirectory>wso2esb-${pom.version}</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>../../INSTALL.txt</source>
             <outputDirectory>wso2esb-${pom.version}</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>

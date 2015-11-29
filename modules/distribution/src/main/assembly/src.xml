@@ -64,10 +64,5 @@
             <outputDirectory>wso2esb-${pom.version}-src</outputDirectory>
             <filtered>true</filtered>
         </file>
-        <file>
-            <source>../../../INSTALL.txt</source>
-            <outputDirectory>wso2esb-${pom.version}-src</outputDirectory>
-            <filtered>true</filtered>
-        </file>
     </files>
 </assembly>

@@ -72,9 +72,7 @@
                 <li>Point your browser to the URL https://localhost:9443/carbon</li>
                 <li>Use "admin", "admin" as the username and password to login as an admin</li>
                 <li>If you need to start the OSGi console with the server use the property
-                    -DosgiConsole when starting the server. The INSTALL.txt file found on the
-                    installation directory will give you a comprehensive set of options and
-                    properties that can be passed into the startup script</li>
+                    -DosgiConsole when starting the server.</li>
                 <li>Sample configurations can be started by the wso2esb-samples script passing
                     the sample number with the -sn option (Please
                     have a look at the samples guide for more information, on running samples)</li>
