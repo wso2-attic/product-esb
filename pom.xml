@@ -21,7 +21,7 @@
     <groupId>org.wso2.esb</groupId>
     <artifactId>esb-parent</artifactId>
     <packaging>pom</packaging>
-    <version>4.9.1-SNAPSHOT</version>
+    <version>4.10.0-M2-SNAPSHOT</version>
     <name>WSO2 ESB - Aggregator Module</name>
     <url>http://wso2.com/products/enterprise-service-bus</url>
     <description>WSO2 Enterprise Service Bus (ESB)</description>
@@ -1059,7 +1059,7 @@
 
         <!--Product Version-->
 
-        <product.esb.version>4.9.1-SNAPSHOT</product.esb.version>
+        <product.esb.version>4.10.0-M2-SNAPSHOT</product.esb.version>
 
         <!-- Axis2 -->
         <axis2.wso2.version>1.6.1.wso2v12</axis2.wso2.version>

@@ -5,7 +5,7 @@
 
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-integration-tests</artifactId>
-        <version>4.9.1-SNAPSHOT</version>
+        <version>4.10.0-M2-SNAPSHOT</version>
     </parent>
 
     <artifactId>service-samples</artifactId>
