@@ -30,7 +30,7 @@
                             </payloadFactory>
                             <log level="custom">
                                 <property name="outSequence" value="************after payload factory*************"/>
-                            </log>-gw
+                            </log>
                             <send>
                                 <endpoint>
                                     <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
