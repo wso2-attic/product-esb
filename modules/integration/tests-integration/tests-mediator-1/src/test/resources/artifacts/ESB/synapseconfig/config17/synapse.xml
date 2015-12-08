@@ -14,7 +14,7 @@
                     <target sequence="anon">
                         <sequence>
                             <log level="custom">
-                                <property name="target2" value="************2nd Iterate*************"/>
+                                <property name="target2" value="************Iterate Mediator Hit*************"/>
                             </log>
                             <payloadFactory media-type="xml">
                                 <format>
@@ -30,7 +30,7 @@
                             </payloadFactory>
                             <log level="custom">
                                 <property name="outSequence" value="************after payload factory*************"/>
-                            </log>
+                            </log>-gw
                             <send>
                                 <endpoint>
                                     <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
