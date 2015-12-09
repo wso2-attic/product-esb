@@ -101,7 +101,6 @@ WSO2 ESB 4.10.0 distribution directory structure
 		|- tmp <folder>
 		|- LICENSE.txt <file>
 		|- README.txt <file>
-		|- INSTALL.txt <file>		
 		|- release-notes.html <file>
 
     - bin
@@ -147,9 +146,6 @@ WSO2 ESB 4.10.0 distribution directory structure
 
     - README.txt
 	  This document.
-
-    - INSTALL.txt
-      This document will contain information on installing WSO2 ESB
 
     - release-notes.html
 	  Release information for WSO2 ESB 4.10.0
@@ -208,4 +204,6 @@ Crypto Notice
 
 --------------------------------------------------------------------------------
 (c) Copyright 2015 WSO2 Inc.
+
+
 

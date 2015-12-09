@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-parent</artifactId>
-        <version>4.9.1-SNAPSHOT</version>
+        <version>4.10.0-M2-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -65,8 +65,6 @@
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
         </dependency>
-
-
     </dependencies>
 
     <build>
@@ -168,9 +166,18 @@
                                 <replace file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/user-mgt.xml" token="&lt;Property name=&quot;GetAllRolesOfUserEnabled&quot;&gt;true&lt;/Property&gt;" value="&lt;!--Property name=&quot;GetAllRolesOfUserEnabled&quot;&gt;true&lt;/Property--&gt;" />
                                 <property name="tempdir2" value="target/identity-ui" />
                                 <mkdir dir="${tempdir2}" />
-                                <unzip src="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.identity.account.mgt.menu.ui_${carbon.identity.version}.jar" dest="${tempdir2}" />
+                                <!-- Move identity:user-roles menu to config_menu -->
+                                <unzip src="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.user.mgt.ui_${carbon.identity.version}.jar" dest="${tempdir2}" />
                                 <replace file="${tempdir2}/META-INF/component.xml" token="&lt;parent-menu&gt;identity_menu&lt;/parent-menu&gt;" value="&lt;parent-menu&gt;configure_menu&lt;/parent-menu&gt;" />
-                                <zip destfile="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.identity.account.mgt.menu.ui_${carbon.identity.version}.jar" basedir="${tempdir2}" />
+                                <zip destfile="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.user.mgt.ui_${carbon.identity.version}.jar" basedir="${tempdir2}" />
+                                <!-- Move identity:user-store to config_menu -->
+                                <unzip src="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.identity.user.store.configuration.ui_${carbon.identity.version}.jar" dest="${tempdir2}" />
+                                <replace file="${tempdir2}/META-INF/component.xml" token="&lt;parent-menu&gt;identity_menu&lt;/parent-menu&gt;" value="&lt;parent-menu&gt;configure_menu&lt;/parent-menu&gt;" />
+                                <zip destfile="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.identity.user.store.configuration.ui_${carbon.identity.version}.jar" basedir="${tempdir2}" />
+                                <!-- Move identity:key-store menu to config_menu -->
+                                <unzip src="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.security.mgt.ui_${carbon.identity.version}.jar" dest="${tempdir2}" />
+                                <replace file="${tempdir2}/META-INF/component.xml" token="&lt;parent-menu&gt;manage_menu&lt;/parent-menu&gt;" value="&lt;parent-menu&gt;configure_menu&lt;/parent-menu&gt;" />
+                                <zip destfile="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.security.mgt.ui_${carbon.identity.version}.jar" basedir="${tempdir2}" />
                             </tasks>
                         </configuration>
                     </execution>
@@ -270,6 +277,13 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>

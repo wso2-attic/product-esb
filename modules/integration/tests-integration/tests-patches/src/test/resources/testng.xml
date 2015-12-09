@@ -81,6 +81,11 @@
             <class name="org.wso2.carbon.esb.mediators.cache.APIMANAGER1838RequestHashGeneratorTestCase"/>
         </classes>
     </test-->
+    <test name="Cache mediator with PIs test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.mediators.cache.ESBJAVA4318Testcase"/>
+        </classes>
+    </test>
 
     <test name="Enrich Mediator Tests" preserve-order="true" verbose="2">
         <classes>
@@ -139,7 +144,9 @@
     </test>
 
     <test name="soap-header-handling-test" preserve-order="true" verbose="2">
-        <classes><class name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4118_SOAPHeaderHandlingTest"></class></classes>
+        <classes>
+            <class name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4118_SOAPHeaderHandlingTest"></class>
+        </classes>
     </test>
 
 	<test
@@ -150,6 +157,29 @@
 				name="org.wso2.carbon.esb.jms.transport.test.JMSBrokerStartupTestCase" />
 			<class
 				name="org.wso2.carbon.esb.message.processor.test.ESBJAVA4279_MPRetryUponResponseSC_500_withNonRetryStatusCodes_200_and_202_TestCase" />
+		</classes>
+	</test>
+
+    <test name="Callout-mediator-status-code-test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4239_HTTP_SC_HandlingTests"></class>
+        </classes>
+    </test>
+
+    <test name="content-type application/json GET request test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.json.ESBJAVA4270TestCase"></class>
+        </classes>
+    </test>
+
+    <test name="ut-scenario-401-on-wrong-credentials-test" preserve-order="true" verbose="2">
+        <classes><class name="org.wso2.carbon.esb.security.policy.UTResponseCode401UTauthFailure"></class></classes>
+    </test>
+
+	<test name="Access HTTP SC after Callout mediator test">
+		<classes>
+			<class
+				name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4239_AccessHTTPSCAfterCallout"></class>
 		</classes>
 	</test>
 </suite>
