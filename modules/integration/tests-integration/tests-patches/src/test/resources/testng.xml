@@ -176,11 +176,20 @@
         <classes><class name="org.wso2.carbon.esb.security.policy.UTResponseCode401UTauthFailure"></class></classes>
     </test>
 
+
+    <test name="JSON empty Array NHTTP transport Test Case" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.nhttp.transport.json.test.ESBJAVA4331MissingJSONEmptyArrayNHTTPTransport"/>
+        </classes>
+    </test>
+
+
 	<test name="Access HTTP SC after Callout mediator test">
 		<classes>
 			<class
 				name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4239_AccessHTTPSCAfterCallout"></class>
 		</classes>
 	</test>
+
 </suite>
 
