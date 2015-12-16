@@ -30,7 +30,6 @@ import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.carbon.utils.ServerConstants;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -61,10 +60,8 @@ public class ESBJAVA3336HostHeaderValuePortCheckTestCase extends ESBIntegrationT
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
     @Test(groups = "wso2.esb", description = "Test wrong port(80) attached with the HOST_HEADERS for https backend")
     public void testHOST_HEADERPropertyTest() throws Exception {
-
-        //wireServer.start();
         try {
-            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("httpsBackendProxyService"),null,"WSO2");
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("httpsBackendProxyService"), null, "WSO2");
         } catch (Exception e) {
 
         }
@@ -102,6 +99,4 @@ public class ESBJAVA3336HostHeaderValuePortCheckTestCase extends ESBIntegrationT
         properties.store(new FileOutputStream(destinationFile), null);
         serverConfigurationManager.applyConfigurationWithoutRestart(destinationFile);
     }
-
-
 }
