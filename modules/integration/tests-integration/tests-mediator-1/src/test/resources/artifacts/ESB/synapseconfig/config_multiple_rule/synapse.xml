@@ -47,11 +47,12 @@
 
             <switch source="get-property('accept')">
                 <case regex="ibmEndPoint">
-                    <send>
+                    <call>
                         <endpoint>
                             <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
                         </endpoint>
-                    </send>
+                    </call>
+                    <respond/>
                 </case>
                 <case regex="sunEndPoint">
                     <sequence key="nonExistentService"/>
@@ -64,19 +65,16 @@
             <drop/>
 
         </in>
-        <out>
-            <send/>
-        </out>
 
     </sequence>
 
     <sequence name="nonExistentService" onError="myFaultHandler">
 
-        <send>
+        <call>
             <endpoint>
                 <address uri="http://localhost:9009/services/NonExistentStockQuoteService"/>
             </endpoint>
-        </send>
+        </call>
         <drop/>
 
     </sequence>
