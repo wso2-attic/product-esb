@@ -1094,7 +1094,7 @@
         <carbon.registry.version>4.4.5</carbon.registry.version>
 
         <!-- Carbon Identity version-->
-        <carbon.identity.version>5.0.5</carbon.identity.version>
+        <carbon.identity.version>5.0.7</carbon.identity.version>
 
         <!-- Carbon Rule version -->
         <carbon.rule.version>4.4.1</carbon.rule.version>
