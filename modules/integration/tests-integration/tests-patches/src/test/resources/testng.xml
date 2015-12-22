@@ -197,5 +197,13 @@
 		</classes>
 	</test>
 
+	<test
+		name="Setting MessageBuilderInvoked property when ContentType is empty">
+		<classes>
+			<class
+				name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA_4325_SettingMessageBuilderInvokedWhenContentTypeEmpty"></class>
+		</classes>
+	</test>
+
 </suite>
 
