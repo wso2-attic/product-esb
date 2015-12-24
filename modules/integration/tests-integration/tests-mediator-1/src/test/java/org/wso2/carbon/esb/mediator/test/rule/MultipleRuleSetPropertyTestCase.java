@@ -62,11 +62,11 @@ public class MultipleRuleSetPropertyTestCase extends ESBIntegrationTest {
         try {
             // If the endpoint suspended from the previous request then need to wait until the endpoint is active
             Thread.sleep(35000);
-            axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), "http://localhost:9000/services/SimpleStockQuoteService", "SUN");
-            fail("Request should throws AxisFault");
+            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), "http://localhost:9000/services/SimpleStockQuoteService", "SUN");
+            String responseText = response.getText();
+            assertEquals(responseText, "WRONG_RULE", "Fault: value 'responseText' mismatched");
         } catch (AxisFault axisFault) {
-            assertEquals(axisFault.getMessage(), ESBTestConstant.ERROR_CONNECTING_TO_BACKEND,
-                    "Fault: value mismatched, should be 'Error connecting to the back end'");
+            throw axisFault;
         }
     }
 
@@ -77,11 +77,11 @@ public class MultipleRuleSetPropertyTestCase extends ESBIntegrationTest {
         try {
             // If the endpoint suspended from the previous request then need to wait until the endpoint is active
             Thread.sleep(35000);
-            axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), "http://localhost:9000/services/SimpleStockQuoteService", "MFST");
-            fail("Request should throws AxisFault");
+            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), "http://localhost:9000/services/SimpleStockQuoteService", "MFST");
+            String responseText = response.getText();
+            assertEquals(responseText, "WRONG_RULE", "Fault: value 'responseText' mismatched");
         } catch (AxisFault axisFault) {
-            assertEquals(axisFault.getMessage(), ESBTestConstant.ERROR_CONNECTING_TO_BACKEND,
-                    "Fault: value mismatched, should be 'Error connecting to the back end'");
+            throw axisFault;
         }
 
     }
