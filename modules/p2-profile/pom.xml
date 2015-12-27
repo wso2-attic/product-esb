@@ -111,6 +111,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.wso2.carbon.mediation.tracer.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
+				<featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.message.flow.tracer.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.wso2.carbon.mediation.configadmin.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
@@ -522,6 +525,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.mediation.tracer.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+				<feature>
+                                    <id>org.wso2.carbon.message.flow.tracer.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
                                 <feature>
@@ -1032,6 +1039,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.mediation.tracer.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+				<feature>
+                                    <id>org.wso2.carbon.message.flow.tracer.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
                                 <feature>
