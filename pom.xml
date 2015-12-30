@@ -1059,7 +1059,7 @@
 
         <!--Product Version-->
 
-        <product.esb.version>4.10.0-M2-SNAPSHOT</product.esb.version>
+        <product.esb.version>4.10.0-M3-SNAPSHOT</product.esb.version>
 
         <!-- Axis2 -->
         <axis2.wso2.version>1.6.1.wso2v12</axis2.wso2.version>
