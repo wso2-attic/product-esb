@@ -30,7 +30,6 @@
              mc.removeProperty("operationProperty","operation");
              mc.removeProperty("transportProperty","transport");]]></script>
                 <log level="custom">
-                    <property name="****************************" value="After remove"/>
                     <property expression="get-property('axis2', 'axis2Property')" name="Axis2_Property_After_Remove"/>
                     <property expression="get-property('transport', 'transportProperty')" name="Transport_Property_After_Remove"/>
                     <property expression="get-property('operation', 'operationProperty')" name="Operation_Property_After_Remove"/>
