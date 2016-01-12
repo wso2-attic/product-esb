@@ -28,59 +28,91 @@ public class SetPropertyWithScopeInScriptMediatorTestCase extends ESBIntegration
             throws Exception {
 
         StockQuoteClient axis2Client1 = new StockQuoteClient();
-        boolean responseInLog = false;
+        boolean setPropertyInLog = false;
+        boolean removePropertyInLog = false;
         OMElement response;
         response = axis2Client1.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("TestProxy"), null, "WSO2");
+        Thread.sleep(10000);
         LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
 
         for (LogEvent logEvent : logs) {
             String message = logEvent.getMessage();
             if (message.contains("Axis2_Property = AXIS2_PROPERTY")) {
-                responseInLog = true;
+                setPropertyInLog = true;
                 break;
             }
         }
 
-        Assert.assertTrue(responseInLog, " The property with axis2 scope is not set ");
+        Assert.assertTrue(setPropertyInLog, " The property with axis2 scope is not set ");
+
+        for (LogEvent logEvent : logs) {
+            String message = logEvent.getMessage();
+            if (message.contains("Axis2_Property_After_Remove = null")) {
+                removePropertyInLog = true;
+                break;
+            }
+        }
+
+        Assert.assertTrue(removePropertyInLog, " The property with axis2 scope is not remove ");
     }
 
     @Test(groups = "wso2.esb", description = "Set a property with transport scope in script mediator") public void testSetPropertyWithTransportScopeInScript()
             throws Exception {
 
         StockQuoteClient axis2Client1 = new StockQuoteClient();
-        boolean responseInLog = false;
+        boolean setPropertyInLog = false;
+        boolean removePropertyInLog = false;
         OMElement response;
         response = axis2Client1.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("TestProxy"), null, "WSO2");
+        Thread.sleep(10000);
         LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
 
         for (LogEvent logEvent : logs) {
             String message = logEvent.getMessage();
             if (message.contains("Transport_Property = TRANSPORT_PROPERTY")) {
-                responseInLog = true;
+                setPropertyInLog = true;
                 break;
             }
         }
+        Assert.assertTrue(setPropertyInLog, " The property with transport scope is not set ");
 
-        Assert.assertTrue(responseInLog, " The property with transport scope is not set ");
+        for (LogEvent logEvent : logs) {
+            String message = logEvent.getMessage();
+            if (message.contains("Transport_Property_After_Remove = null")) {
+                removePropertyInLog = true;
+                break;
+            }
+        }
+        Assert.assertTrue(removePropertyInLog, " The property with axis2 transport is not remove ");
     }
 
     @Test(groups = "wso2.esb", description = "Set a property with operation scope in script mediator") public void testSetPropertyWithOperationScopeInScript()
             throws Exception {
 
         StockQuoteClient axis2Client1 = new StockQuoteClient();
-        boolean responseInLog = false;
+        boolean setPropertyInLog = false;
+        boolean removePropertyInLog = false;
         OMElement response;
         response = axis2Client1.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("TestProxy"), null, "WSO2");
+        Thread.sleep(10000);
         LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
 
         for (LogEvent logEvent : logs) {
             String message = logEvent.getMessage();
             if (message.contains("Operation_Property = OPERATION_PROPERTY")) {
-                responseInLog = true;
+                setPropertyInLog = true;
                 break;
             }
         }
+        Assert.assertTrue(setPropertyInLog, " The property with operation scope is not set ");
 
-        Assert.assertTrue(responseInLog, " The property with operation scope is not set ");
+        for (LogEvent logEvent : logs) {
+            String message = logEvent.getMessage();
+            if (message.contains("Operation_Property_After_Remove = null")) {
+                removePropertyInLog = true;
+                break;
+            }
+        }
+        Assert.assertTrue(removePropertyInLog, " The property with operation scope is not remove ");
     }
 }
