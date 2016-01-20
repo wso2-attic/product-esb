@@ -87,6 +87,13 @@
         </packages>
     </test>
 
+    <test name="LocalEntry-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.localentry.test.*"/>
+        </packages>
+    </test>
+
+
 </suite>
 
 
