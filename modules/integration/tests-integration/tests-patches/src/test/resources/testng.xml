@@ -125,7 +125,7 @@
         </classes>
     </test>
 
-    <!-- Commented the test case due to a regression issue occurred due to this fix. 
+    <!-- Commented the test case due to a regression issue occurred due to this fix.
              Need to enable this test case once the original issue is fixed properly -->
     <!--test
 		name="security-policy-reference-element-in-wsdl-bindings-for-capp-test"
@@ -197,5 +197,12 @@
 		</classes>
 	</test>
 
+    <!--This test been disabled since salesforce dev account get expire after 1 month-->
+    <!--test name="Salesforce_With_Callout mediator test" enabled="false">
+        <classes>
+            <class
+                    name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4388CalloutMediatorFailOnFirstRequestTestCase"></class>
+        </classes>
+    </test-->
 </suite>
 
