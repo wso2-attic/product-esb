@@ -15,7 +15,7 @@ package org.wso2.carbon.esb.mediators.callout;
 * limitations under the License.
 */
 
-import junit.framework.Assert;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -54,12 +54,12 @@ public class ESBJAVA_4388CalloutMediatorFailOnFirstRequestTestCase extends ESBIn
         httpClient.doPost(proxyServiceUrl, headers, requestPayload, "application/xml");
 
         LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
-        Assert.assertTrue("Failed to retrieve logs", logs.length > 0);
+        Assert.assertTrue(logs.length > 0, "Failed to retrieve logs");
         for (LogEvent logEvent : logs) {
             if (logEvent.getPriority().equals("INFO")) {
                 String message = logEvent.getMessage();
-                Assert.assertFalse("First Request failed",
-                                   message.contains("ERROR_MESSAGE = Error while building message"));
+                Assert.assertFalse(message.contains("ERROR_MESSAGE = Error while building message"),
+                                   "First Request failed");
             }
         }
     }
