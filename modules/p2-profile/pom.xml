@@ -527,8 +527,8 @@
                                     <id>org.wso2.carbon.mediation.tracer.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
-				<feature>
-                                    <id>org.wso2.carbon.message.flow.tracer.feature.group</id>
+				                <feature>
+                                    <id>org.wso2.carbon.das.messageflow.data.publisher.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
                                 <feature>
@@ -1041,8 +1041,8 @@
                                     <id>org.wso2.carbon.mediation.tracer.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
-				<feature>
-                                    <id>org.wso2.carbon.message.flow.tracer.feature.group</id>
+				                <feature>
+                                    <id>org.wso2.carbon.das.messageflow.data.publisher.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
                                 <feature>
