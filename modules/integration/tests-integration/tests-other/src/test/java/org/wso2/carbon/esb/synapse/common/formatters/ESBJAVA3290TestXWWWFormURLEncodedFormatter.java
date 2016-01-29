@@ -56,11 +56,11 @@ public class ESBJAVA3290TestXWWWFormURLEncodedFormatter extends ESBIntegrationTe
                                              "body parameter name starts with digit")
     public void testPostRequest() throws Exception {
 
-        URL endpoint = new URL(getProxyServiceURLHttp("RestProxy") + "?paramName=abc&2paramName=def&$paramName=ghi");
+        URL endpoint = new URL(getProxyServiceURLHttp("RestProxy"));
         try {
             Map<String, String> header = new HashMap<String, String>();
             header.put("Content-Type", "application/x-www-form-urlencoded");
-            HttpRequestUtil.doPost(endpoint, "", header);
+            HttpRequestUtil.doPost(endpoint, "paramName=abc&2paramName=def&$paramName=ghi", header);
 
         } catch (Exception e){
             //ignore
