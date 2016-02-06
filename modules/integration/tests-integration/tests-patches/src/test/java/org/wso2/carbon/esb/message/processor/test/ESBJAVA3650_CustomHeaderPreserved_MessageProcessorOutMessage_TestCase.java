@@ -55,7 +55,7 @@ public class ESBJAVA3650_CustomHeaderPreserved_MessageProcessorOutMessage_TestCa
 		Thread.sleep(5000);
 
 		String inputText = tcpMonListener.getConnectionData().get(1).getInputText().toString();
-		Assert.assertTrue(inputText.contains("customHeader:customHeaderValue"),
+		Assert.assertTrue(inputText.contains("customHeader: customHeadervalue"),
 		                  "customHeader:customHeaderValue does not exist in out message of ESB");
 	}
 
