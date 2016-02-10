@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <registry provider="org.wso2.carbon.mediation.registry.WSO2Registry">
+        <parameter name="cachableDuration">15000</parameter>
+    </registry>
+    <taskManager provider="org.wso2.carbon.mediation.ntask.NTaskTaskManager"/>
+    <sequence name="orders_jms_r12_replay_store_seq"/>
+    <sequence name="fault">
+        <!-- Log the message at the full log level with the ERROR_MESSAGE and the ERROR_CODE-->
+        <log level="full">
+            <property name="MESSAGE" value="Executing default 'fault' sequence"/>
+            <property expression="get-property('ERROR_CODE')" name="ERROR_CODE"/>
+            <property expression="get-property('ERROR_MESSAGE')" name="ERROR_MESSAGE"/>
+        </log>
+        <!-- Drops the messages by default if there is a fault -->
+        <drop/>
+    </sequence>
+    <sequence name="main">
+        <in>
+            <!-- Log all messages passing through -->
+            <log level="full"/>
+            <!-- ensure that the default configuration only sends if it is one of samples -->
+            <!-- Otherwise Synapse would be an open proxy by default (BAD!)               -->
+            <filter regex="http://localhost:9000.*" source="get-property('To')">
+                <!-- Send the messages where they have been sent (i.e. implicit "To" EPR) -->
+                <send/>
+            </filter>
+        </in>
+        <out>
+            <send/>
+        </out>
+        <description>The main sequence for the message mediation</description>
+    </sequence>
+    <template name="TryReplayTemplate">
+        <parameter name="CORRELATION_ID"/>
+        <parameter name="NUMBER_OF_ATTEMPTS_DEFAULT"/>
+        <parameter name="NUMBER_OF_ATTEMPTS_REG"/>
+        <parameter name="REPLAY_SEQUENCE_NAME"/>
+        <sequence>
+            <log level="full">
+                <property name="===============================" value="TryReplayTemplate"/>
+            </log>
+            <property expression="$func:CORRELATION_ID"
+                name="CORRELATION_ID" xmlns:ns="http://org.apache.synapse/xsd"/>
+            <log level="full">
+                <property name="===============================" value="Before Enrich"/>
+            </log>
+            <enrich>
+                <source clone="true" property="ORIGINAL_PAYLOAD" type="property"/>
+                <target type="body"/>
+            </enrich>
+            <log level="full">
+                <property name="===============================" value="After Enrich"/>
+            </log>
+            <script language="js"><![CDATA[var attempts = 1;
+                    var intAttempts = 0;
+                    if(attempts != null || attempts != ""){
+                    intAttempts = parseInt(attempts);
+                    }
+                    intAttempts = intAttempts+1;
+                    mc.setProperty("REDELIVERY_ATTEMPTS",intAttempts);]]></script>
+            <log level="full">
+                <property name="===============================" value="After Script"/>
+            </log>
+            <property expression="$ctx:REDELIVERY_ATTEMPTS"
+                name="REDELIVERY_ATTEMPTS" scope="transport" xmlns:ns="http://org.apache.synapse/xsd"/>
+            <property expression="$func:REPLAY_SEQUENCE_NAME"
+                name="REPLAY_SEQUENCE_NAME" xmlns:ns="http://org.apache.synapse/xsd"/>
+            <property name="OUT_ONLY" value="true"/>
+            <property name="messageType" scope="axis2" value="application/json"/>
+            <log level="full">
+                <property name="===============================" value="Before filter"/>
+                <property
+                    expression="get-property('axis2','message.builder.invoked')"
+                    name="=====vvv===================" xmlns:ns="http://org.apache.synapse/xsd"/>
+            </log>
+            <property name="REDELIVERY_ATTEMPTS" value="8"/>
+            <property name="number_of_attempts" value="12"/>
+            <filter xmlns:ns="http://org.apache.synapse/xsd" xpath="$ctx:REDELIVERY_ATTEMPTS &lt; $ctx:number_of_attempts">
+                <then>
+                    <log level="full">
+                        <property name="===============================" value="Inside Then"/>
+                    </log>
+                    <property name="FORCE_SC_ACCEPTED" scope="axis2" value="true"/>
+                    <property name="OUT_ONLY" value="true"/>
+                    <log level="full">
+                        <property name="===============================" value="Before calling store seq"/>
+                    </log>
+                    <drop/>
+                </then>
+                <else>
+                    <log level="full">
+                        <property name="===============================" value="Inside else"/>
+                    </log>
+                </else>
+            </filter>
+        </sequence>
+    </template>
+	<api context="/orders/sources/ops" name="OrderImportOP">
+		<resource methods="POST">
+			<inSequence>
+				<property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
+				<property expression="json-eval($.ecommOrderId)" name="ecommOrderId"
+					scope="default" type="STRING" />
+				<enrich>
+					<source clone="true" type="body" />
+					<target property="ORIGINAL_PAYLOAD" type="property" />
+				</enrich>
+				<payloadFactory media-type="json">
+					<format />
+					<args />
+				</payloadFactory>
+				<property name="WSO2_HW_SC" scope="transport" value="504" />
+				<property name="WSO2_HW_DROP_CTYPE" scope="transport"
+					value="true" />
+				<property name="WSO2_HW_EMPTY_CONTENT" scope="transport"
+					value="true" />
+				<property name="WSO2_HW_SC" scope="transport" value="504" />
+				<property name="WSO2_HW_FORMAT" scope="transport" value="0" />
+				<call>
+					<endpoint>
+						<http method="POST" uri-template="http://127.0.0.1:8090/ccc" />
+					</endpoint>
+				</call>
+				<call-template target="TryReplayTemplate">
+					<with-param name="REPLAY_SEQUENCE_NAME" value="orders_jms_r12_replay_store_seq" />
+					<with-param name="NUMBER_OF_ATTEMPTS_DEFAULT" value="2" />
+					<with-param name="NUMBER_OF_ATTEMPTS_REG" value="2" />
+					<with-param name="CORRELATION_ID" value="{$ctx:ecommOrderId}" />
+				</call-template>
+			</inSequence>
+			<outSequence />
+			<faultSequence />
+		</resource>
+	</api>
+    <!-- You can add any flat sequences, endpoints, etc.. to this synapse.xml file if you do
+    *not* want to keep the artifacts in several files -->
+</definitions>
