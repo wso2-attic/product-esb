@@ -23,17 +23,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta content="text/html; charset=iso-8859-1" http-equiv="content-type"/>
-        <title>WSO2 ESB v4.9.0 Released - September 2015</title>
+        <title>WSO2 ESB v5.0.0-M1 Released - January 2016</title>
     </head>
     <body>
         <div id="header">
         </div>
 
         <div id="main-content">
-            <h1>The WSO2 Enterprise Service Bus (ESB) 4.9.0 Released!</h1>
+            <h1>The WSO2 Enterprise Service Bus (ESB) 5.0.0-M1 Released!</h1>
 
             <p>
-                WSO2 ESB team is pleased to announce the release of version 4.9.0 of
+                WSO2 ESB team is pleased to announce the release of version 5.0.0 of
                 the Open Source Enterprise Service Bus (ESB).
             </p>
 
@@ -50,7 +50,7 @@
             </p>
 
             <p>
-                WSO2 ESB 4.9.0 is developed on top of the revolutionary
+                WSO2 ESB 5.0.0 is developed on top of the revolutionary
                 <a href="http://wso2.org/projects/carbon">WSO2 Carbon platform</a> (Middleware a' la carte),
                 an OSGi based framework that provides seamless modularity to your SOA via
                 componentization. This release also contains many new features and a range of optional
@@ -78,7 +78,7 @@
                     have a look at the samples guide for more information, on running samples)</li>
             </ol>
 
-            <h2>Enhancements in WSO2 ESB 4.9.0</h2>
+            <h2>Enhancements in WSO2 ESB 5.0.0</h2>
 			<ul>
 				<li>HL7 Message Store Implementation with Console for message audit and replay</li>
 				<li>Thread Pooled HL7 Server Endpoints</li>
@@ -131,7 +131,7 @@
             <p>
                 This release of WSO2 ESB comes with a number of bug fixes, both in the base
                 framework and the ESB specific components. All the issues which have been
-                fixed in ESB 4.9.0 are recorded at following locations:
+                fixed in ESB 5.0.0 are recorded at following locations:
             </p>
             <ul>
 				<li><a href="https://wso2.org/jira/issues/?filter=12393">
@@ -140,12 +140,12 @@
 
             <h2>Known Issues</h2>
             <p>
-                All the open issues pertaining to WSO2 ESB 4.9.0 are reported at following
+                All the open issues pertaining to WSO2 ESB 5.0.0 are reported at following
                 locations:
             </p>
             <ul>
                 <li><a href="https://wso2.org/jira/issues/?filter=12394">
-                    WSO2 ESB 4.9.0 component issues</a></li>
+                    WSO2 ESB 5.0.0 component issues</a></li>
             </ul>
 
             <h2>How You Can Contribute</h2>
