@@ -1,8 +1,8 @@
 ================================================================================
-                        WSO2 Enterprise Service Bus 4.10.0
+                        WSO2 Enterprise Service Bus 5.0.0
 ================================================================================
 
-Welcome to the WSO2 ESB 4.10.0 release
+Welcome to the WSO2 ESB 5.0.0 release
 
 WSO2 ESB is a lightweight and easy-to-use Open Source Enterprise Service Bus
 (ESB) available under the Apache Software License v2.0. WSO2 ESB allows
@@ -67,7 +67,7 @@ Key Features of WSO2 ESB
 Installation & Running
 ==================================
 
-1. Extract the wso2esb-4.10.0.zip and go to the extracted directory
+1. Extract the wso2esb-5.0.0.zip and go to the extracted directory
 2. Run the wso2server.sh or wso2server.bat as appropriate
 3. Point your favourite browser to
 
@@ -85,7 +85,7 @@ Installation & Running
     ./wso2esb-samples.sh -sn 0
     ./wso2esb-samples.bat -sn 0
 
-WSO2 ESB 4.10.0 distribution directory structure
+WSO2 ESB 5.0.0 distribution directory structure
 =============================================
 
 	CARBON_HOME
@@ -148,7 +148,7 @@ WSO2 ESB 4.10.0 distribution directory structure
 	  This document.
 
     - release-notes.html
-	  Release information for WSO2 ESB 4.10.0
+	  Release information for WSO2 ESB 5.0.0
 
 Support
 ==================================
@@ -161,7 +161,7 @@ For additional support information please refer to http://wso2.com/support/
 
 For more information on WSO2 ESB, visit the WSO2 Oxygen Tank (http://wso2.org)
 
-Known issues of WSO2 ESB 4.10.0
+Known issues of WSO2 ESB 5.0.0
 ==================================
 
  * Dependency management within the configuration is not handled properly
@@ -203,7 +203,7 @@ Crypto Notice
    Bouncycastle     : http://www.bouncycastle.org/
 
 --------------------------------------------------------------------------------
-(c) Copyright 2015 WSO2 Inc.
+(c) Copyright 2016 WSO2 Inc.
 
 
 
