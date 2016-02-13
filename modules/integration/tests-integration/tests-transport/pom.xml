@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-integration-tests</artifactId>
@@ -12,18 +13,12 @@
     <packaging>jar</packaging>
     <build>
         <plugins>
-
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.12.4</version>
                 <inherited>false</inherited>
                 <configuration>
-                         <!--<argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m -Xmx1024m -XX:PermSize=256m
-                             -XX:MaxPermSize=512m -Xdebug -Xnoagent -Djava.compiler=NONE
-                             -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006
-                         </argLine>-->
                     <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m</argLine>
-                    <testFailureIgnore>true</testFailureIgnore>
                     <disableXmlReport>false</disableXmlReport>
                     <parallel>false</parallel>
                     <suiteXmlFiles>
@@ -49,7 +44,6 @@
                         <sec.verifier.dir>${basedir}/target/security-verifier/</sec.verifier.dir>
                         <maven.test.haltafterfailure>false</maven.test.haltafterfailure>
                         <carbon.zip>
-                            <!--${basedir}/../../distribution/target/wso2esb-${product.esb.version}.zip-->
                             ${basedir}/../../../distribution/target/wso2esb-${product.esb.version}.zip
                         </carbon.zip>
                         <instr.file>${basedir}/src/test/resources/instrumentation.txt</instr.file>
@@ -291,19 +285,6 @@
             <groupId>org.apache.axis2.transport</groupId>
             <artifactId>axis2-transport-tcp</artifactId>
         </dependency>
-
-        <!--  <dependency>
-              <groupId>org.apache.activemq</groupId>
-              <artifactId>activemq-core</artifactId>
-          </dependency>
-          <dependency>
-              <groupId>org.apache.geronimo.specs</groupId>
-              <artifactId>geronimo-j2ee-management_1.1_spec</artifactId>
-          </dependency>
-          <dependency>
-              <groupId>org.apache.geronimo.specs</groupId>
-              <artifactId>geronimo-jms_1.1_spec</artifactId>
-          </dependency>-->
 
         <!-- Jacoco Dependency-->
         <dependency>
