@@ -198,5 +198,12 @@
 		</classes>
 	</test>
 
+    <!--This test been disabled since salesforce dev account get expire after 1 month-->
+    <!--test name="Salesforce_With_Callout mediator test" enabled="false">
+        <classes>
+            <class
+                    name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4388CalloutMediatorFailOnFirstRequestTestCase"></class>
+        </classes>
+    </test-->
 </suite>
 
