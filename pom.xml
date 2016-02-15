@@ -21,7 +21,7 @@
     <groupId>org.wso2.esb</groupId>
     <artifactId>esb-parent</artifactId>
     <packaging>pom</packaging>
-    <version>5.0.0-M2-SNAPSHOT</version>
+    <version>5.0.0-M2</version>
     <name>WSO2 ESB - Aggregator Module</name>
     <url>http://wso2.com/products/enterprise-service-bus</url>
     <description>WSO2 Enterprise Service Bus (ESB)</description>
@@ -48,7 +48,7 @@
         <connection>scm:git:https://github.com/wso2/product-esb.git</connection>
         <url>https://github.com/wso2/product-esb.git</url>
         <developerConnection>scm:git:https://github.com/wso2/product-esb.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>esb-parent-5.0.0-M2</tag>
     </scm>
     <build>
         <plugins>
@@ -1059,7 +1059,7 @@
 
         <!--Product Version-->
 
-        <product.esb.version>5.0.0-M2-SNAPSHOT</product.esb.version>
+        <product.esb.version>5.0.0-M2</product.esb.version>
 
         <!-- Axis2 -->
         <axis2.wso2.version>1.6.1.wso2v12</axis2.wso2.version>
