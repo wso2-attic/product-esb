@@ -198,5 +198,11 @@
 		</classes>
 	</test>
 
+    <test name="Multipart form data format Test Case" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.transport.axis2.test.MultipartFormDataFormatTestCase"/>
+        </classes>
+    </test>
+
 </suite>
 
