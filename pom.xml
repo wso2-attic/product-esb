@@ -1052,7 +1052,16 @@
     		<artifactId>org.wso2.ciphertool</artifactId>
     		<version>${cipher.tool.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro</artifactId>
+                <version>${avro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.opencsv</groupId>
+                <artifactId>opencsv</artifactId>
+                <version>${opencsv.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <properties>
@@ -1189,6 +1198,8 @@
         <testng.version>6.1.1</testng.version>
         <project.scm.id>wso2-scm-server</project.scm.id>
         <rabbitmq.orbit.version>3.4.4.wso2v1</rabbitmq.orbit.version>
+        <avro.version>1.7.5</avro.version>
+        <opencsv.version>2.3</opencsv.version>
     </properties>
     <pluginRepositories>
         <pluginRepository>
