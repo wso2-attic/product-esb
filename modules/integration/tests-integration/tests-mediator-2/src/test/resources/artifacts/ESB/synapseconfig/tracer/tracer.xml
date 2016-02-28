@@ -44,7 +44,7 @@
         <description />
     </proxy>
     <proxy xmlns="http://ws.apache.org/ns/synapse" name="TracerProxy"
-           transports="https,http" statistics="disable" trace="enable"
+           transports="https,http" statistics="enable" trace="enable"
            startOnLoad="true">
         <target>
             <inSequence>
