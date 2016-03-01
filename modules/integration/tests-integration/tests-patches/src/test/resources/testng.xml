@@ -51,6 +51,11 @@
             <class name="org.wso2.carbon.esb.passthru.transport.test.NoEntityBodyPropertyCheck"/>
         </classes>
     </test>
+    <test name="Custom Status Description Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA4423CustomStatusDescriptionTest"/>
+        </classes>
+    </test>
 
     <test name="QueryParam-Test" preserve-order="true" verbose="2">
         <classes>
