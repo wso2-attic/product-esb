@@ -1052,16 +1052,6 @@
     		<artifactId>org.wso2.ciphertool</artifactId>
     		<version>${cipher.tool.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.avro</groupId>
-                <artifactId>avro</artifactId>
-                <version>${avro.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>net.sf.opencsv</groupId>
-                <artifactId>opencsv</artifactId>
-                <version>${opencsv.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
     <properties>
