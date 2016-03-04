@@ -86,7 +86,7 @@
 		</log>
 		<drop />
 	</sequence>
-	<sequence name="testSequence" trace="enable">
+	<sequence name="testSequence" statistics="enable" trace="enable">
 		<log level="full">
 			<property name="Check" value="**SequenceTracerLog**" />
 		</log>
