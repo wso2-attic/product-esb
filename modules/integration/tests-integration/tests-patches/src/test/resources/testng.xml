@@ -102,6 +102,7 @@
         <classes>
             <class name="org.wso2.carbon.esb.jms.transport.test.JMSBrokerStartupTestCase" />
             <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA3714JMXPauseJMSListener" />
+            <class name="org.wso2.carbon.esb.mediators.store.ESBJAVA4470StoreMediatorEmptyOMArraySerializeException" />
         </classes>
     </test>
 
