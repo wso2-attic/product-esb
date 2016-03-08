@@ -294,7 +294,10 @@ public abstract class ESBIntegrationTest {
 		}
 	}
 
-
+	protected void isProxyNotDeployed(String proxyServiceName) throws Exception {
+		Assert.assertFalse(esbUtils.isProxyDeployed(contextUrls.getBackEndUrl(), sessionCookie,
+													proxyServiceName), "Proxy Deployment failed or time out");
+	}
 
 
 	protected void deleteInboundEndpoints() throws Exception {
@@ -499,7 +502,7 @@ public abstract class ESBIntegrationTest {
 		//    new String[]{"service.jks"}, "service.jks");
 		//  } else {
 		securityAdminServiceClient.applySecurity(serviceName, policyId + "", userGroups,
-		                                         new String[]{"wso2carbon.jks"}, "wso2carbon.jks");
+												 new String[]{"wso2carbon.jks"}, "wso2carbon.jks");
 		//  }
 		log.info("Security Scenario " + policyId + " Applied");
 
