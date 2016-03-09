@@ -211,5 +211,12 @@
         </classes>
     </test>
 
+<!--todo uncomment below test once ESB  moves to ntask version 4.6.0 or higher-->
+    <!--<test name="Test startup logs for FATAL error when registry is mounted" preserve-order="true" verbose="2">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.carbon.esb.ntask.CCOMMONS8SetTenantDomainTest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
 </suite>
 
