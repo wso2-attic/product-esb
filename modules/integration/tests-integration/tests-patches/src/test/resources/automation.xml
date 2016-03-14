@@ -257,6 +257,20 @@
                 <properties>
                 </properties>
             </instance>
+            <instance name="esbsRegTest" type="standalone" nonBlockingTransportEnabled="true">
+                <hosts>
+                    <host type="default">localhost</host>
+                </hosts>
+                <ports>
+                    <port type="http">9993</port>
+                    <port type="https">9673</port>
+                    <port type="nhttps">8473</port>
+                    <port type="nhttp">8510</port>
+                </ports>
+                <properties>
+
+                </properties>
+            </instance>
         </productGroup>
     </platform>
 
