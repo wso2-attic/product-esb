@@ -1070,7 +1070,7 @@
         <axiom.wso2.version>1.2.11.wso2v6</axiom.wso2.version>
 
         <!-- Synapse -->
-        <synapse.version>2.1.7-wso2v2-SNAPSHOT</synapse.version>
+        <synapse.version>2.1.7-wso2v3-SNAPSHOT</synapse.version>
 
         <!-- Axis2 Transport -->
         <axis2.transport.version>1.1.1-wso2v3-SNAPSHOT</axis2.transport.version>
