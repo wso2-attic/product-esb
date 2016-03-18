@@ -12,7 +12,7 @@
                 <property action="set" name="OUT_ONLY" scope="default" type="STRING" value="true"/>
                 <send>
                     <endpoint>
-                        <address uri="vfs:ftp://admin:admin@localhost:8085/in"/>
+                        <address uri="vfs:ftp://admin:admin@localhost:8086/in"/>
                     </endpoint>
                 </send>
                 <drop/>
@@ -28,7 +28,7 @@
                 <property action="set" name="OUT_ONLY" scope="default" type="STRING" value="true"/>
                 <send>
                     <endpoint>
-                        <address uri="vfs:ftp://admin:admin@localhost:8085/in"/>
+                        <address uri="vfs:ftp://admin:admin@localhost:8086/in"/>
                     </endpoint>
                 </send>
                 <drop/>
@@ -44,7 +44,7 @@
                 <property action="set" name="OUT_ONLY" scope="default" type="STRING" value="true"/>
                 <send>
                     <endpoint>
-                        <address uri="vfs:ftp://admin:admin@localhost:8085/in?transport.vfs.fileType=ASCII"/>
+                        <address uri="vfs:ftp://admin:admin@localhost:8086/in?transport.vfs.fileType=ASCII"/>
                     </endpoint>
                 </send>
                 <drop/>

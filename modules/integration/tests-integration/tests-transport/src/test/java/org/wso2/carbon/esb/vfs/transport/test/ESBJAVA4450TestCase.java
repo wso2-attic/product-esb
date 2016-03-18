@@ -44,7 +44,7 @@ public class ESBJAVA4450TestCase extends ESBIntegrationTest {
 		String FTPUsername = "admin";
 		String FTPPassword = "admin";
 		String inputFolderName = "in";
-		int FTPPort = 8085;
+		int FTPPort = 8086;
 		String pathToFtpDir = getClass()
 				.getResource(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" +
 				             File.separator + "vfsTransport" + File.separator).getPath();
@@ -65,11 +65,8 @@ public class ESBJAVA4450TestCase extends ESBIntegrationTest {
 
 		// start-up FTP server
 		ftpServerManager = new FTPServerManager(FTPPort, FTPFolder.getAbsolutePath(), FTPUsername, FTPPassword);
-		try {
-			ftpServerManager.startFtpServer();
-		} catch (Exception e) {
+		ftpServerManager.startFtpServer();
 
-		}
 		super.init();
 		// replace the axis2.xml enabled vfs transfer and restart the ESB server
 		// gracefully
@@ -120,16 +117,11 @@ public class ESBJAVA4450TestCase extends ESBIntegrationTest {
 		try {
 			super.cleanup();
 		} finally {
-			try {
-				Thread.sleep(3000);
-				ftpServerManager.stop();
-				log.info("FTP Server stopped successfully");
-				serverConfigurationManager.restoreToLastConfiguration();
-			} catch (Exception e) {
-
-			}
+			Thread.sleep(3000);
+			ftpServerManager.stop();
+			log.info("FTP Server stopped successfully");
+			serverConfigurationManager.restoreToLastConfiguration();
 		}
-
 	}
 
 }
