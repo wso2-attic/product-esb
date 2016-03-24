@@ -18,6 +18,8 @@
 
 package org.wso2.carbon.esb.tcp.inbound.transport.test;
 
+import org.apache.axiom.om.OMElement;
+import org.apache.axiom.om.util.AXIOMUtil;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -55,8 +57,9 @@ public class TCPInboundHeaderTrailerMode extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
     @Test(groups = "wso2.esb")
     public void headerTrailerTest() throws Exception {
+        addInboundEndpoint(addEndpoint());
 
-        Socket socket = new Socket("localhost", 9091);
+        Socket socket = new Socket("localhost", 29091);
         OutputStream out = socket.getOutputStream();
         final byte[] CR = { 0x0D };
 
@@ -112,10 +115,29 @@ public class TCPInboundHeaderTrailerMode extends ESBIntegrationTest {
 
         org.testng.Assert.assertTrue(response.contains("getQuoteResponse"));
 
+        deleteInboundEndpoints();
     }
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
         super.cleanup();
     }
+
+    private OMElement addEndpoint() throws Exception {
+        return AXIOMUtil.stringToOM("<inboundEndpoint xmlns=\"http://ws.apache.org/ns/synapse\"\n" +
+                                    "        name=\"EP1\" onError=\"fault\" protocol=\"tcp\"\n" +
+                                    "        sequence=\"Seq1\" suspend=\"false\">\n" +
+                                    "        <parameters>\n" +
+                                    "            <parameter name=\"inbound.tcp.outOnly\">false</parameter>\n" +
+                                    "            <parameter name=\"inbound.tcp.Header\">0B</parameter>\n" +
+                                    "            <parameter name=\"inbound.tcp.CharSet\">UTF-8</parameter>\n" +
+                                    "            <parameter name=\"inbound.tcp.Port\">29091</parameter>\n" +
+                                    "            <parameter name=\"inbound.tcp.TimeOut\">10000</parameter>\n" +
+                                    "            <parameter name=\"inbound.tcp.ContentType\">txt/xml</parameter>\n" +
+                                    "            <parameter name=\"inbound.tcp.Trailer.byte1\">1C</parameter>\n" +
+                                    "            <parameter name=\"inbound.tcp.Trailer.byte2\">0D</parameter>\n" +
+                                    "        </parameters>\n" +
+                                    "    </inboundEndpoint>");
+    }
+
 }

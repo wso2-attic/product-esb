@@ -18,6 +18,8 @@
 
 package org.wso2.carbon.esb.tcp.inbound.transport.test;
 
+import org.apache.axiom.om.OMElement;
+import org.apache.axiom.om.util.AXIOMUtil;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -55,7 +57,9 @@ public class TCPInboundTagMode  extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = { ExecutionEnvironment.ALL})
     @Test(groups = "wso2.esb")
     public void decodeByTagModeTest() throws Exception {
-        Socket socket = new Socket("localhost", 9092);
+        addInboundEndpoint(addEndpoint());
+
+        Socket socket = new Socket("localhost", 29092);
         socket.setKeepAlive(true);
         OutputStream out = socket.getOutputStream();
 
@@ -95,11 +99,28 @@ public class TCPInboundTagMode  extends ESBIntegrationTest {
         socket.close();
 
         org.testng.Assert.assertTrue(response.contains("getQuoteResponse"));
+        //deleteInboundEndpoints();
+
     }
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
-        super.cleanup();
+        //super.cleanup();
+    }
+
+    private OMElement addEndpoint() throws Exception {
+        return AXIOMUtil.stringToOM("<inboundEndpoint xmlns=\"http://ws.apache.org/ns/synapse\"\n" +
+                                    "        name=\"EP2\" onError=\"fault\" protocol=\"tcp\"\n" +
+                                    "        sequence=\"Seq2\" suspend=\"false\">\n" +
+                                    "        <parameters>\n" +
+                                    "            <parameter name=\"inbound.tcp.enclosure.tag\">foo</parameter>\n" +
+                                    "            <parameter name=\"inbound.tcp.outOnly\">false</parameter>\n" +
+                                    "            <parameter name=\"inbound.tcp.CharSet\">UTF-8</parameter>\n" +
+                                    "            <parameter name=\"inbound.tcp.Port\">29092</parameter>\n" +
+                                    "            <parameter name=\"inbound.tcp.TimeOut\">10000</parameter>\n" +
+                                    "            <parameter name=\"inbound.tcp.ContentType\">application/xml</parameter>\n" +
+                                    "        </parameters>\n" +
+                                    "    </inboundEndpoint>");
     }
 
 }
