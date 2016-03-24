@@ -437,6 +437,13 @@
             <destName>hl7.properties</destName>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
+        </file>
+     	<file>
+            <source>src/main/conf/tcp.properties</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
+            <destName>tcp.properties</destName>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>             
         <file>
             <source>src/main/conf/access-log.properties</source>
