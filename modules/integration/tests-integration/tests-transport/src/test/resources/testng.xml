@@ -141,6 +141,12 @@
         </packages>
     </test>
 
+    <test name="inbound-TCP Transport-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.tcp.inbound.transport.test"/>
+        </packages>
+    </test>
+
     <test name="MailTo-transport-Test-Receiver" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mailto.transport.receiver.test"/>
