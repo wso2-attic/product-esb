@@ -15,7 +15,7 @@
  ~ KIND, either express or implied.  See the License for the
  ~ specific language governing permissions and limitations
  ~ under the License.
- -->    
+ -->
 <assembly>
     <formats>
         <format>zip</format>
@@ -288,6 +288,12 @@
         </file>
 
         <file>
+            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-agent-config.xml</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf/data-bridge</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
             <source>src/main/conf/axis2.xml</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/axis2</outputDirectory>
             <destName>axis2.xml</destName>
@@ -408,18 +414,6 @@
             <source>src/main/conf/security/secret-conf.properties</source>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/security</outputDirectory>
             <destName>secret-conf.properties</destName>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/governance.xml</source>
-            <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-         <file>
-            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/association-config.xml</source>
-            <outputDirectory>wso2esb-${pom.version}/repository/conf/etc</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>

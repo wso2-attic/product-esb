@@ -52,10 +52,9 @@ public class InboundTransportTest extends ESBIntegrationTest {
 		// create InboundFileFolder if not exists
 		if (InboundFileFolder.exists()) {
 			FileUtils.deleteDirectory(InboundFileFolder);
-		} else {
-			Assert.assertTrue(InboundFileFolder.mkdir(),
-					"InboundFileFolder not created");
 		}
+		Assert.assertTrue(InboundFileFolder.mkdir(), "InboundFileFolder not created");
+
 
 		super.init();
 

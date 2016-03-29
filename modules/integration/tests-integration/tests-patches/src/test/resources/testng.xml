@@ -51,6 +51,11 @@
             <class name="org.wso2.carbon.esb.passthru.transport.test.NoEntityBodyPropertyCheck"/>
         </classes>
     </test>
+    <test name="Custom Status Description Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA4423CustomStatusDescriptionTest"/>
+        </classes>
+    </test>
 
     <test name="QueryParam-Test" preserve-order="true" verbose="2">
         <classes>
@@ -97,6 +102,8 @@
         <classes>
             <class name="org.wso2.carbon.esb.jms.transport.test.JMSBrokerStartupTestCase" />
             <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA3714JMXPauseJMSListener" />
+            <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA3282CalloutJMSHeadersTestCase" />
+            <class name="org.wso2.carbon.esb.mediators.store.ESBJAVA4470StoreMediatorEmptyOMArraySerializeException" />
         </classes>
     </test>
 
@@ -197,6 +204,19 @@
 				name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4239_AccessHTTPSCAfterCallout"></class>
 		</classes>
 	</test>
+
+    <test name="ESBJAVA4394" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA4394"/>
+        </classes>
+    </test>
+
+<!--todo uncomment below test once ESB  moves to ntask version 4.6.0 or higher-->
+    <!--<test name="Test startup logs for FATAL error when registry is mounted" preserve-order="true" verbose="2">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.carbon.esb.ntask.CCOMMONS8SetTenantDomainTest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 
 </suite>
 
