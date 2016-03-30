@@ -26,6 +26,7 @@ import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClie
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.activation.DataHandler;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -45,10 +46,10 @@ public class DataMapperOneToOneTestCase extends ESBIntegrationTest {
                 (contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName(), context.getContextTenant().getContextUser().getPassword());
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Datamapper simple one to one xml to xml conversion")
+    @Test(groups = {"wso2.esb"}, description = "Datamapper simple one to one xml to xml conversion", enabled = false)
     public void testOneToOneXmlToXml() throws Exception {
-        loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "synapse.xml");
-        uploadResourcesToGovernanceRegistry(REGISTRY_ROOT_PATH, ARTIFACT_ROOT_PATH);
+        loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "xml_to_xml/" + File.separator + "synapse.xml");
+        uploadResourcesToGovernanceRegistry(REGISTRY_ROOT_PATH + "xml_to_xml/", ARTIFACT_ROOT_PATH + "xml_to_xml" + File.separator);
 
         String request =
                 "   <company>\n" +
@@ -90,10 +91,11 @@ public class DataMapperOneToOneTestCase extends ESBIntegrationTest {
         Assert.assertEquals(response, "<company><offices><usoffice><address>WSO2787CA</address><phone> +1 650 745 4499</phone><fax> +1 408 689 4328</fax></usoffice><europeoffice><address>WSO22-6 London</address><phone>+44 203 318 6025</phone></europeoffice><asiaoffice><address>WSO220Colombo 03</address><phone>+94 11 214 5345</phone><fax>+94 11 2145300</fax></asiaoffice></offices></company>");
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Datamapper simple one to one xml to xml conversion")
+    @Test(groups = {"wso2.esb"}, description = "Datamapper simple one to one json to json conversion")
     public void testOneToOneJsonToJson() throws Exception {
-        loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "synapse.xml");
-        uploadResourcesToGovernanceRegistry(REGISTRY_ROOT_PATH, ARTIFACT_ROOT_PATH);
+        loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "json_to_json/" + File.separator + "synapse.xml");
+        uploadResourcesToGovernanceRegistry(REGISTRY_ROOT_PATH + "json_to_json/", ARTIFACT_ROOT_PATH + "json_to_json" + File.separator);
+
 
         String request = "{\n" +
                 "    \"name\": \"WSO2\",\n" +
@@ -171,17 +173,17 @@ public class DataMapperOneToOneTestCase extends ESBIntegrationTest {
     private void uploadResourcesToGovernanceRegistry(String registryRoot, String artifactRoot) throws Exception {
         resourceAdminServiceClient.addCollection("/_system/governance/", registryRoot, "", "");
         resourceAdminServiceClient.addResource("/_system/governance/" + registryRoot + "testMap.js", "text/plain", "",
-                new DataHandler(new URL("file:///" + getClass().getResource(artifactRoot + "/testMap.js").getPath())));
-        resourceAdminServiceClient.addResource("/_system/governance/" + registryRoot + "inschema.json", "", "",
-                new DataHandler(new URL("file:///" + getClass().getResource(artifactRoot + "/inschema.json").getPath())));
-        resourceAdminServiceClient.addResource("/_system/governance/" + registryRoot + "outschema.json", "", "",
-                new DataHandler(new URL("file:///" + getClass().getResource(artifactRoot + "/outschema.json").getPath())));
+                new DataHandler(new URL("file:///" + getClass().getResource(artifactRoot + "testMap.js").getPath())));
+        resourceAdminServiceClient.addResource("/_system/governance/" + registryRoot + "inschema.jsschema", "", "",
+                new DataHandler(new URL("file:///" + getClass().getResource(artifactRoot + "inschema.jsschema").getPath())));
+        resourceAdminServiceClient.addResource("/_system/governance/" + registryRoot + "outschema.jsschema", "", "",
+                new DataHandler(new URL("file:///" + getClass().getResource(artifactRoot + "outschema.jsschema").getPath())));
     }
 
     @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         try {
-            resourceAdminServiceClient.deleteResource("/_system/governance/datamapper/one_to_one/");
+            resourceAdminServiceClient.deleteResource("/_system/governance/datamapper/one_to_one");
         } finally {
             super.cleanup();
             Thread.sleep(3000);

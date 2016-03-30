@@ -19,24 +19,6 @@
 
 <definitions xmlns="http://ws.apache.org/ns/synapse">
     <proxy
-            name="OneToOneXmlToXml"
-            transports="http,https"
-            statistics="disable"
-            trace="disable"
-            startOnLoad="true">
-        <target>
-            <inSequence>
-                <datamapper config="gov:/datamapper/one_to_one/testMap.js"
-                            inputSchema="gov:/datamapper/one_to_one/inschema.json"
-                            outputSchema="gov:/datamapper/one_to_one/outschema.json"
-                            inputType="XML"
-                            outputType="XML"/>
-                <respond/>
-            </inSequence>
-        </target>
-        <description/>
-    </proxy>
-    <proxy
             name="OneToOneJsonToJson"
             transports="http,https"
             statistics="disable"
@@ -44,9 +26,9 @@
             startOnLoad="true">
         <target>
             <inSequence>
-                <datamapper config="gov:/datamapper/one_to_one/testMap.js"
-                            inputSchema="gov:/datamapper/one_to_one/inschema.json"
-                            outputSchema="gov:/datamapper/one_to_one/outschema.json"
+                <datamapper config="gov:/datamapper/one_to_one/json_to_json/testMap.js"
+                            inputSchema="gov:/datamapper/one_to_one/json_to_json/inschema.jsschema"
+                            outputSchema="gov:/datamapper/one_to_one/json_to_json/outschema.jsschema"
                             inputType="JSON"
                             outputType="JSON"/>
                 <respond/>
