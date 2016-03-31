@@ -19,30 +19,17 @@
 package org.wso2.carbon.esb.rest.test.api;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.vfs2.FileUtil;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.carbon.utils.ServerConstants;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.common.TestConfigurationProvider;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
@@ -58,12 +45,10 @@ public class ESBJAVA4519TestCase extends ESBIntegrationTest {
 		logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 	}
 
-	@Test(groups = {
-			"wso2.esb" }, description = "Test whether file get restored after deployment failure") public void testRestoringToPreviousConfigurationOnHotDeploymentFailure()
-			throws Exception {
+	@Test(groups = {"wso2.esb" }, description = "Test whether file get restored after deployment failure")
+	public void testRestoringToPreviousConfigurationOnHotDeploymentFailure() throws Exception {
 
 		boolean messageInLog = false;
-
 		String esbApiPath = System.getProperty(ServerConstants.CARBON_HOME) + File.separator +
 		                    "repository" + File.separator + "deployment" + File.separator + "server" + File.separator +
 		                    "synapse-configs" + File.separator + "default" + File.separator + "api" + File.separator +
@@ -90,9 +75,7 @@ public class ESBJAVA4519TestCase extends ESBIntegrationTest {
 		}
 
 		LogEvent[] logs;
-
 		Files.copy(corruptedApiFile.toPath(), esbApiFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
 		for (int i = 0; i < 50; i++) {
 			logs = logViewerClient.getAllRemoteSystemLogs();
 			for (LogEvent logEvent : logs) {
