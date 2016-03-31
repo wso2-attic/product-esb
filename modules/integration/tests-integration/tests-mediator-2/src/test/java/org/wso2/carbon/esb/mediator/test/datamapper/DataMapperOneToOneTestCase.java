@@ -19,19 +19,9 @@
 package org.wso2.carbon.esb.mediator.test.datamapper;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
-import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
-import javax.activation.DataHandler;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
 
 public class DataMapperOneToOneTestCase extends DataMapperIntegrationTest {
 

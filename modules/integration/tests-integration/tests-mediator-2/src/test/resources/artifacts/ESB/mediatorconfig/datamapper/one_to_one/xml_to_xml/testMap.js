@@ -1,19 +1,20 @@
-function map_S_company_S_company( ){ 
+function map_S_Envelope_S_company( ){
 var outputcompany={};
-outputcompany.offices ={};
-outputcompany.offices.usoffice ={};
-outputcompany.offices.usoffice.address = inputcompany.name.concat(inputcompany.usoffice.address.no,inputcompany.usoffice.address.city);
-outputcompany.offices.usoffice.phone = inputcompany.usoffice.phone;
-outputcompany.offices.usoffice.fax = inputcompany.usoffice.fax;
 
-outputcompany.offices.europeoffice ={};
-outputcompany.offices.europeoffice.address = inputcompany.name.concat(inputcompany.europeoffice.address.no,inputcompany.europeoffice.address.city);
-outputcompany.offices.europeoffice.phone = inputcompany.europeoffice.phone;
-outputcompany.offices.europeoffice.fax = inputcompany.europeoffice.fax;
+outputcompany = {};
+outputcompany.offices = {};
+outputcompany.offices.asiaoffice = {};
+outputcompany.offices.europeoffice = {};
+outputcompany.offices.usoffice = {};
 
-outputcompany.offices.asiaoffice ={};
-outputcompany.offices.asiaoffice.address = inputcompany.name.concat(inputcompany.asiaoffice.address.no,inputcompany.asiaoffice.address.city);
-outputcompany.offices.asiaoffice.phone = inputcompany.asiaoffice.phone;
-outputcompany.offices.asiaoffice.fax = inputcompany.asiaoffice.fax;
+
+outputcompany.offices.asiaoffice.fax = inputsoapenv_Envelope.soapenv_Body.company.usoffice.fax;
+outputcompany.offices.asiaoffice.phone = inputsoapenv_Envelope.soapenv_Body.company.usoffice.phone;
+outputcompany.offices.asiaoffice.address = inputsoapenv_Envelope.soapenv_Body.company.usoffice.address.street;
+outputcompany.offices.europeoffice.fax = inputsoapenv_Envelope.soapenv_Body.company.asiaoffice.fax;
+outputcompany.offices.europeoffice.phone = inputsoapenv_Envelope.soapenv_Body.company.asiaoffice.phone;
+outputcompany.offices.europeoffice.address = inputsoapenv_Envelope.soapenv_Body.company.asiaoffice.address.street;
+outputcompany.offices.usoffice.phone = inputsoapenv_Envelope.soapenv_Body.company.europeoffice.phone;
+outputcompany.offices.usoffice.address = inputsoapenv_Envelope.soapenv_Body.company.europeoffice.address.street;
 return outputcompany;
 }

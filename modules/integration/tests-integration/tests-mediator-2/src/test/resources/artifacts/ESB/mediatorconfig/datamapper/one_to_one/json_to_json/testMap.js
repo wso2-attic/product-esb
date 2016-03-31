@@ -1,4 +1,4 @@
-function map_S_company_S_company( ){ 
+function map_S_company_S_company( ){
 var outputcompany={};
 outputcompany.offices ={};
 outputcompany.offices.usoffice ={};
