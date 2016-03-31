@@ -33,20 +33,12 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class DataMapperOneToOneTestCase extends ESBIntegrationTest {
+public class DataMapperOneToOneTestCase extends DataMapperIntegrationTest {
 
-    private ResourceAdminServiceClient resourceAdminServiceClient;
     private final String ARTIFACT_ROOT_PATH = "/artifacts/ESB/mediatorconfig/datamapper/one_to_one/";
     private final String REGISTRY_ROOT_PATH = "datamapper/one_to_one/";
 
-    @BeforeClass(alwaysRun = true)
-    public void setEnvironment() throws Exception {
-        super.init();
-        resourceAdminServiceClient = new ResourceAdminServiceClient
-                (contextUrls.getBackEndUrl(), context.getContextTenant().getContextUser().getUserName(), context.getContextTenant().getContextUser().getPassword());
-    }
-
-    @Test(groups = {"wso2.esb"}, description = "Datamapper simple one to one xml to xml conversion", enabled = false)
+    @Test(groups = {"wso2.esb"}, description = "Datamapper simple one to one xml to xml conversion")
     public void testOneToOneXmlToXml() throws Exception {
         loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "xml_to_xml/" + File.separator + "synapse.xml");
         uploadResourcesToGovernanceRegistry(REGISTRY_ROOT_PATH + "xml_to_xml/", ARTIFACT_ROOT_PATH + "xml_to_xml" + File.separator);
@@ -136,59 +128,6 @@ public class DataMapperOneToOneTestCase extends ESBIntegrationTest {
 
         String response = sendRequest(getProxyServiceURLHttp("OneToOneJsonToJson"), request, "application/json");
         Assert.assertEquals(response, "{\"offices\":{\"usoffice\":{\"address\":\"WSO2787CA\",\"phone\":\" +1 650 745 4499\",\"fax\":\" +1 408 689 4328\"},\"europeoffice\":{\"address\":\"WSO22-6 London\",\"phone\":\"+44 203 318 6025\",\"fax\":\"+44 11 2145300\"},\"asiaoffice\":{\"address\":\"WSO220Colombo 03\",\"phone\":\"+94 11 214 5345\",\"fax\":\"+94 11 2145300\"}}}");
-    }
-
-    private String sendRequest(String addUrl, String request, String contentType)
-            throws IOException {
-        String charset = "UTF-8";
-        URLConnection connection = new URL(addUrl).openConnection();
-        connection.setDoOutput(true);
-        connection.setRequestProperty("Accept-Charset", charset);
-        connection.setRequestProperty("Content-Type",
-                contentType + ";charset=" + charset);
-        OutputStream output = null;
-        try {
-            output = connection.getOutputStream();
-            output.write(request.getBytes(charset));
-        } finally {
-            if (output != null) {
-                output.close();
-            }
-        }
-        InputStream response = connection.getInputStream();
-        String out = "[Fault] No Response.";
-        if (response != null) {
-            StringBuilder sb = new StringBuilder();
-            byte[] bytes = new byte[1024];
-            int len;
-            while ((len = response.read(bytes)) != -1) {
-                sb.append(new String(bytes, 0, len));
-            }
-            out = sb.toString();
-        }
-
-        return out;
-    }
-
-    private void uploadResourcesToGovernanceRegistry(String registryRoot, String artifactRoot) throws Exception {
-        resourceAdminServiceClient.addCollection("/_system/governance/", registryRoot, "", "");
-        resourceAdminServiceClient.addResource("/_system/governance/" + registryRoot + "testMap.js", "text/plain", "",
-                new DataHandler(new URL("file:///" + getClass().getResource(artifactRoot + "testMap.js").getPath())));
-        resourceAdminServiceClient.addResource("/_system/governance/" + registryRoot + "inschema.jsschema", "", "",
-                new DataHandler(new URL("file:///" + getClass().getResource(artifactRoot + "inschema.jsschema").getPath())));
-        resourceAdminServiceClient.addResource("/_system/governance/" + registryRoot + "outschema.jsschema", "", "",
-                new DataHandler(new URL("file:///" + getClass().getResource(artifactRoot + "outschema.jsschema").getPath())));
-    }
-
-    @AfterClass(alwaysRun = true)
-    public void close() throws Exception {
-        try {
-            resourceAdminServiceClient.deleteResource("/_system/governance/datamapper/one_to_one");
-        } finally {
-            super.cleanup();
-            Thread.sleep(3000);
-            resourceAdminServiceClient = null;
-        }
     }
 
 }
