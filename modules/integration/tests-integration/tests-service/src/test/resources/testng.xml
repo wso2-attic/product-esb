@@ -7,7 +7,7 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestSuiteListener"/>
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
-    <test name="ProxyService-Test" preserve-order="true" verbose="2">
+    <test name="ProxyService-Test" preserve-order="true" verbose="2" parallel="false">
         <packages>
             <package name="org.wso2.carbon.esb.proxyservice.test.proxyservices"/>
             <package name="org.wso2.carbon.esb.proxyservice.test.loggingProxy"/>
@@ -32,7 +32,7 @@
             </class>
         </classes>
     </test>
-    <test name="Endpoint-Test" preserve-order="true" verbose="2">
+    <test name="Endpoint-Test" preserve-order="true" verbose="2" parallel="false">
         <packages>
             <package name="org.wso2.carbon.esb.endpoint.test"/>
         </packages>
@@ -43,12 +43,12 @@
             <package name="org.wso2.carbon.esb.localentry.test"/>
         </packages>
     </test>
-    <test name="Rest-API-Test" preserve-order="true" verbose="2">
+    <test name="Rest-API-Test" preserve-order="true" verbose="2" parallel="false">
         <packages>
             <package name="org.wso2.carbon.esb.rest.test.api"/>
         </packages>
     </test>
-    <test name="Rest-API-Header-Test" preserve-order="true" verbose="2">
+    <test name="Rest-API-Header-Test" preserve-order="true" verbose="2" parallel="false">
         <packages>
             <package name="org.wso2.carbon.esb.rest.test.header"/>
         </packages>
@@ -60,7 +60,7 @@
     		<package name="org.wso2.carbon.esb.rest.test.security"/>
     	</packages>
     </test-->   
-    <test name="Rest-JSON-Test" preserve-order="true" verbose="2">
+    <test name="Rest-JSON-Test" preserve-order="true" verbose="2" parallel="false">
         <packages>
             <package name="org.wso2.carbon.esb.json.test"/>
         </packages>
@@ -73,17 +73,17 @@
         </classes>
 
     </test>
-    <test name="CAR-Deployment" preserve-order="true" verbose="2">
+    <test name="CAR-Deployment" preserve-order="true" verbose="2" parallel="false">
         <packages>
             <package name="org.wso2.carbon.esb.car.deployment.test"/>
         </packages>
     </test>
-    <test name="ScheduleTask-Test" preserve-order="true" verbose="2">
+    <test name="ScheduleTask-Test" preserve-order="true" verbose="2" parallel="false">
         <packages>
             <package name="org.wso2.carbon.esb.scheduledtask.test"/>
         </packages>
     </test>
-    <test name="Tenant-Test" preserve-order="true" verbose="2">
+    <test name="Tenant-Test" preserve-order="true" verbose="2" parallel="false">
         <packages>
             <package name="org.wso2.carbon.esb.tenant.test.*"/>
         </packages>
