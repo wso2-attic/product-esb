@@ -70,7 +70,7 @@ public class DataMapperOneToOneTestCase extends DataMapperIntegrationTest {
                         "      </asiaoffice>\n" +
                         "   </company>\n";
         String response = sendRequest(getProxyServiceURLHttp("OneToOneXmlToXml"), request, "text/xml");
-        Assert.assertEquals(response, "<company><offices><usoffice><address>WSO2787CA</address><phone> +1 650 745 4499</phone><fax> +1 408 689 4328</fax></usoffice><europeoffice><address>WSO22-6 London</address><phone>+44 203 318 6025</phone></europeoffice><asiaoffice><address>WSO220Colombo 03</address><phone>+94 11 214 5345</phone><fax>+94 11 2145300</fax></asiaoffice></offices></company>");
+        Assert.assertEquals(response, "<company><offices><asiaoffice><fax> +1 408 689 4328</fax><phone> +1 650 745 4499</phone><address>Castro Street,Mountain View</address></asiaoffice><europeoffice><fax>+94 11 2145300</fax><phone>+94 11 214 5345</phone><address>Palm Grove</address></europeoffice><usoffice><phone>+44 203 318 6025</phone><address>Boundary Row</address></usoffice></offices></company>");
     }
 
     @Test(groups = {"wso2.esb"}, description = "Datamapper simple one to one json to json conversion")
