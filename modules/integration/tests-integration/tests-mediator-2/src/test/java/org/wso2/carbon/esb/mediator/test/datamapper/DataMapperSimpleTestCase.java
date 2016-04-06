@@ -27,9 +27,8 @@ public class DataMapperSimpleTestCase extends DataMapperIntegrationTest {
 	private final String ARTIFACT_ROOT_PATH = "/artifacts/ESB/mediatorconfig/datamapper/one_to_one/";
 	private final String REGISTRY_ROOT_PATH = "datamapper/one_to_one/";
 
-	@Test(groups = {
-			"wso2.esb" }, description = "Datamapper simple one to one xml to xml conversion") public void testOneToOneXmlToXml()
-			throws Exception {
+	@Test(groups = { "wso2.esb" }, description = "Datamapper simple one to one xml to xml conversion")
+	public void testOneToOneXmlToXml() throws Exception {
 		loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "xml_to_xml/" + File.separator + "synapse.xml");
 		uploadResourcesToGovernanceRegistry(REGISTRY_ROOT_PATH + "xml_to_xml/",
 		                                    ARTIFACT_ROOT_PATH + "xml_to_xml" + File.separator);
@@ -78,10 +77,8 @@ public class DataMapperSimpleTestCase extends DataMapperIntegrationTest {
                             "6025</phone><address>WSO2787CA</address></usoffice></offices></company>");
 	}
 
-	@Test(groups = {
-			"wso2.esb" }, description = "Datamapper simple one to one json to json conversion") public void
-    testOneToOneJsonToJson()
-			throws Exception {
+	@Test(groups = { "wso2.esb" }, description = "Datamapper simple one to one json to json conversion")
+	public void testOneToOneJsonToJson() throws Exception {
 		loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "json_to_json/" + File.separator + "synapse.xml");
 		uploadResourcesToGovernanceRegistry(REGISTRY_ROOT_PATH + "json_to_json/",
 		                                    ARTIFACT_ROOT_PATH + "json_to_json" + File.separator);
@@ -133,4 +130,3 @@ public class DataMapperSimpleTestCase extends DataMapperIntegrationTest {
 	}
 
 }
-
