@@ -66,8 +66,10 @@ public class ESBJAVA4519TestCase extends ESBIntegrationTest {
 
 		long startTime = System.currentTimeMillis();
 
-		while ((startTime + 50000) > System.currentTimeMillis()) {
+		while ((startTime + 60000) > System.currentTimeMillis()) {
+			log.info("File is written to the file system.");
 			if (esbApiFile.exists() && FileUtils.contentEquals(validApiFile, esbApiFile)) {
+				Thread.sleep(5000);
 				break;
 			} else {
 				Thread.sleep(20000);
@@ -76,7 +78,7 @@ public class ESBJAVA4519TestCase extends ESBIntegrationTest {
 
 		LogEvent[] logs;
 		Files.copy(corruptedApiFile.toPath(), esbApiFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 10; i++) {
 			logs = logViewerClient.getAllRemoteSystemLogs();
 			for (LogEvent logEvent : logs) {
 				String message = logEvent.getMessage();
@@ -86,7 +88,7 @@ public class ESBJAVA4519TestCase extends ESBIntegrationTest {
 				}
 			}
 			if (!messageInLog) {
-				Thread.sleep(1000);
+				Thread.sleep(10000);
 			} else {
 				break;
 			}
