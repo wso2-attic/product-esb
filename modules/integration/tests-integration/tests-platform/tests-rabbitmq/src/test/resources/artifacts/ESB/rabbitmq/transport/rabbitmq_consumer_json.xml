@@ -46,7 +46,7 @@
                 <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
                 <send>
                     <endpoint>
-                        <http method="post" uri-template="http://localhost:8280/deviceid/"/>
+                        <http method="post" uri-template="http://localhost:8480/deviceid/"/>
                     </endpoint>
                 </send>
             </inSequence>

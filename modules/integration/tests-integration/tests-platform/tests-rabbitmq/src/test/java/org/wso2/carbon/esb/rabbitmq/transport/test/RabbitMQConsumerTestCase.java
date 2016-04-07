@@ -32,22 +32,30 @@ import java.io.IOException;
 public class RabbitMQConsumerTestCase extends ESBIntegrationTest {
 
     private LogViewerClient logViewer;
+    private RabbitMQProducerClient sender;
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         super.init();
+        initRabbitMQBroker();
         loadESBConfigurationFromClasspath("/artifacts/ESB/rabbitmq/transport/rabbitmq_consumer_proxy.xml");
         logViewer = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+    }
+
+    private void initRabbitMQBroker() {
+        sender = new RabbitMQProducerClient("localhost", 5672, "guest", "guest");
+        try {
+            sender.declareAndConnect("exchange2", "queue2");
+        } catch (IOException e) {
+            Assert.fail("Could not connect to RabbitMQ broker");
+        }
     }
 
     @Test(groups = {"wso2.esb"}, description = "Test ESB as a RabbitMQ Consumer ")
     public void testRabbitMQConsumer() throws Exception {
         int beforeLogSize = logViewer.getAllRemoteSystemLogs().length;
 
-        RabbitMQProducerClient sender = new RabbitMQProducerClient("localhost", 5672, "guest", "guest");
-
         try {
-            sender.declareAndConnect("exchange2", "queue2");
             String message =
                     "<ser:placeOrder xmlns:ser=\"http://services.samples\">\n" +
                             "<ser:order>\n" +
@@ -57,12 +65,10 @@ public class RabbitMQConsumerTestCase extends ESBIntegrationTest {
                             "</ser:order>\n" +
                             "</ser:placeOrder>";
             for (int i = 0; i < 200; i++) {
-                sender.sendBasicMessage(message);
+                sender.sendMessage(message, "text/plain");
             }
         } catch (IOException e) {
             Assert.fail("Could not connect to RabbitMQ broker");
-        } finally {
-            sender.disconnect();
         }
 
         Thread.sleep(20000);
@@ -85,18 +91,13 @@ public class RabbitMQConsumerTestCase extends ESBIntegrationTest {
     public void testRabbitMQConsumerLargeMessage() throws Exception {
         int beforeLogSize = logViewer.getAllRemoteSystemLogs().length;
 
-        RabbitMQProducerClient sender = new RabbitMQProducerClient("localhost", 5672, "guest", "guest");
-
         try {
-            sender.declareAndConnect("exchange2", "queue2");
             String message = FixedSizeSymbolGenerator.generateMessageKB(10);
             for (int i = 0; i < 200; i++) {
-                sender.sendBasicMessage(message);
+                sender.sendMessage(message, "text/plain");
             }
         } catch (IOException e) {
             Assert.fail("Could not connect to RabbitMQ broker");
-        } finally {
-            sender.disconnect();
         }
 
         Thread.sleep(20000);
@@ -118,6 +119,8 @@ public class RabbitMQConsumerTestCase extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void end() throws Exception {
         super.cleanup();
+        sender.disconnect();
+        sender = null;
         logViewer = null;
     }
 }

@@ -31,19 +31,28 @@ import java.io.IOException;
 public class RabbitMQJSONConsumerTestCase extends ESBIntegrationTest {
 
     private LogViewerClient logViewer;
+    private RabbitMQProducerClient sender;
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         super.init();
+        initRabbitMQBroker();
         loadESBConfigurationFromClasspath("/artifacts/ESB/rabbitmq/transport/rabbitmq_consumer_json.xml");
         logViewer = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+    }
+
+    private void initRabbitMQBroker() {
+        sender = new RabbitMQProducerClient("localhost", 5672, "guest", "guest");
+        try {
+            sender.declareAndConnect("exchange2", "queue2");
+        } catch (IOException e) {
+            Assert.fail("Could not connect to RabbitMQ broker");
+        }
     }
 
     @Test(groups = {"wso2.esb"}, description = "Test ESB as a RabbitMQ consumer for JSON messages ")
     public void testRabbitMQJSONConsumer() throws Exception {
         int beforeLogSize = logViewer.getAllRemoteSystemLogs().length;
-
-        RabbitMQProducerClient sender = new RabbitMQProducerClient("localhost", 5672, "guest", "guest");
 
         try {
             sender.declareAndConnect("exchange2", "queue2");
@@ -51,8 +60,6 @@ public class RabbitMQJSONConsumerTestCase extends ESBIntegrationTest {
             sender.sendMessage(message, "application/json");
         } catch (IOException e) {
             Assert.fail("Could not connect to RabbitMQ broker");
-        } finally {
-            sender.disconnect();
         }
 
         Thread.sleep(20000);
@@ -75,6 +82,8 @@ public class RabbitMQJSONConsumerTestCase extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void end() throws Exception {
         super.cleanup();
+        sender.disconnect();
+        sender = null;
         logViewer = null;
     }
 }

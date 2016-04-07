@@ -114,12 +114,11 @@ public class RabbitMQProducerTestCase extends ESBIntegrationTest {
 
     private String getFixedSizeSymbolKB(String symbol, double size) {
         StringBuilder sb = new StringBuilder();
-        String message = symbol;
-        int length = message.length();
+        int length = symbol.length();
         double bytes = size * 1024;
         sb.append(" WSO2 ");
         for (int i = 0; i < bytes; i += length) {
-            sb.append(message);
+            sb.append(symbol);
         }
         return sb.toString();
     }
