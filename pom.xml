@@ -1052,7 +1052,6 @@
                 <artifactId>org.wso2.ciphertool</artifactId>
                 <version>${cipher.tool.version}</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
     <properties>
