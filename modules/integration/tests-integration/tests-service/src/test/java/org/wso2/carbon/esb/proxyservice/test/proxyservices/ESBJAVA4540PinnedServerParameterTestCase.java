@@ -24,6 +24,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
+import org.wso2.carbon.proxyadmin.stub.types.carbon.ProxyData;
 import org.wso2.esb.integration.common.clients.proxy.admin.ProxyServiceAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
@@ -37,10 +38,12 @@ import java.io.File;
 public class ESBJAVA4540PinnedServerParameterTestCase extends ESBIntegrationTest {
 
     private final String proxyServiceName = "pinnedServerProxy";
+    private final String proxyServiceNameEditProxy = "EditProxyWithPinnedServer";
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
+        loadESBConfigurationFromClasspath("/artifacts/ESB/proxyconfig/proxy/proxyservice/editProxyWithPinnedServer.xml");
     }
 
     @Test(groups = "wso2.esb", description = "Deploying proxy when the pinnedServer is having another instance name")
@@ -70,9 +73,39 @@ public class ESBJAVA4540PinnedServerParameterTestCase extends ESBIntegrationTest
                 , proxyServiceName), "Proxy service deployed successfully");
     }
 
+    @Test(groups = "wso2.esb", description = "Editing a proxy service when the pinnedServer is having" +
+                                             " another instance name")
+    public void modifyProxyService() throws Exception {
+        ProxyServiceAdminClient proxyAdmin = new ProxyServiceAdminClient(contextUrls.getBackEndUrl()
+                , getSessionCookie());
+        ProxyData proxyData = proxyAdmin.getProxyDetails(proxyServiceNameEditProxy);
+        proxyData.setPinnedServers(new String[] {"invalidPinnedServer"});
+
+        LogViewerClient logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+        logViewerClient.clearLogs();
+
+        proxyAdmin.updateProxy(proxyData);
+
+        LogEvent[] logEvents = logViewerClient.getAllRemoteSystemLogs();
+        boolean isLogMessageFound = false;
+
+        for (LogEvent log : logEvents) {
+            if (log != null && log.getMessage().contains("not in pinned servers list. Not deploying " +
+                                                         "Proxy service : EditProxyWithPinnedServer")) {
+                isLogMessageFound = true;
+                break;
+            }
+        }
+        Assert.assertTrue(isLogMessageFound, "Log message not found in the console log");
+        //proxy service should not be deployed since the pinnedServer does not contain this server name
+        Assert.assertFalse(esbUtils.isProxyDeployed(contextUrls.getBackEndUrl(), getSessionCookie()
+                , proxyServiceName), "Proxy service deployed successfully");
+    }
+
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
         deleteProxyService(proxyServiceName);
+        deleteProxyService(proxyServiceNameEditProxy);
         super.cleanup();
     }
 
