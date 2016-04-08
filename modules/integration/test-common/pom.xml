@@ -296,7 +296,7 @@
                     <artifactId>httpcore</artifactId>
                 </exclusion>
                 <exclusion>
-                    <groupId>org.apache.httpcomponents</groupId>
+                    <groupId>org.wso2.httpcomponents</groupId>
                     <artifactId>httpcore-nio</artifactId>
                 </exclusion>
                 <exclusion>
@@ -320,7 +320,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.httpcomponents.wso2</groupId>
+            <groupId>org.wso2.orbit.httpcomponents</groupId>
             <artifactId>httpcore-nio</artifactId>
             <scope>compile</scope>
         </dependency>
