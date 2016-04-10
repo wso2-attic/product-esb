@@ -27,6 +27,7 @@ import org.apache.axis2.engine.ListenerManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.params.CoreConnectionPNames;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.utils.ServerConstants;
 
@@ -79,6 +80,10 @@ public class SampleAxis2Server implements BackendServer {
 
     public void start() throws IOException {
         log.info("Starting sample Axis2 server");
+        //To set the socket can be bound even though a previous connection is still in a timeout state.
+        if (System.getProperty(CoreConnectionPNames.SO_REUSEADDR) == null) {
+            System.setProperty(CoreConnectionPNames.SO_REUSEADDR, "true");
+        }
         listenerManager = new ListenerManager();
         listenerManager.init(cfgCtx);
         listenerManager.start();
