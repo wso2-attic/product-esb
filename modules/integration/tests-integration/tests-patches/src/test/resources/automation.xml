@@ -288,7 +288,7 @@
                     <name>org.wso2.carbon.integration.common.extensions.usermgt.UserPopulateExtension</name>
                 </class>
                 <class>
-                    <name>org.wso2.carbon.automation.extensions.servers.axis2server.Axis2ServerExtension</name>
+                    <name>org.wso2.esb.integration.common.extensions.axis2server.Axis2ServerExtension</name>
                 </class>
             </extentionClasses>
         </platformExecutionManager>

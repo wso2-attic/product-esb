@@ -20,6 +20,7 @@ package org.wso2.esb.integration.common.extensions.axis2server;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.params.CoreConnectionPNames;
 import org.wso2.carbon.automation.engine.exceptions.AutomationFrameworkException;
 import org.wso2.carbon.automation.engine.extensions.ExecutionListenerExtension;
 
@@ -35,7 +36,10 @@ public class Axis2ServerExtension extends ExecutionListenerExtension {
 
     public void onExecutionStart() throws AutomationFrameworkException {
         serverManager = new Axis2ServerManager();
-
+        //To set the socket can be bound even though a previous connection is still in a timeout state.
+        if (System.getProperty(CoreConnectionPNames.SO_REUSEADDR) == null) {
+            System.setProperty(CoreConnectionPNames.SO_REUSEADDR, "true");
+        }
         try {
             serverManager.start();
             log.info(".................Deploying services..............");
