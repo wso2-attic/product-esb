@@ -61,6 +61,7 @@
         <classes>
             <class name="org.wso2.carbon.esb.endpoint.test.ESBJAVA3340QueryParamHttpEndpointTestCase"/>
             <class name="org.wso2.carbon.esb.endpoint.test.ESBJAVA4231EmptyPayloadInFailoverLoadBalanceEndpoint"/>
+            <class name="org.wso2.carbon.esb.endpoint.test.FaultSequenceExecutionOrderTestCase"/>
         </classes>
     </test>
 
