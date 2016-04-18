@@ -93,7 +93,7 @@
                           type="DOUBLE"/>
                 <call>
                     <endpoint>
-                        <http method="get" uri-template="http://localhost:8280/alldevices/"/>
+                        <http method="get" uri-template="http://localhost:8480/alldevices/"/>
                     </endpoint>
                 </call>
                 <iterate id="iterator-id" expression="//deviceId" sequential="true">
@@ -107,7 +107,7 @@
                             <send>
                                 <endpoint>
                                     <http method="post"
-                                          uri-template="http://localhost:8280/deviceid/{uri.var.id}"/>
+                                          uri-template="http://localhost:8480/deviceid/{uri.var.id}"/>
                                 </endpoint>
                             </send>
                         </sequence>
