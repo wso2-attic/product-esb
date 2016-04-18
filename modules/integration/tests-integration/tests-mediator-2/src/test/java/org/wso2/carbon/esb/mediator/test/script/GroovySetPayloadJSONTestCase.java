@@ -17,6 +17,8 @@
 */
 package org.wso2.carbon.esb.mediator.test.script;
 
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -62,8 +64,10 @@ public class GroovySetPayloadJSONTestCase extends ESBIntegrationTest {
         String expectedResult = "{\"fileID\":\"89265\",\"mySiteID\":\"54571\"}";
 
         String actualResult = jsonclient.sendUserDefineRequest(addUrl, query).toString();
-
-        assertEquals(actualResult, expectedResult, "Fault: value 'symbol' mismatched");
+        final ObjectMapper mapper = new ObjectMapper();
+        final JsonNode expectedJsonObject = mapper.readTree(expectedResult);
+        final JsonNode actualJsonObject = mapper.readTree(actualResult);
+        assertEquals(actualJsonObject, expectedJsonObject, "Fault: value 'symbol' mismatched");
     }
 
     @AfterClass(alwaysRun = true)
@@ -74,7 +78,6 @@ public class GroovySetPayloadJSONTestCase extends ESBIntegrationTest {
             super.cleanup();
             Thread.sleep(5000);
         } finally {
-
             serverManager.removeFromComponentLib(GROOVY_JAR);
             serverManager.restartGracefully();
             serverManager.restoreToLastConfiguration();

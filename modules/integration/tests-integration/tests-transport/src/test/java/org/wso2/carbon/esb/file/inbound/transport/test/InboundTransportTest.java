@@ -52,10 +52,9 @@ public class InboundTransportTest extends ESBIntegrationTest {
 		// create InboundFileFolder if not exists
 		if (InboundFileFolder.exists()) {
 			FileUtils.deleteDirectory(InboundFileFolder);
-		} else {
-			Assert.assertTrue(InboundFileFolder.mkdir(),
-					"InboundFileFolder not created");
 		}
+		Assert.assertTrue(InboundFileFolder.mkdir(), "InboundFileFolder not created");
+
 
 		super.init();
 
@@ -75,7 +74,7 @@ public class InboundTransportTest extends ESBIntegrationTest {
 	}
 
 	@SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE })
-	@Test(groups = "wso2.esb", description = "Inbound endpoint Reading file with Contect type XML Test Case" ,enabled = false)
+	@Test(groups = "wso2.esb", description = "Inbound endpoint Reading file with Contect type XML Test Case")
 	public void testInboundEnpointReadFile_ContentType_XML() throws Exception {
 
 		addInboundEndpoint(addEndpoint1());

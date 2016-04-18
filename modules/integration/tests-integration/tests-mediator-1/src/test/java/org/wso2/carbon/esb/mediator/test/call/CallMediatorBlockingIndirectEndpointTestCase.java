@@ -24,19 +24,23 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
+import java.io.File;
+
 import static org.testng.Assert.assertTrue;
 
+/**
+ * Tests for calling the indirect endpoint with blocking external calls
+ */
 public class CallMediatorBlockingIndirectEndpointTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/call/CallMediatorBlockingInDirectEndpointTest.xml");
+        loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "mediatorconfig" + File.separator + "call" + File.separator + "CallMediatorBlockingInDirectEndpointTest.xml");
     }
 
-    @Test(groups = {"wso2.esb"},description = "Call the indirect endpoint with blocking external calls")
+    @Test(groups = {"wso2.esb"}, description = "Call the indirect endpoint with blocking external calls")
     public void callMediatorBlockingIndirectEndpointTest() throws AxisFault {
-
         OMElement response =
                 axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("TestCallProxy"), null, "WSO2");
         boolean responseContainsWSO2 = response.getFirstElement().toString().contains("WSO2");

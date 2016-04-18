@@ -50,7 +50,7 @@ public class MailToTransportHeadersTestCase extends ESBIntegrationTest {
         MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test email sent" , enabled = false)
+    @Test(groups = {"wso2.esb"}, description = "Test email sent" )
     public void testEmailReceivedHeaders() throws Exception {
         Date date = new Date();
         String emailSubject = "Preserve Headers Test : " + new Timestamp(date.getTime());
@@ -63,7 +63,7 @@ public class MailToTransportHeadersTestCase extends ESBIntegrationTest {
           dependsOnMethods = {"testEmailReceivedHeaders"})
     public void testEmailPreserveHeaderTransport() throws Exception {
         assertTrue(MailToTransportUtil.searchStringInLog(
-                    contextUrls.getBackEndUrl(), "Delivered-To = test.automation.dummy@gmail.com",
+                    contextUrls.getBackEndUrl(), "Delivered-To = test.automation.dummy.esb@gmail.com",
                     getSessionCookie()),"Mail Has not Received to ESB with Preserve Header Successfully");
     }
 

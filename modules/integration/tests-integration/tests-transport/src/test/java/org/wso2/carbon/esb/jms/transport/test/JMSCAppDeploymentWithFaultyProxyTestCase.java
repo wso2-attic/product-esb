@@ -37,25 +37,10 @@ public class JMSCAppDeploymentWithFaultyProxyTestCase extends
 	private boolean isCarFileUploaded = false;
 	private ServiceAdminClient serviceAdminClient;
 	private final String proxyServiceName = "JMSProxyWQConf";
-	private ServerConfigurationManager configurationManager;
 
 	@BeforeClass(alwaysRun = true)
 	protected void uploadCarFileTest() throws Exception {
 		
-		super.init();
-
-		configurationManager = new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
-		configurationManager.applyConfiguration(new File(getESBResourceLocation() + File.separator +
-		                                                 "jms" +
-		                                                 File.separator+
-		                                                 "transport"+
-		                                                 File.separator +
-		                                                 "axis2config" +
-		                                                 File.separator +
-		                                                 "activemq"+
-		                                                 File.separator+
-		                                                 "axis2.xml"));
-
 		super.init();
 
 		carbonAppUploaderClient = new CarbonAppUploaderClient(

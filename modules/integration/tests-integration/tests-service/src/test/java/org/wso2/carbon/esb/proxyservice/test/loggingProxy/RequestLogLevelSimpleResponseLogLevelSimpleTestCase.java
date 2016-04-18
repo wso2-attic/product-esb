@@ -30,10 +30,12 @@ public class RequestLogLevelSimpleResponseLogLevelSimpleTestCase extends ESBInte
         super.init();
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/request_log_level_simple_response_log_level_simple.xml");
+        isProxyDeployed("StockQuoteProxy");
 
     }
 
-    @Test(groups = "wso2.esb", description = "- Logging proxy -Request log level simple response log level simple")
+    @Test(groups = "wso2.esb", description = "- Logging proxy -Request log level simple response log level simple",
+            enabled = false)
     public void testLoggingProxyLoggingLevel() throws Exception {
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");

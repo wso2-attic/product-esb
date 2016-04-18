@@ -51,6 +51,7 @@ public class Sample5TestCase extends ESBIntegrationTest {
         } catch (AxisFault expected) {
             log.info("Fault Message : " + expected.getMessage());
             Assert.assertTrue((expected.getMessage().contains("Connection refused") ||
+                               expected.getMessage().contains("Read timed out") ||
                                expected.getMessage().contains("Error connecting to the back end")),
                               "Error Message Mismatched. 'Connection refused or' not found. actual: " +
                               expected.getMessage()
@@ -66,6 +67,7 @@ public class Sample5TestCase extends ESBIntegrationTest {
         } catch (AxisFault expected) {
             log.info("Test passed with symbol SUN - Fault Message : " + expected.getMessage());
             Assert.assertTrue((expected.getMessage().contains("Connection refused") ||
+                               expected.getMessage().contains("Read timed out") ||
                                expected.getMessage().contains("Error connecting to the back end")),
                               "Error Message Mismatched. 'Connection refused or' not found. actual: " +
                               expected.getMessage()

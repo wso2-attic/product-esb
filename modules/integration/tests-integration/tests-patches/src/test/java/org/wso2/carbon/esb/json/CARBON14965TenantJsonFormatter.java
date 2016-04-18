@@ -33,7 +33,8 @@ public class CARBON14965TenantJsonFormatter extends ESBIntegrationTest {
         serverManager.applyConfigurationWithoutRestart(sourceFile, targetFile, true);
 
         loadESBConfigurationFromClasspath("/artifacts/ESB/json/tenant-json-test-case.xml");
-
+        //Give some time to load the configuration since this test is failing intermittently due to not deploying the artifact
+        Thread.sleep(3000);
         serviceUrl = context.getContextUrls().getServiceUrl() + "/jsonproducer/";
         jsonClient = new JSONClient();
     }

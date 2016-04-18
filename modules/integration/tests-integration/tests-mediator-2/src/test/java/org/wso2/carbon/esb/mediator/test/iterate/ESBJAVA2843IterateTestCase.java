@@ -39,7 +39,7 @@ public class ESBJAVA2843IterateTestCase extends ESBIntegrationTest {
 
     @BeforeClass()
     public void uploadSynapseConfig() throws Exception {
-        init();
+        super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/iterate/ESBJAVA-2843-iterateIfPreservePayloadFalse.xml");
     }
 

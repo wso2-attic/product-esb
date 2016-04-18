@@ -35,6 +35,7 @@ public class ProxyServiceEnablingHTTPTestCase extends ESBIntegrationTest {
         super.init();
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/proxy_service_enabling_only_http.xml");
+        isProxyDeployed("StockQuoteProxy");
 
     }
 
@@ -55,7 +56,7 @@ public class ProxyServiceEnablingHTTPTestCase extends ESBIntegrationTest {
 
     }
 
-    @Test(groups = "wso2.esb", description = "- Logging proxy -Proxy service enabling only http -Log")
+    @Test(groups = "wso2.esb", description = "- Logging proxy -Proxy service enabling only http -Log", enabled = false)
     public void testLoggingProxyLogging() throws Exception {
         //ToDo Assert Logs
     }

@@ -42,7 +42,7 @@ public class ESBJAVA3291TestCase extends ESBIntegrationTest {
 	@BeforeClass(alwaysRun = true)
 	public void setEnvironment() throws Exception {
 
-		init();
+		super.init();
 		clearUploadedResource();
 		serverConfigurationManager = new ServerConfigurationManager(context);
 		serverConfigurationManager.copyToComponentLib(new File(getClass()
@@ -50,7 +50,7 @@ public class ESBJAVA3291TestCase extends ESBIntegrationTest {
 				.toURI()));
 		serverConfigurationManager.restartGracefully();
 
-		init();
+		super.init();
 		uploadResourcesToConfigRegistry();
 		loadESBConfigurationFromClasspath(SPRING_XML_LOCATION + File.separator + "spring_mediation_error.xml");
 		logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
@@ -63,9 +63,8 @@ public class ESBJAVA3291TestCase extends ESBIntegrationTest {
 			deleteSequence("main");
 			clearUploadedResource();
 			Thread.sleep(5000);
-			super.cleanup();
 		} finally {
-
+            super.cleanup();
 			serverConfigurationManager.removeFromComponentLib(SIMPLE_BEAN_JAR);
 			serverConfigurationManager.restartGracefully();
 			serverConfigurationManager = null;

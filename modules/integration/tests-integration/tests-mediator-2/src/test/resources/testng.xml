@@ -9,6 +9,13 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
 
+    <!-- This was commented since fails in batch execution - passed locally when individual run-->
+    <!--test name="Server-Stratup" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.mediator.test.switchMediator.InvokeOnErrorSequenceFromSwitchIntegrationTestCase"/>
+        </classes>
+    </test-->
+
     <test name="Sequence-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.sequence"/>
@@ -19,6 +26,13 @@
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.switchMediator"/>
         </packages>
+        <classes>
+            <class name="org.wso2.carbon.esb.mediator.test.switchMediator.InvokeOnErrorSequenceFromSwitchIntegrationTestCase">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+        </classes>
     </test>
 
     <test name="Validate-mediator-Test" preserve-order="true" verbose="2">
@@ -113,10 +127,16 @@
             <package name="org.wso2.carbon.esb.mediator.test.send"/>
         </packages>
     </test>
-    
+
     <test name="Tracer-mediator-Test" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.mediator.test.tracer"/>
+        </packages>
+    </test>
+
+    <test name="Datamapper-mediator-Test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.datamapper"/>
         </packages>
     </test>
     

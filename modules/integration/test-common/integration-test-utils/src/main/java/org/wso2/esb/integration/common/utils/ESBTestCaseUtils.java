@@ -23,6 +23,7 @@ import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
 import org.apache.axiom.om.OMNamespace;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,10 +59,14 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -224,8 +229,9 @@ public class ESBTestCaseUtils {
 				Assert.assertTrue(localEntryAdminServiceClient.deleteLocalEntry(le), le + " Local Entry deletion failed");
 				Assert.assertTrue(isLocalEntryUnDeployed(backendURL, sessionCookie, le), le + " Local Entry undeployment failed");
 			}
-			Assert.assertTrue(localEntryAdminServiceClient.addLocalEntry(localEntry), le + " Local Entry addition failed");
-			log.info(le + " LocalEntry Uploaded");
+            Assert.assertTrue(localEntryAdminServiceClient.addLocalEntry(localEntry), " Local Entry addition failed");
+            Assert.assertTrue(isLocalEntryDeployed(backendURL, sessionCookie, le), " Local Entry deployment failed");
+            log.info(le + " LocalEntry Uploaded");
 		}
 
 		Iterator<OMElement> endpoints = synapseConfig.getChildrenWithLocalName(ENDPOINT);
@@ -236,8 +242,9 @@ public class ESBTestCaseUtils {
 				Assert.assertTrue(endPointAdminClient.deleteEndpoint(ep), ep + " Endpoint deletion failed");
 				Assert.assertTrue(isEndpointUnDeployed(backendURL, sessionCookie, ep), ep + " Endpoint undeployment failed");
 			}
-			Assert.assertTrue(endPointAdminClient.addEndPoint(endpoint), ep + " Endpoint addition failed");
-			log.info(ep + " Endpoint Uploaded");
+            Assert.assertTrue(endPointAdminClient.addEndPoint(endpoint)," Endpoint addition failed");
+            Assert.assertTrue(isEndpointDeployed(backendURL, sessionCookie, ep), " Endpoint deployment failed");
+            log.info(ep + " Endpoint Uploaded");
 		}
 
 		Iterator<OMElement> sequences = synapseConfig.getChildrenWithLocalName(SEQUENCE);
@@ -253,6 +260,7 @@ public class ESBTestCaseUtils {
 					Assert.assertTrue(isSequenceUnDeployed(backendURL, sessionCookie, sqn), sqn + " Sequence undeployment failed");
 				}
 				sequenceAdminClient.addSequence(sequence);
+                Assert.assertTrue(isSequenceDeployed(backendURL, sessionCookie, sqn), " Sequence deployment failed");
 			}
 			log.info(sqn + " Sequence Uploaded");
 		}
@@ -266,6 +274,7 @@ public class ESBTestCaseUtils {
 				Assert.assertTrue(isProxyUnDeployed(backendURL, sessionCookie, proxyName), proxyName + " Undeployment failed");
 			}
 			proxyAdmin.addProxyService(proxy);
+            Assert.assertTrue(isProxyDeployed(backendURL, sessionCookie, proxyName), proxyName + " deployment failed");
 			log.info(proxyName + " Proxy Uploaded");
 		}
 
@@ -278,6 +287,8 @@ public class ESBTestCaseUtils {
 				Assert.assertTrue(isMessageStoreUnDeployed(backendURL, sessionCookie, mStore), mStore + " Message Store undeployment failed");
 			}
 			messageStoreAdminClient.addMessageStore(messageStore);
+            Assert.assertTrue(isMessageStoreDeployed(backendURL, sessionCookie, mStore), " Message Store deployment " +
+                                                                                         "failed");
 			log.info(mStore + " Message Store Uploaded");
 		}
 
@@ -291,6 +302,9 @@ public class ESBTestCaseUtils {
 						, mProcessor + " Message Processor undeployment failed");
 			}
 			messageProcessorClient.addMessageProcessor(messageProcessor);
+            Assert.assertTrue(isMessageProcessorDeployed(backendURL, sessionCookie, mProcessor), " Message Processor " +
+                                                                                                 " deployment" +
+                                                                                                 " failed");
 			log.info(mProcessor + " Message Processor Uploaded");
 		}
 
@@ -306,7 +320,10 @@ public class ESBTestCaseUtils {
 							, templateName + " Sequence Template undeployment failed");
 				}
 				sequenceTemplateAdminServiceClient.addSequenceTemplate(template);
-
+                Assert.assertTrue(isSequenceTemplateDeployed(backendURL, sessionCookie, templateName), " Sequence " +
+                                                                                                       " Template " +
+                                                                                                       " deployment "
+                                                                                                       + " failed");
 			} else {
 
 				if (ArrayUtils.contains(endpointTemplateAdminServiceClient.getEndpointTemplates(), templateName)) {
@@ -315,6 +332,10 @@ public class ESBTestCaseUtils {
 							, templateName + " Endpoint Template undeployment failed");
 				}
 				endpointTemplateAdminServiceClient.addEndpointTemplate(template);
+                Assert.assertTrue(isEndpointTemplateDeployed(backendURL, sessionCookie, templateName), " Endpoint " +
+                                                                                                       " Template " +
+                                                                                                       " deployment "
+                                                                                                       + " failed");
 			}
 			log.info(templateName + " Template Uploaded");
 		}
@@ -329,6 +350,7 @@ public class ESBTestCaseUtils {
 						, apiName + " Api undeployment failed");
 			}
 			apiAdminClient.add(api);
+            Assert.assertTrue(isApiDeployed(backendURL, sessionCookie, apiName), " Api deployment failed");
 			log.info(apiName + " API Uploaded");
 		}
 
@@ -342,6 +364,8 @@ public class ESBTestCaseUtils {
 						, executorName + " Priority Executor undeployment failed");
 			}
 			priorityMediationAdminClient.addPriorityMediator(executorName, executor);
+            Assert.assertTrue(isPriorityExecutorDeployed(backendURL, sessionCookie, executorName), " Priority " +
+                                                                                                   "Executor failed");
 			log.info(executorName + " Priority Executor Uploaded");
 		}
 
@@ -354,6 +378,7 @@ public class ESBTestCaseUtils {
 				continue;
 			}
 			taskAdminClient.addTask(task);
+            Assert.assertTrue(isScheduleTaskDeployed(backendURL, sessionCookie, taskName), " Task deployment failed");
 			log.info(taskName + " Task Uploaded");
 		}
 
@@ -466,13 +491,44 @@ public class ESBTestCaseUtils {
 		return paramMap;
 	}
 
-	public void isInboundEndpointDeployed(String backEndUrl, String sessionCookie, String name)
+	/**
+	 * Checks whether inbound endpoint exists till time interval specified by SERVICE_DEPLOYMENT_DELAY.
+	 *
+	 * @param backEndUrl    backendURL
+	 * @param sessionCookie session Cookie for the Test
+	 * @param name          name of the inbound Endpoint
+	 * @throws Exception If an error occurs while checking for inbound
+	 */
+	public void isInboundEndpointDeployed(String backEndUrl, String sessionCookie, String name) throws Exception {
+		InboundAdminClient inboundAdmin = new InboundAdminClient(backEndUrl, sessionCookie);
+		InboundEndpointDTO inboundEndpointDTO = null;
+		log.info("waiting " + SERVICE_DEPLOYMENT_DELAY + " millis for Inbound Endpoint " + name);
+		Calendar startTime = Calendar.getInstance();
+		long time;
+
+		while ((time = (Calendar.getInstance().getTimeInMillis() - startTime.getTimeInMillis())) <
+		       SERVICE_DEPLOYMENT_DELAY) {
+			inboundEndpointDTO = inboundAdmin.getInboundEndpointbyName(name);
+			if (inboundEndpointDTO != null) {
+				log.info(name + "Inbound Endpoint Found in " + time + " millis");
+				break;
+			}
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				//ignore
+			}
+		}
+		Assert.assertNotNull(inboundEndpointDTO);
+	}
+
+	public void isInboundEndpointUndeployed(String backEndUrl, String sessionCookie, String name)
 			throws Exception {
 		InboundAdminClient inboundAdmin = new InboundAdminClient(backEndUrl, sessionCookie);
 		InboundEndpointDTO inboundEndpointDTO = inboundAdmin.getInboundEndpointbyName(name);
-		Assert.assertNotNull(inboundEndpointDTO);
-
+		Assert.assertNull(inboundEndpointDTO);
 	}
+
 
 	public void deleteInboundEndpointDeployed(String backEndUrl, String sessionCookie, String name)
 			throws Exception {
@@ -2025,5 +2081,59 @@ public class ESBTestCaseUtils {
 				log.info(entry.getKey() + " was not deployed");
 			}
 		}
+	}
+
+	/**
+	 * Copy the given source file to the given destination
+	 *
+	 * @param sourceUri source file location
+	 * @param destUri   destination file location
+	 * @throws IOException
+	 */
+	public static void copyFile(String sourceUri, String destUri) throws IOException {
+		File sourceFile = new File(sourceUri);
+		File destFile = new File(destUri);
+
+		if (destFile.exists()) {
+			destFile.delete();
+		}
+		destFile.createNewFile();
+		FileInputStream fileInputStream = null;
+		FileOutputStream fileOutputStream = null;
+
+		try {
+			fileInputStream = new FileInputStream(sourceFile);
+			fileOutputStream = new FileOutputStream(destFile);
+
+			FileChannel source = fileInputStream.getChannel();
+			FileChannel destination = fileOutputStream.getChannel();
+			destination.transferFrom(source, 0, source.size());
+		} finally {
+			IOUtils.closeQuietly(fileInputStream);
+			IOUtils.closeQuietly(fileOutputStream);
+		}
+	}
+
+	/**
+	 * This method can be used to check whether file specified by the location has contents
+	 *
+	 * @param fullPath path to file
+	 * @return true if file has no contents
+	 */
+	public boolean isFileEmpty(String fullPath) {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(fullPath));
+			if (br.readLine() == null) {
+				return true;
+			}
+		} catch (FileNotFoundException fileNotFoundException) {
+			//synapse config is not found therefore it should copy original file to the location
+			log.info("Synapse config file cannot be found in " + fullPath + " copying Backup Config to the location.");
+			return true;
+		} catch (IOException ioException) {
+			//exception ignored
+			log.info("Couldn't read the synapse config from the location " + fullPath);
+		}
+		return false;
 	}
 }

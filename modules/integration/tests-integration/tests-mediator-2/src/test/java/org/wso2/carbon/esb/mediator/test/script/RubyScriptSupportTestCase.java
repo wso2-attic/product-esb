@@ -50,11 +50,11 @@ public class RubyScriptSupportTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        init(TestUserMode.SUPER_TENANT_ADMIN);
+        super.init(TestUserMode.SUPER_TENANT_ADMIN);
         serverManager = new ServerConfigurationManager(context);
         serverManager.copyToComponentDropins(new File(getClass().getResource(JRUBY_JAR_LOCATION + JRUBY_JAR).toURI()));
         serverManager.restartGracefully();
-        init(TestUserMode.SUPER_TENANT_ADMIN);
+        super.init(TestUserMode.SUPER_TENANT_ADMIN);
 
     }
 
@@ -106,8 +106,8 @@ public class RubyScriptSupportTestCase extends ESBIntegrationTest {
     public void destroy() throws Exception {
         try {
             deleteSequence("main");
-            cleanup();
             Thread.sleep(5000);
+            super.cleanup();
         } finally {
             serverManager.removeFromComponentDropins(JRUBY_JAR);
             serverManager.restartGracefully();

@@ -49,8 +49,9 @@ public class JMXClient {
             throws IOException, MalformedObjectNameException {
         try {
             //need to read rmi ports from environment config
+            //default ports (11111 & 9999) have been offset by 200 due to the overall port offset
             JMXServiceURL url =
-                    new JMXServiceURL("service:jmx:rmi://localhost:11111/jndi/rmi://" + hostName + ":9999/jmxrmi");
+                    new JMXServiceURL("service:jmx:rmi://localhost:11311/jndi/rmi://" + hostName + ":10199/jmxrmi");
 
             Hashtable<String, String[]> hashT = new Hashtable<String, String[]>();
             String[] credentials = new String[]{userName, password};

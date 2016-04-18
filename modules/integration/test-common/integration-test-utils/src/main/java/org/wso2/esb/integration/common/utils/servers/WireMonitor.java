@@ -37,10 +37,10 @@ class WireMonitor extends Thread {
 
     public void run() {
         try {
-
             // creating a server socket
             providerSocket = new ServerSocket(port, 10);
 
+            log.info("WireMonitor Server started on port " + port);
             log.info("Waiting for connection");
             connection = providerSocket.accept();
             log.info("Connection received from " +
@@ -51,6 +51,7 @@ class WireMonitor extends Thread {
             StringBuffer headerBuffer = new StringBuffer();
             Long time = System.currentTimeMillis();
             int contentLength = -1;
+            log.info("Reading message........");
             while ((ch = in.read()) != 1) {
                 buffer.append((char) ch);
                 //message headers end with
@@ -76,26 +77,28 @@ class WireMonitor extends Thread {
                     break;
                 }
             }
-
+            log.info("Message received");
             // Signaling Main thread to continue
             trigger.response = headerBuffer.toString() + buffer.toString();
-            trigger.isFinished = true;
             OutputStream out = connection.getOutputStream();
             out.write(("HTTP/1.1 202 Accepted" + "\r\n\r\n").getBytes());
             out.flush();
+            log.info("Ack sent");
             out.close();
             in.close();
 
         } catch (IOException ioException) {
-
+            log.warn(ioException.getMessage());
         } finally {
             try {
                 connection.close();
                 providerSocket.close();
+                log.info("Connection closed ");
             } catch (Exception e) {
-
+                log.warn(e.getMessage());
             }
         }
+        trigger.isFinished = true;
 
     }
 

@@ -42,6 +42,7 @@ public class Sample268TestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
+        super.init();
         AutomationContext context = new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN);
         serverConfigurationManager = new ServerConfigurationManager(context);
         serverConfigurationManager.applyConfigurationWithoutRestart(
@@ -122,7 +123,7 @@ public class Sample268TestCase extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void stop() throws Exception {
         try {
-            cleanup();
+            super.cleanup();
         } finally {
             Thread.sleep(3000);
             serverConfigurationManager.restoreToLastConfiguration(true);

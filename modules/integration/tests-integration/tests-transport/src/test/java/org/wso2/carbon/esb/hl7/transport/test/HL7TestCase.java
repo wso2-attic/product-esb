@@ -42,7 +42,6 @@ public class HL7TestCase extends ESBIntegrationTest {
 		/*featureClient = new FeatureManagementAdminServiceClient(getSessionCookie(), contextUrls.getBackEndUrl());
 		featureClient.addRepository(featureRepoLocation, featureRepoName);
 		featureClient.installFeature(hl7FeatureID, hl7Vesrion);*/
-		serverConfigurationManager.restartGracefully();
 	}
 
 	@AfterClass(alwaysRun = true)

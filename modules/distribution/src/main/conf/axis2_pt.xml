@@ -58,8 +58,8 @@
     <parameter name="ModulesDirectory">axis2modules</parameter>
 
     <!-- User agent and the server details to be used in the http communication -->
-    <parameter name="userAgent" locked="true">WSO2 ESB 4.9.0</parameter>
-    <parameter name="server" locked="true">WSO2 ESB 4.9.0</parameter>
+    <parameter name="userAgent" locked="true">WSO2 ESB 5.0.0</parameter>
+    <parameter name="server" locked="true">WSO2 ESB 5.0.0</parameter>
 
     <!-- During a fault, stacktrace can be sent with the fault message. The following flag -->
     <!-- will control that behaviour -->
@@ -371,6 +371,16 @@
         </parameter>
     </transportReceiver-->
 
+    <!-- <transportReceiver name="mqtt" class="org.apache.axis2.transport.mqtt.MqttListener">
+         <parameter locked="false" name="mqttConFactory">
+             <parameter locked="false" name="mqtt.server.host.name">localhost</parameter>
+             <parameter name="mqtt.connection.factory">mqttConFactory</parameter>
+             <parameter locked="false" name="mqtt.server.port">1883</parameter>
+             <parameter locked="false" name="mqtt.client.id">client-id-1234</parameter>
+             <parameter locked="false" name="mqtt.topic.name">esb.test</parameter>
+         </parameter>
+     </transportReceiver>-->
+
     <!-- ================================================= -->
     <!--             Transport Outs (Senders)              -->
     <!-- ================================================= -->
@@ -438,6 +448,8 @@
 
     <!-- Uncomment this and configure to use RabbitMQ connection pools for sending messages
     <transportSender name="rabbitmq" class="org.apache.axis2.transport.rabbitmq.RabbitMQSender"/-->
+
+    <!--<transportSender name="mqtt" class="org.apache.axis2.transport.mqtt.MqttSender"/>-->
 
     <!-- ================================================= -->
     <!--             Global Engaged Modules                -->

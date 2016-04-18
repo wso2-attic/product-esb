@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>integration-test-common</artifactId>
-        <version>4.9.0-BETA-SNAPSHOT</version>
+        <version>5.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
      <dependencies>
@@ -60,6 +60,10 @@
              <groupId>org.apache.httpcomponents.wso2</groupId>
              <artifactId>httpclient</artifactId>
              <scope>compile</scope>
+         </dependency>
+         <dependency>
+             <groupId>com.rabbitmq.wso2</groupId>
+             <artifactId>amqp-client</artifactId>
          </dependency>
 
      </dependencies>

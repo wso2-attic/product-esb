@@ -31,8 +31,10 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.JMSEndpointManager;
 import org.wso2.esb.integration.common.utils.servers.ActiveMQServer;
 
+import javax.xml.namespace.QName;
+
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.assertNotNull;
 
 /**
  * class tests adding,updating and deleting inbound endpoints
@@ -54,48 +56,28 @@ public class JMSInboundTransportTestCase extends ESBIntegrationTest {
 		inboundAdminClient = new InboundAdminClient(context.getContextUrls().getBackEndUrl(),getSessionCookie());
 	}
 
-	@Test(groups = { "wso2.esb" }, description = "Adding New JMS Inbound End point")
-	public void testAddingNewJMSInboundEndpoint() throws Exception {
-
-		int beforeCount = 0;
+	@Test(groups = {"wso2.esb" }, description = "Adding New JMS Inbound End point")
+	public void testAddingNewJMSInboundEndpoint()
+			throws Exception {
 		addInboundEndpoint(addEndpoint1());
-		int afterCount = inboundAdminClient.getAllInboundEndpointNames().length;
-		System.out.println("afterCount Adding : "+afterCount);
-		assertEquals(1, afterCount - beforeCount);
-		deleteInboundEndpoints();
-
 	}
 
-	@Test(groups = { "wso2.esb" }, description = "Updationg Existing JMS Inbound End point")
+	@Test(groups = { "wso2.esb" }, description = "Updating Existing JMS Inbound End point",
+			dependsOnMethods = "testAddingNewJMSInboundEndpoint")
 	public void testUpdatingJMSInboundEndpoint() throws Exception {
-		addInboundEndpoint(addEndpoint1());
 		updateInboundEndpoint(addEndpoint2());
-		InboundEndpointDTO[] inboundEndpoints = inboundAdminClient.getAllInboundEndpointNames();
-		if (inboundEndpoints != null && inboundEndpoints.length > 0 && inboundEndpoints[0] != null) {
-			for(int i=0;i<inboundEndpoints.length;i++){
-				System.out.println("Inbound endpoint injected : "+inboundEndpoints[i].getInjectingSeq());
-				assertEquals("main", inboundEndpoints[i].getInjectingSeq());
-				break;
-			}
-		} else {
-			fail("Inbound Endpoint has not been updated properly");
-		}
-
-		deleteInboundEndpoints();
-
+		InboundEndpointDTO inboundEndpoint =
+				inboundAdminClient.getInboundEndpointbyName(addEndpoint1().getAttributeValue(new QName("name")));
+		assertNotNull(inboundEndpoint, "JMS Inbound Endpoint is null");
+		log.info("Inbound endpoint injected : " + inboundEndpoint.getInjectingSeq());
+		assertEquals(inboundEndpoint.getInjectingSeq(), "main", "Inbound Endpoint has not been updated properly");
 	}
 
-	@Test(groups = { "wso2.esb" }, description = "Deleting an JMS Inbound End point")
+	@Test(groups = {"wso2.esb" }, description = "Deleting an JMS Inbound End point", dependsOnMethods =
+			"testUpdatingJMSInboundEndpoint")
 	public void testDeletingJMSInboundEndpoint() throws Exception {
-		addInboundEndpoint(addEndpoint1());
-		int beforeCount = inboundAdminClient.getAllInboundEndpointNames().length;
-		System.out.println("Before Adding : "+beforeCount);
-		deleteInboundEndpointFromName("TestJMS");
-		int afterCount = 0;
-		System.out.println("afterCount adding : "+afterCount);
-		assertEquals(1, beforeCount - afterCount);
-		deleteInboundEndpoints();
-
+		deleteInboundEndpointFromName(addEndpoint1().getAttributeValue(new QName("name")));
+		isInboundUndeployed(addEndpoint1().getAttributeValue(new QName("name")));
 	}
 
 	@AfterClass(alwaysRun = true)

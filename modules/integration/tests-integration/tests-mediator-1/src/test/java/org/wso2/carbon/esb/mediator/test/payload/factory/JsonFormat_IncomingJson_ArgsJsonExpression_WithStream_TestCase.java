@@ -85,7 +85,8 @@ public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase exte
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @Test(groups = {"wso2.esb"}, description = "With Stream B&F, json format, json evaluators, incoming json, outgoing json ")
+    @Test(groups = {"wso2.esb"}, description = "With Stream B&F, json format, json evaluators, incoming json, " +
+                                               "outgoing json ")
     public void incomingJsontransformJsonPayloadByArgsJsonExpressions() throws Exception {
 
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/payload/factory/jsonFormat_JsonExpressiosns.xml");
@@ -95,7 +96,8 @@ public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase exte
         }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @Test(groups = {"wso2.esb"}, description = "With Stream B&F, xml format, json evaluators, incoming json, outgoing xml ")
+    @Test(groups = {"wso2.esb"}, description = "With Stream B&F, xml format, json evaluators, incoming json, outgoing" +
+                                               " xml ")
     public void incomingJsontransformXmlPayloadByArgsJsonExpressions() throws Exception {
 
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/payload/factory/xmlFormat_JsonExpressiosns.xml");
@@ -104,7 +106,8 @@ public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase exte
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @Test(groups = {"wso2.esb"}, description = "With Stream B&F, json format, json evaluators, incoming json, outgoing json ")
+    @Test(groups = {"wso2.esb"}, description = "With Stream B&F, json format, json evaluators, incoming json, " +
+                                               "outgoing json ")
     public void incomingJsontransformJsonPayloadByArgsJsonXmlExpressionsValues() throws Exception {
 
         loadESBConfigurationFromClasspath("artifacts/ESB/mediatorconfig/payload/factory/jsonFormat_JsonXmlExpressions_values.xml");
@@ -113,7 +116,8 @@ public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase exte
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
-    @Test(groups = {"wso2.esb"}, description = "With Stream B&F, json format, json evaluators, incoming json, outgoing json ")
+    @Test(groups = {"wso2.esb"}, description = "With Stream B&F, json format, json evaluators, incoming json, " +
+                                               "outgoing json ")
     public void incomingXmltransformJsonPayloadByArgsJsonXmlExpressionsValues() throws Exception {
 
         loadESBConfigurationFromClasspath("artifacts/ESB/mediatorconfig/payload/factory/jsonFormat_JsonXmlExpressions_values.xml");
@@ -124,7 +128,7 @@ public class JsonFormat_IncomingJson_ArgsJsonExpression_WithStream_TestCase exte
     private void postRequestWithJsonPayload(String payload,String contentType) throws Exception{
 
 
-        String url="http://localhost:8280/services/Dummy";
+        String url="http://localhost:8480/services/Dummy";
         Reader data = new StringReader(JSON_PAYLOAD);
         Writer writer = new StringWriter();
 

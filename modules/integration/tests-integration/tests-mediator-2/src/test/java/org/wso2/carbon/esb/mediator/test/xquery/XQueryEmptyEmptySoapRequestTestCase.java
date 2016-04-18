@@ -39,7 +39,7 @@ public class XQueryEmptyEmptySoapRequestTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void deployArtifacts() throws Exception {
-        init();
+        super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/xquery/xquery_empty_soap_request.xml");
     }
 
@@ -56,6 +56,6 @@ public class XQueryEmptyEmptySoapRequestTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void stop() throws Exception {
-        cleanup();
+        super.cleanup();
     }
 }

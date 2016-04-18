@@ -1320,6 +1320,7 @@ public class VFSTransportTestCase extends ESBIntegrationTest {
                                              "                <parameter name=\"transport.PollInterval\">1</parameter>\n" +
                                              "                <parameter name=\"transport.vfs.ActionAfterProcess\">MOVE</parameter>\n" +
                                              "                <parameter name=\"transport.vfs.MoveAfterProcess\">file://" + pathToVfsDir + "test" + File.separator + "processed" + File.separator + "</parameter>" +
+                                             "                <parameter name=\"transport.vfs.CreateFolder\">true</parameter>" +
                                              "                <target>\n" +
                                              "                        <endpoint>\n" +
                                              "                                <address format=\"soap12\" uri=\"http://localhost:9000/services/SimpleStockQuoteService\"/>\n" +
@@ -1348,6 +1349,7 @@ public class VFSTransportTestCase extends ESBIntegrationTest {
                                              "                <parameter name=\"transport.PollInterval\">1</parameter>\n" +
                                              "                <parameter name=\"transport.vfs.MoveAfterFailure\">file://" + pathToVfsDir + "test" + File.separator + "invalid" + File.separator + "</parameter>\n" +
                                              "                <parameter name=\"transport.vfs.ActionAfterFailure\">MOVE</parameter>" +
+                                             "                <parameter name=\"transport.vfs.CreateFolder\">true</parameter>" +
                                              "                <target>\n" +
                                              "                        <endpoint>\n" +
                                              "                                <address format=\"soap12\" uri=\"http://localhost:9000/services/SimpleStockQuoteService\"/>\n" +

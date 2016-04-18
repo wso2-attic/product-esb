@@ -14,18 +14,13 @@
     </sequence>
 
     <sequence name="main" onError="myFaultHandler">
-        <in>
-            <log level="full"/>
-            <send>
-                <endpoint>
-                    <address uri="http://localhost:8693/services/NonExistingService"/>
-                </endpoint>
-            </send>
-        </in>
-
-        <out>
-            <send/>
-        </out>
+        <log level="full"/>
+        <call>
+            <endpoint>
+                <address uri="http://localhost:8693/services/NonExistingService"/>
+            </endpoint>
+        </call>
+        <respond/>
     </sequence>
 
     <sequence name="fault">

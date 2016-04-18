@@ -29,12 +29,12 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 public class IterateContinueParentTest extends ESBIntegrationTest {
 
 
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public void setEnvironment() throws Exception {
-		init();
+		super.init();
 	}
 
-	@Test(groups = "wso2.esb", description = "Tests with continue parent=true")
+	@Test(groups = "wso2.esb", description = "Tests with continue parent=true", enabled = false)
 	public void testContinueParentTrue() throws Exception, InterruptedException {
 		loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/iterate/iterate_continue_parent_true.xml");
 		OMElement response =
@@ -43,7 +43,7 @@ public class IterateContinueParentTest extends ESBIntegrationTest {
 
 	}
 	
-	@Test(groups = "wso2.esb", description = "Tests with continue parent=false")
+	@Test(groups = "wso2.esb", description = "Tests with continue parent=false", enabled = false)
 	public void testContinueParentFalse() throws Exception, InterruptedException {
 		loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/iterate/iterate_continue_parent_false.xml");
 		OMElement response =
@@ -53,7 +53,7 @@ public class IterateContinueParentTest extends ESBIntegrationTest {
 	}
 
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void close() throws Exception {
 		super.cleanup();
 	}

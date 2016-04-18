@@ -24,19 +24,23 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
+import java.io.File;
+
 import static org.testng.Assert.assertTrue;
 
+/**
+ * Tests for calling the endpoint with blocking external calls according to the switch case
+ */
 public class CallMediatorBlockingSwitchTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
         super.init();
-        loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/call/CallMediatorBlockingSwitchTest.xml");
+        loadESBConfigurationFromClasspath(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "mediatorconfig" + File.separator + "call" + File.separator + "CallMediatorBlockingSwitchTest.xml");
     }
 
-    @Test(groups = {"wso2.esb"},description = "Call the endpoint with blocking external calls according to the switch case")
+    @Test(groups = {"wso2.esb"}, description = "Call the endpoint with blocking external calls according to the switch case")
     public void callMediatorBlockingSwitchTest() throws AxisFault {
-
         OMElement response =
                 axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("TestCallProxy"), null, "WSO2");
         boolean responseContainsWSO2 = response.getFirstElement().toString().contains("WSO2");
@@ -51,7 +55,6 @@ public class CallMediatorBlockingSwitchTestCase extends ESBIntegrationTest {
                 axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("TestCallProxy"), null, "MSFT");
         boolean responseContainsMSFT = response.getFirstElement().toString().contains("MSFT");
         assertTrue(responseContainsMSFT);
-
     }
 
     @AfterClass(alwaysRun = true)

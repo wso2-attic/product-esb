@@ -49,20 +49,17 @@ public class ESBJAVA3430TestCase extends ESBIntegrationTest {
 		// create FTP server root folder if not exists
 		if (FTPFolder.exists()) {
 			FileUtils.deleteDirectory(FTPFolder);
-		} else {
-			Assert.assertTrue(FTPFolder.mkdir(),
-					"FTP root file folder not created");
 		}
+		Assert.assertTrue(FTPFolder.mkdir(), "FTP root file folder not created");
 
 		// create a directory under FTP server root
 		inputFolder = new File(FTPFolder.getAbsolutePath() + File.separator
 				+ inputFolderName);
 
 		if (inputFolder.exists()) {
-			inputFolder.delete();
-		} else {
-			inputFolder.mkdir();
+			FileUtils.deleteDirectory(inputFolder);
 		}
+		Assert.assertTrue(inputFolder.mkdir(), "FTP data /in folder not created");
 
 		// start-up FTP server
 		ftpServerManager = new FTPServerManager(FTPPort,

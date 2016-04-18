@@ -53,6 +53,6 @@ public class FastXSLTTransformFileFromLocalFileUsingSample8TestCase extends ESBI
 
     @AfterClass(alwaysRun = true)
     private void destroy() throws Exception {
-        cleanup();
+        super.cleanup();
     }
 }

@@ -66,15 +66,9 @@ public class MessageProcessorPersistenceTestCase extends ESBIntegrationTest {
 
         loadESBConfigurationFromClasspath(separator + "artifacts" + separator + "ESB" + separator
                                           + "messageProcessorConfig" + separator + "Message_Processor_Persistence_After_Restart_Synapse.xml");
-
         // Waits until the config get sets
         Thread.sleep(5000);
-
         serverConfigurationManager.restartGracefully();
-
-        // Waits until the ESB restart
-        Thread.sleep(10000);
-
         // Creating new variables for new environment
         super.init();
         synapseConfigAdminClient = new SynapseConfigAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());

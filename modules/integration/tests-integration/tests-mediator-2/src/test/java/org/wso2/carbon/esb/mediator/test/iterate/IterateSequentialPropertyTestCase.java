@@ -60,9 +60,9 @@ import java.util.Iterator;
 public class IterateSequentialPropertyTestCase extends ESBIntegrationTest {
 
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-        init();
+        super.init();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/iterate/iterate_sequential.xml");
     }
 
@@ -86,7 +86,7 @@ public class IterateSequentialPropertyTestCase extends ESBIntegrationTest {
         Assert.assertEquals(i , 10, "Chile Element mismatched");
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         super.cleanup();
     }

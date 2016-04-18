@@ -30,7 +30,6 @@ import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClie
 import org.wso2.esb.integration.common.clients.template.SequenceTemplateAdminServiceClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
-import java.rmi.RemoteException;
 
 public class SequenceTemplateMediaTypeTestCase extends ESBIntegrationTest{
     private Log log = LogFactory.getLog(SequenceTemplateMediaTypeTestCase.class);
@@ -92,12 +91,13 @@ public class SequenceTemplateMediaTypeTestCase extends ESBIntegrationTest{
     }
 
     @AfterClass
-    public void destroy() throws  RemoteException {
+    public void destroy() throws  Exception {
         if (isDefinedSequenceTemplateExist) {
             sequenceTemplateAdminServiceClient.deleteTemplate(DEFINED_SEQUENCE_TEMPLATE_NAME);
         }
         if (isDynamicSequenceTemplateExist) {
             sequenceTemplateAdminServiceClient.deleteDynamicTemplate(KEY);
         }
+        super.cleanup();
     }
 }

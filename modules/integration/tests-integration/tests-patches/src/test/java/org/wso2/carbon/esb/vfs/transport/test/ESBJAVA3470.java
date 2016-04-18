@@ -73,6 +73,7 @@ public class ESBJAVA3470 extends ESBIntegrationTest {
     private File outputFolder;
     private File originalFolder;
     private File SFTPFolder;
+    private String carbonHome;
 
     private ServerConfigurationManager serverConfigurationManager;
 
@@ -84,7 +85,7 @@ public class ESBJAVA3470 extends ESBIntegrationTest {
         serverConfigurationManager.applyConfiguration(new File(getClass().getResource(File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" + File.separator + "vfsTransport" + File.separator + "axis2.xml").getPath()));
         super.init();
 
-        String carbonHome = System.getProperty(ServerConstants.CARBON_HOME);
+        carbonHome = System.getProperty(ServerConstants.CARBON_HOME);
 
         setupSftpFolders(carbonHome);
         setupSftpServer();
@@ -95,12 +96,20 @@ public class ESBJAVA3470 extends ESBIntegrationTest {
     @SetEnvironment(executionEnvironments = { ExecutionEnvironment.ALL })
     public void test() throws XMLStreamException, ProxyServiceAdminProxyAdminException, IOException, InterruptedException {
 
+        String baseDir;
         ClassLoader classLoader = getClass().getClassLoader();
         String identityFile = classLoader.getResource("sftp/id_rsa").getFile();
         String sentMessageFile = "getQuote.xml";
         File sourceMessage = new File(classLoader.getResource("sftp/" + sentMessageFile).getFile());
         File destinationMessage = new File(inputFolder + File.separator + sentMessageFile);
         copyFile(sourceMessage, destinationMessage);
+
+        //This is required to handle SFTP server root differences
+        if(carbonHome.indexOf("/target") > 0){
+            baseDir = (carbonHome.split("/target"))[1];
+        } else {
+            baseDir = carbonHome;
+        }
 
         String proxy =  "<proxy xmlns=\"http://ws.apache.org/ns/synapse\"\n" +
                 "       name=\"SFTPTestCaseProxy\"\n" +
@@ -120,9 +129,10 @@ public class ESBJAVA3470 extends ESBIntegrationTest {
                 "   </target>\n" +
                 "   <parameter name=\"transport.vfs.ActionAfterProcess\">MOVE</parameter>\n" +
                 "   <parameter name=\"transport.PollInterval\">5</parameter>\n" +
-                "   <parameter name=\"transport.vfs.MoveAfterProcess\">vfs:sftp://" + SFTP_USER_NAME + "@localhost:9009/out/</parameter>\n" +
-                "   <parameter name=\"transport.vfs.FileURI\">vfs:sftp://" + SFTP_USER_NAME + "@localhost:9009/in/</parameter>\n" +
-                "   <parameter name=\"transport.vfs.MoveAfterFailure\">vfs:sftp://" + SFTP_USER_NAME + "@localhost:9009/original/</parameter>\n" +
+                "   <parameter name=\"transport.vfs.MoveAfterProcess\">vfs:sftp://" + SFTP_USER_NAME +
+                "@localhost:9009"+baseDir +"/out/</parameter>\n" +
+                "   <parameter name=\"transport.vfs.FileURI\">vfs:sftp://" + SFTP_USER_NAME + "@localhost:9009"+baseDir +"/in/</parameter>\n" +
+                "   <parameter name=\"transport.vfs.MoveAfterFailure\">vfs:sftp://" + SFTP_USER_NAME + "@localhost:9009"+baseDir +"/original/</parameter>\n" +
                 "   <parameter name=\"transport.vfs.FileNamePattern\">.*\\.xml</parameter>\n" +
                 "   <parameter name=\"transport.vfs.ContentType\">text/xml</parameter>\n" +
                 "   <parameter name=\"transport.vfs.ActionAfterFailure\">MOVE</parameter>\n" +
@@ -131,7 +141,6 @@ public class ESBJAVA3470 extends ESBIntegrationTest {
                 "   <description/>\n" +
                 "</proxy>\n" +
                 "                                ";
-
         OMElement proxyOM = AXIOMUtil.stringToOM(proxy);
 
         //create VFS transport listener proxy
@@ -151,9 +160,11 @@ public class ESBJAVA3470 extends ESBIntegrationTest {
     }
 
     @AfterClass(alwaysRun = true)
-    public void stopSFTPServer() throws InterruptedException {
+    public void stopSFTPServer() throws Exception {
         //sshd.stop();
         log.info("SFTP Server stopped successfully");
+        super.cleanup();
+        serverConfigurationManager.restoreToLastConfiguration();
     }
 
     /**

@@ -39,7 +39,7 @@ public class CallTemplateIntegrationParamsWithValuesTestCase extends ESBIntegrat
     }
 
     @Test(groups = {"wso2.esb"}, description = "Call Template Mediator Sample Parameters with" +
-                                               " values assigned test")
+                                               " values assigned test", enabled = false)
     public void testXSLTTransformationWithTemplates() throws IOException, XMLStreamException {
         OMElement response=axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp
                                                                            ("StockQuoteProxy"), null, "IBM");
@@ -52,6 +52,6 @@ public class CallTemplateIntegrationParamsWithValuesTestCase extends ESBIntegrat
 
     @AfterClass(alwaysRun = true)
     public void cleanUp() throws Exception {
-        cleanup();
+        super.cleanup();
     }
 }

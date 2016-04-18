@@ -53,7 +53,7 @@ public class FilterMediatorTest extends ESBIntegrationTest {
 
         loadSampleESBConfiguration(1);
 
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuote"), toUrl, "WSO2");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuote"), null, "WSO2");
 
 
         Assert.assertTrue(response.toString().contains("GetQuoteResponse"));

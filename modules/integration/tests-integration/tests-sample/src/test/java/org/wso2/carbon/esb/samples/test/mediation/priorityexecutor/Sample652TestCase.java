@@ -39,13 +39,13 @@ public class Sample652TestCase extends ESBIntegrationTest {
 
         axis2Client.addHttpHeader("priority", "1");
         OMElement response = axis2Client.sendSimpleQuoteRequest(
-                "http://localhost:8280/services/StockQuoteProxy", null, "IBM");
+                "http://localhost:8480/services/StockQuoteProxy", null, "IBM");
         Assert.assertNotNull(response);
 
         axis2Client.clearHttpHeader();
         axis2Client.addHttpHeader("priority", "10");
         OMElement resOmElement = axis2Client.sendSimpleQuoteRequest(
-                "http://localhost:8280/services/StockQuoteProxy", null, "MSFT");
+                "http://localhost:8480/services/StockQuoteProxy", null, "MSFT");
         Assert.assertNotNull(resOmElement);
     }
 

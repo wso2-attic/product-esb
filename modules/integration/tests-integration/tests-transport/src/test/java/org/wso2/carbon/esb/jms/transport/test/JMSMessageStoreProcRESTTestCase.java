@@ -25,12 +25,12 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
-import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
 import org.wso2.carbon.automation.extensions.servers.jmsserver.client.JMSQueueMessageConsumer;
 import org.wso2.carbon.automation.extensions.servers.jmsserver.controller.config.JMSBrokerConfigurationProvider;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.JMSEndpointManager;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
+import org.wso2.esb.integration.common.utils.clients.SimpleHttpClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +38,7 @@ import java.util.Map;
 import static org.testng.Assert.assertEquals;
 
 public class JMSMessageStoreProcRESTTestCase extends ESBIntegrationTest {
-    private static final String url = "http://localhost:8280/services/RESTProxy/new/add?name=jms";
+    private static final String url = "http://localhost:8480/services/RESTProxy/new/add?name=jms";
     private static final String logLine0 =
             "MESSAGE = ************RESTProxy IN, IN-Content-Type = application/json, IN-Test-Header-Field = TestHeaderValue";
     private static final String logLine1 =
@@ -52,7 +52,6 @@ public class JMSMessageStoreProcRESTTestCase extends ESBIntegrationTest {
                               "  \"lastName\" : \"Broker\",\n" +
                               "  \"id\" : 10\n" +
                               "}";
-
     private LogViewerClient logViewer;
 
 

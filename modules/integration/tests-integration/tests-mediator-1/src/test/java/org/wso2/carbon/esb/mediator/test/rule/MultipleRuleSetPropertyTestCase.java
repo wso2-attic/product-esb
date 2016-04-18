@@ -41,10 +41,9 @@ public class MultipleRuleSetPropertyTestCase extends ESBIntegrationTest {
     }
 
     @Test(groups = "wso2.esb",
-          description = "scenario with multiple rules- Invoke IBM rule")
+            description = "scenario with multiple rules- Invoke IBM rule")
     public void testInvokeIBMRule() throws AxisFault {
-
-        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), null, "IBM");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), "http://localhost:9000/services/SimpleStockQuoteService", "IBM");
 
         String lastPrice = response.getFirstElement().getFirstChildWithName(new QName("http://services.samples/xsd", "last"))
                 .getText();
@@ -58,41 +57,47 @@ public class MultipleRuleSetPropertyTestCase extends ESBIntegrationTest {
 
 
     @Test(groups = "wso2.esb",
-          description = "scenario with multiple rules- Invoke SUN rule ")
+            description = "scenario with multiple rules- Invoke SUN rule ")
     public void testInvokeSUNRule() throws Exception {
         try {
-            axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), null, "SUN");
-            fail("Request should throws AxisFault");
+            // If the endpoint suspended from the previous request then need to wait until the endpoint is active
+            Thread.sleep(35000);
+            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), "http://localhost:9000/services/SimpleStockQuoteService", "SUN");
+            String responseText = response.getText();
+            assertEquals(responseText, "WRONG_RULE", "Fault: value 'responseText' mismatched");
         } catch (AxisFault axisFault) {
-            assertEquals(axisFault.getMessage(), ESBTestConstant.READ_TIME_OUT,
-                         "Fault: value mismatched, should be 'Read timed out'");
+            throw axisFault;
         }
     }
 
 
     @Test(groups = "wso2.esb",
-          description = "scenario with multiple rules- Invoke MFST rule ")
+            description = "scenario with multiple rules- Invoke MFST rule ")
     public void testInvokeMSFTRule() throws Exception {
         try {
-            axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), null, "MFST");
-            fail("Request should throws AxisFault");
+            // If the endpoint suspended from the previous request then need to wait until the endpoint is active
+            Thread.sleep(35000);
+            OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), "http://localhost:9000/services/SimpleStockQuoteService", "MFST");
+            String responseText = response.getText();
+            assertEquals(responseText, "WRONG_RULE", "Fault: value 'responseText' mismatched");
         } catch (AxisFault axisFault) {
-            assertEquals(axisFault.getMessage(), ESBTestConstant.READ_TIME_OUT,
-                         "Fault: value mismatched, should be 'Read timed out'");
+            throw axisFault;
         }
 
     }
 
 
     @Test(groups = "wso2.esb",
-          description = "scenario with multiple rules- Invoke an invalid rule ")
+            description = "scenario with multiple rules- Invoke an invalid rule ")
     public void testInvokeInvalidRule() throws Exception {
+        // If the endpoint suspended from the previous request then need to wait until the endpoint is active
+        Thread.sleep(35000);
         try {
-            axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), null, "Invalid");
+            axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), "http://localhost:9000/services/SimpleStockQuoteService", "Invalid");
             fail();
         } catch (AxisFault axisFault) {
             assertEquals(axisFault.getMessage(), ESBTestConstant.INCOMING_MESSAGE_IS_NULL,
-                         "Fault: value mismatched, should be 'The input stream for an incoming message is null.'");
+                    "Fault: value mismatched, should be 'The input stream for an incoming message is null.'");
         }
 
     }

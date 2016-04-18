@@ -17,10 +17,8 @@
   ~  under the License.
   ~
   -->
-
 <!-- Introduction to Payload-factory mediator  -->
 <definitions xmlns="http://ws.apache.org/ns/synapse">
-
     <sequence name="main">
         <in>
             <log level="full"/>
@@ -28,22 +26,20 @@
             <header name="To" action="remove"/>
             <property name="RESPONSE" value="true"/>
             <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
-	    <property xmlns:ns="http://services.samples" name="request" expression="//ns:payload/ns:request" scope="default" type="OM"/>
+            <property xmlns:ns="http://services.samples" name="request" expression="//ns:payload/ns:request"
+                      scope="default" type="OM"/>
             <payloadFactory>
-               <format>
-                  <ns:getQuote xmlns:ns="http://services.samples">$1</ns:getQuote>
-               </format>
-               <args>
-                  <arg expression="get-property('request')"/>
-               </args>
+                <format>
+                    <ns:getQuote xmlns:ns="http://services.samples">$1</ns:getQuote>
+                </format>
+                <args>
+                    <arg expression="get-property('request')"/>
+                </args>
             </payloadFactory>
             <log level="full"/>
-	    <send/>
+            <send/>
         </in>
-
         <out>
-
         </out>
     </sequence>
-
 </definitions>

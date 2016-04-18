@@ -66,7 +66,7 @@ public class JsonFormat_IncomingJson_ArgsXmlExpression_WithOutStream_TestCase ex
                 "    }\n" +
                 "}";
 
-        String url="http://localhost:8280/services/Dummy";
+        String url="http://localhost:8480/services/Dummy";
         String contentType="application/json";
         HttpResponse httpResponse = httpClient.doPost(url, null, payload, contentType);
         String responsePayload = httpClient.getResponsePayload(httpResponse);

@@ -27,6 +27,8 @@ import org.wso2.esb.integration.common.utils.ESBTestConstant;
 
 import javax.xml.namespace.QName;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.fail;
@@ -62,6 +64,7 @@ public class RuleIntegrationTestSample603 extends ESBIntegrationTest {
           description = "Scenario to verify advance rule based routing - Switching Routing" +
                         "Decision According to the Rules - Rule Mediator as Switch mediator- Invoke SUN rule ")
     public void testInvokeSUNRule() throws Exception {
+        TimeUnit.SECONDS.sleep(30);
         try {
             axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), null, "SUN");
             fail("Response message not expected. AxisFault expected");
@@ -76,6 +79,7 @@ public class RuleIntegrationTestSample603 extends ESBIntegrationTest {
           description = "Scenario to verify advance rule based routing - Switching Routing" +
                         "Decision According to the Rules - Rule Mediator as Switch mediator- Invoke MFST rule ")
     public void testInvokeMSFTRule() throws Exception {
+        TimeUnit.SECONDS.sleep(30);
         try {
             axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), null, "MFST");
             fail("Response message not expected. AxisFault expected");

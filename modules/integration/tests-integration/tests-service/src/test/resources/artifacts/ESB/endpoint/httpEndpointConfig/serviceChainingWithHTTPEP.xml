@@ -63,19 +63,19 @@
             <inSequence>
                 <send>
                     <endpoint>
-                        <http method="post" uri-template="http://localhost:8280/services/Service1"/>
+                        <http method="post" uri-template="http://localhost:8480/services/Service1"/>
                     </endpoint>
                 </send>
             </inSequence>
             <outSequence>
                 <call>
                     <endpoint>
-                        <address uri="http://localhost:8280/services/Service2"/>
+                        <address uri="http://localhost:8480/services/Service2"/>
                     </endpoint>
                 </call>
                 <call>
                     <endpoint>
-                        <address uri="http://localhost:8280/services/Service3"/>
+                        <address uri="http://localhost:8480/services/Service3"/>
                     </endpoint>
                 </call>
                 <log level="full">

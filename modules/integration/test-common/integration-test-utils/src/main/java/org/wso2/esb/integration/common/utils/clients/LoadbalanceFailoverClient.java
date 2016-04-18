@@ -93,7 +93,7 @@ public class LoadbalanceFailoverClient {
         value.setText("Sample string");
 
         Options options = new Options();
-        options.setTo(new EndpointReference("http://localhost:8280/services/LBService1"));
+        options.setTo(new EndpointReference("http://localhost:8480/services/LBService1"));
 
         options.setAction("urn:sampleOperation");
 
@@ -104,7 +104,7 @@ public class LoadbalanceFailoverClient {
 
         // set addressing, transport and proxy url
         serviceClient.engageModule("addressing");
-        options.setTo(new EndpointReference("http://localhost:8280"));
+        options.setTo(new EndpointReference("http://localhost:8480"));
 
         serviceClient.setOptions(options);
         String testString = "";
@@ -269,6 +269,7 @@ public class LoadbalanceFailoverClient {
         serviceClient.setOptions(options);
 
         serviceClient.getOptions().setManageSession(true);
+        serviceClient.getOptions().setTo(new EndpointReference(URL));
         OMElement responseElement = serviceClient.sendReceive(value);
         String response = responseElement.getText();
 
@@ -284,7 +285,7 @@ public class LoadbalanceFailoverClient {
      */
     private void sessionfullClient() {
 
-        String synapsePort = "8280";
+        String synapsePort = "8480";
         int iterations = 100;
         boolean infinite = true;
 

@@ -51,14 +51,14 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        init();
+        super.init();
         clearUploadedResource();
         serverConfigurationManager = new ServerConfigurationManager(context);
         serverConfigurationManager.copyToComponentLib
                 (new File(getClass().getResource(JAR_LOCATION + File.separator + SIMPLE_BEAN_JAR).toURI()));
         serverConfigurationManager.restartGracefully();
 
-        init();
+        super.init();
         uploadResourcesToConfigRegistry();
 
     }
@@ -69,9 +69,8 @@ public class SpringMediationTestCase extends ESBIntegrationTest {
             deleteSequence("main");
             clearUploadedResource();
             Thread.sleep(5000);
-            super.cleanup();
         } finally {
-
+            super.cleanup();
             serverConfigurationManager.removeFromComponentLib(SIMPLE_BEAN_JAR);
             serverConfigurationManager.restartGracefully();
 

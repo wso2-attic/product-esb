@@ -46,7 +46,7 @@ public class MailToTransportFolderTestCase extends ESBIntegrationTest {
         MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Test email sent" , enabled = false)
+    @Test(groups = {"wso2.esb"}, description = "Test email sent")
     public void testEmailReceivedFolder() throws Exception {
         MailToTransportUtil.deleteAllUnreadEmailsFromGmail();
         Date date = new Date();

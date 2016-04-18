@@ -47,13 +47,13 @@ public class ProvidingDifferentBeanNamesTestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-        init();
+        super.init();
         serverConfigurationManager = new ServerConfigurationManager(context);
         serverConfigurationManager.copyToComponentLib
                 (new File(getESBResourceLocation() + File.separator + JAR_LOCATION + File.separator + SIMPLE_BEAN_JAR));
         serverConfigurationManager.restartGracefully();
 
-        init();
+        super.init();
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/spring/spring_mediation.xml");
     }
@@ -79,9 +79,9 @@ public class ProvidingDifferentBeanNamesTestCase extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
         clearUploadedResource();
+        Thread.sleep(5000);
         super.cleanup();
         Thread.sleep(30000);//wait till the main sequence get deleted before restarting.
-
         serverConfigurationManager.removeFromComponentLib(SIMPLE_BEAN_JAR);
         serverConfigurationManager.restartGracefully();
 

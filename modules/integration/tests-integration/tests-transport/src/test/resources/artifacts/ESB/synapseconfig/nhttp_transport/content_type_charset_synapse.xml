@@ -15,7 +15,7 @@
                    type="STRING"/>
          <send>
             <endpoint>
-               <address uri="http://localhost:8280/services/echoProxy"/>
+               <address uri="http://localhost:8480/services/echoProxy"/>
             </endpoint>
          </send>
       </inSequence>

@@ -37,13 +37,16 @@ import org.wso2.carbon.inbound.stub.types.carbon.InboundEndpointDTO;
 import org.wso2.carbon.integration.common.admin.client.CarbonAppUploaderClient;
 import org.wso2.carbon.integration.common.admin.client.SecurityAdminServiceClient;
 import org.wso2.carbon.integration.common.utils.LoginLogoutClient;
+import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
 import org.wso2.carbon.mediation.library.stub.MediationLibraryAdminServiceException;
 import org.wso2.carbon.mediation.library.stub.upload.types.carbon.LibraryFileItem;
 import org.wso2.carbon.security.mgt.stub.config.SecurityAdminServiceSecurityConfigExceptionException;
 import org.wso2.carbon.sequences.stub.types.SequenceEditorException;
+import org.wso2.carbon.utils.ServerConstants;
 import org.wso2.esb.integration.common.clients.application.mgt.SynapseApplicationAdminClient;
 import org.wso2.esb.integration.common.clients.mediation.SynapseConfigAdminClient;
 import org.wso2.esb.integration.common.utils.clients.stockquoteclient.StockQuoteClient;
+import org.wso2.esb.integration.common.utils.common.TestConfigurationProvider;
 import org.xml.sax.SAXException;
 
 import javax.activation.DataHandler;
@@ -82,6 +85,9 @@ public abstract class ESBIntegrationTest {
 	private List<String> apiList = null;
 	private List<String> priorityExecutorList = null;
 	private List<String[]> scheduledTaskList = null;
+	private static final String synapsePathFormBaseUri =
+			File.separator + "repository" + File.separator + "deployment" + File.separator + "server" + File.separator +
+			"synapse-configs" + File.separator + "default" + File.separator + "synapse.xml";
 	protected AutomationContext context;
 	protected Tenant tenantInfo;
 	protected User userInfo;
@@ -90,7 +96,6 @@ public abstract class ESBIntegrationTest {
 	protected void init() throws Exception {
 		userMode = TestUserMode.SUPER_TENANT_ADMIN;
 		init(userMode);
-
 	}
 
 	protected void init(TestUserMode userMode) throws Exception {
@@ -144,9 +149,11 @@ public abstract class ESBIntegrationTest {
 			deletePriorityExecutors();
 
 			deleteScheduledTasks();
-//			deleteInboundEndpoints();
+
+			deleteInboundEndpoints();
 
 		} finally {
+			restoreSynapseConfig();
 			synapseConfiguration = null;
 			proxyServicesList = null;
 			messageProcessorsList = null;
@@ -160,7 +167,6 @@ public abstract class ESBIntegrationTest {
 			axis2Client = null;
 			esbUtils = null;
 			scheduledTaskList = null;
-
 		}
 	}
 
@@ -191,8 +197,11 @@ public abstract class ESBIntegrationTest {
 	protected void loadSampleESBConfiguration(int sampleNo) throws Exception {
 		OMElement synapseSample = esbUtils.loadESBSampleConfiguration(sampleNo);
 		updateESBConfiguration(synapseSample);
-
 	}
+
+    protected OMElement loadSampleESBConfigurationWithoutApply(int sampleNo) throws Exception {
+        return esbUtils.loadESBSampleConfiguration(sampleNo);
+    }
 
 	protected void loadESBConfigurationFromClasspath(String relativeFilePath) throws Exception {
 		relativeFilePath = relativeFilePath.replaceAll("[\\\\/]", Matcher.quoteReplacement(File.separator));
@@ -269,11 +278,11 @@ public abstract class ESBIntegrationTest {
 		}
 	}
 
-	protected void addInboundEndpointFromParams(OMElement inboundEndpoint) throws Exception {
+	protected void isInboundUndeployed(String inboundEndpoint) throws Exception {
 		try {
-			esbUtils.addInboundEndpointFromParams(contextUrls.getBackEndUrl(), sessionCookie, inboundEndpoint);
+			esbUtils.isInboundEndpointUndeployed(contextUrls.getBackEndUrl(), sessionCookie, inboundEndpoint);
 		} catch (Exception e) {
-			throw new Exception("Error when adding InboundEndpoint",e);
+			throw new Exception("Error when adding InboundEndpoint", e);
 		}
 	}
 
@@ -285,23 +294,28 @@ public abstract class ESBIntegrationTest {
 		}
 	}
 
-
+	protected void isProxyNotDeployed(String proxyServiceName) throws Exception {
+		Assert.assertFalse(esbUtils.isProxyDeployed(contextUrls.getBackEndUrl(), sessionCookie,
+													proxyServiceName), "Proxy Deployment failed or time out");
+	}
 
 
 	protected void deleteInboundEndpoints() throws Exception {
-		try {
-			InboundEndpointDTO[] inboundEndpointDTOs =   esbUtils.getAllInboundEndpoints(contextUrls.getBackEndUrl(), sessionCookie);
-			if(inboundEndpointDTOs != null ) {
-				for (InboundEndpointDTO inboundEndpointDTO : inboundEndpointDTOs) {
+        try {
+            InboundEndpointDTO[] inboundEndpointDTOs = esbUtils.getAllInboundEndpoints(contextUrls.getBackEndUrl(), sessionCookie);
+            if (inboundEndpointDTOs != null) {
+                for (InboundEndpointDTO inboundEndpointDTO : inboundEndpointDTOs) {
+                    if (inboundEndpointDTO != null && inboundEndpointDTO.getName() != null) {
                         esbUtils.deleteInboundEndpointDeployed(contextUrls.getBackEndUrl(), sessionCookie,
                                                                inboundEndpointDTO.getName());
-				}
-			}
-		} catch (Exception e) {
+                    }
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-			throw new Exception("Error when deleting InboundEndpoint",e);
-		}
-	}
+            throw new Exception("Error when deleting InboundEndpoint", e);
+        }
+    }
 
 	protected void deleteInboundEndpointFromName(String name) throws Exception {
 		try {
@@ -488,12 +502,27 @@ public abstract class ESBIntegrationTest {
 		//    new String[]{"service.jks"}, "service.jks");
 		//  } else {
 		securityAdminServiceClient.applySecurity(serviceName, policyId + "", userGroups,
-		                                         new String[]{"wso2carbon.jks"}, "wso2carbon.jks");
+												 new String[]{"wso2carbon.jks"}, "wso2carbon.jks");
 		//  }
 		log.info("Security Scenario " + policyId + " Applied");
 
 		Thread.sleep(1000);
 
+	}
+
+	protected void restoreSynapseConfig() throws Exception {
+		String carbonHome = System.getProperty(ServerConstants.CARBON_HOME);
+		String fullPath = carbonHome + synapsePathFormBaseUri;
+		String defaultSynapseConfigPath = TestConfigurationProvider.getResourceLocation("ESB") +
+		                                  File.separator + "defaultconfigs" + File.separator + "synapse.xml";
+		if (esbUtils.isFileEmpty(fullPath)) {
+			try {
+				log.info("Synapse config is empty copying Backup Config to the location.");
+				esbUtils.copyFile(defaultSynapseConfigPath, fullPath);
+			} catch (IOException exception) {
+				throw new Exception("Exception occurred while restoring the default synapse configuration.", exception);
+			}
+		}
 	}
 
 	private void deleteMessageProcessors() {
@@ -795,7 +824,7 @@ public abstract class ESBIntegrationTest {
 
 	protected String login(AutomationContext context)
 			throws IOException, XPathExpressionException, URISyntaxException, SAXException,
-			       XMLStreamException, LoginAuthenticationExceptionException {
+			XMLStreamException, LoginAuthenticationExceptionException, AutomationUtilException {
 		LoginLogoutClient loginLogoutClient = new LoginLogoutClient(context);
 		return loginLogoutClient.login();
 	}

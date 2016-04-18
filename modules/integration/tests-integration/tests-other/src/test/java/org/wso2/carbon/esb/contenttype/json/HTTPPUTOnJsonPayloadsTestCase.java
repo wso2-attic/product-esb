@@ -48,7 +48,7 @@ public class HTTPPUTOnJsonPayloadsTestCase extends ESBIntegrationTest {
         super.cleanup();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Tests Get method for by default album with application/json content type" ,  enabled=false)
+    @Test(groups = {"wso2.esb"}, description = "Tests Get method for by default album with application/json content type")
     public void testHTTPGetRequestByDefaultAlbumJSONScenario() throws Exception {
 
         String JSON_PAYLOAD = "{\"album\":\"THE ENDLESS RIVER\",\"singer\":\"UB40\"}";

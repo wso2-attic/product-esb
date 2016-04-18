@@ -47,7 +47,7 @@ public class ValidPathAxis2RepoTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        init();
+        super.init();
 
         String urlAxis2Xml = getESBResourceLocation() +"/mediatorconfig/callout/client_repo/conf";
         String uriSynapse = getESBResourceLocation()+ "/mediatorconfig/callout/ValidPath_Axis2Repo.xml";
@@ -97,9 +97,7 @@ public class ValidPathAxis2RepoTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void cleanup() throws Exception {
-
         super.cleanup();
     }
-
 
 }

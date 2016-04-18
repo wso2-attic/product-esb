@@ -1,8 +1,6 @@
 <!-- Simple rule based routing  of messages - same as filter mediator -->
 <definitions xmlns="http://ws.apache.org/ns/synapse">
-
     <sequence name="main">
-
         <in>
             <rule xmlns="http://wso2.org/carbon/rules">
                 <source>soapBody</source>
@@ -44,14 +42,14 @@
                 </output>
             </rule>
 
-
             <switch source="get-property('accept')">
                 <case regex="ibmEndPoint">
-                    <send>
+                    <call>
                         <endpoint>
                             <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
                         </endpoint>
-                    </send>
+                    </call>
+                    <respond/>
                 </case>
                 <case regex="sunEndPoint">
                     <sequence key="nonExistentService"/>
@@ -62,23 +60,16 @@
             </switch>
 
             <drop/>
-
         </in>
-        <out>
-            <send/>
-        </out>
-
     </sequence>
 
     <sequence name="nonExistentService" onError="myFaultHandler">
-
-        <send>
+        <call>
             <endpoint>
-                <address uri="http://localhost:9009/services/NonExistentStockQuoteService"/>
+                <address uri="http://localhost:8480/services/nonExistentServiceProxy"/>
             </endpoint>
-        </send>
-        <drop/>
-
+        </call>
+        <respond/>
     </sequence>
     <sequence name="myFaultHandler">
         <makefault>
@@ -91,4 +82,37 @@
         <send/>
     </sequence>
 
+    <proxy xmlns="http://ws.apache.org/ns/synapse"
+           name="nonExistentServiceProxy"
+           transports="http,https"
+           statistics="disable"
+           trace="disable"
+           startOnLoad="true">
+        <target>
+            <inSequence>
+                <payloadFactory media-type="xml">
+                    <format>
+                        <ms11:text xmlns:ms11="http://ws.apache.org/commons/ns/payload">$1</ms11:text>
+                    </format>
+                    <args>
+                        <arg value="&lt;soap:Envelope
+                        xmlns:soap=&#34;http://schemas.xmlsoap.org/soap/envelope/&#34;
+                        xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
+                        xmlns:xsd=&#34;http://www.w3.org/2001/XMLSchema&#34;&gt;
+                        &lt;soap:Body&gt;
+                        &lt;test xmlns=&#34;http://tempUri.org/&#34;&gt;WRONG_RULE&lt;/test&gt;
+                        &lt;/soap:Body&gt;
+                        &lt;/soap:Envelope&gt;"/>
+                    </args>
+                </payloadFactory>
+                <property name="messageType" value="text/plain" scope="axis2"/>
+                <log/>
+                <respond/>
+            </inSequence>
+            <outSequence>
+                <log/>
+            </outSequence>
+        </target>
+        <description/>
+    </proxy>
 </definitions>

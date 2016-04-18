@@ -9,6 +9,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
+import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.carbon.utils.CarbonUtils;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.clients.tracer.TracerAdminClient;
@@ -22,6 +25,14 @@ public class TracerTestCase extends ESBIntegrationTest {
 	@BeforeClass(alwaysRun = true)
 	public void setEnvironment() throws Exception {
 
+		// Load modified synapse.properties
+		super.init();
+		ServerConfigurationManager serverConfigurationManager =
+				new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
+		String resourceFolderPath = getESBResourceLocation() + File.separator + "synapseconfig" +
+		                                          File.separator + "tracer" + File.separator;
+		serverConfigurationManager.applyConfiguration(new File(resourceFolderPath + "synapse.properties"));
+
 		super.init();
 		tracerAdminClient = new TracerAdminClient(contextUrls.getBackEndUrl(),
 				getSessionCookie());
@@ -33,7 +44,7 @@ public class TracerTestCase extends ESBIntegrationTest {
 				+ "wso2-esb-trace.log";
 	}
 
-	@AfterClass(groups = "wso2.esb")
+	@AfterClass(groups = "wso2.esb", alwaysRun = true)
 	public void close() throws Exception {
 		super.cleanup();
 	}

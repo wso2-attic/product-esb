@@ -31,10 +31,12 @@ public class RequestLogLevelFullResponseLogLevelFullTestCase extends ESBIntegrat
         super.init();
         loadESBConfigurationFromClasspath(
                 "/artifacts/ESB/proxyconfig/proxy/loggingProxy/request_log_level_full_response_log_level_full.xml");
+        isProxyDeployed("StockQuoteProxy");
 
     }
 
-    @Test(groups = "wso2.esb", description = "- Logging proxy -Request log level full response log level full")
+    @Test(groups = "wso2.esb", description = "- Logging proxy -Request log level full response log level full",
+            enabled = false)
     public void testLoggingProxyLoggingLevel() throws Exception {
 
         OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");

@@ -41,7 +41,7 @@ public class ValidPathAxis2XmlTestCase extends ESBIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        init();
+        super.init();
         String axis2XmlPath = FrameworkPathUtil.getSystemResourceLocation() + "/artifacts/ESB/mediatorconfig/callout/client_repo/conf/axis2.xml";
         String uriSynapse = FrameworkPathUtil.getSystemResourceLocation() + "/artifacts/ESB/mediatorconfig/callout/ValidPath_Axis2Xml.xml";
 
@@ -92,10 +92,7 @@ public class ValidPathAxis2XmlTestCase extends ESBIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void cleanup() throws Exception {
-
         super.cleanup();
-
     }
-
 
 }

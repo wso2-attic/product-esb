@@ -22,11 +22,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.test.utils.http.client.HttpRequestUtil;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
+import org.wso2.carbon.logging.view.stub.LogViewerLogViewerException;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;
 
@@ -53,22 +55,25 @@ public class PropertyIntegrationXpathURLPropertyTestCase extends ESBIntegrationT
     }
 
     @Test(groups = {"wso2.esb"}, description = "Test getting the  URI element of a request URL")
-    public void testXpathURLProperty() throws IOException, XMLStreamException {
-
+    public void testXpathURLProperty() throws IOException, XMLStreamException, LogViewerLogViewerException {
         boolean isUri = false;
-        int beforeLogSize = logViewer.getAllSystemLogs().length;
-
+        logViewer.clearLogs();
         HttpRequestUtil.sendGetRequest(getApiInvocationURL("editing") + "/edit?a=wso2&b=2.4", null);
 
-        // after sending the message reading the log file
-        LogEvent[] logs = logViewer.getAllSystemLogs();
-        int afterLogSize = logs.length;
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            log.warn("Sleep Inturrupted : logs may not updated with required text");
+        }
 
         String msg = "SYMBOL = wso2, VALUE = 2.4";
-
-        for (int i = (afterLogSize - beforeLogSize); i >= 0; i--) {
-            if (logs[i].getMessage().contains(msg)) {
+        // after sending the message reading the log file
+        LogEvent[] logs = logViewer.getAllRemoteSystemLogs();
+        for (LogEvent logEvent : logs) {
+            String message = logEvent.getMessage();
+            if (message.contains(msg)) {
                 isUri = true;
+                break;
             }
         }
 

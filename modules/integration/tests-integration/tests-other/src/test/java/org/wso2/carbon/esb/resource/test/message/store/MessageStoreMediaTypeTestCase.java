@@ -30,7 +30,6 @@ import org.wso2.esb.integration.common.clients.mediation.MessageStoreAdminClient
 import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
-import java.rmi.RemoteException;
 
 public class MessageStoreMediaTypeTestCase extends ESBIntegrationTest {
     private Log log = LogFactory.getLog(MessageStoreMediaTypeTestCase.class);
@@ -42,6 +41,7 @@ public class MessageStoreMediaTypeTestCase extends ESBIntegrationTest {
 
     @BeforeClass
     public void init() throws Exception {
+        super.init();
         messageStoreAdminClient = new MessageStoreAdminClient(contextUrls.getBackEndUrl(),getSessionCookie());
         resourceAdmin = new ResourceAdminServiceClient(contextUrls.getBackEndUrl(),getSessionCookie());
     }
@@ -62,9 +62,10 @@ public class MessageStoreMediaTypeTestCase extends ESBIntegrationTest {
     }
 
     @AfterClass
-    public void destroy() throws RemoteException {
+    public void destroy() throws Exception {
         if (isMessageStoreExist) {
             messageStoreAdminClient.deleteMessageStore(MESSAGE_STORE_NAME);
         }
+        super.cleanup();
     }
 }

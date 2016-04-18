@@ -38,9 +38,9 @@ public class IterateTargetSequenceTypeTestCase extends ESBIntegrationTest {
 
     private IterateClient client;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-        init();
+        super.init();
         client = new IterateClient();
     }
 
@@ -84,7 +84,7 @@ public class IterateTargetSequenceTypeTestCase extends ESBIntegrationTest {
 
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         client = null;
         super.cleanup();

@@ -100,7 +100,7 @@ public class InvalidSoapActionTestCase extends ESBIntegrationTest {
         return chkPrice;
     }
 
-    @AfterClass()
+    @AfterClass(alwaysRun = true)
     public void close() throws Exception {
         axisServiceClient = null;
         super.cleanup();

@@ -3,7 +3,7 @@
     <parent>
         <artifactId>esb-integration-tests</artifactId>
         <groupId>org.wso2.esb</groupId>
-        <version>4.9.0-BETA-SNAPSHOT</version>
+        <version>5.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -296,7 +296,7 @@
                     <artifactId>httpcore</artifactId>
                 </exclusion>
                 <exclusion>
-                    <groupId>org.apache.httpcomponents</groupId>
+                    <groupId>org.wso2.httpcomponents</groupId>
                     <artifactId>httpcore-nio</artifactId>
                 </exclusion>
                 <exclusion>
@@ -305,7 +305,7 @@
                 </exclusion>
                 <exclusion>
                     <groupId>org.bouncycastle</groupId>
-                    <artifactId>bcprov-jdk16</artifactId>
+                    <artifactId>bcprov-jdk15on</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -320,7 +320,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.httpcomponents.wso2</groupId>
+            <groupId>org.wso2.orbit.httpcomponents</groupId>
             <artifactId>httpcore-nio</artifactId>
             <scope>compile</scope>
         </dependency>
