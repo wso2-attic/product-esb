@@ -80,11 +80,12 @@
 
             <h2>Enhancements in WSO2 ESB 5.0.0</h2>
 			<ul>
-				<li>HL7 Message Store Implementation with Console for message audit and replay</li>
-				<li>Thread Pooled HL7 Server Endpoints</li>
-				<li>Improvements for working with Invalid HL7 Messages</li>
-                <li>Enhancing FAST XSLT Mediator.</li>
-                <li>cApp deployment enhacements and stabilizing class mediator hot deployment.</li>
+				<li>WebSockets Connectivity - Adding websockets support for WSO2 ESB.</li>
+				<li>Message Flow Tracing - Comprehensive message flow tracing with the Data Analytics Server (DAS) integration.</li>
+				<li>Message Flow Statistics - Advanced application level statistics (Proxy, API, Sequence, Mediator).</li>
+                <li>Mediation Flow Debugger - Adding debugging capability to ESB mediation flows from the WSO2 Developer Studio tool.</li>
+                <li>JMS 2.0 support - Adding JMS 2.0 specification support for existing JMS messaging features.</li>
+                <li>Updating Smooks - To achieve better performance, Smooks bundle has been updated to latest stable released version 1.5.1.</li>
             </ul>
 
             <h2>Key Features of WSO2 ESB</h2>
