@@ -46,7 +46,8 @@ public class ESBJAVA4519TestCase extends ESBIntegrationTest {
 	}
 
 	@Test(groups = {"wso2.esb" }, description = "Test whether file get restored after deployment failure")
-	public void testRestoringToPreviousConfigurationOnHotDeploymentFailure() throws Exception {
+	public void testRestoringToPreviousConfigurationOnHotDeploymentFailure()
+			throws Exception {
 
 		boolean messageInLog = false;
 		String esbApiPath = System.getProperty(ServerConstants.CARBON_HOME) + File.separator +
@@ -67,9 +68,11 @@ public class ESBJAVA4519TestCase extends ESBIntegrationTest {
 		long startTime = System.currentTimeMillis();
 
 		while ((startTime + 60000) > System.currentTimeMillis()) {
-			log.info("File is written to the file system.");
+			log.info("Waiting for esb to persist the api config file...");
 			if (esbApiFile.exists() && FileUtils.contentEquals(validApiFile, esbApiFile)) {
-				Thread.sleep(5000);
+				log.info("Api Config is written to file system by esb. Waiting for hot deployment to pick up the " +
+				         "resorted file as it will be taken as a restored file from esb.");
+				Thread.sleep(30000);
 				break;
 			} else {
 				Thread.sleep(20000);
@@ -77,18 +80,22 @@ public class ESBJAVA4519TestCase extends ESBIntegrationTest {
 		}
 
 		LogEvent[] logs;
+		log.info("Copying the corrupted api config file...");
 		Files.copy(corruptedApiFile.toPath(), esbApiFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		for (int i = 0; i < 10; i++) {
+		log.info("Copied the corrupted api config file to config folder.");
+		for (int i = 0; i < 5; i++) {
+			log.info("Checking for error logs in the esb..");
 			logs = logViewerClient.getAllRemoteSystemLogs();
 			for (LogEvent logEvent : logs) {
 				String message = logEvent.getMessage();
 				if (message.contains("Deployment of synapse artifact failed")) {
+					log.info("Hot Deployment error log is printed in the ESB logs.");
 					messageInLog = true;
 					break;
 				}
 			}
 			if (!messageInLog) {
-				Thread.sleep(10000);
+				Thread.sleep(20000);
 			} else {
 				break;
 			}
