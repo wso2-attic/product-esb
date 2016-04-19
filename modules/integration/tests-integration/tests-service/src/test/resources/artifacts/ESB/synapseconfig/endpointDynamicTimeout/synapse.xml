@@ -36,20 +36,6 @@
         </target>
     </proxy>
 
-    <proxy name="MockTimeoutProxyTESTTT" startOnLoad="true" trace="disable" transports="https http">
-        <description/>
-        <target>
-            <inSequence>
-                <send>
-                    <endpoint key="MockDelayedTimeoutTemplateEndpoint"/>
-                </send>
-            </inSequence>
-            <outSequence>
-                <send/>
-            </outSequence>
-        </target>
-    </proxy>
-
     <!--proxy to call default template endpoint-->
     <proxy name="MockTimeoutTemplateProxy" startOnLoad="true"
            trace="disable" transports="https http">
