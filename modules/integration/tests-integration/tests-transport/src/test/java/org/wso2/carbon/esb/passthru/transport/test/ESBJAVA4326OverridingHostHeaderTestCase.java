@@ -17,5 +17,70 @@
 */
 package org.wso2.carbon.esb.passthru.transport.test;
 
-public class ESBJAVA4326OverridingHostHeaderTestCase {
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import org.wso2.carbon.automation.test.utils.http.client.HttpRequestUtil;
+import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.servers.WireMonitorServer;
+
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * This test class will test the Host name header replacing with REQUEST_HOST_HEADER.
+ * After first call in service chaining, This property is not working.
+ * <property name="REQUEST_HOST_HEADER" value="new-host-name1:8280" scope="axis2"/>
+ * https://wso2.org/jira/browse/ESBJAVA-4326
+ */
+
+public class ESBJAVA4326OverridingHostHeaderTestCase extends ESBIntegrationTest {
+
+    WireMonitorServer wireMonitorServer = new WireMonitorServer(8456);
+
+    @BeforeClass(alwaysRun = true)
+    public void deployAPI() throws Exception {
+
+        super.init();
+        loadESBConfigurationFromClasspath("/artifacts/ESB/passthru/transport/ESBJAVA-4326.xml");
+
+    }
+
+    @Test(groups = {"wso2.esb"}, description = "replacing the host header after first call")
+    public void settingHostHeaderTest() throws Exception {
+        wireMonitorServer.start();
+        String payload = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n" +
+                         "                                          xmlns:xsd=\"http://services.samples/xsd\"\n" +
+                         "                                          xmlns:ser=\"http://services.samples\">\n" +
+                         "                            <soapenv:Header/>\n" +
+                         "                            <soapenv:Body>\n" +
+                         "                                <ser:getQuote>\n" +
+                         "                                    <ser:request>\n" +
+                         "                                        <xsd:symbol>WSO2-LK</xsd:symbol>\n" +
+                         "                                    </ser:request>\n" +
+                         "                                </ser:getQuote>\n" +
+                         "                            </soapenv:Body>\n" +
+                         "                        </soapenv:Envelope>";
+        Map<String, String> requestHeader = new HashMap<>();
+        requestHeader.put("Content-type", "text/xml");
+        requestHeader.put("SOAPAction", "urn:getQuote");
+        try {
+            HttpResponse response = HttpRequestUtil.doPost(new URL(getApiInvocationURL("products/"))
+                    , payload, requestHeader);
+        }catch (Exception e) {
+            //expected
+        }
+
+        String outMessage = wireMonitorServer.getCapturedMessage();
+        Assert.assertTrue(outMessage.contains("Host: new-host-name2:8280"),
+                          "Host name header not replaced with. new-host-name2:8280" + outMessage);
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void cleanupSynapseConfig() throws Exception {
+        super.cleanup();
+    }
 }
