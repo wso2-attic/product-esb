@@ -45,8 +45,8 @@ public class ESBJAVA4519TestCase extends ESBIntegrationTest {
 		logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
 	}
 
-	@Test(groups = {
-			"wso2.esb" }, description = "Test whether file get restored after deployment failure") public void testRestoringToPreviousConfigurationOnHotDeploymentFailure()
+	@Test(groups = {"wso2.esb" }, description = "Test whether file get restored after deployment failure")
+	public void testRestoringToPreviousConfigurationOnHotDeploymentFailure()
 			throws Exception {
 
 		boolean messageInLog = false;
