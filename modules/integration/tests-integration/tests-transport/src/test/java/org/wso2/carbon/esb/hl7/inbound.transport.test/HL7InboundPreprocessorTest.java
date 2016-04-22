@@ -52,12 +52,12 @@ public class HL7InboundPreprocessorTest extends ESBIntegrationTest {
         logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
 
-    @Test(priority=1, groups = { "wso2.esb" }, description = "Test HL7 PreProcessor")
+    @Test(priority=3, groups = { "wso2.esb" }, description = "Test HL7 PreProcessor")
     public void testHL7InboundAutoAck() throws Exception {
         int beforeLogCount = logViewerClient.getAllRemoteSystemLogs().length;
         addInboundEndpoint(addEndpoint0());
         HL7InboundTestSender sender = new HL7InboundTestSender();
-        String response = sender.send("localhost", 20000);
+        sender.send("localhost", 20003);
         Thread.sleep(500);
         LogEvent[] logs = logViewerClient.getAllSystemLogs();
         boolean found = false;
@@ -69,6 +69,7 @@ public class HL7InboundPreprocessorTest extends ESBIntegrationTest {
         }
         Assert.assertTrue(found, "Can we see the log added by custom HL7MessagePreprocessor?");
         deleteInboundEndpoints();
+        Thread.sleep(5000);
     }
 
     @AfterClass(alwaysRun = true)
@@ -89,10 +90,10 @@ public class HL7InboundPreprocessorTest extends ESBIntegrationTest {
                         "                 suspend=\"false\">\n" +
                         "   <parameters>\n" +
                         "      <parameter name=\"inbound.hl7.ValidateMessage\">true</parameter>\n" +
-                        "      <parameter name=\"inbound.hl7.Port\">20000</parameter>\n" +
+                        "      <parameter name=\"inbound.hl7.Port\">20003</parameter>\n" +
                         "      <parameter name=\"inbound.hl7.TimeOut\">3000</parameter>\n" +
                         "      <parameter name=\"inbound.hl7.MessagePreProcessor\">org.wso2.sample.MessageFilter</parameter>\n" +
-                        "      <parameter name=\"inbound.hl7.AutoAck\">false</parameter>\n" +
+                        "      <parameter name=\"inbound.hl7.AutoAck\">true</parameter>\n" +
                         "      <parameter name=\"inbound.hl7.BuildInvalidMessages\">true</parameter>\n" +
                         "      <parameter name=\"inbound.hl7.PassThroughInvalidMessages\">true</parameter>\n" +
                         "      <parameter name=\"inbound.hl7.CharSet\">UTF-8</parameter>\n" +
