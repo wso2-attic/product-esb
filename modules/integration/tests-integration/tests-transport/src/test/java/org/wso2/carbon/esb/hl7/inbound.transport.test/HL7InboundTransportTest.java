@@ -52,6 +52,7 @@ public class HL7InboundTransportTest extends ESBIntegrationTest {
         String response = sender.send("localhost", 20001);
         Assert.assertTrue(response.contains("Jambugasmulla Mawatha"));
         deleteInboundEndpoints();
+        Thread.sleep(5000);
     }
 
     @Test(priority=2, groups = { "wso2.esb" }, description = "Test HL7 Inbound Automated ACK")
@@ -72,6 +73,7 @@ public class HL7InboundTransportTest extends ESBIntegrationTest {
         Assert.assertTrue(response.contains("ACK^A01"));
         Assert.assertTrue(found, "Found HL7 message in ESB log");
         deleteInboundEndpoints();
+        Thread.sleep(5000);
     }
 
     @AfterClass(alwaysRun = true)
