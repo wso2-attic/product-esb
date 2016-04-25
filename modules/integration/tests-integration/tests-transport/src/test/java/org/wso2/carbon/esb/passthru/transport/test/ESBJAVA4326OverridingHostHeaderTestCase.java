@@ -76,7 +76,8 @@ public class ESBJAVA4326OverridingHostHeaderTestCase extends ESBIntegrationTest 
 
         String outMessage = wireMonitorServer.getCapturedMessage();
         Assert.assertTrue(outMessage.contains("Host: new-host-name2:8280"),
-                          "Host name header not replaced with. new-host-name2:8280" + outMessage);
+                          "Host name header not replaced with new-host-name2:8280 in out message\n"
+                          + outMessage);
     }
 
     @AfterClass(alwaysRun = true)

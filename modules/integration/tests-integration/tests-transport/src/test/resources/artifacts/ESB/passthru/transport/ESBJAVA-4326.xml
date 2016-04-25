@@ -8,7 +8,7 @@
                           scope="axis2"/>
                 <call>
                     <endpoint>
-                        <address uri="http://localhost:9020/services/SimpleStockQuoteService"/>
+                        <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
                     </endpoint>
                 </call>
                 <payloadFactory media-type="xml">
