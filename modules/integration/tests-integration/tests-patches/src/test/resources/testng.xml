@@ -51,11 +51,17 @@
             <class name="org.wso2.carbon.esb.passthru.transport.test.NoEntityBodyPropertyCheck"/>
         </classes>
     </test>
+    <test name="Custom Status Description Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA4423CustomStatusDescriptionTest"/>
+        </classes>
+    </test>
 
     <test name="QueryParam-Test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.endpoint.test.ESBJAVA3340QueryParamHttpEndpointTestCase"/>
             <class name="org.wso2.carbon.esb.endpoint.test.ESBJAVA4231EmptyPayloadInFailoverLoadBalanceEndpoint"/>
+            <class name="org.wso2.carbon.esb.endpoint.test.FaultSequenceExecutionOrderTestCase"/>
         </classes>
     </test>
 
@@ -84,6 +90,7 @@
     <test name="Cache mediator with PIs test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.mediators.cache.ESBJAVA4318Testcase"/>
+            <class name="org.wso2.carbon.esb.mediators.cache.DistributedCachingHeaderSerializationTestcase" />
         </classes>
     </test>
 
@@ -97,6 +104,8 @@
         <classes>
             <class name="org.wso2.carbon.esb.jms.transport.test.JMSBrokerStartupTestCase" />
             <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA3714JMXPauseJMSListener" />
+            <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA3282CalloutJMSHeadersTestCase" />
+            <class name="org.wso2.carbon.esb.mediators.store.ESBJAVA4470StoreMediatorEmptyOMArraySerializeException" />
         </classes>
     </test>
 
@@ -125,7 +134,7 @@
         </classes>
     </test>
 
-    <!-- Commented the test case due to a regression issue occurred due to this fix. 
+    <!-- Commented the test case due to a regression issue occurred due to this fix.
              Need to enable this test case once the original issue is fixed properly -->
     <!--test
 		name="security-policy-reference-element-in-wsdl-bindings-for-capp-test"
@@ -163,6 +172,7 @@
 				name="org.wso2.carbon.esb.jms.transport.test.JMSBrokerStartupTestCase" />
 			<class
 				name="org.wso2.carbon.esb.message.processor.test.ESBJAVA4279_MPRetryUponResponseSC_500_withNonRetryStatusCodes_200_and_202_TestCase" />
+            <class name="org.wso2.carbon.esb.message.processor.test.ESBJAVA3650_CustomHeaderPreserved_MessageProcessorOutMessage_TestCase" />
 		</classes>
 	</test>
 
@@ -196,6 +206,19 @@
 				name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4239_AccessHTTPSCAfterCallout"></class>
 		</classes>
 	</test>
+
+    <test name="ESBJAVA4394" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA4394"/>
+        </classes>
+    </test>
+
+<!--todo uncomment below test once ESB  moves to ntask version 4.6.0 or higher-->
+    <!--<test name="Test startup logs for FATAL error when registry is mounted" preserve-order="true" verbose="2">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.carbon.esb.ntask.CCOMMONS8SetTenantDomainTest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 
 </suite>
 

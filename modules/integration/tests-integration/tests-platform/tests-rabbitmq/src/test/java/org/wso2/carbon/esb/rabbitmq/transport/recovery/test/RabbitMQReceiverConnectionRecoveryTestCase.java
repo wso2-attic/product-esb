@@ -125,7 +125,7 @@ public class RabbitMQReceiverConnectionRecoveryTestCase extends ESBIntegrationTe
                                 "<ser:symbol>RMQ</ser:symbol>\n" +
                                 "</ser:order>\n" +
                                 "</ser:placeOrder>";
-                sender.sendBasicMessage(message);
+                sender.sendMessage(message, "text/plain");
             }
         } catch (IOException e) {
             Assert.fail("Could not connect to RabbitMQ broker");

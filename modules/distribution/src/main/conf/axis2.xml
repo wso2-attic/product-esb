@@ -58,8 +58,8 @@
     <parameter name="ModulesDirectory">axis2modules</parameter>
 
     <!-- User agent and the server details to be used in the http communication -->
-    <parameter name="userAgent" locked="true">WSO2 ESB 4.9.0</parameter>
-    <parameter name="server" locked="true">WSO2 ESB 4.9.0</parameter>
+    <parameter name="userAgent" locked="true">WSO2 ESB 5.0.0</parameter>
+    <parameter name="server" locked="true">WSO2 ESB 5.0.0</parameter>
 
     <!-- During a fault, stacktrace can be sent with the fault message. The following flag -->
     <!-- will control that behaviour -->
@@ -451,6 +451,21 @@
     <transportSender name="rabbitmq" class="org.apache.axis2.transport.rabbitmq.RabbitMQSender"/-->
 
     <!--<transportSender name="mqtt" class="org.apache.axis2.transport.mqtt.MqttSender"/>-->
+    
+    <!--<transportSender name="ws" class="org.wso2.carbon.websocket.transport.WebsocketTransportSender">
+        <parameter name="ws.outflow.dispatch.sequence" locked="false">outflowDispatchSeq</parameter>
+        <parameter name="ws.outflow.dispatch.fault.sequence" locked="false">outflowFaultSeq</parameter>       
+    </transportSender>-->
+    
+    <!--<transportSender name="wss" class="org.wso2.carbon.websocket.transport.WebsocketTransportSender">
+        <parameter name="ws.outflow.dispatch.sequence" locked="false">outflowDispatchSeq</parameter>
+        <parameter name="ws.outflow.dispatch.fault.sequence" locked="false">outflowFaultSeq</parameter>
+        <parameter name="ws.trust.store" locked="false">
+            <ws.trust.store.location>repository/resources/security/client-truststore.jks</ws.trust.store.location>
+            <ws.trust.store.Password>wso2carbon</ws.trust.store.Password>
+        </parameter>
+    </transportSender>-->
+
 
     <!-- ================================================= -->
     <!--             Global Engaged Modules                -->

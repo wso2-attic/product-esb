@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>org.wso2.carbon.esb.tests.platform</artifactId>
-        <version>4.10.0-M3-SNAPSHOT</version>
+        <version>5.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -34,12 +34,7 @@
                 <version>2.12.4</version>
                 <inherited>false</inherited>
                 <configuration>
-                    <!--<argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m -Xmx1024m -XX:PermSize=256m
-                        -XX:MaxPermSize=512m -Xdebug -Xnoagent -Djava.compiler=NONE
-                        -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006
-                    </argLine>-->
                     <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m</argLine>
-                    <testFailureIgnore>true</testFailureIgnore>
                     <disableXmlReport>false</disableXmlReport>
                     <skipTests>${skipPlatformTests}</skipTests>
                     <parallel>false</parallel>
@@ -138,7 +133,6 @@
                             </artifactItems>
                         </configuration>
                     </execution>
-
                 </executions>
             </plugin>
             <plugin>
@@ -153,7 +147,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.6</version>
@@ -286,7 +279,6 @@
             <artifactId>org.jacoco.agent</artifactId>
         </dependency>
     </dependencies>
-
     <properties>
         <skipPlatformTests>true</skipPlatformTests>
     </properties>

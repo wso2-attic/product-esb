@@ -9,6 +9,11 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
 
+    <test name="POST-Request-Without-Body-without-chunking" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA4402MessageWithoutPayloadTestCase"/>
+        </classes>
+    </test>
 
     <test name="passthru-Transport-Test" preserve-order="true" verbose="2">
         <packages>

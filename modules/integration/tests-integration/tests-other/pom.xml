@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-integration-tests</artifactId>
-        <version>4.10.0-M3-SNAPSHOT</version>
+        <version>5.0.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -17,12 +17,7 @@
                 <version>2.12.4</version>
                 <inherited>false</inherited>
                 <configuration>
-                    <!--<argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m -Xmx1024m -XX:PermSize=256m
-                        -XX:MaxPermSize=512m -Xdebug -Xnoagent -Djava.compiler=NONE
-                        -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006
-                    </argLine>-->
                     <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m</argLine>
-                    <testFailureIgnore>true</testFailureIgnore>
                     <disableXmlReport>false</disableXmlReport>
                     <parallel>false</parallel>
                     <suiteXmlFiles>
@@ -260,7 +255,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.wso2.esb</groupId>
             <artifactId>integration-test-utils</artifactId>
@@ -283,7 +277,6 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
@@ -292,10 +285,10 @@
             <groupId>javax.ws.rs</groupId>
             <artifactId>jsr311-api</artifactId>
         </dependency>
-<dependency>
-   <groupId>org.wso2.esb</groupId>
-    <artifactId>extensions</artifactId>
-</dependency>
+        <dependency>
+            <groupId>org.wso2.esb</groupId>
+            <artifactId>extensions</artifactId>
+        </dependency>
         <!-- Jacoco Dependency-->
         <dependency>
             <groupId>org.jacoco</groupId>

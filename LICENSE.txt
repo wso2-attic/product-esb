@@ -538,8 +538,8 @@ org.wso2.carbon.wsdl2code.ui_4.4.7.jar                                          
 org.wso2.carbon.wsdl2code_4.4.7.jar                                             bundle         apache2   4927      
 org.wso2.carbon.wsdl2form-4.4.7.jar                                             bundle         apache2   4936      
 org.wso2.ciphertool-1.0.0-wso2v3.jar                                            bundle         apache2   4038      
-org.wso2.esb.samples_4.9.0.RC4.jar                                              bundle         apache2   5053      
-org.wso2.esb.styles_4.9.0.RC4.jar                                               bundle         apache2   5052      
+org.wso2.esb.samples_5.0.0.jar                                              	bundle         apache2   5053
+org.wso2.esb.styles_5.0.0.jar                                               	bundle         apache2   5052
 org.wso2.securevault_1.0.0.wso2v2.jar                                           bundle         apache2   768       
 pdepublishing-ant.jar                                                           jar            epl1      524       
 pdepublishing.jar                                                               jar            epl1      525       

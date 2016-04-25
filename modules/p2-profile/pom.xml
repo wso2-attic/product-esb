@@ -18,7 +18,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-parent</artifactId>
-        <version>4.10.0-M3-SNAPSHOT</version>
+        <version>5.0.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -103,16 +103,13 @@
                                     org.wso2.carbon.mediation:org.wso2.carbon.mediation.statistics.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.mediation:org.wso2.carbon.mediation.flow.statistics.feature:${carbon.mediation.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.wso2.carbon.relay.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.wso2.carbon.mediation.tracer.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
-				<featureArtifactDef>
-                                    org.wso2.carbon.mediation:org.wso2.carbon.message.flow.tracer.feature:${carbon.mediation.version}
+				                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.das.messageflow.data.publisher.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.wso2.carbon.mediation.configadmin.feature:${carbon.mediation.version}
@@ -159,6 +156,12 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.wso2.carbon.mediator.cache.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.mediator.datamapper.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.mediator.datamapper.engine.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
 
                                 <!--2 Carbon-Kernel-->
                                 <featureArtifactDef>
@@ -168,7 +171,7 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.core.ui.feature:${carbon.kernel.version}
-                                </featureArtifactDef>           
+                                </featureArtifactDef>
 
                                 <!--3 Carbon Commons-->
 				<featureArtifactDef>
@@ -181,7 +184,7 @@
                                     org.wso2.carbon.commons:org.wso2.carbon.discovery.ui.feature:${carbon.commons.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.commons:org.wso2.carbon.databridge.datapublisher.feature:${carbon.commons.version}
+                                    org.wso2.carbon.analytics-common:org.wso2.carbon.databridge.datapublisher.feature:${carbon.analytics.common.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.ntask.core.feature:${carbon.commons.version}
@@ -287,12 +290,6 @@
                                     org.wso2.carbon.registry:org.wso2.carbon.registry.associations.dependencies.feature:${carbon.registry.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.community.features.feature:${carbon.registry.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.community.features.server.feature:${carbon.registry.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.registry:org.wso2.carbon.registry.contentsearch.server.feature:${carbon.registry.version}
                                 </featureArtifactDef>
 
@@ -333,24 +330,16 @@
                                     org.wso2.carbon.deployment:org.wso2.carbon.module.mgt.feature:${carbon.deployment.version}
                                 </featureArtifactDef>
 
-                                <!--7 Carbon Governance -->
-                                <featureArtifactDef>
-                                    org.wso2.carbon.governance:org.wso2.carbon.governance.metadata.server.feature:${carbon.governance.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.governance:org.wso2.carbon.registry.extensions.feature:${carbon.governance.version}
-                                </featureArtifactDef>
-
                                 <!--8 Carbon-MultiTenancy-->
                                 <featureArtifactDef>
                                     org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.common.feature:${carbon.multitenancy.version}
                                 </featureArtifactDef>
-				<featureArtifactDef>
-				    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.mgt.core.feature:${carbon.multitenancy.version}
-				</featureArtifactDef>	
-				<!--featureArtifactDef>
-				    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.mgt.server.feature:${carbon.multitenancy.version}
-				</featureArtifactDef-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.mgt.core.feature:${carbon.multitenancy.version}
+                                </featureArtifactDef>
+                                <!--featureArtifactDef>
+                                    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.mgt.server.feature:${carbon.multitenancy.version}
+                                </featureArtifactDef-->
                                 <featureArtifactDef>
                                     org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.usage.agent.feature:${carbon.multitenancy.version}
                                 </featureArtifactDef>
@@ -435,6 +424,7 @@
                                 <!--TODO Add required adaptors-->
                                 <!--featureArtifactDef>org.wso2.carbon:org.wso2.carbon.hl7.feature:${carbon.mediation.version}</featureArtifactDef-->
                                 <!--<featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transports.sap.feature:${wso2carbon.feature.version}</featureArtifactDef>-->
+                                <featureArtifactDef>org.wso2.carbon.mediation:org.wso2.carbon.websocket.feature:${carbon.mediation.version}</featureArtifactDef>
 
 
                             </featureArtifacts>
@@ -516,10 +506,6 @@
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.mediation.flow.statistics.feature.group</id>
-                                    <version>${carbon.mediation.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.relay.server.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
@@ -527,8 +513,8 @@
                                     <id>org.wso2.carbon.mediation.tracer.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
-				<feature>
-                                    <id>org.wso2.carbon.message.flow.tracer.feature.group</id>
+				                <feature>
+                                    <id>org.wso2.carbon.das.messageflow.data.publisher.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
                                 <feature>
@@ -607,6 +593,14 @@
                                     <id>org.wso2.carbon.mediator.cache.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.mediator.datamapper.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.mediator.datamapper.engine.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
 
                                 <!-- 2 Carbon-Kernel -->
                                 <feature>
@@ -633,7 +627,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.databridge.datapublisher.feature.group</id>
-                                    <version>${carbon.commons.version}</version>
+                                    <version>${carbon.analytics.common.version}</version>
                                 </feature>
                                 <!--feature>
                                     <id>org.wso2.carbon.user.mgt.feature.group</id>
@@ -766,15 +760,7 @@
                                     <id>org.wso2.carbon.registry.associations.dependencies.feature.group</id>
                                     <version>${carbon.registry.version}</version>
                                 </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.registry.community.features.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.registry.community.features.server.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
-                                </feature>
-                                <feature>
+                               <feature>
                                     <id>org.wso2.carbon.registry.contentsearch.server.feature.group</id>
                                     <version>${carbon.registry.version}</version>
                                 </feature>
@@ -827,29 +813,19 @@
                                     <version>${carbon.deployment.version}</version>
                                 </feature>
 
-                                <!-- 7 Carbon Governance  -->
-                                <feature>
-                                    <id>org.wso2.carbon.governance.metadata.server.feature.group</id>
-                                    <version>${carbon.governance.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.registry.extensions.feature.group</id>
-                                    <version>${carbon.governance.version}</version>
-                                </feature>
-
                                 <!-- 8 Carbon-MultiTenancy -->
                                 <feature>
                                     <id>org.wso2.carbon.tenant.common.feature.group</id>
                                     <version>${carbon.multitenancy.version}</version>
                                 </feature>
-				<feature>
-			 	    <id>org.wso2.carbon.tenant.mgt.core.feature.group</id>
-				    <version>${carbon.multitenancy.version}</version>
-				</feature>
-				<!--feature>
-			 	    <id>org.wso2.carbon.tenant.mgt.server.feature.group</id>
-				    <version>${carbon.multitenancy.version}</version>
-				</feature-->
+                                <feature>
+                                    <id>org.wso2.carbon.tenant.mgt.core.feature.group</id>
+                                    <version>${carbon.multitenancy.version}</version>
+                                </feature>
+                                <!--feature>
+                                     <id>org.wso2.carbon.tenant.mgt.server.feature.group</id>
+                                    <version>${carbon.multitenancy.version}</version>
+                                </feature-->
                                 <feature>
                                     <id>org.wso2.carbon.tenant.usage.agent.feature.group</id>
                                     <version>${carbon.multitenancy.version}</version>
@@ -937,7 +913,10 @@
                                 <!--<version>${wso2carbon.feature.version}</version>-->
                                 <!--</feature>-->
                                 
-                                
+                                <feature>
+                                    <id>org.wso2.carbon.websocket.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature> 
                                 <feature>
                                     <id>org.wso2.carbon.cloud.gateway.agent.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
@@ -1030,10 +1009,6 @@
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.mediation.flow.statistics.feature.group</id>
-                                    <version>${carbon.mediation.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.relay.server.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
@@ -1041,8 +1016,8 @@
                                     <id>org.wso2.carbon.mediation.tracer.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
-				<feature>
-                                    <id>org.wso2.carbon.message.flow.tracer.feature.group</id>
+				                <feature>
+                                    <id>org.wso2.carbon.das.messageflow.data.publisher.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
                                 <feature>
@@ -1111,6 +1086,14 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.mediator.cache.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.mediator.datamapper.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.mediator.datamapper.engine.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
 
@@ -1226,7 +1209,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.databridge.datapublisher.feature.group</id>
-                                    <version>${carbon.commons.version}</version>
+                                    <version>${carbon.analytics.common.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.deployment.synchronizer.feature.group</id>
@@ -1256,14 +1239,6 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.associations.dependencies.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.registry.community.features.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.registry.community.features.server.feature.group</id>
                                     <version>${carbon.registry.version}</version>
                                 </feature>
                                 <feature>
@@ -1317,16 +1292,6 @@
                                 <feature>
                                     <id>org.wso2.carbon.service.mgt.server.feature.group</id>
                                     <version>${carbon.deployment.version}</version>
-                                </feature>
-
-                                <!-- 7 Carbon Governance  -->
-                                <feature>
-                                    <id>org.wso2.carbon.governance.metadata.server.feature.group</id>
-                                    <version>${carbon.governance.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.registry.extensions.feature.group</id>
-                                    <version>${carbon.governance.version}</version>
                                 </feature>
 
                                 <!-- 8 Carbon-MultiTenancy -->
@@ -1492,7 +1457,10 @@
                                 <!--<version>${wso2carbon.feature.version}</version>-->
                                 <!--</feature>-->
                                 
- 
+                                <feature>
+                                    <id>org.wso2.carbon.websocket.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.cloud.gateway.agent.feature.group</id>
                                     <version>${carbon.mediation.version}</version>

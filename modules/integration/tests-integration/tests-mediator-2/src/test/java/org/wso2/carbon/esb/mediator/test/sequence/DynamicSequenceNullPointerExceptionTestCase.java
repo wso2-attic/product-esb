@@ -22,7 +22,6 @@ import org.apache.axis2.AxisFault;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.esb.integration.common.extensions.axis2server.Axis2ServerManager;
 import org.wso2.esb.integration.common.extensions.axis2server.ServiceNameConstants;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
@@ -37,7 +36,6 @@ import static org.testng.Assert.assertNotNull;
 
 public class DynamicSequenceNullPointerExceptionTestCase extends ESBIntegrationTest {
 
-    Axis2ServerManager serverManager;
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception{

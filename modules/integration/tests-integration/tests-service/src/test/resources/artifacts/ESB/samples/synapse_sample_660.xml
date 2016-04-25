@@ -22,14 +22,14 @@
 
     <proxy name="SmooksSample" transports="vfs">
         <!--CHANGE-->
-        <parameter name="transport.vfs.FileURI">file:///home/lakmali/dev/test/smooks/in</parameter>
+        <parameter name="transport.vfs.FileURI">file:///home/user/smooks/in</parameter>
         <parameter name="transport.vfs.ContentType">application/xml</parameter>
         <parameter name="transport.vfs.FileNamePattern">.*\.xml</parameter>
         <parameter name="transport.PollInterval">5</parameter>
         <!--CHANGE-->
-        <parameter name="transport.vfs.MoveAfterProcess">file:///home/lakmali/dev/test/smooks/original</parameter>
+        <parameter name="transport.vfs.MoveAfterProcess">file:///home/user/smooks/original</parameter>
         <!--CHANGE-->
-        <parameter name="transport.vfs.MoveAfterFailure">file:///home/lakmali/dev/test/smooks/original</parameter>
+        <parameter name="transport.vfs.MoveAfterFailure">file:///home/user/smooks/fail</parameter>
         <parameter name="transport.vfs.ActionAfterProcess">MOVE</parameter>
         <parameter name="transport.vfs.ActionAfterFailure">MOVE</parameter>
         <parameter name="Operation">urn:placeOrder</parameter>

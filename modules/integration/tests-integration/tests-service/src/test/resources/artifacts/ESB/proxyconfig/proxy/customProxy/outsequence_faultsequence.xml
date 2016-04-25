@@ -105,7 +105,7 @@
     </proxy>
     <proxy name="StockQuoteProxyTwo" transports="https http" startOnLoad="true" trace="disable">
         <description/>
-        <target outSequence="out">
+        <target outSequence="changeResponseBodySeq">
             <endpoint>
                 <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
             </endpoint>
@@ -130,7 +130,7 @@
         </log>
         <drop/>
     </sequence>
-    <sequence name="out">
+    <sequence name="changeResponseBodySeq">
         <enrich>
             <source type="inline" clone="true">
                 <ns:getQuoteResponse xmlns:ns="http://services.samples">
