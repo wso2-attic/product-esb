@@ -23,6 +23,7 @@ import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
 import org.apache.axiom.om.OMNamespace;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
+import org.apache.commons.codec.CharEncoding;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
@@ -55,23 +56,27 @@ import org.wso2.esb.integration.common.clients.template.EndpointTemplateAdminSer
 import org.wso2.esb.integration.common.clients.template.SequenceTemplateAdminServiceClient;
 import org.wso2.esb.integration.common.utils.common.TestConfigurationProvider;
 
+import javax.xml.bind.DatatypeConverter;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
 import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
 public class ESBTestCaseUtils {
 
@@ -2135,5 +2140,44 @@ public class ESBTestCaseUtils {
 			log.info("Couldn't read the synapse config from the location " + fullPath);
 		}
 		return false;
+	}
+
+	/**
+	 * Decompress a compressed g gzip compressed string.
+	 *
+	 * @param str Compressed string
+	 * @return Decompressed string
+	 */
+	public static String decompress(String str) {
+		ByteArrayInputStream byteInputStream = null;
+		GZIPInputStream gzipInputStream = null;
+		BufferedReader br = null;
+		try {
+			byteInputStream = new ByteArrayInputStream(DatatypeConverter.parseBase64Binary(str));
+			gzipInputStream = new GZIPInputStream(byteInputStream);
+			br = new BufferedReader(new InputStreamReader(gzipInputStream, CharEncoding.UTF_8));
+			StringBuilder jsonStringBuilder = new StringBuilder();
+			String line;
+			while ((line = br.readLine()) != null) {
+				jsonStringBuilder.append(line);
+			}
+			return jsonStringBuilder.toString();
+		} catch (IOException e) {
+			return null;
+		} finally {
+			try {
+				if (byteInputStream != null) {
+					byteInputStream.close();
+				}
+				if (gzipInputStream != null) {
+					gzipInputStream.close();
+				}
+				if (br != null) {
+					br.close();
+				}
+			} catch (IOException e) {
+				//ignored
+			}
+		}
 	}
 }

@@ -1,0 +1,22 @@
+{
+  "name": "esb-flow-entry-stream",
+  "version": "1.0.0",
+  "nickName": "",
+  "description": "",
+  "metaData": [
+    {
+      "name": "compressed",
+      "type": "BOOL"
+    }
+  ],
+  "payloadData": [
+    {
+      "name": "messageId",
+      "type": "STRING"
+    },
+    {
+      "name": "flowData",
+      "type": "STRING"
+    }
+  ]
+}
