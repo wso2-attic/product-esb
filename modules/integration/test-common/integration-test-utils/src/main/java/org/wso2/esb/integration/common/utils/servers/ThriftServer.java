@@ -236,4 +236,17 @@ public class ThriftServer implements Runnable {
 			return (name.endsWith(ext));
 		}
 	}
+
+	public void waitToReceiveEvents(int maxWaitTime, int expectedCount){
+		for(int i = 0; i < maxWaitTime; i = i + 5000){
+			if(msgCount.get() >= expectedCount){
+				break;
+			}
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				//ignored
+			}
+		}
+	}
 }

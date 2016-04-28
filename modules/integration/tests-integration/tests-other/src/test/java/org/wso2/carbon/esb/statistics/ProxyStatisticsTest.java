@@ -37,7 +37,8 @@ public class ProxyStatisticsTest extends ESBIntegrationTest {
 	private ServerConfigurationManager serverConfigurationManager;
 	StatisticsEnableAdminClient statisticsEnableAdminClient;
 
-	@BeforeClass(alwaysRun = true) protected void initialize() throws Exception {
+	@BeforeClass(alwaysRun = true)
+	protected void initialize() throws Exception {
 		//Starting the thrift port to listen to statistics events
 		thriftServer = new ThriftServer("Wso2EventTestCase", 8461, true);
 		thriftServer.start(8462);
@@ -57,34 +58,32 @@ public class ProxyStatisticsTest extends ESBIntegrationTest {
 
 		//load esb configuration to the server
 		loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/statistics/synapseconfigproxy.xml");
-		Thread.sleep(20000); //waiting for esb to send artifact config data to the thriftserver
+		thriftServer.waitToReceiveEvents(20000, 4); //waiting for esb to send artifact config data to the thriftserver
 
 		//Checking whether all the artifact configuration events are received
 		Assert.assertEquals("Three configuration events are required", 4, thriftServer.getMsgCount());
 	}
 
 	@Test(groups = { "wso2.esb" }, description = "Proxy statistics message count check.")
-	public void statisticsCollectionCountTest()
-			throws Exception {
+	public void statisticsCollectionCountTest() throws Exception {
 		thriftServer.resetMsgCount();
 		thriftServer.resetPreservedEventList();
-
 		for (int i = 0; i < 100; i++) {
 			axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 		}
-		Thread.sleep(10000); //wait to esb for asynchronously send statistics events to the backend
+		thriftServer.waitToReceiveEvents(20000, 100); //wait to esb for asynchronously send statistics events to the
+		// backend
 		Assert.assertEquals("Hundred statistics events are required, but different number is found", 100,
 		                    thriftServer.getMsgCount());
 	}
 
 	@Test(groups = { "wso2.esb" }, description = "Proxy statistics statistics event data check")
-	public void statisticsEventDataTest()
-			throws Exception {
+	public void statisticsEventDataTest() throws Exception {
 		thriftServer.resetMsgCount();
 		thriftServer.resetPreservedEventList();
 
 		axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
-		Thread.sleep(10000);//wait to esb for asynchronously send statistics events to the backend
+		thriftServer.waitToReceiveEvents(20000, 1);//wait to esb for asynchronously send statistics events
 		Assert.assertEquals("Statistics event is received", 1, thriftServer.getMsgCount());
 		String jsonString =
 				ESBTestCaseUtils.decompress((String) thriftServer.getPreservedEventList().get(0).getPayloadData()[1]);
@@ -106,16 +105,15 @@ public class ProxyStatisticsTest extends ESBIntegrationTest {
 		                  jsonString.contains("StockQuoteProxy@3:SendMediator"));
 	}
 
-	@Test(groups = {
-			"wso2.esb" }, description = "Proxy Spilt Aggregate scenario statistics message count check.") public void statisticsSpiltAggregateProxyCollectionCountTest()
-			throws Exception {
+	@Test(groups = { "wso2.esb" }, description = "Proxy Spilt Aggregate scenario statistics message count check.")
+	public void statisticsSpiltAggregateProxyCollectionCountTest() throws Exception {
 		thriftServer.resetMsgCount();
 		thriftServer.resetPreservedEventList();
 
 		for (int i = 0; i < 100; i++) {
 			axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("StockQuoteProxy"), null, "WSO2");
 		}
-		Thread.sleep(10000); //wait to esb for asynchronously send statistics events to the backend
+		thriftServer.waitToReceiveEvents(20000, 100); //wait to esb for asynchronously send statistics events
 		Assert.assertEquals("Hundred statistics events are required, but different number is found", 100,
 		                    thriftServer.getMsgCount());
 	}
@@ -126,7 +124,7 @@ public class ProxyStatisticsTest extends ESBIntegrationTest {
 		thriftServer.resetPreservedEventList();
 
 		axis2Client.sendMultipleQuoteRequest(getProxyServiceURLHttp("SplitAggregateProxy"), null, "WSO2", 4);
-		Thread.sleep(10000);//wait to esb for asynchronously send statistics events to the backend
+		thriftServer.waitToReceiveEvents(20000, 1);//wait to esb for asynchronously send statistics events to the
 		Assert.assertEquals("Statistics event is received", 1, thriftServer.getMsgCount());
 		String jsonString =
 				ESBTestCaseUtils.decompress((String) thriftServer.getPreservedEventList().get(0).getPayloadData()[1]);
@@ -160,7 +158,8 @@ public class ProxyStatisticsTest extends ESBIntegrationTest {
 		                  jsonString.contains("SplitAggregateProxy@7:SendMediator"));
 	}
 
-	@AfterClass(alwaysRun = true) public void cleanupArtifactsIfExist() throws Exception {
+	@AfterClass(alwaysRun = true)
+	public void cleanupArtifactsIfExist() throws Exception {
 		statisticsEnableAdminClient = new StatisticsEnableAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
 		statisticsEnableAdminClient.removeAllStatisticsConfiguration();
 		thriftServer.stop();
