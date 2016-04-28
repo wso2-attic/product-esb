@@ -75,8 +75,7 @@ public class ApiStatisticsTest extends ESBIntegrationTest {
 		Assert.assertEquals("Three configuration events are required", 3, thriftServer.getMsgCount());
 	}
 
-	@Test(groups = {
-			"wso2.esb" }, description = "API statistics message count check.")
+	@Test(groups = { "wso2.esb" }, description = "API statistics message count check.")
 	public void statisticsCollectionCountTest() throws Exception {
 		thriftServer.resetMsgCount();
 		thriftServer.resetPreservedEventList();
@@ -92,8 +91,7 @@ public class ApiStatisticsTest extends ESBIntegrationTest {
 		                    thriftServer.getMsgCount());
 	}
 
-	@Test(groups = {
-			"wso2.esb" }, description = "API statistics message count check for post requests")
+	@Test(groups = { "wso2.esb" }, description = "API statistics message count check for post requests")
 	public void statisticsCollectionCountTestForPostRequests() throws Exception {
 		thriftServer.resetMsgCount();
 		thriftServer.resetPreservedEventList();
@@ -107,8 +105,7 @@ public class ApiStatisticsTest extends ESBIntegrationTest {
 		                    thriftServer.getMsgCount());
 	}
 
-	@Test(groups = {
-			"wso2.esb" }, description = "API statistics statistics event data check")
+	@Test(groups = { "wso2.esb" }, description = "API statistics statistics event data check")
 	public void statisticsEventDataTest() throws Exception {
 		thriftServer.resetMsgCount();
 		thriftServer.resetPreservedEventList();
