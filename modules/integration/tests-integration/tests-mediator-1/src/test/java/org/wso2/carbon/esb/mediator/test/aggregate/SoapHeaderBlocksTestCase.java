@@ -30,10 +30,9 @@ public class SoapHeaderBlocksTestCase extends ESBIntegrationTest {
     private CarbonAppUploaderClient carbonAppUploaderClient;
     private ApplicationAdminClient applicationAdminClient;
     private final int MAX_TIME = 120000;
-    private final String carFileName = "MurasalatCapp_1.0.0";
-    private final String carFileNameWithExtension = "MurasalatCapp_1.0.0.car";
-    private boolean isCarFileUploaded = false;
-    private final String serviceName="eMurasalatV1";
+    private final String carFileName = "SoapHeaderTestRegFiles_1.0.0";
+    private final String carFileNameWithExtension = "SoapHeaderTestRegFiles_1.0.0.car";
+    private final String serviceName="TestProxy";
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
@@ -42,7 +41,6 @@ public class SoapHeaderBlocksTestCase extends ESBIntegrationTest {
         carbonAppUploaderClient.uploadCarbonAppArtifact(carFileNameWithExtension
                 , new DataHandler(new URL("file:" + File.separator + File.separator + getESBResourceLocation()
                 + File.separator + "car" + File.separator + carFileNameWithExtension)));
-        isCarFileUploaded = true;
         applicationAdminClient = new ApplicationAdminClient(context.getContextUrls().getBackEndUrl(), getSessionCookie());
         Assert.assertTrue(isCarFileDeployed(carFileName), "Car file deployment failed");
         loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/requestWithSoapHeaderBlockConfig/synapse.xml");
@@ -56,17 +54,17 @@ public class SoapHeaderBlocksTestCase extends ESBIntegrationTest {
                 "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
                         + "xmlns:u=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\">"
                         + "<s:Header>"
-                        + "<VsDebuggerCausalityData "
+                        + "<VsDebugger "
                         + "xmlns=\"http://schemas.microsoft.com/vstudio/diagnostics/servicemodelsink\">"
-                        + "uIDPo0Mw/Eb91VlEjEor51+HffMBAAAAkKmLMq19iUCjeRY7qgK5lxtZHD0Rwu9LhJA4m8GtFkcACQAA</VsDebuggerCausalityData>"
+                        + "uIDPo0Mttttvvvvvvv</VsDebugger>"
                         + "</s:Header>"
                         + "<s:Body xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
                         + "<sendLetter xmlns=\"http://ws.cts.deg.gov.ae/\">" + "<letter xmlns=\"\">"
                         + "<body/>" + "<confidentiality>Public</confidentiality>"
                         + "<date>201d6-02-29T15:22:14.88dd7</date>" + "<from>"
-                        + "<code>DdddSG</code>" + "<id>96dd7</id>" + "</from>"
+                        + "<code>ADdddSG</code>" + "<id>AAdd7</id>" + "</from>"
                         + "<importance>Normal</importance>"
-                        + "<outgoingRef>DSssssG/ddddOUT/2016TEST/0000099</outgoingRef>"
+                        + "<outgoingRef>DSssssG/ddddOUT/2016TEST/0uy0099</outgoingRef>"
                         + "<priority>Normal</priority>" + "<replyTo>218602</replyTo>"
                         + "<signedCopy>" + "<filename>Test.pdf</filename>"
                         + "<format>pdf</format>" + "</signedCopy>"
@@ -119,7 +117,7 @@ public class SoapHeaderBlocksTestCase extends ESBIntegrationTest {
             conn.setDoOutput(true); // Triggers POST.
             conn.setRequestProperty("Content-Type", contentType);
             conn.setRequestProperty("charset", "utf-8");
-            conn.setRequestProperty("SOAPAction", "http://ws.cts.deg.gov.ae/eMurasalat/sendLetterRequest");
+            conn.setRequestProperty("SOAPAction", "http://test/sendLetterRequest");
             conn.setRequestProperty("Content-Length",
                     "" + Integer.toString(requestQuery.getBytes(Charset.defaultCharset()).length));
             conn.setUseCaches(false);

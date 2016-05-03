@@ -19,7 +19,7 @@
             <faultSequence/>
         </target>
     </proxy>
-    <proxy name="eMurasalatV1"
+    <proxy name="TestProxy"
            transports="https"
            startOnLoad="true"
            trace="disable">
@@ -36,7 +36,7 @@
                         <log>
                             <property name="Log2" value="***Came here-Log2***"/>
                         </log>
-                        <sequence key="eMurSendLetterSequence"/>
+                        <sequence key="SendLetterSequence"/>
                     </case>
                     <case regex=".*checkStatusRequest">
                         <log>
@@ -91,7 +91,7 @@
         <parameter name="engagedModules">rampart</parameter>
         <enableSec/>
     </proxy>
-    <proxy name="eMurasalatProcessor"
+    <proxy name="testProcessor"
            transports="https"
            startOnLoad="true"
            trace="disable">
@@ -118,8 +118,8 @@
         <parameter name="enableMTOM">true</parameter>
         <parameter name="ScenarioID">scenario1</parameter>
     </proxy>
-    <endpoint name="eMurProcessorEPR">
-        <address uri="https://localhost:8443/services/eMurasalatProcessor"/>
+    <endpoint name="ProcessorEPR">
+        <address uri="https://localhost:8443/services/testProcessor"/>
     </endpoint>
     <sequence name="eMurOutSequence">
         <log>
@@ -168,7 +168,7 @@
         </out>
         <description>The main sequence for the message mediation</description>
     </sequence>
-    <sequence name="eMurSendLetterSequence">
+    <sequence name="SendLetterSequence">
         <log>
             <property name="BeforePropety" value="***Came here-BeforeProperty***"/>
         </log>
@@ -190,7 +190,7 @@
                     </log>
                     <header name="Action" value="urn:mediate"/>
                     <send>
-                        <endpoint key="eMurProcessorEPR"/>
+                        <endpoint key="ProcessorEPR"/>
                     </send>
                 </sequence>
             </target>
