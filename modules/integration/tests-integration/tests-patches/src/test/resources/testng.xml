@@ -220,5 +220,11 @@
         <!--</classes>-->
     <!--</test>-->
 
+    <test name="ESBJAVA_4565" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.registry.task.ESBJAVA4565TestCase"/>
+        </classes>
+    </test>
+
 </suite>
 
