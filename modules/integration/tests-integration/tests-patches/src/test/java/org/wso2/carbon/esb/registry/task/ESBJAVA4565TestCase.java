@@ -18,14 +18,16 @@
 
 package org.wso2.carbon.esb.registry.task;
 
+import org.apache.axiom.om.OMElement;
+import org.apache.axiom.om.impl.llom.util.AXIOMUtil;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.api.clients.logging.LogViewerClient;
-import org.wso2.carbon.automation.api.clients.registry.ResourceAdminServiceClient;
-import org.wso2.carbon.esb.ESBIntegrationTest;
+import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
+import org.wso2.esb.integration.common.clients.registry.ResourceAdminServiceClient;
+import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import javax.activation.DataHandler;
 import java.net.URL;
@@ -42,22 +44,33 @@ public class ESBJAVA4565TestCase extends ESBIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     protected void init() throws Exception {
-        super.init(0);
+        super.init();
         resourceAdminServiceStub =
-                new ResourceAdminServiceClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
+                new ResourceAdminServiceClient(contextUrls.getBackEndUrl(), getSessionCookie());
 
         resourceAdminServiceStub.addResource(REGISTRY_ARTIFACT, "application/xml", "FTP Test account details",
                 new DataHandler(new URL("file:///" + getESBResourceLocation() +
                                         "/registry/ftp.xml")));
-        Thread.sleep(1000);
-        loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/esbjava4565/synapse.xml");
+
+        OMElement sequence = esbUtils.loadResource("/artifacts/ESB/sequence/esbjava4565/testSequence.xml");
+        this.addSequence(sequence);
+
+        OMElement task = AXIOMUtil.stringToOM("<task:task xmlns:task=\"http://www.wso2.org/products/wso2commons/tasks\"\n" +
+                                              "           name=\"TestTask\"\n" +
+                                              "           class=\"org.apache.synapse.startup.tasks.MessageInjector\" group=\"synapse.simple.quartz\">\n" +
+                                              "    <task:trigger interval=\"10\"/>\n" +
+                                              "    <task:property name=\"format\" value=\"get\"/>\n" +
+                                              "    <task:property name=\"sequenceName\" value=\"testSequence\"/>\n" +
+                                              "    <task:property name=\"injectTo\" value=\"sequence\"/>\n" +
+                                              "    <task:property name=\"message\"><empty/></task:property>\n" +
+                                              "</task:task>");
+        this.addScheduledTask(task);
     }
 
     @Test(groups = "wso2.esb", description = "Analyze carbon logs to find NPE due to unresolved tenant domain.")
     public void checkErrorLog() throws Exception {
-        Thread.sleep(30000);
-        LogViewerClient cli = new LogViewerClient(esbServer.getBackEndUrl(), esbServer.getSessionCookie());
-        LogEvent[] logs = cli.getAllSystemLogs();
+        LogViewerClient cli = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+        LogEvent[] logs = cli.getAllRemoteSystemLogs();
         Assert.assertNotNull(logs, "No logs found");
         Assert.assertTrue(logs.length > 0, "No logs found");
         boolean hasErrorLog = false;
