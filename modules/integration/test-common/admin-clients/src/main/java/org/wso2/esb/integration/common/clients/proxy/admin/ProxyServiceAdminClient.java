@@ -188,6 +188,21 @@ public class ProxyServiceAdminClient {
     }
 
     /**
+     * Start proxy service
+     *
+     * @param proxyName name of the proxy
+     * @throws ProxyServiceAdminProxyAdminException
+     *                         proxy admin exception
+     * @throws java.rmi.RemoteException remote exception
+     */
+    public void startProxyService(String proxyName)
+            throws ProxyServiceAdminProxyAdminException, RemoteException {
+
+        proxyServiceAdminStub.startProxyService(proxyName);
+        log.info("Proxy activated");
+    }
+
+    /**
      * Redeploy proxy service
      *
      * @param proxyName name of the proxy
