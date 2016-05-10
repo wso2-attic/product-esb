@@ -26,5 +26,18 @@
         </packages>
     </test>
 
+    <test name="RabbitMQ-message-store-test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.rabbitmq.message.store.jira"/>
+        </packages>
+    </test>
+
+
+    <test name="RabbitMQ-Transport-Qos-test" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.rabbitmq.qos.jira"/>
+        </packages>
+    </test>
+
 </suite>
 
