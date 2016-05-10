@@ -92,6 +92,56 @@ public class RabbitMQServer {
         return started;
     }
 
+    /**
+     * Check whether rabbitMQ server started, this method will have a timeout, so if server won't get started within
+     * the given timeout, this will return false
+     *
+     * @param timeout in seconds
+     * @return
+     */
+    public boolean isRabbitMQStarted(long timeout) {
+        for (int i = 1; i * 5 < timeout; i++) {
+            Reader reader = null;
+            Writer writer = null;
+            InputStream instream = null;
+            try {
+                Process process = Runtime.getRuntime().exec("sh rabbitmqctl status", null, rabbitMQHome);
+                instream = process.getInputStream();
+                writer = new StringWriter();
+                char[] buffer = new char[1024];
+                reader = new BufferedReader(new InputStreamReader(instream));
+                int n;
+                while ((n = reader.read(buffer)) != -1) {
+                    writer.write(buffer, 0, n);
+                }
+                reader.close();
+                instream.close();
+                String message = writer.toString();
+                log.info(message);
+                if (message.contains("{pid,")) {
+                    log.info("RabbitMQ server is running");
+                    return true;
+                }
+                Thread.sleep(300); //wait 5 seconds before trying again
+            } catch (IOException e) {
+                log.error("Error getting rabbitmq server status - " + e.getMessage(), e);
+                return false;
+            } catch (InterruptedException e) {
+                log.error("Error waiting - " + e.getMessage(), e);
+                return false;
+            } finally {
+                try {
+                    reader.close();
+                    instream.close();
+                    writer.close();
+                } catch (IOException e) {
+                    log.error("Error closing streams - " + e.getMessage(), e);
+                }
+            }
+        }
+        return false;
+    }
+
     private void execute(String command) {
         try {
             Process process = Runtime.getRuntime().exec(command, null, rabbitMQHome);
