@@ -77,7 +77,7 @@
              <scope>compile</scope>
          </dependency>
          <dependency>
-             <groupId>org.apache.httpcomponents.wso2</groupId>
+             <groupId>org.wso2.orbit.org.apache.httpcomponents</groupId>
              <artifactId>httpclient</artifactId>
              <scope>compile</scope>
          </dependency>
