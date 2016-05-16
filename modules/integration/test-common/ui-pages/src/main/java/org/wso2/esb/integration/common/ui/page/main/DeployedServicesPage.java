@@ -18,12 +18,11 @@ public class DeployedServicesPage {
     }
 
     public ProxySourcePage gotoSourceView(String serviceName) throws IOException {
-        List<WebElement> services = driver.findElements(By.cssSelector("#sgTable tr td:nth-child(2) a"));
-        for (int i = 0; i < services.size(); i++) {
-            WebElement serviceLink = services.get(i);
-            if (serviceName.equals(serviceLink.getText())) {
-                By sourceTdSelector = By.cssSelector("#sgTable tr:nth-child(" + (i + 1) + ") td:nth-child(10)");
-                WebElement showSource = driver.findElement(sourceTdSelector).findElement(By.tagName("a"));
+        List<WebElement> servicesTable = driver.findElements(By.xpath("//*[@id=\"sgTable\"]/tbody/tr"));
+        for (int i = 0; i < servicesTable.size(); i++) {
+            WebElement serviceLink = servicesTable.get(i);
+            if (serviceName.equals(serviceLink.findElements(By.tagName("td")).get(1).getText())) {
+                WebElement showSource = serviceLink.findElement(By.linkText("Source View"));
                 showSource.click();
                 return new ProxySourcePage(driver);
             }
