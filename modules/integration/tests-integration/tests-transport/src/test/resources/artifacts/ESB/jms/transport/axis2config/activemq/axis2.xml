@@ -416,7 +416,17 @@
     <!--<transportSender name="local" class="org.apache.axis2.transport.local.NonBlockingLocalTransportSender"/>-->
 
     <!-- uncomment this and configure to use connection pools for sending messages> -->
-      <transportSender name="jms" class="org.apache.axis2.transport.jms.JMSSender"/>
+    <transportSender name="jms" class="org.apache.axis2.transport.jms.JMSSender">
+        <parameter name="myQueueConnectionFactory2" locked="false">
+            <parameter name="java.naming.factory.initial" locked="false">org.apache.activemq.jndi.ActiveMQInitialContextFactory</parameter>
+            <parameter name="java.naming.provider.url" locked="false">tcp://localhost:61626</parameter>
+            <parameter name="transport.jms.ConnectionFactoryJNDIName" locked="false">QueueConnectionFactory</parameter>
+            <parameter name="transport.jms.ConnectionFactoryType" locked="false">queue</parameter>
+            <parameter name="transport.jms.Destination" locked="false">dynamicQueues/StaleConnectionTest</parameter>
+            <parameter name="transport.jms.DestinationType" locked="false">queue</parameter>
+            <parameter name="transport.jms.CacheLevel" locked="false">connection</parameter>
+        </parameter>
+    </transportSender>
 
     <!--transportSender name="vfs" class="org.apache.synapse.transport.vfs.VFSTransportSender"/-->
 
