@@ -232,5 +232,11 @@
         </classes>
     </test>
 
+    <test name="ESBJAVA_4631" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.header.preserve.ESBJAVA4631PreserveContentTypeHeaderTestCase"/>
+        </classes>
+    </test>
+
 </suite>
 
