@@ -3,7 +3,7 @@
         <description/>
         <target>
             <inSequence>
-                <property name="REST_URL_POSTFIX" value="wso2 lanka" scope="axis2"/>
+                <property name="REST_URL_POSTFIX" expression="url-encode('wso2 lanka')" scope="axis2"/>
                 <log>
                     <property name="rest-url-value" expression="get-property('axis2','REST_URL_POSTFIX')"/>
                 </log>
