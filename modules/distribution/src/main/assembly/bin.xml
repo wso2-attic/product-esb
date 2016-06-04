@@ -169,6 +169,15 @@
                 <exclude>empty.txt</exclude>
             </excludes>
         </fileSet>
+        <!-- For analytic data publishing event-publishers and event-streams -->
+        <fileSet>
+            <directory>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/eventpublishers</directory>
+            <outputDirectory>wso2esb-${pom.version}/repository/deployment/server/eventpublishers</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/eventstreams</directory>
+            <outputDirectory>wso2esb-${pom.version}/repository/deployment/server/eventstreams</outputDirectory>
+        </fileSet>
         <fileSet>
             <directory>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/advanced/</directory>
             <outputDirectory>wso2esb-${pom.version}/repository/conf/advanced</outputDirectory>
@@ -557,6 +566,17 @@
             <source>src/main/conf/wso2carbon-version.txt</source>
             <outputDirectory>wso2esb-${pom.version}/bin/</outputDirectory>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- For analytic data publishing service -->
+        <file>
+            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-processor.xml</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/output-event-adapters.xml</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <fileMode>644</fileMode>
         </file>
     </files>
