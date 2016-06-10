@@ -85,7 +85,14 @@
              <groupId>com.rabbitmq.wso2</groupId>
              <artifactId>amqp-client</artifactId>
          </dependency>
-
+         <dependency>
+             <groupId>com.esotericsoftware</groupId>
+             <artifactId>kryo-shaded</artifactId>
+         </dependency>
+         <dependency>
+         <groupId>org.apache.synapse</groupId>
+         <artifactId>synapse-core</artifactId>
+         </dependency>
      </dependencies>
 
 
