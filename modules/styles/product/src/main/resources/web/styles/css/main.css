@@ -222,8 +222,11 @@ background-color:#ffffff;
 }
 
 /* new theme 01-07-2013 */
-table#main-table td.vertical-menu-container { background-color:#444; padding-left: 5px; border-top:0px;}
+table#main-table td.vertical-menu-container { background-color:#000; padding-left: 5px; border-top:0px;}
 div.menu-panel-buttons { border-top-left-radius: 7px; border-bottom-left-radius: 7px;  border-top-right-radius: 0px; border-bottom-right-radius: 0px; padding: 15px 3px;}
-div.selected span { font-weight:bold; color:#ffffff; background-color:#555555; }
+div.selected span { font-weight:bold; color:#ffffff; background-color:#3c1d60; }
 div.menu-panel-buttons span {  }
-div.selected { border:0px; background-color:#555555; box-shadow:none; }
+div.selected { border:0px; background-color:#3c1d60; box-shadow:none; }
+.menu-panel-buttons{background:#fff;}
+.menu-panel-buttons span{background:#fff;}
+div#middle h2{color:#444;}
