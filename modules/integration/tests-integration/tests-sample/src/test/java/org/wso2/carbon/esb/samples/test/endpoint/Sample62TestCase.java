@@ -84,7 +84,7 @@ public class Sample62TestCase extends ESBIntegrationTest {
 		OMElement response = axis2Client.sendSimpleQuoteRequest("http://localhost:8480/", null, "WSO2");
 		System.out.println(response.toString());
 
-		Assert.assertTrue(response.toString().contains("getSimpleQuoteResponse"),
+		Assert.assertTrue(response.toString().contains("getQuoteResponse"),
 		                  "GetQuoteResponse not found");
 		Assert.assertTrue(response.toString().contains("WSO2 Company"), "WSO2 Company not found");
 
