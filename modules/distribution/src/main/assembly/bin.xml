@@ -48,6 +48,8 @@
                 <exclude>**/webapp-mode/WEB-INF/web.xml</exclude>
                 <exclude>**/repository/conf/tomcat/carbon/WEB-INF/web.xml</exclude>
 		<exclude>**/repository/components/plugins/httpclient_4.3.1.wso2v2.jar</exclude>
+		<exclude>**/repository/components/plugins/axis2-transport-jms_1.1.1.wso2v2.jar</exclude>
+		<exclude>**/repository/components/plugins/axis2-transport-sms_1.1.1.wso2v2.jar</exclude>
             </excludes>
         </fileSet>
         <fileSet>
