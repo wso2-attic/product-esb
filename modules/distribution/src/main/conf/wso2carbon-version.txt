@@ -1,1 +1,1 @@
-WSO2 Carbon Framework v4.4.5
+WSO2 Carbon Framework v4.4.6
