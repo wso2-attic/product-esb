@@ -39,5 +39,11 @@
         </packages>
     </test>
 
+    <test name="RabbitMQ-Transport-multiple-listner" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.rabbitmq.multiple.listner"/>
+        </packages>
+    </test>
+
 </suite>
 

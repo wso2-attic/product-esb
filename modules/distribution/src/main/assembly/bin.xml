@@ -47,6 +47,10 @@
                 <exclude>**/repository/conf/tomcat/web.xml</exclude>
                 <exclude>**/webapp-mode/WEB-INF/web.xml</exclude>
                 <exclude>**/repository/conf/tomcat/carbon/WEB-INF/web.xml</exclude>
+		<exclude>**/repository/components/plugins/httpclient_4.3.1.wso2v2.jar</exclude>
+		<exclude>**/repository/components/plugins/axis2-transport-jms_1.1.1.wso2v2.jar</exclude>
+		<exclude>**/repository/components/plugins/axis2-transport-sms_1.1.1.wso2v2.jar</exclude>
+		<exclude>**/repository/components/plugins/axis2-transport-mail_1.1.1.wso2v2.jar</exclude>
             </excludes>
         </fileSet>
         <fileSet>
@@ -167,6 +171,15 @@
             <excludes>
                 <exclude>empty.txt</exclude>
             </excludes>
+        </fileSet>
+        <!-- For analytic data publishing event-publishers and event-streams -->
+        <fileSet>
+            <directory>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/eventpublishers</directory>
+            <outputDirectory>wso2esb-${pom.version}/repository/deployment/server/eventpublishers</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/eventstreams</directory>
+            <outputDirectory>wso2esb-${pom.version}/repository/deployment/server/eventstreams</outputDirectory>
         </fileSet>
         <fileSet>
             <directory>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/advanced/</directory>
@@ -556,6 +569,17 @@
             <source>src/main/conf/wso2carbon-version.txt</source>
             <outputDirectory>wso2esb-${pom.version}/bin/</outputDirectory>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- For analytic data publishing service -->
+        <file>
+            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-processor.xml</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/output-event-adapters.xml</source>
+            <outputDirectory>wso2esb-${pom.version}/repository/conf</outputDirectory>
             <fileMode>644</fileMode>
         </file>
     </files>

@@ -18,16 +18,18 @@
 
 package org.wso2.esb.integration.common.utils;
 
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Input;
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
 import org.apache.axiom.om.OMNamespace;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
-import org.apache.commons.codec.CharEncoding;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.synapse.aspects.flow.statistics.publishing.PublishingPayload;
 import org.apache.synapse.config.xml.XMLConfigConstants;
 import org.testng.Assert;
 import org.wso2.carbon.endpoint.stub.types.EndpointAdminEndpointAdminException;
@@ -69,9 +71,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -2148,22 +2150,27 @@ public class ESBTestCaseUtils {
 	 * @param str Compressed string
 	 * @return Decompressed string
 	 */
-	public static String decompress(String str) {
+	public static Map<String, Object> decompress(String str) {
 		ByteArrayInputStream byteInputStream = null;
 		GZIPInputStream gzipInputStream = null;
-		BufferedReader br = null;
 		try {
+			ThreadLocal<Kryo> kryoTL = new ThreadLocal<Kryo>() {
+				protected Kryo initialValue() {
+					Kryo kryo = new Kryo();
+					// Class registering precedence matters. Hence intentionally giving a registration ID
+					kryo.register(HashMap.class, 111);
+					kryo.register(ArrayList.class, 222);
+					kryo.register(PublishingPayload.class, 333);
+					return kryo;
+				}
+			};
 			byteInputStream = new ByteArrayInputStream(DatatypeConverter.parseBase64Binary(str));
 			gzipInputStream = new GZIPInputStream(byteInputStream);
-			br = new BufferedReader(new InputStreamReader(gzipInputStream, CharEncoding.UTF_8));
-			StringBuilder jsonStringBuilder = new StringBuilder();
-			String line;
-			while ((line = br.readLine()) != null) {
-				jsonStringBuilder.append(line);
-			}
-			return jsonStringBuilder.toString();
+			byte[] unzippedBytes = IOUtils.toByteArray(gzipInputStream);
+			Input input = new Input(unzippedBytes);
+			return kryoTL.get().readObjectOrNull(input, HashMap.class);
 		} catch (IOException e) {
-			return null;
+			throw new RuntimeException("Error occured while decompressing events string: " + e.getMessage(), e);
 		} finally {
 			try {
 				if (byteInputStream != null) {
@@ -2172,11 +2179,8 @@ public class ESBTestCaseUtils {
 				if (gzipInputStream != null) {
 					gzipInputStream.close();
 				}
-				if (br != null) {
-					br.close();
-				}
 			} catch (IOException e) {
-				//ignored
+				//ignore
 			}
 		}
 	}

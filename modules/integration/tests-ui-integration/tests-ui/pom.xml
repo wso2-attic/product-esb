@@ -291,6 +291,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.wso2.esb</groupId>
+            <artifactId>extensions</artifactId>
+        </dependency>
 
         <!-- Jacoco Dependency-->
         <dependency>

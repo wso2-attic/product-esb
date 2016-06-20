@@ -20,6 +20,7 @@
                 </payloadFactory>
                 <header name="Action" value="getQuote"/>
                 <property name="SOAPAction" value="getQuote" scope="transport"/>
+                <property name="messageType" value="text/xml" scope="axis2"/>
                 <send>
                     <endpoint>
                         <address uri="http://localhost:9000/services/SimpleStockQuoteService"
@@ -62,6 +63,7 @@
                 </payloadFactory>
                 <header name="Action" value="getQuote"/>
                 <property name="SOAPAction" value="getQuote" scope="transport"/>
+                <property name="messageType" value="text/xml" scope="axis2"/>
                 <send>
                     <endpoint>
                         <address uri="http://localhost:9000/services/SimpleStockQuoteService"

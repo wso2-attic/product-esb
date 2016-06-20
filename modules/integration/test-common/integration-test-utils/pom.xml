@@ -77,7 +77,7 @@
              <scope>compile</scope>
          </dependency>
          <dependency>
-             <groupId>org.apache.httpcomponents.wso2</groupId>
+             <groupId>org.wso2.orbit.org.apache.httpcomponents</groupId>
              <artifactId>httpclient</artifactId>
              <scope>compile</scope>
          </dependency>
@@ -85,7 +85,14 @@
              <groupId>com.rabbitmq.wso2</groupId>
              <artifactId>amqp-client</artifactId>
          </dependency>
-
+         <dependency>
+             <groupId>com.esotericsoftware</groupId>
+             <artifactId>kryo-shaded</artifactId>
+         </dependency>
+         <dependency>
+         <groupId>org.apache.synapse</groupId>
+         <artifactId>synapse-core</artifactId>
+         </dependency>
      </dependencies>
 
 

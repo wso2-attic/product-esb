@@ -26,175 +26,186 @@ import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpClient;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
-import org.wso2.esb.integration.common.clients.StatisticsEnableAdminClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import org.wso2.esb.integration.common.utils.ESBTestCaseUtils;
 import org.wso2.esb.integration.common.utils.servers.ThriftServer;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Map;
 
 public class ApiStatisticsTest extends ESBIntegrationTest {
-	ThriftServer thriftServer;
-	private ServerConfigurationManager serverConfigurationManager;
-	StatisticsEnableAdminClient statisticsEnableAdminClient;
-	String url = "http://127.0.0.1:8480/stockquote/view/IBM";
-	String postUrl = "http://127.0.0.1:8480/stockquote/order/";
-	String payload = "<placeOrder xmlns=\"http://services.samples\">\n" +
-	                 "  <order>\n" +
-	                 "     <price>50</price>\n" +
-	                 "     <quantity>10</quantity>\n" +
-	                 "     <symbol>IBM</symbol>\n" +
-	                 "  </order>\n" +
-	                 "</placeOrder>";
-	String contentType = "application/xml";
+    ThriftServer thriftServer;
+    private ServerConfigurationManager serverConfigurationManager;
+    public static final int MEDIATOR_ID_INDEX = 4;
+    String url = "http://127.0.0.1:8480/stockquote/view/IBM";
+    String postUrl = "http://127.0.0.1:8480/stockquote/order/";
+    String payload = "<placeOrder xmlns=\"http://services.samples\">\n" +
+            "  <order>\n" +
+            "     <price>50</price>\n" +
+            "     <quantity>10</quantity>\n" +
+            "     <symbol>IBM</symbol>\n" +
+            "  </order>\n" +
+            "</placeOrder>";
+    String contentType = "application/xml";
 
-	@BeforeClass(alwaysRun = true)
-	protected void initialize() throws Exception {
-		//Starting the thrift port to listen to statistics events
-		thriftServer = new ThriftServer("Wso2EventTestCase", 8461, true);
-		thriftServer.start(8462);
-		log.info("Thrift Server is Started on port 8462");
+    @BeforeClass(alwaysRun = true)
+    protected void initialize() throws Exception {
+        //Starting the thrift port to listen to statistics events
+        thriftServer = new ThriftServer("Wso2EventTestCase", 7612, true);
+        thriftServer.start(7612);
+        log.info("Thrift Server is Started on port 8462");
 
-		//Changing synapse configuration to enable statistics and tracing
-		serverConfigurationManager =
-				new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
-		serverConfigurationManager.applyConfiguration(
-				new File(getESBResourceLocation() + File.separator + "StatisticTestResources" + File.separator +
-				         "synapse.properties"));
-		super.init();
+        //Changing synapse configuration to enable statistics and tracing
+        serverConfigurationManager =
+                new ServerConfigurationManager(new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
+        serverConfigurationManager.applyConfiguration(
+                new File(getESBResourceLocation() + File.separator + "StatisticTestResources" + File.separator +
+                        "synapse.properties"));
+        super.init();
 
-		//Configuring thrift server configuration in ESB
-		statisticsEnableAdminClient = new StatisticsEnableAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
-		statisticsEnableAdminClient.addStatisticsConfiguration();
+        thriftServer.resetMsgCount();
+        thriftServer.resetPreservedEventList();
+        //load esb configuration to the server
+        loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/statistics/synapseconfigapi.xml");
+        thriftServer.waitToReceiveEvents(20000, 3); //waiting for esb to send artifact config data to the thriftserver
 
-		//load esb configuration to the server
-		loadESBConfigurationFromClasspath("/artifacts/ESB/synapseconfig/statistics/synapseconfigapi.xml");
-		thriftServer.waitToReceiveEvents(20000, 3); //waiting for esb to send artifact config data to the thriftserver
+        //Checking whether all the artifact configuration events are received
+        Assert.assertEquals("Three configuration events are required", 3, thriftServer.getMsgCount());
+    }
 
-		//Checking whether all the artifact configuration events are received
-		Assert.assertEquals("Three configuration events are required", 3, thriftServer.getMsgCount());
-	}
+    @Test(groups = {"wso2.esb"}, description = "API statistics message count check.")
+    public void statisticsCollectionCountTest() throws Exception {
+        thriftServer.resetMsgCount();
+        thriftServer.resetPreservedEventList();
 
-	@Test(groups = { "wso2.esb" }, description = "API statistics message count check.")
-	public void statisticsCollectionCountTest() throws Exception {
-		thriftServer.resetMsgCount();
-		thriftServer.resetPreservedEventList();
+        for (int i = 0; i < 100; i++) {
+            SimpleHttpClient httpClient = new SimpleHttpClient();
+            httpClient.doGet(url, null);
+        }
 
-		for (int i = 0; i < 100; i++) {
-			SimpleHttpClient httpClient = new SimpleHttpClient();
-			httpClient.doGet(url, null);
-		}
+        thriftServer.waitToReceiveEvents(20000, 100); //wait to esb for asynchronously send statistics
+        // events to the backend
+        Assert.assertEquals("Hundred statistics events are required, but different number is found", 100,
+                thriftServer.getMsgCount());
+    }
 
-		thriftServer.waitToReceiveEvents(20000, 100); //wait to esb for asynchronously send statistics
-		// events to the backend
-		Assert.assertEquals("Hundred statistics events are required, but different number is found", 100,
-		                    thriftServer.getMsgCount());
-	}
+    @Test(groups = {"wso2.esb"}, description = "API statistics message count check for post requests")
+    public void statisticsCollectionCountTestForPostRequests() throws Exception {
+        thriftServer.resetMsgCount();
+        thriftServer.resetPreservedEventList();
+        for (int i = 0; i < 100; i++) {
+            SimpleHttpClient httpClient = new SimpleHttpClient();
+            httpClient.doPost(postUrl, null, payload, contentType);
+        }
+        thriftServer.waitToReceiveEvents(20000, 100); //wait to esb for asynchronously send statistics
+        // events to the backend
+        Assert.assertEquals("Hundred statistics events are required, but different number is found", 100,
+                thriftServer.getMsgCount());
+    }
 
-	@Test(groups = { "wso2.esb" }, description = "API statistics message count check for post requests")
-	public void statisticsCollectionCountTestForPostRequests() throws Exception {
-		thriftServer.resetMsgCount();
-		thriftServer.resetPreservedEventList();
-		for (int i = 0; i < 100; i++) {
-			SimpleHttpClient httpClient = new SimpleHttpClient();
-			httpClient.doPost(postUrl, null, payload, contentType);
-		}
-		thriftServer.waitToReceiveEvents(20000, 100); //wait to esb for asynchronously send statistics
-		// events to the backend
-		Assert.assertEquals("Hundred statistics events are required, but different number is found", 100,
-		                    thriftServer.getMsgCount());
-	}
+    @Test(groups = {"wso2.esb"}, description = "API statistics statistics event data check")
+    public void statisticsEventDataTest() throws Exception {
+        thriftServer.resetMsgCount();
+        thriftServer.resetPreservedEventList();
+        SimpleHttpClient httpClient = new SimpleHttpClient();
+        httpClient.doGet(url, null);
+        thriftServer.waitToReceiveEvents(20000, 1);//wait to esb for asynchronously send statistics events
+        Assert.assertEquals("Statistics event is received", 1, thriftServer.getMsgCount());
+        Map<String, Object> aggregatedEvent =
+                ESBTestCaseUtils.decompress((String) thriftServer.getPreservedEventList().get(0).getPayloadData()[1]);
+        ArrayList eventList = (ArrayList) aggregatedEvent.get("events");
+        HashSet<String> allMediatorEventIds = new HashSet<>();
+        for (Object list : eventList) {
+            allMediatorEventIds.add((String) ((ArrayList) list).get(MEDIATOR_ID_INDEX));
+        }
 
-	@Test(groups = { "wso2.esb" }, description = "API statistics statistics event data check")
-	public void statisticsEventDataTest() throws Exception {
-		thriftServer.resetMsgCount();
-		thriftServer.resetPreservedEventList();
-		SimpleHttpClient httpClient = new SimpleHttpClient();
-		httpClient.doGet(url, null);
-		thriftServer.waitToReceiveEvents(20000, 1);//wait to esb for asynchronously send statistics events
-		Assert.assertEquals("Statistics event is received", 1, thriftServer.getMsgCount());
-		String jsonString =
-				ESBTestCaseUtils.decompress((String) thriftServer.getPreservedEventList().get(0).getPayloadData()[1]);
-		Assert.assertNotNull("Payload of the reported statistics event is null", jsonString);
+        /*
+        Mediator list in the StockQuoteAPI
+        StockQuoteAPI@0:StockQuoteAPI
+        StockQuoteAPI@1:Resource
+        StockQuoteAPI@2:API_INSEQ
+        StockQuoteAPI@3:PayloadFactoryMediator
+        StockQuoteAPI@4:HeaderMediator:Action
+        StockQuoteAPI@5:SendMediator
+        StockQuoteAPI@6:AnonymousEndpoint
+        StockQuoteAPI@7:API_OUTSEQ
+        StockQuoteAPI@8:SendMediator
+        */
 
-			/* Mediator list in the StockQuoteAPI
-			StockQuoteAPI@0:StockQuoteAPI
-			StockQuoteAPI@1:Resource
-			StockQuoteAPI@2:API_INSEQ
-			StockQuoteAPI@3:PayloadFactoryMediator
-			StockQuoteAPI@4:HeaderMediator:Action
-			StockQuoteAPI@5:SendMediator
-			StockQuoteAPI@6:AnonymousEndpoint
-			StockQuoteAPI@7:API_OUTSEQ
-			StockQuoteAPI@8:SendMediator
-			 */
-		Assert.assertTrue("Entry StockQuoteAPI@0:StockQuoteAPI not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@0:StockQuoteAPI"));
-		Assert.assertTrue("Entry StockQuoteAPI@1:Resource not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@1:Resource"));
-		Assert.assertTrue("Entry StockQuoteAPI@2:API_INSEQ not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@2:API_INSEQ"));
-		Assert.assertTrue("Entry StockQuoteAPI@3:PayloadFactoryMediator not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@3:PayloadFactoryMediator"));
-		Assert.assertTrue("Entry StockQuoteAPI@4:HeaderMediator:Action not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@4:HeaderMediator:Action"));
-		Assert.assertTrue("Entry StockQuoteAPI@5:SendMediator not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@5:SendMediator"));
-		Assert.assertTrue("Entry StockQuoteAPI@6:AnonymousEndpoint not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@6:AnonymousEndpoint"));
-		Assert.assertTrue("Entry StockQuoteAPI@7:API_OUTSEQ not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@7:API_OUTSEQ"));
-		Assert.assertTrue("Entry StockQuoteAPI@8:SendMediator not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@8:SendMediator"));
-	}
+        ArrayList<String> mediatorList = new ArrayList<>();
+        mediatorList.add("StockQuoteAPI@0:StockQuoteAPI");
+        mediatorList.add("StockQuoteAPI@1:Resource");
+        mediatorList.add("StockQuoteAPI@2:API_INSEQ");
+        mediatorList.add("StockQuoteAPI@3:PayloadFactoryMediator");
+        mediatorList.add("StockQuoteAPI@4:HeaderMediator:Action");
+        mediatorList.add("StockQuoteAPI@5:SendMediator");
+        mediatorList.add("StockQuoteAPI@6:AnonymousEndpoint");
+        mediatorList.add("StockQuoteAPI@7:API_OUTSEQ");
+        mediatorList.add("StockQuoteAPI@8:SendMediator");
 
-	@Test(groups = { "wso2.esb" }, description = "API statistics statistics event data check for post requests")
-	public void statisticsEventDataTestForPostRequest() throws Exception {
-		thriftServer.resetMsgCount();
-		thriftServer.resetPreservedEventList();
+        //Checking whether all the mediators are present in the event
+        Assert.assertEquals("Nine configuration events are required", 9, eventList.size());
 
-		SimpleHttpClient httpClient = new SimpleHttpClient();
-		httpClient.doPost(postUrl, null, payload, contentType);
-		thriftServer.waitToReceiveEvents(20000, 1);//wait to esb for asynchronously send statistics events
-		// to the backend
-		Assert.assertEquals("Statistics event is received", 1, thriftServer.getMsgCount());
-		String jsonString =
-				ESBTestCaseUtils.decompress((String) thriftServer.getPreservedEventList().get(0).getPayloadData()[1]);
-		Assert.assertNotNull("Payload of the reported statistics event is null", jsonString);
+        for (String mediatorId : mediatorList) {
+            Assert.assertTrue("Mediator not found", allMediatorEventIds.contains(mediatorId));
+        }
 
-			/* Mediator list in the StockQuoteAPI
-			StockQuoteAPI@0:StockQuoteAPI
-			StockQuoteAPI@1:Resource
-			StockQuoteAPI@2:API_INSEQ
-			StockQuoteAPI@3:PayloadFactoryMediator
-			StockQuoteAPI@4:HeaderMediator:Action
-			StockQuoteAPI@5:SendMediator
-			StockQuoteAPI@6:AnonymousEndpoint
-			StockQuoteAPI@7:API_OUTSEQ
-			StockQuoteAPI@8:SendMediator
-			 */
-		Assert.assertTrue("Entry StockQuoteAPI@0:StockQuoteAPI not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@0:StockQuoteAPI"));
-		Assert.assertTrue("Entry StockQuoteAPI@9:Resource not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@9:Resource"));
-		Assert.assertTrue("Entry StockQuoteAPI@10:API_INSEQ not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@10:API_INSEQ"));
-		Assert.assertTrue("Entry StockQuoteAPI@11:PropertyMediator:FORCE_SC_ACCEPTED not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@11:PropertyMediator:FORCE_SC_ACCEPTED"));
-		Assert.assertTrue("Entry StockQuoteAPI@12:PropertyMediator:OUT_ONLY not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@12:PropertyMediator:OUT_ONLY"));
-		Assert.assertTrue("Entry StockQuoteAPI@13:SendMediator not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@13:SendMediator"));
-		Assert.assertTrue("Entry StockQuoteAPI@14:AnonymousEndpoint not exists in statistics event",
-		                  jsonString.contains("StockQuoteAPI@14:AnonymousEndpoint"));
-	}
+    }
 
-	@AfterClass(alwaysRun = true)
-	public void cleanupArtifactsIfExist() throws Exception {
-		statisticsEnableAdminClient = new StatisticsEnableAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
-		statisticsEnableAdminClient.removeAllStatisticsConfiguration();
-		thriftServer.stop();
-		super.cleanup();
-		serverConfigurationManager.restoreToLastConfiguration();
-	}
+
+    @Test(groups = {"wso2.esb"}, description = "API statistics statistics event data check for post requests")
+    public void statisticsEventDataTestForPostRequest() throws Exception {
+        thriftServer.resetMsgCount();
+        thriftServer.resetPreservedEventList();
+
+        SimpleHttpClient httpClient = new SimpleHttpClient();
+        httpClient.doPost(postUrl, null, payload, contentType);
+        thriftServer.waitToReceiveEvents(20000, 1);//wait to esb for asynchronously send statistics events
+        // to the backend
+        Assert.assertEquals("Statistics event is received", 1, thriftServer.getMsgCount());
+        Map<String, Object> aggregatedEvent =
+                ESBTestCaseUtils.decompress((String) thriftServer.getPreservedEventList().get(0).getPayloadData()[1]);
+        ArrayList eventList = (ArrayList) aggregatedEvent.get("events");
+        HashSet<String> allMediatorEventIds = new HashSet<>();
+        for (Object list : eventList) {
+            allMediatorEventIds.add((String) ((ArrayList) list).get(MEDIATOR_ID_INDEX));
+        }
+
+        /*
+        Mediator list in the StockQuoteAPI
+        StockQuoteAPI@0:StockQuoteAPI
+        StockQuoteAPI@9:Resource
+        StockQuoteAPI@10:API_INSEQ
+        PropertyMediator:FORCE_SC_ACCEPTED
+        StockQuoteAPI@12:PropertyMediator:OUT_ONLY
+        StockQuoteAPI@13:SendMediator
+        StockQuoteAPI@14:AnonymousEndpoint
+        */
+
+        ArrayList<String> mediatorList = new ArrayList<>();
+        mediatorList.add("StockQuoteAPI@0:StockQuoteAPI");
+        mediatorList.add("StockQuoteAPI@9:Resource");
+        mediatorList.add("StockQuoteAPI@10:API_INSEQ");
+        mediatorList.add("StockQuoteAPI@11:PropertyMediator:FORCE_SC_ACCEPTED");
+        mediatorList.add("StockQuoteAPI@12:PropertyMediator:OUT_ONLY");
+        mediatorList.add("StockQuoteAPI@13:SendMediator");
+        mediatorList.add("StockQuoteAPI@14:AnonymousEndpoint");
+
+        //Checking whether all the mediators are present in the event
+        Assert.assertEquals("Four configuration events are required", 7, eventList.size());
+
+        for (String mediatorId : mediatorList) {
+            Assert.assertTrue("Mediator not found", allMediatorEventIds.contains(mediatorId));
+        }
+
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void cleanupArtifactsIfExist() throws Exception {
+        thriftServer.stop();
+        super.cleanup();
+        serverConfigurationManager.restoreToLastConfiguration();
+    }
 }

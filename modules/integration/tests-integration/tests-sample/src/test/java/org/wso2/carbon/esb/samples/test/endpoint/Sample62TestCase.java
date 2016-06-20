@@ -68,6 +68,7 @@ public class Sample62TestCase extends ESBIntegrationTest {
 				new SynapseConfigAdminClient(contextUrls.getBackEndUrl(), getSessionCookie());
 		String config = synapseConfigAdminClient.getConfiguration();
 		config = config.replace("9001", "9100").replace("9002", "9200").replace("9003", "9300");
+		config = config.replace("//m0:getQuoteResponse", "//m0:getSimpleQuoteResponse");
 		synapseConfigAdminClient.updateConfiguration(config);
 
 		listener1.start();
@@ -85,7 +86,7 @@ public class Sample62TestCase extends ESBIntegrationTest {
 		System.out.println(response.toString());
 
 		Assert.assertTrue(response.toString().contains("getSimpleQuoteResponse"),
-		                  "GetQuoteResponse not found");
+		                  "GetSimpleQuoteResponse not found");
 		Assert.assertTrue(response.toString().contains("WSO2 Company"), "WSO2 Company not found");
 
 		Thread.sleep(3000);
