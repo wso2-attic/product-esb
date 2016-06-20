@@ -133,5 +133,10 @@
             <package name="org.wso2.carbon.esb.mediator.test.datamapper"/>
         </packages>
     </test>
-    
+
+    <test name="PublishEvent Mediator Test" preserve-order="true" verbose="2" parallel="false">
+        <packages>
+            <package name="org.wso2.carbon.esb.mediator.test.publishevent"/>
+        </packages>
+    </test>
 </suite>
