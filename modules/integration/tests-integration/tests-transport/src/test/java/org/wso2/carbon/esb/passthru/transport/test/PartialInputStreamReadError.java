@@ -98,6 +98,7 @@ public class PartialInputStreamReadError extends ESBIntegrationTest {
             urlConnection.setDoInput(true);
             urlConnection.setUseCaches(false);
             urlConnection.setAllowUserInteraction(false);
+            urlConnection.setReadTimeout(10000);
             for (Map.Entry<String, String> e : headers.entrySet()) {
                 urlConnection.setRequestProperty(e.getKey(), e.getValue());
             }
