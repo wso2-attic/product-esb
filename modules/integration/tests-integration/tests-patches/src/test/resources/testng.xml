@@ -113,6 +113,7 @@
           preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.vfs.transport.test.ESBJAVA3470"/>
+            <class name="org.wso2.carbon.esb.vfs.transport.test.ESBJAVA4679VFSPasswordSecurityTestCase"/>
         </classes>
     </test>
 
