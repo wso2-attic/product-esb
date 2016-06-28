@@ -1522,10 +1522,10 @@
 
     <!--#####################################Dynamic Receiving Sequence#########################################-->
     <sequence xmlns="http://ws.apache.org/ns/synapse" name="dynamic_receiving_sequence">
-        <send/>
         <log xmlns="http://ws.apache.org/ns/synapse">
             <property name="Receiving Sequence" value="Config Reg" ></property>
         </log>
+        <send/>
     </sequence>
 
     <!--########################################################################################################-->
