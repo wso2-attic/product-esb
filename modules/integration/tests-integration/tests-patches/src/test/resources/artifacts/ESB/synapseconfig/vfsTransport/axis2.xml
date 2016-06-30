@@ -270,7 +270,13 @@
 
     <transportReceiver name="local" class="org.wso2.carbon.core.transports.local.CarbonLocalTransportReceiver"/>
 
-    <transportReceiver name="vfs" class="org.apache.synapse.transport.vfs.VFSTransportListener"/>
+    <transportReceiver class="org.apache.synapse.transport.vfs.VFSTransportListener" name="vfs">
+        <parameter locked="false" name="keystore.identity.location">repository/resources/security/wso2carbon.jks</parameter>
+        <parameter locked="false" name="keystore.identity.type">JKS</parameter>
+        <parameter locked="false" name="keystore.identity.store.password">wso2carbon</parameter>
+        <parameter locked="false" name="keystore.identity.key.password">wso2carbon</parameter>
+        <parameter locked="false" name="keystore.identity.alias">wso2carbon</parameter>
+    </transportReceiver>
 
     <!--<transportReceiver name="mailto" class="org.apache.axis2.transport.mail.MailTransportListener">-->
     <!-- configure any optional POP3/IMAP properties
