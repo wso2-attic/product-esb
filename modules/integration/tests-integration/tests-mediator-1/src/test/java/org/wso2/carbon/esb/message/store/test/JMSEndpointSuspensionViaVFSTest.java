@@ -130,8 +130,6 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
 
         sendFile(outfile, afile, bfile);
 
-        sendFile(outfile, afile, bfile);
-
         Assert.assertTrue(interceptor.getPayload().contains("Endpoint Down!"));
 
         deleteProxyService("VFSJMSProxy1");
@@ -238,22 +236,18 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
                                              "                  <inSequence>\n" +
                                              "                     <property name=\"OUT_ONLY\" value=\"true\" scope=\"default\" type=\"STRING\"/>\n" +
                                              "                     <log level=\"full\"/>\n" +
-                                             "                     <iterate expression=\"//addresses/address\">\n" +
-                                             "                        <target>\n" +
-                                             "                           <sequence>\n" +
-                                             "                              <send>\n" +
+                                             "                     <send>\n" +
+                                             "                          <endpoint>\n" +
+                                             "                              <recipientlist>\n" +
                                              "                                  <endpoint>\n" +
-                                             "                                       <address uri=\"jms:/Addresses?transport.jms.ConnectionFactoryJNDIName=QueueConnectionFactory&amp;java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory&amp;java.naming.provider.url=tcp://localhost:61616\"/>" +
+                                             "                                      <address uri=\"jms:/Addresses?transport.jms.ConnectionFactoryJNDIName=QueueConnectionFactory&amp;java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory&amp;java.naming.provider.url=tcp://localhost:61616\"/>" +
                                              "                                  </endpoint>" +
-                                             "                              </send>\n" +
-                                             "                              <send>\n" +
                                              "                                  <endpoint>\n" +
-                                             "                                       <address uri=\"http://localhost:8095/services/SimpleStockQuoteService\"/>" +
+                                             "                                      <address uri=\"http://localhost:8095/services/SimpleStockQuoteService\"/>" +
                                              "                                  </endpoint>" +
-                                             "                              </send>\n" +
-                                             "                           </sequence>\n" +
-                                             "                        </target>\n" +
-                                             "                     </iterate>\n" +
+                                             "                              </recipientlist>\n" +
+                                             "                          </endpoint>\n" +
+                                             "                      </send>\n" +
                                              "                  </inSequence>\n" +
                                              "                  <faultSequence>\n" +
                                              "                     <log level=\"full\">\n" +
