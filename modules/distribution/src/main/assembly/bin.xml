@@ -44,9 +44,9 @@
                 <exclude>**/lib/endorsed/xalan*.jar</exclude>
                 <exclude>**/repository/conf/tomcat/catalina-server.xml</exclude>
                 <exclude>**/repository/conf/registry.xml</exclude>
-                <exclude>**/repository/conf/tomcat/web.xml</exclude>
+                <!--<exclude>**/repository/conf/tomcat/web.xml</exclude>-->
                 <exclude>**/webapp-mode/WEB-INF/web.xml</exclude>
-                <exclude>**/repository/conf/tomcat/carbon/WEB-INF/web.xml</exclude>
+                <!--<exclude>**/repository/conf/tomcat/carbon/WEB-INF/web.xml</exclude>-->
 		<exclude>**/repository/components/plugins/httpclient_4.3.1.wso2v2.jar</exclude>
 		<exclude>**/repository/components/plugins/axis2-transport-jms_1.1.1.wso2v2.jar</exclude>
 		<exclude>**/repository/components/plugins/axis2-transport-sms_1.1.1.wso2v2.jar</exclude>
@@ -318,16 +318,16 @@
             <destName>registry.xml</destName>
             <fileMode>644</fileMode>
         </file>
-        <file>
-            <source>src/main/conf/web.xml</source>
-            <outputDirectory>wso2esb-${pom.version}/repository/conf/tomcat</outputDirectory>
-            <destName>web.xml</destName>
-        </file>
-        <file>
-            <source>src/main/conf/carbon/web.xml</source>
-            <outputDirectory>wso2esb-${pom.version}/repository/conf/tomcat/carbon/WEB-INF</outputDirectory>
-            <destName>web.xml</destName>
-        </file>
+        <!--<file>-->
+            <!--<source>src/main/conf/web.xml</source>-->
+            <!--<outputDirectory>wso2esb-${pom.version}/repository/conf/tomcat</outputDirectory>-->
+            <!--<destName>web.xml</destName>-->
+        <!--</file>-->
+        <!--<file>-->
+            <!--<source>src/main/conf/carbon/web.xml</source>-->
+            <!--<outputDirectory>wso2esb-${pom.version}/repository/conf/tomcat/carbon/WEB-INF</outputDirectory>-->
+            <!--<destName>web.xml</destName>-->
+        <!--</file>-->
         <file>
             <source>src/main/conf/webapp-mode/web.xml</source>
             <outputDirectory>wso2esb-${pom.version}/webapp-mode/WEB-INF</outputDirectory>
