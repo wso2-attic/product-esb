@@ -106,6 +106,7 @@
             <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA3714JMXPauseJMSListener" />
             <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA3282CalloutJMSHeadersTestCase" />
             <class name="org.wso2.carbon.esb.mediators.store.ESBJAVA4470StoreMediatorEmptyOMArraySerializeException" />
+            <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA4692_MP_FaultSequence_HttpsEndpoint_TestCase" />
         </classes>
     </test>
 
@@ -113,6 +114,7 @@
           preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.vfs.transport.test.ESBJAVA3470"/>
+            <class name="org.wso2.carbon.esb.vfs.transport.test.ESBJAVA4679VFSPasswordSecurityTestCase"/>
         </classes>
     </test>
 
