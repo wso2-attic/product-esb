@@ -1139,7 +1139,7 @@
         <sandesha2.version>1.6.1-wso2v1</sandesha2.version>
         <geronimo.specs.j2ee.version>1.0.1</geronimo.specs.j2ee.version>
         <geronimo.specs.jms.version>1.1.1</geronimo.specs.jms.version>
-        <httpcore-nio.wso2.version>4.3.3.wso2v4-SNAPSHOT</httpcore-nio.wso2.version>
+        <httpcore-nio.wso2.version>4.3.3.wso2v4</httpcore-nio.wso2.version>
         <rampart.wso2.version>1.6.1.wso2v18</rampart.wso2.version>
         <rampart.mar.version>1.6.1-wso2v18</rampart.mar.version>
 
