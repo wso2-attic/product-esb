@@ -31,7 +31,6 @@
         <display-name>Carbon Bridge Servlet</display-name>
         <description>Carbon Bridge Servlet</description>
         <servlet-class>org.wso2.carbon.tomcat.ext.servlet.DelegationServlet</servlet-class>
-
         <load-on-startup>1</load-on-startup>
     </servlet>
 
