@@ -1115,7 +1115,7 @@
         <carbon.deployment.version>4.7.0</carbon.deployment.version>
 
         <!-- Carbon Registry version-->
-        <carbon.registry.version>4.5.5</carbon.registry.version>
+        <carbon.registry.version>4.5.6</carbon.registry.version>
 
         <!-- Carbon Identity version-->
         <carbon.identity.version>5.2.0</carbon.identity.version>
@@ -1252,16 +1252,6 @@
         </pluginRepository>
     </pluginRepositories>
     <repositories>
-        <repository>
-            <id>wso2-staging</id>
-            <name>WSO2 staging Repository</name>
-            <url>http://maven.wso2.org/nexus/content/repositories/orgwso2carbonmultitenancy-1001/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>ignore</checksumPolicy>
-            </releases>
-        </repository>
         <repository>
             <id>wso2-nexus</id>
             <name>WSO2 internal Repository</name>
