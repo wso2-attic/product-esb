@@ -1097,7 +1097,7 @@
         <synapse.version>2.1.7-wso2v3-SNAPSHOT</synapse.version>
 
         <!-- Axis2 Transport -->
-        <axis2.transport.version>1.1.1-wso2v4-SNAPSHOT</axis2.transport.version>
+        <axis2.transport.version>1.1.1-wso2v4</axis2.transport.version>
 
         <!-- Apache Versions -->
         <org.apache.httpcomponents.wso2.version>4.2.3.wso2v1</org.apache.httpcomponents.wso2.version>
