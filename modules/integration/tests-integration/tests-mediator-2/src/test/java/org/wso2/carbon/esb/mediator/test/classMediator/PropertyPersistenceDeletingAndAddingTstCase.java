@@ -88,6 +88,8 @@ public class PropertyPersistenceDeletingAndAddingTstCase extends ESBIntegrationT
         serverConfigurationManager.copyToComponentLib
                 (new File(getClass().getResource(JAR_LOCATION + File.separator + CLASS_JAR_FOUR_PROPERTIES).toURI()));
         loadSampleESBConfiguration(0);
+        /* waiting for the new config file to be written to the disk */
+        Thread.sleep(10000);
         serverConfigurationManager.restartGracefully();
 
         super.init();
