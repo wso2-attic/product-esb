@@ -86,6 +86,8 @@
     <parameter name="SynapseConfig.ResolveRoot" locked="false">.</parameter>
     <!-- Synapse Server name parameter -->
     <parameter name="SynapseConfig.ServerName" locked="false">localhost</parameter>
+    <!-- Returns 401 for UT secured scenario with incorrect/missing credentials -->
+    <parameter name="enableBasicAuth" locked="false">true</parameter>
 
     <!-- To override repository/services you need to uncomment following parameter and value -->
     <!-- SHOULD be absolute file path. -->
