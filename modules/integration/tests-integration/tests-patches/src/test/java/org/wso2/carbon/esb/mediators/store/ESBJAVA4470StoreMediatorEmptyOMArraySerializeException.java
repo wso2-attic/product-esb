@@ -59,7 +59,7 @@ public class ESBJAVA4470StoreMediatorEmptyOMArraySerializeException extends ESBI
         String url = getApiInvocationURL("SerializeProperty")+"/serializeOMArray";
         SimpleHttpClient httpClient = new SimpleHttpClient();
         httpClient.doGet(url, null);
-        TimeUnit.SECONDS.sleep(5);
+        TimeUnit.SECONDS.sleep(10);
         LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
         boolean logFound = false;
         for (LogEvent item : logs) {
