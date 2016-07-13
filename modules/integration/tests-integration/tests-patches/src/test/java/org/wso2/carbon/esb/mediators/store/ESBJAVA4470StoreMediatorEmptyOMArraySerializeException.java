@@ -49,17 +49,17 @@ public class ESBJAVA4470StoreMediatorEmptyOMArraySerializeException extends ESBI
                 , new DataHandler(new URL("file:" + File.separator + File.separator +
                 getESBResourceLocation() + File.separator + "car" +
                 File.separator + carFileName)));
-        TimeUnit.SECONDS.sleep(5);
+        TimeUnit.SECONDS.sleep(30);
         log.info(carFileName + " uploaded successfully");
     }
 
     @Test(groups = {"wso2.esb"}, description = "Test if Store Mediator Serialize Empty OM Array without Exception")
     public void testStoreMediatorEmptyOMArrayPropertySerialize() throws Exception {
-        Thread.sleep(6000);
         logViewerClient.clearLogs();
         String url = getApiInvocationURL("SerializeProperty")+"/serializeOMArray";
         SimpleHttpClient httpClient = new SimpleHttpClient();
         httpClient.doGet(url, null);
+        TimeUnit.SECONDS.sleep(10);
         LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
         boolean logFound = false;
         for (LogEvent item : logs) {
