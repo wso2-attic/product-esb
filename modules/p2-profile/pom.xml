@@ -292,13 +292,13 @@
                                     org.wso2.carbon.identity:org.wso2.carbon.security.mgt.feature:${carbon.identity.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.sts.feature:${carbon.identity.version}
+                                    org.wso2.carbon.identity:org.wso2.carbon.sts.feature:${carbon.identity-inbound-auth-sts.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.server.feature:${carbon.identity.version}
+                                    org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.server.feature:${carbon.identity-carbon-auth-saml2.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature:${carbon.identity.version}
+                                    org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature:${carbon.identity-carbon-auth-saml2.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.user.mgt.feature:${carbon.identity.version}
@@ -759,15 +759,15 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.sts.feature.group</id>
-                                    <version>${carbon.identity.version}</version>
+                                    <version>${carbon.identity-inbound-auth-sts.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
-                                    <version>${carbon.identity.version}</version>
+                                    <version>${carbon.identity-carbon-auth-saml2.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature.group</id>
-                                    <version>${carbon.identity.version}</version>
+                                    <version>${carbon.identity-carbon-auth-saml2.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.user.mgt.feature.group</id>
@@ -1240,11 +1240,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.sts.feature.group</id>
-                                    <version>${carbon.identity.version}</version>
+                                    <version>${carbon.identity-inbound-auth-sts.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
-                                    <version>${carbon.identity.version}</version>
+                                    <version>${carbon.identity-carbon-auth-saml2.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.user.mgt.feature.group</id>
