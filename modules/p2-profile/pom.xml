@@ -991,10 +991,6 @@
                                     <id>org.wso2.carbon.relay.server.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
-                                <!--<feature>
-                                    <id>org.wso2.carbon.mediation.tracer.feature.group</id>
-                                    <version>${carbon.mediation.version}</version>
-                                </feature>-->
 				                <feature>
                                     <id>org.wso2.carbon.das.messageflow.data.publisher.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
