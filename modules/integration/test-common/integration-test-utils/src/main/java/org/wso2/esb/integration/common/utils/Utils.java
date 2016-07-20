@@ -22,6 +22,9 @@ import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
 import org.apache.axiom.om.OMNamespace;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 public class Utils {
     public static OMElement getSimpleQuoteRequest(String symbol) {
         OMFactory fac = OMAbstractFactory.getOMFactory();
@@ -81,5 +84,38 @@ public class Utils {
         request.addChild(code);
         payload.addChild(request);
         return payload;
+    }
+
+    /**
+     * method to kill existing servers which are bind to the given port
+     *
+     * @param port
+     */
+    public static void shutdownFailsafe(int port) {
+        try {
+            System.out.println("Method to kill already existing servers in port " + port);
+            Process p = Runtime.getRuntime().exec("lsof -Pi tcp:" + port);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            reader.readLine();
+            line = reader.readLine();
+            if (line != null) {
+                line = line.trim();
+                String processId = line.split(" +")[1];
+                System.out.println("There is already a process using " + port + ", process id is - " + processId);
+                if (processId != null) {
+                    String killStr = "kill -9 " + processId;
+                    System.out.println("kill string to kill the process - " + killStr);
+                    Runtime.getRuntime().exec(killStr);
+
+                    System.out.println(
+                            "process " + processId + " killed successfully, which was running on port " + port);
+                }
+            } else {
+                System.out.println("There are no existing processes running on port " + port);
+            }
+        } catch (Exception e) {
+            System.out.println("Error killing the process which uses the port " + port);
+        }
     }
 }

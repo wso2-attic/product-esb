@@ -30,6 +30,7 @@ import org.wso2.carbon.automation.extensions.servers.ftpserver.FTPServerManager;
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,14 +46,14 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 	private String pathToFtpDir;
 
 	@BeforeClass(alwaysRun = true)
-	public void runFTPServer() throws Exception {
+	public void runFTPServerForInboundTest() throws Exception {
 
 		// Username password for the FTP server to be started
 		FTPUsername = "admin";
 		FTPPassword = "admin";
 		String inputFolderName = "ftpin";
 		String outputFolderName = "ftpout";
-		int FTPPort = 8095;
+		int FTPPort = 9653;
 
 		pathToFtpDir = getClass().getResource(
 				File.separator + "artifacts" + File.separator + "ESB"
@@ -88,6 +89,9 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 		}
 		Assert.assertTrue(outputFolder.mkdir(), "FTP data /in folder not created");
 
+		/* Make the port available */
+		Utils.shutdownFailsafe(FTPPort);
+
 		// start-up FTP server
 		ftpServerManager = new FTPServerManager(FTPPort,
 				FTPFolder.getAbsolutePath(), FTPUsername, FTPPassword);
@@ -101,11 +105,12 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 
 		logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(),
 				getSessionCookie());
+		log.info("Before Class test method completed successfully");
 
 	}
 
 	@AfterClass(alwaysRun = true)
-	public void stopFTPServer() throws Exception {
+	public void stopFTPServerForInboundTest() throws Exception {
 		try {
 			super.cleanup();
 		} finally {
@@ -209,7 +214,7 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 						+ " <parameter name=\"transport.vfs.ContentType\">application/xml</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterFailure\">NONE</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterProcess\">NONE</parameter>\n"
-						+ " <parameter name=\"transport.vfs.FileURI\">ftp://admin:admin@localhost:8095/ftpin/test.xml"
+						+ " <parameter name=\"transport.vfs.FileURI\">ftp://admin:admin@localhost:9653/ftpin/test.xml"
 						+ "</parameter>\n"
 						+ " </parameters>\n"
 						+ "</inboundEndpoint>\n");
@@ -229,9 +234,9 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 						+ " <parameter name=\"transport.vfs.ContentType\">application/xml</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterFailure\">NONE</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterProcess\">MOVE</parameter>\n"
-						+ "<parameter name=\"transport.vfs.MoveAfterProcess\">ftp://admin:admin@localhost:8095/ftpout"
+						+ "<parameter name=\"transport.vfs.MoveAfterProcess\">ftp://admin:admin@localhost:9653/ftpout"
 						+ "</parameter>"
-						+ " <parameter name=\"transport.vfs.FileURI\">ftp://admin:admin@localhost:8095/ftpin"
+						+ " <parameter name=\"transport.vfs.FileURI\">ftp://admin:admin@localhost:9653/ftpin"
 						+ "</parameter>\n"
 						+ " </parameters>\n"
 						+ "</inboundEndpoint>\n");
@@ -251,9 +256,9 @@ public class FtpInboundTransportTest extends ESBIntegrationTest {
 						+ " <parameter name=\"transport.vfs.ContentType\">application/xml</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterFailure\">NONE</parameter>\n"
 						+ " <parameter name=\"transport.vfs.ActionAfterProcess\">MOVE</parameter>\n"
-						+ "<parameter name=\"transport.vfs.MoveAfterProcess\">ftp://admin:admin@localhost:8095/ftpout/test.xml"
+						+ "<parameter name=\"transport.vfs.MoveAfterProcess\">ftp://admin:admin@localhost:9653/ftpout/test.xml"
 						+ "</parameter>"
-						+ " <parameter name=\"transport.vfs.FileURI\">ftp://invalid:admin@localhost:8095/ftpin/test.xml"
+						+ " <parameter name=\"transport.vfs.FileURI\">ftp://invalid:admin@localhost:9653/ftpin/test.xml"
 						+ "</parameter>\n"
 						+ " </parameters>\n"
 						+ "</inboundEndpoint>\n");
