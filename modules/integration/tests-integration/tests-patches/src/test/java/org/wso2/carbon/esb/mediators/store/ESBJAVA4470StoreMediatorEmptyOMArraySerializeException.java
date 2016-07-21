@@ -28,10 +28,10 @@ import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
-import javax.activation.DataHandler;
 import java.io.File;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+import javax.activation.DataHandler;
 
 import static org.testng.Assert.assertFalse;
 
@@ -62,10 +62,12 @@ public class ESBJAVA4470StoreMediatorEmptyOMArraySerializeException extends ESBI
         TimeUnit.SECONDS.sleep(10);
         LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
         boolean logFound = false;
-        for (LogEvent item : logs) {
-            if(item.getMessage().contains("Index: 0, Size: 0") && item.getPriority().contains("ERROR")){
-                logFound = true;
-                break;
+        if (logs != null) {
+            for (LogEvent item : logs) {
+                if (item.getMessage().contains("Index: 0, Size: 0") && item.getPriority().contains("ERROR")) {
+                    logFound = true;
+                    break;
+                }
             }
         }
         assertFalse(logFound, "Exception thrown when serializing OM Array property by Store Mediator");
