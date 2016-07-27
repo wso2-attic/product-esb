@@ -1110,7 +1110,7 @@
         <!-- Carbon Identity version-->
         <carbon.identity.version>5.2.0</carbon.identity.version>
         <carbon.identity-inbound-auth-sts.version>5.1.1</carbon.identity-inbound-auth-sts.version>
-        <carbon.identity-carbon-auth-saml2.version>5.1.1</carbon.identity-carbon-auth-saml2.version>
+        <carbon.identity-carbon-auth-saml2.version>5.1.2</carbon.identity-carbon-auth-saml2.version>
 
         <!-- Carbon Rule version -->
         <carbon.rule.version>4.4.1</carbon.rule.version>
