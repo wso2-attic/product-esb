@@ -97,7 +97,7 @@
     </filter>
 
     <filter>
-        <filter-name>HttpHeaderSecurityFilter_WsdlTools</filter-name>
+        <filter-name>HttpHeaderSecurityFilter_AntiClickJacking_WsdlTools</filter-name>
         <filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class>
         <init-param>
             <param-name>hstsEnabled</param-name>
@@ -123,7 +123,7 @@
     </filter-mapping>
 
     <filter-mapping>
-        <filter-name>HttpHeaderSecurityFilter_WsdlTools</filter-name>
+        <filter-name>HttpHeaderSecurityFilter_AntiClickJacking_WsdlTools</filter-name>
         <url-pattern>/services/WSDLValidatorService/*</url-pattern>
         <url-pattern>/fileupload/wsdl</url-pattern>
         <url-pattern>/fileupload/tools</url-pattern>
