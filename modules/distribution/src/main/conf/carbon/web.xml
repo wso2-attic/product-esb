@@ -96,9 +96,37 @@
         </init-param>
     </filter>
 
+    <filter>
+        <filter-name>HttpHeaderSecurityFilter_WsdlTools</filter-name>
+        <filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class>
+        <init-param>
+            <param-name>hstsEnabled</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <init-param>
+            <param-name>blockContentTypeSniffingEnabled</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <init-param>
+            <param-name>xssProtectionEnabled</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <init-param>
+            <param-name>antiClickJackingOption</param-name>
+            <param-value>SAMEORIGIN</param-value>
+        </init-param>
+    </filter>
+
     <filter-mapping>
         <filter-name>HttpHeaderSecurityFilter</filter-name>
         <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>HttpHeaderSecurityFilter_WsdlTools</filter-name>
+        <url-pattern>/services/WSDLValidatorService/*</url-pattern>
+        <url-pattern>/fileupload/wsdl</url-pattern>
+        <url-pattern>/fileupload/tools</url-pattern>
     </filter-mapping>
 
     <filter-mapping>
