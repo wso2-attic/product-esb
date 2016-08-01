@@ -85,6 +85,13 @@
         <packages>
             <package name="org.wso2.carbon.esb.statistics"/>
         </packages>
+        <classes>
+            <class name="org.wso2.carbon.esb.statistics.ApiStatisticsTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+        </classes>
     </test>
 
     <test name="LocalEntry-Test" preserve-order="true" verbose="2">
