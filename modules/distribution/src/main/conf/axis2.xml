@@ -86,6 +86,8 @@
     <parameter name="SynapseConfig.ResolveRoot" locked="false">.</parameter>
     <!-- Synapse Server name parameter -->
     <parameter name="SynapseConfig.ServerName" locked="false">localhost</parameter>
+    <!-- Returns 401 for UT secured scenario with incorrect/missing credentials -->
+    <parameter name="enableBasicAuth" locked="false">true</parameter>
 
     <!-- To override repository/services you need to uncomment following parameter and value -->
     <!-- SHOULD be absolute file path. -->
@@ -485,6 +487,10 @@
      -->
     <clustering class="org.wso2.carbon.core.clustering.hazelcast.HazelcastClusteringAgent"
                 enable="false">
+
+        <!-- Parameter to differentiate clustering mode, Default value will be "WorkerManager" in which
+         case the manager nodes of the cluster won't run schedule tasks-->
+        <parameter name="clusteringPattern">WorkerManager</parameter>
 
         <!--
            This parameter indicates whether the cluster has to be automatically initalized

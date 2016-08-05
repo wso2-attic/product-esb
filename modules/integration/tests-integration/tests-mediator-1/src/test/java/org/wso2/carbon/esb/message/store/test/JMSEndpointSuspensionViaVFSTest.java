@@ -22,6 +22,7 @@ import org.wso2.carbon.automation.extensions.servers.jmsserver.controller.config
 import org.wso2.carbon.automation.extensions.servers.httpserver.SimpleHttpServer;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
+import org.wso2.esb.integration.common.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,12 +44,15 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
     private final String GERONIMO_J2EE_MANAGEMENT = "geronimo-j2ee-management_1.1_spec-1.0.1.jar";
     private final String GERONIMO_JMS = "geronimo-jms_1.1_spec-1.1.1.jar";
     private final String JAR_LOCATION = "/artifacts/ESB/jar";
+    private final int PORT = 9654;
     private SimpleHttpServer httpServer;
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         setUpJMSBroker();
-        httpServer = new SimpleHttpServer(8095, new Properties());
+        /* Make the port available */
+        Utils.shutdownFailsafe(PORT);
+        httpServer = new SimpleHttpServer(PORT, new Properties());
         httpServer.start();
         Thread.sleep(5000);
 
@@ -93,6 +97,7 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
         infolder.mkdirs();
         originalfolder.mkdirs();
         failurelfolder.mkdirs();
+        log.info("Before Class method completed successfully");
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.STANDALONE})
@@ -127,8 +132,6 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
         interceptor = new TestRequestInterceptor();
         httpServer.getRequestHandler().setInterceptor(interceptor);
         jmsBrokerController.stop();
-
-        sendFile(outfile, afile, bfile);
 
         sendFile(outfile, afile, bfile);
 
@@ -238,22 +241,18 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
                                              "                  <inSequence>\n" +
                                              "                     <property name=\"OUT_ONLY\" value=\"true\" scope=\"default\" type=\"STRING\"/>\n" +
                                              "                     <log level=\"full\"/>\n" +
-                                             "                     <iterate expression=\"//addresses/address\">\n" +
-                                             "                        <target>\n" +
-                                             "                           <sequence>\n" +
-                                             "                              <send>\n" +
+                                             "                     <send>\n" +
+                                             "                          <endpoint>\n" +
+                                             "                              <recipientlist>\n" +
                                              "                                  <endpoint>\n" +
-                                             "                                       <address uri=\"jms:/Addresses?transport.jms.ConnectionFactoryJNDIName=QueueConnectionFactory&amp;java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory&amp;java.naming.provider.url=tcp://localhost:61616\"/>" +
+                                             "                                      <address uri=\"jms:/Addresses?transport.jms.ConnectionFactoryJNDIName=QueueConnectionFactory&amp;java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory&amp;java.naming.provider.url=tcp://localhost:61616\"/>" +
                                              "                                  </endpoint>" +
-                                             "                              </send>\n" +
-                                             "                              <send>\n" +
                                              "                                  <endpoint>\n" +
-                                             "                                       <address uri=\"http://localhost:8095/services/SimpleStockQuoteService\"/>" +
+                                             "                                      <address uri=\"http://localhost:9654/services/SimpleStockQuoteService\"/>" +
                                              "                                  </endpoint>" +
-                                             "                              </send>\n" +
-                                             "                           </sequence>\n" +
-                                             "                        </target>\n" +
-                                             "                     </iterate>\n" +
+                                             "                              </recipientlist>\n" +
+                                             "                          </endpoint>\n" +
+                                             "                      </send>\n" +
                                              "                  </inSequence>\n" +
                                              "                  <faultSequence>\n" +
                                              "                     <log level=\"full\">\n" +
@@ -265,7 +264,7 @@ public class JMSEndpointSuspensionViaVFSTest extends ESBIntegrationTest {
                                              "                     </makefault>\n" +
                                              "                     <send>\n" +
                                              "                          <endpoint>\n" +
-                                             "                               <address uri=\"http://localhost:8095/services/SimpleStockQuoteService\"/>" +
+                                             "                               <address uri=\"http://localhost:9654/services/SimpleStockQuoteService\"/>" +
                                              "                          </endpoint>" +
                                              "                     </send>\n" +
                                              "                  </faultSequence>" +

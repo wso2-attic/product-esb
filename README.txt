@@ -78,12 +78,12 @@ Installation & Running
     username : admin
     password : admin
 
-5. Smaple configurations can be started with wso2esb-samples.sh or
+5. Sample configurations can be started with wso2esb-samples.sh or
    wso2esb-samples.bat as appropriate specifying the sample number with the -sn
    option, for example to run sample 0 the command is
 
     ./wso2esb-samples.sh -sn 0
-    ./wso2esb-samples.bat -sn 0
+     wso2esb-samples.bat -sn 0
 
 WSO2 ESB 5.0.0 distribution directory structure
 =============================================
