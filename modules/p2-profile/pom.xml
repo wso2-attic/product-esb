@@ -18,7 +18,7 @@
     <parent>
         <groupId>org.wso2.esb</groupId>
         <artifactId>esb-parent</artifactId>
-        <version>5.0.0-SNAPSHOT</version>
+        <version>5.0.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -893,7 +893,7 @@
 
                                 <feature>
                                 <id>org.wso2.carbon.transports.sap.feature.group</id>
-                                <version>${carbon.mediation.version}</version>-->
+                                <version>${carbon.mediation.version}</version>--&gt;
                                 </feature>
                                 
                                 <feature>
