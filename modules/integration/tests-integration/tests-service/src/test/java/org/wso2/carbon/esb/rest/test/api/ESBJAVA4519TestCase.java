@@ -43,6 +43,7 @@ public class ESBJAVA4519TestCase extends ESBIntegrationTest {
 				File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" +
 				File.separator + "rest" + File.separator + "ESBJAVA4519synapseConfig.xml");
 		logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
+		logViewerClient.clearLogs();
 	}
 
 	@Test(groups = {"wso2.esb" }, description = "Test whether file get restored after deployment failure")
