@@ -47,6 +47,13 @@
         <packages>
             <package name="org.wso2.carbon.esb.rest.test.api"/>
         </packages>
+        <classes>
+            <class name="org.wso2.carbon.esb.rest.test.api.ESBJAVA4519TestCase">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+        </classes>
     </test>
     <test name="Rest-API-Header-Test" preserve-order="true" verbose="2" parallel="false">
         <packages>
