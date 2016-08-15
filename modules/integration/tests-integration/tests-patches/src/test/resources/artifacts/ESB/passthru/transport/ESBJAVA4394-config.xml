@@ -10,7 +10,7 @@
         <description/>
         <target faultSequence="simpleStockPTFault">
             <endpoint>
-                <address uri="http://localhost:5000/services/SimpleStockQuoteService"/>
+                <address uri="http://localhost:9200/services/SimpleStockQuoteService"/>
             </endpoint>
             <inSequence>
                 <log level="custom">
