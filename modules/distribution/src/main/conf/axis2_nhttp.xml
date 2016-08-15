@@ -87,6 +87,9 @@
     <!-- Synapse Server name parameter -->
     <parameter name="SynapseConfig.ServerName" locked="false">localhost</parameter>
 
+    <!-- disabling tryIt feature globally to prevent possible xxe attack -->
+    <parameter name="disableTryIt">true</parameter>
+
     <!-- To override repository/services you need to uncomment following parameter and value -->
     <!-- SHOULD be absolute file path. -->
     <!--<parameter name="ServicesDirectory" locked="false">service</parameter>-->
