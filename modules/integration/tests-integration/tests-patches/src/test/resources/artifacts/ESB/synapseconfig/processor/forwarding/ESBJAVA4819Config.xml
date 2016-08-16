@@ -1,0 +1,94 @@
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <registry provider="org.wso2.carbon.mediation.registry.WSO2Registry">
+        <parameter name="cachableDuration">15000</parameter>
+    </registry>
+    <taskManager provider="org.wso2.carbon.mediation.ntask.NTaskTaskManager"/>
+    <proxy name="MessageProcessorWSAProxy" startOnLoad="true" trace="disable" transports="http https">
+        <description/>
+        <target>
+            <inSequence>
+                <log/>
+                <property name="FORCE_SC_ACCEPTED" scope="axis2"
+                          type="STRING" value="true"/>
+                <sequence key="MessageProcessorWSASequence"/>
+            </inSequence>
+            <outSequence>
+                <drop/>
+            </outSequence>
+        </target>
+    </proxy>
+    <endpoint name="MessageProcessorWSAEp">
+        <address uri="http://localhost:8480/test">
+            <enableAddressing/>
+        </address>
+    </endpoint>
+    <sequence name="MessageProcessorWSASequence" trace="disable">
+        <payloadFactory media-type="xml">
+            <format>
+                <greet>
+                    <name>MessageProcessorWSA</name>
+                </greet>
+            </format>
+            <args/>
+        </payloadFactory>
+        <header scope="default">
+            <wsa:MessageID xmlns:wsa="http://www.w3.org/2005/08/addressing">uuid:d7f2e040-e298-49f2-9c73-99273f15f9d5</wsa:MessageID>
+        </header>
+        <header scope="default">
+            <wsa:To xmlns:wsa="http://www.w3.org/2005/08/addressing">http://localhost:8480/test</wsa:To>
+        </header>
+        <log level="full">
+            <property name="BeforeSendingToStore" value="Before Sending to Message Store"/>
+        </log>
+        <property name="PRESERVE_WS_ADDRESSING" value="true"/>
+        <store messageStore="MessageProcessorWSAMs"/>
+    </sequence>
+    <sequence name="fault">
+        <log level="full">
+            <property name="MESSAGE" value="Executing default 'fault' sequence"/>
+            <property expression="get-property('ERROR_CODE')" name="ERROR_CODE"/>
+            <property expression="get-property('ERROR_MESSAGE')" name="ERROR_MESSAGE"/>
+        </log>
+        <drop/>
+    </sequence>
+    <sequence name="main">
+        <in>
+            <log level="full"/>
+            <filter regex="http://localhost:9000.*" source="get-property('To')">
+                <send/>
+            </filter>
+        </in>
+        <out>
+            <send/>
+        </out>
+        <description>The main sequence for the message mediation</description>
+    </sequence>
+    <messageStore name="MessageProcessorWSAMs"/>
+    <messageProcessor
+            class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
+            messageStore="MessageProcessorWSAMs" name="testMp" targetEndpoint="MessageProcessorWSAEp">
+        <parameter name="client.retry.interval">1000</parameter>
+        <parameter name="throttle">false</parameter>
+        <parameter name="max.delivery.attempts">2</parameter>
+        <parameter name="member.count">1</parameter>
+        <parameter name="message.processor.fault.sequence">fault</parameter>
+        <parameter name="max.delivery.drop">Disabled</parameter>
+        <parameter name="interval">1000</parameter>
+        <parameter name="is.active">true</parameter>
+        <parameter name="target.endpoint">MessageProcessorWSAEp</parameter>
+    </messageProcessor>
+    <api xmlns="http://ws.apache.org/ns/synapse" name="MessageProcessorWSAApi" context="/test">
+        <resource methods="POST">
+            <inSequence>
+                <payloadFactory media-type="xml">
+                    <format>
+                        <response xmlns="">MessageProcessorWSAProxy Request Received</response>
+                    </format>
+                    <args/>
+                </payloadFactory>
+                <log level="full"/>
+                <respond/>
+            </inSequence>
+        </resource>
+    </api>
+</definitions>
