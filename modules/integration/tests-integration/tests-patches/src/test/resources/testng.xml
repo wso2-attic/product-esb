@@ -241,5 +241,11 @@
         </classes>
     </test>
 
+    <test name="ESBJAVA-4819 Test" preserve-order="true" verbose="2" parallel="false">
+        <classes>
+            <class name="org.wso2.carbon.esb.message.processor.test.ESBJava4819TestCase"/>
+        </classes>
+    </test>
+
 </suite>
 
