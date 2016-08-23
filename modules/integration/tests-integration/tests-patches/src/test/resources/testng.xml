@@ -242,5 +242,10 @@
         </classes>
     </test>
 
+    <test name="Payload Factory" preserve-order="true" verbose="2" parallel="false">
+        <classes>
+            <class name="org.wso2.carbon.esb.mediators.payloadFactory.ESBJAVA3573PayloadFormatWithBeginHtmlTagArgument"/>
+        </classes>
+    </test>
 </suite>
 
