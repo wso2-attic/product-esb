@@ -51,6 +51,7 @@
 		<exclude>**/repository/components/plugins/axis2-transport-jms_1.1.1.wso2v2.jar</exclude>
 		<exclude>**/repository/components/plugins/axis2-transport-sms_1.1.1.wso2v2.jar</exclude>
 		<exclude>**/repository/components/plugins/axis2-transport-mail_1.1.1.wso2v2.jar</exclude>
+		<exclude>**/repository/components/plugins/jsch_0.1.49.wso2v1.jar</exclude>
             </excludes>
         </fileSet>
         <fileSet>
