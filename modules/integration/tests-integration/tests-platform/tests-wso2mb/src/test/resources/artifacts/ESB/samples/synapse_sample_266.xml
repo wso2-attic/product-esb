@@ -15,25 +15,24 @@
   ~  KIND, either express or implied.  See the License for the
   ~  specific language governing permissions and limitations
   ~  under the License.
+  ~
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<!-- An empty flat synapse configuration shipped with the Apache Synapse -->
+<definitions xmlns="http://ws.apache.org/ns/synapse"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://ws.apache.org/ns/synapse http://synapse.apache.org/ns/2010/04/configuration/synapse_config.xsd">
 
-    <parent>
-        <groupId>org.wso2.esb</groupId>
-        <artifactId>esb-integration-tests</artifactId>
-        <version>5.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
-    </parent>
+    <proxy name="StockQuoteProxy" transports="tcp">
+        <target>
+            <endpoint>
+                <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+            </endpoint>
+            <inSequence>
+                <log level="full"/>
+                <property name="OUT_ONLY" value="true"/>
+            </inSequence>
+        </target>
+    </proxy>
 
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>org.wso2.carbon.esb.tests.platform</artifactId>
-    <name>ESB Test Module - Platform</name>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>tests-rabbitmq</module>
-        <module>tests-wso2mb</module>
-    </modules>
-
-</project>
+</definitions>
