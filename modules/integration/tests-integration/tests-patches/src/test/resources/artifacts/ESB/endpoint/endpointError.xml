@@ -32,7 +32,7 @@
         </target>
     </proxy>
     <endpoint name="ErrorEndpoint">
-        <address uri="http://10.100.7.63:8080/name" format="soap11">
+        <address uri="http://invalidEndpoint/name" format="soap11">
             <timeout>
                 <duration>120000</duration>
                 <responseAction>fault</responseAction>
