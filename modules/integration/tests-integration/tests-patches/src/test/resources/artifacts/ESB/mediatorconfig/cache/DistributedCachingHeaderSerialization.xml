@@ -32,7 +32,7 @@
         <property name="TargetUri" value="http://localhost:8480/services/RespondProxy"/>
         <header expression="get-property('TargetUri')" name="To" xmlns:ns="http://org.apache.synapse/xsd"/>
         <cache collector="false"
-               hashGenerator="org.wso2.caching.digest.DOMHASHGenerator"
+               hashGenerator="org.wso2.carbon.mediator.cache.digest.DOMHASHGenerator"
                scope="per-host" timeout="30">
             <onCacheHit>
                 <log>
