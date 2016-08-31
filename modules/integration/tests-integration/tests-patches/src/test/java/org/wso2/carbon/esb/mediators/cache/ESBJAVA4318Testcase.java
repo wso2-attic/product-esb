@@ -35,7 +35,7 @@ public class ESBJAVA4318Testcase extends ESBIntegrationTest {
                 + "       transports=\"https http\"\n" + "       startOnLoad=\"true\"\n" + "       trace=\"disable\">\n"
                 + "    <description/>\n" + "    <target>\n" + "        <inSequence>\n"
                 + "            <cache scope=\"per-host\"\n" + "                   collector=\"false\"\n"
-                + "                   hashGenerator=\"org.wso2.caching.digest.DOMHASHGenerator\"\n"
+                + "                   hashGenerator=\"org.wso2.carbon.mediator.cache.digest.DOMHASHGenerator\"\n"
                 + "                   timeout=\"60\">\n" + "                <onCacheHit>\n"
                 + "                    <log level=\"full\"/>\n"
                 + "                    <property name=\"messageType\" value=\"application/xml\" scope=\"axis2\"/>\n"
