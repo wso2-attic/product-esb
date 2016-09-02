@@ -203,6 +203,12 @@
         </classes>
     </test>
 
+    <test name="Staxon JSON formatter escape auto primitive test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.json.ESBJAVA4781EscapeAutoPrimitiveTestCase"/>
+        </classes>
+    </test>
+
 
 	<test name="Access HTTP SC after Callout mediator test">
 		<classes>
