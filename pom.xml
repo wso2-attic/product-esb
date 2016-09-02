@@ -1096,7 +1096,7 @@
         <carbon.mediation.version>4.6.7-SNAPSHOT</carbon.mediation.version>
 
         <!-- Carbon kernel version-->
-        <carbon.kernel.version>4.4.8</carbon.kernel.version>
+        <carbon.kernel.version>4.4.9</carbon.kernel.version>
 
         <!-- Carbon Commons version-->
         <carbon.commons.version>4.5.4</carbon.commons.version>
