@@ -1113,7 +1113,7 @@
         <carbon.identity-carbon-auth-saml2.version>5.1.3</carbon.identity-carbon-auth-saml2.version>
 
         <!-- Carbon Rule version -->
-        <carbon.rule.version>4.4.1</carbon.rule.version>
+        <carbon.rule.version>4.4.4</carbon.rule.version>
 
         <!-- Analytic Commons version-->
         <carbon.analytics.common.version>5.1.1</carbon.analytics.common.version>
