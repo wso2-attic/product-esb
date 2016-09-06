@@ -34,7 +34,7 @@ import java.io.File;
 /**
  * Testcase for check whether Synapse handlers getting executed in blocking calls.
  */
-public class ESBJAVA4883SynapseHandlerBlockingCallTest extends ESBIntegrationTest {
+public class ESBJAVA4883SynapseHandlerBlockingCallTestCase extends ESBIntegrationTest {
 
     private ServerConfigurationManager serverConfigurationManager;
     private  LogViewerClient logViewerClient;
@@ -56,8 +56,9 @@ public class ESBJAVA4883SynapseHandlerBlockingCallTest extends ESBIntegrationTes
     @Test(groups = "wso2.esb", description = "Invoking Synapse handlers in blocking calls test")
     public void testSynapseHandlerBlockingCall() throws Exception {
         axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp("SynapseHandlerTestProxy"), null, "WSO2");
-        Assert.assertTrue(stringExistsInLog("Request Out Flow"));
-        Assert.assertTrue(stringExistsInLog("Response In Flow"));
+        LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
+        Assert.assertTrue(stringExistsInLog("Request Out Flow", logs), "Synapse Handler not executed in the request out path");
+        Assert.assertTrue(stringExistsInLog("Response In Flow", logs), "Synapse Handler not executed in the response in path");
     }
 
     @AfterClass(alwaysRun = true)
@@ -65,8 +66,7 @@ public class ESBJAVA4883SynapseHandlerBlockingCallTest extends ESBIntegrationTes
         super.cleanup();
     }
 
-    protected boolean stringExistsInLog(String string) throws Exception {
-        LogEvent[] logs = logViewerClient.getAllRemoteSystemLogs();
+    protected boolean stringExistsInLog(String string, LogEvent[] logs) throws Exception {
         boolean logFound = false;
         for (LogEvent item : logs) {
             if (item.getPriority().equals("INFO")) {
