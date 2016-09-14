@@ -69,9 +69,7 @@ public class JMSSenderStaleConnectionsTestCase extends ESBIntegrationTest {
         logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
     }
 
-    @Test(groups = {
-            "wso2.esb"
-    },
+    @Test(groups = { "wso2.esb" },
           description = "Test for JMS sender side stale connections handling")
     public void staleConnectionsTestJMSProxy() throws Exception {
 
@@ -101,13 +99,16 @@ public class JMSSenderStaleConnectionsTestCase extends ESBIntegrationTest {
                 break;
             }
         }
-        Assert.assertTrue(!isExceptionThrown, "Sender Side Stale connections handling test passed");
+        Assert.assertFalse(isExceptionThrown, "Sender Side Stale connections handling test failed");
     }
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
-        super.cleanup();
-        stopBroker();
+        try {
+            super.cleanup();
+        } finally {
+            stopBroker();
+        }
     }
 
     /**
