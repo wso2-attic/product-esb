@@ -98,6 +98,7 @@
     <test name="Enrich Mediator Tests" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.mediators.enrich.ESBJAVA3676EnrichSourcePropNoClone"/>
+            <class name="org.wso2.carbon.esb.mediators.enrich.ESBJAVA4892EnrichPropertyTestCase"/>
         </classes>
     </test>
 
