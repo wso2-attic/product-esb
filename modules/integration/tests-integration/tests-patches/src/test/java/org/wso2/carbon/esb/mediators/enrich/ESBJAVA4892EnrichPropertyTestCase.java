@@ -36,8 +36,8 @@ public class ESBJAVA4892EnrichPropertyTestCase extends ESBIntegrationTest {
         loadESBConfigurationFromClasspath("/artifacts/ESB/mediatorconfig/enrich/OperationContextService.xml");
     }
 
-    @Test(groups = "wso2.esb", description = "Tests Enriching Property Source with multiple requets")
-    public void testEnrichSourceTypePropertyAndCloneFalse() throws Exception {
+    @Test(groups = "wso2.esb", description = "Tests Enriching Property in Operation context")
+    public void testEnrichOperationContextProperty() throws Exception {
 
         OMElement response1 = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(PROXY_NAME), null, "WSO2");
         OMElement response2 = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(PROXY_NAME), null, "WSO2");
