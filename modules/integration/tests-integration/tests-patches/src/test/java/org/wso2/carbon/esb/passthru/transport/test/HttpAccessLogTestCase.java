@@ -77,7 +77,7 @@ public class HttpAccessLogTestCase extends ESBIntegrationTest {
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
     @Test(groups = "wso2.esb")
-    public void testHttpAccessLogGeneration() {
+    public void testHttpAccessLogGeneration() throws Exception {
         BufferedReader bf = null;
         boolean found = false;
         String line;
@@ -101,21 +101,10 @@ public class HttpAccessLogTestCase extends ESBIntegrationTest {
                 }
             }
             assertTrue(found, "Access logs not generated for the proxy service.");
-        } catch (IOException e) {
-            log.warn("Error occurred while reading access log file content", e);
-        } catch (InterruptedException e) {
-            log.warn("Error occurred while thread sleep", e);
-        } catch (XPathExpressionException e) {
-            log.warn("Error occurred while sending simple quote request.", e);
         } finally {
             if (bf != null) {
-                try {
-                    bf.close();
-                } catch (IOException e) {
-                    log.warn("Error occurred while closing buffered reader", e);
-                }
+                bf.close();
             }
-
         }
     }
 
