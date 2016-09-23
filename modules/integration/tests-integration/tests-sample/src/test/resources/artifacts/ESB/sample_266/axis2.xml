@@ -289,7 +289,7 @@
     <transportReceiver name="local" class="org.wso2.carbon.core.transports.local.CarbonLocalTransportReceiver"/>
 
     <transportReceiver name="tcp" class="org.apache.axis2.transport.tcp.TCPTransportListener">
-        <parameter name="transport.tcp.port">6090</parameter>
+        <parameter name="transport.tcp.port">8290</parameter>
     </transportReceiver>
 
     <!--<transportReceiver name="vfs" class="org.apache.synapse.transport.vfs.VFSTransportListener"/>-->
