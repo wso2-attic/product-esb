@@ -84,7 +84,7 @@ public class Sample266TestCase extends ESBIntegrationTest {
             "      </soapenv:Body>\n" +
             "   </soapenv:Envelope>";
 
-        TCPClient client = new TCPClient("localhost", 6090);
+        TCPClient client = new TCPClient("localhost", 8290);
         client.sendMessage(message);
 
         Thread.sleep(30000);
