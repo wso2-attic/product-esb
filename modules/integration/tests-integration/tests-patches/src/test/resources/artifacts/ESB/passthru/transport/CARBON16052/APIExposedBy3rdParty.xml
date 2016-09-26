@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <api name="APIExposedBy3rdParty" context="/apiExposedBy3rdParty">
+        <resource methods="GET">
+            <inSequence>
+                <log level="custom">
+                    <property name="Log" value="I am API exposed by the 3rd Party"/>
+                </log>
+                <payloadFactory media-type="json">
+                    <format>{"key1":"value1"}</format>
+                    <args/>
+                </payloadFactory>
+                <property name="messageType" value="application/json" scope="axis2"/>
+                <header name="Set-Cookie" scope="transport"
+                        value="NSC_ESNS=003f89c8-bbc9-17e0-9678-00e0ed2b4efe_4040064315_1537360564_00000000000003409346; Path=/; Expires=Tue, 20-Sep-2016 04:32:24 GMT"/>
+                <respond/>
+            </inSequence>
+        </resource>
+    </api>
+</definitions>
