@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <api name="APIExposedInESB" context="/apiExposedInESB">
+        <resource methods="GET">
+            <inSequence>
+                <log level="custom">
+                    <property name="Log" value="I am API exposed by ESB!"/>
+                </log>
+                <call blocking="true">
+                    <endpoint>
+                        <http method="GET" uri-template="http://localhost:8280/apiExposedBy3rdParty"/>
+                    </endpoint>
+                </call>
+                <payloadFactory media-type="json">
+                    <format>$1</format>
+                    <args>
+                        <arg evaluator="json" expression="$."/>
+                    </args>
+                </payloadFactory>
+                <property name="messageType" value="application/json" scope="axis2"/>
+                <respond/>
+            </inSequence>
+        </resource>
+    </api>
+</definitions>
