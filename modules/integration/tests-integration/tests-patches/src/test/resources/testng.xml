@@ -25,6 +25,7 @@
     <test name="API-Test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.api.test.ESBJAVA3751UriTemplateReservedCharacterEncodingTest"/>
+            <class name="org.wso2.carbon.esb.api.apidefinition.ESBJAVA4907SwaggerGenerationTestCase"/>
         </classes>
     </test>
 
