@@ -33,6 +33,10 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
 import static org.testng.Assert.assertTrue;
 
@@ -82,6 +86,80 @@ public class VFSTransportTestCase extends ESBIntegrationTest {
             serverConfigurationManager.restoreToLastConfiguration();
             serverConfigurationManager = null;
         }
+    }
+
+    @SetEnvironment(executionEnvironments = { ExecutionEnvironment.STANDALONE }) @Test(groups = {
+            "wso2.esb" }, description = "Writing to a file the content of a xml with content in text element") public void testVFSProxyPlainXMLWriter()
+            throws Exception {
+
+        addVFSProxyWriteFile();
+
+        File outfile = new File(pathToVfsDir + "test" + File.separator + "out" + File.separator + "out_reply.xml");
+
+        String request = " <ns:text xmlns:ns=\"http://ws.apache.org/commons/ns/payload\">\n"
+                + "         <test>request_value</test>\n" + "      </ns:text>";
+        sendRequest(getProxyServiceURLHttp("salesforce_DAMAS_writeFile"), request, "text/xml");
+
+        try {
+
+            //Assert.assertTrue(!outfile.exists());
+            Thread.sleep(1000);
+            Assert.assertTrue(outfile.exists());
+            String vfsOut = FileUtils.readFileToString(outfile);
+            Assert.assertTrue(vfsOut.contains("request_value"), "Sent request body not found");
+        } finally {
+            deleteFile(outfile);
+            removeProxy("salesforce_DAMAS_writeFile");
+        }
+    }
+
+    protected void sendRequest(String addUrl, String request, String contentType) throws IOException {
+        String charset = "UTF-8";
+        URLConnection connection = new URL(addUrl).openConnection();
+        connection.setDoOutput(true);
+        connection.setReadTimeout(1000);
+        connection.setRequestProperty("Accept-Charset", charset);
+        connection.setRequestProperty("Content-Type", contentType + ";charset=" + charset);
+        OutputStream output = null;
+        try {
+            output = connection.getOutputStream();
+            output.write(request.getBytes(charset));
+        } finally {
+            if (output != null) {
+                output.close();
+            }
+        }
+
+        InputStream response = null;
+        try {
+            response = connection.getInputStream();
+        } catch (Exception e) {
+        }
+    }
+
+    private void addVFSProxyWriteFile() throws Exception {
+
+        addProxyService(AXIOMUtil.stringToOM(
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<proxy xmlns=\"http://ws.apache.org/ns/synapse\"\n"
+                        + "       name=\"salesforce_DAMAS_writeFile\"\n" + "       transports=\"http\"\n"
+                        + "       statistics=\"disable\"\n" + "       trace=\"enable\"\n"
+                        + "       startOnLoad=\"true\">\n" + "   <target>\n" + "      <inSequence>\n"
+                        + "         <property name=\"OUT_ONLY\" value=\"true\" scope=\"default\" type=\"STRING\"/>\n"
+                        + "         <property name=\"transport.vfs.ReplyFileName\"\n"
+                        + "                   value=\"out_reply.xml\"\n" + "                   scope=\"transport\"\n"
+                        + "                   type=\"STRING\"/>\n"
+                        + "                           <log level=\"full\"/>\n" + "         <send>\n"
+                        + "            <endpoint>\n" + "               <address uri=\"vfs:file://" + pathToVfsDir
+                        + "test" + File.separator + "out\"/>\n" + "<timeout>\n"
+                        + "               <duration>10</duration>\n"
+                        + "               <responseAction>discard</responseAction>\n" + "            </timeout>"
+                        + "            </endpoint>\n" + "         </send>\n" + "      </inSequence>\n"
+                        + "      <outSequence/>\n" + "      <faultSequence/>\n" + "   </target>\n"
+                        + "   <parameter name=\"transport.vfs.locking\">disable</parameter>\n"
+                        + "   <parameter name=\"redeliveryPolicy.maximumRedeliveries\">0</parameter>\n"
+                        + "   <parameter name=\"transport.vfs.ContentType\">text/plain</parameter>\n"
+                        + "   <parameter name=\"redeliveryPolicy.redeliveryDelay\">1</parameter>\n"
+                        + "   <description/>\n" + "</proxy>"));
     }
 
     @SetEnvironment(executionEnvironments = {ExecutionEnvironment.ALL})
