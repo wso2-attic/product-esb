@@ -37,9 +37,9 @@ public class ESBJAVA4394 extends ESBIntegrationTest {
                 "artifacts" + File.separator + "ESB" + File.separator + "passthru" + File.separator + "transport"
                         + File.separator + "ESBJAVA4394-config.xml");
 
-        tcpMonListener1 = new TCPMonListener(5000, "localhost", 8000);
+        tcpMonListener1 = new TCPMonListener(9200, "localhost", 9300);
         tcpMonListener1.start();
-        tcpMonListener2 = new TCPMonListener(8000, "localhost", 9001);
+        tcpMonListener2 = new TCPMonListener(9300, "localhost", 9001);
         tcpMonListener2.start();
     }
 
