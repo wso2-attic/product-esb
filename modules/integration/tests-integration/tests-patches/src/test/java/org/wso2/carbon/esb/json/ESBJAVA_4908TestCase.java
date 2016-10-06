@@ -66,7 +66,6 @@ public class ESBJAVA_4908TestCase extends ESBIntegrationTest {
                 "       <e>1.8e2</e>\n" +
                 "   </location>\n" +
                 "</coordinates>";
-        System.out.println("proxy port..."+ getProxyServiceURLHttp("disable-auto-primitive-with-regex"));
         HttpResponse response = httpClient.doPost(getProxyServiceURLHttp("disable-auto-primitive-with-regex")
                 , null, payload, "application/xml");
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
