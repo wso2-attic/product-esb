@@ -270,5 +270,10 @@
             <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA4760ContentLengthHeaderTest"/>
         </classes>
     </test>
+    <test name="ESBJAVA4760" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.nhttp.transport.mtom.test.ESBJAVA4909MultipartRelatedTestCase"/>
+        </classes>
+    </test>
 </suite>
 
