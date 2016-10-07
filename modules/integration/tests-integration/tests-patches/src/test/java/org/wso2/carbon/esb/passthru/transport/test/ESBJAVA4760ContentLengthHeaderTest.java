@@ -42,8 +42,8 @@ public class ESBJAVA4760ContentLengthHeaderTest extends ESBIntegrationTest {
 
     @Test(groups = "wso2.esb", description = "Test 204 status code  with disable chunking", enabled = true)
     public void testContentLengthWithDisableChunking() throws IOException {
-        HttpResponse response = HttpRequestUtil.sendGetRequest(getApiInvocationURL("stockquote") + "/view/IBM", null);
-        Assert.assertEquals(response.getResponseCode(), EXPECTED_HTTP_SC, "Extected response code didn't match");
+        HttpResponse response = HttpRequestUtil.sendGetRequest(getApiInvocationURL("stockquoteapi") + "/view/IBM", null);
+        Assert.assertEquals(response.getResponseCode(), EXPECTED_HTTP_SC, "Expected response code didn't match");
     }
 
     @AfterClass
