@@ -5,13 +5,13 @@
             <inSequence>
                 <send>
                     <endpoint>
-                        <http method="GET" uri-template="http://localhost:8480/services/test/select?queryParam={uri.var.query}"/>
+                        <http method="GET" uri-template="http://localhost:8480/services/queryparamapi/select?queryParam={uri.var.query}"/>
                     </endpoint>
                 </send>
             </inSequence>
         </resource>
     </api>
-    <api context="/services/test" name="Server">
+    <api context="/services/queryparamapi" name="ESBJAVA3340Server">
         <resource methods="GET">
             <inSequence>
                 <log level="custom">

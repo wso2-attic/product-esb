@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://ws.apache.org/ns/synapse">
-    <api name="StockQuoteAPI1" context="/stockquote">
+    <api name="StockQuoteAPIESBJAVA4760" context="/stockquoteapi">
         <resource uri-template="/view/{symbol}" methods="GET">
             <inSequence>
                 <payloadFactory>
