@@ -97,7 +97,8 @@ public class ESBJAVA4468ContentTypeCharsetInResponseTestCase extends ESBIntegrat
         Assert.assertTrue(response.getData().contains("WSO2 Company"), "Response not as expected " + response);
 
         String contentType = response.getHeaders().get("Content-Type");
-        Assert.assertTrue(contentType.contains("application/xml"), "Content-Type is not changed " + contentType);
+        //Removing since a invalid scenario after the fix for https://wso2.org/jira/browse/ESBJAVA-1994
+        //Assert.assertTrue(contentType.contains("application/xml"), "Content-Type is not changed " + contentType);
         Assert.assertEquals(StringUtils.countMatches(contentType, HTTPConstants.CHAR_SET_ENCODING), 1
                 , "charset repeated in Content-Type header " + contentType);
     }
@@ -118,7 +119,8 @@ public class ESBJAVA4468ContentTypeCharsetInResponseTestCase extends ESBIntegrat
         Assert.assertTrue(response.getData().contains("WSO2 Company"), "Response not as expected " + response);
 
         String contentType = response.getHeaders().get("Content-Type");
-        Assert.assertTrue(contentType.contains("application/xml"), "Content-Type is not changed " + contentType);
+        //Removing Invalid scenario after the fix for https://wso2.org/jira/browse/ESBJAVA-1994
+        //Assert.assertTrue(contentType.contains("application/xml"), "Content-Type is not changed " + contentType);
         Assert.assertEquals(StringUtils.countMatches(contentType, HTTPConstants.CHAR_SET_ENCODING), 1
                 , "charset repeated in Content-Type header " + contentType);
     }

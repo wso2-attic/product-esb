@@ -29,6 +29,7 @@ import javax.xml.namespace.QName;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 
@@ -63,8 +64,7 @@ public class MultipleRuleSetPropertyTestCase extends ESBIntegrationTest {
             // If the endpoint suspended from the previous request then need to wait until the endpoint is active
             Thread.sleep(35000);
             OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), "http://localhost:9000/services/SimpleStockQuoteService", "SUN");
-            String responseText = response.getText();
-            assertEquals(responseText, "WRONG_RULE", "Fault: value 'responseText' mismatched");
+            assertTrue(response.toString().contains("WRONG_RULE"), "Fault: value 'responseText' mismatched");
         } catch (AxisFault axisFault) {
             throw axisFault;
         }
@@ -78,8 +78,7 @@ public class MultipleRuleSetPropertyTestCase extends ESBIntegrationTest {
             // If the endpoint suspended from the previous request then need to wait until the endpoint is active
             Thread.sleep(35000);
             OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), "http://localhost:9000/services/SimpleStockQuoteService", "MFST");
-            String responseText = response.getText();
-            assertEquals(responseText, "WRONG_RULE", "Fault: value 'responseText' mismatched");
+            assertTrue(response.toString().contains("WRONG_RULE"), "Fault: value 'responseText' mismatched");
         } catch (AxisFault axisFault) {
             throw axisFault;
         }
