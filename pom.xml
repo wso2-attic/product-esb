@@ -145,6 +145,21 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-http2</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-http</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.synapse</groupId>
                 <artifactId>synapse-core</artifactId>
                 <version>${synapse.version}</version>
@@ -1135,6 +1150,7 @@
 
         <carbon.p2.plugin>1.5.4</carbon.p2.plugin>
 
+        <netty.version>4.1.5.Final</netty.version>
 
         <!-- Carbon -->
         <carbon.reliable-messaging.version>4.2.0</carbon.reliable-messaging.version>

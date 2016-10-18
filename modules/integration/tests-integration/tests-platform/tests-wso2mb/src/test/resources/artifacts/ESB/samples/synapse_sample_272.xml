@@ -15,7 +15,7 @@
             </outSequence>
         </target>
         <parameter name="mqtt.connection.factory">mqttConFactory</parameter>
-        <parameter name="mqtt.topic.name">esb.test2</parameter>
+        <parameter name="mqtt.topic.name">esb.test1</parameter>
         <parameter name="mqtt.subscription.qos">2</parameter>
         <parameter name="mqtt.content.type">text/plain</parameter>
         <parameter name="mqtt.session.clean">false</parameter>

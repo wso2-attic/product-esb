@@ -20,6 +20,7 @@
     <!-- Introduction to Synapse Message Sampling Processor -->
 
 <definitions xmlns="http://ws.apache.org/ns/synapse">
+    <taskManager provider="org.wso2.carbon.mediation.ntask.NTaskTaskManager"/>
 
     <sequence name="send_seq">
         <send>

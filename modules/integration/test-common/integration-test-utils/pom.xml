@@ -88,6 +88,18 @@
          <groupId>org.apache.synapse</groupId>
          <artifactId>synapse-core</artifactId>
          </dependency>
+         <dependency>
+             <groupId>io.netty</groupId>
+         <artifactId>netty-all</artifactId>
+         </dependency>
+         <dependency>
+             <groupId>io.netty</groupId>
+             <artifactId>netty-codec-http2</artifactId>
+         </dependency>
+         <dependency>
+             <groupId>io.netty</groupId>
+             <artifactId>netty-codec-http</artifactId>
+         </dependency>
      </dependencies>
 
 

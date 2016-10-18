@@ -21,6 +21,7 @@
         <!-- Introduction to Synapse Scheduled Message Forwarding Processor -->
 
 <definitions xmlns="http://ws.apache.org/ns/synapse">
+    <taskManager provider="org.wso2.carbon.mediation.ntask.NTaskTaskManager"/>
 
     <endpoint name="StockQuoteServiceEp">
         <address uri="http://localhost:9000/services/SimpleStockQuoteService">
@@ -43,13 +44,12 @@
             <log level="full"/>
             <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
             <property name="OUT_ONLY" value="true"/>
-            <property name="target.endpoint" value="StockQuoteServiceEp"/>
             <store messageStore="MyStore"/>
         </in>
         <description>The main sequence for the message mediation</description>
     </sequence>
     <messageStore name="MyStore"/>
-    <messageProcessor class="org.apache.synapse.message.processors.forward.ScheduledMessageForwardingProcessor" name="ScheduledProcessor" messageStore="MyStore">
+    <messageProcessor class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor" name="ScheduledProcessor" messageStore="MyStore" targetEndpoint="StockQuoteServiceEp">
         <parameter name="interval">10000</parameter>
     </messageProcessor>
 </definitions>
