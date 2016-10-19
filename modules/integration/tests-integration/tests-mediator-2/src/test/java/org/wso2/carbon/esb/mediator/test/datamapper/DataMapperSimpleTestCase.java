@@ -22,11 +22,21 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
+/**
+ * This class contains integration tests for Data Mapper mediator.
+ *
+ */
 public class DataMapperSimpleTestCase extends DataMapperIntegrationTest {
 
 	private final String ARTIFACT_ROOT_PATH = "/artifacts/ESB/mediatorconfig/datamapper/one_to_one/";
 	private final String REGISTRY_ROOT_PATH = "datamapper/one_to_one/";
 
+    /**
+     * This method contains the test case for mapping single xml object element without arrays
+     * to a single xml object element without array
+     *
+     * @throws Exception
+     */
 	@Test(groups = { "wso2.esb" }, description = "Datamapper simple one to one xml to xml conversion")
 	public void testOneToOneXmlToXml() throws Exception {
 		loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "xml_to_xml/" + File.separator + "synapse.xml");
@@ -77,6 +87,12 @@ public class DataMapperSimpleTestCase extends DataMapperIntegrationTest {
                             "6025</phone><address>WSO2787CA</address></usoffice></offices></company>");
 	}
 
+    /**
+     * This method contains the test case for mapping single json object element without arrays
+     * to a single json object element without array
+     *
+     * @throws Exception
+     */
 	@Test(groups = { "wso2.esb" }, description = "Datamapper simple one to one json to json conversion")
 	public void testOneToOneJsonToJson() throws Exception {
 		loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "json_to_json/" + File.separator + "synapse.xml");
@@ -128,5 +144,38 @@ public class DataMapperSimpleTestCase extends DataMapperIntegrationTest {
                             "\"asiaoffice\":{\"address\":\"WSO220Colombo 03\",\"phone\":\"+94 11 214 5345\"," +
                             "\"fax\":\"+94 11 2145300\"}}}");
 	}
+
+    /**
+     * This method contains the test case for mapping single xml object with elements containing
+     * underscore in name to a single xml object with elements containing underscore in name
+     *
+     * @throws Exception
+     */
+    @Test(groups = { "wso2.esb" }, description = "Data-mapper conversion of input xml messages with underscore "
+            + "element names for xml messages with element names with underscore")
+    public void testXmlWithUnderscoreToXmlWithUnderscore() throws Exception {
+        loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "xml_un_to_xml_un/" + File.separator + "synapse.xml");
+        uploadResourcesToGovernanceRegistry(REGISTRY_ROOT_PATH + "xml_un_to_xml_un/",
+                ARTIFACT_ROOT_PATH + "xml_un_to_xml_un" + File.separator);
+        String expectedResponse = "<test xmlns:sf=\"urn:sobject.partner.soap.sforce.com\""
+                + " xmlns:axis2ns11=\"urn:partner.soap.sforce.com\""
+                + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><axis2ns11:records_un "
+                + "xsi:type=\"sf:sObject\"><sf:type>Account</sf:type><sf:Id>001E0000002SFO2IAO</sf:Id>"
+                + "<sf:CreatedDate>2011-03-15T00:15:00.000Z</sf:CreatedDate><sf:Name>WSO2</sf:Name>"
+                + "</axis2ns11:records_un></test>";
+        String request = "<test>\n" + "        <axis2ns11:records_un xmlns:axis2ns11=\"urn:partner.soap.sforce.com\" "
+                + "xmlns:sf=\"urn:sobject.partner.soap.sforce.com\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
+                + "                 xsi:type=\"sf:sObject\">\n"
+                + "            <sf:type xmlns:sf=\"urn:sobject.partner.soap.sforce.com\">Account</sf:type>\n"
+                + "            <sf:Id xmlns:sf=\"urn:sobject.partner.soap.sforce.com\">001E0000002SFO2IAO</sf:Id>\n"
+                + "            <sf:CreatedDate xmlns:sf=\"urn:sobject.partner.soap.sforce.com\">"
+                + "2011-03-15T00:15:00.000Z</sf:CreatedDate>\n"
+                + "            <sf:Id xmlns:sf=\"urn:sobject.partner.soap.sforce.com\">001E0000002SFO2IAO</sf:Id>\n"
+                + "            <sf:Name xmlns:sf=\"urn:sobject.partner.soap.sforce.com\">WSO2</sf:Name>\n"
+                + "        </axis2ns11:records_un>\n" + "</test>";
+        String response = sendRequest(getProxyServiceURLHttp("OneToOneXmlunToXmlun"), request, "text/xml");
+        Assert.assertEquals(response,expectedResponse);
+    }
+
 
 }
