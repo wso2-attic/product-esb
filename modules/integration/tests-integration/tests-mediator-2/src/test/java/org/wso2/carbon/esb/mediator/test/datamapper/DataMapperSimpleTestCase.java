@@ -22,11 +22,21 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
+/**
+ * This class contains integration tests for Data Mapper mediator.
+ *
+ */
 public class DataMapperSimpleTestCase extends DataMapperIntegrationTest {
 
 	private final String ARTIFACT_ROOT_PATH = "/artifacts/ESB/mediatorconfig/datamapper/one_to_one/";
 	private final String REGISTRY_ROOT_PATH = "datamapper/one_to_one/";
 
+    /**
+     * This method contains the test case for mapping single xml object element without arrays
+     * to a single xml object element without array
+     *
+     * @throws Exception
+     */
 	@Test(groups = { "wso2.esb" }, description = "Datamapper simple one to one xml to xml conversion")
 	public void testOneToOneXmlToXml() throws Exception {
 		loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "xml_to_xml/" + File.separator + "synapse.xml");
@@ -77,6 +87,12 @@ public class DataMapperSimpleTestCase extends DataMapperIntegrationTest {
                             "6025</phone><address>WSO2787CA</address></usoffice></offices></company>");
 	}
 
+    /**
+     * This method contains the test case for mapping single json object element without arrays
+     * to a single json object element without array
+     *
+     * @throws Exception
+     */
 	@Test(groups = { "wso2.esb" }, description = "Datamapper simple one to one json to json conversion")
 	public void testOneToOneJsonToJson() throws Exception {
 		loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "json_to_json/" + File.separator + "synapse.xml");
@@ -129,9 +145,15 @@ public class DataMapperSimpleTestCase extends DataMapperIntegrationTest {
                             "\"fax\":\"+94 11 2145300\"}}}");
 	}
 
-    @Test(groups = { "wso2.esb" }, description = "Datamapper conversion of xml elements "
-            + "with underscore to xml elements with underscore") public void testXmlWithUnderscoreToXmlWithUnderscore()
-            throws Exception {
+    /**
+     * This method contains the test case for mapping single xml object with elements containing
+     * underscore in name to a single xml object with elements containing underscore in name
+     *
+     * @throws Exception
+     */
+    @Test(groups = { "wso2.esb" }, description = "Data-mapper conversion of input xml messages with underscore "
+            + "element names for xml messages with element names with underscore")
+    public void testXmlWithUnderscoreToXmlWithUnderscore() throws Exception {
         loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "xml_un_to_xml_un/" + File.separator + "synapse.xml");
         uploadResourcesToGovernanceRegistry(REGISTRY_ROOT_PATH + "xml_un_to_xml_un/",
                 ARTIFACT_ROOT_PATH + "xml_un_to_xml_un" + File.separator);
