@@ -157,7 +157,12 @@ public class DataMapperSimpleTestCase extends DataMapperIntegrationTest {
         loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "xml_un_to_xml_un/" + File.separator + "synapse.xml");
         uploadResourcesToGovernanceRegistry(REGISTRY_ROOT_PATH + "xml_un_to_xml_un/",
                 ARTIFACT_ROOT_PATH + "xml_un_to_xml_un" + File.separator);
-
+        String expectedResponse = "<test xmlns:sf=\"urn:sobject.partner.soap.sforce.com\""
+                + " xmlns:axis2ns11=\"urn:partner.soap.sforce.com\""
+                + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><axis2ns11:records_un "
+                + "xsi:type=\"sf:sObject\"><sf:type>Account</sf:type><sf:Id>001E0000002SFO2IAO</sf:Id>"
+                + "<sf:CreatedDate>2011-03-15T00:15:00.000Z</sf:CreatedDate><sf:Name>WSO2</sf:Name>"
+                + "</axis2ns11:records_un></test>";
         String request = "<test>\n" + "        <axis2ns11:records_un xmlns:axis2ns11=\"urn:partner.soap.sforce.com\" "
                 + "xmlns:sf=\"urn:sobject.partner.soap.sforce.com\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
                 + "                 xsi:type=\"sf:sObject\">\n"
@@ -169,12 +174,7 @@ public class DataMapperSimpleTestCase extends DataMapperIntegrationTest {
                 + "            <sf:Name xmlns:sf=\"urn:sobject.partner.soap.sforce.com\">WSO2</sf:Name>\n"
                 + "        </axis2ns11:records_un>\n" + "</test>";
         String response = sendRequest(getProxyServiceURLHttp("OneToOneXmlunToXmlun"), request, "text/xml");
-        Assert.assertEquals(response,
-                "<test xmlns:sf=\"urn:sobject.partner.soap.sforce.com\" xmlns:axis2ns11=\"urn:partner.soap.sforce.com\""
-                        + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><axis2ns11:records_un "
-                        + "xsi:type=\"sf:sObject\"><sf:type>Account</sf:type><sf:Id>001E0000002SFO2IAO</sf:Id>"
-                        + "<sf:CreatedDate>2011-03-15T00:15:00.000Z</sf:CreatedDate><sf:Name>WSO2</sf:Name>"
-                        + "</axis2ns11:records_un></test>");
+        Assert.assertEquals(response,expectedResponse);
     }
 
 
