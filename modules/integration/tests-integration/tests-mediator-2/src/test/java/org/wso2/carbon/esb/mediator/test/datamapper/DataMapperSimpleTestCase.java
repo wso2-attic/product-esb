@@ -129,4 +129,31 @@ public class DataMapperSimpleTestCase extends DataMapperIntegrationTest {
                             "\"fax\":\"+94 11 2145300\"}}}");
 	}
 
+    @Test(groups = { "wso2.esb" }, description = "Datamapper conversion of xml elements "
+            + "with underscore to xml elements with underscore") public void testXmlWithUnderscoreToXmlWithUnderscore()
+            throws Exception {
+        loadESBConfigurationFromClasspath(ARTIFACT_ROOT_PATH + "xml_un_to_xml_un/" + File.separator + "synapse.xml");
+        uploadResourcesToGovernanceRegistry(REGISTRY_ROOT_PATH + "xml_un_to_xml_un/",
+                ARTIFACT_ROOT_PATH + "xml_un_to_xml_un" + File.separator);
+
+        String request = "<test>\n" + "        <axis2ns11:records_un xmlns:axis2ns11=\"urn:partner.soap.sforce.com\" "
+                + "xmlns:sf=\"urn:sobject.partner.soap.sforce.com\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
+                + "                 xsi:type=\"sf:sObject\">\n"
+                + "            <sf:type xmlns:sf=\"urn:sobject.partner.soap.sforce.com\">Account</sf:type>\n"
+                + "            <sf:Id xmlns:sf=\"urn:sobject.partner.soap.sforce.com\">001E0000002SFO2IAO</sf:Id>\n"
+                + "            <sf:CreatedDate xmlns:sf=\"urn:sobject.partner.soap.sforce.com\">"
+                + "2011-03-15T00:15:00.000Z</sf:CreatedDate>\n"
+                + "            <sf:Id xmlns:sf=\"urn:sobject.partner.soap.sforce.com\">001E0000002SFO2IAO</sf:Id>\n"
+                + "            <sf:Name xmlns:sf=\"urn:sobject.partner.soap.sforce.com\">WSO2</sf:Name>\n"
+                + "        </axis2ns11:records_un>\n" + "</test>";
+        String response = sendRequest(getProxyServiceURLHttp("OneToOneXmlunToXmlun"), request, "text/xml");
+        Assert.assertEquals(response,
+                "<test xmlns:sf=\"urn:sobject.partner.soap.sforce.com\" xmlns:axis2ns11=\"urn:partner.soap.sforce.com\""
+                        + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><axis2ns11:records_un "
+                        + "xsi:type=\"sf:sObject\"><sf:type>Account</sf:type><sf:Id>001E0000002SFO2IAO</sf:Id>"
+                        + "<sf:CreatedDate>2011-03-15T00:15:00.000Z</sf:CreatedDate><sf:Name>WSO2</sf:Name>"
+                        + "</axis2ns11:records_un></test>");
+    }
+
+
 }
