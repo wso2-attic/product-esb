@@ -280,5 +280,10 @@
             <class name="org.wso2.carbon.esb.mediators.clone.ESBJAVA4913HandleExceptionTest"/>
         </classes>
     </test>
+    <test name="ESBJAVA4702" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA4702JMSHeaderTest"/>
+        </classes>
+    </test>
 </suite>
 

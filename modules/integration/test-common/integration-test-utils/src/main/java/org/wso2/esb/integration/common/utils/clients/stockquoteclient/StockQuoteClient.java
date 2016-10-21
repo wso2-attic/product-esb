@@ -179,6 +179,24 @@ public class StockQuoteClient {
         }
     }
 
+    /**
+     * This method utilises serviceClient's sendRobust() method
+     *
+     * @param trpUrl transport url
+     * @param addUrl address url
+     * @param action action
+     * @param payload payload
+     * @throws AxisFault if error occurs in sending the request
+     */
+    public void sendRobust(String trpUrl, String addUrl, String action, OMElement payload) throws AxisFault {
+
+        ServiceClient serviceClient = getServiceClient(trpUrl, addUrl, action);
+        try {
+            serviceClient.sendRobust(payload);
+        } finally {
+            serviceClient.cleanupTransport();
+        }
+    }
 
     public OMElement sendCustomQuoteRequestREST(String trpUrl, String addUrl, String symbol)
             throws AxisFault {
