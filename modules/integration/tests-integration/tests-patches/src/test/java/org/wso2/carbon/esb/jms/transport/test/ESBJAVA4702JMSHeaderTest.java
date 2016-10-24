@@ -20,6 +20,7 @@ package org.wso2.carbon.esb.jms.transport.test;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.util.AXIOMUtil;
+import org.apache.axis2.AxisFault;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -42,22 +43,17 @@ import java.rmi.RemoteException;
  * https://wso2.org/jira/browse/ESBJAVA-4702
  */
 public class ESBJAVA4702JMSHeaderTest extends ESBIntegrationTest {
-    private ServerConfigurationManager serverConfigurationManager;
     private InboundAdminClient inboundAdminClient;
     private LogViewerClient logViewerClient;
-    private ActiveMQServer activeMQServer = new ActiveMQServer();
 
     /**
      * This method initializes an activeMQ server and adds relevant synapse configs to the ESB instance
      *
      * @throws Exception if error occurs in super.init call
      */
-    @BeforeClass(alwaysRun = true) public void init() throws Exception {
+    @BeforeClass(alwaysRun = true)
+    public void init() throws Exception {
         super.init();
-        activeMQServer.startJMSBrokerAndConfigureESB();
-        super.init();
-        serverConfigurationManager = new ServerConfigurationManager(
-                new AutomationContext("ESB", TestUserMode.SUPER_TENANT_ADMIN));
         OMElement synapse = esbUtils.loadResource("artifacts/ESB/jms/transport/ESBJAVA4702synapseconfig.xml");
         updateESBConfiguration(JMSEndpointManager.setConfigurations(synapse));
         inboundAdminClient = new InboundAdminClient(context.getContextUrls().getBackEndUrl(), getSessionCookie());
@@ -72,8 +68,8 @@ public class ESBJAVA4702JMSHeaderTest extends ESBIntegrationTest {
      * @throws LogViewerLogViewerException if logviewer is not initialized properly
      * @throws InterruptedException if thread.sleep call is interrupted
      */
-    @Test(groups = {
-            "wso2.esb" }, description = "Test JMS Headers : ESBJAVA-4702") public void JMSInboundEndpointHeaderTest()
+    @Test(groups = {"wso2.esb" }, description = "Test JMS Headers : ESBJAVA-4702")
+    public void JMSInboundEndpointHeaderTest()
             throws RemoteException, XMLStreamException, LogViewerLogViewerException, InterruptedException {
         logViewerClient = new LogViewerClient(contextUrls.getBackEndUrl(), getSessionCookie());
         logViewerClient.clearLogs();
@@ -87,12 +83,12 @@ public class ESBJAVA4702JMSHeaderTest extends ESBIntegrationTest {
                 isHeaderSet = true;
             }
         }
-        Assert.assertEquals(isHeaderSet, true);
+        Assert.assertTrue(isHeaderSet);
     }
 
-    @AfterClass(alwaysRun = true) public void destroy() throws Exception {
+    @AfterClass(alwaysRun = true)
+    public void destroy() throws Exception {
         super.cleanup();
-        activeMQServer.stopJMSBrokerRevertESBConfiguration();
     }
 
     /**

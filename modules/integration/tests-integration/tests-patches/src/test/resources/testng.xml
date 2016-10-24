@@ -110,6 +110,7 @@
             <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA3282CalloutJMSHeadersTestCase" />
             <class name="org.wso2.carbon.esb.mediators.store.ESBJAVA4470StoreMediatorEmptyOMArraySerializeException" />
             <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA4692_MP_FaultSequence_HttpsEndpoint_TestCase" />
+            <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA4702JMSHeaderTest"/>
         </classes>
     </test>
 
@@ -278,11 +279,6 @@
     <test name="ESBJAVA_4913" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.mediators.clone.ESBJAVA4913HandleExceptionTest"/>
-        </classes>
-    </test>
-    <test name="ESBJAVA4702" preserve-order="true" verbose="2">
-        <classes>
-            <class name="org.wso2.carbon.esb.jms.transport.test.ESBJAVA4702JMSHeaderTest"/>
         </classes>
     </test>
 </suite>
