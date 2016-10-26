@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="test" trace="enable" xmlns="http://ws.apache.org/ns/synapse">
+    <in>
+        <!-- Log all messages passing through -->
+        <!-- ensure that the default configuration only sends if it is one of samples -->
+        <!-- Otherwise Synapse would be an open proxy by default (BAD!)           	-->
+        <payloadFactory media-type="xml">
+            <format>
+                <m:getQuote xmlns:m="http://services.samples">
+                    <m:request>
+                        <m:symbol>$1</m:symbol>
+                    </m:request>
+                </m:getQuote>
+            </format>
+            <args>
+                <arg evaluator="xml" expression="//m0:Code "
+                     xmlns:m0="http://services.samples" xmlns:ns="http://org.apache.synapse/xsd"/>
+            </args>
+        </payloadFactory>
+        <property name="SOAPAction" scope="transport" value="urn:getQuote"/>
+        <send>
+            <endpoint>
+                <address format="soap11" uri="http2://0.0.0.0:8083"/>
+            </endpoint>
+        </send>
+    </in>
+    <out>
+        <payloadFactory media-type="xml">
+            <format>
+                <m:CheckPriceResponse xmlns:m="http://services.samples/xsd">
+                    <m:Code>$1</m:Code>
+                    <m:Price>$2</m:Price>
+                </m:CheckPriceResponse>
+            </format>
+            <args>
+                <arg evaluator="xml" expression="//m0:symbol"
+                     xmlns:m0="http://services.samples/xsd" xmlns:ns="http://org.apache.synapse/xsd"/>
+                <arg evaluator="xml" expression="//m0:last"
+                     xmlns:m0="http://services.samples/xsd" xmlns:ns="http://org.apache.synapse/xsd"/>
+            </args>
+        </payloadFactory>
+        <send/>
+    </out>
+    <description>The main sequence for the message mediation</description>
+</sequence>

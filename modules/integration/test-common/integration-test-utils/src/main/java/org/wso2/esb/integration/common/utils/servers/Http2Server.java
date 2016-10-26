@@ -26,7 +26,7 @@ import java.security.cert.CertificateException;
  * <p>This example is making use of the "multiplexing" http2 API, where streams are mapped to child
  * Channels. This API is very experimental and incomplete.
  */
-public class Http2Server extends Thread{
+public class Http2Server{
 
     private static final Log log=LogFactory.getLog(Http2Server.class);
 
@@ -41,7 +41,7 @@ public class Http2Server extends Thread{
         this.SSL=SSL;
     }
 
-    public void run(){
+    public void startServer(){
         SslContext sslCtx;
         if (SSL) {
             try {
