@@ -50,10 +50,10 @@ public class Http2ServerInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     public void initChannel(SocketChannel ch) {
         if (sslCtx != null) {
-    //        System.out.println("SSL chanel started");
+            System.out.println("SSL chanel started");
             configureSsl(ch);
         } else {
-   //         System.out.println("ClearText Chanel started");
+            System.out.println("ClearText Chanel started");
             configureClearText(ch);
 
         }
@@ -79,7 +79,7 @@ public class Http2ServerInitializer extends ChannelInitializer<SocketChannel> {
             @Override
             protected void channelRead0(ChannelHandlerContext ctx, HttpMessage msg) throws Exception {
                 // If this handler is hit then no upgrade has been attempted and the client is just talking HTTP.
-                //System.err.println("Directly talking: " + msg.protocolVersion() + " (no upgrade was attempted)");
+                System.err.println("Directly talking: " + msg.protocolVersion() + " (no upgrade was attempted)");
                 ChannelPipeline pipeline = ctx.pipeline();
                 ChannelHandlerContext thisCtx = pipeline.context(this);
                 pipeline.addAfter(thisCtx.name(), null, new Http1Handler("Direct. No Upgrade Attempted."));
@@ -97,7 +97,7 @@ public class Http2ServerInitializer extends ChannelInitializer<SocketChannel> {
     private static class UserEventLogger extends ChannelInboundHandlerAdapter {
         @Override
         public void userEventTriggered(ChannelHandlerContext ctx, Object evt) {
-     //       System.out.println("User Event Triggered: " + evt);
+            System.out.println("User Event Triggered: " + evt);
             ctx.fireUserEventTriggered(evt);
         }
     }

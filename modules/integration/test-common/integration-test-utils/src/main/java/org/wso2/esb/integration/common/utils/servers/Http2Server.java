@@ -18,9 +18,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.esb.integration.common.utils.servers.http2.Http2ServerInitializer;
 
-import javax.net.ssl.SSLException;
-import java.security.cert.CertificateException;
-
 /**
  * A HTTP/2 Server that responds to requests with a Hello World. Once started, you can test the
  * server with the example client.
@@ -66,7 +63,7 @@ public class Http2Server implements Runnable{
             sslCtx = null;
         }
         group = new NioEventLoopGroup();
-        //try {
+        try {
         ServerBootstrap b = new ServerBootstrap();
         b.option(ChannelOption.SO_BACKLOG, 1024);
         b.group(group)
@@ -77,12 +74,12 @@ public class Http2Server implements Runnable{
         Channel ch = b.bind("127.0.0.5",PORT).sync().channel();
 
             // System.out.println("Chanel binded for the port:"+PORT);
-           // ch.closeFuture().sync();
+         ch.closeFuture().sync();
             //  System.out.println("Closed chanel future");
-//        }
-//        finally {
-//      //      group.shutdownGracefully();
-//        }
+        }
+        finally {
+            group.shutdownGracefully();
+        }
 
     }
     @Override

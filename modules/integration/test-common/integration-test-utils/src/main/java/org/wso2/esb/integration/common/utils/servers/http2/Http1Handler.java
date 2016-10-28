@@ -2,6 +2,7 @@ package org.wso2.esb.integration.common.utils.servers.http2;
 
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -31,11 +32,11 @@ public class Http1Handler extends SimpleChannelInboundHandler<FullHttpRequest> {
         boolean keepAlive = HttpUtil.isKeepAlive(req);
 
         ByteBuf content = ctx.alloc().buffer();
-        content.writeBytes(Http2Handler.DATA_RESPONSE.duplicate());
-      //  ByteBufUtil.writeAscii(content, " - via " + req.protocolVersion() + " (" + establishApproach + ")");
+        content.writeBytes(Http2Handler.RESPONSE_BYTES.duplicate());
+       // ByteBufUtil.writeAscii(content, " - via " + req.protocolVersion() + " (" + establishApproach + ")");
 
         FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK, content);
-        response.headers().set(CONTENT_TYPE, "text/xml");
+        response.headers().set(CONTENT_TYPE, "text/xml; charset=UTF-8");
         response.headers().setInt(CONTENT_LENGTH, response.content().readableBytes());
 
         if (!keepAlive) {

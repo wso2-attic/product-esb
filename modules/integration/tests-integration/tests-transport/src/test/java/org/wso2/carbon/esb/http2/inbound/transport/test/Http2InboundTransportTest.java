@@ -15,6 +15,9 @@ import org.wso2.esb.integration.common.utils.clients.Http2Client;
 import org.wso2.esb.integration.common.utils.clients.http2client.Http2Response;
 import org.wso2.esb.integration.common.utils.common.TestConfigurationProvider;
 import org.wso2.esb.integration.common.utils.servers.Http2Server;
+import scala.actors.threadpool.Executor;
+import scala.actors.threadpool.ExecutorService;
+import scala.actors.threadpool.Executors;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -33,6 +36,7 @@ public class Http2InboundTransportTest extends ESBIntegrationTest {
     private Http2Client http2Client;
     private ServerConfigurationManager serverConfigurationManager;
     private Thread server;
+    private ExecutorService executor;
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
@@ -42,10 +46,8 @@ public class Http2InboundTransportTest extends ESBIntegrationTest {
                 new File(TestConfigurationProvider.getResourceLocation() + File.separator + "artifacts" +
                         File.separator + "ESB" + File.separator + "http2.inbound.transport"+File.separator+ "axis2.xml"));
         super.init();
-
-        http2Server=new Http2Server(false,8083);
-        server=new Thread(http2Server);
-        server.run();
+        executor= Executors.newFixedThreadPool(1);
+        executor.execute(new Http2Server(false,8083));
 
         http2Client=new Http2Client("localhost",8082);
 
@@ -75,8 +77,7 @@ public class Http2InboundTransportTest extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
         http2Client.releaseConnection();
-            if(server.isAlive())
-                server.interrupt();
+        executor.shutdown();
         super.cleanup();
         if(serverConfigurationManager!=null){
             serverConfigurationManager.restoreToLastConfiguration();
