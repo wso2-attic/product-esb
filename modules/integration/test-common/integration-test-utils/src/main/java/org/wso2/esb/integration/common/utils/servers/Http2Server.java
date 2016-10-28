@@ -7,6 +7,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http2.Http2SecurityUtil;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.*;
 import io.netty.handler.ssl.ApplicationProtocolConfig.Protocol;
 import io.netty.handler.ssl.ApplicationProtocolConfig.SelectedListenerFailureBehavior;
@@ -26,7 +28,7 @@ import java.security.cert.CertificateException;
  * <p>This example is making use of the "multiplexing" http2 API, where streams are mapped to child
  * Channels. This API is very experimental and incomplete.
  */
-public class Http2Server{
+public class Http2Server implements Runnable{
 
     private static final Log log=LogFactory.getLog(Http2Server.class);
 
@@ -41,10 +43,9 @@ public class Http2Server{
         this.SSL=SSL;
     }
 
-    public void startServer(){
-        SslContext sslCtx;
+    public void startServer() throws Exception{
+        final SslContext sslCtx;
         if (SSL) {
-            try {
                 SslProvider provider = OpenSsl.isAlpnSupported() ? SslProvider.OPENSSL : SslProvider.JDK;
                 SelfSignedCertificate ssc = new SelfSignedCertificate();
                 sslCtx = SslContextBuilder.forServer(ssc.certificate(), ssc.privateKey())
@@ -61,37 +62,35 @@ public class Http2Server{
                                 ApplicationProtocolNames.HTTP_2,
                                 ApplicationProtocolNames.HTTP_1_1))
                         .build();
-
-            }catch (SSLException|CertificateException e){
-                sslCtx=null;
-                log.error(e.getStackTrace());
-            }
-
         } else {
             sslCtx = null;
         }
         group = new NioEventLoopGroup();
-        try {
-            ServerBootstrap b = new ServerBootstrap();
-            b.option(ChannelOption.SO_BACKLOG, 1024);
-            b.group(group)
-                    .channel(NioServerSocketChannel.class)
-                    .childHandler(new Http2ServerInitializer(sslCtx));
+        //try {
+        ServerBootstrap b = new ServerBootstrap();
+        b.option(ChannelOption.SO_BACKLOG, 1024);
+        b.group(group)
+                .channel(NioServerSocketChannel.class)
+                .handler(new LoggingHandler(LogLevel.INFO))
+                .childHandler(new Http2ServerInitializer(sslCtx));
 
-            Channel ch = b.bind(PORT).sync().channel();
+        Channel ch = b.bind("127.0.0.5",PORT).sync().channel();
 
             // System.out.println("Chanel binded for the port:"+PORT);
-            ch.closeFuture().sync();
+           // ch.closeFuture().sync();
             //  System.out.println("Closed chanel future");
-        }catch(InterruptedException e){
-            log.error("Server Interrupted"+e.getStackTrace());
-        }
+//        }
+//        finally {
+//      //      group.shutdownGracefully();
+//        }
 
     }
-
-    public void stopServer(){
-        if(group!=null){
-            group.shutdownGracefully();
+    @Override
+    public void run() {
+        try {
+            startServer();
+        }catch (Exception e){
+            log.error("server starting failed : "+e.toString());
         }
     }
 }
