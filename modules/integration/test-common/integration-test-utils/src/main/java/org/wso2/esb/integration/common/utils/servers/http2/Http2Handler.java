@@ -1,3 +1,22 @@
+/*
+ *
+ *   Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ *   WSO2 Inc. licenses this file to you under the Apache License,
+ *   Version 2.0 (the "License"); you may not use this file except
+ *   in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing,
+ *  software distributed under the License is distributed on an
+ *  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ *  KIND, either express or implied.  See the License for the
+ *  specific language governing permissions and limitations
+ *  under the License.
+ */
+
 package org.wso2.esb.integration.common.utils.servers.http2;
 
 import io.netty.buffer.ByteBuf;
@@ -16,9 +35,8 @@ import static io.netty.handler.codec.http.HttpResponseStatus.OK;
 
 public class Http2Handler extends ChannelDuplexHandler {
 
-    private static final Log log=LogFactory.getLog(Http2Handler.class);
-    //static final ByteBuf RESPONSE_BYTES = unreleasableBuffer(copiedBuffer("Hello World", CharsetUtil.UTF_8));
-    public static final ByteBuf DATA_RESPONSE=unreleasableBuffer(copiedBuffer("<?xml version='1.0' encoding='UTF-8'?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"><soapenv:Body><ns:getQuoteResponse xmlns:ns=\"http://services.samples\"><ns:return xmlns:ax21=\"http://services.samples/xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"ax21:GetQuoteResponse\"><ax21:change>4.355291912708564</ax21:change><ax21:earnings>12.138178985496905</ax21:earnings><ax21:high>170.70158142117154</ax21:high><ax21:last>163.97644300968693</ax21:last><ax21:lastTradeTimestamp>Tue Sep 20 11:49:14 IST 2016" +
+    private static final Log log = LogFactory.getLog(Http2Handler.class);
+    public static final ByteBuf DATA_RESPONSE = unreleasableBuffer(copiedBuffer("<?xml version='1.0' encoding='UTF-8'?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"><soapenv:Body><ns:getQuoteResponse xmlns:ns=\"http://services.samples\"><ns:return xmlns:ax21=\"http://services.samples/xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"ax21:GetQuoteResponse\"><ax21:change>4.355291912708564</ax21:change><ax21:earnings>12.138178985496905</ax21:earnings><ax21:high>170.70158142117154</ax21:high><ax21:last>163.97644300968693</ax21:last><ax21:lastTradeTimestamp>Tue Sep 20 11:49:14 IST 2016" +
                     "</ax21:lastTradeTimestamp><ax21:low>-160.7773112104583" +
                     "</ax21:low><ax21:marketCap>6355651.160707118</ax21:marketCap>" +
                     "<ax21:name>WSO2 Company</ax21:name><ax21:open>-162.55332747332653" +
@@ -50,32 +68,21 @@ public class Http2Handler extends ChannelDuplexHandler {
         }
     }
 
-    /**
-     * If receive a frame with end-of-stream set, send a pre-canned response.
-     */
+
     public void onDataRead(ChannelHandlerContext ctx, Http2DataFrame data) throws Exception {
         if (data.isEndStream()) {
             ByteBuf content = ctx.alloc().buffer();
-            /*ByteBuf con = data.content();
-            if (con.isReadable()) {
-                int contentLength = con.readableBytes();
-                byte[] arr = new byte[contentLength];
-                con.readBytes(arr);
-            }*/
             content.writeBytes(DATA_RESPONSE.duplicate());
             Http2Headers headers = new DefaultHttp2Headers().status(OK.codeAsText());
-            headers.add(HttpHeaderNames.CONTENT_TYPE,"text/xml");
+            headers.add(HttpHeaderNames.CONTENT_TYPE, "text/xml");
             ctx.write(new DefaultHttp2HeadersFrame(headers));
             ctx.writeAndFlush(new DefaultHttp2DataFrame(content, true));
         }
     }
 
-    /**
-     * If receive a frame with end-of-stream set, send a pre-canned response.
-     */
+
     public void onHeadersRead(ChannelHandlerContext ctx, Http2HeadersFrame headers)
             throws Exception {
-        //System.out.println();
         if (headers.isEndStream() && (headers.headers().method().toString()).equalsIgnoreCase("GET")) {
             if (headers.headers().contains("http2-settings")) {
                 return;

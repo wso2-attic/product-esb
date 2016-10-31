@@ -1,3 +1,22 @@
+/*
+ *
+ *   Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ *   WSO2 Inc. licenses this file to you under the Apache License,
+ *   Version 2.0 (the "License"); you may not use this file except
+ *   in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing,
+ *  software distributed under the License is distributed on an
+ *  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ *  KIND, either express or implied.  See the License for the
+ *  specific language governing permissions and limitations
+ *  under the License.
+ */
+
 package org.wso2.esb.integration.common.utils.clients.http2client;
 
 
@@ -13,12 +32,14 @@ import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Process {@link io.netty.handler.codec.http.FullHttpResponse} translated from HTTP/2 frames
  */
 public class HttpResponseHandler extends SimpleChannelInboundHandler<FullHttpResponse> {
-
+    private final Log log=LogFactory.getLog(HttpResponseHandler.class);
     private SortedMap<Integer, Entry<ChannelFuture, ChannelPromise>> streamidPromiseMap;
     private SortedMap<Integer,Http2Response> responses;
 
@@ -59,17 +80,13 @@ public class HttpResponseHandler extends SimpleChannelInboundHandler<FullHttpRes
                 throw new RuntimeException(writeFuture.cause());
             }
             ChannelPromise promise = entry.getValue().getValue();
-            /*if(entry.getKey()==3){
-                itr.remove();
-                continue;
-            }*/
             if (!promise.awaitUninterruptibly(timeout, unit)) {
                 throw new IllegalStateException("Timed out waiting for response on stream id " + entry.getKey());
             }
             if (!promise.isSuccess()) {
                 throw new RuntimeException(promise.cause());
             }
-            System.out.println("---Stream id: " + entry.getKey() + " received---");
+            log.debug("---Stream id: " + entry.getKey() + " received---");
             itr.remove();
         }
     }
@@ -78,13 +95,13 @@ public class HttpResponseHandler extends SimpleChannelInboundHandler<FullHttpRes
     protected void channelRead0(ChannelHandlerContext ctx, FullHttpResponse msg) throws Exception {
         Integer streamId = msg.headers().getInt(HttpConversionUtil.ExtensionHeaderNames.STREAM_ID.text());
         if (streamId == null) {
-            System.err.println("HttpResponseHandler unexpected message received: " + msg);
+            log.error("HttpResponseHandler unexpected message received: " + msg);
             return;
         }
 
         Entry<ChannelFuture, ChannelPromise> entry = streamidPromiseMap.get(streamId);
         if (entry == null) {
-            System.err.println("Message received for unknown stream id " + streamId);
+            log.error("Message received for unknown stream id " + streamId);
         } else {
             responses.put(streamId,new Http2Response(msg));
             entry.getValue().setSuccess();

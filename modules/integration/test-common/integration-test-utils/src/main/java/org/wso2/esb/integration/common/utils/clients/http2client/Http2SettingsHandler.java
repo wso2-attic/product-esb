@@ -7,17 +7,8 @@ import io.netty.handler.codec.http2.Http2Settings;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Reads the first {@link Http2Settings} object and notifies a {@link io.netty.channel.ChannelPromise}
- */
 public class Http2SettingsHandler extends SimpleChannelInboundHandler<Http2Settings> {
     private ChannelPromise promise;
-
-    /**
-     * Create new instance
-     *
-     * @param promise Promise object used to notify when first settings are received
-     */
     public Http2SettingsHandler(ChannelPromise promise) {
         this.promise = promise;
     }
@@ -42,8 +33,6 @@ public class Http2SettingsHandler extends SimpleChannelInboundHandler<Http2Setti
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Http2Settings msg) throws Exception {
         promise.setSuccess();
-
-        // Only care about the first settings message
         ctx.pipeline().remove(this);
     }
 }

@@ -1,3 +1,21 @@
+/*
+ *   Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ *   WSO2 Inc. licenses this file to you under the Apache License,
+ *   Version 2.0 (the "License"); you may not use this file except
+ *   in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing,
+ *  software distributed under the License is distributed on an
+ *  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ *  KIND, either express or implied.  See the License for the
+ *  specific language governing permissions and limitations
+ *  under the License.
+ */
+
 package org.wso2.esb.integration.common.utils.servers.http2;
 
 import io.netty.channel.*;
@@ -14,10 +32,7 @@ import io.netty.handler.codec.http2.Http2ServerUpgradeCodec;
 import io.netty.handler.ssl.SslContext;
 import io.netty.util.AsciiString;
 
-/**
- * Sets up the Netty pipeline for the example server. Depending on the endpoint config, sets up the
- * pipeline for NPN or cleartext HTTP upgrade to HTTP/2.
- */
+
 public class Http2ServerInitializer extends ChannelInitializer<SocketChannel> {
 
     private static final UpgradeCodecFactory upgradeCodecFactory = new UpgradeCodecFactory() {
@@ -50,25 +65,17 @@ public class Http2ServerInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     public void initChannel(SocketChannel ch) {
         if (sslCtx != null) {
-    //        System.out.println("SSL chanel started");
             configureSsl(ch);
         } else {
-   //         System.out.println("ClearText Chanel started");
             configureClearText(ch);
-
         }
     }
 
-    /**
-     * Configure the pipeline for TLS NPN negotiation to HTTP/2.
-     */
+
     private void configureSsl(SocketChannel ch) {
         ch.pipeline().addLast(sslCtx.newHandler(ch.alloc()), new Http2OrHttpHandler());
     }
 
-    /**
-     * Configure the pipeline for a cleartext upgrade from HTTP to HTTP/2.0
-     */
     private void configureClearText(SocketChannel ch) {
         final ChannelPipeline p = ch.pipeline();
         final HttpServerCodec sourceCodec = new HttpServerCodec();
@@ -78,8 +85,6 @@ public class Http2ServerInitializer extends ChannelInitializer<SocketChannel> {
         p.addLast(new SimpleChannelInboundHandler<HttpMessage>() {
             @Override
             protected void channelRead0(ChannelHandlerContext ctx, HttpMessage msg) throws Exception {
-                // If this handler is hit then no upgrade has been attempted and the client is just talking HTTP.
-                //System.err.println("Directly talking: " + msg.protocolVersion() + " (no upgrade was attempted)");
                 ChannelPipeline pipeline = ctx.pipeline();
                 ChannelHandlerContext thisCtx = pipeline.context(this);
                 pipeline.addAfter(thisCtx.name(), null, new Http1Handler("Direct. No Upgrade Attempted."));
@@ -91,13 +96,9 @@ public class Http2ServerInitializer extends ChannelInitializer<SocketChannel> {
         p.addLast(new UserEventLogger());
     }
 
-    /**
-     * Class that logs any User Events triggered on this channel.
-     */
     private static class UserEventLogger extends ChannelInboundHandlerAdapter {
         @Override
         public void userEventTriggered(ChannelHandlerContext ctx, Object evt) {
-     //       System.out.println("User Event Triggered: " + evt);
             ctx.fireUserEventTriggered(evt);
         }
     }

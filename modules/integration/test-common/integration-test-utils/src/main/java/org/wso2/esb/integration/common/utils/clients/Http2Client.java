@@ -1,3 +1,22 @@
+/*
+ *
+ *   Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ *   WSO2 Inc. licenses this file to you under the Apache License,
+ *   Version 2.0 (the "License"); you may not use this file except
+ *   in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing,
+ *  software distributed under the License is distributed on an
+ *  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ *  KIND, either express or implied.  See the License for the
+ *  specific language governing permissions and limitations
+ *  under the License.
+ */
+
 package org.wso2.esb.integration.common.utils.clients;
 
 
@@ -35,14 +54,13 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 public class Http2Client {
 
-    private final Log log=LogFactory.getLog(Http2Client.class);
+    private final Log log = LogFactory.getLog(Http2Client.class);
 
     private boolean SSL = false;
     private int PORT;
-    private String HOST; /* = System.getProperty("host", "10.100.4.212");*/
-    private SslContext sslContext=null;
+    private String HOST;
+    private SslContext sslContext = null;
     private int StreamId;
-  ///  private Connections conn;
     private Channel channel;
     private HttpResponseHandler responseHandler;
     private Http2ClientInitializer initializer;
@@ -51,29 +69,27 @@ public class Http2Client {
     public Http2Client(String HOST, int PORT) {
         this.HOST = HOST;
         this.PORT = PORT;
-        this.StreamId=3;
-     //   this.conn=new Connections();
+        this.StreamId = 3;
     }
 
-    public void createSSLContext(TrustManagerFactory trustManager){
+    public void createSSLContext(TrustManagerFactory trustManager) {
         try {
             sslContext = generateSSLContext(trustManager);
-            SSL=true;
-        }catch (SSLException e){
+            SSL = true;
+        } catch (SSLException e) {
             log.error(e.getStackTrace());
         }
     }
 
-    public Http2Response doGet(String url, Map<String,String> headers){
+    public Http2Response doGet(String url, Map<String, String> headers) {
         initChannel();
-       // HttpResponseHandler responseHandler = conn.getInitializer().responseHandler();
         HttpScheme scheme = SSL ? HttpScheme.HTTPS : HttpScheme.HTTP;
         AsciiString hostName = new AsciiString(HOST + ':' + PORT);
 
         FullHttpRequest request = new DefaultFullHttpRequest(HTTP_1_1, GET, url);
-        if(!headers.isEmpty()){
-            for (Map.Entry h:headers.entrySet()) {
-                request.headers().add((CharSequence) h.getKey(),h.getValue());
+        if (!headers.isEmpty()) {
+            for (Map.Entry h : headers.entrySet()) {
+                request.headers().add((CharSequence) h.getKey(), h.getValue());
             }
         }
         request.headers().add(HttpHeaderNames.HOST, hostName);
@@ -81,20 +97,20 @@ public class Http2Client {
         request.headers().add(HttpHeaderNames.ACCEPT_ENCODING, HttpHeaderValues.GZIP);
         request.headers().add(HttpHeaderNames.ACCEPT_ENCODING, HttpHeaderValues.DEFLATE);
         io.netty.channel.ChannelPromise p;
-        int s=StreamId;
-        if(responseHandler==null) {
+        int s = StreamId;
+        if (responseHandler == null) {
             log.error("Response handler is null");
             return null;
-        }else if(channel==null){
+        } else if (channel == null) {
             log.error("Channel is null");
             return null;
-        }else {
+        } else {
             responseHandler.put(StreamId, channel.writeAndFlush(request), p = channel.newPromise());
             StreamId += 2;
             Http2Response response;
             try {
                 while (!p.isSuccess()) {
-                    System.out.println("Waiting for response");
+                    log.info("Waiting for response");
                     Thread.sleep(20);
                 }
                 response = responseHandler.getResponse(s);
@@ -107,7 +123,7 @@ public class Http2Client {
 
     }
 
-    public Http2Response doPost(String url, String data, Map<String,String> headers){
+    public Http2Response doPost(String url, String data, Map<String, String> headers) {
 
         initChannel();
         HttpScheme scheme = SSL ? HttpScheme.HTTPS : HttpScheme.HTTP;
@@ -116,56 +132,49 @@ public class Http2Client {
         FullHttpRequest request = new DefaultFullHttpRequest(HTTP_1_1, POST, url,
                 Unpooled.copiedBuffer(data.getBytes()));
 
-        if(!headers.isEmpty()){
-            for (Map.Entry h:headers.entrySet()) {
-                request.headers().add((CharSequence) h.getKey(),h.getValue());
+        if (!headers.isEmpty()) {
+            for (Map.Entry h : headers.entrySet()) {
+                request.headers().add((CharSequence) h.getKey(), h.getValue());
             }
         }
- //       request.headers().add(HttpHeaderNames.CONTENT_TYPE,"text/xml");
-//        request.headers().add("SOAPAction","urn:getQuote");
         request.headers().add(HttpHeaderNames.HOST, hostName);
         request.headers().add(HttpConversionUtil.ExtensionHeaderNames.SCHEME.text(), scheme.name());
         request.headers().add(HttpHeaderNames.ACCEPT_ENCODING, HttpHeaderValues.GZIP);
         request.headers().add(HttpHeaderNames.ACCEPT_ENCODING, HttpHeaderValues.DEFLATE);
         io.netty.channel.ChannelPromise p;
-        int s=StreamId;
-        responseHandler.put(StreamId, channel.writeAndFlush(request), p=channel.newPromise());
+        int s = StreamId;
+        responseHandler.put(StreamId, channel.writeAndFlush(request), p = channel.newPromise());
         StreamId += 2;
         Http2Response response;
         try {
-            while (!p.isSuccess()){
-                System.out.println("Waiting for response");
+            while (!p.isSuccess()) {
+                log.info("Waiting for response");
                 Thread.sleep(20);
             }
-            response=responseHandler.getResponse(s);
-        }catch (InterruptedException e){
-            response=null;
+            response = responseHandler.getResponse(s);
+        } catch (InterruptedException e) {
+            response = null;
             log.error(e.getStackTrace());
         }
         return response;
     }
 
-    public void releaseConnection(){
-        if(channel!=null){
+    public void releaseConnection() {
+        if (channel != null) {
             channel.close().syncUninterruptibly();
         }
-           // conn.shutDown();
     }
 
-    private SslContext generateSSLContext(TrustManagerFactory trustManager) throws SSLException{
+    private SslContext generateSSLContext(TrustManagerFactory trustManager) throws SSLException {
         SslProvider provider = OpenSsl.isAlpnSupported() ? SslProvider.OPENSSL : SslProvider.JDK;
         return SslContextBuilder.forClient()
                 .sslProvider(provider)
                 .trustManager(trustManager)
-                /* NOTE: the cipher filter may not include all ciphers required by the HTTP/2 specification.
-                 * Please refer to the HTTP/2 specification for cipher requirements. */
                 .ciphers(Http2SecurityUtil.CIPHERS, SupportedCipherSuiteFilter.INSTANCE)
                 .trustManager(InsecureTrustManagerFactory.INSTANCE)
                 .applicationProtocolConfig(new ApplicationProtocolConfig(
                         Protocol.ALPN,
-                        // NO_ADVERTISE is currently the only mode supported by both OpenSsl and JDK providers.
                         SelectorFailureBehavior.NO_ADVERTISE,
-                        // ACCEPT is currently the only mode supported by both OpenSsl and JDK providers.
                         SelectedListenerFailureBehavior.ACCEPT,
                         ApplicationProtocolNames.HTTP_2,
                         ApplicationProtocolNames.HTTP_1_1))
@@ -173,8 +182,8 @@ public class Http2Client {
 
     }
 
-    private void initChannel(){
-        if(channel==null) {
+    private void initChannel() {
+        if (channel == null) {
             try {
                 workerGroup = new NioEventLoopGroup();
                 initializer = new Http2ClientInitializer(sslContext, Integer.MAX_VALUE);
@@ -187,7 +196,7 @@ public class Http2Client {
 
                 // Start the client.
                 channel = b.connect().syncUninterruptibly().channel();
-                System.out.println("Connected to [" + HOST + ':' + PORT + ']');
+                log.info("Connected to [" + HOST + ':' + PORT + ']');
 
                 // Wait for the HTTP/2 upgrade to occur.
                 Http2SettingsHandler http2SettingsHandler = initializer.settingsHandler();
@@ -197,23 +206,7 @@ public class Http2Client {
 
             } catch (Exception e) {
                 log.error(e.getStackTrace());
-            }/*finally {
-               // channel.close().syncUninterruptibly();
-              //  workerGroup.shutdownGracefully();
-            }*/
+            }
         }
     }
-
-    /*private class Connections{
-        private Channel channel=null;
-        private Http2ClientInitializer initializer;
-        private EventLoopGroup workerGroup;
-
-        public Http2ClientInitializer getInitializer(){
-            return initializer;
-        }
-
-        public void shutDown(){
-        }
-    }*/
 }

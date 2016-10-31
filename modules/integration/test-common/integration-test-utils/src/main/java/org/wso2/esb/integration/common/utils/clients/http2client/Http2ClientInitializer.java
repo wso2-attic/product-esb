@@ -13,9 +13,6 @@ import io.netty.handler.ssl.SslContext;
 
 import static io.netty.handler.logging.LogLevel.INFO;
 
-/**
- * Configures the client pipeline to support HTTP/2 frames.
- */
 public class Http2ClientInitializer extends ChannelInitializer<SocketChannel> {
     private static final Http2FrameLogger logger = new Http2FrameLogger(INFO, Http2ClientInitializer.class);
 
@@ -64,14 +61,9 @@ public class Http2ClientInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(settingsHandler, responseHandler);
     }
 
-    /**
-     * Configure the pipeline for TLS NPN negotiation to HTTP/2.
-     */
     private void configureSsl(SocketChannel ch) {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(sslCtx.newHandler(ch.alloc()));
-        // We must wait for the handshake to finish and the protocol to be negotiated before configuring
-        // the HTTP/2 components of the pipeline.
         pipeline.addLast(new ApplicationProtocolNegotiationHandler("") {
             @Override
             protected void configurePipeline(ChannelHandlerContext ctx, String protocol) {
@@ -87,9 +79,6 @@ public class Http2ClientInitializer extends ChannelInitializer<SocketChannel> {
         });
     }
 
-    /**
-     * Configure the pipeline for a cleartext upgrade from HTTP to HTTP/2.
-     */
     private void configureClearText(SocketChannel ch) {
         HttpClientCodec sourceCodec = new HttpClientCodec();
         Http2ClientUpgradeCodec upgradeCodec = new Http2ClientUpgradeCodec(connectionHandler);
@@ -101,32 +90,21 @@ public class Http2ClientInitializer extends ChannelInitializer<SocketChannel> {
                 new UserEventLogger());
     }
 
-    /**
-     * A handler that triggers the cleartext upgrade to HTTP/2 by sending an initial HTTP request.
-     */
     private final class UpgradeRequestHandler extends ChannelInboundHandlerAdapter {
         @Override
         public void channelActive(ChannelHandlerContext ctx) throws Exception {
             DefaultFullHttpRequest upgradeRequest =
                     new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, "/");
             ctx.writeAndFlush(upgradeRequest);
-
             ctx.fireChannelActive();
-
-            // Done with this handler, remove it from the pipeline.
             ctx.pipeline().remove(this);
-
             configureEndOfPipeline(ctx.pipeline());
         }
     }
 
-    /**
-     * Class that logs any User Events triggered on this channel.
-     */
     private static class UserEventLogger extends ChannelInboundHandlerAdapter {
         @Override
         public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-            System.out.println("User Event Triggered: " + evt);
             ctx.fireUserEventTriggered(evt);
         }
     }
