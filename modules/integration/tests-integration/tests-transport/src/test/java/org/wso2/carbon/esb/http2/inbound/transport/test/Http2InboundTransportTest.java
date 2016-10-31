@@ -1,8 +1,25 @@
+/*
+ *   Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ *   WSO2 Inc. licenses this file to you under the Apache License,
+ *   Version 2.0 (the "License"); you may not use this file except
+ *   in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing,
+ *  software distributed under the License is distributed on an
+ *  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ *  KIND, either express or implied.  See the License for the
+ *  specific language governing permissions and limitations
+ *  under the License.
+ */
+
 package org.wso2.carbon.esb.http2.inbound.transport.test;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axis2.AxisFault;
-import org.apache.commons.io.input.AutoCloseInputStream;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -15,6 +32,8 @@ import org.wso2.esb.integration.common.utils.clients.Http2Client;
 import org.wso2.esb.integration.common.utils.clients.http2client.Http2Response;
 import org.wso2.esb.integration.common.utils.common.TestConfigurationProvider;
 import org.wso2.esb.integration.common.utils.servers.Http2Server;
+import scala.actors.threadpool.ExecutorService;
+import scala.actors.threadpool.Executors;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,17 +41,13 @@ import javax.xml.stream.XMLStreamException;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.TreeMap;
 
-/**
- * Created by chanakabalasooriya on 10/13/16.
- */
+
 public class Http2InboundTransportTest extends ESBIntegrationTest {
-    private Http2Server http2Server;
     private Http2Client http2Client;
     private ServerConfigurationManager serverConfigurationManager;
-    private Thread server;
+    private ExecutorService executor;
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
@@ -42,10 +57,8 @@ public class Http2InboundTransportTest extends ESBIntegrationTest {
                 new File(TestConfigurationProvider.getResourceLocation() + File.separator + "artifacts" +
                         File.separator + "ESB" + File.separator + "http2.inbound.transport"+File.separator+ "axis2.xml"));
         super.init();
-
-        http2Server=new Http2Server(false,8083);
-        server=new Thread(http2Server);
-        server.run();
+        executor= Executors.newFixedThreadPool(1);
+        executor.execute(new Http2Server(false,8083));
 
         http2Client=new Http2Client("localhost",8082);
 
@@ -75,8 +88,7 @@ public class Http2InboundTransportTest extends ESBIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
         http2Client.releaseConnection();
-            if(server.isAlive())
-                server.interrupt();
+        executor.shutdown();
         super.cleanup();
         if(serverConfigurationManager!=null){
             serverConfigurationManager.restoreToLastConfiguration();
