@@ -80,7 +80,7 @@ public class ESBJAVA4931PreserveContentTypeHeaderCharSetTestCase extends ESBInte
         String wireResponse = wireMonitorServer.getCapturedMessage();
         String[] wireResponseList = wireResponse.split(System.lineSeparator());
 
-        Assert.assertTrue(wireResponse.contains("Content-Type"));
+        Assert.assertTrue(wireResponse.contains("Content-Type"), "Request to the backend doesn't contain Content-Type header");
         boolean isCharSetPreserved = false;
         for (String line : wireResponseList) {
             if (line.contains("Content-Type")) {
