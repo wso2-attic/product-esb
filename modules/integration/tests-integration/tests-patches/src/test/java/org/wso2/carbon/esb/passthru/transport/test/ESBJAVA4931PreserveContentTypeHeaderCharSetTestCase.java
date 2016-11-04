@@ -35,7 +35,7 @@ import java.util.Map;
 
 /**
  * When ESB received requests with content-type with charset, ES should pass the charset to the backend along with the
- * content type. This test is to test that behavior.
+ * content type. This test is to test that behavior.(https://wso2.org/jira/browse/ESBJAVA-4931)
  */
 public class ESBJAVA4931PreserveContentTypeHeaderCharSetTestCase extends ESBIntegrationTest {
 
