@@ -112,7 +112,6 @@ public class ESBJAVA3770DropLargePayloadsPreventESBFromOOMTestCase extends ESBIn
         try {
             small_req_res = HttpRequestUtil.doPost(new URL(getApiInvocationURL("drop/payload")),
                     small_payload, headers);
-
             Assert.assertEquals(small_req_res.getResponseCode(), 200, "Server returned unexpected HTTP response code.");
         } catch (Exception ex) {
             //Ignore
@@ -123,7 +122,8 @@ public class ESBJAVA3770DropLargePayloadsPreventESBFromOOMTestCase extends ESBIn
         try {
             HttpRequestUtil.doPost(new URL(getApiInvocationURL("drop/payload")),
                     large_payload, headers);
-
+            //execution flow should be interrupted from this point should move to catch clause
+            Assert.assertTrue(false,  "Server returned HTTP response code other than 413 - Request Too Long.");
         } catch (Exception ex) {
             //expected
             Assert.assertTrue(ex.getMessage().contains("Server returned HTTP response code: 413"),
