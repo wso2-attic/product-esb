@@ -33,17 +33,21 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class tests whether the passthrough transport drops the request payload when it exceed a user
+ * defined threshold specified at passthough-http.properties
+ */
 public class ESBJAVA3770DropLargePayloadsPreventESBFromOOMTestCase extends ESBIntegrationTest {
 
     private ServerConfigurationManager serverConfigurationManager;
     //payload size at 184 bytes
-    private String small_payload = "<ns3:orders xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" " +
+    private String smallPayload = "<ns3:orders xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" " +
             " xmlns:ns3=\"http://www.wso2.com/xml/ns/wso2/order/2.0\">\n" +
             "    <ns3:order id=\"00000000000000000000\">\n" +
             "    </ns3:order>\n" +
             "</ns3:orders>";
     //payload size 2160 bytes > 184 bytes
-    private String large_payload = "<ns3:orders xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" " +
+    private String largePayload = "<ns3:orders xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" " +
             " xmlns:ns3=\"http://www.wso2.com/xml/ns/wso2/order/2.0\">\n" +
             "    <ns3:order id=\"00000000000000000001\">\n" +
             "        <ns3:order-header>\n" +
@@ -102,17 +106,17 @@ public class ESBJAVA3770DropLargePayloadsPreventESBFromOOMTestCase extends ESBIn
                 + "DropLargePayloadPreventESBOOM.xml");
     }
 
-    @Test(groups = "wso2.esb", description = "test whether messaged are getting dropped when message size " +
+    @Test(groups = "wso2.esb", description = "test whether messages are getting dropped when message size " +
             "exceeds a given threshold specified at passthough-http.properties")
     public void testValidationBasedOnMessageSize() {
 
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-type", "application/xml;charset=UTF-8");
-        HttpResponse small_req_res = null;
+        HttpResponse smallRequestResponse = null;
         try {
-            small_req_res = HttpRequestUtil.doPost(new URL(getApiInvocationURL("drop/payload")),
-                    small_payload, headers);
-            Assert.assertEquals(small_req_res.getResponseCode(), 200, "Server returned unexpected HTTP response code.");
+            smallRequestResponse = HttpRequestUtil.doPost(new URL(getApiInvocationURL("drop/payload")),
+                    smallPayload, headers);
+            Assert.assertEquals(smallRequestResponse.getResponseCode(), 200, "Server returned unexpected HTTP response code.");
         } catch (Exception ex) {
             //Ignore
             Assert.assertTrue(false, "Server returned unexpected HTTP response code. " +
@@ -121,7 +125,7 @@ public class ESBJAVA3770DropLargePayloadsPreventESBFromOOMTestCase extends ESBIn
 
         try {
             HttpRequestUtil.doPost(new URL(getApiInvocationURL("drop/payload")),
-                    large_payload, headers);
+                    largePayload, headers);
             //execution flow should be interrupted from this point should move to catch clause
             Assert.assertTrue(false,  "Server returned HTTP response code other than 413 - Request Too Long.");
         } catch (Exception ex) {
