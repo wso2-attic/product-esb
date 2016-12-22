@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <taskManager provider="org.wso2.carbon.mediation.ntask.NTaskTaskManager"/>
+    <endpoint name="502Endpoint">
+        <address uri="http://localhost:8480/request/backend"/>
+    </endpoint>
+    <sequence name="StoreSequence">
+        <property name="FORCE_SC_ACCEPTED" scope="axis2" type="STRING" value="true"/>
+        <property name="OUT_ONLY" scope="default" type="STRING" value="true"/>
+        <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
+        <log level="full"/>
+        <store messageStore="InMemoryStore"/>
+    </sequence>
+    <sequence name="ErrorSequence">
+        <log level="custom">
+            <property name="text" value="An unexpected error occured"/>
+            <property expression="get-property('ERROR_MESSAGE')"
+                name="message" xmlns:ns="http://org.apache.synapse/xsd"
+                xmlns:ns3="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"/>
+            <property expression="get-property('ERROR_CODE')"
+                name="code" xmlns:ns="http://org.apache.synapse/xsd"
+                xmlns:ns3="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"/>
+            <property expression="get-property('ERROR_DETAIL')"
+                name="detail" xmlns:ns="http://org.apache.synapse/xsd"
+                xmlns:ns3="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"/>
+            <property expression="get-property('ERROR_EXCEPTION')"
+                name="exception"
+                xmlns:ns="http://org.apache.synapse/xsd"
+                xmlns:ns3="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"/>
+        </log>
+    </sequence>
+    <messageStore name="InMemoryStore"/>
+    <messageProcessor
+        class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
+        messageStore="InMemoryStore" name="InMemoryMessageProcessor" targetEndpoint="502Endpoint">
+        <parameter name="client.retry.interval">1000</parameter>
+        <parameter name="throttle">false</parameter>
+        <parameter name="max.delivery.attempts">4</parameter>
+        <parameter name="member.count">1</parameter>
+        <parameter name="message.processor.fault.sequence">ErrorSequence</parameter>
+        <parameter name="max.delivery.drop">Disabled</parameter>
+        <parameter name="interval">1000</parameter>
+        <parameter name="is.active">true</parameter>
+        <parameter name="target.endpoint">502Endpoint</parameter>
+    </messageProcessor>
+    <api context="/request" name="ESBJAVA4974Api">
+        <resource faultSequence="MPERRORSequence"
+            inSequence="StoreSequence" methods="POST GET" url-mapping="/store">
+            <outSequence>
+                <send/>
+            </outSequence>
+        </resource>
+        <resource methods="GET" url-mapping="/backend">
+            <inSequence>
+                <property name="HTTP_SC" scope="axis2" value="502"/>
+                <respond/>
+            </inSequence>
+            <outSequence/>
+        </resource>
+    </api>
+</definitions>
