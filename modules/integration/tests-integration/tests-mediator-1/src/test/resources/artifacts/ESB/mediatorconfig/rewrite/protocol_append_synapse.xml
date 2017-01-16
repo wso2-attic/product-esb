@@ -16,12 +16,10 @@
                     </rewriterule>
                     <rewriterule>
                         <condition>
-                            <equal xmlns="" type="url" source="protocol" value="https"/>
+                            <equal xmlns="" type="url" source="protocol" value="http"/>
                         </condition>
                         <action value="s" type="append" fragment="protocol"/>
-                        <action type="remove" fragment="protocol"/>
-                        <action value="http" type="set" fragment="protocol"/>
-                        <action value="9000" regex="\w.*" type="replace" fragment="port"/>
+                        <action value="9002" regex="\w.*" type="replace" fragment="port"/>
                     </rewriterule>
                 </rewrite>
                 <log level="full"/>

@@ -57,7 +57,7 @@ public class AppendProtocolTestCase extends ESBIntegrationTest {
         try {
             axis2Client.sendSimpleStockQuoteRequest(
                     getProxyServiceURLHttp("urlRewriteProxy"),
-                    "http://localhost:9010/services/SimpleStockQuoteService",
+                    "https://localhost:9010/services/SimpleStockQuoteService",
                     "IBM");
             fail("This Query Must fail");
         } catch (AxisFault fault) {
@@ -74,10 +74,10 @@ public class AppendProtocolTestCase extends ESBIntegrationTest {
     @DataProvider(name = "addressingUrl")
     public Object[][] addressingUrl() {
         return new Object[][]{
-//                {"htt://localhost:9000/services/SimpleStockQuoteService"},
+                {"htt://localhost:9000/services/SimpleStockQuoteService"},
                 {"http://localhost:9000/services/SimpleStockQuoteService"},
+//                {"htt://localhost:9000/services/SimpleStockQuoteService"},
 //                {"htt://localhost:9010/services/SimpleStockQuoteService"},
-                {"https://localhost:9002/services/SimpleStockQuoteService"},
 
         };
 
