@@ -302,5 +302,10 @@
             <class name="org.wso2.carbon.esb.blocking.sender.test.ESBJAVA4974BlockingSenderSetErroCodesTestCase"/>
         </classes>
     </test>
+    <test name="ESBJAVA4999WriteAsJsonErrorTestCase" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA4999WriteAsJsonErrorTestCase" />
+        </classes>
+    </test>
 </suite>
 
