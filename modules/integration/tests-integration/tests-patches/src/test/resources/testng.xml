@@ -190,6 +190,12 @@
         </classes>
     </test>
 
+    <test name="Callout-mediator-disabling-chunking" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_3587_DisableChunkingTest"/>
+        </classes>
+    </test>
+
     <test name="content-type application/json GET request test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.json.ESBJAVA4270TestCase"></class>
