@@ -26,6 +26,7 @@
         <classes>
             <class name="org.wso2.carbon.esb.api.test.ESBJAVA3751UriTemplateReservedCharacterEncodingTest"/>
             <class name="org.wso2.carbon.esb.api.apidefinition.ESBJAVA4907SwaggerGenerationTestCase"/>
+            <class name="org.wso2.carbon.esb.api.apidefinition.ESBJAVA4936SwaggerGenerationJsonYamlTestCase"/>
         </classes>
     </test>
 
@@ -189,6 +190,12 @@
         </classes>
     </test>
 
+    <test name="Callout-mediator-disabling-chunking" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_3587_DisableChunkingTest"/>
+        </classes>
+    </test>
+
     <test name="content-type application/json GET request test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.json.ESBJAVA4270TestCase"></class>
@@ -279,6 +286,31 @@
     <test name="ESBJAVA_4913" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.mediators.clone.ESBJAVA4913HandleExceptionTest"/>
+        </classes>
+    </test>
+    <test name="ESBJAVA_4931_PreserveContentTypeHeaderCharSetTestCase" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA4931PreserveContentTypeHeaderCharSetTestCase"/>
+        </classes>
+    </test>
+    <test name="ESBJAVA_4940" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.nhttp.transport.json.test.ESBJAVA4940CharacterEncodingRemovalTestCase"/>
+        </classes>
+    </test>
+    <test name="ESBJAVA_3770_DropLargePayloadsPreventESBFromOOMTestCase" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA3770DropLargePayloadsPreventESBFromOOMTestCase"/>
+        </classes>
+    </test>
+    <test name="ESBJAVA4974BlockingSenderSetErroCodesTestCase" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.blocking.sender.test.ESBJAVA4974BlockingSenderSetErroCodesTestCase"/>
+        </classes>
+    </test>
+    <test name="ESBJAVA4999WriteAsJsonErrorTestCase" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA4999WriteAsJsonErrorTestCase" />
         </classes>
     </test>
 </suite>

@@ -1052,7 +1052,7 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>com.rabbitmq.wso2</groupId>
+                <groupId>org.wso2.orbit.com.rabbitmq</groupId>
                 <artifactId>amqp-client</artifactId>
                 <version>${rabbitmq.orbit.version}</version>
             </dependency>
@@ -1084,7 +1084,7 @@
         <axiom.wso2.version>1.2.11.wso2v10</axiom.wso2.version>
 
         <!-- Synapse -->
-        <synapse.version>2.1.7-wso2v8-SNAPSHOT</synapse.version>
+        <synapse.version>2.1.7-wso2v11-SNAPSHOT</synapse.version>
 
         <!-- Axis2 Transport -->
         <axis2.transport.version>1.1.1-wso2v7-SNAPSHOT</axis2.transport.version>
@@ -1093,7 +1093,7 @@
         <org.apache.httpcomponents.wso2.version>4.2.3.wso2v1</org.apache.httpcomponents.wso2.version>
 
         <!-- Carbon mediation version -->
-        <carbon.mediation.version>4.6.7-SNAPSHOT</carbon.mediation.version>
+        <carbon.mediation.version>4.6.10-SNAPSHOT</carbon.mediation.version>
 
         <!-- Carbon kernel version-->
         <carbon.kernel.version>4.4.9</carbon.kernel.version>
@@ -1205,7 +1205,7 @@
         <activemq.version>5.9.1</activemq.version>
         <testng.version>6.1.1</testng.version>
         <project.scm.id>wso2-scm-server</project.scm.id>
-        <rabbitmq.orbit.version>3.4.4.wso2v1</rabbitmq.orbit.version>
+        <rabbitmq.orbit.version>3.6.6.wso2v1</rabbitmq.orbit.version>
     </properties>
     <pluginRepositories>
         <pluginRepository>
