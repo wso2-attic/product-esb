@@ -313,5 +313,10 @@
             <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA4999WriteAsJsonErrorTestCase" />
         </classes>
     </test>
+    <test name="Call Mediator" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.mediators.call.ESBJAVA4976CallMediatorWithBlockingTrue"/>
+        </classes>
+    </test>
 </suite>
 
