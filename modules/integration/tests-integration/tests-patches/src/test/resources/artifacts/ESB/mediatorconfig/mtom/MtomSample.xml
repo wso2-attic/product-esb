@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+<proxy name="MtomSample"
+       transports="http https"
+       startOnLoad="true">
+    <description/>
+    <target>
+        <inSequence>
+            <log>
+                <property name="in" value="==== IN ====="/>
+            </log>
+            <property name="enableMTOM" value="true" scope="axis2"/>
+            <property name="messageType"
+                      value="multipart/related"
+                      scope="axis2"
+                      type="STRING"/>
+            <send>
+                <endpoint>
+                    <address uri="http://localhost:9001/services/MTOMSwASampleService"
+                             optimize="mtom"/>
+                </endpoint>
+            </send>
+        </inSequence>
+        <outSequence>
+            <log>
+                <property name="outseq" value="=== OUT ===="/>
+            </log>
+            <send/>
+        </outSequence>
+    </target>
+</proxy>
+    </definitions>
