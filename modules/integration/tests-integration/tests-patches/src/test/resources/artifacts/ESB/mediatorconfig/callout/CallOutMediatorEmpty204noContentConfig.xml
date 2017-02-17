@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <api name="callouttest" context="/callouttest">
+        <resource methods="POST">
+            <inSequence>
+                <callout serviceURL="http://localhost:8480/mockresponse">
+                    <source type="envelope"/>
+                </callout>
+                <respond/>
+            </inSequence>
+        </resource>
+    </api>
+
+    <api name="mockresponse" context="/mockresponse">
+        <resource methods="POST">
+            <inSequence>
+                <payloadFactory media-type="xml">
+                    <format>
+                        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+                            <soapenv:Body/>
+                        </soapenv:Envelope>
+                    </format>
+                    <args/>
+                </payloadFactory>
+                <property name="messageType" value="text/xml" scope="axis2"/>
+                <property name="DISABLE_CHUNKING" value="true" scope="axis2"/>
+                <property name="HTTP_SC" value="204" scope="axis2"/>
+                <property name="Content-Length" value="0" scope="transport"/>
+                <respond/>
+            </inSequence>
+        </resource>
+    </api>
+</definitions>
