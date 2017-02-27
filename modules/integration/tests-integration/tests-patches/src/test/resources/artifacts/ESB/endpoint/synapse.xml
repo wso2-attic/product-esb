@@ -14,7 +14,7 @@
                         <loadbalance algorithm="org.apache.synapse.endpoints.algorithms.RoundRobin">
                             <endpoint name="ep1">
                                 <http method="post"
-                                      uri-template="http://localhost:8080/rest/api/invalid"/>
+                                      uri-template="http://localhost:8080/rest/api/people"/>
                                 <timeout>
                                     <duration>5000</duration>
                                     <responseAction>fault</responseAction>
@@ -22,7 +22,7 @@
                             </endpoint>
                             <endpoint name="ep2">
                                 <http method="post"
-                                      uri-template="http://localhost:8080/rest/api/people"/>
+                                      uri-template="http://localhost:8080/rest/api/music/post"/>
                                 <timeout>
                                     <duration>5000</duration>
                                     <responseAction>fault</responseAction>

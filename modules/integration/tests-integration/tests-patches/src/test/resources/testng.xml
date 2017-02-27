@@ -9,18 +9,18 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
 
-    <test name="Rule mediator Test" preserve-order="true" verbose="2">
+    <!--<test name="Rule mediator Test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.mediators.rule.ESBJAVA2506RuleFetchFromRegistryFailsForTheFirstTime"/>
         </classes>
     </test>
 
-    <!-- FIX - Cannot find class in classpath: org.wso2.carbon.esb.ServerStartupTestCase -->
-    <!--test name="Server-Stratup" preserve-order="true" verbose="2">
+    &lt;!&ndash; FIX - Cannot find class in classpath: org.wso2.carbon.esb.ServerStartupTestCase &ndash;&gt;
+    &lt;!&ndash;test name="Server-Stratup" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.ServerStartupTestCase"/>
          </classes>
-    </test-->
+    </test&ndash;&gt;
 
     <test name="API-Test" preserve-order="true" verbose="2">
         <classes>
@@ -57,18 +57,19 @@
         <classes>
             <class name="org.wso2.carbon.esb.passthru.transport.test.ESBJAVA4423CustomStatusDescriptionTest"/>
         </classes>
-    </test>
+    </test>-->
 
     <test name="QueryParam-Test" preserve-order="true" verbose="2">
         <classes>
-            <class name="org.wso2.carbon.esb.endpoint.test.ESBJAVA3340QueryParamHttpEndpointTestCase"/>
+            <!--<class name="org.wso2.carbon.esb.endpoint.test.ESBJAVA3340QueryParamHttpEndpointTestCase"/>
             <class name="org.wso2.carbon.esb.endpoint.test.ESBJAVA4231EmptyPayloadInFailoverLoadBalanceEndpoint"/>
             <class name="org.wso2.carbon.esb.endpoint.test.FaultSequenceExecutionOrderTestCase"/>
-            <class name="org.wso2.carbon.esb.endpoint.test.EndpointErrorTest"/>
+            <class name="org.wso2.carbon.esb.endpoint.test.EndpointErrorTest"/>-->
+            <class name="org.wso2.carbon.esb.endpoint.test.ESBJAVA5017DroppedPayloadInFailoverLoadBalanceEndpoint"/>
         </classes>
     </test>
 
-    <test name="JSON-Tests" preserve-order="true" verbose="2">
+    <!--<test name="JSON-Tests" preserve-order="true" verbose="2">
         <packages>
             <package name="org.wso2.carbon.esb.json"/>
         </packages>
@@ -85,11 +86,11 @@
             <class name="org.wso2.carbon.esb.car.deployment.test.ESBJAVA3611EndpointTestCase"/>
         </classes>
     </test>
-    <!--test name="Cache mediator with REQUESTHASHGenerator test" preserve-order="true" verbose="2">
+    &lt;!&ndash;test name="Cache mediator with REQUESTHASHGenerator test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.mediators.cache.APIMANAGER1838RequestHashGeneratorTestCase"/>
         </classes>
-    </test-->
+    </test&ndash;&gt;
     <test name="Cache mediator with PIs test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.mediators.cache.ESBJAVA4318Testcase"/>
@@ -142,16 +143,16 @@
         </classes>
     </test>
 
-    <!-- Commented the test case due to a regression issue occurred due to this fix.
-             Need to enable this test case once the original issue is fixed properly -->
-    <!--test
+    &lt;!&ndash; Commented the test case due to a regression issue occurred due to this fix.
+             Need to enable this test case once the original issue is fixed properly &ndash;&gt;
+    &lt;!&ndash;test
 		name="security-policy-reference-element-in-wsdl-bindings-for-capp-test"
 		preserve-order="true" verbose="2">
 		<classes>
 			<class
 				name="org.wso2.carbon.esb.security.policy.ESBJAVA3899_PolicyReferenceInWSDLBindingsTestCase" />
 		</classes>
-    </test-->
+    </test&ndash;&gt;
 
     <test name="proxy-start-on-load-false-test" preserve-order="true" verbose="2">
         <classes>
@@ -239,12 +240,12 @@
         </classes>
     </test>
 
-<!--todo uncomment below test once ESB  moves to ntask version 4.6.0 or higher-->
-    <!--<test name="Test startup logs for FATAL error when registry is mounted" preserve-order="true" verbose="2">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.carbon.esb.ntask.CCOMMONS8SetTenantDomainTest"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+&lt;!&ndash;todo uncomment below test once ESB  moves to ntask version 4.6.0 or higher&ndash;&gt;
+    &lt;!&ndash;<test name="Test startup logs for FATAL error when registry is mounted" preserve-order="true" verbose="2">&ndash;&gt;
+        &lt;!&ndash;<classes>&ndash;&gt;
+            &lt;!&ndash;<class name="org.wso2.carbon.esb.ntask.CCOMMONS8SetTenantDomainTest"/>&ndash;&gt;
+        &lt;!&ndash;</classes>&ndash;&gt;
+    &lt;!&ndash;</test>&ndash;&gt;
 
     <test name="ESBJAVA_4565" preserve-order="true" verbose="2">
         <classes>
@@ -317,6 +318,6 @@
         <classes>
             <class name="org.wso2.carbon.esb.mediators.call.ESBJAVA4976CallMediatorWithBlockingTrue"/>
         </classes>
-    </test>
+    </test>-->
 </suite>
 
