@@ -44,7 +44,7 @@ public class ESBJAVA5017DroppedPayloadInFailoverLoadBalanceEndpoint extends ESBI
     @Test(groups = "wso2.esb", description = "Test sending request to LoadBalancing Endpoint with application/json content type")
     public void testHTTPPostRequestJSONScenario() throws Exception {
 
-        String JSON_PAYLOAD = "{\"album\":\"Hotel California\",\"singer\":\"Eagles\"}";
+        String JSON_PAYLOAD = "{\"action\":\"ping\"}";
 
         WebResource webResource = client
                 .resource(getProxyServiceURLHttp("LBProxy"));
@@ -53,8 +53,9 @@ public class ESBJAVA5017DroppedPayloadInFailoverLoadBalanceEndpoint extends ESBI
         ClientResponse postResponse = webResource.type("application/json")
                 .post(ClientResponse.class, JSON_PAYLOAD);
 
-        Assert.assertEquals(postResponse.getType().toString(), "application/json", "Content-Type Should be application/json");
-        Assert.assertEquals(postResponse.getStatus(), 201, "Response status should be 201");
+        String entity = postResponse.getEntity(String.class);
+
+        Assert.assertTrue(entity.contains("pong"), "The test has succeeded.");
     }
 
     @AfterClass(alwaysRun = true)

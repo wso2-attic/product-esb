@@ -3,30 +3,31 @@
     <registry provider="org.wso2.carbon.mediation.registry.WSO2Registry">
         <parameter name="cachableDuration">15000</parameter>
     </registry>
-    <proxy name="LBProxy"
+    <proxy xmlns="http://ws.apache.org/ns/synapse"
+           name="LBProxy"
            transports="http https"
            startOnLoad="true">
         <description/>
         <target>
             <inSequence>
                 <send>
-                    <endpoint name="LoadBalancingEndpoint">
+                    <endpoint>
                         <loadbalance algorithm="org.apache.synapse.endpoints.algorithms.RoundRobin">
                             <endpoint name="ep1">
-                                <http method="post"
-                                      uri-template="http://localhost:8080/rest/api/people"/>
-                                <timeout>
-                                    <duration>5000</duration>
-                                    <responseAction>fault</responseAction>
-                                </timeout>
+                                <http uri-template="http://slowwly.robertomurray.co.uk/delay/40000/url/http://www.googlee.com">
+                                    <timeout>
+                                        <duration>10000</duration>
+                                        <responseAction>fault</responseAction>
+                                    </timeout>
+                                </http>
                             </endpoint>
                             <endpoint name="ep2">
-                                <http method="post"
-                                      uri-template="http://localhost:8080/rest/api/music/post"/>
-                                <timeout>
-                                    <duration>5000</duration>
-                                    <responseAction>fault</responseAction>
-                                </timeout>
+                                <http uri-template="http://localhost:8480/test">
+                                    <timeout>
+                                        <duration>10000</duration>
+                                        <responseAction>fault</responseAction>
+                                    </timeout>
+                                </http>
                             </endpoint>
                         </loadbalance>
                     </endpoint>
@@ -37,12 +38,19 @@
             </outSequence>
         </target>
     </proxy>
-    <sequence name="fault">
-        <log level="full">
-            <property name="MESSAGE" value="Executing default 'fault' sequence"/>
-            <property name="ERROR_CODE" expression="get-property('ERROR_CODE')"/>
-            <property name="ERROR_MESSAGE" expression="get-property('ERROR_MESSAGE')"/>
-        </log>
-        <drop/>
-    </sequence>
+    <api xmlns="http://ws.apache.org/ns/synapse"
+         name="BackendAPI"
+         context="/test">
+        <resource methods="POST" uri-template="/*">
+            <inSequence>
+                <payloadFactory media-type="json">
+                    <format>{"request":"$1","action":"pong"}</format>
+                    <args>
+                        <arg evaluator="json" expression="$.action"/>
+                    </args>
+                </payloadFactory>
+                <respond/>
+            </inSequence>
+        </resource>
+    </api>
 </definitions>
