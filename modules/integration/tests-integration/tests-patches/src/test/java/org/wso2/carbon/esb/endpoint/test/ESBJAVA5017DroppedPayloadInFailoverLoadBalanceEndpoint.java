@@ -48,10 +48,8 @@ public class ESBJAVA5017DroppedPayloadInFailoverLoadBalanceEndpoint extends ESBI
     public void testHTTPPostRequestJSONLoadBalanceEPScenario() throws Exception {
 
         String JSON_PAYLOAD = "{\"action\":\"ping\"}";
-
         DefaultHttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost(getProxyServiceURLHttp("LBProxy"));
-
         StringEntity postingString = new StringEntity(JSON_PAYLOAD);
         httppost.setEntity(postingString);
         httppost.setHeader(HTTPConstants.CONTENT_TYPE, HTTPConstants.MEDIA_TYPE_APPLICATION_JSON);
