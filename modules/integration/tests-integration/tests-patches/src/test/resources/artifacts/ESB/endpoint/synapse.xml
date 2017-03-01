@@ -14,7 +14,7 @@
                     <endpoint>
                         <loadbalance algorithm="org.apache.synapse.endpoints.algorithms.RoundRobin">
                             <endpoint name="ep1">
-                                <http uri-template="http://slowwly.robertomurray.co.uk/delay/40000/url/http://www.googlee.com">
+                                <http uri-template="http://localhost:8480/delay">
                                     <timeout>
                                         <duration>10000</duration>
                                         <responseAction>fault</responseAction>
@@ -45,6 +45,22 @@
             <inSequence>
                 <payloadFactory media-type="json">
                     <format>{"request":"$1","action":"pong"}</format>
+                    <args>
+                        <arg evaluator="json" expression="$.action"/>
+                    </args>
+                </payloadFactory>
+                <respond/>
+            </inSequence>
+        </resource>
+    </api>
+    <api xmlns="http://ws.apache.org/ns/synapse"
+         name="DelayAPI"
+         context="/delay">
+        <resource methods="POST" uri-template="/*">
+            <inSequence>
+                <script language="js">java.lang.Thread.sleep(150000);</script>
+                <payloadFactory media-type="json">
+                    <format>{"request":"$1","response":"delayed pong"}</format>
                     <args>
                         <arg evaluator="json" expression="$.action"/>
                     </args>
