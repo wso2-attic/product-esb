@@ -18,49 +18,62 @@
 
 package org.wso2.carbon.esb.endpoint.test;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+import org.apache.axis2.transport.http.HTTPConstants;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 
 public class ESBJAVA5017DroppedPayloadInFailoverLoadBalanceEndpoint extends ESBIntegrationTest {
 
-    private Client client = Client.create();
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
         super.init();
         loadESBConfigurationFromClasspath(
-                "artifacts" + File.separator + "ESB" + File.separator + "endpoint" + File.separator +
-                        "synapse.xml");
+                "artifacts" + File.separator + "ESB" + File.separator + "endpoint" + File.separator + "synapse.xml");
     }
 
     @Test(groups = "wso2.esb", description = "Test sending request to LoadBalancing Endpoint with application/json content type")
-    public void testHTTPPostRequestJSONScenario() throws Exception {
+    public void testHTTPPostRequestJSONLoadBalanceEPScenario() throws Exception {
 
         String JSON_PAYLOAD = "{\"action\":\"ping\"}";
 
-        WebResource webResource = client
-                .resource(getProxyServiceURLHttp("LBProxy"));
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost(getProxyServiceURLHttp("LBProxy"));
 
-        // sending post request
-        ClientResponse postResponse = webResource.type("application/json")
-                .post(ClientResponse.class, JSON_PAYLOAD);
+        StringEntity postingString = new StringEntity(JSON_PAYLOAD);
+        httppost.setEntity(postingString);
+        httppost.setHeader(HTTPConstants.CONTENT_TYPE, HTTPConstants.MEDIA_TYPE_APPLICATION_JSON);
 
-        String entity = postResponse.getEntity(String.class);
+        try {
+            HttpResponse httpResponse = httpclient.execute(httppost);
+            HttpEntity entity = httpResponse.getEntity();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(entity.getContent()));
+            String result = "";
+            String line;
+            while ((line = rd.readLine()) != null) {
+                result += line;
+            }
+            Assert.assertTrue(result.contains("pong"), "Response doesn't contains the desired phrase.");
+        } finally {
+            httpclient.clearRequestInterceptors();
+        }
 
-        Assert.assertTrue(entity.contains("pong"), "The test has succeeded.");
     }
 
     @AfterClass(alwaysRun = true)
     public void stop() throws Exception {
-        client.destroy();
         super.cleanup();
     }
 }
