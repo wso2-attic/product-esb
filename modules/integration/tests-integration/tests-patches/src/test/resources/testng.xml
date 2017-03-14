@@ -329,5 +329,10 @@
             <class name="org.wso2.carbon.esb.endpoint.test.ESBJAVA5017DroppedPayloadInFailoverLoadBalanceEndpoint"/>
         </classes>
     </test>
+    <test name="Dynamic-Security-Policy-Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.security.policy.ESBJAVA5029_DynamicallyParameterizingEndpointWithPolicyTestCase"/>
+        </classes>
+    </test>
 </suite>
 
