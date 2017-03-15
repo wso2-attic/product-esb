@@ -334,5 +334,10 @@
             <class name="org.wso2.carbon.esb.security.policy.ESBJAVA5029_DynamicallyParameterizingEndpointWithPolicyTestCase"/>
         </classes>
     </test>
+    <test name="Blocking-Sender-Empty-Content-Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.blocking.sender.test.ESBJAVA5039BlockingSenderWithEmptyBodyTestCase"/>
+        </classes>
+    </test>
 </suite>
 
