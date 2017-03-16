@@ -30,6 +30,10 @@ import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * This class will test the scenario: in the tenant space, starting passthru calls. ex: WSDLs should be accessible.
+ * https://wso2.org/jira/browse/ESBJAVA-5046
+ */
 
 public class PassthruTransportTenantTestCase extends ESBIntegrationTest {
 
