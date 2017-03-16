@@ -27,6 +27,7 @@ import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
 import org.wso2.carbon.automation.test.utils.http.client.HttpURLConnectionClient;
 import org.wso2.esb.integration.common.utils.ESBIntegrationTest;
 
+import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
 import java.io.IOException;
 
@@ -48,11 +49,12 @@ public class PassthruTransportTenantTestCase extends ESBIntegrationTest {
     @Test(groups = "wso2.esb", description = "Passthru  test case for tenant" )
     public void passthruProxyWSDLTest() throws AxisFault {
         try {
+            String wsdlurl = this.getMainSequenceURL() + "HttpProxyTest?wsdl" ;
             HttpResponse responsee = HttpURLConnectionClient.
-                    sendGetRequest("http://localhost:8480/services/t/wso2.com/HttpProxyTest?wsdl", null);
+                    sendGetRequest(wsdlurl, null);
             Assert.assertNotNull(responsee, "WSDL is accessible");
         } catch (IOException e) {
-            Assert.fail("WSDL is not found", e);
+            Assert.fail("Error while accessing the WSDL", e);
         }
     }
 
