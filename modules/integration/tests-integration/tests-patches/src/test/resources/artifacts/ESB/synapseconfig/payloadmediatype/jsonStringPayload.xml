@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+<api xmlns="http://ws.apache.org/ns/synapse"
+     name="quoteCheckAPI"
+     context="/quoteCheckAPI">
+    <resource methods="POST">
+        <inSequence>
+            <payloadFactory media-type="json">
+                <format>{"output":$1}</format>
+                <args>
+                    <arg evaluator="xml" expression="fn:concat( '&#34;' , fn:concat('hello',  '&#34;'))"/>
+                </args>
+            </payloadFactory>
+            <property name="messageType"
+                      value="application/json"
+                      scope="axis2"
+                      type="STRING"/>
+        <log level="custom">
+            <property name="OUTGOING_RESPONSE" expression="json-eval($.)"/>
+        </log>
+            <respond/>
+        </inSequence>
+    </resource>
+</api>
+</definitions>
