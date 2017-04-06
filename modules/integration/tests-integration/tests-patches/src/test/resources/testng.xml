@@ -334,5 +334,10 @@
             <class name="org.wso2.carbon.esb.security.policy.ESBJAVA5029_DynamicallyParameterizingEndpointWithPolicyTestCase"/>
         </classes>
     </test>
+    <test name="Fix-for-CARBON16113" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.car.deployment.test.CARBON16113TransportStartsBeforeArtifactDeploymentTestCase"/>
+        </classes>
+    </test>
 </suite>
 

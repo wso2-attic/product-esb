@@ -271,6 +271,20 @@
 
                 </properties>
             </instance>
+            <instance name="esbCAppTest" type="standalone" nonBlockingTransportEnabled="true">
+                <hosts>
+                    <host type="default">localhost</host>
+                </hosts>
+                <ports>
+                    <port type="http">9996</port>
+                    <port type="https">9676</port>
+                    <port type="nhttps">8476</port>
+                    <port type="nhttp">8513</port>
+                </ports>
+                <properties>
+
+                </properties>
+            </instance>
         </productGroup>
     </platform>
 
