@@ -38,7 +38,9 @@ public class ESBJAVA5029_DynamicallyParameterizingEndpointWithPolicyTestCase ext
         super.init();
     }
 
-    @Test(groups = {"wso2.esb"}, description = "Parsing a policy as a dynamic entry and secure endpoint using it")
+    @Test(groups = {"wso2.esb" },
+          description = "Parsing a policy as a dynamic entry and secure endpoint using it",
+          enabled = false)
     public void testParsingPolicyDynamically() throws Exception {
         uploadResourcesToConfigRegistry();
         loadESBConfigurationFromClasspath("/artifacts/ESB/security/ESBJAVA5029/synapse.xml");

@@ -36,15 +36,16 @@ import java.io.InputStreamReader;
 
 public class ESBJAVA5017DroppedPayloadInFailoverLoadBalanceEndpoint extends ESBIntegrationTest {
 
-
-    @BeforeClass(alwaysRun = true)
+    @BeforeClass(alwaysRun = true, enabled = false)
     public void init() throws Exception {
         super.init();
         loadESBConfigurationFromClasspath(
                 "artifacts" + File.separator + "ESB" + File.separator + "endpoint" + File.separator + "synapse.xml");
     }
 
-    @Test(groups = "wso2.esb", description = "Test sending request to LoadBalancing Endpoint with application/json content type")
+    @Test(groups = "wso2.esb",
+          description = "Test sending request to LoadBalancing Endpoint with application/json content type",
+          enabled = false)
     public void testHTTPPostRequestJSONLoadBalanceEPScenario() throws Exception {
 
         String JSON_PAYLOAD = "{\"action\":\"ping\"}";
@@ -70,7 +71,7 @@ public class ESBJAVA5017DroppedPayloadInFailoverLoadBalanceEndpoint extends ESBI
 
     }
 
-    @AfterClass(alwaysRun = true)
+    @AfterClass(alwaysRun = true, enabled = false)
     public void stop() throws Exception {
         super.cleanup();
     }
