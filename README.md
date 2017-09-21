@@ -1,5 +1,10 @@
-#WSO2 Enterprise Service Bus
+NOTE
+----
+Since WSO2 ESB will be included in the WSO2 Integrator(http://wso2.com/integration) as the ESB(Integration) profile, we are deprecating this product and moving it to the attic.
 
+<h1>
+WSO2 Enterprise Service Bus
+</h1>
 WSO2 Enterprise Service Bus is a lightweight, high performance, near-zero latency product, providing comprehensive support for several different technologies like SOAP, WS* and REST as well as domain-specific solutions and protocols like SAP or HL7. It goes above and beyond by being 100% compliant with enterprise integration patterns. It also has 100+ ready-made, easy-to-use connectors to seamlessly integrate between cloud service providers. WSO2 Enterprise Service Bus is 100% configuration driven, which means no code needs to be written. Its capabilities can be extended too with the many extension points to plug into.
 
 <h2>
