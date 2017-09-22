@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <proxy xmlns="http://ws.apache.org/ns/synapse"
+           name="blockingSenderProxy"
+           transports="http"
+           statistics="disable"
+           trace="disable"
+           startOnLoad="true">
+        <target>
+            <inSequence>
+                <log level="custom">
+                    <property name="LOG1" value="--- before call blockingSenderProxy ---"/>
+                </log>
+                <payloadFactory media-type="xml">
+                    <format>
+                        <ser:addRole xmlns:ser="http://service.ws.um.carbon.wso2.org">
+                            <ser:roleName>sample</ser:roleName>
+                        </ser:addRole>
+                    </format>
+                    <args/>
+                </payloadFactory>
+                <property name="HTTP_METHOD" value="POST" scope="axis2"/>
+                <property name="messageType" value="application/xml" scope="axis2"/>
+                <log level="full"/>
+                <call blocking="true">
+                    <endpoint>
+                        <address uri="http://localhost:8480/backendtest"/>
+                    </endpoint>
+                </call>
+                <log level="custom">
+                    <property name="LOG1" value="--- after call blockingSenderProxy ---"/>
+                </log>
+                <respond/>
+            </inSequence>
+            <faultSequence>
+                <log level="custom">
+                    <property name="LOG1" value="--- inside faultSequence - blockingSenderProxy ---"/>
+                </log>
+                <sequence key="fault"/>
+            </faultSequence>
+        </target>
+        <description/>
+    </proxy>
+
+
+    <api xmlns="http://ws.apache.org/ns/synapse"
+         name="EmptyContentHeaderApi"
+         context="/backendtest">
+        <resource methods="POST">
+            <inSequence>
+                <log level="custom">
+                    <property name="LOG3" value="--- inside EmptyContentHeaderApi---"/>
+                </log>
+                <property name="HTTP_SC" value="202" scope="axis2"/>
+                <header name="CONTENT-LENGTH" scope="transport" value="0"/>
+                <property name="FORCE_HTTP_CONTENT_LENGTH" value="true" scope="axis2"/>
+                <property name="COPY_CONTENT_LENGTH_FROM_INCOMING" value="true" scope="axis2"/>
+                <log level="custom">
+                    <property name="CONTENT-LENGTH value" expression="$trp:CONTENT-LENGTH" />
+                </log>
+                <respond/>
+            </inSequence>
+        </resource>
+    </api>
+
+</definitions>
