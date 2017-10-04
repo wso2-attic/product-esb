@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="gov:/callSequence" >
+	<send>
+		<endpoint>
+			<address uri="http://localhost:8480/services/SendEndpoint"/>
+		</endpoint>
+	</send>
+	<log level="custom">
+		<property name="Status" value="Working(Sequence Executed)"/>
+	</log>
+</sequence>
