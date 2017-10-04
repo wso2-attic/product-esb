@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <registry provider="org.wso2.carbon.mediation.registry.WSO2Registry">
+        <parameter name="cachableDuration">15000</parameter>
+    </registry>
+    <proxy xmlns="http://ws.apache.org/ns/synapse"
+           name="disable-auto-primitive-with-regex"
+           transports="http,https"
+           statistics="disable"
+           trace="disable"
+           startOnLoad="true">
+        <target>
+            <inSequence>
+                <property name="messageType" value="application/json" scope="axis2"/>
+                <respond/>
+            </inSequence>
+        </target>
+        <description/>
+    </proxy>
+</definitions>
