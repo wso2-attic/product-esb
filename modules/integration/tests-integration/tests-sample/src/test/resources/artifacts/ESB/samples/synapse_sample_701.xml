@@ -20,6 +20,7 @@
     <!-- Introduction to Synapse Message Sampling Processor -->
 
 <definitions xmlns="http://ws.apache.org/ns/synapse">
+    <taskManager provider="org.wso2.carbon.mediation.ntask.NTaskTaskManager"/>
 
     <sequence name="send_seq">
         <send>
@@ -43,11 +44,8 @@
         <description>The main sequence for the message mediation</description>
     </sequence>
     <messageStore name="MyStore"/>
-    <messageProcessor class="org.apache.synapse.message.processor.impl.sampler.SamplingProcessor" name="SamplingProcessor" messageStore="MyStore">
-        <parameter name="interval">1000</parameter>
-        <parameter name="concurrency">1</parameter>
+    <messageProcessor class="org.apache.synapse.message.processors.sampler.SamplingProcessor" name="SamplingProcessor" messageStore="MyStore">
+        <parameter name="interval">20000</parameter>
         <parameter name="sequence">send_seq</parameter>
-        <parameter name="is.active">true</parameter>
-
     </messageProcessor>
 </definitions>

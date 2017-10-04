@@ -1,6 +1,13 @@
-<?xml version="1.0"?>
-<definitions xmlns="http://ws.apache.org/ns/synapse">
-
+<definitions xmlns="http://ws.apache.org/ns/synapse"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://ws.apache.org/ns/synapse http://synapse.apache.org/ns/2010/04/configuration/synapse_config.xsd">
+    <sequence name="myFaultHandler">
+        <log level="custom">
+            <property name="text" value="** Rollback Transaction**"/>
+        </log>
+        <transaction action="rollback"/>
+        <send/>
+    </sequence>
     <sequence name="main" onError="myFaultHandler">
         <in>
             <send>
@@ -17,9 +24,9 @@
             <dbreport useTransaction="true" xmlns="http://ws.apache.org/ns/synapse">
                 <connection>
                     <pool>
-                        <dsName>jdbc/MySqlDS1</dsName>
-                        <user>root</user>
-                        <password>admin</password>
+                        <dsName>jdbc/XADerbyDS</dsName>
+                        <user>esb</user>
+                        <password>esb</password>
                     </pool>
                 </connection>
                 <statement>
@@ -36,25 +43,17 @@
             <dbreport useTransaction="true" xmlns="http://ws.apache.org/ns/synapse">
                 <connection>
                     <pool>
-                        <dsName>jdbc/MySqlDS2</dsName>
-                        <user>root</user>
-                        <password>admin</password>
+                        <dsName>jdbc/XADerbyDS1</dsName>
+                        <user>esb</user>
+                        <password>esb</password>
                     </pool>
                 </connection>
                 <statement>
-                    <sql>INSERT into company values ('WSO2','c4',12.0)</sql>
+                    <sql>INSERT into company values ('IBM','c4',12.0)</sql>
                 </statement>
             </dbreport>
             <transaction action="commit"/>
             <send/>
         </out>
-    </sequence>
-
-    <sequence name="myFaultHandler">
-        <log level="custom">
-            <property name="text" value="** Rollback Transaction**"/>
-        </log>
-        <transaction action="rollback"/>
-        <send/>
     </sequence>
 </definitions>

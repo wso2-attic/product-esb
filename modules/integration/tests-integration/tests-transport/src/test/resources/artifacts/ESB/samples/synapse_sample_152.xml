@@ -28,6 +28,7 @@
             </endpoint>
             <outSequence>
                 <log level="full"/>
+                <property name="messageType" value="text/xml" scope="axis2"/>
                 <send/>
             </outSequence>
         </target>
