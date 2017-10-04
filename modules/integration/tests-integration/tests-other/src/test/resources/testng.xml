@@ -44,10 +44,10 @@
             <class name="org.wso2.carbon.esb.test.servers.CarbonTestServerManager"/>
             <class name="org.wso2.carbon.esb.test.servers.NewInstanceTestCase"/>
             <class name="org.wso2.carbon.esb.test.servers.OSGIUnsatisfiedServerBundlesTestCase">
-		<methods>
+                <methods>
                     <exclude name=".*"/>
                 </methods>
-	    </class>
+            </class>
         </classes>
     </test>
 
@@ -100,7 +100,11 @@
         </packages>
     </test>
 
-
+    <test name="Security-Test-Tryit" preserve-order="true" verbose="2">
+        <packages>
+            <package name="org.wso2.carbon.esb.security.test.tryit.*"/>
+        </packages>
+    </test>
 </suite>
 
 
