@@ -165,7 +165,7 @@
             <class name="org.wso2.carbon.esb.car.deployment.test.ESBJAVA4116CAppArtifactDeploymentFailureDueToNameTestCase"/>
         </classes>
     </test>
-
+    
     <test name="soap-header-handling-test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.mediators.callout.ESBJAVA_4118_SOAPHeaderHandlingTest"></class>
@@ -332,6 +332,12 @@
     <test name="Dynamic-Security-Policy-Test" preserve-order="true" verbose="2">
         <classes>
             <class name="org.wso2.carbon.esb.security.policy.ESBJAVA5029_DynamicallyParameterizingEndpointWithPolicyTestCase"/>
+        </classes>
+    </test>
+
+    <test name="Synapse Handler Test" preserve-order="true" verbose="2">
+        <classes>
+            <class name="org.wso2.carbon.esb.handler.ESBJAVA4105HandlerTest"/>
         </classes>
     </test>
 </suite>
