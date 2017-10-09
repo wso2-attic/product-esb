@@ -4,7 +4,6 @@
      context="/serviceTest">
     <resource methods="GET" uri-template="/test*">
         <inSequence>
-            <log level="full"/>
             <send>
                 <endpoint>
                     <http method="get"

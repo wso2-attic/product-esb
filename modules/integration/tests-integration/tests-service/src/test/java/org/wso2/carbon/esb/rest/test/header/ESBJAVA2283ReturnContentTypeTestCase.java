@@ -24,11 +24,13 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import org.apache.axiom.om.OMElement;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -41,56 +43,79 @@ import org.wso2.esb.integration.common.utils.ESBTestCaseUtils;
 
 public class ESBJAVA2283ReturnContentTypeTestCase extends ESBIntegrationTest {
     private Log log = LogFactory.getLog(ESBJAVA2283ReturnContentTypeTestCase.class);
-	private HttpServer server = null;
+    private HttpServer server = null;
+    private static final String API_URL = "http://localhost:8280/serviceTest/test";
+    private static final int HTTP_OK = 200;
+    private static final int PORT = 8089;
+    private static final String CONTENT_TYPE = "Content-Type";
+    private static final String CONTEXT_URL = "/gettest";
+    private static final String TEXT_XML = "text/xml";
 
     @BeforeClass(alwaysRun = true)
     public void init() throws Exception {
-	    super.init();
-	    String relativePath = "/artifacts/ESB/synapseconfig/esbjava2283/api.xml";
-	    ESBTestCaseUtils util = new ESBTestCaseUtils();
-	    relativePath = relativePath.replaceAll("[\\\\/]", File.separator);
-	    OMElement apiConfig = util.loadResource(relativePath);
-	    addApi(apiConfig);
+        super.init();
+        String relativePath = File.separator + "artifacts" + File.separator + "ESB" + File.separator + "synapseconfig" +
+            File.separator + "esbjava2283" + File.separator + "api.xml";
+        ESBTestCaseUtils util = new ESBTestCaseUtils();
+        OMElement apiConfig = util.loadResource(relativePath);
+        addApi(apiConfig);
     }
 
     @Test(groups = {"wso2.esb"}, description = "test return content type")
     public void testReturnContentType() throws Exception {
-	    int port = 8089;
-	    String contentType = "text/xml";
-	    server = HttpServer.create(new InetSocketAddress(port), 0);
-	    server.createContext("/gettest", new MyHandler());
-	    server.setExecutor(null); // creates a default executor
-	    server.start();
-	    DefaultHttpClient httpclient = new DefaultHttpClient();
-	    String url = "http://localhost:8480/serviceTest/test";
-	    HttpGet httpGet = new HttpGet(url);
-	    HttpResponse response = null;
-	    try {
-		    response = httpclient.execute(httpGet);
-	    } catch (IOException e) {
-		    log.error("Error Occurred while sending http get request. " + e);
-	    }
-	    log.info(response.getEntity().getContentType());
-	    log.info(response.getStatusLine().getStatusCode());
+        server = HttpServer.create(new InetSocketAddress(PORT), 0);
+        server.createContext(CONTEXT_URL, new ContentTypeHandler());
+        server.setExecutor(null); // creates a default executor
+        server.start();
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+        HttpGet httpGet = new HttpGet(API_URL);
+        HttpResponse response;
+        InputStream instream = null;
+        try {
+            response = httpclient.execute(httpGet);
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                instream = entity.getContent();
+                log.info("Content-Type of the HTTP response is : " + response.getEntity().getContentType());
+                log.info("Status Code of the Http response is : " + response.getStatusLine().getStatusCode());
+                assertEquals(response.getFirstHeader(CONTENT_TYPE).getValue(), TEXT_XML, "Expected content type doesn't match");
+                assertEquals(response.getStatusLine().getStatusCode(), HTTP_OK, "response code doesn't match");
+            }
+        } catch (IOException e) {
+            log.error("Error Occurred while sending http get request.", e);
+        } finally {
+            if (instream != null) {
+                instream.close();
+            }
+            server.stop(0);
+        }
 
-	    assertEquals(response.getFirstHeader("Content-Type").getValue(), contentType,
-	                 "Expected content type doesn't match");
-	    assertEquals(response.getStatusLine().getStatusCode(), 200, "response code doesn't match");
-
-	    server.stop(0);
     }
 
-	private class MyHandler implements HttpHandler {
-		public void handle(HttpExchange t) throws IOException {
-			Headers h = t.getResponseHeaders();
-			h.add("Content-Type", "text/xml");
-			String response = "This is the test case for ESBJAVA-2283";
-			t.sendResponseHeaders(200, response.length());
-			OutputStream os = t.getResponseBody();
-			os.write(response.getBytes());
-			os.close();
-		}
-	}
+    private class ContentTypeHandler implements HttpHandler {
+        public void handle(HttpExchange exchange)  {
+            Headers responseHeaders = exchange.getResponseHeaders();
+            responseHeaders.add(CONTENT_TYPE, TEXT_XML);
+            String response = "This is the test case for ESBJAVA-2283";
+            OutputStream os = null;
+            try {
+                exchange.sendResponseHeaders(HTTP_OK, response.length());
+                os = exchange.getResponseBody();
+                os.write(response.getBytes());
+            } catch (IOException e) {
+                log.error("Error Occurred while writing the response.", e);
+            } finally {
+                if (os != null) {
+                    try {
+                        os.close();
+                    } catch (IOException e) {
+                        log.error("Error Occurred while closing the ContentTypeHandler output stream.", e);
+                    }
+                }
+            }
+
+        }
+    }
 
     @AfterClass(alwaysRun = true)
     public void destroy() throws Exception {
