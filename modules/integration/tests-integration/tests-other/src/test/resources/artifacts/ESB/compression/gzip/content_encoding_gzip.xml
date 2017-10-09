@@ -1,0 +1,16 @@
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <api xmlns="http://ws.apache.org/ns/synapse" name="contentapi" context="/contentapi">
+        <resource methods="POST">
+            <inSequence>
+                <send>
+                    <endpoint>
+                        <address uri="http://localhost:9000/services/SimpleStockQuoteService/placeOrder"/>
+                    </endpoint>
+                </send>
+            </inSequence>
+            <outSequence>
+                <send/>
+            </outSequence>
+        </resource>
+    </api>
+</definitions>
