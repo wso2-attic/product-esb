@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <sequence name="requestHandlerSeq" onError="inFault">
+        <log category="INFO" level="full" separator=",">
+            <property name="test" value="requestHandlerSequence"/>
+        </log>
+        <property name="SOAPAction" value="getQuote" scope="transport"/>
+        <send>
+            <endpoint>
+                <address uri="http://localhost:9000/services/SimpleStockQuoteService" format="soap11"/>
+            </endpoint>
+        </send>
+    </sequence>
+    <sequence name="inFault">
+        <log category="INFO" level="full" separator=",">
+            <property name="fault" value="Inside the Fault sequence"/>
+        </log>
+    </sequence>
+</definitions>
