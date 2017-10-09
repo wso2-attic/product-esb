@@ -1,0 +1,17 @@
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <proxy xmlns="http://ws.apache.org/ns/synapse" name="host2PinnedServerProxy" transports="http https" pinnedServers="host2.wso2.org" startOnLoad="true" trace="disable">
+        <description/>
+        <target>
+            <inSequence>
+                <log level="full" />
+                <payloadFactory>
+                    <format>
+                        <testResponse><foo/></testResponse>
+                    </format>
+                    <args/>
+                </payloadFactory>
+                <respond/>
+            </inSequence>
+        </target>
+    </proxy>
+</definitions>
