@@ -1184,7 +1184,7 @@
         <org.wso2.andes.client.version>0.13.wso2v3</org.wso2.andes.client.version>
 
         <commons-codec.version>1.6</commons-codec.version>
-        <bouncycastle.version>1.52</bouncycastle.version>
+        <bouncycastle.version>1.67</bouncycastle.version>
         <commons-digester.version>2.1</commons-digester.version>
         <groovy.version>1.1-rc-1</groovy.version>
         <hawtbuf.version>1.9</hawtbuf.version>
